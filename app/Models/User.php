@@ -19,6 +19,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
     ];
 
@@ -40,4 +41,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function addresses()
+    {
+        return $this->hasMany('App\Models\UserAddress');
+    }
+
+    public function mainAddress()
+    {
+        return $this->hasOne('App\Models\UserAddress')->where('is_main_address', true);
+    }
 }
