@@ -21,6 +21,8 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
+        'role',
+        'point',
     ];
 
     /**
@@ -42,7 +44,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function addresses()
+    public function userAddresses()
     {
         return $this->hasMany('App\Models\UserAddress');
     }

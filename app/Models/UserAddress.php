@@ -19,6 +19,7 @@ class UserAddress extends Model
         'kecamatan',
         'city',
         'province',
+        'postal_code',
         'is_main_address',
         'user_id',
     ];

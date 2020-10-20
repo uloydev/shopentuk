@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\UserAddress;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 class UserAddressFactory extends Factory
 {
@@ -22,7 +23,18 @@ class UserAddressFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->sentence($nbWords=3, $variableNbWords=true) . " address",
+            'name' => $this->faker->name,
+            'email' => $this->faker->email,
+            'phone' => $this->faker->phoneNumber,
+            'street_address' => $this->faker->streetAddress,
+            'kelurahan' => 'meruyung',
+            'kecamatan' => 'limo',
+            'city' => 'depok',
+            'province' => 'jawa barat',
+            'postal_code' => '16515',
+            'is_main_address' => 0,
+            'user_id' => User::factory()
         ];
     }
 }

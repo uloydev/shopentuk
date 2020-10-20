@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\ProductImage;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Product;
 
 class ProductImageFactory extends Factory
 {
@@ -22,7 +23,9 @@ class ProductImageFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'url' => 'https://via.placeholder.com/150/b6f/FFF?text=Shopentuk',
+            'product_id' => Product::factory(),
+            'is_main_image' => false,
         ];
     }
 }

@@ -12,14 +12,14 @@ class Product extends Model
     protected $with = ['discount'];
 
     protected $fillable = [
-        'name',
+        'title',
         'description',
         'price',
-        'token_price',
-        'category_id'
+        'point_price',
+        'category_id',
     ];
 
-    public function category()
+    public function productCategory()
     {
         return $this->belongsTo('App\Models\ProductCategory', 'category_id');
     }
@@ -29,7 +29,7 @@ class Product extends Model
         return $this->hasOne('App\Models\ProductDiscount');
     }
 
-    public function images()
+    public function productImages()
     {
         return $this->hasMany('App\Models\ProductImage');
     }

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\ProductCategory;
 
 class ProductFactory extends Factory
 {
@@ -22,7 +23,11 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->sentence($nbWords=5, $variableNbWords=true),
+            'description' => $this->faker->paragraph($nbSentences=3, $variableNbSentences=true),
+            'price' => $this->faker->numberBetween($min=10000, $max=100000),
+            'point_price' => $this->faker->numberBetween($min=10, $max=100),
+            'category_id' => ProductCategory::factory(),
         ];
     }
 }

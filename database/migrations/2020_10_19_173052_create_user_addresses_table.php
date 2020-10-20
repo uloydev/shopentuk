@@ -24,8 +24,9 @@ class CreateUserAddressesTable extends Migration
             $table->string('kecamatan');
             $table->string('city');
             $table->string('province');
+            $table->string('postal_code');
             $table->boolean('is_main_address');
-            $table->unsignedInteger('user_id');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }
