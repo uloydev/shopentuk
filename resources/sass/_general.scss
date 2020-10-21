@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+
+@import url('https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Annie+Use+Your+Telescope&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.box-promo {
+    &__heading, &__subheading {
+        font-family: 'Amita', cursive;
+    }
+}
+
+.section {
+    &__heading {
+
+        span {
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -30px;
+                background-color: #000;
+                height: 2px;
+                width: 60%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+}

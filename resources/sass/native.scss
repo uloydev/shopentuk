@@ -1,0 +1,189 @@
+@use 'mixin';
+@use 'general';
+
+.header {
+    background: {
+        image: url('../img/header-landing.jpg');
+        color: rgba($color: #003a69, $alpha: 0.6);
+        blend-mode: overlay;
+        attachment: fixed;
+        size: cover;
+    }
+    @apply flex flex-col;
+    height: 90vh;
+    position: relative;
+}
+
+.nav {
+    @apply shadow-md;
+
+    .container {
+        padding-top: 1rem;
+        @apply flex flex-col bg-white;
+
+        @media (min-width: theme('screens.sm')) {
+            @apply flex-row bg-transparent pt-0;
+        }
+    }
+
+    &__ul {
+        @apply flex flex-col;
+        padding: 0 1rem;
+        flex-grow: 1;
+        
+
+        & & {
+            padding-left: 1rem;
+        }
+
+        @media (min-width: theme('screens.sm')) {
+            @apply flex-row;
+        }
+    }
+
+    &__logo {
+        overflow: hidden;
+        display: inline-flex;
+        max-width: 50%;
+        margin-right: auto;
+
+        @media (min-width: theme('screens.sm')) {
+            max-width: none;
+            margin-right: 0;
+        }
+    }
+    &__img {
+        height: 100%;
+        overflow: hidden;
+    }
+    &__icon {
+        @apply flex items-center relative;
+
+        #total-shopping {
+            @apply absolute transform translate-x-1/2 translate-y-1 text-sm;
+            right: calc(45px / 2);
+        }
+        &--bag box-icon {
+            @include mixin.sameSize(45px);
+        }
+    }
+
+    &__toggle-menu{
+        transform: translateY(4px);
+
+        box-icon {
+            @include mixin.sameSize(30px);
+        }
+
+        @media (min-width: theme('screens.sm')) {
+            display: none;
+        }
+    }
+
+    &__item {
+        display: flex;
+
+        &--first {
+            padding: 0 1rem 1rem;
+            @apply border-b-2 border-gray-200;
+
+            @media (min-width: theme('screens.sm')) {
+                width: 20%;
+            }
+        }
+
+        &--cart {
+            width: 50%;
+        }
+
+        &--menu {
+            @apply flex-col;
+            height: 0;
+            opacity: 0;
+            transition: none; //transition when wanna close nav
+
+            .nav--open & {
+                height: auto;
+                opacity: 1;
+                transition: all 200ms;
+            }
+
+            @media (min-width: theme('screens.sm')) {
+                height: auto;
+                opacity: 1;
+                z-index: 1;
+            }
+            
+        }
+
+        &-has-child {
+            @apply relative;
+
+            & & {
+                padding-right: 0;
+            }
+
+            .nav__ul {
+                @apply overflow-hidden transition transition-all duration-200 h-0 opacity-0;
+                @media (min-width: theme('screens.sm')) {
+                    @apply flex-col absolute;
+                    top: 100%;
+                    overflow: visible;
+
+                    & & {
+                        transition-property: none;
+                        @apply transition-opacity;
+                        top: auto;
+                        left: calc(100% + 1rem);
+                        border-left: 1px solid rgb(218, 218, 218);
+                    }
+                }
+            }
+
+            &--open {
+
+                > .nav__link--open-child {
+
+                    .child-dropdown-icon {
+                        @apply transform rotate-180;
+                    }
+                }
+
+                > .nav__ul {
+                    @apply h-auto opacity-100;
+
+                    .nav__link  {
+                        justify-content: start;
+                    }
+                }
+
+            }
+        }
+
+    }
+
+   
+
+    &__link {
+        @apply flex py-3;
+
+        @media (min-width: theme('screens.sm')) {
+            justify-content: center;
+        }
+    }
+
+    #open-icon {
+        display: initial;
+        @include mixin.openNav {
+            display: none;
+        }
+    }
+    #close-icon {
+        display: none;
+        @include mixin.openNav {
+            display: initial;
+        }
+    }
+}
+
+@tailwind utilities;

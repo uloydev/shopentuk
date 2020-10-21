@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+Route::view('/', 'landing')->name('landing-page');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
