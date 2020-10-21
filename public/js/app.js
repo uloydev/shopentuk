@@ -37321,10 +37321,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/sass/app.scss":
-/*!*********************************!*\
-  !*** ./resources/sass/app.scss ***!
-  \*********************************/
+/***/ "./resources/sass/native.sass":
+/*!************************************!*\
+  !*** ./resources/sass/native.sass ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -37333,14 +37333,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ }),
 
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!****************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/native.sass ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/sass/native.sass */"./resources/sass/native.sass");
 
 
 /***/ })

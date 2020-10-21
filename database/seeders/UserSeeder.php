@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\UserAddress;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -15,29 +16,23 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // create superadmin account
-        User::factory()
-        ->make([
-            'email' => 'superadmin@mail.com',
-            'role' => 'superadmin'
-        ])
-        ->save();
-
-        // create admin account
-        User::factory()
-        ->make([
-            'email' => 'admin@mail.com',
-            'role' => 'admin'
-        ])
-        ->save();
+        // create superadmin and admin account
+        User::insert([
+            [
+                'name' => 'superadmin',
+                'email' => 'superadmin@mail.com',
+                'role' => 'superadmin',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'name' => 'admin',
+                'email' => 'admin@mail.com',
+                'role' => 'admin',
+                'password' => Hash::make('password'),
+            ]
+        ]);
 
         // create user accounts
-        User::factory()
-        ->count(10)
-        ->has(
-            UserAddress::factory()
-            ->count(2)
-        )
-        ->create();
+        User::factory()->times(10)->has(UserAddress::factory()->count(2))->create();
     }
 }

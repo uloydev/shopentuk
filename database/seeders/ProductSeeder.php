@@ -17,17 +17,11 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        ProductCategory::factory()
-        ->count(5)
-        ->has(
-            Product::factory()
-            ->count(8)
-            ->has(
-                ProductImage::factory()
-                ->count(3)
+        ProductCategory::factory()->times(5)->has(
+            Product::factory()->count(8)->has(
+                ProductImage::factory()->count(3)
             )
-        )
-        ->create();
+        )->create();
 
         $products = Product::inRandomOrder()->limit(10)->get();
         foreach ($products as $product) {
