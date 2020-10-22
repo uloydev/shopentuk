@@ -7,15 +7,13 @@
     <link rel="stylesheet" href="{{ asset('css/native.css') }}">
     <title>Shopentuk Shop | @yield('title')</title>
 </head>
-<body>
+<body id="@yield('body-id')Page" class="overflow-x-hidden">
     <header class="header">
         @include('partial.nav')
         @yield('header')
     </header>
     <main>
-        <div class="container mx-auto">
-            @yield('content')
-        </div>
+        @yield('content')
     </main>
     @include('partial.footer')
     <script src="{{ asset('js/native.js') }}"></script>

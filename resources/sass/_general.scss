@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 
-@import url('https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Annie+Use+Your+Telescope&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Architects+Daughter&family=Annie+Use+Your+Telescope&display=swap');
 
 * {
     box-sizing: border-box;
@@ -10,7 +10,9 @@
 }
 
 .box-promo {
-    &__heading, &__subheading {
+
+    &__heading,
+    &__subheading {
         font-family: 'Amita', cursive;
     }
 }
@@ -33,4 +35,12 @@
             }
         }
     }
+}
+
+.card-product {
+    @apply flex flex-col;
+}
+
+.font-architects {
+    font-family: 'Architects Daughter', cursive;
 }

@@ -186,4 +186,18 @@
     }
 }
 
+/*landing-page style*/
+#landingPage #section__promo {
+    position: relative;
+    background-image: url('../img/special-edition.jpg');
+
+    &::after {
+        content: '';
+        @apply absolute top-0 left-0 h-full w-full;
+        opacity: 0.43;
+        background-image: linear-gradient(100deg, #000000 0%, rgba(17,107,191,0.39) 100%);
+    }
+}
+/*end of landing-page style*/
+
 @tailwind utilities;
