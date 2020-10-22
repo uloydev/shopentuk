@@ -7,6 +7,7 @@ use App\Models\ProductCategory;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductDiscount;
+use App\Models\ProductSubCategory;
 
 class ProductSeeder extends Seeder
 {
@@ -18,8 +19,12 @@ class ProductSeeder extends Seeder
     public function run()
     {
         ProductCategory::factory()->times(5)->has(
-            Product::factory()->count(8)->has(
-                ProductImage::factory()->count(3)
+            ProductSubCategory::factory()->count(3)->has(
+                Product::factory()->count(8)->has(
+                    ProductImage::factory()->count(3)
+                )->state(function (array $attributes, ProductSubCategory $subCategory) {
+                    return ['category_id' => $subCategory->category_id];
+                })
             )
         )->create();
 
