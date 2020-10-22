@@ -43,6 +43,14 @@ btnOpenChildMenu.forEach(openChild => {
 
 });
 
+document.querySelector('header nav + *').addEventListener('click', () => {
+    const allChild =  document.querySelectorAll('.nav__item-has-child--open');
+    
+    allChild.forEach(child => {
+        child.classList.remove('nav__item-has-child--open');
+    });
+});
+
 if (window.screen.width > 768) {
     document.querySelectorAll('.nav .container > .nav__ul > .nav__item > .nav__link > .child-dropdown-icon')
     .forEach(dropdownIcon => {

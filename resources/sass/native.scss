@@ -124,7 +124,7 @@
             }
 
             .nav__ul {
-                @apply overflow-hidden transition transition-all duration-200 h-0 opacity-0;
+                @apply overflow-hidden transition transition-all h-0 opacity-0 invisible;
                 @media (min-width: theme('screens.sm')) {
                     @apply flex-col absolute;
                     top: 100%;
@@ -132,7 +132,7 @@
 
                     & & {
                         transition-property: none;
-                        @apply transition-opacity;
+                        @apply transition-all;
                         top: auto;
                         left: calc(100% + 1rem);
                         border-left: 1px solid rgb(218, 218, 218);
@@ -150,7 +150,7 @@
                 }
 
                 > .nav__ul {
-                    @apply h-auto opacity-100;
+                    @apply h-auto opacity-100 visible;
 
                     .nav__link  {
                         justify-content: start;
@@ -187,15 +187,24 @@
 }
 
 /*landing-page style*/
-#landingPage #section__promo {
-    position: relative;
-    background-image: url('../img/special-edition.jpg');
-
-    &::after {
-        content: '';
-        @apply absolute top-0 left-0 h-full w-full;
-        opacity: 0.43;
-        background-image: linear-gradient(100deg, #000000 0%, rgba(17,107,191,0.39) 100%);
+#landingPage {
+    #section-catalog {
+        &__promo {
+            position: relative;
+            background-image: url('../img/special-edition.jpg');
+        
+            &::after {
+                content: '';
+                @apply absolute top-0 left-0 h-full w-full;
+                opacity: 0.43;
+                background-image: linear-gradient(100deg, #000000 0%, rgba(17,107,191,0.39) 100%);
+            }
+        }
+        &__overlay {
+            @apply absolute top-0 left-0 h-full w-full;
+            opacity: 0.43;
+            background-image: linear-gradient(100deg, #000000 0%, rgba(17,107,191,0.39) 100%);
+        }
     }
 }
 /*end of landing-page style*/

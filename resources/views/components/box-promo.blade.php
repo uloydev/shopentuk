@@ -1,4 +1,4 @@
-<div class="box-promo text-center lg:text-left {{ isset($addedClass) ? $addedClass : '' }}">
+<div class="box-promo relative text-center lg:text-left {{ isset($addedClass) ? $addedClass : '' }}">
     @isset($headingHelp)
     <h3 class="text-sm text-white">{{ $headingHelp }}</h3>
     @endisset
