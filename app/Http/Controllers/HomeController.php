@@ -29,7 +29,7 @@ class HomeController extends Controller
 
     public function landingPage()
     {
-        $products = Product::all();
+        $products = Product::limit(10)->latest()->get();
         return view('landing', ['products' => $products]);
     }
 }

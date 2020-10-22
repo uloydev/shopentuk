@@ -814,9 +814,9 @@ video {
   overflow: hidden;
   transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
   transition-property: all;
-  transition-duration: 200ms;
   height: 0;
   opacity: 0;
+  visibility: hidden;
 }
 
 @media (min-width: 640px) {
@@ -829,7 +829,7 @@ video {
 
   .nav__item-has-child .nav__ul .nav__item-has-child .nav__ul {
     transition-property: none;
-    transition-property: opacity;
+    transition-property: all;
     top: auto;
     left: calc(100% + 1rem);
     border-left: 1px solid #dadada;
@@ -851,6 +851,7 @@ video {
 .nav__item-has-child--open > .nav__ul {
   height: auto;
   opacity: 1;
+  visibility: visible;
 }
 
 .nav__item-has-child--open > .nav__ul .nav__link {
@@ -887,13 +888,23 @@ video {
 
 /*landing-page style*/
 
-#landingPage #section__promo {
+#landingPage #section-catalog__promo {
   position: relative;
   background-image: url("../img/special-edition.jpg");
 }
 
-#landingPage #section__promo::after {
+#landingPage #section-catalog__promo::after {
   content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.43;
+  background-image: linear-gradient(100deg, #000000 0%, rgba(17, 107, 191, 0.39) 100%);
+}
+
+#landingPage #section-catalog__overlay {
   position: absolute;
   top: 0;
   left: 0;

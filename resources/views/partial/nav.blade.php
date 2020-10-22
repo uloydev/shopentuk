@@ -2,12 +2,11 @@
     <div class="container mx-auto">
         <div class="nav__item nav__item--first sm:border-b-0 sm:pb-0 sm:px-0">
             <a href="{{ route('landing-page') }}" class="nav__logo">
-                <picture class="nav__img" >
+                <picture class="nav__img">
                     <source media="(min-width: 500px)" srcset="{{ asset('img/logo/shopentuk-desktop.png') }}">
                     <source media="(max-width: 499px)" srcset="{{ asset('img/logo/shopentuk.png') }}">
                     <img src="{{ asset('img/logo/shopentuk.png') }}">
                 </picture>
-                
             </a>
             <a href="" class="nav__icon nav__icon--bag sm:hidden">
                 <var class="not-italic" id="total-shopping">0</var>
@@ -19,114 +18,73 @@
             </a>
         </div>
         <ul class="nav__ul bg-gray-100 sm:bg-transparent sm:pr-0 sm:pl-8">
-            <li class="nav__item nav__item--menu sm:mr-6 sm:text-gray-300 sm:hover:text-white sm:flex-grow sm:justify-center">
+            <li 
+            class="nav__item nav__item--menu sm:mr-6 sm:text-gray-300 sm:hover:text-white sm:flex-grow sm:justify-center">
                 <a href="" class="nav__link">Home</a>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child sm:mr-6 sm:flex-grow sm:justify-center">
-                <a href="javascript:void(0);" class="nav__link nav__link--open-child sm:text-gray-300 sm:hover:text-white">
-                    <span>Store</span>
-                    <box-icon name='chevron-down' type='solid' color="#718096" 
-                    class="child-dropdown-icon ml-auto sm:ml-2"></box-icon>
+                <a href="javascript:void(0);"
+                class="nav__link nav__link--open-child sm:text-gray-300 sm:hover:text-white">
+                    <x-menu-has-nested-child text="Store" />
                 </a>
-                <ul class="nav__ul sm:border-0 divide-y sm:divide-gray-300 sm:bg-white">
+                <ul class="nav__ul sm:border-0 divide-y sm:divide-gray-300 sm:bg-white pr-0 sm:pr-8">
                     <li class="nav__item nav__item--menu nav__item-has-child">
                         <a href="" class="nav__link nav__link--open-child">
-                            <box-icon name='chevron-right'></box-icon>
-                            <span>Pria</span>
-                            <box-icon name='chevron-down' type='solid' 
-                            color="#718096" class="child-dropdown-icon ml-auto sm:hidden"></box-icon>
+                            <x-menu-has-child text="Pria" />
                         </a>
                         <ul class="nav__ul divide-y divide-gray-400 sm:bg-white">
-                            <li class="nav__item nav__item--menu">
-                                <a href="" class="nav__link">
-                                    <box-icon name='chevron-right'></box-icon>
-                                    <span>Baju</span>
-                                </a>
-                            </li>
-                            <li class="nav__item nav__item--menu">
-                                <a href="" class="nav__link">
-                                    <box-icon name='chevron-right'></box-icon>
-                                    <span>Celana</span>
-                                </a>
-                            </li>
+                            <x-menu-standar id="menu-store-pria-baju" text="Baju" 
+                            to="/link-go-to-baju" have-icon="true" />
+                            <x-menu-standar id="menu-store-pria-celana" text="Celana" to="/link-go-to-celana"
+                            have-icon="true" />
                         </ul>
                     </li>
                     <li class="nav__item nav__item--menu nav__item-has-child">
                         <a href="" class="nav__link nav__link--open-child">
-                            <box-icon name='chevron-right'></box-icon>
-                            <span>Wanita</span>
-                            <box-icon name='chevron-down' type='solid' 
-                            color="#718096" class="child-dropdown-icon ml-auto sm:hidden"></box-icon>
+                            <x-menu-has-child text="Wanita" />
                         </a>
                         <ul class="nav__ul divide-y divide-gray-400 sm:bg-white">
-                            <li class="nav__item nav__item--menu">
-                                <a href="" class="nav__link">
-                                    <box-icon name='chevron-right'></box-icon>
-                                    <span>Baju</span>
-                                </a>
-                            </li>
-                            <li class="nav__item nav__item--menu">
-                                <a href="" class="nav__link">
-                                    <box-icon name='chevron-right'></box-icon>
-                                    <span>Celana</span>
-                                </a>
-                            </li>
+                            <x-menu-standar id="menu-store-wanita-baju" text="Baju" to="/link-go-to-baju" 
+                            have-icon="true" />
+                            <x-menu-standar id="menu-store-wanita-celana" text="Celana" to="/link-go-to-celana"
+                            have-icon="true" />
                         </ul>
                     </li>
                     <li class="nav__item nav__item--menu nav__item-has-child">
                         <a href="" class="nav__link nav__link--open-child">
-                            <box-icon name='chevron-right'></box-icon>
-                            <span>Accessories</span>
-                            <box-icon name='chevron-down' type='solid'
-                            color="#718096" class="child-dropdown-icon ml-auto sm:hidden"></box-icon>
+                            <x-menu-has-child text="Accessories" />
                         </a>
                         <ul class="nav__ul divide-y divide-gray-400 sm:bg-white">
-                            <li class="nav__item nav__item--menu">
-                                <a href="" class="nav__link">
-                                    <box-icon name='chevron-right'></box-icon>
-                                    <span>Topi</span>
-                                </a>
-                            </li>
+                            <x-menu-standar id="menu-accessories-topi" text="Topi" to="/link-go-to-topi" 
+                            have-icon="true" />
                         </ul>
                     </li>
                 </ul>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child sm:mr-6 sm:flex-grow sm:justify-center">
                 <a href="" class="nav__link nav__link--open-child sm:text-gray-300 sm:hover:text-white">
-                    <span>Voucher</span>
-                    <box-icon name='chevron-down' type='solid' color="#718096" 
-                    class="child-dropdown-icon ml-auto sm:ml-2"></box-icon>
+                    <x-menu-has-nested-child text="Voucher" />
                 </a>
                 <ul class="nav__ul sm:bg-white pr-0 sm:pr-4 divide-y sm:divide-gray-400 sm:w-48">
                     <li class="nav__item nav__item--menu nav__item-has-child">
                         <a href="" class="nav__link nav__link--open-child">
-                            <box-icon name='chevron-right' class="hidden sm:block sm:order-1"></box-icon>
-                            <span>Pulsa</span>
-                            <box-icon name='chevron-down' type='solid' color="#718096" 
-                            class="child-dropdown-icon ml-auto sm:hidden"></box-icon>
+                            <x-menu-has-child text="Pulsa" />
                         </a>
                         <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-400 border-0 sm:w-48">
-                            <li class="nav__item nav__item--menu">
-                                <a href="" class="nav__link">Pulsa Telkomsel</a>
-                            </li>
-                            <li class="nav__item nav__item--menu">
-                                <a href="" class="nav__link">Pulsa XL</a>
-                            </li>
-                            <li class="nav__item nav__item--menu">
-                                <a href="" class="nav__link">Pulsa Indosat</a>
-                            </li>
-                            <li class="nav__item nav__item--menu">
-                                <a href="" class="nav__link">Pulsa Axis</a>
-                            </li>
-                            <li class="nav__item nav__item--menu">
-                                <a href="" class="nav__link">Pulsa Tri</a>
-                            </li>
+                            <x-menu-standar id="menu-pulsa-telkomsel" text="Pulsa Telkomsel" 
+                            to="/link-go-pulsa-telkomsel" have-icon="true" />
+                            <x-menu-standar id="menu-pulsa-xl" text="Pulsa XL" 
+                            to="/link-go-pulsa-xl" have-icon="true" />
+                            <x-menu-standar id="menu-pulsa-indosat" text="Pulsa Indosat" 
+                            to="/link-go-pulsa-indosat" have-icon="true" />
+                            <x-menu-standar id="menu-pulsa-axis" text="Pulsa Axis" 
+                            to="/link-go-pulsa-axis" have-icon="true" />
+                            <x-menu-standar id="menu-pulsa-tri" text="Pulsa Tri" 
+                            to="/link-go-pulsa-tri" have-icon="true" />
                         </ul>
                     </li>
-                    <li class="nav__item nav__item--menu">
-                        <a href="" class="nav__link">Voucher game</a>
-                    </li>
-                    </li>
+                    <x-menu-standar id="menu-voucher-game" text="Voucher game" 
+                    to="/link-go-voucher-game" have-icon="true" />
                 </ul>
             </li>
             <li class="nav__item nav__item--menu sm:mr-6 sm:text-gray-300 sm:hover:text-white sm:flex-grow sm:justify-center">
@@ -134,44 +92,24 @@
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child sm:mr-6 sm:flex-grow sm:justify-center">
                 <a href="" class="nav__link nav__link--open-child sm:text-gray-300 sm:hover:text-white">
-                    <span>Cancel & refund</span>
-                    <box-icon name='chevron-down' type='solid' color="#718096" 
-                    class="child-dropdown-icon ml-auto sm:ml-2"></box-icon>
+                    <x-menu-has-nested-child text="Cancel & refund" />
                 </a>
                 <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-300">
-                    <li class="nav__item nav__item--menu">
-                        <a href="" class="nav__link">
-                            <box-icon name='chevron-right'></box-icon>
-                            Pengembalian uang
-                        </a>
-                    </li>
-                    <li class="nav__item nav__item--menu">
-                        <a href="" class="nav__link">
-                            <box-icon name='chevron-right'></box-icon>
-                            Pembatalan order
-                        </a>
-                    </li>
+                    <x-menu-standar id="menu-cancel-refund" text="Pengembalian uang"
+                    to="/link-go-to-pengembalian" have-icon="false" />
+                    <x-menu-standar id="menu-cancel-pembatalan" text="Pembatalan order"
+                    to="/link-go-to-pembatalan" have-icon="false" />
                 </ul>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child sm:mr-6 sm:flex-grow sm:justify-center">
                 <a href="" class="nav__link nav__link--open-child sm:text-gray-300 sm:hover:text-white">
-                    <span>My akun</span>
-                    <box-icon name='chevron-down' type='solid' color="#718096" 
-                    class="child-dropdown-icon ml-auto sm:ml-2"></box-icon>
+                    <x-menu-has-nested-child text="My akun" />
                 </a>
                 <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-300">
-                    <li class="nav__item nav__item--menu">
-                        <a href="" class="nav__link">
-                            <box-icon name='chevron-right'></box-icon>
-                            <span>Akun saya</span>
-                        </a>
-                    </li>
-                    <li class="nav__item nav__item--menu">
-                        <a href="" class="nav__link">
-                            <box-icon name='chevron-right'></box-icon>
-                            <span>Toko point</span>
-                        </a>
-                    </li>
+                    <x-menu-standar id="menu-my-akun-akun-saya" text="Akun saya" 
+                    to="/link-go-to-akun" have-icon="false" />
+                    <x-menu-standar id="menu-my-akun-toko-point" text="Toko Point" 
+                    to="/link-go-to-toko" have-icon="false" />
                 </ul>
             </li>
             <li class="nav__item nav__item--menu hidden sm:inline-flex sm:flex-grow sm:justify-center">
