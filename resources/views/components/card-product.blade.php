@@ -1,6 +1,6 @@
 <div class="card-product">
     <div class="d-flex relative">
-        <img src="{{ asset('img/' . $productImg) }}" alt="Image of {{ $productName }}" class="card-product__img">
+        <img src="{{ $productImg }}" alt="Image of {{ $productName }}" class="card-product__img">
         <div class="bg-gray-700 rounded-full text-white h-12 text-xs w-12 flex items-center justify-center absolute right-0 top-0 transform translate-x-4 -translate-y-4 {{ $productIsObral == 'false' ? 'hidden' : ''  }}">
             Obral !
         </div>
@@ -17,7 +17,10 @@
             <span class="font-bold">Rp. <var>{{ $productFinalPrice }}</var></span>
         </p>
 
-        @php
+        {{-- 
+            buat skrg dia ga minta pake rating. jadiin fitur tambahan aja nanti kalo dia request
+
+            @php
             $emptyRating = 5 - $productRating;
             // nanti pindahin ke controller, jelek bjer ada kode php di blade wkwkkw
         @endphp
@@ -35,6 +38,6 @@
                     <box-icon name='star' ></box-icon>
                 @endfor
             @endif
-        </div>
+        </div> --}}
     </div>
 </div>

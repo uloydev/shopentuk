@@ -24,6 +24,8 @@ class ProductCategoryFactory extends Factory
         return [
             'title' => $this->faker->sentence($nbWords=2, $variableNbWords=true),
             'description' => $this->faker->paragraph($nbSentences=3, $variableNbSentences=true),
+            'image' => "img/baju.jpg",
+            'is_digital_product' => $this->faker->randomElement([1,0]),
         ];
     }
 }

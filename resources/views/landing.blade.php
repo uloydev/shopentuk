@@ -21,9 +21,23 @@
         </h1>
         <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-8 lg:gap-y-10 justify-items-center mt-32">
             @foreach ($products as $product)
-            <x-card-product product-img="{{ 'example.jpg' }}" product-name="{{ $product->title }}"
-                product-category="{{ $product->productCategory->title }}" product-final-price="{{ $product->price }}"
-                product-rating="0" product-is-obral="{{ ($loop->index + 1) % 2 == 0 ? 'true' : 'false' }}" />
+                @if ($product->discount)
+                    <x-card-product 
+                        product-img="{{ asset('img/example.jpg') }}" 
+                        product-name="{{ $product->title }}"
+                        product-category="{{ $product->productCategory->title }}" 
+                        product-original-price="{{ $product->price }}"
+                        product-final-price="{{ $product->discount->discounted_price }}"
+                        product-rating="0" 
+                        product-is-obral="true" />
+                @else
+                    <x-card-product 
+                        product-img="{{ asset('img/example.jpg') }}" 
+                        product-name="{{ $product->title }}"
+                        product-category="{{ $product->productCategory->title }}" product-final-price="{{ $product->price }}"
+                        product-rating="0" 
+                        product-is-obral="false" />
+                @endif
             @endforeach
         </div>
     </div>
@@ -31,14 +45,9 @@
 <section class="section pt-16 pb-24" style="background-color: #f4f4f4;" id="section-catalog">
     <div class="container mx-auto">
         <div class="grid grid-cols-1 gap-5 md:grid-cols-3 -mx-8">
-            {{-- 
-                ******* foreach *******
-                ini include nya gue repeat buat contoh doang. Ntar mah sekali aja includenya, kan di dlm foreach
-            --}}
-            @include('partial.catalog-card')
-            @include('partial.catalog-card')
-            @include('partial.catalog-card')
-            {{--  end of foreach  --}}
+            @foreach ($categories as $category)
+                @include('partial.catalog-card')
+            @endforeach
         </div>
         <div class="mt-5 relative p-40 bg-fixed -mx-8" id="section-catalog__promo">
             <div id="section-catalog__overlay"></div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -29,7 +30,11 @@ class HomeController extends Controller
 
     public function landingPage()
     {
+        $categories = ProductCategory::all();
         $products = Product::limit(10)->latest()->get();
-        return view('landing', ['products' => $products]);
+        return view('landing', [
+            'products' => $products,
+            'categories' => $categories,
+        ]);
     }
 }

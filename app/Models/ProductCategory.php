@@ -12,6 +12,8 @@ class ProductCategory extends Model
     protected $fillable = [
         'title',
         'description',
+        'image',
+        'is_digital_product',
     ];
 
     public function productSubCategory()
@@ -22,5 +24,16 @@ class ProductCategory extends Model
     public function products()
     {
         return $this->hasMany('App\Models\Product', 'category_id');
+    }
+
+    // image_url mutator
+    public function setImageAttribute($value)
+    {
+        $this->attributes['image'] = base64_encode($value);
+    }
+
+    public function getImageAttribute()
+    {
+        return base64_decode($this->attributes['image']);
     }
 }

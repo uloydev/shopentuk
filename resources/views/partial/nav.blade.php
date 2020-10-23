@@ -28,37 +28,21 @@
                     <x-menu-has-nested-child text="Store" />
                 </a>
                 <ul class="nav__ul sm:border-0 divide-y sm:divide-gray-300 sm:bg-white pr-0 sm:pr-8">
-                    <li class="nav__item nav__item--menu nav__item-has-child">
-                        <a href="" class="nav__link nav__link--open-child">
-                            <x-menu-has-child text="Pria" />
-                        </a>
-                        <ul class="nav__ul divide-y divide-gray-400 sm:bg-white">
-                            <x-menu-standar id="menu-store-pria-baju" text="Baju" 
-                            to="/link-go-to-baju" have-icon="true" />
-                            <x-menu-standar id="menu-store-pria-celana" text="Celana" to="/link-go-to-celana"
-                            have-icon="true" />
-                        </ul>
-                    </li>
-                    <li class="nav__item nav__item--menu nav__item-has-child">
-                        <a href="" class="nav__link nav__link--open-child">
-                            <x-menu-has-child text="Wanita" />
-                        </a>
-                        <ul class="nav__ul divide-y divide-gray-400 sm:bg-white">
-                            <x-menu-standar id="menu-store-wanita-baju" text="Baju" to="/link-go-to-baju" 
-                            have-icon="true" />
-                            <x-menu-standar id="menu-store-wanita-celana" text="Celana" to="/link-go-to-celana"
-                            have-icon="true" />
-                        </ul>
-                    </li>
-                    <li class="nav__item nav__item--menu nav__item-has-child">
-                        <a href="" class="nav__link nav__link--open-child">
-                            <x-menu-has-child text="Accessories" />
-                        </a>
-                        <ul class="nav__ul divide-y divide-gray-400 sm:bg-white">
-                            <x-menu-standar id="menu-accessories-topi" text="Topi" to="/link-go-to-topi" 
-                            have-icon="true" />
-                        </ul>
-                    </li>
+                    @foreach ($categories->where('is_digital_product', false) as $category)
+                        <li class="nav__item nav__item--menu nav__item-has-child">
+                            <a href="" class="nav__link nav__link--open-child">
+                                <x-menu-has-child text="{{ $category->title }}" />
+                            </a>
+                            <ul class="nav__ul divide-y divide-gray-400 sm:bg-white">
+                                @foreach ($category->productSubCategory as $subCategory)
+                                    <x-menu-standar 
+                                    id="{{ Str::slug($subCategory->title, '-') }}" 
+                                    text="{{ $subCategory->title }}" 
+                                    to="/link-go-to" have-icon="true" />
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endforeach
                 </ul>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child sm:mr-6 sm:flex-grow sm:justify-center">
@@ -66,25 +50,22 @@
                     <x-menu-has-nested-child text="Voucher" />
                 </a>
                 <ul class="nav__ul sm:bg-white pr-0 sm:pr-4 divide-y sm:divide-gray-400 sm:w-48">
-                    <li class="nav__item nav__item--menu nav__item-has-child">
-                        <a href="" class="nav__link nav__link--open-child">
-                            <x-menu-has-child text="Pulsa" />
-                        </a>
-                        <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-400 border-0 sm:w-48">
-                            <x-menu-standar id="menu-pulsa-telkomsel" text="Pulsa Telkomsel" 
-                            to="/link-go-pulsa-telkomsel" have-icon="true" />
-                            <x-menu-standar id="menu-pulsa-xl" text="Pulsa XL" 
-                            to="/link-go-pulsa-xl" have-icon="true" />
-                            <x-menu-standar id="menu-pulsa-indosat" text="Pulsa Indosat" 
-                            to="/link-go-pulsa-indosat" have-icon="true" />
-                            <x-menu-standar id="menu-pulsa-axis" text="Pulsa Axis" 
-                            to="/link-go-pulsa-axis" have-icon="true" />
-                            <x-menu-standar id="menu-pulsa-tri" text="Pulsa Tri" 
-                            to="/link-go-pulsa-tri" have-icon="true" />
-                        </ul>
-                    </li>
-                    <x-menu-standar id="menu-voucher-game" text="Voucher game" 
-                    to="/link-go-voucher-game" have-icon="true" />
+                    @foreach ($categories->where('is_digital_product', true) as $category)
+                        <li class="nav__item nav__item--menu nav__item-has-child">
+                            <a href="" class="nav__link nav__link--open-child">
+                                <x-menu-has-child text="{{ $category->title }}" />
+                            </a>
+                            <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-400 border-0 sm:w-48">
+                                @foreach ($category->productSubCategory as $subCategory)
+                                    <x-menu-standar 
+                                    id="{{ Str::slug($subCategory->title, '-') }}" 
+                                    text="{{ $subCategory->title }}" 
+                                    to="/link-go-pulsa-telkomsel" 
+                                    have-icon="true" />
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endforeach
                 </ul>
             </li>
             <li class="nav__item nav__item--menu sm:mr-6 sm:text-gray-300 sm:hover:text-white sm:flex-grow sm:justify-center">

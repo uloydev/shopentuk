@@ -18,7 +18,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        ProductCategory::factory()->times(5)->has(
+        ProductCategory::factory()->times(8)->has(
             ProductSubCategory::factory()->count(3)->has(
                 Product::factory()->count(8)->has(
                     ProductImage::factory()->count(3)
@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
             )
         )->create();
 
-        $products = Product::inRandomOrder()->limit(10)->get();
+        $products = Product::inRandomOrder()->limit(Product::count() / 2)->get();
         foreach ($products as $product) {
             ProductDiscount::create([
                 'discounted_price' => $product->price * 0.8,
