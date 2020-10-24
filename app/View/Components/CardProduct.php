@@ -7,13 +7,8 @@ use Illuminate\View\Component;
 class CardProduct extends Component
 {
 
-    public $productImg;
-    public $productName;
-    public $productOriginalPrice;
-    public $productFinalPrice;
-    public $productRating;
-    public $productCategory;
-    public $productIsObral;
+    public $productImg, $productName, $productOriginalPrice, $productFinalPrice;
+    public $productRating, $productCategory, $productIsObral, $isHorizontal;
 
     /**
      * Create a new component instance.
@@ -27,7 +22,8 @@ class CardProduct extends Component
         $productFinalPrice, 
         $productRating,
         $productCategory,
-        $productIsObral
+        $productIsObral,
+        $isHorizontal = null
     ) {
         $this->productImg = $productImg;
         $this->productName = $productName;
@@ -36,6 +32,7 @@ class CardProduct extends Component
         $this->productRating = $productRating;
         $this->productCategory = $productCategory;
         $this->productIsObral = $productIsObral;
+        $this->isHorizontal = $isHorizontal;
     }
 
     /**

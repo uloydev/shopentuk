@@ -2,20 +2,21 @@
 @use 'general';
 
 .header {
-    background: {
-        image: url('../img/header-landing.jpg');
-        color: rgba($color: #003a69, $alpha: 0.6);
-        blend-mode: overlay;
-        attachment: fixed;
-        size: cover;
+    #landingPage & {
+        background: {
+            image: url('../img/header-landing.jpg');
+            color: rgba($color: #003a69, $alpha: 0.6);
+            blend-mode: overlay;
+            attachment: fixed;
+            size: cover;
+        }
+        @apply flex flex-col;
+        height: 90vh;
     }
-    @apply flex flex-col;
-    height: 90vh;
     position: relative;
 }
 
 .nav {
-    @apply shadow-md;
 
     .container {
         padding-top: 1rem;
@@ -62,6 +63,10 @@
         #total-shopping {
             @apply absolute transform translate-x-1/2 translate-y-1 text-sm;
             right: calc(45px / 2);
+
+            @media (min-width: theme('screens.sm')) {
+                right: 45px;
+            }
         }
         &--bag box-icon {
             @include mixin.sameSize(45px);
@@ -188,17 +193,20 @@
 
 /*landing-page style*/
 #landingPage {
+    $nav: '.nav';
+
+    .nav .container > .nav__ul > .nav__item > .nav__link {
+        color: #fff;
+    }
+
+    body:not(&) main {
+        @apply bg-gray-100;
+    }
+
     #section-catalog {
         &__promo {
             position: relative;
             background-image: url('../img/special-edition.jpg');
-        
-            &::after {
-                content: '';
-                @apply absolute top-0 left-0 h-full w-full;
-                opacity: 0.43;
-                background-image: linear-gradient(100deg, #000000 0%, rgba(17,107,191,0.39) 100%);
-            }
         }
         &__overlay {
             @apply absolute top-0 left-0 h-full w-full;
@@ -208,5 +216,9 @@
     }
 }
 /*end of landing-page style*/
+
+/*storePage style*/
+
+/*end of storePage style*/
 
 @tailwind utilities;

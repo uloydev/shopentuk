@@ -8,11 +8,12 @@
     <title>Shopentuk Shop | @yield('title')</title>
 </head>
 <body id="@yield('body-id')Page" class="overflow-x-hidden">
-    <header class="header">
+    <header class="header bg-gray-100">
         @include('partial.nav')
         @yield('header')
     </header>
     <main>
+        @yield('breadcrumbs')
         @yield('content')
     </main>
     @include('partial.footer')

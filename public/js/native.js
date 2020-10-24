@@ -144,19 +144,28 @@ var nav = document.querySelector('nav');
 var navUl = nav.querySelector('.nav__ul');
 var dividerMenu = ['divide-y', 'divide-gray-400'];
 var classToOpenNavItemHasChild = 'nav__item-has-child--open';
+
+function closeNavAndChild() {
+  var _navUl$classList;
+
+  nav.classList.remove('nav--open');
+
+  (_navUl$classList = navUl.classList).remove.apply(_navUl$classList, dividerMenu);
+}
+
 btnOpenMenu.addEventListener('click', function () {
   if (nav.classList.contains('nav--open')) {
-    var _navUl$classList;
+    var _navUl$classList2;
 
     nav.classList.remove('nav--open');
 
-    (_navUl$classList = navUl.classList).remove.apply(_navUl$classList, dividerMenu);
+    (_navUl$classList2 = navUl.classList).remove.apply(_navUl$classList2, dividerMenu);
   } else {
-    var _navUl$classList2;
+    var _navUl$classList3;
 
     nav.classList.add('nav--open');
 
-    (_navUl$classList2 = navUl.classList).add.apply(_navUl$classList2, dividerMenu);
+    (_navUl$classList3 = navUl.classList).add.apply(_navUl$classList3, dividerMenu);
   }
 });
 btnOpenChildMenu.forEach(function (openChild) {
@@ -177,14 +186,34 @@ btnOpenChildMenu.forEach(function (openChild) {
     }
   });
 });
-document.querySelector('header nav + *').addEventListener('click', function () {
+
+if (window.location.pathname == '/') {
+  document.querySelector('header nav + *').addEventListener('click', function () {
+    var allChild = document.querySelectorAll('.nav__item-has-child--open');
+    allChild.forEach(function (child) {
+      child.classList.remove('nav__item-has-child--open');
+    });
+    closeNavAndChild();
+  });
+}
+
+document.querySelector('main').addEventListener('click', function () {
   var allChild = document.querySelectorAll('.nav__item-has-child--open');
   allChild.forEach(function (child) {
     child.classList.remove('nav__item-has-child--open');
   });
+  closeNavAndChild();
 });
 
-if (window.screen.width > 768) {
+if (window.location.pathname == '/') {
+  nav.classList.add('bg-gray-800', 'bg-opacity-25');
+  document.querySelector('header, main').classList.remove('bg-gray-100');
+} else {
+  nav.classList.add('bg-white');
+  nav.classList.remove('shadow');
+}
+
+if (window.screen.width > 768 && window.location.pathname == '/') {
   document.querySelectorAll('.nav .container > .nav__ul > .nav__item > .nav__link > .child-dropdown-icon').forEach(function (dropdownIcon) {
     dropdownIcon.setAttribute('color', '#fff');
   });

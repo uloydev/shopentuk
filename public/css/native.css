@@ -641,7 +641,7 @@ video {
 
 .card-product {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .font-architects {
@@ -649,6 +649,10 @@ video {
 }
 
 .header {
+  position: relative;
+}
+
+#landingPage .header {
   background-image: url("../img/header-landing.jpg");
   background-color: rgba(0, 58, 105, 0.6);
   background-blend-mode: overlay;
@@ -657,11 +661,6 @@ video {
   display: flex;
   flex-direction: column;
   height: 90vh;
-  position: relative;
-}
-
-.nav {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .nav .container {
@@ -737,6 +736,12 @@ video {
   --transform-translate-y: 0.25rem;
   font-size: 0.875rem;
   right: calc(45px / 2);
+}
+
+@media (min-width: 640px) {
+  .nav__icon #total-shopping {
+    right: 45px;
+  }
 }
 
 .nav__icon--bag box-icon {
@@ -888,20 +893,19 @@ video {
 
 /*landing-page style*/
 
+#landingPage .nav .container > .nav__ul > .nav__item > .nav__link {
+  color: #fff;
+}
+
+body:not(#landingPage) main {
+  --bg-opacity: 1;
+  background-color: #f7fafc;
+  background-color: rgba(247, 250, 252, var(--bg-opacity));
+}
+
 #landingPage #section-catalog__promo {
   position: relative;
   background-image: url("../img/special-edition.jpg");
-}
-
-#landingPage #section-catalog__promo::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0.43;
-  background-image: linear-gradient(100deg, #000000 0%, rgba(17, 107, 191, 0.39) 100%);
 }
 
 #landingPage #section-catalog__overlay {
@@ -915,6 +919,10 @@ video {
 }
 
 /*end of landing-page style*/
+
+/*storePage style*/
+
+/*end of storePage style*/
 
 .space-y-0 > :not(template) ~ :not(template){
   --space-y-reverse: 0;

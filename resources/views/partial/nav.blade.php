@@ -19,20 +19,20 @@
         </div>
         <ul class="nav__ul bg-gray-100 sm:bg-transparent sm:pr-0 sm:pl-8">
             <li 
-            class="nav__item nav__item--menu sm:mr-6 sm:text-gray-300 sm:hover:text-white sm:flex-grow sm:justify-center">
+            class="nav__item nav__item--menu sm:mr-6 sm:flex-grow sm:justify-center">
                 <a href="" class="nav__link">Home</a>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child sm:mr-6 sm:flex-grow sm:justify-center">
                 <a href="javascript:void(0);"
-                class="nav__link nav__link--open-child sm:text-gray-300 sm:hover:text-white">
+                class="nav__link nav__link--open-child">
                     <x-menu-has-nested-child text="Store" />
                 </a>
-                <ul class="nav__ul sm:border-0 divide-y sm:divide-gray-300 sm:bg-white pr-0 sm:pr-8">
+                <ul class="nav__ul sm:border-0 divide-y sm:divide-gray-300 sm:bg-white pr-0 sm:pr-8 sm:shadow">
                     <li class="nav__item nav__item--menu nav__item-has-child">
                         <a href="" class="nav__link nav__link--open-child">
                             <x-menu-has-child text="Pria" />
                         </a>
-                        <ul class="nav__ul divide-y divide-gray-400 sm:bg-white">
+                        <ul class="nav__ul divide-y divide-gray-400 sm:bg-white sm:shadow">
                             <x-menu-standar id="menu-store-pria-baju" text="Baju" 
                             to="/link-go-to-baju" have-icon="true" />
                             <x-menu-standar id="menu-store-pria-celana" text="Celana" to="/link-go-to-celana"
@@ -43,7 +43,7 @@
                         <a href="" class="nav__link nav__link--open-child">
                             <x-menu-has-child text="Wanita" />
                         </a>
-                        <ul class="nav__ul divide-y divide-gray-400 sm:bg-white">
+                        <ul class="nav__ul divide-y divide-gray-400 sm:bg-white sm:shadow">
                             <x-menu-standar id="menu-store-wanita-baju" text="Baju" to="/link-go-to-baju" 
                             have-icon="true" />
                             <x-menu-standar id="menu-store-wanita-celana" text="Celana" to="/link-go-to-celana"
@@ -54,7 +54,7 @@
                         <a href="" class="nav__link nav__link--open-child">
                             <x-menu-has-child text="Accessories" />
                         </a>
-                        <ul class="nav__ul divide-y divide-gray-400 sm:bg-white">
+                        <ul class="nav__ul divide-y divide-gray-400 sm:bg-white sm:shadow">
                             <x-menu-standar id="menu-accessories-topi" text="Topi" to="/link-go-to-topi" 
                             have-icon="true" />
                         </ul>
@@ -62,15 +62,15 @@
                 </ul>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child sm:mr-6 sm:flex-grow sm:justify-center">
-                <a href="" class="nav__link nav__link--open-child sm:text-gray-300 sm:hover:text-white">
+                <a href="" class="nav__link nav__link--open-child">
                     <x-menu-has-nested-child text="Voucher" />
                 </a>
-                <ul class="nav__ul sm:bg-white pr-0 sm:pr-4 divide-y sm:divide-gray-400 sm:w-48">
+                <ul class="nav__ul sm:bg-white pr-0 sm:pr-4 divide-y sm:divide-gray-400 sm:w-48 sm:shadow">
                     <li class="nav__item nav__item--menu nav__item-has-child">
                         <a href="" class="nav__link nav__link--open-child">
                             <x-menu-has-child text="Pulsa" />
                         </a>
-                        <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-400 border-0 sm:w-48">
+                        <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-400 border-0 sm:w-48 sm:shadow">
                             <x-menu-standar id="menu-pulsa-telkomsel" text="Pulsa Telkomsel" 
                             to="/link-go-pulsa-telkomsel" have-icon="true" />
                             <x-menu-standar id="menu-pulsa-xl" text="Pulsa XL" 
@@ -84,17 +84,17 @@
                         </ul>
                     </li>
                     <x-menu-standar id="menu-voucher-game" text="Voucher game" 
-                    to="/link-go-voucher-game" have-icon="true" />
+                    to="/link-go-voucher-game" have-icon="false" />
                 </ul>
             </li>
-            <li class="nav__item nav__item--menu sm:mr-6 sm:text-gray-300 sm:hover:text-white sm:flex-grow sm:justify-center">
+            <li class="nav__item nav__item--menu sm:mr-6 sm:flex-grow sm:justify-center">
                 <a href="" class="nav__link">Konfirmasi pembayaran</a>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child sm:mr-6 sm:flex-grow sm:justify-center">
-                <a href="" class="nav__link nav__link--open-child sm:text-gray-300 sm:hover:text-white">
+                <a href="" class="nav__link nav__link--open-child">
                     <x-menu-has-nested-child text="Cancel & refund" />
                 </a>
-                <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-300">
+                <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-300 sm:shadow">
                     <x-menu-standar id="menu-cancel-refund" text="Pengembalian uang"
                     to="/link-go-to-pengembalian" have-icon="false" />
                     <x-menu-standar id="menu-cancel-pembatalan" text="Pembatalan order"
@@ -102,10 +102,10 @@
                 </ul>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child sm:mr-6 sm:flex-grow sm:justify-center">
-                <a href="" class="nav__link nav__link--open-child sm:text-gray-300 sm:hover:text-white">
+                <a href="" class="nav__link nav__link--open-child">
                     <x-menu-has-nested-child text="My akun" />
                 </a>
-                <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-300">
+                <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-300 sm:shadow">
                     <x-menu-standar id="menu-my-akun-akun-saya" text="Akun saya" 
                     to="/link-go-to-akun" have-icon="false" />
                     <x-menu-standar id="menu-my-akun-toko-point" text="Toko Point" 
@@ -113,7 +113,7 @@
                 </ul>
             </li>
             <li class="nav__item nav__item--menu hidden sm:inline-flex sm:flex-grow sm:justify-center">
-                <a href="" class="nav__icon nav__icon--bag">
+                <a href="" class="nav__icon nav__icon--bag hover:text-white">
                     <var class="not-italic" id="total-shopping">0</var>
                     <box-icon name='shopping-bag'></box-icon>
                 </a>
