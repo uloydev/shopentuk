@@ -2,19 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Product;
+use App\Models\ProductSubCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\ProductCategory;
-use App\Models\ProductSubCategory;
 
-class ProductFactory extends Factory
+class ProductSubCategoryFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Product::class;
+    protected $model = ProductSubCategory::class;
 
     /**
      * Define the model's default state.
@@ -24,12 +23,9 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence($nbWords=5, $variableNbWords=true),
+            'title' => $this->faker->sentence($nbWords=2, $variableNbWords=true),
             'description' => $this->faker->paragraph($nbSentences=3, $variableNbSentences=true),
-            'price' => $this->faker->numberBetween($min=10000, $max=100000),
-            'point_price' => $this->faker->numberBetween($min=10, $max=100),
             'category_id' => ProductCategory::factory(),
-            'sub_category_id' => ProductSubCategory::factory(),
         ];
     }
 }
