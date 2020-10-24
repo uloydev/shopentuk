@@ -22,8 +22,8 @@
         <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-8 lg:gap-y-10 justify-items-center mt-32">
             @foreach ($products as $product)
                 @if ($product->discount)
-                    <x-card-product 
-                        product-img="{{ asset('img/example.jpg') }}" 
+                    <x-card-product
+                        product-img="{{ 'example.jpg' }}" 
                         product-name="{{ $product->title }}"
                         product-category="{{ $product->productCategory->title }}" 
                         product-original-price="{{ $product->price }}"
@@ -32,9 +32,10 @@
                         product-is-obral="true" />
                 @else
                     <x-card-product 
-                        product-img="{{ asset('img/example.jpg') }}" 
+                        product-img="{{ 'example.jpg' }}" 
                         product-name="{{ $product->title }}"
-                        product-category="{{ $product->productCategory->title }}" product-final-price="{{ $product->price }}"
+                        product-category="{{ $product->productCategory->title }}" 
+                        product-final-price="{{ $product->price }}"
                         product-rating="0" 
                         product-is-obral="false" />
                 @endif
