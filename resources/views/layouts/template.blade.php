@@ -45,6 +45,7 @@
     <script src="{{ asset('template/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js') }}"></script>
     <script src="{{ asset('template/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script src="{{ asset('template/dist/js/dashboard1.min.js') }}"></script>
+    <script src="{{ asset('js/dashboard.js') }}"></script>
 </body>
 
 </html>
