@@ -28,6 +28,6 @@ class ProductImage extends Model
 
     public function getUrlAttribute()
     {
-        return base64_decode($this->url);
+        return base64_decode($this->attributes['url']);
     }
 }

@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('price');
             $table->unsignedInteger('point_price');
             $table->foreignId('category_id');
-            $table->foreignId('sub_category_id');
+            $table->foreignId('sub_category_id')->nullable();
             $table->timestamps();
         });
     }
