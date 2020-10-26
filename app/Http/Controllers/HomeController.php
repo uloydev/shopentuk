@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
+    protected $products, $categories;
+
     /**
      * Create a new controller instance.
      *
@@ -15,7 +18,9 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('landingPage');
+        $this->middleware('auth')->except('landingPage', 'storePage');
+        $this->categories = ProductCategory::all();
+        $this->products = Product::limit(10)->latest()->get();
     }
 
     /**
@@ -30,11 +35,17 @@ class HomeController extends Controller
 
     public function landingPage()
     {
-        $categories = ProductCategory::all();
-        $products = Product::limit(10)->latest()->get();
         return view('landing', [
-            'products' => $products,
-            'categories' => $categories,
+            'products' => $this->products,
+            'categories' => $this->categories
+        ]);
+    }
+
+    public function storePage()
+    {
+        return view('store.index', [
+            'products' => $this->products,
+            'categories' => $this->categories
         ]);
     }
 }

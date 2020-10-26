@@ -23,11 +23,11 @@
                 <a href="" class="nav__link">Home</a>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child sm:mr-6 sm:flex-grow sm:justify-center">
-                <a href="javascript:void(0);"
+                <a href=""
                 class="nav__link nav__link--open-child">
                     <x-menu-has-nested-child text="Store" />
                 </a>
-                <ul class="nav__ul sm:border-0 divide-y sm:divide-gray-300 sm:bg-white pr-0 sm:pr-8">
+                <ul class="nav__ul sm:border-0 divide-y sm:divide-gray-300 sm:bg-white pr-0 sm:pr-8 md:shadow">
                     @foreach ($categories->where('is_digital_product', false) as $category)
                         <li class="nav__item nav__item--menu nav__item-has-child">
                             <a href="" class="nav__link nav__link--open-child">
@@ -43,13 +43,15 @@
                             </ul>
                         </li>
                     @endforeach
+                    <x-menu-standar id="menu-store-all" text="All"
+                    to="{{ route('store.index') }}" have-icon="false" />
                 </ul>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child sm:mr-6 sm:flex-grow sm:justify-center">
                 <a href="" class="nav__link nav__link--open-child">
                     <x-menu-has-nested-child text="Voucher" />
                 </a>
-                <ul class="nav__ul sm:bg-white pr-0 sm:pr-4 divide-y sm:divide-gray-400 sm:w-48">
+                <ul class="nav__ul sm:bg-white pr-0 sm:pr-4 divide-y sm:divide-gray-400 sm:w-48 md:shadow">
                     @foreach ($categories->where('is_digital_product', true) as $category)
                         <li class="nav__item nav__item--menu nav__item-has-child">
                             <a href="" class="nav__link nav__link--open-child">
@@ -75,7 +77,7 @@
                 <a href="" class="nav__link nav__link--open-child">
                     <x-menu-has-nested-child text="Cancel & refund" />
                 </a>
-                <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-300 sm:shadow">
+                <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-300 md:shadow">
                     <x-menu-standar id="menu-cancel-refund" text="Pengembalian uang"
                     to="/link-go-to-pengembalian" have-icon="false" />
                     <x-menu-standar id="menu-cancel-pembatalan" text="Pembatalan order"
@@ -86,7 +88,7 @@
                 <a href="" class="nav__link nav__link--open-child">
                     <x-menu-has-nested-child text="My akun" />
                 </a>
-                <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-300 sm:shadow">
+                <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-300 md:shadow">
                     <x-menu-standar id="menu-my-akun-akun-saya" text="Akun saya" 
                     to="/link-go-to-akun" have-icon="false" />
                     <x-menu-standar id="menu-my-akun-toko-point" text="Toko Point" 
