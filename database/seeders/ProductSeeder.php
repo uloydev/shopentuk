@@ -18,7 +18,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        ProductCategory::factory()->times(8)->has(
+        ProductCategory::factory()->times(6)->has(
             ProductSubCategory::factory()->count(3)->has(
                 Product::factory()->count(8)->has(
                     ProductImage::factory()->count(3)

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@landingPage')->name('landing-page');
-Route::get('store', 'HomeController@storePage')->name('store.index');
+Route::get('store', 'StoreController@index')->name('store.index');
 
 Auth::routes();
 
