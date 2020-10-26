@@ -14,8 +14,8 @@
                 </button>
             </form>
             <div class="py-4">
-                <h1 class="text-3xl">Our best sellers</h1>
-                <ul class="mt-3 divide-y divide-gray-400">
+                <h1 class="text-2xl">Our best sellers</h1>
+                <ul class="mt-5 divide-y divide-gray-400">
                     {{-- foreach --}}
                     @foreach ($bestProducts as $product)
                         <li class="pb-3">
@@ -42,6 +42,41 @@
                         </li>
                     @endforeach
                     {{-- end of foreach --}}
+                </ul>
+            </div>
+            <div class="py-4">
+                <h1 class="text-2xl">Browse by categories</h1>
+                <ul class="mt-5">
+                    <li class="flex justify-between py-3">
+                        <a href="">Accessories</a>
+                        <var class="not-italic">7</var>
+                    </li>
+                    <li class="flex justify-between py-3">
+                        <a href="">Pria</a>
+                        <var class="not-italic">7</var>
+                    </li>
+                    <li class="flex justify-between flex-wrap py-3">
+                        <a href="">Voucher</a>
+                        <var class="not-italic">7</var>
+                        <ul class="w-full pl-4">
+                            {{-- foreach --}}
+                            <li class="py-3">
+                                <div class="flex justify-between">
+                                    <a href="">Pulsa</a>
+                                    <var class="not-italic">7</var>
+                                </div>
+                                <ul class="pl-4">
+                                    {{-- foreach --}}
+                                    <li class="py-3 flex justify-between">
+                                        <a href="">Telkomsel</a>
+                                        <var class="not-italic">7</var>
+                                    </li>
+                                    {{-- end of foreach --}}
+                                </ul>
+                            </li>
+                            {{-- end of foreach --}}
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </aside>

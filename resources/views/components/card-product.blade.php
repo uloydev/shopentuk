@@ -1,4 +1,4 @@
-<div class="card-product {{ $isHorizontal == 'false' ? 'flex-col' : 'flex-row' }}">
+<div class="flex {{ $isHorizontal == 'false' ? 'flex-col' : 'flex-row' }}">
     <div class="flex relative {{ $isHorizontal == 'true' ? 'items-center mr-4' : '' }}">
         <a href="">
             <img src="{{ asset('img/' . $productImg) }}" alt="Image of {{ $productName }}" 

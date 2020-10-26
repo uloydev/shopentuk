@@ -639,11 +639,6 @@ video {
   transform: translateX(-50%);
 }
 
-.card-product {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .font-architects {
   font-family: "Architects Daughter", cursive;
 }
@@ -10625,6 +10620,10 @@ body:not(#landingPage) main {
 
 .font-cursive{
   font-family: "Annie Use Your Telescope";
+}
+
+.font-roboto{
+  font-family: Roboto;
 }
 
 .font-hairline{
@@ -31475,6 +31474,10 @@ body:not(#landingPage) main {
     font-family: "Annie Use Your Telescope";
   }
 
+  .sm\:font-roboto{
+    font-family: Roboto;
+  }
+
   .sm\:font-hairline{
     font-weight: 100;
   }
@@ -52256,6 +52259,10 @@ body:not(#landingPage) main {
 
   .md\:font-cursive{
     font-family: "Annie Use Your Telescope";
+  }
+
+  .md\:font-roboto{
+    font-family: Roboto;
   }
 
   .md\:font-hairline{
@@ -73041,6 +73048,10 @@ body:not(#landingPage) main {
     font-family: "Annie Use Your Telescope";
   }
 
+  .lg\:font-roboto{
+    font-family: Roboto;
+  }
+
   .lg\:font-hairline{
     font-weight: 100;
   }
@@ -93822,6 +93833,10 @@ body:not(#landingPage) main {
 
   .xl\:font-cursive{
     font-family: "Annie Use Your Telescope";
+  }
+
+  .xl\:font-roboto{
+    font-family: Roboto;
   }
 
   .xl\:font-hairline{

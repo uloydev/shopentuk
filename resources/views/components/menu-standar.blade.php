@@ -5,4 +5,5 @@
         @endif
         <span>{{ $text }}</span>
     </a>
+    {{ $slot }}
 </li>
