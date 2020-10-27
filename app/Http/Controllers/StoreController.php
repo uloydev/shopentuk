@@ -15,7 +15,7 @@ class StoreController extends Controller
         $this->categories = ProductCategory::all();
     }
 
-    public function index(Request $request)
+    public function product(Request $request)
     {
         $bestProducts = Product::inRandomOrder()->limit(3)->get();
         $products = Product::query();
@@ -39,11 +39,15 @@ class StoreController extends Controller
         $products = $products->paginate(12);
         $products->appends($httpQuery);
 
-        return view('store.index', [
+        return view('store.product', [
             'products' => $products,
             'bestProducts' => $bestProducts,
             'categories' => $this->categories,
             'httpQuery' => $httpQuery,
         ]);
+    }
+
+    public function voucher(){
+        return view('store.voucher', ['categories' => $this->categories]);
     }
 }

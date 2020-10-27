@@ -18,9 +18,8 @@
             </a>
         </div>
         <ul class="nav__ul bg-gray-100 sm:bg-transparent sm:pr-0 sm:pl-8">
-            <li 
-            class="nav__item nav__item--menu sm:mr-6 sm:flex-grow sm:justify-center">
-                <a href="" class="nav__link">Home</a>
+            <li class="nav__item nav__item--menu sm:mr-6 sm:flex-grow sm:justify-center">
+                <a href="{{ route('landing-page') }}" class="nav__link">Home</a>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child sm:mr-6 sm:flex-grow sm:justify-center">
                 <a href=""
@@ -44,7 +43,7 @@
                         </li>
                     @endforeach
                     <x-menu-standar id="menu-store-all" text="All"
-                    to="{{ route('store.index') }}" have-icon="false" />
+                    to="{{ route('store.product') }}" have-icon="false" />
                 </ul>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child sm:mr-6 sm:flex-grow sm:justify-center">
@@ -68,6 +67,8 @@
                             </ul>
                         </li>
                     @endforeach
+                    <x-menu-standar id="menu-store-all" to="{{ route('store.voucher') }}" 
+                    text="All" have-icon="false"/>
                 </ul>
             </li>
             <li class="nav__item nav__item--menu sm:mr-6 sm:flex-grow sm:justify-center">
@@ -90,7 +91,7 @@
                 </a>
                 <ul class="nav__ul sm:bg-white divide-y sm:divide-gray-300 md:shadow">
                     <x-menu-standar id="menu-my-akun-akun-saya" text="Akun saya" 
-                    to="/link-go-to-akun" have-icon="false" />
+                    to="/home" have-icon="false" />
                     <x-menu-standar id="menu-my-akun-toko-point" text="Toko Point" 
                     to="/link-go-to-toko" have-icon="false" />
                 </ul>

@@ -21,23 +21,23 @@
                         <li class="pb-3">
                             @if ($product->discount)
                                 <x-card-product
-                                    product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
-                                    product-name="{{ $product->title }}"
-                                    product-category="{{ $product->productCategory->title }}" 
-                                    product-original-price="{{ $product->price }}"
-                                    product-final-price="{{ $product->discount->discounted_price }}"
-                                    product-rating="0" 
-                                    product-is-obral="true"
-                                    is-horizontal="true" />
+                                product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}"
+                                product-name="{{ $product->title }}"
+                                product-category="{{ $product->productCategory->title }}" 
+                                product-original-price="{{ $product->price }}"
+                                product-final-price="{{ $product->discount->discounted_price }}"
+                                product-rating="0" 
+                                product-is-obral="false"
+                                is-horizontal="true" />
                             @else
                                 <x-card-product 
-                                    product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
-                                    product-name="{{ $product->title }}"
-                                    product-category="{{ $product->productCategory->title }}" 
-                                    product-final-price="{{ $product->price }}"
-                                    product-rating="0" 
-                                    product-is-obral="false"
-                                    is-horizontal="true" />
+                                product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
+                                product-name="{{ $product->title }}"
+                                product-category="{{ $product->productCategory->title }}" 
+                                product-final-price="{{ $product->price }}"
+                                product-rating="0" 
+                                product-is-obral="false"
+                                is-horizontal="true" />
                             @endif
                         </li>
                     @endforeach
@@ -103,7 +103,7 @@
                     </div>
                 </form>
             </div>
-            <div class="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 mt-10">
+            <div class="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-10 mt-10">
                 {{-- foreach --}}
                 @foreach ($products as $product)
                     @if ($product->discount)
@@ -114,7 +114,8 @@
                             product-original-price="{{ $product->price }}"
                             product-final-price="{{ $product->discount->discounted_price }}"
                             product-rating="0" 
-                            product-is-obral="true" />
+                            product-is-obral="true"
+                            is-horizontal="false" />
                     @else
                         <x-card-product 
                             product-img="{{ $product->mainImage ? $product->mainImage->url : 'example.jpg' }}" 
@@ -122,26 +123,27 @@
                             product-category="{{ $product->productCategory->title }}" 
                             product-final-price="{{ $product->price }}"
                             product-rating="0" 
-                            product-is-obral="false" />
+                            product-is-obral="false"
+                            is-horizontal="false" />
                     @endif
                 @endforeach
                 {{-- end of foreach --}}
             </div>
-            {{ $products->links() }}
+            <div class="mt-8">
+                {{ $products->links() }}
+            </div>
         </section>
     </div>
 </div>
 
 {{-- rapihin briq jsnya --}}
-<script
-    src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-    crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" 
+integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script>
     let httpQuery = {!! json_encode($httpQuery) !!};
     let currentPage = {{ $products->currentPage() }};
     let currentUrl = "{{ URL::current() }}";
-    var newUrl;
+    let newUrl;
 
     $("#form-search").submit(function (e) {
         e.preventDefault();
