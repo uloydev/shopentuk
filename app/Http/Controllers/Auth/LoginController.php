@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -23,48 +22,25 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
-     * Create a new controller instance.
+     * override redirect after login
      *
-     * @return void
-     */
+     * @return string
+     **/
+    protected function redirectTo()
+    {
+        if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin') {
+            return 'admin/dashboard';
+        }
+        else {
+            return 'home';
+        }
+    }
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-    }
-
-    public function authenticate(Request $request)
-    {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-        $credentials = $request->only('email', 'password');
-        if(Auth::attempt($credentials)){
-            if (Auth::user()->role == 'user') {
-                return redirect()->route('home');
-            }else{
-                return redirect()->route('admin.home');
-            }
-        }else{
-            dd(auth()->attempt(['email' => $request->password, 'password' => $request->password]));
-            return redirect()->route('login')
-                ->with('error','Email & Password are incorrect.');
-        }     
-    }
-
-    public function redirectTo()
-    {
-        if (Auth::user()->role == 'user') {
-            return route('home');
-        }
-        return route('admin.dashboard');
     }
 }
