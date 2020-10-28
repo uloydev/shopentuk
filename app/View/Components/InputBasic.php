@@ -7,18 +7,19 @@ use Illuminate\View\Component;
 class InputBasic extends Component
 {
 
-    public $name, $label, $type;
+    public $name, $label, $type, $boxWidth;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name, $label, $type = 'text')
+    public function __construct($name, $label, $type = 'text', $boxWidth = '')
     {
         $this->name = $name;
         $this->label = $label;
         $this->type = $type;
+        $this->boxWidth = $boxWidth;
     }
 
     /**
