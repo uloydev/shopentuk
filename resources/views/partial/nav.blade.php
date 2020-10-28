@@ -22,8 +22,7 @@
                 <a href="{{ route('landing-page') }}" class="nav__link">Home</a>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child sm:mr-6 sm:flex-grow sm:justify-center">
-                <a href=""
-                class="nav__link nav__link--open-child">
+                <a href="" class="nav__link nav__link--open-child">
                     <x-menu-has-nested-child text="Store" />
                 </a>
                 <ul class="nav__ul sm:border-0 divide-y sm:divide-gray-300 sm:bg-white pr-0 sm:pr-8 md:shadow">
