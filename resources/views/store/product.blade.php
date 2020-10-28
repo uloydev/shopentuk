@@ -8,7 +8,7 @@
             <form action="" method="get" class="flex mb-5" id="form-search">
                 <input type="text" placeholder="Cari produk..."
                 class="appearance-none w-full leading-tight py-2 px-4 border-2 border-r-0 placeholder-gray-700 border-gray-400" name="search" 
-                value="{{ $httpQuery['search'] ?? ''}}" required id="search-input">
+                value="{{ $httpQuery['search'] ?? ''}}" id="search-input">
                 <x-btn-primary text="Cari" class="border-gray-400"/>
             </form>
             <div class="py-4">
@@ -19,7 +19,7 @@
                         <li class="pb-3">
                             @if ($product->discount)
                                 <x-card-product
-                                product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}"
+                                product-img="{{ $product->mainImage ? $product->mainImage->url : 'example.jpg' }}"
                                 product-name="{{ $product->title }}"
                                 product-category="{{ $product->productCategory->title }}" 
                                 product-original-price="{{ $product->price }}"
@@ -29,7 +29,7 @@
                                 is-horizontal="true" />
                             @else
                                 <x-card-product 
-                                product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
+                                product-img="{{ $product->mainImage ? $product->mainImage->url : 'example.jpg' }}" 
                                 product-name="{{ $product->title }}"
                                 product-category="{{ $product->productCategory->title }}" 
                                 product-final-price="{{ $product->price }}"

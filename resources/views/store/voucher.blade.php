@@ -5,30 +5,40 @@
 <div class="container py-10 px-5 lg:px-0 mx-auto">
     <div class="flex flex-wrap justify-between">
         <aside class="w-full lg:w-3/12 lg:border-r-2 pr-5 lg:pr-10 order-last lg:order-first mt-10 lg:mt-0">
-            <form action="" method="get" class="flex mb-5" id="form-search">
+           <form action="" method="get" class="flex mb-5" id="form-search">
                 <input type="text" placeholder="Cari produk..."
                 class="appearance-none w-full leading-tight py-2 px-4 border-2 border-r-0 placeholder-gray-700 border-gray-400" name="search" 
-                value="" required id="search-input">
-                <button type="submit" class="bg-gray-300 hover:bg-gray-900 py-2 px-4 border-2 border-gray-400 hover:text-white">
-                    Cari
-                </button>
+                value="{{ $httpQuery['search'] ?? ''}}" id="search-input">
+                <x-btn-primary text="Cari" class="border-gray-400"/>
             </form>
             <div class="py-4">
                 <h1 class="text-2xl">Our best sellers</h1>
                 <ul class="mt-5 divide-y divide-gray-400">
                     {{-- foreach --}}
-                    @for ($i = 0; $i < 12; $i++)
+                    @foreach ($bestProducts as $product)
                         <li class="pb-3">
-                            <x-card-product 
-                            product-img="{{ $i % 2 == 0 ? 'static/telkomsel.jpg' : 'static/3.jpg' }}" 
-                            product-name="{{ 'title' }}"
-                            product-category="{{ 'category' }}" 
-                            product-final-price="{{ 2000 }}"
-                            product-rating="0" 
-                            product-is-obral="false"
-                            is-horizontal="true" />
+                            @if ($product->discount)
+                                <x-card-product
+                                product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}"
+                                product-name="{{ $product->title }}"
+                                product-category="{{ $product->productCategory->title }}" 
+                                product-original-price="{{ $product->price }}"
+                                product-final-price="{{ $product->discount->discounted_price }}"
+                                product-rating="0" 
+                                product-is-obral="false"
+                                is-horizontal="true" />
+                            @else
+                                <x-card-product 
+                                product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
+                                product-name="{{ $product->title }}"
+                                product-category="{{ $product->productCategory->title }}" 
+                                product-final-price="{{ $product->price }}"
+                                product-rating="0" 
+                                product-is-obral="false"
+                                is-horizontal="true" />
+                            @endif
                         </li>
-                    @endfor
+                    @endforeach
                     {{-- end of foreach --}}
                 </ul>
             </div>
@@ -91,21 +101,33 @@
             </div>
             <div class="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-10 mt-10">
                 {{-- foreach --}}
-                @for ($i = 0; $i < 12; $i++)
-                    <x-card-product
-                    product-img="{{ $i % 2 === 0 ? 'static/telkomsel.jpg' : 'static/3.jpg' }}" 
-                    product-name="{{ 'title' }}"
-                    product-category="{{ 'category' }}"
-                    product-final-price="{{ 3000 }}"
-                    product-rating="0" 
-                    product-is-obral="false"
-                    is-horizontal="false" />
-                @endfor
+                @foreach ($products as $product)
+                    @if ($product->discount)
+                        <x-card-product
+                            product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
+                            product-name="{{ $product->title }}"
+                            product-category="{{ $product->productCategory->title }}" 
+                            product-original-price="{{ $product->price }}"
+                            product-final-price="{{ $product->discount->discounted_price }}"
+                            product-rating="0" 
+                            product-is-obral="true"
+                            is-horizontal="false" />
+                    @else
+                        <x-card-product 
+                            product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
+                            product-name="{{ $product->title }}"
+                            product-category="{{ $product->productCategory->title }}" 
+                            product-final-price="{{ $product->price }}"
+                            product-rating="0" 
+                            product-is-obral="false"
+                            is-horizontal="false" />
+                    @endif
+                @endforeach
                 {{-- end of foreach --}}
             </div>
-            {{-- <div class="mt-8">
+            <div class="mt-8">
                 {{ $products->links() }}
-            </div> --}}
+            </div>
         </section>
     </div>
 </div>
@@ -114,7 +136,35 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
 integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script>
-    
+    let httpQuery = {!! json_encode($httpQuery) !!};
+    let currentPage = {{ $products->currentPage() }};
+    let currentUrl = "{{ URL::current() }}";
+    let newUrl;
+
+    $("#form-search").submit(function (e) {
+        e.preventDefault();
+        var searchInput = $("#search-input").val();
+        newUrl = currentUrl + "?search=" + searchInput;
+        if (httpQuery.sort) {
+            newUrl += "&sort=" + httpQuery.sort;
+        }
+        window.location.href = newUrl;
+    });
+
+    $("#sort-product").change(function () {
+        newUrl = currentUrl;
+        if (httpQuery.search) {
+            newUrl += "?search=" + httpQuery.search;
+            if ($(this).val() != "default") {
+                newUrl += "&sort=" + $(this).val();
+            }
+        } else  {
+            if ($(this).val() != "default") {
+                newUrl += "?sort=" + $(this).val();
+            }
+        }
+        window,location.href = newUrl;
+    });
 </script>
 @endsection
 
