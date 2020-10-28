@@ -21,7 +21,6 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except('landingPage');
-        $this->categories = ProductCategory::all();
     }
 
     /**
@@ -37,9 +36,6 @@ class HomeController extends Controller
     public function landingPage()
     {
         $products = Product::limit(10)->latest()->get();
-        return view('landing', [
-            'products' => $products,
-            'categories' => $this->categories,
-        ]);
+        return view('landing', ['products' => $products]);
     }
 }
