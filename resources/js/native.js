@@ -74,6 +74,7 @@ document.querySelector('main').addEventListener('click', () => {
 });
 
 if (pageUrl === '/') {
+    nav.classList.add('bg-gray-800', 'bg-opacity-25');
     document.querySelector('header, main').classList.remove('bg-gray-100');
 
     //jika lg di landing page dan di mode tablet keatas, icon menu ganti warna jd putih
