@@ -5,7 +5,13 @@ module.exports = {
   },
   purge: [],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        gray: {
+          '100' : '#f9f9f9'
+        }
+      }
+    },
     fontFamily: {
       sans: [
         'system-ui',
@@ -27,6 +33,9 @@ module.exports = {
       mono: ['Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
       cursive: ['"Annie Use Your Telescope"'],
       roboto: ['Roboto'],
+    },
+    container: {
+      center: true,
     },
   },
   variants: {},
