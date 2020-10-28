@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 
-@import url('https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Architects+Daughter&family=Annie+Use+Your+Telescope&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Architects+Daughter&family=Annie+Use+Your+Telescope&family=Shadows+Into+Light&display=swap');
 
 * {
     box-sizing: border-box;
@@ -39,4 +39,7 @@
 
 .font-architects {
     font-family: 'Architects Daughter', cursive;
+}
+.font-shadows-light {
+    font-family: 'Shadows Into Light', cursive;
 }

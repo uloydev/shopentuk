@@ -1,46 +1,62 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+@section('body-id', 'register')
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-                        <x-input-auth input-name="email" label-text="E-Mail Address" type="text"
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email should be a valid email"/>
-                        
-                        <x-input-auth input-name="password" label-text="Password" 
-                        type="password" min="8" autocomplete="current-password"/>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" 
-                                    name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <x-button-auth btn-text="Login">
-                            @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            @endif
-                        </x-button-auth>
-
-                    </form>
-                </div>
-            </div>
+@section('header')
+    <div class="flex py-32 items-center relative flex-grow justify-center">
+        <div class="bg-overlay"></div>
+        <div class="z-10 text-white font-shadows-light font-bold">
+            <h1 class="text-6xl">Akun Saya</h1>
+            <hr class="bg-white border-white my-8">
+            <h2 class="text-4xl">Selamat Datang</h2>
         </div>
     </div>
-</div>
+@endsection
+
+@section('content')
+    <div class="container">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 py-12">
+            <section>
+                <h3 class="mb-5 text-2xl">Masuk</h3>
+                <div class="auth-box">
+                    <form action="{{ route('login') }}" method="POST">
+                        @csrf
+                        @include('auth.email-pw', [
+                            'placeholderEmail' => 'Email akun anda',
+                            'placeholderPw' => 'Kata sandi akun anda'
+                        ])
+                        <div class="mb-3 flex items-center">
+                            <label for="remember" class="ml-2 order-last">Ingat saya</label>
+                            <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                        </div>
+                        <x-btn-primary text="Masuk"/>
+                    </form>
+                </div>
+            </section>
+            <section>
+                <h3 class="mb-5 text-2xl">Daftar</h3>
+                <div class="auth-box">
+                    <form action="{{ route('register') }}" id="form-register" method="POST">
+                        @csrf
+                        <x-input-basic name="name" label="Nama pengguna" 
+                        placeholder="Contoh: bariqdharmawans" required/>
+                        <x-input-basic name="phone" type="tel" label="Nomor telepon" 
+                        placeholder="Contoh: 87771406656" autocomplete="tel" pattern="^[0-9]+$" required/>
+                        @include('auth.email-pw', [
+                            'placeholderEmail' => 'Email akun anda',
+                            'placeholderPw' => 'Kata sandi akun anda'
+                        ])
+                        <x-input-basic name="password_confirmation" label="Password Konfirmasi" 
+                        type="password" placeholder="Sama dengan password anda" min="8" autocomplete="new-password" required/>
+                    </form>
+                    <p class="text-sm text-gray-600">
+                        Data pribadi Anda akan digunakan untuk menunjang pengalaman Anda di seluruh situs web ini, 
+                        untuk mengelola akses ke akun Anda, dan untuk tujuan lain yang dijelaskan 
+                        dalam kebijakan privasi kami.
+                    </p>
+                    <x-btn-primary text="Daftar" class="mt-5" form="form-register"/>
+                </div>
+            </section>
+        </div>
+    </div>
 @endsection

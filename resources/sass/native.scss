@@ -17,6 +17,7 @@
 }
 
 .nav {
+    @apply bg-white;
 
     .container {
         padding-top: 1rem;
@@ -114,9 +115,7 @@
             }
 
             @media (min-width: theme('screens.sm')) {
-                height: auto;
-                opacity: 1;
-                z-index: 1;
+                @apply z-50 opacity-100 h-auto; //z-50 == z-index teratas di tailwind
             }
             
         }
@@ -193,7 +192,9 @@
 
 /*landing-page style*/
 #landingPage {
-    $nav: '.nav';
+    .nav {
+        @apply bg-gray-800 bg-opacity-25;
+    }
 
     .nav .container > .nav__ul > .nav__item > .nav__link {
         color: #fff;
@@ -217,8 +218,27 @@
 }
 /*end of landing-page style*/
 
-/*storePage style*/
+/*register style*/
+#registerPage {
+    header {
+        @apply flex flex-col flex-grow;
+        background: {
+            image: url('../img/static/auth-bg.jpg');
+            attachment: fixed;
+            size: cover;
+        }
 
+        .bg-overlay {
+            background-image: linear-gradient(180deg, #000000 0%, #54595f 100%);
+            @apply absolute w-full h-full inset-0;
+            opacity: 0.5;
+        }
+    }
+
+    .auth-box {
+        @apply p-4 border border-gray-400;
+    }
+}
 /*end of storePage style*/
 
 @tailwind utilities;

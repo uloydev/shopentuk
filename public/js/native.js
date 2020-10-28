@@ -142,10 +142,13 @@ var btnOpenMenu = document.querySelector('.nav__toggle-menu');
 var btnOpenChildMenu = document.querySelectorAll('.nav__link--open-child');
 var nav = document.querySelector('nav');
 var navUl = nav.querySelector('.nav__ul');
-var dividerMenu = ['divide-y', 'divide-gray-400'];
-var classToOpenNavItemHasChild = 'nav__item-has-child--open';
+var dividerMenu = ['divide-y', 'divide-gray-400']; //ini class buat nambah border ke menu
 
-function closeNavAndChild() {
+var classToOpenNavItemHasChild = 'nav__item-has-child--open';
+var pageUrl = window.location.pathname;
+var elementOnHeaderExceptNav = document.querySelectorAll('header nav + *');
+
+function closeNav() {
   var _navUl$classList;
 
   nav.classList.remove('nav--open');
@@ -153,19 +156,27 @@ function closeNavAndChild() {
   (_navUl$classList = navUl.classList).remove.apply(_navUl$classList, dividerMenu);
 }
 
+function openNav() {
+  var _navUl$classList2;
+
+  nav.classList.add('nav--open');
+
+  (_navUl$classList2 = navUl.classList).add.apply(_navUl$classList2, dividerMenu);
+}
+
+function closeAllMenu() {
+  var allChild = document.querySelectorAll('.nav__item-has-child--open');
+  allChild.forEach(function (child) {
+    child.classList.remove('nav__item-has-child--open');
+  });
+  closeNav();
+}
+
 btnOpenMenu.addEventListener('click', function () {
   if (nav.classList.contains('nav--open')) {
-    var _navUl$classList2;
-
-    nav.classList.remove('nav--open');
-
-    (_navUl$classList2 = navUl.classList).remove.apply(_navUl$classList2, dividerMenu);
+    closeNav();
   } else {
-    var _navUl$classList3;
-
-    nav.classList.add('nav--open');
-
-    (_navUl$classList3 = navUl.classList).add.apply(_navUl$classList3, dividerMenu);
+    openNav();
   }
 });
 btnOpenChildMenu.forEach(function (openChild) {
@@ -187,36 +198,24 @@ btnOpenChildMenu.forEach(function (openChild) {
   });
 });
 
-if (window.location.pathname == '/') {
+if (elementOnHeaderExceptNav.length > 0) {
   document.querySelector('header nav + *').addEventListener('click', function () {
-    var allChild = document.querySelectorAll('.nav__item-has-child--open');
-    allChild.forEach(function (child) {
-      child.classList.remove('nav__item-has-child--open');
-    });
-    closeNavAndChild();
+    closeAllMenu();
   });
 }
 
 document.querySelector('main').addEventListener('click', function () {
-  var allChild = document.querySelectorAll('.nav__item-has-child--open');
-  allChild.forEach(function (child) {
-    child.classList.remove('nav__item-has-child--open');
-  });
-  closeNavAndChild();
+  closeAllMenu();
 });
 
-if (window.location.pathname == '/') {
-  nav.classList.add('bg-gray-800', 'bg-opacity-25');
-  document.querySelector('header, main').classList.remove('bg-gray-100');
-} else {
-  nav.classList.add('bg-white');
-  nav.classList.remove('shadow');
-}
+if (pageUrl === '/') {
+  document.querySelector('header, main').classList.remove('bg-gray-100'); //jika lg di landing page dan di mode tablet keatas, icon menu ganti warna jd putih
 
-if (window.screen.width > 768 && window.location.pathname == '/') {
-  document.querySelectorAll('.nav .container > .nav__ul > .nav__item > .nav__link > .child-dropdown-icon').forEach(function (dropdownIcon) {
-    dropdownIcon.setAttribute('color', '#fff');
-  });
+  if (window.screen.width > 768) {
+    document.querySelectorAll('.nav .container > .nav__ul > .nav__item > .nav__link > .child-dropdown-icon').forEach(function (dropdownIcon) {
+      dropdownIcon.setAttribute('color', '#fff');
+    });
+  }
 }
 
 /***/ }),
