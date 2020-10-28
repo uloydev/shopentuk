@@ -29,6 +29,7 @@
                         product-original-price="{{ $product->price }}"
                         product-final-price="{{ $product->discount->discounted_price }}"
                         product-rating="0" 
+                        is-horizontal="false"
                         product-is-obral="true" />
                 @else
                     <x-card-product 
@@ -37,6 +38,7 @@
                         product-category="{{ $product->productCategory->title }}" 
                         product-final-price="{{ $product->price }}"
                         product-rating="0" 
+                        is-horizontal="false"
                         product-is-obral="false" />
                 @endif
             @endforeach
