@@ -1,5 +1,5 @@
 import 'boxicons';
-import * as Helper from './helper/getSibling.js';
+import * as Helper from './helper.js';
 
 const btnOpenMenu = document.querySelector('.nav__toggle-menu')
 const btnOpenChildMenu = document.querySelectorAll('.nav__link--open-child')

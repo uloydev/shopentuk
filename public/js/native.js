@@ -98,28 +98,40 @@
 
 /***/ }),
 
-/***/ "./resources/js/helper/getSibling.js":
-/*!*******************************************!*\
-  !*** ./resources/js/helper/getSibling.js ***!
-  \*******************************************/
-/*! exports provided: getSiblings */
+/***/ "./resources/js/helper.js":
+/*!********************************!*\
+  !*** ./resources/js/helper.js ***!
+  \********************************/
+/*! exports provided: getSiblings, inputElement */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSiblings", function() { return getSiblings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inputElement", function() { return inputElement; });
 /*!
  * Get all siblings of an element
  * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
- * @param  {Node}  elem The element
- * @return {Array}      The siblings
  */
 var getSiblings = function getSiblings(elem) {
   return Array.prototype.filter.call(elem.parentNode.children, function (sibling) {
     return sibling !== elem;
   });
 };
+/*
+ * Make all input lowercase
+ */
 
+
+var inputElement = document.querySelectorAll(".input-lowercase");
+inputElement.forEach(function (input) {
+  input.addEventListener('input', function () {
+    return input.value = input.value.toLowerCase();
+  });
+  input.addEventListener('change', function () {
+    return console.log(input.value);
+  });
+});
 
 
 /***/ }),
@@ -135,7 +147,7 @@ var getSiblings = function getSiblings(elem) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _helper_getSibling_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper/getSibling.js */ "./resources/js/helper/getSibling.js");
+/* harmony import */ var _helper_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper.js */ "./resources/js/helper.js");
 
 
 var btnOpenMenu = document.querySelector('.nav__toggle-menu');
@@ -183,7 +195,7 @@ btnOpenChildMenu.forEach(function (openChild) {
   var parentOfBtnOpenChild = openChild.parentNode.classList;
   openChild.addEventListener('click', function (e) {
     e.preventDefault();
-    var siblingsChild = _helper_getSibling_js__WEBPACK_IMPORTED_MODULE_1__["getSiblings"](openChild.parentNode);
+    var siblingsChild = _helper_js__WEBPACK_IMPORTED_MODULE_1__["getSiblings"](openChild.parentNode);
     siblingsChild.forEach(function (eachSibling) {
       if (eachSibling.classList.contains(classToOpenNavItemHasChild)) {
         eachSibling.classList.remove(classToOpenNavItemHasChild);
