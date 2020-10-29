@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@landingPage')->name('landing-page');
-Route::get('store/product', 'StoreController@product')->name('store.product');
-Route::get('store/voucher', 'StoreController@voucher')->name('store.voucher');
+Route::prefix('store')->name('store.')->group(function(){
+    Route::get('product', 'StoreController@product')->name('product');
+    Route::get('product/{slug}', 'StoreController@showProduct')->name('product.show');
+    Route::get('voucher', 'StoreController@voucher')->name('voucher'); 
+});
 Route::get('konfirmasi-pembayaran', 'PaymentController@confirm')->name('payment.confirm');
 
 Auth::routes();

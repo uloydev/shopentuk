@@ -19,30 +19,7 @@
         <h1 class="section__heading font-cursive text-4xl text-center font-bold">
             <span>Produk Terbaru Kami</span>
         </h1>
-        <div class="p-5 overflow-hidden grid grid-cols-2 gap-x-5 gap-y-10 md:grid-cols-3 lg:grid-cols-5 lg:gap-8 lg:gap-y-10 justify-items-center mt-32">
-            @foreach ($products as $product)
-                @if ($product->discount)
-                    <x-card-product
-                        product-img="{{ 'example.jpg' }}" 
-                        product-name="{{ $product->title }}"
-                        product-category="{{ $product->productCategory->title }}" 
-                        product-original-price="{{ $product->price }}"
-                        product-final-price="{{ $product->discount->discounted_price }}"
-                        product-rating="0" 
-                        is-horizontal="false"
-                        product-is-obral="true" />
-                @else
-                    <x-card-product 
-                        product-img="{{ 'example.jpg' }}" 
-                        product-name="{{ $product->title }}"
-                        product-category="{{ $product->productCategory->title }}" 
-                        product-final-price="{{ $product->price }}"
-                        product-rating="0" 
-                        is-horizontal="false"
-                        product-is-obral="false" />
-                @endif
-            @endforeach
-        </div>
+        @include('store.product.list', ['addClass' => "lg:grid-cols-5 mt-32"])
     </div>
 </section>
 <section class="section pt-16 pb-24" style="background-color: #f4f4f4;" id="section-catalog">

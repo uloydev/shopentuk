@@ -8,7 +8,7 @@ class CardProduct extends Component
 {
 
     public $productImg, $productName, $productOriginalPrice, $productFinalPrice;
-    public $productRating, $productCategory, $productIsObral, $isHorizontal;
+    public $productRating, $productCategory, $productIsObral, $isHorizontal, $link;
 
     /**
      * Create a new component instance.

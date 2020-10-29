@@ -15,6 +15,11 @@ class StoreController extends Controller
         $this->categories = ProductCategory::all();
     }
 
+    protected function productWhere($column, $conditional, $value)
+    {
+        return Product::where($column, $conditional, $value);
+    }
+
     public function product(Request $request)
     {
         $bestProducts = Product::inRandomOrder()->limit(3)->get();
@@ -39,11 +44,22 @@ class StoreController extends Controller
         $products = $products->paginate(12);
         $products->appends($httpQuery);
 
-        return view('store.product', [
+        return view('store.product.index', [
             'products' => $products,
             'bestProducts' => $bestProducts,
             'categories' => $this->categories,
             'httpQuery' => $httpQuery,
+        ]);
+    }
+
+    public function showProduct($slug)
+    {
+        $productTitle = strtolower(ucwords(str_replace('-', ' ', $slug)));
+        $product = $this->productWhere('title', 'LIKE', "%$productTitle%")->first();
+        $products = $this->productWhere('category_id', '=', $product->productCategory->id)->limit(4)->get();
+        return view('store.product.show', [
+            'product' => $product, 
+            'products' => $products
         ]);
     }
 
