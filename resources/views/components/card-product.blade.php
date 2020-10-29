@@ -1,6 +1,10 @@
-<div class="flex {{ $isHorizontal == 'false' ? 'flex-col' : 'flex-row' }}">
+@php
+    $slug = Str::slug($productName);
+@endphp
+
+<div class="card-product flex {{ $isHorizontal == 'false' ? 'flex-col' : 'flex-row' }}">
     <div class="flex relative {{ $isHorizontal == 'true' ? 'items-center mr-4' : '' }}">
-        <a href="">
+        <a href="{{ route('store.product.show', $slug) }}" class="block">
             <img src="{{ asset('img/' . $productImg) }}" alt="Image of {{ $productName }}" 
             width="{{ $isHorizontal == 'true' ? '65' : '' }}">
         </a>
@@ -9,8 +13,10 @@
         </div>
     </div>
     <div class="flex-grow">
-        <div class="py-4">
-            <a class="font-bold text-xl mb-2" href="">{{ Str::words($productName, 4, '...') }}</a>
+        <div class="py-4 overflow-hidden">
+            <a class="font-bold text-xl mb-2 break-words" href="{{ route('store.product.show', $slug) }}">
+                {{ Str::words($productName, 4, '...') }}
+            </a>
             <p class="text-gray-700 text-base">
                 <a href="/category/{{ $productCategory }}">{{ $productCategory }}</a>
             </p>
@@ -23,21 +29,16 @@
                 <span class="font-bold">Rp. <var>{{ $productFinalPrice }}</var></span>
             </p>
     
-            @php
-                $emptyRating = 5 - $productRating;
-                // nanti pindahin ke controller, jelek bjer ada kode php di blade wkwkkw
-            @endphp
-    
             <div class="mt-2">
                 @if ($productRating > 0)
                     @for ($i = 0; $i < $productRating; $i++)
                         <box-icon name='star' type='solid'></box-icon>
                     @endfor
-                    @for ($i = 0; $i < $emptyRating; $i++)
+                    @for ($i = 0; $i < 5 - $productRating; $i++)
                         <box-icon name='star' ></box-icon>
                     @endfor
                 @else
-                    @for ($i = 0; $i < $emptyRating; $i++)
+                    @for ($i = 0; $i < 5 - $productRating; $i++)
                         <box-icon name='star' ></box-icon>
                     @endfor
                 @endif
