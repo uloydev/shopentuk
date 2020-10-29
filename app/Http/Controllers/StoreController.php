@@ -30,8 +30,19 @@ class StoreController extends Controller
         $products = Product::with('productCategory')->whereHas('productCategory', function ($query) use ($isDigitalProduct){
             $query->where('is_digital_product', $isDigitalProduct);
         });
-        $bestProducts = $products->inRandomOrder()->limit(3)->get();
+        $bestProducts = clone $products;
+        $bestProducts = $bestProducts->inRandomOrder()->limit(3)->get();
         $httpQuery = [];
+
+        if ($request->has('catId') && !empty($request->catId)) {
+            $httpQuery['catId'] = $request->catId;
+            $products = $products->where('category_id', $request->catId);
+        }
+
+        if ($request->has('subCatId') && !empty($request->subCatId)) {
+            $httpQuery['subCatId'] = $request->subCatId;
+            $products = $products->where('sub_category_id', $request->subCatId);
+        }
 
         if ($request->has('search')) {
             $httpQuery['search'] = $request->search;
@@ -55,7 +66,7 @@ class StoreController extends Controller
         return [
             'products' => $products,
             'bestProducts' => $bestProducts,
-            'categories' => $this->categories->where('is_digital_product', $isDigitalProduct),
+            'categories' => $this->categories,
             'httpQuery' => $httpQuery,
         ];
     }

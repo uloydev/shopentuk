@@ -43,38 +43,32 @@
                 </ul>
             </div>
             <div class="py-4">
-                <h1 class="text-2xl">Browse by categories</h1>
+                <h1 class="text-2xl">Browse by product categories</h1>
                 <ul class="mt-5">
+                    @foreach ($categories->where('is_digital_product', true) as $category)
                     <li class="flex justify-between py-3">
-                        <a href="">Accessories</a>
-                        <var class="not-italic">7</var>
-                    </li>
-                    <li class="flex justify-between py-3">
-                        <a href="">Pria</a>
-                        <var class="not-italic">7</var>
-                    </li>
-                    <li class="flex justify-between flex-wrap py-3">
-                        <a href="">Voucher</a>
-                        <var class="not-italic">7</var>
+                        <a 
+                        href="{{ route('store.voucher', array_merge(array_diff_key($httpQuery, ['subCatId' => '']), ['catId'=> $category->id])) }}"
+                        title="{{ $category->title }}">
+                            {{ Str::limit($category->title, 15) }}
+                        </a>
+                        <var class="not-italic">{{ $category->products->count() }}</var>
                         <ul class="w-full pl-4">
-                            {{-- foreach --}}
-                            <li class="py-3">
-                                <div class="flex justify-between">
-                                    <a href="">Pulsa</a>
-                                    <var class="not-italic">7</var>
-                                </div>
-                                <ul class="pl-4">
-                                    {{-- foreach --}}
-                                    <li class="py-3 flex justify-between">
-                                        <a href="">Telkomsel</a>
-                                        <var class="not-italic">7</var>
-                                    </li>
-                                    {{-- end of foreach --}}
-                                </ul>
-                            </li>
-                            {{-- end of foreach --}}
+                            @foreach ($category->productSubCategory as $subCategory)
+                                <li class="py-3">
+                                    <div class="flex justify-between">
+                                        <a 
+                                        href="{{ route('store.voucher', array_merge(array_diff_key($httpQuery, ['catId' => '']), ['subCatId'=> $subCategory->id])) }}" 
+                                        title="{{ $subCategory->title }}">
+                                            {{ Str::limit($subCategory->title, 15) }}
+                                        </a>
+                                        <var class="not-italic">{{ $subCategory->products->count() }}</var>
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
+                    @endforeach
                 </ul>
             </div>
         </aside>
