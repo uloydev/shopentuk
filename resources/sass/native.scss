@@ -1,8 +1,4 @@
-@use 'mixin';
-@use 'general';
-
-@tailwind base;
-@tailwind components;
+@use 'nav';
 
 .header {
     #landingPage & {
@@ -19,186 +15,24 @@
     position: relative;
 }
 
-.nav {
-    @apply bg-white;
-
-    .container {
-        @apply flex flex-col bg-white pt-4;
-
-        @screen sm {
-            @apply flex-row bg-transparent pt-0;
-        }
-    }
-
-    &__ul {
-        @apply flex flex-col px-4 flex-grow;
-        
-
-        & & {
-            padding-left: 1rem;
-        }
-
-        @screen sm {
-            @apply flex-row;
-        }
-    }
-
-    &__logo {
-        overflow: hidden;
-        display: inline-flex;
-        max-width: 50%;
-        margin-right: auto;
-
-        @screen sm {
-            max-width: none;
-            margin-right: 0;
-        }
-    }
-    &__img {
-        height: 100%;
-        overflow: hidden;
-    }
-    &__icon {
-        @apply flex items-center relative;
-
-        #total-shopping {
-            @apply absolute transform translate-x-1/2 translate-y-1 text-sm;
-            right: calc(45px / 2);
-
-            @screen sm {
-                right: 45px;
-            }
-        }
-        &--bag box-icon {
-            @include mixin.sameSize(45px);
-        }
-    }
-
-    &__toggle-menu{
-        transform: translateY(4px);
-
-        box-icon {
-            @include mixin.sameSize(30px);
-        }
-
-        @screen sm {
-            display: none;
-        }
-    }
-
-    &__item {
-        display: flex;
-
-        &--first {
-            @apply border-b-2 border-gray-200 px-4 pb-4;
-
-            @screen sm {
-                width: 20%;
-            }
-        }
-
-        &--cart {
-            width: 50%;
-        }
-
-        &--menu {
-            @apply flex-col;
-            height: 0;
-            opacity: 0;
-            transition: none; //transition when wanna close nav
-
-            .nav--open & {
-                @apply h-auto opacity-100 transition transition-all duration-200;
-            }
-
-            @screen sm {
-                @apply z-50 opacity-100 h-auto; //z-50 == z-index teratas di tailwind
-            }
-            
-        }
-
-        &-has-child {
-            @apply relative;
-
-            & & {
-                padding-right: 0;
-            }
-
-            .nav__ul {
-                @apply overflow-hidden transition transition-all h-0 opacity-0 invisible;
-                @screen sm {
-                    @apply flex-col absolute;
-                    top: 100%;
-                    overflow: visible;
-
-                    & & {
-                        transition-property: none;
-                        @apply transition-all;
-                        top: auto;
-                        left: calc(100% + 1rem);
-                        border-left: 1px solid rgb(218, 218, 218);
-                    }
-                }
-            }
-
-            &--open {
-
-                > .nav__link--open-child {
-
-                    .child-dropdown-icon {
-                        @apply transform rotate-180;
-                    }
-                }
-
-                > .nav__ul {
-                    @apply h-auto opacity-100 visible;
-
-                    .nav__link  {
-                        justify-content: start;
-                    }
-                }
-
-            }
-        }
-
-    }
-
-    &__link {
-        @apply flex py-3;
-
-        @screen sm {
-            justify-content: center;
-        }
-    }
-
-    #open-icon {
-        display: initial;
-        @include mixin.openNav {
-            display: none;
-        }
-    }
-    #close-icon {
-        display: none;
-        @include mixin.openNav {
-            display: initial;
-        }
-    }
-}
-
 /*landing-page style*/
 #landingPage {
 
-    .nav .container > .nav__ul > .nav__item > .nav__link {
-        color: #fff;
+    main {
+        @apply bg-gray-100;
     }
 
-    body:not(&) main {
-        @apply bg-gray-100;
+    #section-new-product {
+        .card-product {
+            img {
+                width: 100%;
+            }
+        }
     }
 
     #section-catalog {
         &__promo {
-            position: relative;
+            @apply w-full relative;
             background-image: url('../img/special-edition.jpg');
         }
         &__overlay {
