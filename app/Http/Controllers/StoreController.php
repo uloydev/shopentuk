@@ -22,14 +22,39 @@ class StoreController extends Controller
 
     public function product(Request $request)
     {
-        $bestProducts = Product::inRandomOrder()->limit(3)->get();
-        $products = Product::query();
+        return view('store.product', $this->getFilteredProducts($request, false));
+    }
+
+    public function voucher(Request $request)
+    {
+        return view('store.voucher', $this->getFilteredProducts($request, true));
+    }
+
+    private function getFilteredProducts(Request $request, bool $isDigitalProduct)
+    {
+        $products = Product::with('productCategory')->whereHas('productCategory', function ($query) use ($isDigitalProduct){
+            $query->where('is_digital_product', $isDigitalProduct);
+        });
+        $bestProducts = clone $products;
+        $bestProducts = $bestProducts->inRandomOrder()->limit(3)->get();
         $httpQuery = [];
+
+        if ($request->has('catId') && !empty($request->catId)) {
+            $httpQuery['catId'] = $request->catId;
+            $products = $products->where('category_id', $request->catId);
+        }
+
+        if ($request->has('subCatId') && !empty($request->subCatId)) {
+            $httpQuery['subCatId'] = $request->subCatId;
+            $products = $products->where('sub_category_id', $request->subCatId);
+        }
 
         if ($request->has('search')) {
             $httpQuery['search'] = $request->search;
-            $products = $products->where('title', 'like', '%'.$request->search.'%')
+            $products = $products->where(function ($query) use ($request){
+                $query->where('title', 'like', '%'.$request->search.'%')
                 ->orWhere('description', 'like', '%'.$request->search.'%');
+            });
         }
 
         if ($request->has('sort')) {
@@ -61,9 +86,5 @@ class StoreController extends Controller
             'product' => $product, 
             'products' => $products
         ]);
-    }
-
-    public function voucher(){
-        return view('store.voucher', ['categories' => $this->categories]);
     }
 }
