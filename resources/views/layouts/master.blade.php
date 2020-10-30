@@ -18,5 +18,6 @@
     </main>
     @include('partial.footer')
     <script src="{{ asset('js/native.js') }}"></script>
+    @stack('script')
 </body>
 </html>

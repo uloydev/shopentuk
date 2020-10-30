@@ -1202,9 +1202,9 @@ video {
 
 /*end of landing-page style*/
 
-/*register style*/
+/*auth style*/
 
-#registerPage header {
+#authPage header {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -1213,7 +1213,7 @@ video {
   background-size: cover;
 }
 
-#registerPage header .bg-overlay {
+#authPage header .bg-overlay {
   background-image: linear-gradient(180deg, #000000 0%, #54595f 100%);
   position: absolute;
   width: 100%;
@@ -1225,7 +1225,7 @@ video {
   opacity: 0.5;
 }
 
-#registerPage .auth-box {
+#authPage .auth-box {
   padding: 1rem;
   border-width: 1px;
   --border-opacity: 1;
