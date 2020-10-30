@@ -1,6 +1,7 @@
 @use 'nav';
 
 .header {
+    position: relative;
     #landingPage & {
         background: {
             image: url('../img/header-landing.jpg');
@@ -12,7 +13,6 @@
         @apply flex flex-col;
         height: 90vh;
     }
-    position: relative;
 }
 
 /*landing-page style*/
