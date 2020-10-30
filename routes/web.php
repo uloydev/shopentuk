@@ -12,7 +12,10 @@ Route::prefix('store')->name('store.')->group(function(){
 Route::get('konfirmasi-pembayaran', 'PaymentController@confirm')->name('payment.confirm');
 
 Auth::routes();
-Route::permanentRedirect('register', 'login');
+
+Route::get('/register', function () {
+   return redirect('login');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -20,5 +23,3 @@ Route::namespace('Admin')->prefix('admin')->middleware('admin')->name('admin.')-
     Route::get('dashboard', 'DashboardController')->name('dashboard');
     Route::get('home', 'HomeController@index')->name('home');
 });
-
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
