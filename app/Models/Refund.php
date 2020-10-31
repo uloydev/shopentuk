@@ -18,6 +18,10 @@ class Refund extends Model
         'image',
     ];
 
+    protected $casts = [
+        'payment_date' => 'date',
+    ];
+
     public function order()
     {
         return $this->belongsTo('App\Models\Order');
