@@ -66,5 +66,24 @@
     }
 }
 /*end of storePage style*/
+#konfirmasiPembayaranPage {
+    .box-upload {
+        outline: 2px dashed black;
+        @apply col-span-full mb-3 relative bg-white;
+        height: 100px;
+
+        &__file {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+        &__text {
+            @apply absolute flex items-center justify-center h-full w-full
+        }
+    }
+}
 
 @tailwind utilities;

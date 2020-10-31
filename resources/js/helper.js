@@ -17,4 +17,5 @@ inputElement.forEach(function(input) {
     input.addEventListener('change', () => console.log(input.value));
 });
 
+
 export {getSiblings, inputElement};

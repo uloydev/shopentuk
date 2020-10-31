@@ -1235,6 +1235,35 @@ video {
 
 /*end of storePage style*/
 
+#konfirmasiPembayaranPage .box-upload {
+  outline: 2px dashed black;
+  grid-column: 1 / -1;
+  margin-bottom: 0.75rem;
+  position: relative;
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  height: 100px;
+}
+
+#konfirmasiPembayaranPage .box-upload__file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+#konfirmasiPembayaranPage .box-upload__text {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
 .space-y-0 > :not(template) ~ :not(template){
   --space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--space-y-reverse)));

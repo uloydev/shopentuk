@@ -310,7 +310,20 @@ if (pageUrl === '/login') {
   } else if (localStorage.getItem('sessionFailed') === 'login') {
     removeValidationOnFalseForm(formRegister);
   }
-}
+} //general js
+
+/*  
+    trigger box file upload when click child, 
+    bcz for default when click child the box is not triggered
+*/
+// const fileUploaderChild = document.querySelectorAll('.file-upload-drag > *')
+// let parentFileUploaderChild
+// fileUploaderChild.forEach(child => {
+//     child.addEventListener('click', () => {
+//         parentFileUploaderChild = child.parentElement
+//         parentFileUploaderChild.click()
+//     });
+// });
 
 /***/ }),
 
