@@ -9,12 +9,12 @@ Route::prefix('store')->name('store.')->group(function(){
     Route::get('product/{slug}', 'StoreController@showProduct')->name('product.show');
     Route::get('voucher', 'StoreController@voucher')->name('voucher'); 
 });
-Route::get('konfirmasi-pembayaran', 'PaymentController@confirm')->name('payment.confirm');
+Route::get('konfirmasi-pembayaran', 'PaymentController@showConfirm')->name('payment.show-confirm');
 
 Auth::routes();
 
 Route::get('/register', function () {
-   return redirect('login');
+    return redirect('login');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -53,4 +53,14 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\UserAddress')->where('is_main_address', true);
     }
+
+    public function Orders()
+    {
+        return $this->hasMany('App\Models\Order');
+    }
+
+    public function cart()
+    {
+        return $this->hasOne('App\Models\Cart');
+    }
 }
