@@ -20,16 +20,6 @@ class StoreController extends Controller
         return Product::where($column, $conditional, $value);
     }
 
-    public function product(Request $request)
-    {
-        return view('store.product', $this->getFilteredProducts($request, false));
-    }
-
-    public function voucher(Request $request)
-    {
-        return view('store.voucher', $this->getFilteredProducts($request, true));
-    }
-
     private function getFilteredProducts(Request $request, bool $isDigitalProduct)
     {
         $products = Product::with('productCategory')->whereHas('productCategory', function ($query) use ($isDigitalProduct){
@@ -75,6 +65,16 @@ class StoreController extends Controller
             'categories' => $this->categories,
             'httpQuery' => $httpQuery,
         ]);
+    }
+
+    public function product(Request $request)
+    {
+        return view('store.product.index', [$this->getFilteredProducts($request, false)]);
+    }
+
+    public function voucher(Request $request)
+    {
+        return view('store.voucher', $this->getFilteredProducts($request, true));
     }
 
     public function showProduct($slug)
