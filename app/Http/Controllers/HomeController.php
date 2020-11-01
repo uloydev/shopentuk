@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
 
-    private $categories;
-
 
     /**
      * Create a new controller instance.

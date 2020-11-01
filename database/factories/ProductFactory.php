@@ -25,7 +25,7 @@ class ProductFactory extends Factory
     {
         return [
             'title' => strtolower($this->faker->sentence($nbWords=5, $variableNbWords=true)),
-            'description' => strtolower($this->faker->paragraph($nbSentences=3, $variableNbSentences=true)),
+            'description' => strtolower($this->faker->paragraph($nbSentences=10, $variableNbSentences=true)),
             'price' => $this->faker->numberBetween($min=10000, $max=100000),
             'point_price' => $this->faker->numberBetween($min=10, $max=100),
             'category_id' => ProductCategory::factory(),

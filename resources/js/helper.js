@@ -17,5 +17,15 @@ inputElement.forEach(function(input) {
     input.addEventListener('change', () => console.log(input.value));
 });
 
+const setAttributes = (el, attrs) => {
+	for(let key in attrs) {
+		el.setAttribute(key, attrs[key]);
+	}
+}
 
-export {getSiblings, inputElement};
+const inputOnlyNumberAndSpace = document.querySelectorAll('.only-alpha-space')
+inputOnlyNumberAndSpace.forEach(input => {
+	input.setAttribute('pattern', '[a-zA-Z][a-zA-Z ]+ ');
+});
+
+export {getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace};

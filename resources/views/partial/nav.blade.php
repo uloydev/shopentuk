@@ -85,12 +85,23 @@
                 </ul>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child lg:mr-6 lg:flex-grow lg:justify-center">
-                <a href="" class="nav__link nav__link--open-child">
+                <a href="javascript:void(0);" class="nav__link nav__link--open-child">
                     <x-menu-has-nested-child text="My akun" />
                 </a>
                 <ul class="nav__ul lg:bg-white divide-y lg:divide-gray-300 lg:shadow">
-                    <x-menu-standar id="menu-my-akun-akun-saya" text="Akun saya" 
-                    to="/home" have-icon="false" />
+                    @auth
+                        @if (Auth::user()->role == 'user')
+                            <x-menu-standar id="menu-my-akun-akun-saya" text="Akun saya" 
+                            to="{{ route('home') }}" have-icon="false" />
+                        @else
+                            <x-menu-standar id="menu-my-akun-akun-saya" text="Dashboard"
+                            to="{{ route('admin.dashboard') }}" have-icon="false" />
+                        @endif
+                    @endauth
+                    @guest
+                        <x-menu-standar id="menu-my-akun-akun-saya" text="Login"
+                        to="{{ route('login') }}" have-icon="false" />
+                    @endguest
                     <x-menu-standar id="menu-my-akun-toko-point" text="Toko Point" 
                     to="/link-go-to-toko" have-icon="false" />
                 </ul>

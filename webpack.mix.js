@@ -6,7 +6,9 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/native.scss', 'public/css')
     .options({
         processCssUrls: false,
-        postCss: [tailwindcss('./tailwind.config.js')],
+        postCss: [
+            tailwindcss('./tailwind.config.js')
+        ],
     })
     .copyDirectory('resources/img', 'public/img/static')
     .styles([
@@ -35,5 +37,8 @@ mix.js('resources/js/app.js', 'public/js')
         'public/js/custom-dashboard.js'
     ], 'public/js/dashboard.js')
     .setPublicPath('public');
+
+mix.disableSuccessNotifications();
+mix.browserSync('http://localhost:8000');
 
 if (mix.inProduction()) { mix.version() }
