@@ -22,20 +22,30 @@ class StoreController extends Controller
     
     public function voucher(Request $request)
     {
-        return view('store.voucher', $this->getFilteredProducts($request, true));
+        return view('store.voucher.index', $this->getFilteredProducts($request, true));
     }
     
     public function showProduct($slug)
     {
-        $productTitle = str_replace('-', ' ', $slug);
+        return view('store.product.show', $this->getProductFromSlug($slug));
+    }
+
+    public function showVoucher($slug)
+    {
+        return view('store.voucher.show', $this->getProductFromSlug($slug));
+    }
+
+    private function getProductFromSlug($slug)
+    {
+        $productTitle = strtolower(ucwords(str_replace('-', ' ', $slug)));
         $product = $this->productWhere('title', 'LIKE', "%$productTitle%")->first();
-        $products = $this->productWhere('category_id', '=', $product->productCategory->id)->limit(4)->get();
-        return view('store.product.show', [
+        $products = $this->productWhere('category_id', '=', $product->productCategory->id)->inRandomOrder()->limit(4)->get();
+        return [
             'product' => $product, 
             'products' => $products
-        ]);
+        ];
     }
-    
+
     private function productWhere($column, $conditional, $value)
     {
         return Product::where($column, $conditional, $value);

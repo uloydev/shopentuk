@@ -1,10 +1,11 @@
 @php
     $slug = Str::slug($productName);
+    $route = $isDigitalProduct ? 'store.voucher.show' : 'store.product.show';
 @endphp
 
 <div class="card-product flex {{ $isHorizontal == 'false' ? 'flex-col' : 'flex-row' }}">
     <div class="flex relative {{ $isHorizontal == 'true' ? 'items-center mr-4' : '' }}">
-        <a href="{{ route('store.product.show', $slug) }}" class="block">
+        <a href="{{ route($route, $slug) }}" class="block">
             <img src="{{ asset('img/' . $productImg) }}" alt="Image of {{ $productName }}" 
             width="{{ $isHorizontal == 'true' ? '65' : '' }}">
         </a>
@@ -14,7 +15,7 @@
     </div>
     <div class="flex-grow">
         <div class="py-4 overflow-hidden">
-            <a class="font-bold text-xl mb-2 break-words" href="{{ route('store.product.show', $slug) }}">
+            <a class="font-bold text-xl mb-2 break-words" href="{{ route($route, $slug) }}">
                 {{ Str::words($productName, 4, '...') }}
             </a>
             <p class="text-gray-700 text-base">
