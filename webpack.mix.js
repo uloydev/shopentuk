@@ -39,6 +39,11 @@ mix.js('resources/js/app.js', 'public/js')
     .setPublicPath('public');
 
 mix.disableSuccessNotifications();
-mix.browserSync('http://localhost:8000');
+mix.browserSync({
+    proxy: 'http://localhost:8000',
+    watchOptions: {
+        ignored: /node_modules/
+    }
+});
 
 if (mix.inProduction()) { mix.version() }

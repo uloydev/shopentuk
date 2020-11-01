@@ -44,20 +44,52 @@
                 {!! $product->description !!}
             </div>
             <div id="ulasan-detail" class="py-3">
+                {{-- contoh --}}
                 @php
-                    $reviews = [
-                        [
-                            'ulasan' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia, ipsa!',
-                        ]
-                    ];
+                    $ulasanTotal = 3;
                 @endphp
-                <p>Belum ada ulasan</p>
+                @if ($ulasanTotal > 0)
+                    @for ($i = 0; $i < $ulasanTotal; $i++)
+                        <div class="flex flex-col mb-3">
+                            <figure class="flex border-b-2 border-gray-300 pb-2 items-center">
+                                <img src="{{ asset('img/static/people.png') }}" class="mr-2 h-8 w-8 rounded-full"
+                                alt="People avatar {{ env('APP_NAME') }}">
+                                <figcaption>
+                                    <p>People name</p>
+                                </figcaption>
+                            </figure>
+                            <div class="py-3">
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus labore 
+                                    incidunt totam maxime eligendi reprehenderit alias libero nam. 
+                                    Possimus architecto corrupti exercitationem cum ipsum cumque, 
+                                    non quis impedit error reiciendis?
+                                </p>
+                                <div class="mt-3">
+                                    @php
+                                        $productRating = 3; //buat contoh aja. ntar ngambil dari controller
+                                    @endphp
+                                    @include('partial.rating', ['rating' => $productRating])
+                                </div>
+                            </div>
+                        </div>
+                    @endfor
+                @else
+                <h1 class="text-xl mb-5 mt-2 px-1">Belum ada ulasan</h1>
+                @endif
+                {{-- end of contoh --}}
                 <form action="" method="POST" class="border border-gray-400 p-6 mt-3">
                     @csrf
                     <h2 class="text-xl mb-2 font-medium">
-                        Jadilah yang pertama memberikan ulasan <q>{{ $product->title }}</q>
+                        <span>
+                            {{ $ulasanTotal == 0 ? 'Jadilah yang pertama memberikan ulasan ' : 'Berikan ulasanmu ' }}
+                        </span>
+                        <span>untuk <q>{{ $product->title }}</q></span>
                     </h2>
-                    <h3 class="text-base mb-5">Alamat email Anda tidak akan dipublikasikan. Ruas yang wajib ditandai *</h3>
+                    <h3 class="text-base mb-5">
+                        Alamat email Anda tidak akan dipublikasikan. 
+                        Ruas yang wajib ditandai *
+                    </h3>
                     <div class="mb-5">
                         <label for="rating" class="block mb-2">Rating</label>
                         <div id="rater" data-input-name="rating_product"></div>
