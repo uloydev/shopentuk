@@ -14,13 +14,12 @@
             <div class="py-4">
                 <h1 class="text-2xl">Our best sellers</h1>
                 <ul class="mt-5 divide-y divide-gray-400">
-                    {{-- foreach --}}
                     @foreach ($bestProducts as $product)
                         <li class="pb-3">
                             @if ($product->discount)
                                 <x-card-product
                                 product-img="{{ $product->mainImage ? $product->mainImage->url : 'example.jpg' }}"
-                                product-name="{{ $product->title }}"
+                                product-name="{{ Str::words($product->title, 2) }}"
                                 product-category="{{ $product->productCategory->title }}" 
                                 product-original-price="{{ $product->price }}"
                                 product-final-price="{{ $product->discount->discounted_price }}"
@@ -30,7 +29,7 @@
                             @else
                                 <x-card-product 
                                 product-img="{{ $product->mainImage ? $product->mainImage->url : 'example.jpg' }}" 
-                                product-name="{{ $product->title }}"
+                                product-name="{{ Str::words($product->title, 2) }}"
                                 product-category="{{ $product->productCategory->title }}" 
                                 product-final-price="{{ $product->price }}"
                                 product-rating="0" 
@@ -39,26 +38,23 @@
                             @endif
                         </li>
                     @endforeach
-                    {{-- end of foreach --}}
                 </ul>
             </div>
             <div class="py-4">
                 <h1 class="text-2xl">Browse by product categories</h1>
                 <ul class="mt-5">
                     @foreach ($categories->where('is_digital_product', false) as $category)
-                    <li class="flex justify-between py-3">
-                        <a 
-                        href="{{ route('store.product', array_merge(array_diff_key($httpQuery, ['subCatId' => '']), ['catId'=> $category->id])) }}"
-                        title="{{ $category->title }}">
-                            {{ Str::limit($category->title, 15) }}
+                    <li class="flex justify-between flex-col py-3">
+                        <a href="{{ route('store.product', array_merge(array_diff_key($httpQuery, ['subCatId' => '']),['catId'=> $category->id])) }}" title="{{ $category->title }}" class="justify-between flex">
+                            {{ Str::words($category->title, 3) }}
+                            <var class="not-italic">{{ '(' . $category->products->count() . ')' }}</var>
                         </a>
-                        <var class="not-italic">{{ $category->products->count() }}</var>
-                        <ul class="w-full pl-4">
+                        <ul class="pl-5">
                             @foreach ($category->productSubCategory as $subCategory)
                                 <li class="py-3">
                                     <div class="flex justify-between">
-                                        <a 
-                                        href="{{ route('store.product', array_merge(array_diff_key($httpQuery, ['catId' => '']), ['subCatId'=> $subCategory->id])) }}" 
+                                        <a href="{{ route('store.product', array_merge(array_diff_key($httpQuery,
+                                        ['catId' => '']), ['subCatId'=> $subCategory->id])) }}"
                                         title="{{ $subCategory->title }}">
                                             {{ Str::limit($subCategory->title, 15) }}
                                         </a>
@@ -75,7 +71,6 @@
         <section class="w-full lg:w-9/12 lg:pl-12">
             @include('partial.breadcumb')
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                {{-- <p class="mb-5 sm:mb-0">Menampilkan 1–12 dari 39 hasil</p> --}}
                 <form action="" method="GET">
                     <div class="relative">
                         <select id="sort-product"

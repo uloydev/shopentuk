@@ -48,9 +48,23 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\UserAddress');
     }
-
-    public function mainAddress()
+    
+    public function Orders()
     {
-        return $this->hasOne('App\Models\UserAddress')->where('is_main_address', true);
+        return $this->hasMany('App\Models\Order');
+    }
+    
+    public function cart()
+    {
+        return $this->hasOne('App\Models\Cart');
+    }
+
+    public function getMainAddressAttribute()
+    {
+        $address = $this->userAddresses()->where('is_main_address', true)->first();
+        if (!$address) {
+            $address = $this->userAddresses()->first();
+        }
+        return $address;
     }
 }

@@ -11,7 +11,16 @@
             <figcaption class="md:ml-10">
                 @include('partial.breadcumb')
                 <p class="text-2xl mb-5">{{ $product->title }}</p>
-                <p class="text-lg font-bold mb-5">Rp. <var class="not-italic">{{ number_format($product->price) }}</var></p>
+                @if($product->discount)
+                <p class="mb-2"><del>Rp. <var>{{ number_format($product->price) }}</var></del></p>
+                <p class="text-lg font-bold mb-5">
+                    Rp. <var class="not-italic">{{ number_format($product->discount->discounted_price) }}</var>
+                </p>
+                @else
+                    <p class="text-lg font-bold mb-5">
+                        Rp. <var class="not-italic">{{ number_format($product->price) }}</var>
+                    </p>
+                @endif
                 <p>{{ $product->description }}</p>
                 <div class="flex my-5">
                     <input type="number" class="appearance-none bg-white border border-gray-400 p-1 text-center w-12"

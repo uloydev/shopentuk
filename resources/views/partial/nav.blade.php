@@ -71,7 +71,7 @@
                 </ul>
             </li>
             <li class="nav__item nav__item--menu lg:mr-6 lg:flex-grow lg:justify-center">
-                <a href="{{ route('payment.confirm') }}" class="nav__link">Konfirmasi pembayaran</a>
+                <a href="{{ route('payment.show-confirm') }}" class="nav__link">Konfirmasi pembayaran</a>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child lg:mr-6 lg:flex-grow lg:justify-center">
                 <a href="" class="nav__link nav__link--open-child">
