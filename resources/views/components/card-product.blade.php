@@ -30,7 +30,7 @@
                 <span class="font-bold">Rp. <var class="not-italic">{{ $productFinalPrice }}</var></span>
             </p>
     
-            <div class="mt-2">
+            {{-- <div class="mt-2">
                 @if ($productRating > 0)
                     @for ($i = 0; $i < $productRating; $i++)
                         <box-icon name='star' type='solid'></box-icon>
@@ -43,7 +43,7 @@
                         <box-icon name='star' ></box-icon>
                     @endfor
                 @endif
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
