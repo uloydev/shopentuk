@@ -98,8 +98,8 @@
                             product-img="{{ $product->mainImage ? $product->mainImage->url : 'example.jpg' }}" 
                             product-name="{{ $product->title }}"
                             product-category="{{ $product->productCategory->title }}" 
-                            product-original-price="{{ $product->price }}"
-                            product-final-price="{{ $product->discount->discounted_price }}"
+                            product-original-price="{{ number_format($product->price) }}"
+                            product-final-price="{{ number_format($product->discount->discounted_price) }}"
                             product-rating="0" 
                             product-is-obral="true"
                             is-horizontal="false" />
@@ -108,7 +108,7 @@
                             product-img="{{ $product->mainImage ? $product->mainImage->url : 'example.jpg' }}" 
                             product-name="{{ $product->title }}"
                             product-category="{{ $product->productCategory->title }}" 
-                            product-final-price="{{ $product->price }}"
+                            product-final-price="{{ number_format($product->price) }}"
                             product-rating="0" 
                             product-is-obral="false"
                             is-horizontal="false" />
