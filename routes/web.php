@@ -5,9 +5,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@landingPage')->name('landing-page');
 Route::prefix('store')->name('store.')->group(function(){
-    Route::get('product', 'StoreController@product')->name('product');
-    Route::get('product/{slug}', 'StoreController@showProduct')->name('product.show');
-    Route::get('voucher', 'StoreController@voucher')->name('voucher'); 
+    Route::prefix('product')->name('product')->group(function () {
+        Route::get('/', 'StoreController@product');
+        Route::get('/{slug}', 'StoreController@showProduct')->name('.show');
+    });
+    Route::prefix('voucher')->name('voucher')->group(function () {
+        Route::get('/', 'StoreController@voucher');
+        Route::get('/{slug}', 'StoreController@showVoucher')->name('.show');
+    });
 });
 Route::get('konfirmasi-pembayaran', 'PaymentController@showConfirm')->name('payment.show-confirm');
 
