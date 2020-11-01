@@ -7,7 +7,7 @@
                 product-category="{{ $product->productCategory->title }}" 
                 product-original-price="{{ $product->price }}"
                 product-final-price="{{ $product->discount->discounted_price }}"
-                product-rating="0" 
+                product-rating="3" 
                 is-horizontal="false"
                 product-is-obral="true" />
         @else
