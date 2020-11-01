@@ -1,6 +1,5 @@
 import 'boxicons'
 import * as Helper from './helper.js'
-import 'tabbyjs'
 
 const btnOpenMenu = document.querySelector('.nav__toggle-menu')
 const btnOpenChildMenu = document.querySelectorAll('.nav__link--open-child')
