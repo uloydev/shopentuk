@@ -122,6 +122,41 @@ if (pageUrl === '/login') {
     }
 }
 
+// detail product script
+const tabs = new Tabby('[data-tabs]');
+
+const detailProductPage = document.querySelector('#productDetailPage')
+const raterProduct = detailProductPage.querySelector('#rater');
+const ratingProduct = raterJs({
+    starSize: 32,
+    max: 5,
+    element: raterProduct,
+    rateCallback:function rateCallback(rating, done) {
+        this.setRating(rating); 
+        done(); 
+    }
+});
+ratingProduct.setRating(3);
+
+let inputRatingName = raterProduct.dataset.inputName;
+
+const inputRating = document.createElement('input')
+let inputRatingValue = raterProduct.dataset.rating
+
+raterProduct.appendChild(inputRating)
+
+inputRating.name = inputRatingName
+inputRating.hidden = true
+inputRating.setAttribute('value', inputRatingValue)
+
+raterProduct.querySelector('.star-value').addEventListener('click', () => {
+    //ambil value rating nya setelah value ratingnya berubah
+    setTimeout(() => {
+        inputRatingValue = raterProduct.dataset.rating
+        inputRating.setAttribute('value', inputRatingValue)
+    }, 0.01)
+});
+
 //general js
 
 /*  

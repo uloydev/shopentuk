@@ -13,13 +13,13 @@
         @include('partial.nav')
         @yield('header')
     </header>
-    <main>
+    <main class="bg-gray-100">
         @yield('breadcrumbs')
         @yield('content')
     </main>
     @include('partial.footer')
+    @stack('script')
     <script src="{{ asset('js/native.js') }}"></script>
     <script src="{{ asset('library/dropzone/dropzone.min.js') }}"></script>
-    @stack('script')
 </body>
 </html>

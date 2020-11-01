@@ -2,7 +2,7 @@
 
 @section('title', 'Produk - ' . env('APP_NAME') . ' Shop')
 
-@section('body-id', 'store')
+@section('body-id', 'productDetail')
 
 @section('content')
     <div class="container py-10 px-5 lg:px-0 mx-auto">
@@ -34,17 +34,55 @@
         <section id="deskripsi-ulasan">
             <ul data-tabs>
                 <li>
-                    <a href="#deskripsi-detail" data-tabby-default>Deskripsi</a>
+                    <a href="#deskripsi-detail">Deskripsi</a>
                 </li>
                 <li>
-                    <a href="#ulasan-detail">Ulasan</a>
+                    <a href="#ulasan-detail" data-tabby-default>Ulasan</a>
                 </li>
             </ul>
             <div id="deskripsi-detail" class="py-3">
                 {!! $product->description !!}
             </div>
             <div id="ulasan-detail" class="py-3">
-                ulasan detail
+                @php
+                    $reviews = [
+                        [
+                            'ulasan' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia, ipsa!',
+                        ]
+                    ];
+                @endphp
+                <p>Belum ada ulasan</p>
+                <form action="" method="POST" class="border border-gray-400 p-6 mt-3">
+                    @csrf
+                    <h2 class="text-xl mb-2 font-medium">
+                        Jadilah yang pertama memberikan ulasan <q>{{ $product->title }}</q>
+                    </h2>
+                    <h3 class="text-base mb-5">Alamat email Anda tidak akan dipublikasikan. Ruas yang wajib ditandai *</h3>
+                    <div class="mb-5">
+                        <label for="rating" class="block mb-2">Rating</label>
+                        <div id="rater" data-input-name="rating_product"></div>
+                        {{-- input namenya rating_product --}}
+                    </div>
+                    <label for="ulasan" class="block mb-2">Ulasan anda</label>
+                    <textarea name="ulasan" id="ulasan" rows="5" placeholder="Minimal 5 kata" 
+                    class="form-textarea block w-full bg-white"></textarea>
+                    <div class="grid grid-cols-2 gap-5 mt-5">
+                        <x-input-basic name="nama_lengkap" label="Nama lengkap" add-class="only-alpha-space"
+                        placeholder="Mohon gunakan nama lengkap" value="{{ Auth::user()->name ?? '' }}"
+                        title="Nama tidak boleh mengandung spesial karakter, angka, dan spasi diawal maupun diakhir"/>
+                        <div class="mb-5">
+                            <x-input-basic name="email" value="{{ Auth::user()->email ?? '' }}" 
+                            placeholder="Mohon gunakan email valid" type="email" label="Email"/>
+                            <div class="flex items-start text-sm">
+                                <input type="checkbox" name="simpan_data" class="form-checkbox border-gray-500">
+                                <span class="ml-2 leading-relaxed -mt-2">
+                                    Simpan nama dan email untuk komentar saya berikutnya
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <x-btn-primary text="Kirim" class="col-auto"/>
+                </form>
             </div>
         </section>
         <section id="related-product" class="mt-5">
@@ -56,9 +94,7 @@
 
 @push('script')
     <script src="https://cdn.jsdelivr.net/gh/cferdinandi/tabby@12/dist/js/tabby.polyfills.js"></script>
-    <script>
-        const tabs = new Tabby('[data-tabs]');
-    </script>
+    <script src="{{ asset('library/rater-js/index.js') }}"></script>
 @endpush
 
 @push('css')

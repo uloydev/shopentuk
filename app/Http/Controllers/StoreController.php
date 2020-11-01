@@ -27,7 +27,7 @@ class StoreController extends Controller
     
     public function showProduct($slug)
     {
-        $productTitle = strtolower(ucwords(str_replace('-', ' ', $slug)));
+        $productTitle = str_replace('-', ' ', $slug);
         $product = $this->productWhere('title', 'LIKE', "%$productTitle%")->first();
         $products = $this->productWhere('category_id', '=', $product->productCategory->id)->limit(4)->get();
         return view('store.product.show', [

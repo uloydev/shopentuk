@@ -1174,12 +1174,6 @@ video {
 
 /*landing-page style*/
 
-#landingPage main {
-  --bg-opacity: 1;
-  background-color: #f7fafc;
-  background-color: rgba(247, 250, 252, var(--bg-opacity));
-}
-
 #landingPage #section-new-product .card-product img {
   width: 100%;
 }
