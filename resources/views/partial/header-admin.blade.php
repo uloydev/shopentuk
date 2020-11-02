@@ -16,7 +16,7 @@
             <a class="topbartoggler d-block d-md-none waves-effect waves-light" 
             href="javascript:void(0)" data-toggle="collapse"
             aria-label="Toggle navigation" aria-controls="navbarSupportedContent" 
-            aria-expanded="false" data-target="#navbarSupportedContent" >
+            aria-expanded="false" data-target="#navbarSupportedContent">
                 <i class="ti-more"></i>
             </a>
         </div>
@@ -42,12 +42,12 @@
             <ul class="navbar-nav float-right">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="javascript:void(0)"
-                        aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
-                        <img src="{{ asset('template/assets/images/users/profile-pic.jpg') }}" 
+                    aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
+                        <img src="{{ asset('template/assets/images/users/profile-pic.jpg') }}"
                         alt="user" class="rounded-circle" width="40">
                         <span class="ml-2 d-none d-lg-inline-block">
-                            <span>Hello,</span> 
-                            <span class="text-dark">Jason Doe</span> 
+                            <span>Hello,</span>
+                            <span class="text-dark">{{ Auth::user()->name }}</span> 
                             <i data-feather="chevron-down" class="svg-icon"></i>
                         </span>
                     </a>
