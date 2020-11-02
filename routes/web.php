@@ -14,7 +14,11 @@ Route::prefix('store')->name('store.')->group(function(){
         Route::get('/{slug}', 'StoreController@showVoucher')->name('show');
     });
 });
-Route::get('konfirmasi-pembayaran', 'PaymentController@showConfirm')->name('payment.show-confirm');
+
+Route::prefix('payment')->name('payment.')->group(function(){
+    Route::get('konfirmasi-pembayaran', 'PaymentController@showConfirm')->name('show-confirm');
+    Route::get('cart', 'PaymentController@cart')->name('cart');
+});
 
 Auth::routes();
 

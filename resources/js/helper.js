@@ -33,4 +33,12 @@ Array.from(requiredInput).map(input => {
 	return input.previousElementSibling.classList.add('required-input');
 });
 
-export {getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, requiredInput};
+const rupiahCurrency = document.querySelectorAll('.rupiah-currency')
+let moneyNumber, moneyNumberFormatted;
+rupiahCurrency.forEach(money => {
+	moneyNumber = money.textContent
+	moneyNumberFormatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(moneyNumber)
+	money.textContent = moneyNumberFormatted
+});
+
+export {getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, requiredInput, rupiahCurrency};

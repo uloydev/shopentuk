@@ -1016,6 +1016,7 @@ video {
   --bg-opacity: 1;
   background-color: #fff;
   background-color: rgba(255, 255, 255, var(--bg-opacity));
+  box-shadow: 0 1px 5px rgba(53, 53, 53, 0.3);
 }
 
 .nav .container {
@@ -1026,6 +1027,8 @@ video {
   background-color: rgba(255, 255, 255, var(--bg-opacity));
   padding-top: 1rem;
   max-width: none;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 @media (min-width: 1024px) {
@@ -1034,6 +1037,8 @@ video {
     background-color: transparent;
     padding-top: 0;
     max-width: 1280px;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 }
 
@@ -1187,8 +1192,8 @@ video {
   .nav__item-has-child .nav__ul {
     flex-direction: column;
     position: absolute;
-    top: 100%;
     overflow: visible;
+    top: 100%;
   }
 
   .nav__item-has-child .nav__ul .nav__item-has-child .nav__ul {
@@ -1254,6 +1259,10 @@ video {
 
 .nav.nav--open #close-icon {
   display: initial;
+}
+
+#landing-page .nav {
+  box-shadow: none;
 }
 
 .header {

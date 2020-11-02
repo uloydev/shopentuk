@@ -524,7 +524,7 @@
 /*!********************************!*\
   !*** ./resources/js/helper.js ***!
   \********************************/
-/*! exports provided: getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, requiredInput */
+/*! exports provided: getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, requiredInput, rupiahCurrency */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -534,6 +534,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAttributes", function() { return setAttributes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inputOnlyNumberAndSpace", function() { return inputOnlyNumberAndSpace; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requiredInput", function() { return requiredInput; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rupiahCurrency", function() { return rupiahCurrency; });
 /*!
  * Get all siblings of an element
  * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
@@ -571,6 +572,16 @@ inputOnlyNumberAndSpace.forEach(function (input) {
 var requiredInput = document.querySelectorAll('[required="required"], textarea[required]');
 Array.from(requiredInput).map(function (input) {
   return input.previousElementSibling.classList.add('required-input');
+});
+var rupiahCurrency = document.querySelectorAll('.rupiah-currency');
+var moneyNumber, moneyNumberFormatted;
+rupiahCurrency.forEach(function (money) {
+  moneyNumber = money.textContent;
+  moneyNumberFormatted = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR'
+  }).format(moneyNumber);
+  money.textContent = moneyNumberFormatted;
 });
 
 
