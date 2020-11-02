@@ -29,10 +29,6 @@
                 @endisset
                 <span class="font-bold">Rp. <var class="not-italic">{{ $productFinalPrice }}</var></span>
             </p>
-    
-            <div class="mt-2">
-                @include('partial.rating', ['rating' => $productRating])
-            </div>
         </div>
     </div>
 </div>

@@ -49,22 +49,3 @@
         </div>
     </div>
 @endsection
-@push('script')
-    <script>
-      // const myDropzone = new Dropzone("#my-awesome-dropzone", {
-      //   url: "/"
-      // });
-
-      // Dropzone.options.myDropzone = {
-      //   paramName: "file", // The name that will be used to transfer the file
-      //   maxFilesize: 2, // MB
-      //   accept: function(file, done) {
-      //     if (file.name == "justinbieber.jpg") {
-      //       done("Naha, you don't.");
-      //     }
-      //     else { done(); }
-      //   }
-      // };
-      // Dropzone.options.myAwesomeDropzone = false;
-    </script>
-@endpush

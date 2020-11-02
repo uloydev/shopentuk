@@ -18,8 +18,7 @@
         @yield('content')
     </main>
     @include('partial.footer')
+    <script src="{{ mix('js/all-client.js') }}"></script>
     @stack('script')
-    <script src="{{ asset('js/native.js') }}"></script>
-    <script src="{{ asset('library/dropzone/dropzone.min.js') }}"></script>
 </body>
 </html>

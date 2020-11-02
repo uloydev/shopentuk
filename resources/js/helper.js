@@ -23,9 +23,14 @@ const setAttributes = (el, attrs) => {
 	}
 }
 
-const inputOnlyNumberAndSpace = document.querySelectorAll('.only-alpha-space')
+const inputOnlyNumberAndSpace = document.querySelectorAll('.only-alpha-space');
 inputOnlyNumberAndSpace.forEach(input => {
 	input.setAttribute('pattern', '[a-zA-Z][a-zA-Z ]+ ');
 });
 
-export {getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace};
+const requiredInput = document.querySelectorAll('[required="required"], textarea[required]');
+Array.from(requiredInput).map(input => {
+	return input.previousElementSibling.classList.add('required-input');
+});
+
+export {getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, requiredInput};

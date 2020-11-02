@@ -42,7 +42,7 @@
                         </li>
                     @endforeach
                     <x-menu-standar id="menu-store-all" text="All"
-                    to="{{ route('store.product') }}" have-icon="false" />
+                    to="{{ route('store.product.index') }}" have-icon="false" />
                 </ul>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child lg:mr-6 lg:flex-grow lg:justify-center">
@@ -66,7 +66,7 @@
                             </ul>
                         </li>
                     @endforeach
-                    <x-menu-standar id="menu-store-all" to="{{ route('store.voucher') }}" 
+                    <x-menu-standar id="menu-store-all" to="{{ route('store.voucher.index') }}" 
                     text="All" have-icon="false"/>
                 </ul>
             </li>

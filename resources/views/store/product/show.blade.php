@@ -43,15 +43,15 @@
             <div id="deskripsi-detail" class="py-3">
                 {!! $product->description !!}
             </div>
-            <div id="ulasan-detail" class="py-3">
+            <div id="ulasan-detail" class="py-5">
                 {{-- contoh --}}
                 @php
                     $ulasanTotal = 3;
                 @endphp
                 @if ($ulasanTotal > 0)
                     @for ($i = 0; $i < $ulasanTotal; $i++)
-                        <div class="flex flex-col mb-3">
-                            <figure class="flex border-b-2 border-gray-300 pb-2 items-center">
+                        <div class="flex flex-col mb-8">
+                            <figure class="flex border-b-2 border-gray-300 pb-5 items-center">
                                 <img src="{{ asset('img/static/people.png') }}" class="mr-2 h-8 w-8 rounded-full"
                                 alt="People avatar {{ env('APP_NAME') }}">
                                 <figcaption>
@@ -65,12 +65,6 @@
                                     Possimus architecto corrupti exercitationem cum ipsum cumque, 
                                     non quis impedit error reiciendis?
                                 </p>
-                                <div class="mt-3">
-                                    @php
-                                        $productRating = 3; //buat contoh aja. ntar ngambil dari controller
-                                    @endphp
-                                    @include('partial.rating', ['rating' => $productRating])
-                                </div>
                             </div>
                         </div>
                     @endfor
@@ -90,21 +84,19 @@
                         Alamat email Anda tidak akan dipublikasikan. 
                         Ruas yang wajib ditandai *
                     </h3>
-                    <div class="mb-5">
-                        <label for="rating" class="block mb-2">Rating</label>
-                        <div id="rater" data-input-name="rating_product"></div>
-                        {{-- input namenya rating_product --}}
-                    </div>
-                    <label for="ulasan" class="block mb-2">Ulasan anda</label>
+                    <label for="ulasan" class="block mb-2">
+                        <span>Ulasan anda</span>
+                    </label>
                     <textarea name="ulasan" id="ulasan" rows="5" placeholder="Minimal 5 kata" 
-                    class="form-textarea block w-full bg-white"></textarea>
+                    class="form-textarea block w-full bg-white" required></textarea>
                     <div class="grid grid-cols-2 gap-5 mt-5">
                         <x-input-basic name="nama_lengkap" label="Nama lengkap" add-class="only-alpha-space"
                         placeholder="Mohon gunakan nama lengkap" value="{{ Auth::user()->name ?? '' }}"
-                        title="Nama tidak boleh mengandung spesial karakter, angka, dan spasi diawal maupun diakhir"/>
+                        title="Nama tidak boleh mengandung spesial karakter, angka, dan spasi diawal maupun diakhir"
+                        required/>
                         <div class="mb-5">
                             <x-input-basic name="email" value="{{ Auth::user()->email ?? '' }}" 
-                            placeholder="Mohon gunakan email valid" type="email" label="Email"/>
+                            placeholder="Mohon gunakan email valid" type="email" label="Email" required/>
                             <div class="flex items-start text-sm">
                                 <input type="checkbox" name="simpan_data" class="form-checkbox border-gray-500">
                                 <span class="ml-2 leading-relaxed -mt-2">
@@ -123,12 +115,3 @@
         </section>
 </div>
 @endsection
-
-@push('script')
-    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/tabby@12/dist/js/tabby.polyfills.js"></script>
-    <script src="{{ asset('library/rater-js/index.js') }}"></script>
-@endpush
-
-@push('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cferdinandi/tabby@12/dist/css/tabby-ui.css">
-@endpush
