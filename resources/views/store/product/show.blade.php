@@ -4,7 +4,7 @@
 @section('content')
     <div class="container py-10 px-5 lg:px-0 mx-auto">
         <figure class="grid grid-cols-1 md:grid-cols-2 flex-col md:flex-row mb-8">
-            <img src="{{ asset('storage/img/hoodie.jpg') }}" class="w-full mb-5 md:mb-0">
+            <img src="{{ asset('img/'.($product->mainImage ? $product->mainImage->url : 'example.jpg')) }}" class="w-full mb-5 md:mb-0">
             <figcaption class="md:ml-10">
                 @include('partial.breadcumb')
                 <p class="text-2xl mb-5">{{ $product->title }}</p>
@@ -18,7 +18,6 @@
                         Rp. <var class="not-italic">{{ number_format($product->price) }}</var>
                     </p>
                 @endif
-                <p>{{ $product->description }}</p>
                 <div class="flex my-5">
                     <input type="number" class="appearance-none bg-white border border-gray-400 p-1 text-center w-12"
                     min="1" max="999" value="1" required>
@@ -26,6 +25,9 @@
                 </div>
                 <hr>
                 <p class="mt-5 text-gray-700">Kategori: <span>{{ $product->productCategory->title }}</span></p>
+                @isset($product->productSubCategory)
+                    <p class="mt-5 text-gray-700">Sub Kategori: <span>{{ $product->productSubCategory->title }}</span></p>
+                @endisset
             </figcaption>
         </figure>
         <section id="deskripsi-ulasan">

@@ -2,7 +2,7 @@
     @foreach ($products as $product)
         @if ($product->discount)
             <x-card-product
-                product-img="{{ 'example.jpg' }}" 
+                product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
                 product-name="{{ $product->title }}"
                 product-category="{{ $product->productCategory->title }}" 
                 product-category-id="{{ $product->productCategory->id }}" 
@@ -14,7 +14,7 @@
                 is-digital-product="true" />
         @else
             <x-card-product 
-                product-img="{{ 'example.jpg' }}" 
+                product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
                 product-name="{{ $product->title }}"
                 product-category="{{ $product->productCategory->title }}" 
                 product-category-id="{{ $product->productCategory->id }}" 
