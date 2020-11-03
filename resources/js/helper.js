@@ -8,6 +8,14 @@ const getSiblings = function (elem) {
 	});
 };
 
+
+/*
+	formatting currency to rupiah
+*/
+const formattingRupiah = function (currency) {
+	return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(currency).replace(',00', '');
+};
+
 /*
  * Make all input lowercase
  */
@@ -33,12 +41,12 @@ Array.from(requiredInput).map(input => {
 	return input.previousElementSibling.classList.add('required-input');
 });
 
+/**
+ * utilities class helper for instant formatting to rupiah
+ */
 const rupiahCurrency = document.querySelectorAll('.rupiah-currency')
-let moneyNumber, moneyNumberFormatted;
 rupiahCurrency.forEach(money => {
-	moneyNumber = money.textContent
-	moneyNumberFormatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(moneyNumber)
-	money.textContent = moneyNumberFormatted
+	money.textContent = formattingRupiah(money.textContent)
 });
 
-export {getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, requiredInput, rupiahCurrency};
+export {getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, requiredInput, rupiahCurrency, formattingRupiah};

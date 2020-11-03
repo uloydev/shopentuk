@@ -1,4 +1,4 @@
-<nav class="nav lg:py-4 lg:shadow-none lg:border-b border-gray-400">
+<nav class="nav lg:py-4 lg:shadow-none">
     <div class="container">
         <div class="nav__item nav__item--first lg:border-b-0 lg:pb-0 lg:px-0">
             <a href="{{ route('landing-page') }}" class="nav__logo">
@@ -9,8 +9,10 @@
                 </picture>
             </a>
             <a href="" class="nav__icon nav__icon--bag lg:hidden">
-                <var class="not-italic" id="total-shopping">0</var>
-                <box-icon name='shopping-bag'></box-icon>
+                <div class="nav__icon-cart">
+                    <var class="not-italic" id="total-shopping">0</var>
+                    <box-icon name='shopping-bag'></box-icon>
+                </div>
             </a>
             <a href="javascript:void(0);" class="nav__icon nav__toggle-menu ml-3">
                 <box-icon name='menu-alt-right' id="open-icon"></box-icon>
@@ -107,9 +109,11 @@
                 </ul>
             </li>
             <li class="nav__item nav__item--menu hidden lg:inline-flex lg:flex-grow lg:justify-center">
-                <a href="" class="nav__icon nav__icon--bag hover:text-white">
-                    <var class="not-italic" id="total-shopping">0</var>
-                    <box-icon name='shopping-bag'></box-icon>
+                <a href="{{ route('payment.cart') }}" class="nav__icon nav__icon--bag">
+                    <div class="nav__icon-cart">
+                        <var class="not-italic" id="total-shopping">0</var>
+                        <box-icon name='shopping-bag'></box-icon>
+                    </div>
                 </a>
             </li>
         </ul>

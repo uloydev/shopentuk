@@ -1,4 +1,3 @@
-@use 'mixin';
 @use 'general';
 
 .nav {
@@ -35,18 +34,18 @@
         }
     }
     &__icon {
-        @apply flex items-center relative;
+        @apply flex items-center justify-center;
 
         #total-shopping {
-            @apply absolute transform translate-x-1/2 translate-y-1 text-sm;
-            right: calc(45px / 2);
-
-            @screen lg {
-                right: 45px;
-            }
+            position: absolute;
+            transform: translateY(5px);
         }
         &--bag box-icon {
-            @include mixin.sameSize(45px);
+            @include general.sameSize(45px);
+        }
+
+        &-cart {
+            @apply flex items-center justify-center;
         }
     }
 
@@ -54,7 +53,7 @@
         transform: translateY(4px);
 
         box-icon {
-            @include mixin.sameSize(30px);
+            @include general.sameSize(30px);
         }
 
         @screen lg {
@@ -147,13 +146,13 @@
 
     #open-icon {
         display: initial;
-        @include mixin.openNav {
+        @include general.openNav {
             display: none;
         }
     }
     #close-icon {
         display: none;
-        @include mixin.openNav {
+        @include general.openNav {
             display: initial;
         }
     }

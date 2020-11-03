@@ -969,6 +969,25 @@ video {
   font-family: "Amita", cursive;
 }
 
+.btn, .btn-outline {
+  font-weight: 700;
+  padding: 0.5rem;
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  border-radius: 0.25rem;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 150ms;
+}
+
+.btn:focus, .btn-outline:focus {
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+.btn-outline {
+  border-width: 1px;
+}
+
 .section__heading span {
   position: relative;
 }
@@ -1079,34 +1098,23 @@ video {
 .nav__icon {
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: center;
 }
 
 .nav__icon #total-shopping {
   position: absolute;
-  --transform-translate-x: 0;
-  --transform-translate-y: 0;
-  --transform-rotate: 0;
-  --transform-skew-x: 0;
-  --transform-skew-y: 0;
-  --transform-scale-x: 1;
-  --transform-scale-y: 1;
-  transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
-  --transform-translate-x: 50%;
-  --transform-translate-y: 0.25rem;
-  font-size: 0.875rem;
-  right: calc(45px / 2);
-}
-
-@media (min-width: 1024px) {
-  .nav__icon #total-shopping {
-    right: 45px;
-  }
+  transform: translateY(5px);
 }
 
 .nav__icon--bag box-icon {
   width: 45px;
   height: 45px;
+}
+
+.nav__icon-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav__toggle-menu {

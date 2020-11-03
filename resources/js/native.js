@@ -21,13 +21,13 @@ function openNav() {
 }
 
 function closeAllMenu() {
-    const allChild =  document.querySelectorAll('.nav__item-has-child--open');
+    const allChild =  document.querySelectorAll('.nav__item-has-child--open')
     
     allChild.forEach(child => {
         child.classList.remove('nav__item-has-child--open')
     });
 
-    closeNav();
+    closeNav()
 }
 
 btnOpenMenu.addEventListener('click', () => {
@@ -65,7 +65,7 @@ btnOpenChildMenu.forEach(openChild => {
 
 if (elementOnHeaderExceptNav.length > 0) {
     document.querySelector('header nav + *').addEventListener('click', () => {
-        closeAllMenu();
+        closeAllMenu()
     });
 }
 
@@ -74,37 +74,40 @@ document.querySelector('main').addEventListener('click', () => {
 });
 
 if (pageUrl === '/') {
-    nav.classList.add('bg-gray-800', 'bg-opacity-25');
-    document.querySelector('header, main').classList.remove('bg-gray-100');
+    nav.classList.add('bg-gray-800', 'bg-opacity-25')
+    document.querySelector('header, main').classList.remove('bg-gray-100')
 
     //jika lg di landing page dan di mode tablet keatas, icon menu ganti warna jd putih
     if (window.screen.width > 768) {
         document.querySelectorAll('.nav .container > .nav__ul > .nav__item > .nav__link > .child-dropdown-icon')
         .forEach(dropdownIcon => {
-            dropdownIcon.setAttribute('color', '#fff');
+            dropdownIcon.setAttribute('color', '#fff')
         });
     }
+}
+else {
+    nav.classList.add('lg:border-b', 'border-gray-400');
 }
 
 //auth page script
 if (pageUrl === '/login') {
-    const authPage = document.querySelector('#authPage');
-    const formRegister = authPage.querySelector('#form-daftar');
-    const formLogin = authPage.querySelector('#form-masuk');
+    const authPage = document.querySelector('#authPage')
+    const formRegister = authPage.querySelector('#form-daftar')
+    const formLogin = authPage.querySelector('#form-masuk')
 
     formRegister.addEventListener('submit', function () {
-        localStorage.clear();
-        localStorage.setItem('sessionFailed', 'regist');
+        localStorage.clear()
+        localStorage.setItem('sessionFailed', 'regist')
     });
 
     formLogin.addEventListener('submit', function () {
-        localStorage.clear();
-        localStorage.setItem('sessionFailed', 'login');
+        localStorage.clear()
+        localStorage.setItem('sessionFailed', 'login')
     });
 
     function removeValidationOnFalseForm(falseForm) {
-        const falseErrorMessage = falseForm.querySelectorAll('.error-message');
-        const falseErrorInput = falseForm.querySelectorAll('.border-red-400');
+        const falseErrorMessage = falseForm.querySelectorAll('.error-message')
+        const falseErrorInput = falseForm.querySelectorAll('.border-red-400')
 
         Array.from(falseErrorMessage).map(error => {
             error.remove();
@@ -122,7 +125,22 @@ if (pageUrl === '/login') {
     }
 }
 
+//cart js
+if (pageUrl === '/payment/cart') {
+    const cartPrices = document.querySelectorAll('.cart-item__price')
+    const allPrice = Array.from(cartPrices).map(price => Number(price.dataset.price))
+    const totalPriceWithoutShipping = allPrice.reduce((acc, val) => acc + val)
+
+    const cartSubTotal = document.querySelector('#cart__sub-total')
+    cartSubTotal.textContent = Helper.formattingRupiah(totalPriceWithoutShipping);
+
+    const cartShipping = Number(document.querySelector('#cart__shipping').dataset.price);
+
+    const cartGrandTotal = document.querySelector('#cart__total')
+    cartGrandTotal.textContent = Helper.formattingRupiah(cartShipping + totalPriceWithoutShipping);
+
+}
 //plugin js
 if (document.querySelector('[data-tabs]')) {
-    const tabs = new Tabby('[data-tabs]')
+    new Tabby('[data-tabs]')
 }

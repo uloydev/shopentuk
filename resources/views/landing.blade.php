@@ -4,9 +4,9 @@
 @section('header')
 <div class="container mx-auto h-full flex items-center justify-center lg:justify-start">
     <x-box-promo heading="Shopentuk Shop" subheading="Harga Terjangkau, kualitas terjamin" subheadClass="text-3xl"
-        primary-btn-text="Shop now" primary-btn-link="shop.com"
+        primary-btn-text="Shop now" primary-btn-link="/"
         primary-btn-type="bg-white hover:bg-gray-100 text-gray-800 border border-gray-400 rounded shadow md:mr-8 font-bold">
-        <a href=""
+        <a href="/"
             class="bg-transparent hover:bg-black text-white font-semibold hover:text-white p-3 border border-white hover:border-transparent rounded mt-5 md:mt-0">
             Find more
         </a>

@@ -1,5 +1,4 @@
 @use './../plugin/tabbyjs/sass/tabby-ui.scss';
-
 @import url('https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Architects+Daughter&family=Annie+Use+Your+Telescope&family=Shadows+Into+Light&display=swap');
 
 @tailwind base;
@@ -21,6 +20,19 @@
         text-overflow: ellipsis;
         max-width: 100%;
         font-family: 'Amita', cursive;
+    }
+}
+
+.btn {
+    @apply font-bold p-2 text-white rounded transition duration-150;
+
+    &:focus {
+        @apply shadow-outline;
+    }
+
+    &-outline {
+        @extend .btn;
+        @apply border;
     }
 }
 
@@ -65,5 +77,22 @@
             transform: translateY(-50%);
             @apply absolute right-0 text-red-400;
         }
+    }
+}
+
+//mixin
+@mixin sameSize($size) {
+    width: $size;
+    height: $size;
+}
+
+@mixin openNav($depthParent: 1) {
+    $rootString: #{&};
+    $parentIndex: str-index($rootString, " ");
+    $parent: str_slice($rootString, 0, $parentIndex - $depthParent);
+    $children: str_slice($rootString, $parentIndex);
+
+    @at-root #{$parent}.nav--open #{$children} {
+        @content;
     }
 }

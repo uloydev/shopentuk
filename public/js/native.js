@@ -102,7 +102,7 @@
 /*!********************************!*\
   !*** ./resources/js/helper.js ***!
   \********************************/
-/*! exports provided: getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, requiredInput, rupiahCurrency */
+/*! exports provided: getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, requiredInput, rupiahCurrency, formattingRupiah */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -113,6 +113,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inputOnlyNumberAndSpace", function() { return inputOnlyNumberAndSpace; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requiredInput", function() { return requiredInput; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rupiahCurrency", function() { return rupiahCurrency; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formattingRupiah", function() { return formattingRupiah; });
 /*!
  * Get all siblings of an element
  * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
@@ -121,6 +122,17 @@ var getSiblings = function getSiblings(elem) {
   return Array.prototype.filter.call(elem.parentNode.children, function (sibling) {
     return sibling !== elem;
   });
+};
+/*
+	formatting currency to rupiah
+*/
+
+
+var formattingRupiah = function formattingRupiah(currency) {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR'
+  }).format(currency).replace(',00', '');
 };
 /*
  * Make all input lowercase
@@ -151,15 +163,13 @@ var requiredInput = document.querySelectorAll('[required="required"], textarea[r
 Array.from(requiredInput).map(function (input) {
   return input.previousElementSibling.classList.add('required-input');
 });
+/**
+ * utilities class helper for instant formatting to rupiah
+ */
+
 var rupiahCurrency = document.querySelectorAll('.rupiah-currency');
-var moneyNumber, moneyNumberFormatted;
 rupiahCurrency.forEach(function (money) {
-  moneyNumber = money.textContent;
-  moneyNumberFormatted = new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR'
-  }).format(moneyNumber);
-  money.textContent = moneyNumberFormatted;
+  money.textContent = formattingRupiah(money.textContent);
 });
 
 
@@ -258,6 +268,8 @@ if (pageUrl === '/') {
       dropdownIcon.setAttribute('color', '#fff');
     });
   }
+} else {
+  nav.classList.add('lg:border-b', 'border-gray-400');
 } //auth page script
 
 
@@ -291,11 +303,27 @@ if (pageUrl === '/login') {
   } else if (localStorage.getItem('sessionFailed') === 'login') {
     removeValidationOnFalseForm(formRegister);
   }
+} //cart js
+
+
+if (pageUrl === '/payment/cart') {
+  var cartPrices = document.querySelectorAll('.cart-item__price');
+  var allPrice = Array.from(cartPrices).map(function (price) {
+    return Number(price.dataset.price);
+  });
+  var totalPriceWithoutShipping = allPrice.reduce(function (acc, val) {
+    return acc + val;
+  });
+  var cartSubTotal = document.querySelector('#cart__sub-total');
+  cartSubTotal.textContent = _helper_js__WEBPACK_IMPORTED_MODULE_1__["formattingRupiah"](totalPriceWithoutShipping);
+  var cartShipping = Number(document.querySelector('#cart__shipping').dataset.price);
+  var cartGrandTotal = document.querySelector('#cart__total');
+  cartGrandTotal.textContent = _helper_js__WEBPACK_IMPORTED_MODULE_1__["formattingRupiah"](cartShipping + totalPriceWithoutShipping);
 } //plugin js
 
 
 if (document.querySelector('[data-tabs]')) {
-  var tabs = new Tabby('[data-tabs]');
+  new Tabby('[data-tabs]');
 }
 
 /***/ }),
