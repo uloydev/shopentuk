@@ -145,7 +145,7 @@ var setAttributes = function setAttributes(el, attrs) {
 
 var inputOnlyNumberAndSpace = document.querySelectorAll('.only-alpha-space');
 inputOnlyNumberAndSpace.forEach(function (input) {
-  input.setAttribute('pattern', '[a-zA-Z][a-zA-Z ]+ ');
+  input.setAttribute('pattern', '[a-zA-Z]+');
 });
 var requiredInput = document.querySelectorAll('[required="required"], textarea[required]');
 Array.from(requiredInput).map(function (input) {

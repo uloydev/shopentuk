@@ -1,9 +1,6 @@
 @extends('layouts.master')
-
 @section('title', 'Produk - ' . env('APP_NAME') . ' Shop')
-
 @section('body-id', 'productDetail')
-
 @section('content')
     <div class="container py-10 px-5 lg:px-0 mx-auto">
         <figure class="grid grid-cols-1 md:grid-cols-2 flex-col md:flex-row mb-8">
@@ -72,7 +69,7 @@
                 <h1 class="text-xl mb-5 mt-2 px-1">Belum ada ulasan</h1>
                 @endif
                 {{-- end of contoh --}}
-                <form action="" method="POST" class="border border-gray-400 p-6 mt-3">
+                <form action="/dummy-post" method="POST" class="border border-gray-400 p-6 mt-3">
                     @csrf
                     <h2 class="text-xl mb-2 font-medium">
                         <span>

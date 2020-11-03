@@ -34,3 +34,7 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin'])->name('admin.'
     });
     Route::get('dashboard', 'DashboardController')->name('dashboard');
 });
+
+Route::post('/dummy-post', function (){
+    return redirect()->back();
+});
