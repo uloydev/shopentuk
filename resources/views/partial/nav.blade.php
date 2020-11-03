@@ -36,7 +36,8 @@
                                     <x-menu-standar 
                                     id="{{ Str::slug($subCategory->title, '-') }}" 
                                     text="{{ $subCategory->title }}" 
-                                    to="/link-go-to" have-icon="true" />
+                                    to="{{route('store.product.index', ['subCatId'=>$subCategory->id])}}" 
+                                    have-icon="true" />
                                 @endforeach
                             </ul>
                         </li>
@@ -60,7 +61,7 @@
                                     <x-menu-standar 
                                     id="{{ Str::slug($subCategory->title, '-') }}" 
                                     text="{{ $subCategory->title }}" 
-                                    to="/link-go-pulsa-telkomsel" 
+                                    to="{{route('store.voucher.index', ['subCatId'=>$subCategory->id])}}" 
                                     have-icon="true" />
                                 @endforeach
                             </ul>
@@ -79,9 +80,9 @@
                 </a>
                 <ul class="nav__ul lg:bg-white divide-y lg:divide-gray-300 lg:shadow">
                     <x-menu-standar id="menu-cancel-refund" text="Pengembalian uang"
-                    to="/link-go-to-pengembalian" have-icon="false" />
+                    to="" have-icon="false" />
                     <x-menu-standar id="menu-cancel-pembatalan" text="Pembatalan order"
-                    to="/link-go-to-pembatalan" have-icon="false" />
+                    to="" have-icon="false" />
                 </ul>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child lg:mr-6 lg:flex-grow lg:justify-center">
@@ -103,7 +104,7 @@
                         to="{{ route('login') }}" have-icon="false" />
                     @endguest
                     <x-menu-standar id="menu-my-akun-toko-point" text="Toko Point" 
-                    to="/link-go-to-toko" have-icon="false" />
+                    to="" have-icon="false" />
                 </ul>
             </li>
             <li class="nav__item nav__item--menu hidden lg:inline-flex lg:flex-grow lg:justify-center">

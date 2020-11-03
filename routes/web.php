@@ -26,8 +26,11 @@ Route::get('register', function () {
     return redirect('login');
 });
 
-Route::get('home', 'HomeController@index')->name('home');
+Route::get('my-account', 'HomeController@index')->name('my-account');
 
-Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'superadmin'])->name('admin.')->group(function () {
+Route::namespace('Admin')->prefix('admin')->middleware(['admin'])->name('admin.')->group(function () {
+    Route::get('/', function (){
+        return redirect()->route('admin.dashboard');
+    });
     Route::get('dashboard', 'DashboardController')->name('dashboard');
 });

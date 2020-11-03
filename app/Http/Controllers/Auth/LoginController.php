@@ -35,7 +35,7 @@ class LoginController extends Controller
             return 'admin/dashboard';
         }
         else {
-            return 'home';
+            return 'my-account';
         }
     }
 
