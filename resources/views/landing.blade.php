@@ -4,9 +4,9 @@
 @section('header')
 <div class="container mx-auto h-full flex items-center justify-center lg:justify-start">
     <x-box-promo heading="Shopentuk Shop" subheading="Harga Terjangkau, kualitas terjamin" subheadClass="text-3xl"
-        primary-btn-text="Shop now" primary-btn-link="shop.com"
+        primary-btn-text="Shop now" primary-btn-link="#section-new-product"
         primary-btn-type="bg-white hover:bg-gray-100 text-gray-800 border border-gray-400 rounded shadow md:mr-8 font-bold">
-        <a href=""
+        <a href="{{ route('store.product.index') }}"
             class="bg-transparent hover:bg-black text-white font-semibold hover:text-white p-3 border border-white hover:border-transparent rounded mt-5 md:mt-0">
             Find more
         </a>
@@ -34,10 +34,10 @@
             <div class="px-5 md:px-10 lg:px-24">
                 <x-box-promo heading="Edisi Spesial"
                 subheading="Beli Baju,Celana,Sepatu,Dan Akseksoris Di Shopentuk Akan Mendapatkan Point Yang Nantinya Akan Menjadi Potongan Untuk Pembelian Berikutnya"
-                primary-btn-text="Beli sekarang" primary-btn-link="shop.com" subheadClass="text-base"
+                primary-btn-text="Beli sekarang" primary-btn-link="{{ route('store.product.index', ['sort'=>'promo']) }}" subheadClass="text-base"
                 primary-btn-type="bg-white hover:bg-gray-100 text-gray-800 border border-gray-400 shadow order-1">
                     <x-slot name="headingHelp">Promo Shopentuk Shop</x-slot>
-                    <div class="w-full text-white mb-10">Apalagai Yang Kamu Tunggu Order Sekarang !!!</div>
+                    <div class="w-full text-white mb-10">Apalagi Yang Kamu Tunggu Order Sekarang !!!</div>
                 </x-box-promo>
             </div>
         </div>

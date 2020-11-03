@@ -84,6 +84,8 @@ class StoreController extends Controller
                 $products = $products->orderBy('price', 'asc');
             } else if ($request->sort == "expensive") {
                 $products = $products->orderBy('price', 'desc');
+            }else if ($request->sort == "promo") {
+                $products = $products->inRandomOrder()->whereHas('discount');
             }
         }
         
