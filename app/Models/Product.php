@@ -58,6 +58,11 @@ class Product extends Model
         return $this->belongsTo('App\Models\ProductCategory', 'category_id')->withDefault();
     }
 
+    public function productSubCategory()
+    {
+        return $this->belongsTo('App\Models\ProductSubCategory', 'sub_category_id')->withDefault();
+    }
+
     public function discount()
     {
         return $this->hasOne('App\Models\ProductDiscount');

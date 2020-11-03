@@ -21,6 +21,7 @@
                                 product-img="{{ $product->mainImage ? $product->mainImage->url : 'example.jpg' }}"
                                 product-name="{{ Str::words($product->title, 2) }}"
                                 product-category="{{ $product->productCategory->title }}" 
+                                product-category-id="{{ $product->productCategory->id }}" 
                                 product-original-price="{{ $product->price }}"
                                 product-final-price="{{ $product->discount->discounted_price }}"
                                 product-rating="0" 
@@ -31,6 +32,7 @@
                                 product-img="{{ $product->mainImage ? $product->mainImage->url : 'example.jpg' }}" 
                                 product-name="{{ Str::words($product->title, 2) }}"
                                 product-category="{{ $product->productCategory->title }}" 
+                                product-category-id="{{ $product->productCategory->id }}" 
                                 product-final-price="{{ $product->price }}"
                                 product-rating="0" 
                                 product-is-obral="false"
@@ -43,9 +45,16 @@
             <div class="py-4">
                 <h1 class="text-2xl">Browse by product categories</h1>
                 <ul class="mt-5">
+                    <li class="flex justify-between flex-col py-3">
+                        <a class="{{ !isset($httpQuery['catId']) && !isset($httpQuery['subCatId']) ? 'font-bold' : ''}}"
+                        href="{{ route('store.product.index', array_merge(array_diff_key($httpQuery, ['subCatId'=>'', 'catId'=>'']))) }}" class="justify-between flex">
+                            All Category
+                        </a>
+                    </li>
                     @foreach ($categories->where('is_digital_product', false) as $category)
                     <li class="flex justify-between flex-col py-3">
-                        <a href="{{ route('store.product.index', array_merge(array_diff_key($httpQuery, ['subCatId' => '']),['catId'=> $category->id])) }}" title="{{ $category->title }}" class="justify-between flex">
+                        <a class="{{ isset($httpQuery['catId']) && $httpQuery['catId'] == $category->id ? 'font-bold' : ''}}"
+                        href="{{ route('store.product.index', array_merge(array_diff_key($httpQuery, ['subCatId' => '']),['catId'=> $category->id])) }}" title="{{ $category->title }}" class="justify-between flex">
                             {{ Str::words($category->title, 3) }}
                             <var class="not-italic">{{ '(' . $category->products->count() . ')' }}</var>
                         </a>
@@ -53,7 +62,8 @@
                             @foreach ($category->productSubCategory as $subCategory)
                                 <li class="py-3">
                                     <div class="flex justify-between">
-                                        <a href="{{ route('store.product.index', array_merge(array_diff_key($httpQuery,
+                                        <a class="{{ isset($httpQuery['subCatId']) && $httpQuery['subCatId'] == $subCategory->id ? 'font-bold' : ''}}"
+                                        href="{{ route('store.product.index', array_merge(array_diff_key($httpQuery,
                                         ['catId' => '']), ['subCatId'=> $subCategory->id])) }}"
                                         title="{{ $subCategory->title }}">
                                             {{ Str::limit($subCategory->title, 15) }}
@@ -81,6 +91,8 @@
                             {{ ($httpQuery['sort'] ?? '') == 'cheap' ? 'selected' : '' }}>Termurah</option>
                             <option value="expensive" 
                             {{ ($httpQuery['sort'] ?? '') == 'expensive' ? 'selected' : '' }}>Termahal</option>
+                            <option value="promo" 
+                            {{ ($httpQuery['sort'] ?? '') == 'promo' ? 'selected' : '' }}>Promo</option>
                         </select>
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -98,6 +110,7 @@
                             product-img="{{ $product->mainImage ? $product->mainImage->url : 'example.jpg' }}" 
                             product-name="{{ $product->title }}"
                             product-category="{{ $product->productCategory->title }}" 
+                            product-category-id="{{ $product->productCategory->id }}" 
                             product-original-price="{{ number_format($product->price) }}"
                             product-final-price="{{ number_format($product->discount->discounted_price) }}"
                             product-rating="0" 
@@ -108,6 +121,7 @@
                             product-img="{{ $product->mainImage ? $product->mainImage->url : 'example.jpg' }}" 
                             product-name="{{ $product->title }}"
                             product-category="{{ $product->productCategory->title }}" 
+                            product-category-id="{{ $product->productCategory->id }}" 
                             product-final-price="{{ number_format($product->price) }}"
                             product-rating="0" 
                             product-is-obral="false"

@@ -33,7 +33,7 @@ const setAttributes = (el, attrs) => {
 
 const inputOnlyNumberAndSpace = document.querySelectorAll('.only-alpha-space');
 inputOnlyNumberAndSpace.forEach(input => {
-	input.setAttribute('pattern', '[a-zA-Z][a-zA-Z ]+ ');
+	input.setAttribute('pattern', '[a-zA-Z]+');
 });
 
 const requiredInput = document.querySelectorAll('[required="required"], textarea[required]');

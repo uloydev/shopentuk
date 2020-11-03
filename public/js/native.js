@@ -157,7 +157,7 @@ var setAttributes = function setAttributes(el, attrs) {
 
 var inputOnlyNumberAndSpace = document.querySelectorAll('.only-alpha-space');
 inputOnlyNumberAndSpace.forEach(function (input) {
-  input.setAttribute('pattern', '[a-zA-Z][a-zA-Z ]+ ');
+  input.setAttribute('pattern', '[a-zA-Z]+');
 });
 var requiredInput = document.querySelectorAll('[required="required"], textarea[required]');
 Array.from(requiredInput).map(function (input) {
@@ -335,7 +335,7 @@ if (document.querySelector('[data-tabs]')) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/js/native.js */"./resources/js/native.js");
+module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/js/native.js */"./resources/js/native.js");
 
 
 /***/ })
