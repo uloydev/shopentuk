@@ -1,4 +1,87 @@
-@import url(https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Architects+Daughter&family=Annie+Use+Your+Telescope&family=Shadows+Into+Light&display=swap);/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+@import url(https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Architects+Daughter&family=Annie+Use+Your+Telescope&family=Shadows+Into+Light&display=swap);/**
+ * The tablist
+ */
+
+[role=tablist] {
+  border-bottom: 1px solid lightgray;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+[role=tablist] * {
+  box-sizing: border-box;
+}
+
+/**
+ * The tablist item
+ */
+
+@media (min-width: 30em) {
+  [role=tablist] li {
+    display: inline-block;
+  }
+}
+
+/**
+ * The tabs
+ */
+
+[role=tab] {
+  border: 1px solid transparent;
+  border-top-color: lightgray;
+  display: block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  /**
+   * Active tab styling
+   */
+  /**
+   * Tabs on hover
+   */
+}
+
+@media (min-width: 30em) {
+  [role=tab] {
+    border-top-color: transparent;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    display: inline-block;
+    margin-bottom: -1px;
+  }
+}
+
+[role=tab][aria-selected=true] {
+  background-color: lightgray;
+}
+
+@media (min-width: 30em) {
+  [role=tab][aria-selected=true] {
+    background-color: transparent;
+    border: 1px solid lightgray;
+    border-bottom-color: #ffffff;
+  }
+}
+
+[role=tab]:hover:not([aria-selected=true]) {
+  background-color: #f7f7f7;
+}
+
+@media (min-width: 30em) {
+  [role=tab]:hover:not([aria-selected=true]) {
+    border: 1px solid lightgray;
+  }
+}
+
+/**
+ * [hidden] fallback for IE10 and lower
+ */
+
+[hidden] {
+  display: none;
+}
+
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
    ========================================================================== */
@@ -913,10 +996,27 @@ video {
   font-family: "Shadows Into Light", cursive;
 }
 
+.required-input span {
+  position: relative;
+  padding-right: 0.75rem;
+}
+
+.required-input span::after {
+  content: "*";
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  right: 0;
+  --text-opacity: 1;
+  color: #fc8181;
+  color: rgba(252, 129, 129, var(--text-opacity));
+}
+
 .nav {
   --bg-opacity: 1;
   background-color: #fff;
   background-color: rgba(255, 255, 255, var(--bg-opacity));
+  box-shadow: 0 1px 5px rgba(53, 53, 53, 0.3);
 }
 
 .nav .container {
@@ -927,6 +1027,8 @@ video {
   background-color: rgba(255, 255, 255, var(--bg-opacity));
   padding-top: 1rem;
   max-width: none;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 @media (min-width: 1024px) {
@@ -935,6 +1037,8 @@ video {
     background-color: transparent;
     padding-top: 0;
     max-width: 1280px;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 }
 
@@ -1088,8 +1192,8 @@ video {
   .nav__item-has-child .nav__ul {
     flex-direction: column;
     position: absolute;
-    top: 100%;
     overflow: visible;
+    top: 100%;
   }
 
   .nav__item-has-child .nav__ul .nav__item-has-child .nav__ul {
@@ -1155,6 +1259,10 @@ video {
 
 .nav.nav--open #close-icon {
   display: initial;
+}
+
+#landing-page .nav {
+  box-shadow: none;
 }
 
 .header {

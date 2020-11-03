@@ -10,4 +10,9 @@ class PaymentController extends Controller
     {
         return view('payment.confirm', ['title' => 'Konfirmasi pembayaran']);
     }
+
+    public function cart()
+    {
+        return view('payment.cart', ['title' => 'cart']);
+    }
 }

@@ -45,7 +45,7 @@
                 <ul class="mt-5">
                     @foreach ($categories->where('is_digital_product', false) as $category)
                     <li class="flex justify-between flex-col py-3">
-                        <a href="{{ route('store.product', array_merge(array_diff_key($httpQuery, ['subCatId' => '']),['catId'=> $category->id])) }}" title="{{ $category->title }}" class="justify-between flex">
+                        <a href="{{ route('store.product.index', array_merge(array_diff_key($httpQuery, ['subCatId' => '']),['catId'=> $category->id])) }}" title="{{ $category->title }}" class="justify-between flex">
                             {{ Str::words($category->title, 3) }}
                             <var class="not-italic">{{ '(' . $category->products->count() . ')' }}</var>
                         </a>
@@ -53,7 +53,7 @@
                             @foreach ($category->productSubCategory as $subCategory)
                                 <li class="py-3">
                                     <div class="flex justify-between">
-                                        <a href="{{ route('store.product', array_merge(array_diff_key($httpQuery,
+                                        <a href="{{ route('store.product.index', array_merge(array_diff_key($httpQuery,
                                         ['catId' => '']), ['subCatId'=> $subCategory->id])) }}"
                                         title="{{ $subCategory->title }}">
                                             {{ Str::limit($subCategory->title, 15) }}

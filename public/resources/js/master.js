@@ -102,7 +102,7 @@
 /*!********************************!*\
   !*** ./resources/js/helper.js ***!
   \********************************/
-/*! exports provided: getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, requiredInput, rupiahCurrency */
+/*! exports provided: getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, requiredInput */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -112,7 +112,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAttributes", function() { return setAttributes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inputOnlyNumberAndSpace", function() { return inputOnlyNumberAndSpace; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requiredInput", function() { return requiredInput; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rupiahCurrency", function() { return rupiahCurrency; });
 /*!
  * Get all siblings of an element
  * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
@@ -150,16 +149,6 @@ inputOnlyNumberAndSpace.forEach(function (input) {
 var requiredInput = document.querySelectorAll('[required="required"], textarea[required]');
 Array.from(requiredInput).map(function (input) {
   return input.previousElementSibling.classList.add('required-input');
-});
-var rupiahCurrency = document.querySelectorAll('.rupiah-currency');
-var moneyNumber, moneyNumberFormatted;
-rupiahCurrency.forEach(function (money) {
-  moneyNumber = money.textContent;
-  moneyNumberFormatted = new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR'
-  }).format(moneyNumber);
-  money.textContent = moneyNumberFormatted;
 });
 
 
@@ -294,9 +283,19 @@ if (pageUrl === '/login') {
 } //plugin js
 
 
-if (document.querySelector('[data-tabs]')) {
-  var tabs = new Tabby('[data-tabs]');
-}
+var tabs = new Tabby('[data-tabs]');
+/*  
+    trigger box file upload when click child, 
+    bcz for default when click child the box is not triggered
+*/
+// const fileUploaderChild = document.querySelectorAll('.file-upload-drag > *')
+// let parentFileUploaderChild
+// fileUploaderChild.forEach(child => {
+//     child.addEventListener('click', () => {
+//         parentFileUploaderChild = child.parentElement
+//         parentFileUploaderChild.click()
+//     });
+// });
 
 /***/ }),
 
@@ -307,7 +306,7 @@ if (document.querySelector('[data-tabs]')) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/js/native.js */"./resources/js/native.js");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/js/native.js */"./resources/js/native.js");
 
 
 /***/ })

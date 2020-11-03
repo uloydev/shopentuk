@@ -3,12 +3,13 @@
 
 .nav {
     @apply bg-white;
+    box-shadow: 0 1px 5px rgba(53, 53, 53, 0.3);
 
     .container {
-        @apply flex flex-col bg-white pt-4 max-w-none;
+        @apply flex flex-col bg-white pt-4 max-w-none px-0;
 
         @screen lg {
-            @apply flex-row bg-transparent pt-0 max-w-screen-xl;
+            @apply flex-row bg-transparent pt-0 max-w-screen-xl px-5;
         }
     }
 
@@ -100,9 +101,8 @@
             .nav__ul {
                 @apply overflow-hidden transition transition-all h-0 opacity-0 invisible;
                 @screen lg {
-                    @apply flex-col absolute;
+                    @apply flex-col absolute overflow-visible;
                     top: 100%;
-                    overflow: visible;
 
                     & & {
                         @apply transition-all top-auto border-l border-gray-300;
@@ -156,5 +156,9 @@
         @include mixin.openNav {
             display: initial;
         }
+    }
+
+    #landing-page & {
+        @apply shadow-none;
     }
 }

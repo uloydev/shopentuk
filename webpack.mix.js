@@ -1,8 +1,13 @@
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
 
+
 mix.js('resources/js/app.js', 'public/js')
-    .js('resources/js/native.js', 'public/js')
+    .js('resources/js/native.js', 'public/js/')
+    .scripts([
+        'resources/plugin/tabbyjs/js/tabby.js',
+        'public/js/native.js'
+    ], 'public/js/all-client.js')
     .sass('resources/sass/native.scss', 'public/css')
     .options({
         processCssUrls: false,

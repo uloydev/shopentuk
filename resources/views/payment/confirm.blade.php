@@ -37,10 +37,6 @@
                         </label>
                       </div>
                     </div>
-                    {{-- <div class="col-span-full file-upload-drag" id="my-awesome-dropzone">
-                      <img src="{{ asset('img/static/img-upload-vector.jpg') }}" class="file-upload-drag__img">
-                      <span class="text-gray-600">Click here or drag and drop file to upload</span>
-                    </div> --}}
                     <x-input-basic name="tgl_bayar" type="date" box-width="col-span-full" label="Tanggal bayar"/>
                 </div>
                 <x-btn-primary text="Kirim" 
@@ -49,22 +45,3 @@
         </div>
     </div>
 @endsection
-@push('script')
-    <script>
-      // const myDropzone = new Dropzone("#my-awesome-dropzone", {
-      //   url: "/"
-      // });
-
-      // Dropzone.options.myDropzone = {
-      //   paramName: "file", // The name that will be used to transfer the file
-      //   maxFilesize: 2, // MB
-      //   accept: function(file, done) {
-      //     if (file.name == "justinbieber.jpg") {
-      //       done("Naha, you don't.");
-      //     }
-      //     else { done(); }
-      //   }
-      // };
-      // Dropzone.options.myAwesomeDropzone = false;
-    </script>
-@endpush

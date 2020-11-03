@@ -23,9 +23,22 @@ const setAttributes = (el, attrs) => {
 	}
 }
 
-const inputOnlyNumberAndSpace = document.querySelectorAll('.only-alpha-space')
+const inputOnlyNumberAndSpace = document.querySelectorAll('.only-alpha-space');
 inputOnlyNumberAndSpace.forEach(input => {
 	input.setAttribute('pattern', '[a-zA-Z][a-zA-Z ]+ ');
 });
 
-export {getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace};
+const requiredInput = document.querySelectorAll('[required="required"], textarea[required]');
+Array.from(requiredInput).map(input => {
+	return input.previousElementSibling.classList.add('required-input');
+});
+
+const rupiahCurrency = document.querySelectorAll('.rupiah-currency')
+let moneyNumber, moneyNumberFormatted;
+rupiahCurrency.forEach(money => {
+	moneyNumber = money.textContent
+	moneyNumberFormatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(moneyNumber)
+	money.textContent = moneyNumberFormatted
+});
+
+export {getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, requiredInput, rupiahCurrency};

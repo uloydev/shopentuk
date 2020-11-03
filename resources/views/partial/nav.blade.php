@@ -1,4 +1,4 @@
-<nav class="nav lg:py-4">
+<nav class="nav lg:py-4 lg:shadow-none lg:border-b border-gray-400">
     <div class="container">
         <div class="nav__item nav__item--first lg:border-b-0 lg:pb-0 lg:px-0">
             <a href="{{ route('landing-page') }}" class="nav__logo">
@@ -42,7 +42,7 @@
                         </li>
                     @endforeach
                     <x-menu-standar id="menu-store-all" text="All"
-                    to="{{ route('store.product') }}" have-icon="false" />
+                    to="{{ route('store.product.index') }}" have-icon="false" />
                 </ul>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child lg:mr-6 lg:flex-grow lg:justify-center">
@@ -66,7 +66,7 @@
                             </ul>
                         </li>
                     @endforeach
-                    <x-menu-standar id="menu-store-all" to="{{ route('store.voucher') }}" 
+                    <x-menu-standar id="menu-store-all" to="{{ route('store.voucher.index') }}" 
                     text="All" have-icon="false"/>
                 </ul>
             </li>

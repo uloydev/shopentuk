@@ -1,3 +1,5 @@
+@use './../plugin/tabbyjs/sass/tabby-ui.scss';
+
 @import url('https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Architects+Daughter&family=Annie+Use+Your+Telescope&family=Shadows+Into+Light&display=swap');
 
 @tailwind base;
@@ -50,4 +52,18 @@
 }
 .font-shadows-light {
     font-family: 'Shadows Into Light', cursive;
+}
+
+.required-input {
+    
+    span {
+        @apply relative pr-3;
+        
+        &::after {
+            content: '*';
+            top: 50%;
+            transform: translateY(-50%);
+            @apply absolute right-0 text-red-400;
+        }
+    }
 }
