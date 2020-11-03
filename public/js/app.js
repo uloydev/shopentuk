@@ -37339,8 +37339,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/shopentuk/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/sass/native.scss */"./resources/sass/native.scss");
+__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/sass/native.scss */"./resources/sass/native.scss");
 
 
 /***/ })
