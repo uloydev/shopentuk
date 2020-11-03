@@ -43,7 +43,8 @@
             </li>
             <li class="py-3 flex justify-between items-center">
                 <span>Shipping: </span>
-                <var class="font-bold not-italic rupiah-currency" id="cart__shipping" data-price="{{ $shipping }}">
+                <var class="font-bold not-italic rupiah-currency" 
+                id="cart__shipping" data-price="{{ $shipping }}">
                     {{ $shipping }}
                 </var>
             </li>
@@ -55,7 +56,10 @@
     </div>
     <div class="flex justify-between items-center">
         <a href="{{ url()->previous() }}"
-        class="btn-outline bg-transparent hover:bg-yellow-500 border-yellow-500 text-yellow-400 hover:text-gray-800">Kembali</a>
+        class="btn-outline bg-transparent hover:bg-yellow-500 border-yellow-500 text-yellow-400 hover:text-gray-800">
+            <box-icon name='left-arrow-alt'></box-icon>
+            Kembali
+        </a>
         <x-btn-primary text="Lanjutkan checkout"
         class="btn bg-teal-500 focus:bg-teal-800 hover:bg-teal-700 border-teal-700 float-right"/>
     </div>
