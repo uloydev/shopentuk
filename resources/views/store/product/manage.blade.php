@@ -34,7 +34,7 @@
                         class="btn btn-sm btn-primary btn-rounded mr-2">
                             View
                         </a>
-                        <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST"
+                        <form action="{{ route('admin.products.destroy', $product->slug) }}" method="POST"
                         class="d-inline-block">
                             @csrf @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger btn-rounded">
