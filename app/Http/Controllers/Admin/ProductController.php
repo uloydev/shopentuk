@@ -10,6 +10,20 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+
+    protected function saveProduct(Product $product, Request $request)
+    {
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->point_price = $request->point_price;
+        $product->category_id = $request->category_id;
+        if ($request->has('sub_category_id')) {
+            $product->sub_category_id = $request->sub_category_id;
+        }
+        $product->save();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +32,10 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::paginate(10);
-        return view('admin.product.index', ['products' => $products]);
+        return view('store.product.manage', [
+            'products' => $products,
+            'title' => 'manage product'
+        ]);
     }
 
     /**
@@ -39,16 +56,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = new Product();
-        $product->title = $request->title;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->point_price = $request->point_price;
-        $product->category_id = $request->category_id;
-        if ($request->has('sub_category_id')) {
-            $product->sub_category_id = $request->sub_category_id;
-        }
-        $product->save();
+        $product = new Product;
+        $this->saveProduct($product, $request);
         return redirect()->back()->with(['msg' => 'product added successfuly']);
     }
 
@@ -60,6 +69,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        dd($product);
         return view('admin.product.show', ['product' => $product]);
     }
 
@@ -71,7 +81,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('admin.product.edit', ['product' => $product]);
+        dd($product);
+        // return view('admin.product.edit', ['product' => $product]);
     }
 
     /**
@@ -83,15 +94,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $product->title = $request->title;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->point_price = $request->point_price;
-        $product->category_id = $request->category_id;
-        if ($request->has('sub_category_id')) {
-            $product->sub_category_id = $request->sub_category_id;
-        }
-        $product->save();
+        $this->saveProduct($product, $request);
         return redirect()->back()->with(['msg' => 'product edited successfuly']);
     }
 
