@@ -33,7 +33,10 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin'])->name('admin.'
         return redirect()->route('admin.dashboard');
     });
     Route::get('dashboard', 'DashboardController')->name('dashboard');
-    Route::resource('products', 'ProductController');
+    Route::resources([
+        'all-category' => 'AllCategoryController',
+        'products' => 'ProductController'
+    ]);
 });
 
 Route::post('/dummy-post', function (){

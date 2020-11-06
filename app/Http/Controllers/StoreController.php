@@ -14,25 +14,10 @@ class StoreController extends Controller
     {
         $this->categories = ProductCategory::all();
     }
-    
-    public function product(Request $request)
-    {
-        return view('store.product.index', $this->getFilteredProducts($request, false));
-    }
-    
-    public function voucher(Request $request)
-    {
-        return view('store.voucher.index', $this->getFilteredProducts($request, true));
-    }
-    
-    public function showProduct($slug)
-    {
-        return view('store.product.show', $this->getProductFromSlug($slug));
-    }
 
-    public function showVoucher($slug)
+    private function productWhere($column, $conditional, $value)
     {
-        return view('store.voucher.show', $this->getProductFromSlug($slug));
+        return Product::where($column, $conditional, $value);
     }
 
     private function getProductFromSlug($slug)
@@ -46,14 +31,10 @@ class StoreController extends Controller
         ];
     }
 
-    private function productWhere($column, $conditional, $value)
-    {
-        return Product::where($column, $conditional, $value);
-    }
-    
     private function getFilteredProducts(Request $request, bool $isDigitalProduct)
     {
-        $products = Product::with('productCategory')->whereHas('productCategory', function ($query) use ($isDigitalProduct){
+        $products = Product::with('productCategory')
+        ->whereHas('productCategory', function ($query) use ($isDigitalProduct){
             $query->where('is_digital_product', $isDigitalProduct);
         });
         $bestProducts = clone $products;
@@ -80,12 +61,18 @@ class StoreController extends Controller
         
         if ($request->has('sort')) {
             $httpQuery['sort'] = $request->sort;
-            if ($request->sort == "cheap") {
-                $products = $products->orderBy('price', 'asc');
-            } else if ($request->sort == "expensive") {
-                $products = $products->orderBy('price', 'desc');
-            }else if ($request->sort == "promo") {
-                $products = $products->inRandomOrder()->whereHas('discount');
+            switch ($request->sort) {
+                case 'cheap':
+                    $products = $products->orderBy('price', 'asc');
+                    break;
+
+                case 'expensive':
+                    $products = $products->orderBy('price', 'desc');
+                    break;
+                
+                case 'promo':
+                    $products = $products->inRandomOrder()->whereHas('discount');
+                    break;
             }
         }
         
@@ -98,6 +85,26 @@ class StoreController extends Controller
             'categories' => $this->categories,
             'httpQuery' => $httpQuery,
         ];
+    }
+    
+    public function product(Request $request)
+    {
+        return view('store.product.index', $this->getFilteredProducts($request, false));
+    }
+    
+    public function voucher(Request $request)
+    {
+        return view('store.voucher.index', $this->getFilteredProducts($request, true));
+    }
+    
+    public function showProduct($slug)
+    {
+        return view('store.product.show', $this->getProductFromSlug($slug));
+    }
+
+    public function showVoucher($slug)
+    {
+        return view('store.voucher.show', $this->getProductFromSlug($slug));
     }
     
 }
