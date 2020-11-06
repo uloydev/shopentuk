@@ -10,7 +10,7 @@
                     <span class="hide-menu">Products</span>
                 </li>
                 <x-menu-admin icon="tag" text="Category & sub" :to="route('landing-page')"/>
-                <x-menu-admin icon="message-square" text="All product" :to="route('landing-page')"/>
+                <x-menu-admin icon="message-square" text="All product" :to="route('admin.products.index')"/>
                 <li class="nav-small-cap">
                     <span class="hide-menu">Others</span>
                 </li>

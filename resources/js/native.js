@@ -127,19 +127,37 @@ if (pageUrl === '/login') {
 
 //cart js
 if (pageUrl === '/payment/cart') {
-    const cartPrices = document.querySelectorAll('.cart-item__price')
-    const allPrice = Array.from(cartPrices).map(price => Number(price.dataset.price))
+    const bodyId = document.querySelector('#cartPage');
+    const cartQtyInput = bodyId.querySelectorAll('.cart-item__qty')
+    let currentQtyInput, cartItemInitPrice
+
+    cartQtyInput.forEach(input => {
+        const cartItemPriceEl = input.parentElement.querySelector('.cart-item__price')
+        
+        input.addEventListener('keyup', () => {
+            currentQtyInput = input.value
+            cartItemInitPrice = Number(cartItemPriceEl.dataset.initPrice)
+
+            cartItemPriceEl.textContent = Helper.formattingRupiah(cartItemInitPrice * currentQtyInput)
+            
+
+        });
+    });
+
+    const allCartPrices = bodyId.querySelectorAll('.cart-item__price')
+    const allPrice = Array.from(allCartPrices).map(price => Number(price.dataset.price))
     const totalPriceWithoutShipping = allPrice.reduce((acc, val) => acc + val)
 
-    const cartSubTotal = document.querySelector('#cart__sub-total')
+    const cartSubTotal = bodyId.querySelector('#cart__sub-total')
     cartSubTotal.textContent = Helper.formattingRupiah(totalPriceWithoutShipping);
 
-    const cartShipping = Number(document.querySelector('#cart__shipping').dataset.price);
+    const cartShipping = Number(bodyId.querySelector('#cart__shipping').dataset.price);
 
-    const cartGrandTotal = document.querySelector('#cart__total')
-    cartGrandTotal.textContent = Helper.formattingRupiah(cartShipping + totalPriceWithoutShipping);
+    const cartGrandTotal = bodyId.querySelector('#cart__total')
+    cartGrandTotal.textContent = Helper.formattingRupiah(cartShipping + totalPriceWithoutShipping)
 
 }
+
 //plugin js
 if (document.querySelector('[data-tabs]')) {
     new Tabby('[data-tabs]')

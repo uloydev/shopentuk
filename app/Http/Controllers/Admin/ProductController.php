@@ -31,9 +31,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(10);
         return view('store.product.manage', [
-            'products' => $products,
+            'products' => Product::paginate(10),
             'title' => 'manage product'
         ]);
     }

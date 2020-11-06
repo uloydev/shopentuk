@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
@@ -15,6 +17,13 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('admin.dashboard');
+        $totalUser = User::where([
+            ['role', '<>', 'admin'],
+            ['role', '<>', 'superadmin']
+        ])->count();
+        return view('admin.dashboard', [
+            'menus' => ['Total products', 'Total order', 'Total customer'],
+            'valueMenus' => [Product::count(), 20, $totalUser]
+        ]);
     }
 }

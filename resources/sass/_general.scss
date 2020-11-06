@@ -24,7 +24,7 @@
 }
 
 .btn {
-    @apply font-bold p-2 text-white rounded transition duration-150;
+    @apply font-bold p-2 text-white rounded transition duration-150 flex items-center;
 
     &:focus {
         @apply shadow-outline;
@@ -33,6 +33,10 @@
     &-outline {
         @extend .btn;
         @apply border;
+    }
+
+    box-icon #icon {
+        fill: red;
     }
 }
 
