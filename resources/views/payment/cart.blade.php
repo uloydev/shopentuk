@@ -26,9 +26,9 @@
                         </div>
                         <div>
                             <input type="number" name="qty" value="1" min="1" max="99" 
-                            class="appearance-none text-center h-8 w-8 lg:w-12 bg-white border border-gray-300" required>
+                            class="cart-item__qty appearance-none text-center h-8 w-8 lg:w-12 bg-white border border-gray-300" required>
                             <var class="rupiah-currency cart-item__price not-italic ml-3"
-                            data-price="{{ $price[$i] }}">
+                            data-price="{{ $price[$i] }}" data-init-price="{{ $price[$i] }}">
                                 {{ $price[$i] }}
                             </var>
                         </div>
@@ -54,14 +54,21 @@
             </li>
         </ul>
     </div>
-    <div class="flex justify-between items-center">
-        <a href="{{ url()->previous() }}"
-        class="btn-outline bg-transparent hover:bg-yellow-500 border-yellow-500 text-yellow-400 hover:text-gray-800">
-            <box-icon name='left-arrow-alt'></box-icon>
-            Kembali
-        </a>
-        <x-btn-primary text="Lanjutkan checkout"
-        class="btn bg-teal-500 focus:bg-teal-800 hover:bg-teal-700 border-teal-700 float-right"/>
+    <div class="flex justify-center items-center flex-col lg:flex-row">
+        <div class="lg:mr-auto flex items-center text-xs justify-between w-full mb-3 lg:mb-0">
+            <a href="{{ url()->previous() }}" id="test"
+            class="btn-outline bg-transparent hover:bg-yellow-500 border-yellow-500 text-yellow-400 hover:text-gray-800">
+                <box-icon name='left-arrow-alt' color="#fad13c"></box-icon>
+                Kembali
+            </a>
+            <x-btn-primary type="button" text="Perbarui keranjang"
+            class="border-gray-500 hover:border-gray-900 flex items-center lg:mr-3">
+                <box-icon name='refresh' class="mr-1" animation="tada-hover"></box-icon>
+            </x-btn-primary>
+        </div>
+        <x-btn-primary text="Lanjutkan checkout" 
+        class="btn bg-teal-500 focus:bg-teal-800 hover:bg-teal-700 border-teal-700 w-full justify-center"/>
+        
     </div>
 </div>
 @endsection
