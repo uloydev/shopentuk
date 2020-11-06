@@ -25,9 +25,13 @@
         <div class="card-product__rating pb-2 mt-auto">
             <p class="text-gray-700 text-base">
                 @isset($productOriginalPrice)
-                <del>Rp. <var class="not-italic">{{ $productOriginalPrice }}</var></del>
+                <del>
+                    <var class="not-italic rupiah-currency">{{ $productOriginalPrice }}</var>
+                </del>
                 @endisset
-                <span class="font-bold">Rp. <var class="not-italic">{{ $productFinalPrice }}</var></span>
+                <span class="font-bold">
+                    <var class="not-italic rupiah-currency">{{ $productFinalPrice }}</var>
+                </span>
             </p>
         </div>
     </div>
