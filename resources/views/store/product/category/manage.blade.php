@@ -8,6 +8,13 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h1 class="h3">Category and it's sub</h1>
+                <button type="button" class="btn btn-sm waves-effect waves-light btn-rounded btn-primary"
+                data-target="#modalAddCategory" data-toggle="modal">
+                    Add new category
+                </button>
+            </div>
             <div class="card-body">
                 <ul class="nav nav-tabs nav-justified nav-bordered mb-3">
                     @foreach ($categories as $category)
@@ -53,4 +60,7 @@
         </div>
     </div>
 </div>
+
+@include('store.product.category.create')
+
 @endsection
