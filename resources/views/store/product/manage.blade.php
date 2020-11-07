@@ -6,12 +6,18 @@
 
 @section('content')
  <div class="table-responsive">
+     <div class="mb-3">
+        <h1 class="h3">All products</h1>
+        <small class="text-success font-weight-bold">
+            Click the data on each column for editing
+        </small>
+     </div>
      <table class="table table-striped table-bordered no-wrap" id="zero_config">
          <thead>
              <tr class="text-capitalize">
                 <th>title</th>
                 <th>price</th>
-                <th>point_price</th>
+                <th>point price</th>
                 <th>category</th>
                 <th>sub category</th>
                 <th>action</th>
@@ -19,17 +25,27 @@
          </thead>
          <tbody>
              @foreach ($products as $product)
-                <tr>
-                    <td>{{ Str::limit($product->title, 20) }}</td>
-                    <td>@currency($product->price)</td>
-                    <td>{{ $product->point_price }}</td>
-                    <td>{{ Str::words($product->productCategory->title, 1) }}</td>
-                    <td>{{ Str::words($product->productSubCategory->title, 2) }}</td>
+                <tr class="product-item">
+                    <td class="product-item__title" data-original="{{ $product->title }}">
+                        {{ Str::limit($product->title, 20) }}
+                    </td>
+                    <td class="product-item__price" data-original="{{ $product->price }}">
+                        @currency($product->price)
+                    </td>
+                    <td class="product-item__point" data-original="{{ $product->point_price }}">
+                        {{ $product->point_price }}
+                    </td>
+                    <td class="product-item__cat" data-original="{{ $product->productCategory->title }}">
+                        {{ Str::words($product->productCategory->title, 1) }}
+                    </td>
+                    <td class="product-item__sub-cat" data-original="{{ $product->productSubCategory->title }}">
+                        {{ Str::words($product->productSubCategory->title, 2) }}
+                    </td>
                     <td>
-                        <a href="{{ route('admin.products.edit', $product->slug) }}" 
-                        class="btn btn-sm btn-warning btn-rounded mr-2">
+                        {{-- <a href="javascript:void(0)" 
+                        class="btn btn-sm btn-warning btn-rounded mr-2 edit-product-btn">
                             Edit
-                        </a>
+                        </a> --}}
                         <a href="{{ route('admin.products.show', $product->slug) }}" 
                         class="btn btn-sm btn-primary btn-rounded mr-2">
                             View
@@ -48,3 +64,6 @@
      </table>
  </div>
 @endsection
+
+@push('scripts')
+@endpush
