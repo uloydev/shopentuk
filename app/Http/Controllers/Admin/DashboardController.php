@@ -9,21 +9,18 @@ use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function __invoke(Request $request)
+    
+    public function __invoke()
     {
         $totalUser = User::where([
             ['role', '<>', 'admin'],
             ['role', '<>', 'superadmin']
         ])->count();
+        $links = [route('admin.products.index'), route('admin.all-category.index'), route('admin.products.index')];
         return view('admin.dashboard', [
             'menus' => ['Total products', 'Total order', 'Total customer'],
-            'valueMenus' => [Product::count(), 20, $totalUser]
+            'valueMenus' => [Product::count(), 20, $totalUser],
+            'links' => $links
         ]);
     }
 }

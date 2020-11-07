@@ -27,7 +27,7 @@
              @foreach ($products as $product)
                 <tr class="product-item">
                     <td class="product-item__title" data-original="{{ $product->title }}">
-                        {{ Str::limit($product->title, 20) }}
+                        {{ Str::limit($product->title, 10) }}
                     </td>
                     <td class="product-item__price" data-original="{{ $product->price }}">
                         @currency($product->price)
@@ -42,10 +42,6 @@
                         {{ Str::words($product->productSubCategory->title, 2) }}
                     </td>
                     <td>
-                        {{-- <a href="javascript:void(0)" 
-                        class="btn btn-sm btn-warning btn-rounded mr-2 edit-product-btn">
-                            Edit
-                        </a> --}}
                         <a href="{{ route('admin.products.show', $product->slug) }}" 
                         class="btn btn-sm btn-primary btn-rounded mr-2">
                             View
@@ -64,6 +60,3 @@
      </table>
  </div>
 @endsection
-
-@push('scripts')
-@endpush

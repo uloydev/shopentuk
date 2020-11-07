@@ -30,19 +30,8 @@ aria-labelledby="modalAddCategoryLabel" aria-hidden="true">
                             <small>Add new parent category</small>
                         </a>
                     </div>
-                    <div class="form-group">
-                        <label class="form-control-label" for="sub-category">
-                            Type a new sub category
-                        </label>
-                        <input type="text" name="subcategory" id="sub-category" 
-                        placeholder="Ex: Car - electric" required
-                        class="form-control @error('subcategory') is-invalid @enderror">
-                        @error('subcategory')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
+                    <x-input-template type="text" name="subcategory" label="Type a new sub category" 
+                    id="sub-category" placeholder="Ex: Car - electric" required />
                 </form>
             </div>
             <div class="modal-footer">

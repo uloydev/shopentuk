@@ -17,6 +17,7 @@
                 <x-menu-admin icon="message-square" text="order" :to="route('landing-page')"/>
                 <x-menu-admin icon="message-square" text="game history" :to="route('landing-page')"/>
                 <x-menu-admin icon="message-square" text="report penjualan" :to="route('landing-page')"/>
+                <x-menu-admin icon="message-square" text="list admin" :to="route('superadmin.admins.index')"/>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

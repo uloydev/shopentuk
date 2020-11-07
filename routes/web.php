@@ -39,6 +39,10 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin'])->name('admin.'
     ]);
 });
 
+Route::prefix('superadmin')->middleware('superadmin')->name('superadmin.')->group(function () {
+    Route::resource('admins', 'Admin\AdminController')->except('create', 'show', 'edit');
+});
+
 Route::post('/dummy-post', function (){
     return redirect()->back();
 });

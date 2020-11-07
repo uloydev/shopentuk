@@ -19,7 +19,7 @@
                             </h6>
                         </div>
                         <div class="ml-auto mt-lg-0">
-                            <a href="{{ route('admin.products.index') }}" id="add-product-btn">
+                            <a href="{{ $links[$i] }}" id="add-product-btn">
                                 <span class="opacity-7 text-muted">
                                     <i data-feather="plus-circle"></i>
                                 </span>

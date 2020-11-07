@@ -112,3 +112,11 @@ if (pageUrl == '/admin/products') {
         });
     });
 }
+
+if (pageUrl === '/superadmin/admins') {
+    const manageAdminPage = document.querySelector("#manageAdminPage")
+    const totalError = manageAdminPage.querySelectorAll('.invalid-feedback').length
+    if (totalError > 0) { //if there's an error when add/update admin acc
+        $("#addNewAdmin").modal('show');
+    }
+}
