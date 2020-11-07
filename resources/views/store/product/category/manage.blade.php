@@ -67,27 +67,3 @@
 @include('store.product.category.create')
 
 @endsection
-
-@push('scripts')
-    <script>
-        const editSubCategoryBtn = document.querySelectorAll(".edit-sub-category-btn")
-        const subCategoryFocused = ['border', 'border-primary', 'p-2']
-
-        editSubCategoryBtn.forEach(btnEditSub => {
-            const subcategoryTitle = btnEditSub.parentElement.querySelector('.subcategory__title')
-            
-            btnEditSub.addEventListener('click', () => {
-                subcategoryTitle.classList.add(...subCategoryFocused)
-                subcategoryTitle.setAttribute('contenteditable', true)
-                subcategoryTitle.focus()
-            });
-
-            subcategoryTitle.addEventListener('focusout', () => {
-                subcategoryTitle.setAttribute('contenteditable', false)
-                subcategoryTitle.classList.remove(...subCategoryFocused)
-
-                //ksh ajax disini ntar buat save perubahan di subcategory nya
-            });
-        })
-    </script>
-@endpush
