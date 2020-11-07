@@ -7,14 +7,14 @@
                 <x-menu-admin icon="home" text="dashboard" :to="route('admin.dashboard')" />
                 <li class="list-divider"></li>
                 <li class="nav-small-cap">
-                    <span class="hide-menu">Products</span>
+                    <span class="hide-menu">products</span>
                 </li>
-                <x-menu-admin icon="tag" text="Category & sub" :to="route('admin.all-category.index')"/>
+                <x-menu-admin icon="tag" text="category & sub" :to="route('admin.all-category.index')"/>
                 <x-menu-admin icon="message-square" text="All product" :to="route('admin.products.index')"/>
                 <li class="nav-small-cap">
-                    <span class="hide-menu">Others</span>
+                    <span class="hide-menu">others</span>
                 </li>
-                <x-menu-admin icon="message-square" text="Order" :to="route('landing-page')"/>
+                <x-menu-admin icon="message-square" text="order" :to="route('landing-page')"/>
                 <x-menu-admin icon="message-square" text="game history" :to="route('landing-page')"/>
                 <x-menu-admin icon="message-square" text="report penjualan" :to="route('landing-page')"/>
             </ul>

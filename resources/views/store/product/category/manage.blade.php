@@ -34,9 +34,12 @@
                     <div class="tab-pane {{ $loop->first ? 'active' : '' }}" id="{{ Str::slug($category->title) }}">
                         <ul class="list-group list-group-full list-group-flush">
                             @forelse ($category->productSubCategory as $sub)
-                                <li class="list-group-item d-flex align-items-center"> 
-                                    <span>{{ $sub->title }}</span>
-                                    <a href="" class="badge badge-warning badge-pill ml-auto">
+                                <li class="list-group-item d-flex align-items-center subcategory"> 
+                                    <span class="subcategory__title">
+                                        {{ $sub->title }}
+                                    </span>
+                                    <a href="javascript:void(0);"
+                                    class="badge badge-warning badge-pill ml-auto edit-sub-category-btn">
                                         Edit
                                     </a>
                                     <form class="ml-2 d-inline-block" method="POST" title="sub category {{ $sub->id }}"
@@ -64,3 +67,27 @@
 @include('store.product.category.create')
 
 @endsection
+
+@push('scripts')
+    <script>
+        const editSubCategoryBtn = document.querySelectorAll(".edit-sub-category-btn")
+        const subCategoryFocused = ['border', 'border-primary', 'p-2']
+
+        editSubCategoryBtn.forEach(btnEditSub => {
+            const subcategoryTitle = btnEditSub.parentElement.querySelector('.subcategory__title')
+            
+            btnEditSub.addEventListener('click', () => {
+                subcategoryTitle.classList.add(...subCategoryFocused)
+                subcategoryTitle.setAttribute('contenteditable', true)
+                subcategoryTitle.focus()
+            });
+
+            subcategoryTitle.addEventListener('focusout', () => {
+                subcategoryTitle.setAttribute('contenteditable', false)
+                subcategoryTitle.classList.remove(...subCategoryFocused)
+
+                //ksh ajax disini ntar buat save perubahan di subcategory nya
+            });
+        })
+    </script>
+@endpush

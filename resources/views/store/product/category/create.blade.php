@@ -1,4 +1,5 @@
-<div id="modalAddCategory" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalAddCategoryLabel" aria-hidden="true">
+<div id="modalAddCategory" class="modal fade" tabindex="-1" role="dialog" 
+aria-labelledby="modalAddCategoryLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,7 +13,9 @@
                 method="post" id="form-add-sub-category">
                     @csrf
                     <div class="form-group">
-                        <label class="form-control-label" for="parentCategory">Pick a parent category</label>
+                        <label class="form-control-label" for="parentCategory">
+                            Pick a parent category
+                        </label>
                         <select class="custom-select @error('category') is-invalid @enderror mr-sm-2" 
                         name="category" id="parentCategory" aria-describedby="helperTitle" required autofocus>
                             <option disabled>Pick category</option>
@@ -43,7 +46,9 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-success" form="form-add-sub-category">Add new category</button>
+                <button type="submit" class="btn btn-success" form="form-add-sub-category">
+                    Add new category
+                </button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -59,7 +64,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.all-category.store') }}" id="form-add-parent-category" method="post">
+                <form action="{{ route('admin.all-category.store') }}" 
+                id="form-add-parent-category" method="post">
                     @csrf
                     <div class="form-group">
                         <label class="form-control-label" for="parent-category">
