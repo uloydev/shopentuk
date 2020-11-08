@@ -26,11 +26,11 @@
             <p class="text-gray-700 text-base">
                 @isset($productOriginalPrice)
                 <del>
-                    <var class="not-italic rupiah-currency">{{ $productOriginalPrice }}</var>
+                    <var class="rupiah-currency">{{ $productOriginalPrice }}</var>
                 </del>
                 @endisset
                 <span class="font-bold">
-                    <var class="not-italic rupiah-currency">{{ $productFinalPrice }}</var>
+                    <var class="rupiah-currency">{{ $productFinalPrice }}</var>
                 </span>
             </p>
         </div>

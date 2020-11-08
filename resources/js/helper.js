@@ -46,6 +46,7 @@ Array.from(requiredInput).map(input => {
  */
 const rupiahCurrency = document.querySelectorAll('.rupiah-currency')
 rupiahCurrency.forEach(money => {
+	money.classList.add('not-italic')
 	money.textContent = formattingRupiah(money.textContent)
 });
 

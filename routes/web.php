@@ -26,7 +26,10 @@ Route::get('register', function () {
     return redirect('login');
 });
 
-Route::get('my-account', 'HomeController@index')->name('my-account');
+Route::prefix('my-account')->name('my-account.')->namespace('Customer')->group(function(){
+    Route::get('dashboard', 'AccountController@index')->name('dashboard');
+    Route::get('all-order', 'OrderController@index')->name('all-order');
+});
 
 Route::namespace('Admin')->prefix('admin')->middleware(['admin'])->name('admin.')->group(function () {
     Route::get('/', function (){

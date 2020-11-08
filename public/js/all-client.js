@@ -592,6 +592,7 @@ Array.from(requiredInput).map(function (input) {
 
 var rupiahCurrency = document.querySelectorAll('.rupiah-currency');
 rupiahCurrency.forEach(function (money) {
+  money.classList.add('not-italic');
   money.textContent = formattingRupiah(money.textContent);
 });
 /**

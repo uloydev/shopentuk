@@ -43,14 +43,14 @@
             </li>
             <li class="py-3 flex justify-between items-center">
                 <span>Shipping: </span>
-                <var class="font-bold not-italic rupiah-currency" 
+                <var class="font-bold rupiah-currency" 
                 id="cart__shipping" data-price="{{ $shipping }}">
                     {{ $shipping }}
                 </var>
             </li>
             <li class="py-3 flex justify-between items-center">
                 <span>Total: </span>
-                <var class="font-bold not-italic rupiah-currency" id="cart__total"></var>
+                <var class="font-bold rupiah-currency" id="cart__total"></var>
             </li>
         </ul>
     </div>
