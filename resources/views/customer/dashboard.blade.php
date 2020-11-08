@@ -38,7 +38,7 @@
                         </li>
                     @endfor
                 </ul>
-                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 rounded">
+                <div class="relative flex flex-col min-w-0 break-words w-full mb-6">
                     <div class="py-5 flex-auto">
                         <div class="tab-content tab-space">
                             @include('customer.order.history')
