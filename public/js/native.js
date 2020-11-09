@@ -17600,11 +17600,12 @@ if (pageUrl === '/payment/cart') {
 
 if (pageUrl.indexOf('/my-account') > -1) {
   var tabsMenu = document.querySelectorAll('.change-menu-btn');
+  var pageUrlWithoutProtocol = window.location.href.replace(window.location.protocol, '');
   tabsMenu.forEach(function (menu) {
-    var tabLinkMenu = menu.getAttribute('href').replace(pageOriginUrl, '');
+    var tabLinkMenu = menu.getAttribute('href');
     console.log(tabLinkMenu);
 
-    if (tabLinkMenu === pageUrl) {
+    if (tabLinkMenu === pageUrlWithoutProtocol) {
       menu.classList.add('text-blue-500', 'border-b', 'border-blue-500');
       menu.classList.remove('text-gray-600');
     }
@@ -17625,7 +17626,7 @@ if (document.querySelector('[data-tabs]')) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/js/native.js */"./resources/js/native.js");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/js/native.js */"./resources/js/native.js");
 
 
 /***/ })
