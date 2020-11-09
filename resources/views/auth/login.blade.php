@@ -29,9 +29,11 @@
                 </div>
             </x-section-auth>
             <x-section-auth name="Daftar" :action="url('register')">
-                <x-input-basic name="name" label="Nama pengguna" placeholder="Contoh: bariqdharmawans" required />
-                <x-input-basic name="phone" type="tel" label="Nomor telepon" placeholder="Contoh: 87771406656"
-                autocomplete="tel" pattern="^[0-9]+$" title="Phone number should be a valid phone number" required />
+                <x-input-basic name="name" label="Nama pengguna" 
+                placeholder="Contoh: bariqdharmawans" required />
+                <x-input-basic name="phone" type="tel" label="Nomor telepon" 
+                placeholder="Contoh: 87771406656" autocomplete="tel" pattern="^[0-9]+$" 
+                title="Phone number should be a valid phone number" required />
                 @include('auth.email-pw', [
                     'placeholderEmail' => 'Email akun anda',
                     'placeholderPw' => 'Kata sandi akun anda'
