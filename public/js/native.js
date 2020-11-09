@@ -335,7 +335,7 @@ if (document.querySelector('[data-tabs]')) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/js/native.js */"./resources/js/native.js");
+module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/js/native.js */"./resources/js/native.js");
 
 
 /***/ })
