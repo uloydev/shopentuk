@@ -46,7 +46,37 @@ Array.from(requiredInput).map(input => {
  */
 const rupiahCurrency = document.querySelectorAll('.rupiah-currency')
 rupiahCurrency.forEach(money => {
+	money.classList.add('not-italic')
 	money.textContent = formattingRupiah(money.textContent)
 });
 
-export {getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, requiredInput, rupiahCurrency, formattingRupiah};
+/**
+ * convert string into camelCase
+ */
+function camelCase(str) {
+	return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+		return index === 0 ? word.toLowerCase() : word.toUpperCase();
+	}).replace(/\s+/g, '');
+}
+
+/**
+ * 
+ */
+function getCssPropertyForRule(rule, prop) {
+	var sheets = document.styleSheets;
+	var slen = sheets.length;
+	for(var i=0; i<slen; i++) {
+		var rules = document.styleSheets[i].cssRules;
+		var rlen = rules.length;
+		for(var j=0; j<rlen; j++) {
+			if(rules[j].selectorText == rule) {
+				return rules[j].style[prop];
+			}
+		}
+	}
+}
+
+export {
+	getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, 
+	requiredInput, rupiahCurrency, formattingRupiah, camelCase
+};

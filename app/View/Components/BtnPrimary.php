@@ -7,18 +7,17 @@ use Illuminate\View\Component;
 class BtnPrimary extends Component
 {
 
-    public $text, $type, $addClass;
+    public $text, $type;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($text, $type = 'submit', $addClass = '')
+    public function __construct($text, $type = 'submit')
     {
         $this->text = $text;
         $this->type = $type;
-        $this->addClass = $addClass;
     }
 
     /**

@@ -978,6 +978,8 @@ video {
   border-radius: 0.25rem;
   transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
   transition-duration: 150ms;
+  display: flex;
+  align-items: center;
 }
 
 .btn:focus, .btn-outline:focus {
@@ -986,6 +988,10 @@ video {
 
 .btn-outline {
   border-width: 1px;
+}
+
+.btn box-icon #icon, .btn-outline box-icon #icon {
+  fill: red;
 }
 
 .section__heading span {

@@ -111,8 +111,8 @@
                             product-name="{{ $product->title }}"
                             product-category="{{ $product->productCategory->title }}" 
                             product-category-id="{{ $product->productCategory->id }}" 
-                            product-original-price="{{ number_format($product->price) }}"
-                            product-final-price="{{ number_format($product->discount->discounted_price) }}"
+                            product-original-price="{{ $product->price }}"
+                            product-final-price="{{ $product->discount->discounted_price }}"
                             product-rating="0" 
                             product-is-obral="true"
                             is-horizontal="false" />
@@ -122,7 +122,7 @@
                             product-name="{{ $product->title }}"
                             product-category="{{ $product->productCategory->title }}" 
                             product-category-id="{{ $product->productCategory->id }}" 
-                            product-final-price="{{ number_format($product->price) }}"
+                            product-final-price="{{ $product->price }}"
                             product-rating="0" 
                             product-is-obral="false"
                             is-horizontal="false" />

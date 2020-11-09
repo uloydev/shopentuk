@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -29,6 +30,7 @@ class Product extends Model
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = strtolower($value);
+        $this->attributes['slug'] = Str::slug($value);
     }
 
     /**
@@ -40,6 +42,16 @@ class Product extends Model
     public function getTitleAttribute($value)
     {
         return ucwords($value);
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 
     /**

@@ -4,5 +4,6 @@
     "/js/native.js": "/js/native.js",
     "/js/all-client.js": "/js/all-client.js",
     "/css/dashboard.css": "/css/dashboard.css",
-    "/js/dashboard.js": "/js/dashboard.js"
+    "/js/dashboard.js": "/js/dashboard.js",
+    "/library/datatables.net": "/library/datatables.net"
 }

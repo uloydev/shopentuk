@@ -38,7 +38,7 @@
                                     <x-menu-standar 
                                     id="{{ Str::slug($subCategory->title, '-') }}" 
                                     text="{{ $subCategory->title }}" 
-                                    to="{{route('store.product.index', ['subCatId'=>$subCategory->id])}}" 
+                                    to="{{ route('store.product.index', ['subCatId' => $subCategory->id]) }}" 
                                     have-icon="true" />
                                 @endforeach
                             </ul>
@@ -95,7 +95,7 @@
                     @auth
                         @if (Auth::user()->role == 'user')
                             <x-menu-standar id="menu-my-akun-akun-saya" text="Akun saya" 
-                            to="{{ route('home') }}" have-icon="false" />
+                            to="{{ route('my-account.dashboard') }}" have-icon="false" />
                         @else
                             <x-menu-standar id="menu-my-akun-akun-saya" text="Dashboard"
                             to="{{ route('admin.dashboard') }}" have-icon="false" />

@@ -102,7 +102,7 @@
 /*!********************************!*\
   !*** ./resources/js/helper.js ***!
   \********************************/
-/*! exports provided: getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, requiredInput, rupiahCurrency, formattingRupiah */
+/*! exports provided: getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, requiredInput, rupiahCurrency, formattingRupiah, camelCase */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -114,6 +114,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requiredInput", function() { return requiredInput; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rupiahCurrency", function() { return rupiahCurrency; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formattingRupiah", function() { return formattingRupiah; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "camelCase", function() { return camelCase; });
 /*!
  * Get all siblings of an element
  * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
@@ -169,8 +170,39 @@ Array.from(requiredInput).map(function (input) {
 
 var rupiahCurrency = document.querySelectorAll('.rupiah-currency');
 rupiahCurrency.forEach(function (money) {
+  money.classList.add('not-italic');
   money.textContent = formattingRupiah(money.textContent);
 });
+/**
+ * convert string into camelCase
+ */
+
+function camelCase(str) {
+  return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+    return index === 0 ? word.toLowerCase() : word.toUpperCase();
+  }).replace(/\s+/g, '');
+}
+/**
+ * 
+ */
+
+
+function getCssPropertyForRule(rule, prop) {
+  var sheets = document.styleSheets;
+  var slen = sheets.length;
+
+  for (var i = 0; i < slen; i++) {
+    var rules = document.styleSheets[i].cssRules;
+    var rlen = rules.length;
+
+    for (var j = 0; j < rlen; j++) {
+      if (rules[j].selectorText == rule) {
+        return rules[j].style[prop];
+      }
+    }
+  }
+}
+
 
 
 /***/ }),
@@ -307,17 +339,28 @@ if (pageUrl === '/login') {
 
 
 if (pageUrl === '/payment/cart') {
-  var cartPrices = document.querySelectorAll('.cart-item__price');
-  var allPrice = Array.from(cartPrices).map(function (price) {
+  var bodyId = document.querySelector('#cartPage');
+  var cartQtyInput = bodyId.querySelectorAll('.cart-item__qty');
+  var currentQtyInput, cartItemInitPrice;
+  cartQtyInput.forEach(function (input) {
+    var cartItemPriceEl = input.parentElement.querySelector('.cart-item__price');
+    input.addEventListener('keyup', function () {
+      currentQtyInput = input.value;
+      cartItemInitPrice = Number(cartItemPriceEl.dataset.initPrice);
+      cartItemPriceEl.textContent = _helper_js__WEBPACK_IMPORTED_MODULE_1__["formattingRupiah"](cartItemInitPrice * currentQtyInput);
+    });
+  });
+  var allCartPrices = bodyId.querySelectorAll('.cart-item__price');
+  var allPrice = Array.from(allCartPrices).map(function (price) {
     return Number(price.dataset.price);
   });
   var totalPriceWithoutShipping = allPrice.reduce(function (acc, val) {
     return acc + val;
   });
-  var cartSubTotal = document.querySelector('#cart__sub-total');
+  var cartSubTotal = bodyId.querySelector('#cart__sub-total');
   cartSubTotal.textContent = _helper_js__WEBPACK_IMPORTED_MODULE_1__["formattingRupiah"](totalPriceWithoutShipping);
-  var cartShipping = Number(document.querySelector('#cart__shipping').dataset.price);
-  var cartGrandTotal = document.querySelector('#cart__total');
+  var cartShipping = Number(bodyId.querySelector('#cart__shipping').dataset.price);
+  var cartGrandTotal = bodyId.querySelector('#cart__total');
   cartGrandTotal.textContent = _helper_js__WEBPACK_IMPORTED_MODULE_1__["formattingRupiah"](cartShipping + totalPriceWithoutShipping);
 } //plugin js
 
