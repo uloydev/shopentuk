@@ -1,4 +1,4 @@
-<div class="mb-5 {{ $boxWidth }}">
+<div class="mb-6 {{ $boxWidth }}">
     <label for="{{ $name }}" class="block mb-2">
         <span>{{ $label }}</span>
     </label>

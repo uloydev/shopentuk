@@ -95,7 +95,13 @@
                     @auth
                         @if (Auth::user()->role == 'user')
                             <x-menu-standar id="menu-my-akun-akun-saya" text="Akun saya" 
-                            to="{{ route('my-account.dashboard') }}" have-icon="false" />
+                            to="{{ route('my-account.history.order') }}" have-icon="false" />
+                            <x-menu-standar id="menu-logout" text="Logout" 
+                            to="javascript:void(0);" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();" have-icon="false" />
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         @else
                             <x-menu-standar id="menu-my-akun-akun-saya" text="Dashboard"
                             to="{{ route('admin.dashboard') }}" have-icon="false" />

@@ -32,7 +32,10 @@ module.exports = {
       padding: '1.25rem'
     },
   },
-  variants: {},
+  variants: {
+    borderWidth: ['responsive', 'hover', 'focus'],
+    borderColor: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+  },
   plugins: [
     require('@tailwindcss/custom-forms'),
   ],

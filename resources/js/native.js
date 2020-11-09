@@ -1,4 +1,5 @@
 import 'boxicons'
+import { concat } from 'lodash'
 import * as Helper from './helper.js'
 
 const btnOpenMenu = document.querySelector('.nav__toggle-menu')
@@ -8,6 +9,7 @@ const navUl = nav.querySelector('.nav__ul')
 const dividerMenu = ['divide-y', 'divide-gray-400'] //ini class buat nambah border ke menu
 const classToOpenNavItemHasChild = 'nav__item-has-child--open'
 const pageUrl = window.location.pathname
+const pageOriginUrl = window.location.origin
 const elementOnHeaderExceptNav = document.querySelectorAll('header nav + *')
 
 function closeNav() {
@@ -156,6 +158,22 @@ if (pageUrl === '/payment/cart') {
     const cartGrandTotal = bodyId.querySelector('#cart__total')
     cartGrandTotal.textContent = Helper.formattingRupiah(cartShipping + totalPriceWithoutShipping)
 
+}
+
+// customer dashboard js
+if (pageUrl.indexOf('/my-account') > -1) {
+    const tabsMenu = document.querySelectorAll('.change-menu-btn')
+    
+
+    tabsMenu.forEach(menu => {
+        const tabLinkMenu = menu.getAttribute('href').replace(pageOriginUrl, '')
+        console.log(tabLinkMenu)
+        if (tabLinkMenu === pageUrl) {
+            menu.classList.add('text-blue-500', 'border-b', 'border-blue-500')
+            menu.classList.remove('text-gray-600')
+        }
+    });
+    
 }
 
 //plugin js

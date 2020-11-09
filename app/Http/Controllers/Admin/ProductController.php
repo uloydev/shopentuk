@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductValidation;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
+
 
     protected function saveProduct(Product $product, Request $request)
     {
@@ -24,6 +27,20 @@ class ProductController extends Controller
         $product->save();
     }
 
+    // public function viewIndex()
+    // {
+    //     return view('store.product.manage', [
+    //         'title' => 'manage product'
+    //     ]);
+    // }
+
+    // public function viewShow()
+    // {
+    //     return view('store.product.show', [
+    //         'title' => 'manage product'
+    //     ]);
+    // }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,8 +48,12 @@ class ProductController extends Controller
      */
     public function index()
     {
+        // return response()->json([
+        //     'success' => true,
+        //     'data' => Product::paginate(10)
+        // ], 200);
         return view('store.product.manage', [
-            'products' => Product::paginate(10),
+            'products' => Product::all(),
             'title' => 'manage product'
         ]);
     }
@@ -53,23 +74,28 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductValidation $request)
     {
         $product = new Product;
         $this->saveProduct($product, $request);
+        // return response()->json([
+        //     'success' => true,
+        //     'data' => $product
+        // ]);
         return redirect()->back()->with(['msg' => 'product added successfuly']);
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified product.
      *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
     {
-        dd($product);
-        return view('admin.product.show', ['product' => $product]);
+        // return response()->json([
+        //     'success' => true,
+        //     'data' => Product::findOrFail($id)
+        // ], 200);
+        return view('store.product.show', ['product' => $product]);
     }
 
     /**
@@ -80,8 +106,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        dd($product);
-        // return view('admin.product.edit', ['product' => $product]);
+        // dd($product);
+        return view('admin.product.edit', ['product' => $product]);
     }
 
     /**
@@ -91,27 +117,48 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductValidation $request, $id)
     {
-        $this->saveProduct($product, $request);
+        $updateProduct = Product::findOrFail($id);
+        $this->saveProduct($updateProduct, $request);
+        // return response()->json([
+        //     'success' => true,
+        //     'data' => $updateProduct
+        // ]);
         return redirect()->back()->with(['msg' => 'product edited successfuly']);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified product
      *
-     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        if ($product->productImages) {
-            $product->productImages->each(function ($item, $key) {
-                Storage::delete($item->url);
-                $item->delete();
-            });
-        }
-        $product->delete();
+        $product = Product::findOrFail($id);
+        // if ($product) {
+        //     if ($product->productImages) {
+        //         $product->productImages->each(function ($item, $key) {
+        //             Storage::delete($item->url);
+        //             $item->delete();
+        //         });
+        //     }
+        //     $product->delete();
+        //     return response()->json([
+        //         'success' => true,
+        //         'message' => 'Product ' . $product->title . ' deleted'
+        //     ]);
+        // }
+        // else {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Product Not Found',
+        //     ], 404);
+        // }
+        $product->productImages->each(function ($item, $key) {
+            Storage::delete($item->url);
+            $item->delete();
+        });
         return redirect()->back()->with(['msg' => 'product deleted successfuly']);
     }
 

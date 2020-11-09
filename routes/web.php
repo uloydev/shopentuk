@@ -26,16 +26,20 @@ Route::get('register', function () {
     return redirect('login');
 });
 
-Route::prefix('my-account')->name('my-account.')->namespace('Customer')->group(function(){
-    Route::get('dashboard', 'AccountController@index')->name('dashboard');
-    Route::get('all-order', 'OrderController@index')->name('all-order');
+Route::prefix('my-account')->name('my-account.')->middleware('auth')->namespace('Customer')->group(function(){
+    Route::get('order/history', 'DashboardController@orderHistory')->name('history.order');
+    Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');
+    Route::get('detail', 'DashboardController@accountDetail')->name('account.detail');
+    Route::get('point', 'DashboardController@accountPoint')->name('account.point');
 });
 
-Route::namespace('Admin')->prefix('admin')->middleware(['admin'])->name('admin.')->group(function () {
-    Route::get('/', function (){
-        return redirect()->route('admin.dashboard');
-    });
+Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name('admin.')->group(function(){
+    Route::permanentRedirect('/', 'dashboard');
     Route::get('dashboard', 'DashboardController')->name('dashboard');
+    // Route::prefix('products')->name('products.')->group(function(){
+    //     Route::get('/', 'ProductController@viewIndex')->name('index');
+    //     Route::get('show', 'ProductController@viewShow')->name('show');
+    // });
     Route::resources([
         'all-category' => 'AllCategoryController',
         'products' => 'ProductController'
@@ -43,7 +47,7 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin'])->name('admin.'
 });
 
 Route::prefix('superadmin')->middleware('superadmin')->name('superadmin.')->group(function () {
-    Route::resource('admins', 'Admin\AdminController')->except('create', 'show', 'edit');
+    Route::resource('admins', 'Admin\AdminController')->only('index', 'store', 'update', 'destroy');
 });
 
 Route::post('/dummy-post', function (){

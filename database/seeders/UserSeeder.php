@@ -34,14 +34,6 @@ class UserSeeder extends Seeder
                 'role' => 'admin',
                 'password' => Hash::make('gakadapassword'),
                 'created_at' => Carbon::parse(now())->subMonths(8)
-            ],
-            [
-                'name' => 'admin 2',
-                'email' => 'admin2@mail.com',
-                'phone' => '019283917281',
-                'role' => 'admin',
-                'password' => Hash::make('gakadapassword'),
-                'created_at' => Carbon::parse(now())->subMonths(3)
             ]
         ]);
 

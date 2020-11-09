@@ -25,8 +25,8 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            'phone' => $this->faker->unique()->phoneNumber,
-            'email_verified_at' => now(),
+            'phone' => '+6287776196047',
+            'email_verified_at' => now()->translatedFormat('Y-m-d H:i:s'),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'role' => 'user',
             'point' => 0,
