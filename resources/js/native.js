@@ -173,6 +173,16 @@ if (pageUrl.indexOf('/my-account') > -1) {
             menu.classList.remove('text-gray-600')
         }
     });
+
+    if (pageUrl === '/my-account/point') {
+        const pointQty = Array.from(document.querySelectorAll('.point-item__qty')).map(point => {
+            return Number(point.textContent)
+        })
+        
+        const pointTotal = pointQty.reduce((acc, val) => acc + val)
+        document.querySelector('.point-item__total').textContent = pointTotal
+        
+    }
     
 }
 

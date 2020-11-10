@@ -44,6 +44,9 @@ class DashboardController extends Controller
 
     public function accountPoint()
     {
-        return 'account point page';
+        return view('customer.account.my-point', [
+            'title' => 'my point',
+            'tabMenus' => $this->tabMenus
+        ]);
     }
 }

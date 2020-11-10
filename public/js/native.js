@@ -17610,6 +17610,16 @@ if (pageUrl.indexOf('/my-account') > -1) {
       menu.classList.remove('text-gray-600');
     }
   });
+
+  if (pageUrl === '/my-account/point') {
+    var pointQty = Array.from(document.querySelectorAll('.point-item__qty')).map(function (point) {
+      return Number(point.textContent);
+    });
+    var pointTotal = pointQty.reduce(function (acc, val) {
+      return acc + val;
+    });
+    document.querySelector('.point-item__total').textContent = pointTotal;
+  }
 } //plugin js
 
 
