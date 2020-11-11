@@ -32,7 +32,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        URL::forceScheme('https');
         Schema::defaultStringLength(191);
         
         View::share('categories', ProductCategory::all());
