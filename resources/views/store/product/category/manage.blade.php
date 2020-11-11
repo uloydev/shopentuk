@@ -23,7 +23,7 @@
                         class="nav-link {{ $loop->first ? 'active' : '' }}"
                         aria-expanded="{{ $loop->first ? 'true' : 'false' }}">
                             <i class="mdi mdi-home-variant d-lg-none d-block mr-1"></i>
-                            <span class="d-none d-lg-block">{{ $category->title }}</span>
+                            <span class="d-none d-lg-block">{{ Str::words($category->title, 1) }}</span>
                         </a>
                     </li>
                     @endforeach

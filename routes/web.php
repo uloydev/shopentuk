@@ -26,7 +26,9 @@ Route::get('register', function () {
     return redirect('login');
 });
 
-Route::prefix('my-account')->name('my-account.')->middleware('auth')->namespace('Customer')->group(function(){
+Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'])
+->namespace('Customer')->group(function(){
+    Route::permanentRedirect('/', 'my-account/detail');
     Route::get('order/history', 'DashboardController@orderHistory')->name('history.order');
     Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');
     Route::get('detail', 'DashboardController@accountDetail')->name('account.detail');
