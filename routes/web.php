@@ -13,6 +13,11 @@ Route::prefix('store')->name('store.')->group(function(){
         Route::get('/', 'StoreController@voucher')->name('index');
         Route::get('/{slug}', 'StoreController@showVoucher')->name('show');
     });
+    Route::prefix('toko-point')->name('toko-point.')->group(function () {
+        Route::get('/', 'StoreController@tokoPoint')->name('index');
+        Route::get('/redeem/{slug}', 'StoreController@showRedeem')->name('redeem.show');
+        Route::get('/{slug}', 'StoreController@showTokoPoint')->name('show');
+    });
 });
 
 Route::prefix('payment')->name('payment.')->group(function(){
