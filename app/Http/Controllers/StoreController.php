@@ -31,12 +31,18 @@ class StoreController extends Controller
         ];
     }
 
-    private function getFilteredProducts(Request $request, bool $isDigitalProduct)
+    private function getFilteredProducts(Request $request, $productType = "all")
     {
-        $products = Product::with('productCategory')
-        ->whereHas('productCategory', function ($query) use ($isDigitalProduct){
-            $query->where('is_digital_product', $isDigitalProduct);
-        });
+        $products = Product::with('productCategory');
+        if ($productType != 'all') {
+            $products = $products->whereHas('productCategory', function ($query) use ($productType){
+                if ($productType == 'digital'){
+                    $query->where('is_digital_product', true);
+                } else if ($productType == 'non-digital') {
+                    $query->where('is_digital_product', false);
+                }
+            });
+        }
         $bestProducts = clone $products;
         $bestProducts = $bestProducts->inRandomOrder()->limit(3)->get();
         $httpQuery = [];
@@ -86,17 +92,17 @@ class StoreController extends Controller
             'httpQuery' => $httpQuery,
         ];
     }
-    
+
     public function product(Request $request)
     {
-        return view('store.product.index', $this->getFilteredProducts($request, false));
+        return view('store.product.index', $this->getFilteredProducts($request, 'non-digital'));
     }
-    
+
     public function voucher(Request $request)
     {
-        return view('store.voucher.index', $this->getFilteredProducts($request, true));
+        return view('store.voucher.index', $this->getFilteredProducts($request, 'digital'));
     }
-    
+
     public function showProduct($slug)
     {
         return view('store.product.show', $this->getProductFromSlug($slug));
@@ -106,5 +112,14 @@ class StoreController extends Controller
     {
         return view('store.voucher.show', $this->getProductFromSlug($slug));
     }
-    
+
+    public function tokoPoint(Request $request)
+    {
+        return view('store.toko-point.index', $this->getFilteredProducts($request, 'all'));
+    }
+
+    public function showTokoPoint($slug)
+    {
+        return view('store.toko-point.show', $this->getProductFromSlug($slug));
+    }
 }

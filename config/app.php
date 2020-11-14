@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-
 return [
 
     /*
@@ -16,11 +14,6 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-
-    /**
-     * Global $user for accessing current login
-     */
-    'user' => Auth::user(),
 
     /*
     |--------------------------------------------------------------------------

@@ -74,18 +74,13 @@
                 </ul>
             </li>
             <li class="nav__item nav__item--menu lg:mr-6 lg:flex-grow lg:justify-center">
-                <a href="{{ route('payment.show-confirm') }}" class="nav__link">Konfirmasi pembayaran</a>
+                <a href="{{ route('landing-page') }}" class="nav__link">Game</a>
             </li>
-            <li class="nav__item nav__item--menu nav__item-has-child lg:mr-6 lg:flex-grow lg:justify-center">
-                <a href="" class="nav__link nav__link--open-child">
-                    <x-menu-has-nested-child text="Cancel & refund" />
-                </a>
-                <ul class="nav__ul lg:bg-white divide-y lg:divide-gray-300 lg:shadow">
-                    <x-menu-standar id="menu-cancel-refund" text="Pengembalian uang"
-                    to="" have-icon="false" />
-                    <x-menu-standar id="menu-cancel-pembatalan" text="Pembatalan order"
-                    to="" have-icon="false" />
-                </ul>
+            <li class="nav__item nav__item--menu lg:mr-6 lg:flex-grow lg:justify-center">
+                <a href="{{ route('store.toko-point.index') }}" class="nav__link">Toko Point</a>
+            </li>
+            <li class="nav__item nav__item--menu lg:mr-6 lg:flex-grow lg:justify-center">
+                <a href="{{ route('payment.show-confirm') }}" class="nav__link">Konfirmasi pembayaran</a>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child lg:mr-6 lg:flex-grow lg:justify-center">
                 <a href="javascript:void(0);" class="nav__link nav__link--open-child">
@@ -96,23 +91,25 @@
                         @if (Auth::user()->role == 'user')
                             <x-menu-standar id="menu-my-akun-akun-saya" text="Akun saya" 
                             to="{{ route('my-account.history.order') }}" have-icon="false" />
-                            <x-menu-standar id="menu-logout" text="Logout" 
-                            to="javascript:void(0);" onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();" have-icon="false" />
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
+                            <x-menu-standar id="menu-cancel-refund" text="Pengembalian uang"
+                            to="" have-icon="false" />
+                            <x-menu-standar id="menu-cancel-pembatalan" text="Pembatalan order"
+                            to="" have-icon="false" />
                         @else
                             <x-menu-standar id="menu-my-akun-akun-saya" text="Dashboard"
                             to="{{ route('admin.dashboard') }}" have-icon="false" />
                         @endif
+                        <x-menu-standar id="menu-logout" text="Logout" 
+                        to="javascript:void(0);" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();" have-icon="false" />
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     @endauth
                     @guest
                         <x-menu-standar id="menu-my-akun-akun-saya" text="Login"
                         to="{{ route('login') }}" have-icon="false" />
                     @endguest
-                    <x-menu-standar id="menu-my-akun-toko-point" text="Toko Point" 
-                    to="" have-icon="false" />
                 </ul>
             </li>
             <li class="nav__item nav__item--menu hidden lg:inline-flex lg:flex-grow lg:justify-center">
