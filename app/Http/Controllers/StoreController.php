@@ -35,7 +35,7 @@ class StoreController extends Controller
     {
         $products = Product::with('productCategory');
         if ($productType != 'all') {
-            $products = $products->whereHas('productCategory', function ($query) use ($isDigitalProduct){
+            $products = $products->whereHas('productCategory', function ($query) use ($productType){
                 if ($productType == 'digital'){
                     $query->where('is_digital_product', true);
                 } else if ($productType == 'non-digital') {
