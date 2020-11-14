@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('phone');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['user', 'admin', 'superadmin'])->default('user');
+            $table->enum('role', ['customer', 'admin', 'superadmin'])->default('customer');
             $table->integer('point')->default(0);
             $table->rememberToken();
             $table->timestamps();

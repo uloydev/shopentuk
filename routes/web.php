@@ -4,6 +4,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@landingPage')->name('landing-page');
+Route::prefix('contact-us')->name('contact-us.')->group(function(){
+    Route::view('/', 'partial.contact-us', ['title' => 'contact us'])->name('index');
+    Route::post('/post', function () {
+        return 'success';
+    });
+});
 Route::prefix('store')->name('store.')->group(function(){
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', 'StoreController@product')->name('index');
@@ -21,7 +27,7 @@ Route::prefix('store')->name('store.')->group(function(){
 });
 
 Route::prefix('payment')->name('payment.')->group(function(){
-    Route::get('konfirmasi-pembayaran', 'PaymentController@showConfirm')->name('show-confirm');
+    Route::get('confirmation', 'PaymentController@showConfirm')->name('show-confirm');
     Route::get('cart', 'PaymentController@cart')->name('cart');
 });
 
@@ -33,7 +39,6 @@ Route::get('register', function () {
 
 Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'])
 ->namespace('Customer')->group(function(){
-    Route::permanentRedirect('/', 'my-account/detail');
     Route::get('order/history', 'DashboardController@orderHistory')->name('history.order');
     Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');
     Route::get('detail', 'DashboardController@accountDetail')->name('account.detail');

@@ -24,7 +24,7 @@
 </section>
 <section class="section pt-16 pb-24" style="background-color: #f4f4f4;" id="section-catalog">
     <div class="container pt-5">
-        <div class="w-full grid grid-cols-1 gap-5 md:grid-cols-3">
+        <div class="w-full grid grid-cols-1 gap-10 md:grid-cols-2">
             @include('partial.catalog-card')
         </div>
         <div class="mt-5 py-24 bg-fixed" id="section-catalog__promo">
