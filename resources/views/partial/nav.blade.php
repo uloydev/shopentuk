@@ -77,10 +77,13 @@
                 <a href="{{ route('landing-page') }}" class="nav__link">Game</a>
             </li>
             <li class="nav__item nav__item--menu lg:mr-6 lg:flex-grow lg:justify-center">
-                <a href="{{ route('store.toko-point.index') }}" class="nav__link">Toko Point</a>
+                <a href="{{ route('store.toko-point.index') }}" class="nav__link">Point</a>
             </li>
             <li class="nav__item nav__item--menu lg:mr-6 lg:flex-grow lg:justify-center">
-                <a href="{{ route('payment.show-confirm') }}" class="nav__link">Konfirmasi pembayaran</a>
+                <a href="{{ route('payment.show-confirm') }}" class="nav__link">Pembayaran</a>
+            </li>
+            <li class="nav__item nav__item--menu lg:mr-6 lg:flex-grow lg:justify-center">
+                <a href="{{ route('contact-us.index') }}" class="nav__link">Contact us</a>
             </li>
             <li class="nav__item nav__item--menu nav__item-has-child lg:mr-6 lg:flex-grow lg:justify-center">
                 <a href="javascript:void(0);" class="nav__link nav__link--open-child">

@@ -4,7 +4,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@landingPage')->name('landing-page');
-Route::view('contact-us', 'partial.contact-us', ['title' => 'contact us'])->name('contact-us');
+Route::prefix('contact-us')->name('contact-us.')->group(function(){
+    Route::view('/', 'partial.contact-us', ['title' => 'contact us'])->name('index');
+    Route::post('/post', function () {
+        return 'success';
+    });
+});
 Route::prefix('store')->name('store.')->group(function(){
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', 'StoreController@product')->name('index');
