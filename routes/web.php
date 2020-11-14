@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@landingPage')->name('landing-page');
+Route::view('contact-us', 'partial.contact-us', ['title' => 'contact us'])->name('contact-us');
 Route::prefix('store')->name('store.')->group(function(){
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', 'StoreController@product')->name('index');
@@ -31,8 +32,8 @@ Route::get('register', function () {
     return redirect('login');
 });
 
-Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'])->namespace('Customer')
-->group(function(){
+Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'])
+->namespace('Customer')->group(function(){
     Route::get('order/history', 'DashboardController@orderHistory')->name('history.order');
     Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');
     Route::get('detail', 'DashboardController@accountDetail')->name('account.detail');
