@@ -16,7 +16,7 @@ Route::prefix('store')->name('store.')->group(function(){
 });
 
 Route::prefix('payment')->name('payment.')->group(function(){
-    Route::get('konfirmasi-pembayaran', 'PaymentController@showConfirm')->name('show-confirm');
+    Route::get('confirmation', 'PaymentController@showConfirm')->name('show-confirm');
     Route::get('cart', 'PaymentController@cart')->name('cart');
 });
 
@@ -26,9 +26,8 @@ Route::get('register', function () {
     return redirect('login');
 });
 
-Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'])
-->namespace('Customer')->group(function(){
-    Route::permanentRedirect('/', 'my-account/detail');
+Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'])->namespace('Customer')
+->group(function(){
     Route::get('order/history', 'DashboardController@orderHistory')->name('history.order');
     Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');
     Route::get('detail', 'DashboardController@accountDetail')->name('account.detail');

@@ -962,10 +962,15 @@ video {
   background-color: rgba(74, 85, 104, var(--bg-opacity));
 }
 
+.center-x {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .box-promo__heading, .box-promo__subheading {
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100%;
   font-family: "Amita", cursive;
 }
 
@@ -1012,11 +1017,13 @@ video {
 
 .section__heading span::after {
   content: "";
-  position: absolute;
-  bottom: -30px;
+  --bg-opacity: 1;
   background-color: #000;
-  height: 2px;
+  background-color: rgba(0, 0, 0, var(--bg-opacity));
   width: 60%;
+  bottom: -30px;
+  height: 2px;
+  position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
