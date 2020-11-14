@@ -70,9 +70,7 @@
         height: 100px;
 
         &__file {
-            // @include mixin.sameSize(0.1px);
-            width: 0.1px;
-            height: 0.1px;
+            @include general.sameSize(0.1px);
             opacity: 0;
             overflow: hidden;
             position: absolute;
