@@ -35,5 +35,9 @@ class ProductSeeder extends Seeder
                 'product_id' => $product->id,
             ]);
         }
+
+        Product::factory()->count(4)->state(function () {
+            return ['is_redeem' => true];
+        })->create();
     }
 }

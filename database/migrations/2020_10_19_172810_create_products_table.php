@@ -18,10 +18,11 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('description');
-            $table->unsignedInteger('price');
+            $table->unsignedInteger('price')->nullable();
             $table->unsignedInteger('point_price');
-            $table->foreignId('category_id');
+            $table->foreignId('category_id')->nullable();
             $table->foreignId('sub_category_id')->nullable();
+            $table->boolean('is_redeem')->default(false);
             $table->timestamps();
         });
     }

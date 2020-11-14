@@ -15,7 +15,7 @@ Route::prefix('store')->name('store.')->group(function(){
     });
     Route::prefix('toko-point')->name('toko-point.')->group(function () {
         Route::get('/', 'StoreController@tokoPoint')->name('index');
-        Route::get('/redeem/{slug}', 'StoreController@showRedeem')->name('redeem.show');
+        Route::get('/redeem', 'StoreController@redeem')->name('redeem.index');
         Route::get('/{slug}', 'StoreController@showTokoPoint')->name('show');
     });
 });
