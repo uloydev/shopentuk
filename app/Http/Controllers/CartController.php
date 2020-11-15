@@ -16,6 +16,7 @@ class CartController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth');
         $this->siteSetting = SiteSetting::first();
     }
 
@@ -24,6 +25,7 @@ class CartController extends Controller
         $pointTotal = 0;
         $priceTotal = 0;
         $cart = Auth::user()->cart;
+
         if ($cart && $cart->cartItems->count() > 0) {
             foreach ($cart->cartItems as $item) {
                 if ($item->is_toko_point) {
@@ -33,6 +35,7 @@ class CartController extends Controller
                 }
             }
         }
+
         return view('payment.cart', [
             'title' => 'cart',
             'cart' => $cart,
@@ -42,13 +45,12 @@ class CartController extends Controller
         ]);
     }
 
-    public function addItem(Request $request)
+    public function store(Request $request)
     {
-        $user = Auth::user();
         if ($request->has('product_id')) {
             $product = Product::findOrFail($request->product_id);
-            $cart = Cart::where('user_id', $user->id)->firstOrCreate([
-                'user_id' => $user->id,
+            $cart = Cart::where('user_id', Auth::id())->firstOrCreate([
+                'user_id' => Auth::id(),
             ]);
             $cartItem = CartItem::firstOrNew([
                 'cart_id' => $cart->id,

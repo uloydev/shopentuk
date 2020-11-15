@@ -91,7 +91,7 @@
                 </a>
                 <ul class="nav__ul lg:bg-white divide-y lg:divide-gray-300 lg:shadow">
                     @auth
-                        @if (Auth::user()->role == 'user')
+                        @if (Auth::user()->role == 'customer')
                             <x-menu-standar id="menu-my-akun-akun-saya" text="Akun saya" 
                             to="{{ route('my-account.history.order') }}" have-icon="false" />
                             <x-menu-standar id="menu-cancel-refund" text="Pengembalian uang"
@@ -116,7 +116,7 @@
                 </ul>
             </li>
             <li class="nav__item nav__item--menu hidden lg:inline-flex lg:flex-grow lg:justify-center">
-                <a href="{{ route('store.cart.index') }}" class="nav__icon nav__icon--bag">
+                <a href="{{ route('cart.index') }}" class="nav__icon nav__icon--bag">
                     <div class="nav__icon-cart">
                         <var class="not-italic" id="total-shopping">
                             @if (Auth::check() && Auth::user()->cart)

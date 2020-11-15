@@ -10,6 +10,7 @@ Route::prefix('contact-us')->name('contact-us.')->group(function(){
         return 'success';
     });
 });
+
 Route::prefix('store')->name('store.')->group(function(){
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', 'StoreController@product')->name('index');
@@ -24,10 +25,6 @@ Route::prefix('store')->name('store.')->group(function(){
         Route::get('/redeem', 'StoreController@redeem')->name('redeem.index');
         Route::get('/{slug}', 'StoreController@showTokoPoint')->name('show');
     });
-    Route::middleware('auth')->prefix('cart')->name('cart.')->group(function () {
-        Route::get('/', 'CartController@index')->name('index');
-        Route::post('/', 'CartController@addItem')->name('addItem');
-    });
 });
 
 Route::prefix('payment')->name('payment.')->group(function(){
@@ -35,6 +32,8 @@ Route::prefix('payment')->name('payment.')->group(function(){
 });
 
 Auth::routes();
+
+Route::resource('cart', 'CartController');
 
 Route::get('register', function () {
     return redirect('login');
@@ -51,10 +50,7 @@ Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'
 Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name('admin.')->group(function(){
     Route::permanentRedirect('/', 'dashboard');
     Route::get('dashboard', 'DashboardController')->name('dashboard');
-    // Route::prefix('products')->name('products.')->group(function(){
-    //     Route::get('/', 'ProductController@viewIndex')->name('index');
-    //     Route::get('show', 'ProductController@viewShow')->name('show');
-    // });
+    Route::view('order', 'payment.manage-order');
     Route::resources([
         'all-category' => 'AllCategoryController',
         'products' => 'ProductController'
