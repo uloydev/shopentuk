@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'phone' => '+6287776196047',
             'email_verified_at' => now()->translatedFormat('Y-m-d H:i:s'),
             'password' => Hash::make('password'), // password
-            'role' => 'customer',
+            'role' => $this->faker->randomElement(['customer', 'admin']),
             'point' => 0,
             'remember_token' => Str::random(10),
         ];

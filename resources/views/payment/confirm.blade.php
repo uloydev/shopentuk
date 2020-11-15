@@ -8,7 +8,7 @@
             <form action="{{ 'test' }}" method="post" enctype="multipart/form-data"
             class="w-full max-w-screen-md shadow-md rounded px-8 py-5 bg-white">
                 <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10">
-                    <x-input-basic name="nama_lengkap" label="Nama lengkap"/>
+                    <x-input-basic name="nama_lengkap" add-class="input-lowercase" label="Nama lengkap"/>
                     <x-input-basic name="nama_lengkap" label="No Telepon / Wa"/>
                     <x-input-basic name="nama_lengkap" type="number" box-width="col-span-full" label="Nomor Order"/>
                     <div class="flex flex-col mb-5">

@@ -29,7 +29,7 @@
                         <tbody>
                             @foreach ($admins as $account)
                                <tr class="admin">
-                                   <td class="admin__name">
+                                   <td class="admin__name" data-admin-name="{{ $account->name }}">
                                        {{ Str::limit($account->name, 10) }}
                                    </td>
                                    <td class="admin__email">
@@ -43,7 +43,8 @@
                                    </td>
                                    <td>
                                        <button type="button" data-toggle="modal" data-target="#editAdmin"
-                                       class="btn btn-sm btn-warning btn-rounded mr-2">
+                                       class="btn btn-sm btn-warning btn-rounded mr-2 btn-edit-admin"
+                                       data-admin-id="{{ $account->id }}">
                                            Edit
                                        </button>
                                        <form action="" method="POST"

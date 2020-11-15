@@ -6,7 +6,9 @@
 
 @section('content')
     <div class="container py-10 px-5">
-        <h1 class="mb-10 text-2xl md:text-4xl text-center input-lowercase">{{ ucwords($title) }}</h1>
+        <h1 class="mb-10 text-2xl md:text-4xl text-center input-lowercase">
+            {{ ucwords($title) }}
+        </h1>
         <div class="flex justify-center">
             <form action="{{ '/contact-us' }}" method="post" enctype="multipart/form-data"
             class="w-full max-w-screen-md shadow-md rounded px-8 py-5 bg-white">
