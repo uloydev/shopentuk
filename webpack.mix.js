@@ -6,6 +6,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/native.js', 'public/js/')
     .scripts([
         'resources/plugin/tabbyjs/js/tabby.js',
+        'resources/js/helper.js',
         'public/js/native.js'
     ], 'public/js/all-client.js')
     .sass('resources/sass/native.scss', 'public/css')
@@ -25,6 +26,7 @@ mix.js('resources/js/app.js', 'public/js')
         'resources/css/custom-dashboard.css'
     ], 'public/css/dashboard.css')
     .scripts([
+        'resources/js/helper.js',
         'public/js/addons/jquery.min.js',
         'public/js/addons/popper.min.js',
         'public/js/addons/bootstrap.min.js',
@@ -41,7 +43,7 @@ mix.js('resources/js/app.js', 'public/js')
         // 'public/template/assets/libs/chartist/chartist.min.js',
         'resources/plugin/datatables.net/js/jquery.dataTables.min.js',
         'resources/plugin/datatables.net/js/datatable-basic.init.min.js',
-        'public/js/custom-dashboard.js'
+        'resources/js/custom-dashboard.js'
     ], 'public/js/dashboard.js')
     .copyDirectory('resources/plugin/datatables.net', 'public/library')
     .setPublicPath('public');
@@ -52,6 +54,9 @@ mix.browserSync({
     watchOptions: {
         ignored: /node_modules/
     }
+});
+mix.babelConfig({
+    plugins: ['@babel/plugin-syntax-dynamic-import'],
 });
 
 if (mix.inProduction()) { mix.version() }

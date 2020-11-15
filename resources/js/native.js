@@ -1,5 +1,4 @@
 import 'boxicons'
-import * as Helper from './helper.js'
 
 const btnOpenMenu = document.querySelector('.nav__toggle-menu')
 const btnOpenChildMenu = document.querySelectorAll('.nav__link--open-child')
@@ -45,7 +44,7 @@ btnOpenChildMenu.forEach(openChild => {
     openChild.addEventListener('click', (e) => {
         e.preventDefault()
 
-        const siblingsChild = Helper.getSiblings(openChild.parentNode);
+        const siblingsChild = getSiblings(openChild.parentNode);
 
         siblingsChild.forEach(eachSibling => {
             if (eachSibling.classList.contains(classToOpenNavItemHasChild)) {
@@ -138,7 +137,7 @@ if (pageUrl === '/payment/cart') {
             currentQtyInput = input.value
             cartItemInitPrice = Number(cartItemPriceEl.dataset.initPrice)
 
-            cartItemPriceEl.textContent = Helper.formattingRupiah(cartItemInitPrice * currentQtyInput)
+            cartItemPriceEl.textContent = formattingRupiah(cartItemInitPrice * currentQtyInput)
             
 
         });
@@ -149,12 +148,12 @@ if (pageUrl === '/payment/cart') {
     const totalPriceWithoutShipping = allPrice.reduce((acc, val) => acc + val)
 
     const cartSubTotal = bodyId.querySelector('#cart__sub-total')
-    cartSubTotal.textContent = Helper.formattingRupiah(totalPriceWithoutShipping);
+    cartSubTotal.textContent = formattingRupiah(totalPriceWithoutShipping);
 
     const cartShipping = Number(bodyId.querySelector('#cart__shipping').dataset.price);
 
     const cartGrandTotal = bodyId.querySelector('#cart__total')
-    cartGrandTotal.textContent = Helper.formattingRupiah(cartShipping + totalPriceWithoutShipping)
+    cartGrandTotal.textContent = formattingRupiah(cartShipping + totalPriceWithoutShipping)
 
 }
 
