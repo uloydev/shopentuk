@@ -10,4 +10,9 @@ class PaymentController extends Controller
     {
         return view('payment.confirm', ['title' => 'Konfirmasi pembayaran']);
     }
+
+    public function showReturning()
+    {
+        return view('payment.returning', ['title' => 'Pengembalian uang']);
+    }
 }

@@ -4,14 +4,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@landingPage')->name('landing-page');
-Route::prefix('contact-us')->name('contact-us.')->group(function(){
+Route::prefix('contact-us')->name('contact-us.')->group(function() {
     Route::view('/', 'partial.contact-us', ['title' => 'contact us'])->name('index');
-    Route::post('/post', function () {
-        return 'success';
-    });
+    Route::post('/post', fn() => 'success');
 });
 
-Route::prefix('store')->name('store.')->group(function(){
+Route::prefix('store')->name('store.')->group(function() {
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', 'StoreController@product')->name('index');
         Route::get('/{slug}', 'StoreController@showProduct')->name('show');
@@ -27,17 +25,16 @@ Route::prefix('store')->name('store.')->group(function(){
     });
 });
 
-Route::prefix('payment')->name('payment.')->group(function(){
+Route::prefix('payment')->name('payment.')->group(function() {
     Route::get('confirmation', 'PaymentController@showConfirm')->name('show-confirm');
+    Route::get('returning', 'PaymentController@showReturning')->name('returning');
 });
 
 Auth::routes();
 
 Route::resource('cart', 'CartController');
 
-Route::get('register', function () {
-    return redirect('login');
-});
+Route::get('register', fn() => redirect('login'));
 
 Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'])
 ->namespace('Customer')->group(function(){
@@ -61,6 +58,4 @@ Route::prefix('superadmin')->middleware('superadmin')->name('superadmin.')->grou
     Route::resource('admins', 'Admin\AdminController')->only('index', 'store', 'update', 'destroy');
 });
 
-Route::post('/dummy-post', function (){
-    return redirect()->back();
-});
+Route::post('/dummy-post', fn() => redirect()->back());
