@@ -9,6 +9,10 @@
     @apply p-0 m-0;
 }
 
+html, body {
+    height: 100%;
+}
+
 ::selection {
     @apply text-white bg-gray-700;
 }

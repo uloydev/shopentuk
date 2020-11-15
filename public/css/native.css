@@ -944,6 +944,10 @@ video {
   margin: 0;
 }
 
+html, body {
+  height: 100%;
+}
+
 ::-moz-selection {
   --text-opacity: 1;
   color: #fff;

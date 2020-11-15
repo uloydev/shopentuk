@@ -1,5 +1,4 @@
 import 'boxicons'
-import { concat } from 'lodash'
 import * as Helper from './helper.js'
 
 const btnOpenMenu = document.querySelector('.nav__toggle-menu')
@@ -9,7 +8,6 @@ const navUl = nav.querySelector('.nav__ul')
 const dividerMenu = ['divide-y', 'divide-gray-400'] //ini class buat nambah border ke menu
 const classToOpenNavItemHasChild = 'nav__item-has-child--open'
 const pageUrl = window.location.pathname
-const pageOriginUrl = window.location.origin
 const elementOnHeaderExceptNav = document.querySelectorAll('header nav + *')
 
 function closeNav() {
@@ -190,3 +188,6 @@ if (pageUrl.indexOf('/my-account') > -1) {
 if (document.querySelector('[data-tabs]')) {
     new Tabby('[data-tabs]')
 }
+
+//general js
+document.querySelector('main').style.height = `calc(100% - ${nav.offsetHeight}px)`
