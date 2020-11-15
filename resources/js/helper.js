@@ -62,23 +62,8 @@ const camelCase = (str) => {
 }
 
 /**
- * 
+ * set form action
  */
-const getCssPropertyForRule = (rule, prop) => {
-	let sheets = document.styleSheets;
-	let slen = sheets.length;
-	for(let i=0; i<slen; i++) {
-		let rules = document.styleSheets[i].cssRules;
-		let rlen = rules.length;
-		for(let j=0; j<rlen; j++) {
-			if(rules[j].selectorText == rule) {
-				return rules[j].style[prop];
-			}
-		}
-	}
+const setFormAction = (form, url) => {
+	document.querySelector(form).action = url
 }
-
-export {
-	getSiblings, inputElement, setAttributes, inputOnlyNumberAndSpace, 
-	requiredInput, rupiahCurrency, formattingRupiah, camelCase
-};
