@@ -1216,6 +1216,10 @@ html, body {
   padding-right: 0;
 }
 
+.nav__item-has-child .nav__item {
+  max-height: 0;
+}
+
 .nav__item-has-child .nav__ul {
   overflow: hidden;
   transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
@@ -1242,6 +1246,10 @@ html, body {
     border-color: rgba(226, 232, 240, var(--border-opacity));
     left: calc(100% + 1rem);
   }
+}
+
+.nav__item-has-child--open .nav__item {
+  max-height: none;
 }
 
 .nav__item-has-child--open > .nav__link--open-child .child-dropdown-icon {

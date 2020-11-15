@@ -10,18 +10,18 @@ const classToOpenNavItemHasChild = 'nav__item-has-child--open'
 const pageUrl = window.location.pathname
 const elementOnHeaderExceptNav = document.querySelectorAll('header nav + *')
 
-function closeNav() {
+const closeNav =  () => {
     nav.classList.remove('nav--open')
     navUl.classList.remove(...dividerMenu)
 }
 
-function openNav() {
+const openNav = () => {
     nav.classList.add('nav--open')
     navUl.classList.add(...dividerMenu)
 }
 
-function closeAllMenu() {
-    const allChild =  document.querySelectorAll('.nav__item-has-child--open')
+const closeAllMenu = () => {
+    const allChild = document.querySelectorAll('.nav__item-has-child--open')
     
     allChild.forEach(child => {
         child.classList.remove('nav__item-has-child--open')

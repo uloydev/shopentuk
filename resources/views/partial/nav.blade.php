@@ -95,7 +95,7 @@
                             <x-menu-standar id="menu-my-akun-akun-saya" text="Akun saya" 
                             to="{{ route('my-account.history.order') }}" have-icon="false" />
                             <x-menu-standar id="menu-cancel-refund" text="Pengembalian uang"
-                            to="" have-icon="false" />
+                            to="{{ route('payment.returning') }}" have-icon="false" />
                             <x-menu-standar id="menu-cancel-pembatalan" text="Pembatalan order"
                             to="" have-icon="false" />
                         @else

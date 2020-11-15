@@ -2,8 +2,8 @@
  * Get all siblings of an element
  * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
  */
-const getSiblings = function (elem) {
-	return Array.prototype.filter.call(elem.parentNode.children, function (sibling) {
+const getSiblings = (elem) => {
+	return Array.prototype.filter.call(elem.parentNode.children, (sibling) => {
 		return sibling !== elem;
 	});
 };
@@ -12,8 +12,10 @@ const getSiblings = function (elem) {
 /*
 	formatting currency to rupiah
 */
-const formattingRupiah = function (currency) {
-	return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(currency).replace(',00', '');
+const formattingRupiah = (currency) => {
+	return new Intl.NumberFormat('id-ID', {
+		style: 'currency', currency: 'IDR'
+	}).format(currency).replace(',00', '');
 };
 
 /*
@@ -53,7 +55,7 @@ rupiahCurrency.forEach(money => {
 /**
  * convert string into camelCase
  */
-function camelCase(str) {
+const camelCase = (str) => {
 	return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
 		return index === 0 ? word.toLowerCase() : word.toUpperCase();
 	}).replace(/\s+/g, '');
@@ -62,13 +64,13 @@ function camelCase(str) {
 /**
  * 
  */
-function getCssPropertyForRule(rule, prop) {
-	var sheets = document.styleSheets;
-	var slen = sheets.length;
-	for(var i=0; i<slen; i++) {
-		var rules = document.styleSheets[i].cssRules;
-		var rlen = rules.length;
-		for(var j=0; j<rlen; j++) {
+const getCssPropertyForRule = (rule, prop) => {
+	let sheets = document.styleSheets;
+	let slen = sheets.length;
+	for(let i=0; i<slen; i++) {
+		let rules = document.styleSheets[i].cssRules;
+		let rlen = rules.length;
+		for(let j=0; j<rlen; j++) {
 			if(rules[j].selectorText == rule) {
 				return rules[j].style[prop];
 			}

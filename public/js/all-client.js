@@ -599,17 +599,17 @@ rupiahCurrency.forEach(function (money) {
  * convert string into camelCase
  */
 
-function camelCase(str) {
+var camelCase = function camelCase(str) {
   return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
     return index === 0 ? word.toLowerCase() : word.toUpperCase();
   }).replace(/\s+/g, '');
-}
+};
 /**
  * 
  */
 
 
-function getCssPropertyForRule(rule, prop) {
+var getCssPropertyForRule = function getCssPropertyForRule(rule, prop) {
   var sheets = document.styleSheets;
   var slen = sheets.length;
 
@@ -623,7 +623,7 @@ function getCssPropertyForRule(rule, prop) {
       }
     }
   }
-}
+};
 
 
 
@@ -653,29 +653,29 @@ var classToOpenNavItemHasChild = 'nav__item-has-child--open';
 var pageUrl = window.location.pathname;
 var elementOnHeaderExceptNav = document.querySelectorAll('header nav + *');
 
-function closeNav() {
+var closeNav = function closeNav() {
   var _navUl$classList;
 
   nav.classList.remove('nav--open');
 
   (_navUl$classList = navUl.classList).remove.apply(_navUl$classList, dividerMenu);
-}
+};
 
-function openNav() {
+var openNav = function openNav() {
   var _navUl$classList2;
 
   nav.classList.add('nav--open');
 
   (_navUl$classList2 = navUl.classList).add.apply(_navUl$classList2, dividerMenu);
-}
+};
 
-function closeAllMenu() {
+var closeAllMenu = function closeAllMenu() {
   var allChild = document.querySelectorAll('.nav__item-has-child--open');
   allChild.forEach(function (child) {
     child.classList.remove('nav__item-has-child--open');
   });
   closeNav();
-}
+};
 
 btnOpenMenu.addEventListener('click', function () {
   if (nav.classList.contains('nav--open')) {

@@ -97,6 +97,10 @@
                 padding-right: 0;
             }
 
+            .nav__item {
+                max-height: 0;
+            }
+
             .nav__ul {
                 @apply overflow-hidden transition transition-all h-0 opacity-0 invisible;
                 @screen lg {
@@ -111,6 +115,10 @@
             }
 
             &--open {
+
+                .nav__item {
+                    max-height: none;
+                }
 
                 > .nav__link--open-child {
 
