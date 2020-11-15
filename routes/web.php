@@ -21,14 +21,17 @@ Route::prefix('store')->name('store.')->group(function(){
     });
     Route::prefix('toko-point')->name('toko-point.')->group(function () {
         Route::get('/', 'StoreController@tokoPoint')->name('index');
-        Route::get('/redeem/{slug}', 'StoreController@showRedeem')->name('redeem.show');
+        Route::get('/redeem', 'StoreController@redeem')->name('redeem.index');
         Route::get('/{slug}', 'StoreController@showTokoPoint')->name('show');
+    });
+    Route::middleware('auth')->prefix('cart')->name('cart.')->group(function () {
+        Route::get('/', 'CartController@index')->name('index');
+        Route::post('/', 'CartController@addItem')->name('addItem');
     });
 });
 
 Route::prefix('payment')->name('payment.')->group(function(){
     Route::get('confirmation', 'PaymentController@showConfirm')->name('show-confirm');
-    Route::get('cart', 'PaymentController@cart')->name('cart');
 });
 
 Auth::routes();

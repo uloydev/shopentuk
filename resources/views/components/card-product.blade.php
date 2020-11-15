@@ -1,6 +1,7 @@
 @php
     $slug = Str::slug($productName);
     $route = $isDigitalProduct ? 'store.voucher.' : 'store.product.';
+    $route = $isTokoPoint ? 'store.toko-point.' : $route;
 @endphp
 
 <div class="card-product flex {{ $isHorizontal == 'false' ? 'flex-col' : 'flex-row' }}">
@@ -30,7 +31,12 @@
                 </del>
                 @endisset
                 <span class="font-bold">
-                    <var class="rupiah-currency">{{ $productFinalPrice }}</var>
+                    @isset($productFinalPrice)
+                        <var class="rupiah-currency">{{ $productFinalPrice }}</var>
+                    @endisset
+                    @isset($productPointPrice)
+                        <var>{{ $productPointPrice }} point</var>
+                    @endisset
                 </span>
             </p>
         </div>

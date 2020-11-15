@@ -16,30 +16,16 @@
                 <ul class="mt-5 divide-y divide-gray-400">
                     @foreach ($bestProducts as $product)
                         <li class="pb-3">
-                            @if ($product->discount)
-                                <x-card-product
-                                product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}"
-                                product-name="{{ Str::words($product->title, 2) }}"
-                                product-category="{{ $product->productCategory->title }}" 
-                                product-category-id="{{ $product->productCategory->id }}" 
-                                product-original-price="{{ $product->price }}"
-                                product-final-price="{{ $product->discount->discounted_price }}"
-                                product-rating="0" 
-                                product-is-obral="false"
-                                is-horizontal="true"
-                                is-digital-product="true" />
-                            @else
-                                <x-card-product 
-                                product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
-                                product-name="{{ Str::words($product->title, 2) }}"
-                                product-category="{{ $product->productCategory->title }}" 
-                                product-category-id="{{ $product->productCategory->id }}" 
-                                product-final-price="{{ $product->price }}"
-                                product-rating="0" 
-                                product-is-obral="false"
-                                is-horizontal="true"
-                                is-digital-product="true" />
-                            @endif
+                            <x-card-product 
+                            product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
+                            product-name="{{ Str::words($product->title, 2) }}"
+                            product-category="{{ $product->productCategory->title }}" 
+                            product-category-id="{{ $product->productCategory->id }}" 
+                            product-point-price="{{ $product->point_price }}"
+                            product-rating="0" 
+                            product-is-obral="false"
+                            is-horizontal="true"
+                            is-toko-point="true"/>
                         </li>
                     @endforeach
                 </ul>
@@ -48,15 +34,15 @@
                 <h1 class="text-2xl">Browse by product categories</h1>
                 <li class="flex justify-between flex-col py-3">
                     <a class="{{ !isset($httpQuery['catId']) && !isset($httpQuery['subCatId']) ? 'font-bold' : ''}}"
-                    href="{{ route('store.voucher.index', array_merge(array_diff_key($httpQuery, ['subCatId'=>'', 'catId'=>'']))) }}" class="justify-between flex">
+                    href="{{ route('store.toko-point.index', array_merge(array_diff_key($httpQuery, ['subCatId'=>'', 'catId'=>'']))) }}" class="justify-between flex">
                         All Category
                     </a>
                 </li>
                 <ul class="mt-5">
-                    @foreach ($categories->where('is_digital_product', true) as $category)
+                    @foreach ($categories as $category)
                     <li class="flex justify-between flex-col py-3">
                         <a class="{{ isset($httpQuery['catId']) && $httpQuery['catId'] == $category->id ? 'font-bold' : ''}}"
-                        href="{{ route('store.voucher.index', array_merge(array_diff_key($httpQuery, ['subCatId' => '']),['catId'=> $category->id])) }}" title="{{ $category->title }}" class="justify-between flex">
+                        href="{{ route('store.toko-point.index', array_merge(array_diff_key($httpQuery, ['subCatId' => '']),['catId'=> $category->id])) }}" title="{{ $category->title }}" class="justify-between flex">
                             {{ Str::words($category->title, 3) }}
                             <var class="not-italic">{{ '(' . $category->products->count() . ')' }}</var>
                         </a>
@@ -65,7 +51,7 @@
                                 <li class="py-3">
                                     <div class="flex justify-between">
                                         <a class="{{ isset($httpQuery['subCatId']) && $httpQuery['subCatId'] == $subCategory->id ? 'font-bold' : ''}}"
-                                        href="{{ route('store.voucher.index', array_merge(array_diff_key($httpQuery,
+                                        href="{{ route('store.toko-point.index', array_merge(array_diff_key($httpQuery,
                                         ['catId' => '']), ['subCatId'=> $subCategory->id])) }}"
                                         title="{{ $subCategory->title }}">
                                             {{ Str::limit($subCategory->title, 15) }}
@@ -108,30 +94,16 @@
             <div class="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-10 mt-10">
                 {{-- foreach --}}
                 @foreach ($products as $product)
-                    @if ($product->discount)
-                        <x-card-product
-                            product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
-                            product-name="{{ $product->title }}"
-                            product-category="{{ $product->productCategory->title }}" 
-                            product-category-id="{{ $product->productCategory->id }}" 
-                            product-original-price="{{ number_format($product->price) }}"
-                            product-final-price="{{ number_format($product->discount->discounted_price) }}"
-                            product-rating="0" 
-                            product-is-obral="true"
-                            is-horizontal="false"
-                            is-digital-product="true" />
-                    @else
-                        <x-card-product 
-                            product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
-                            product-name="{{ $product->title }}"
-                            product-category="{{ $product->productCategory->title }}" 
-                            product-category-id="{{ $product->productCategory->id }}" 
-                            product-final-price="{{ number_format($product->price) }}"
-                            product-rating="0" 
-                            product-is-obral="false"
-                            is-horizontal="false"
-                            is-digital-product="true" />
-                    @endif
+                    <x-card-product 
+                        product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
+                        product-name="{{ $product->title }}"
+                        product-category="{{ $product->productCategory->title }}" 
+                        product-category-id="{{ $product->productCategory->id }}" 
+                        product-point-price="{{ $product->point_price }}"
+                        product-rating="0" 
+                        product-is-obral="false"
+                        is-horizontal="false"
+                        is-toko-point="true"/>
                 @endforeach
                 {{-- end of foreach --}}
             </div>

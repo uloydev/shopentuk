@@ -8,20 +8,18 @@
         <figcaption class="md:ml-10">
             @include('partial.breadcumb')
             <p class="text-2xl mb-5">{{ $product->title }}</p>
-            @if($product->discount)
-                <p class="mb-2"><del>Rp. <var>{{ number_format($product->price) }}</var></del></p>
-                <p class="text-lg font-bold mb-5">
-                    Rp. <var class="not-italic">{{ number_format($product->discount->discounted_price) }}</var>
-                </p>
-            @else
-                <p class="text-lg font-bold mb-5">
-                    Rp. <var class="not-italic">{{ number_format($product->price) }}</var>
-                </p>
-            @endif
+            <p class="text-lg font-bold mb-5">
+                <var class="not-italic">{{ $product->point_price }} point</var>
+            </p>
             <div class="flex my-5">
-                <input type="number" class="appearance-none bg-white border border-gray-400 p-1 text-center w-12"
-                min="1" max="999" value="1" required>
-                <x-btn-primary text="Tambah ke keranjang" class="ml-2"/>
+                <form action="{{ route('store.cart.addItem') }}" method="post">
+                    @csrf
+                    <input type="number" class="appearance-none bg-white border border-gray-400 p-1 text-center w-12"
+                    min="1" max="999" value="1" required name="quantity">
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <input type="hidden" name="is_toko_point" value="true">
+                    <x-btn-primary text="Tambah ke keranjang" class="ml-2" type="submit"/>
+                </form>
             </div>
             <hr>
             <p class="mt-5 text-gray-700">Kategori: <span>{{ $product->productCategory->title }}</span></p>
@@ -110,7 +108,7 @@
     </section>
     <section id="related-product" class="mt-5">
         <h1 class="mb-3 text-3xl">Produk Terkait</h1>
-        @include('store.voucher.list', ['addClass' => "lg:grid-cols-4"])
+        @include('store.toko-point.list', ['addClass' => "lg:grid-cols-4"])
     </section>
 </div>
 @endsection

@@ -116,9 +116,15 @@
                 </ul>
             </li>
             <li class="nav__item nav__item--menu hidden lg:inline-flex lg:flex-grow lg:justify-center">
-                <a href="{{ route('payment.cart') }}" class="nav__icon nav__icon--bag">
+                <a href="{{ route('store.cart.index') }}" class="nav__icon nav__icon--bag">
                     <div class="nav__icon-cart">
-                        <var class="not-italic" id="total-shopping">0</var>
+                        <var class="not-italic" id="total-shopping">
+                            @if (Auth::check() && Auth::user()->cart)
+                                {{ Auth::user()->cart->cartItems->pluck('quantity')->sum() ?? 0 }}
+                            @else
+                                0
+                            @endif
+                        </var>
                         <box-icon name='shopping-bag'></box-icon>
                     </div>
                 </a>

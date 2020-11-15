@@ -23,11 +23,16 @@ class StoreController extends Controller
     private function getProductFromSlug($slug)
     {
         $productTitle = strtolower(ucwords(str_replace('-', ' ', $slug)));
-        $product = $this->productWhere('title', 'LIKE', "%$productTitle%")->first();
-        $products = $this->productWhere('category_id', '=', $product->productCategory->id)->inRandomOrder()->limit(4)->get();
+        $product = $this->productWhere('title', 'LIKE', "%$productTitle%")->firstOrFail();
+        if ($product->is_redeem) {
+            $similarProducts = $this->productWhere('is_redeem', '=', true);
+        } else {
+            $similarProducts = $this->productWhere('category_id', '=', $product->productCategory->id);
+        }
+        $similarProducts = $similarProducts->inRandomOrder()->limit(4)->get();
         return [
             'product' => $product, 
-            'products' => $products
+            'products' => $similarProducts
         ];
     }
 
@@ -40,6 +45,11 @@ class StoreController extends Controller
                     $query->where('is_digital_product', true);
                 } else if ($productType == 'non-digital') {
                     $query->where('is_digital_product', false);
+                }
+                if ($productType == 'redeem') {
+                    $query->where('is_redeem', true);
+                } else {
+                    $query->where('is_redeem', false);
                 }
             });
         }
@@ -121,5 +131,10 @@ class StoreController extends Controller
     public function showTokoPoint($slug)
     {
         return view('store.toko-point.show', $this->getProductFromSlug($slug));
+    }
+
+    public function redeem(Request $request)
+    {
+        return view('store.toko-point.index', $this->getFilteredProducts($request, 'redeem'));
     }
 }

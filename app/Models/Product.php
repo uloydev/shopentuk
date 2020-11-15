@@ -19,6 +19,7 @@ class Product extends Model
         'point_price',
         'category_id',
         'sub_category_id',
+        'is_redeem',
     ];
 
     /**
