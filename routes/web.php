@@ -24,11 +24,14 @@ Route::prefix('store')->name('store.')->group(function(){
         Route::get('/redeem', 'StoreController@redeem')->name('redeem.index');
         Route::get('/{slug}', 'StoreController@showTokoPoint')->name('show');
     });
+    Route::middleware('auth')->prefix('cart')->name('cart.')->group(function () {
+        Route::get('/', 'CartController@index')->name('index');
+        Route::post('/', 'CartController@addItem')->name('addItem');
+    });
 });
 
 Route::prefix('payment')->name('payment.')->group(function(){
     Route::get('confirmation', 'PaymentController@showConfirm')->name('show-confirm');
-    Route::get('cart', 'PaymentController@cart')->name('cart');
 });
 
 Auth::routes();

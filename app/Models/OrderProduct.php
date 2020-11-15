@@ -15,6 +15,7 @@ class OrderProduct extends Model
         'original_price',
         'discounted_price',
         'quantity',
+        'is_toko_point',
     ];
 
     public function order()

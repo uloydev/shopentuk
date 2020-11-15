@@ -13,8 +13,11 @@ class Order extends Model
         'user_id',
         'user_address_id',
         'shipping_price',
+        'shipping_point',
         'product_price',
-        'grand_total',
+        'product_point',
+        'price_total',
+        'point_total',
         'status',
     ];
 
