@@ -125,7 +125,7 @@ if (pageUrl === '/login') {
 }
 
 //cart js
-if (pageUrl === '/payment/cart') {
+if (pageUrl === '/cart') {
     const bodyId = document.querySelector('#cartPage');
     const cartQtyInput = bodyId.querySelectorAll('.cart-item__qty')
     let currentQtyInput, cartItemInitPrice

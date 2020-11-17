@@ -29,9 +29,9 @@ class CartController extends Controller
         if ($cart && $cart->cartItems->count() > 0) {
             foreach ($cart->cartItems as $item) {
                 if ($item->is_toko_point) {
-                    $pointTotal += $item->product->point_price;
+                    $pointTotal += $item->product->point_price * $item->quantity;
                 } else {
-                    $priceTotal += $item->product->price;
+                    $priceTotal += $item->product->price * $item->quantity;
                 }
             }
         }
@@ -61,5 +61,13 @@ class CartController extends Controller
             $cartItem->save();
         }
         return redirect()->back()->with(['success'=>'berhasil menambahkan produk kedalam keranjang']);
+    }
+
+    public function update(Cart $cart, Request $request)
+    {
+        foreach ($request->all() as $data) {
+            CartItem::find($data['item_id'])->update(['quantity' => $data['quantity']]);
+        }
+        return $cart->cartItems;
     }
 }
