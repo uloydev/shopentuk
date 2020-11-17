@@ -4,10 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@landingPage')->name('landing-page');
-Route::prefix('contact-us')->name('contact-us.')->group(function() {
-    Route::view('/', 'partial.contact-us', ['title' => 'contact us'])->name('index');
-    Route::post('/post', fn() => 'success');
-});
+Route::resource('contact-us', 'FeedbackController')->only('index', 'store', 'destroy');
 
 Route::prefix('store')->name('store.')->group(function() {
     Route::prefix('product')->name('product.')->group(function () {
