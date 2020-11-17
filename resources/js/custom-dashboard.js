@@ -1,4 +1,6 @@
-const appUrl = window.location.origin
+import 'boxicons'
+
+const appUrl = window.location.origin;
 const pageUrl = window.location.pathname
 
 const logoutBtn = document.querySelector('#logoutBtn');
@@ -142,5 +144,10 @@ if (pageUrl === '/superadmin/admins') {
 
     setFormAction('#form-add-admin', `${appUrl}/${urlFormAdmin}`)
     
-
 }
+
+// general js
+Array.from(document.querySelectorAll('box-icon')).map(icon => {
+    icon.classList.remove('has-arrow') // remove ::after style because of adminmart template
+    icon.classList.add('mr-2')
+})

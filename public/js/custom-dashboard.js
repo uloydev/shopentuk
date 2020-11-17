@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -98,10 +98,10 @@
 
 /***/ }),
 
-/***/ "./resources/js/native.js":
-/*!********************************!*\
-  !*** ./resources/js/native.js ***!
-  \********************************/
+/***/ "./resources/js/custom-dashboard.js":
+/*!******************************************!*\
+  !*** ./resources/js/custom-dashboard.js ***!
+  \******************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -110,192 +110,249 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
 
-var btnOpenMenu = document.querySelector('.nav__toggle-menu');
-var btnOpenChildMenu = document.querySelectorAll('.nav__link--open-child');
-var nav = document.querySelector('nav');
-var navUl = nav.querySelector('.nav__ul');
-var dividerMenu = ['divide-y', 'divide-gray-400']; //ini class buat nambah border ke menu
-
-var classToOpenNavItemHasChild = 'nav__item-has-child--open';
+var appUrl = window.location.origin;
 var pageUrl = window.location.pathname;
-var elementOnHeaderExceptNav = document.querySelectorAll('header nav + *');
+var logoutBtn = document.querySelector('#logoutBtn');
+logoutBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+  document.getElementById('logout-form').submit();
+}); // /admin/all-category page
 
-var closeNav = function closeNav() {
-  var _navUl$classList;
+if (pageUrl === '/admin/all-category') {
+  var manageCategoryPage = document.querySelector('#manageCategoryPage');
+  var editSubCategoryBtn = manageCategoryPage.querySelectorAll(".edit-sub-category-btn");
+  var subCategoryFocused = ['border', 'border-primary', 'p-2'];
+  editSubCategoryBtn.forEach(function (btnEditSub) {
+    var subcategoryTitle = btnEditSub.parentElement.querySelector('.subcategory__title');
+    btnEditSub.addEventListener('click', function () {
+      var _subcategoryTitle$cla;
 
-  nav.classList.remove('nav--open');
+      (_subcategoryTitle$cla = subcategoryTitle.classList).add.apply(_subcategoryTitle$cla, subCategoryFocused);
 
-  (_navUl$classList = navUl.classList).remove.apply(_navUl$classList, dividerMenu);
-};
-
-var openNav = function openNav() {
-  var _navUl$classList2;
-
-  nav.classList.add('nav--open');
-
-  (_navUl$classList2 = navUl.classList).add.apply(_navUl$classList2, dividerMenu);
-};
-
-var closeAllMenu = function closeAllMenu() {
-  var allChild = document.querySelectorAll('.nav__item-has-child--open');
-  allChild.forEach(function (child) {
-    child.classList.remove('nav__item-has-child--open');
-  });
-  closeNav();
-};
-
-btnOpenMenu.addEventListener('click', function () {
-  if (nav.classList.contains('nav--open')) {
-    closeNav();
-  } else {
-    openNav();
-  }
-});
-btnOpenChildMenu.forEach(function (openChild) {
-  var parentOfBtnOpenChild = openChild.parentNode.classList;
-  openChild.addEventListener('click', function (e) {
-    e.preventDefault();
-    var siblingsChild = getSiblings(openChild.parentNode);
-    siblingsChild.forEach(function (eachSibling) {
-      if (eachSibling.classList.contains(classToOpenNavItemHasChild)) {
-        eachSibling.classList.remove(classToOpenNavItemHasChild);
-      }
+      subcategoryTitle.setAttribute('contenteditable', true);
+      subcategoryTitle.focus();
     });
+    subcategoryTitle.addEventListener('focusout', function () {
+      var _subcategoryTitle$cla2;
 
-    if (parentOfBtnOpenChild.contains(classToOpenNavItemHasChild)) {
-      parentOfBtnOpenChild.remove(classToOpenNavItemHasChild);
-    } else {
-      parentOfBtnOpenChild.add(classToOpenNavItemHasChild);
-    }
-  });
-});
+      subcategoryTitle.setAttribute('contenteditable', false);
 
-if (elementOnHeaderExceptNav.length > 0) {
-  document.querySelector('header nav + *').addEventListener('click', function () {
-    closeAllMenu();
+      (_subcategoryTitle$cla2 = subcategoryTitle.classList).remove.apply(_subcategoryTitle$cla2, subCategoryFocused); //ksh ajax disini ntar buat save perubahan di subcategory nya
+
+    });
   });
 }
 
-document.querySelector('main').addEventListener('click', function () {
-  closeAllMenu();
-});
-
-if (pageUrl === '/') {
-  nav.classList.add('bg-gray-800', 'bg-opacity-25');
-  document.querySelector('header, main').classList.remove('bg-gray-100'); //jika lg di landing page dan di mode tablet keatas, icon menu ganti warna jd putih
-
-  if (window.screen.width > 768) {
-    document.querySelectorAll('.nav .container > .nav__ul > .nav__item > .nav__link > .child-dropdown-icon').forEach(function (dropdownIcon) {
-      dropdownIcon.setAttribute('color', '#fff');
-    });
-  }
-} else {
-  nav.classList.add('lg:border-b', 'border-gray-400');
-} //auth page script
-
-
-if (pageUrl === '/login') {
-  var removeValidationOnFalseForm = function removeValidationOnFalseForm(falseForm) {
-    var falseErrorMessage = falseForm.querySelectorAll('.error-message');
-    var falseErrorInput = falseForm.querySelectorAll('.border-red-400');
-    Array.from(falseErrorMessage).map(function (error) {
-      error.remove();
-    });
-    Array.from(falseErrorInput).map(function (input) {
-      input.value = null;
-      input.classList.remove('border-red-400');
-    });
+if (pageUrl == '/admin/products') {
+  var findMultiElOnManageProductPage = function findMultiElOnManageProductPage(element) {
+    return manageProductPage.querySelectorAll(element);
   };
 
-  var authPage = document.querySelector('#authPage');
-  var formRegister = authPage.querySelector('#form-daftar');
-  var formLogin = authPage.querySelector('#form-masuk');
-  formRegister.addEventListener('submit', function () {
-    localStorage.clear();
-    localStorage.setItem('sessionFailed', 'regist');
-  });
-  formLogin.addEventListener('submit', function () {
-    localStorage.clear();
-    localStorage.setItem('sessionFailed', 'login');
-  });
+  var manageProductPage = document.querySelector('#manageProductPage');
+  var columnFocusedClass = ['border', 'border-primary', 'p-2'];
+  var productTitle = findMultiElOnManageProductPage('.product-item__title');
+  var productPrice = findMultiElOnManageProductPage('.product-item__price');
+  var productPoint = findMultiElOnManageProductPage('.product-item__point');
+  var productCat = findMultiElOnManageProductPage('.product-item__cat');
+  var productSubCat = findMultiElOnManageProductPage('.product-item__sub-cat');
+  var originalValue, changedValue;
+  productTitle.forEach(function (element, index) {
+    var eachTitle = productTitle[index];
+    var eachPrice = productPrice[index];
+    var eachPoint = productPoint[index];
+    var eachCat = productCat[index];
+    var eachSubCat = productSubCat[index];
+    var allElement = [eachTitle, eachPrice, eachPoint, eachCat, eachSubCat];
+    allElement.forEach(function (element) {
+      var formattedValue = element.textContent.trim();
+      element.addEventListener('click', function () {
+        var _element$classList;
 
-  if (localStorage.getItem('sessionFailed') === 'regist') {
-    removeValidationOnFalseForm(formLogin);
-  } else if (localStorage.getItem('sessionFailed') === 'login') {
-    removeValidationOnFalseForm(formRegister);
+        originalValue = element.dataset.original.trim();
+
+        (_element$classList = element.classList).add.apply(_element$classList, columnFocusedClass);
+
+        element.setAttribute('contenteditable', true);
+        element.textContent = originalValue;
+        element.focus();
+      });
+      element.addEventListener('input', function (e) {
+        //jika yg lg diedit adalah kolom price, hapus karakter yg bkn integer
+        if (element === eachPrice) {
+          changedValue = element.textContent.replace(/\D/g, '');
+          element.dataset.original = changedValue;
+          element.textContent = changedValue;
+        } else {
+          changedValue = element.textContent;
+        }
+
+        element.setAttribute('data-original', changedValue);
+        formattedValue = changedValue;
+      });
+      element.addEventListener('focusout', function () {
+        var _element$classList2;
+
+        element.setAttribute('contenteditable', false);
+
+        (_element$classList2 = element.classList).remove.apply(_element$classList2, columnFocusedClass);
+
+        if (originalValue === element.textContent) {
+          //jika yg lg diedit adalah kolom price, hapus karakter yg bkn integer
+          if (element === eachPrice) {
+            element.textContent = new Intl.NumberFormat('id-ID', {
+              style: 'currency',
+              currency: 'IDR'
+            }).format(originalValue).replace(',00', '');
+          } else {
+            element.textContent = formattedValue;
+          }
+        } else {
+          element.dataset.original = changedValue; //jika yg lg diedit adalah kolom price, hapus karakter yg bkn integer
+
+          if (element === eachPrice) {
+            element.textContent = new Intl.NumberFormat('id-ID', {
+              style: 'currency',
+              currency: 'IDR'
+            }).format(changedValue).replace(',00', '');
+          } else {
+            formattedValue = changedValue.substring(0, 10) + '...';
+            element.textContent = formattedValue;
+            element.dataset.original = changedValue;
+          }
+        }
+      });
+    });
+  });
+}
+
+if (pageUrl === '/superadmin/admins') {
+  var manageAdminPage = document.querySelector("#manageAdminPage");
+  var totalError = manageAdminPage.querySelectorAll('.invalid-feedback').length;
+
+  if (totalError > 0) {
+    //if there's an error when add/update admin acc
+    $("#addNewAdmin").modal('show');
   }
-} //cart js
 
-
-if (pageUrl === '/payment/cart') {
-  var bodyId = document.querySelector('#cartPage');
-  var cartQtyInput = bodyId.querySelectorAll('.cart-item__qty');
-  var currentQtyInput, cartItemInitPrice;
-  cartQtyInput.forEach(function (input) {
-    var cartItemPriceEl = input.parentElement.querySelector('.cart-item__price');
-    input.addEventListener('keyup', function () {
-      currentQtyInput = input.value;
-      cartItemInitPrice = Number(cartItemPriceEl.dataset.initPrice);
-      cartItemPriceEl.textContent = formattingRupiah(cartItemInitPrice * currentQtyInput);
+  var urlFormAdmin = 'superadmin/admins';
+  var btnEditAdmin = manageAdminPage.querySelectorAll('.btn-edit-admin');
+  var adminId, adminName, adminEmail, adminPhone, adminJoinedAt;
+  btnEditAdmin.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      adminId = btn.dataset.adminId;
+      adminName = btn.closest('.admin').querySelector('.admin__name').dataset.adminName.trim();
+      adminEmail = btn.closest('.admin').querySelector('.admin__email').textContent.trim();
+      adminPhone = btn.closest('.admin').querySelector('.admin__phone').textContent.trim();
+      adminJoinedAt = btn.closest('.admin').querySelector('.admin__joined-at').textContent.trim();
+      setFormAction('#form-edit-admin', "".concat(appUrl, "/").concat(urlFormAdmin, "/").concat(adminId));
     });
   });
-  var allCartPrices = bodyId.querySelectorAll('.cart-item__price');
-  var allPrice = Array.from(allCartPrices).map(function (price) {
-    return Number(price.dataset.price);
-  });
-  var totalPriceWithoutShipping = allPrice.reduce(function (acc, val) {
-    return acc + val;
-  });
-  var cartSubTotal = bodyId.querySelector('#cart__sub-total');
-  cartSubTotal.textContent = formattingRupiah(totalPriceWithoutShipping);
-  var cartShipping = Number(bodyId.querySelector('#cart__shipping').dataset.price);
-  var cartGrandTotal = bodyId.querySelector('#cart__total');
-  cartGrandTotal.textContent = formattingRupiah(cartShipping + totalPriceWithoutShipping);
-} // customer dashboard js
+  setFormAction('#form-add-admin', "".concat(appUrl, "/").concat(urlFormAdmin));
+} // general js
 
 
-if (pageUrl.indexOf('/my-account') > -1) {
-  var tabsMenu = document.querySelectorAll('.change-menu-btn');
-  var pageUrlWithoutProtocol = window.location.href.replace(window.location.protocol, '');
-  tabsMenu.forEach(function (menu) {
-    var tabLinkMenu = menu.getAttribute('href');
-    console.log(tabLinkMenu);
+Array.from(document.querySelectorAll('box-icon')).map(function (icon) {
+  icon.classList.remove('has-arrow'); // remove ::after style because of adminmart template
 
-    if (tabLinkMenu === pageUrlWithoutProtocol) {
-      menu.classList.add('text-blue-500', 'border-b', 'border-blue-500');
-      menu.classList.remove('text-gray-600');
-    }
-  });
-
-  if (pageUrl === '/my-account/point') {
-    var pointQty = Array.from(document.querySelectorAll('.point-item__qty')).map(function (point) {
-      return Number(point.textContent);
-    });
-    var pointTotal = pointQty.reduce(function (acc, val) {
-      return acc + val;
-    });
-    document.querySelector('.point-item__total').textContent = pointTotal;
-  }
-} //plugin js
-
-
-if (document.querySelector('[data-tabs]')) {
-  new Tabby('[data-tabs]');
-} //general js
-
-
-document.querySelector('main').style.height = "calc(100% - ".concat(nav.offsetHeight, "px)");
+  icon.classList.add('mr-2');
+});
 
 /***/ }),
 
-/***/ 1:
-/*!**************************************!*\
-  !*** multi ./resources/js/native.js ***!
-  \**************************************/
+/***/ "./resources/js/helper.js":
+/*!********************************!*\
+  !*** ./resources/js/helper.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*!
+ * Get all siblings of an element
+ * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
+ */
+var getSiblings = function getSiblings(elem) {
+  return Array.prototype.filter.call(elem.parentNode.children, function (sibling) {
+    return sibling !== elem;
+  });
+};
+/*
+	formatting currency to rupiah
+*/
+
+
+var formattingRupiah = function formattingRupiah(currency) {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR'
+  }).format(currency).replace(',00', '');
+};
+/*
+ * Make all input lowercase
+ */
+
+
+var inputElement = document.querySelectorAll(".input-lowercase");
+inputElement.forEach(function (input) {
+  input.addEventListener('input', function () {
+    return input.value = input.value.toLowerCase();
+  });
+  input.addEventListener('change', function () {
+    return console.log(input.value);
+  });
+});
+
+var setAttributes = function setAttributes(el, attrs) {
+  for (var key in attrs) {
+    el.setAttribute(key, attrs[key]);
+  }
+};
+
+var inputOnlyNumberAndSpace = document.querySelectorAll('.only-alpha-space');
+inputOnlyNumberAndSpace.forEach(function (input) {
+  input.setAttribute('pattern', '[a-zA-Z]+');
+});
+var requiredInput = document.querySelectorAll('[required="required"], textarea[required]');
+Array.from(requiredInput).map(function (input) {
+  return input.previousElementSibling.classList.add('required-input');
+});
+/**
+ * utilities class helper for instant formatting to rupiah
+ */
+
+var rupiahCurrency = document.querySelectorAll('.rupiah-currency');
+rupiahCurrency.forEach(function (money) {
+  money.classList.add('not-italic');
+  money.textContent = formattingRupiah(money.textContent);
+});
+/**
+ * convert string into camelCase
+ */
+
+var camelCase = function camelCase(str) {
+  return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+    return index === 0 ? word.toLowerCase() : word.toUpperCase();
+  }).replace(/\s+/g, '');
+};
+/**
+ * set form action
+ */
+
+
+var setFormAction = function setFormAction(form, url) {
+  document.querySelector(form).action = url;
+};
+
+/***/ }),
+
+/***/ 2:
+/*!*************************************************************************!*\
+  !*** multi ./resources/js/helper.js ./resources/js/custom-dashboard.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/js/native.js */"./resources/js/native.js");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/js/helper.js */"./resources/js/helper.js");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/js/custom-dashboard.js */"./resources/js/custom-dashboard.js");
 
 
 /***/ })

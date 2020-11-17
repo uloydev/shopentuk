@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/native.css": "/css/native.css",
+    "/js/custom-dashboard.js": "/js/custom-dashboard.js",
     "/js/native.js": "/js/native.js",
     "/js/all-client.js": "/js/all-client.js",
     "/css/dashboard.css": "/css/dashboard.css",
