@@ -225,33 +225,7 @@ if (pageUrl === '/login') {
     removeValidationOnFalseForm(formRegister);
   }
 } //cart js
-
-
-if (pageUrl === '/payment/cart') {
-  var bodyId = document.querySelector('#cartPage');
-  var cartQtyInput = bodyId.querySelectorAll('.cart-item__qty');
-  var currentQtyInput, cartItemInitPrice;
-  cartQtyInput.forEach(function (input) {
-    var cartItemPriceEl = input.parentElement.querySelector('.cart-item__price');
-    input.addEventListener('keyup', function () {
-      currentQtyInput = input.value;
-      cartItemInitPrice = Number(cartItemPriceEl.dataset.initPrice);
-      cartItemPriceEl.textContent = formattingRupiah(cartItemInitPrice * currentQtyInput);
-    });
-  });
-  var allCartPrices = bodyId.querySelectorAll('.cart-item__price');
-  var allPrice = Array.from(allCartPrices).map(function (price) {
-    return Number(price.dataset.price);
-  });
-  var totalPriceWithoutShipping = allPrice.reduce(function (acc, val) {
-    return acc + val;
-  });
-  var cartSubTotal = bodyId.querySelector('#cart__sub-total');
-  cartSubTotal.textContent = formattingRupiah(totalPriceWithoutShipping);
-  var cartShipping = Number(bodyId.querySelector('#cart__shipping').dataset.price);
-  var cartGrandTotal = bodyId.querySelector('#cart__total');
-  cartGrandTotal.textContent = formattingRupiah(cartShipping + totalPriceWithoutShipping);
-} // customer dashboard js
+// customer dashboard js
 
 
 if (pageUrl.indexOf('/my-account') > -1) {
@@ -282,9 +256,6 @@ if (pageUrl.indexOf('/my-account') > -1) {
 if (document.querySelector('[data-tabs]')) {
   new Tabby('[data-tabs]');
 } //general js
-
-
-document.querySelector('main').style.height = "calc(100% - ".concat(nav.offsetHeight, "px)");
 
 /***/ }),
 

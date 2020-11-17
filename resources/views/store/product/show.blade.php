@@ -35,81 +35,12 @@
             </figcaption>
         </figure>
         <section id="deskripsi-ulasan">
-            <ul data-tabs>
-                <li>
-                    <a href="#deskripsi-detail">Deskripsi</a>
-                </li>
-                <li>
-                    <a href="#ulasan-detail" data-tabby-default>Ulasan</a>
-                </li>
-            </ul>
             <div id="deskripsi-detail" class="py-3">
+                <a href="javascript:void(0);" 
+                class="inline-block text-lg mb-5 p-3 border border-b-0 border-gray-500">
+                    Deskripsi
+                </a>
                 {!! $product->description !!}
-            </div>
-            <div id="ulasan-detail" class="py-5">
-                {{-- contoh --}}
-                @php
-                    $ulasanTotal = 3;
-                @endphp
-                @if ($ulasanTotal > 0)
-                    @for ($i = 0; $i < $ulasanTotal; $i++)
-                        <div class="flex flex-col mb-8">
-                            <figure class="flex border-b-2 border-gray-300 pb-5 items-center">
-                                <img src="{{ asset('img/static/people.png') }}" class="mr-2 h-8 w-8 rounded-full"
-                                alt="People avatar {{ env('APP_NAME') }}">
-                                <figcaption>
-                                    <p>People name</p>
-                                </figcaption>
-                            </figure>
-                            <div class="py-3">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus labore 
-                                    incidunt totam maxime eligendi reprehenderit alias libero nam. 
-                                    Possimus architecto corrupti exercitationem cum ipsum cumque, 
-                                    non quis impedit error reiciendis?
-                                </p>
-                            </div>
-                        </div>
-                    @endfor
-                @else
-                <h1 class="text-xl mb-5 mt-2 px-1">Belum ada ulasan</h1>
-                @endif
-                {{-- end of contoh --}}
-                <form action="/dummy-post" method="POST" class="border border-gray-400 p-6 mt-3">
-                    @csrf
-                    <h2 class="text-xl mb-2 font-medium">
-                        <span>
-                            {{ $ulasanTotal == 0 ? 'Jadilah yang pertama memberikan ulasan ' : 'Berikan ulasanmu ' }}
-                        </span>
-                        <span>untuk <q>{{ $product->title }}</q></span>
-                    </h2>
-                    <h3 class="text-base mb-5">
-                        Alamat email Anda tidak akan dipublikasikan. 
-                        Ruas yang wajib ditandai *
-                    </h3>
-                    <label for="ulasan" class="block mb-2">
-                        <span>Ulasan anda</span>
-                    </label>
-                    <textarea name="ulasan" id="ulasan" rows="5" placeholder="Minimal 5 kata" 
-                    class="form-textarea block w-full bg-white" required></textarea>
-                    <div class="grid grid-cols-2 gap-5 mt-5">
-                        <x-input-basic name="nama_lengkap" label="Nama lengkap" add-class="only-alpha-space"
-                        placeholder="Mohon gunakan nama lengkap" value="{{ Auth::user()->name ?? '' }}"
-                        title="Nama tidak boleh mengandung spesial karakter, angka, dan spasi diawal maupun diakhir"
-                        required/>
-                        <div class="mb-5">
-                            <x-input-basic name="email" value="{{ Auth::user()->email ?? '' }}" 
-                            placeholder="Mohon gunakan email valid" type="email" label="Email" required/>
-                            <div class="flex items-start text-sm">
-                                <input type="checkbox" name="simpan_data" class="form-checkbox border-gray-500">
-                                <span class="ml-2 leading-relaxed -mt-2">
-                                    Simpan nama dan email untuk komentar saya berikutnya
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <x-btn-primary text="Kirim" class="col-auto"/>
-                </form>
             </div>
         </section>
         <section id="related-product" class="mt-5">
