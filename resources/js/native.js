@@ -125,37 +125,6 @@ if (pageUrl === '/login') {
 }
 
 //cart js
-if (pageUrl === '/payment/cart') {
-    const bodyId = document.querySelector('#cartPage');
-    const cartQtyInput = bodyId.querySelectorAll('.cart-item__qty')
-    let currentQtyInput, cartItemInitPrice
-
-    cartQtyInput.forEach(input => {
-        const cartItemPriceEl = input.parentElement.querySelector('.cart-item__price')
-        
-        input.addEventListener('keyup', () => {
-            currentQtyInput = input.value
-            cartItemInitPrice = Number(cartItemPriceEl.dataset.initPrice)
-
-            cartItemPriceEl.textContent = formattingRupiah(cartItemInitPrice * currentQtyInput)
-            
-
-        });
-    });
-
-    const allCartPrices = bodyId.querySelectorAll('.cart-item__price')
-    const allPrice = Array.from(allCartPrices).map(price => Number(price.dataset.price))
-    const totalPriceWithoutShipping = allPrice.reduce((acc, val) => acc + val)
-
-    const cartSubTotal = bodyId.querySelector('#cart__sub-total')
-    cartSubTotal.textContent = formattingRupiah(totalPriceWithoutShipping);
-
-    const cartShipping = Number(bodyId.querySelector('#cart__shipping').dataset.price);
-
-    const cartGrandTotal = bodyId.querySelector('#cart__total')
-    cartGrandTotal.textContent = formattingRupiah(cartShipping + totalPriceWithoutShipping)
-
-}
 
 // customer dashboard js
 if (pageUrl.indexOf('/my-account') > -1) {
@@ -189,4 +158,3 @@ if (document.querySelector('[data-tabs]')) {
 }
 
 //general js
-document.querySelector('main').style.height = `calc(100% - ${nav.offsetHeight}px)`
