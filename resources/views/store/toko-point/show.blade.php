@@ -69,41 +69,6 @@
             <h1 class="text-xl mb-5 mt-2 px-1">Belum ada ulasan</h1>
             @endif
             {{-- end of contoh --}}
-            <form action="/dummy-post" method="POST" class="border border-gray-400 p-6 mt-3">
-                @csrf
-                <h2 class="text-xl mb-2 font-medium">
-                    <span>
-                        {{ $ulasanTotal == 0 ? 'Jadilah yang pertama memberikan ulasan ' : 'Berikan ulasanmu ' }}
-                    </span>
-                    <span>untuk <q>{{ $product->title }}</q></span>
-                </h2>
-                <h3 class="text-base mb-5">
-                    Alamat email Anda tidak akan dipublikasikan. 
-                    Ruas yang wajib ditandai *
-                </h3>
-                <label for="ulasan" class="block mb-2">
-                    <span>Ulasan anda</span>
-                </label>
-                <textarea name="ulasan" id="ulasan" rows="5" placeholder="Minimal 5 kata" 
-                class="form-textarea block w-full bg-white" required></textarea>
-                <div class="grid grid-cols-2 gap-5 mt-5">
-                    <x-input-basic name="nama_lengkap" label="Nama lengkap" add-class="only-alpha-space"
-                    placeholder="Mohon gunakan nama lengkap" value="{{ Auth::user()->name ?? '' }}"
-                    title="Nama tidak boleh mengandung spesial karakter, angka, dan spasi diawal maupun diakhir"
-                    required/>
-                    <div class="mb-5">
-                        <x-input-basic name="email" value="{{ Auth::user()->email ?? '' }}" 
-                        placeholder="Mohon gunakan email valid" type="email" label="Email" required/>
-                        <div class="flex items-start text-sm">
-                            <input type="checkbox" name="simpan_data" class="form-checkbox border-gray-500">
-                            <span class="ml-2 leading-relaxed -mt-2">
-                                Simpan nama dan email untuk komentar saya berikutnya
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <x-btn-primary text="Kirim" class="col-auto"/>
-            </form>
         </div>
     </section>
     <section id="related-product" class="mt-5">

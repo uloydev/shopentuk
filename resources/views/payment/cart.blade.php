@@ -19,22 +19,24 @@
                         <figcaption class="p-3 flex-grow flex flex-col lg:flex-row lg:justify-between">
                             <div class="mb-5 lg:mb-0">
                                 <p class="mb-2">Item {{ $item->product->title }}</p>
-                                <p class="text-sm text-gray-700">{{$item->product->category->title ?? ''}}</p>
+                                <p class="text-sm text-gray-700">
+                                    {{ $item->product->category->title ?? '' }}
+                                </p>
                             </div>
                             <div>
-                                <input type="number" name="qty" value="{{ $item->quantity }}" min="1" max="99" 
-                                class="cart-item__qty appearance-none text-center h-8 w-8 lg:w-12 bg-white border border-gray-300" data-item-id="{{ $item->id }}" required>
                                 @if ($item->is_toko_point)
-                                    <var class="cart-item__price not-italic ml-3"
-                                    data-price="{{ $item->product->point_price }}" data-init-price="{{ $item->product->point_price }}">
-                                        {{ $item->product->point_price }}
-                                    </var>    
+                                    <var data-price="{{ $item->product->point_price }}"
+                                    class="cart-item__price not-italic mr-3 cart-item__price-point">
+                                        {{ $item->product->point_price . ' points x ' }}
+                                    </var>
                                 @else
-                                    <var class="rupiah-currency cart-item__price not-italic ml-3"
-                                    data-price="{{ $item->product->price }}" data-init-price="{{ $item->product->price }}">
+                                    <var data-price="{{ $item->product->price }}"
+                                    class="rupiah-currency cart-item__price not-italic cart-item__price-money mr-3">
                                         {{ $item->product->price }}
                                     </var>
                                 @endif
+                                <input type="number" name="qty" value="{{ $item->quantity }}" min="1" max="99" 
+                                class="cart-item__qty appearance-none text-center h-8 w-8 lg:w-12 bg-white border border-gray-300" data-item-id="{{ $item->id }}" required>
                             </div>
                         </figcaption>
                     </figure>
@@ -42,8 +44,10 @@
             @endforeach
             <ul class="mb-3">
                 <li class="py-3 flex justify-between items-center">
-                    <span>Sub total: </span>
-                    <var class="not-italic font-bold rupiah-currency" id="cart__sub-total">{{ $priceTotal }}</var>
+                    <span>Sub total : </span>
+                    <var class="not-italic font-bold rupiah-currency" id="cart__sub-total">
+                        {{ $priceTotal }}
+                    </var>
                 </li>
                 <li class="py-3 flex justify-between items-center">
                     <span>Shipping: </span>
@@ -54,11 +58,13 @@
                 </li>
                 <li class="py-3 flex justify-between items-center">
                     <span>Point total: </span>
-                    <var class="not-italic font-bold" id="cart__sub-total">{{ $pointTotal }}</var>
+                    <var class="not-italic font-bold" id="cart__total-point">{{ $pointTotal }}</var>
                 </li>
                 <li class="py-3 flex justify-between items-center">
                     <span>Price Total: </span>
-                    <var class="font-bold rupiah-currency" id="cart__total">{{ $priceTotal + $siteSetting->shipping_price }}</var>
+                    <var class="font-bold rupiah-currency" id="cart__total-money">
+                        {{ $priceTotal + $siteSetting->shipping_price }}
+                    </var>
                 </li>
             </ul>
         </div>
