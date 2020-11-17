@@ -25,14 +25,14 @@
                             </div>
                             <div>
                                 @if ($item->is_toko_point)
-                                    <var data-price="{{ $item->product->point_price }}"
-                                    class="cart-item__price not-italic mr-3 cart-item__price-point">
-                                        {{ $item->product->point_price . ' points x ' }}
-                                    </var>
+                                    <var class="cart-item__price not-italic ml-3"
+                                    data-price="{{ $item->product->point_price }}" data-init-price="{{ $item->product->point_price }}" data-is-point="true">
+                                        {{ $item->product->point_price * $item->quantity}} Point
+                                    </var>    
                                 @else
-                                    <var data-price="{{ $item->product->price }}"
-                                    class="rupiah-currency cart-item__price not-italic cart-item__price-money mr-3">
-                                        {{ $item->product->price }}
+                                    <var class="rupiah-currency cart-item__price not-italic ml-3"
+                                    data-price="{{ $item->product->price }}" data-init-price="{{ $item->product->price }} " data-is-point="false">
+                                        {{ $item->product->price  * $item->quantity}}
                                     </var>
                                 @endif
                                 <input type="number" name="qty" value="{{ $item->quantity }}" min="1" max="99" 
@@ -76,7 +76,7 @@
                     Kembali
                 </a>
                 <x-btn-primary type="button" text="Perbarui keranjang"
-                class="border-gray-500 hover:border-gray-900 flex items-center lg:mr-3">
+                class="border-gray-500 hover:border-gray-900 flex items-center lg:mr-3" id="updateCartBtn">
                     <box-icon name='refresh' class="mr-1" animation="tada-hover"></box-icon>
                 </x-btn-primary>
             </div>
@@ -100,4 +100,31 @@
         </figure>
     @endif
 </div>
+
+<script>
+    const updateCartBtn = document.querySelector('#updateCartBtn');
+    updateCartBtn.addEventListener('click', () => {
+        let data = [];
+        const cartItems = document.querySelectorAll('.cart-item__qty');
+        cartItems.forEach(item => {
+            data.push({
+                'item_id' : item.dataset.itemId,
+                'quantity' : item.value,
+            });
+        });
+        fetch('/cart/{{ Auth::user()->cart->id ?? "" }}', {
+            method:'PUT',
+            headers:{
+                'Content-type': 'application/json',
+                'X-CSRF-Token': '{{csrf_token()}}',
+            },
+            body:JSON.stringify(data),
+        }).then(res => res.json())
+        .then(json => {
+            console.log(json);
+            location.reload();
+        });
+    });
+</script>
+
 @endsection

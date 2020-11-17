@@ -12,7 +12,7 @@
                 <var class="not-italic">{{ $product->point_price }} point</var>
             </p>
             <div class="flex my-5">
-                <form action="{{ route('cart.post') }}" method="post">
+                <form action="{{ route('cart.store') }}" method="post">
                     @csrf
                     <input type="number" class="appearance-none bg-white border border-gray-400 p-1 text-center w-12"
                     min="1" max="999" value="1" required name="quantity">

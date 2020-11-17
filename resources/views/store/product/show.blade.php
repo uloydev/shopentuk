@@ -19,9 +19,13 @@
                     </p>
                 @endif
                 <div class="flex my-5">
-                    <input type="number" class="appearance-none bg-white border border-gray-400 p-1 text-center w-12"
-                    min="1" max="999" value="1" required>
-                    <x-btn-primary text="Tambah ke keranjang" class="ml-2"/>
+                    <form action="{{ route('cart.store') }}" method="post">
+                        @csrf
+                        <input type="number" class="appearance-none bg-white border border-gray-400 p-1 text-center w-12"
+                        min="1" max="999" value="1" required name="quantity">
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <x-btn-primary text="Tambah ke keranjang" class="ml-2" type="submit"/>
+                    </form>
                 </div>
                 <hr>
                 <p class="mt-5 text-gray-700">Kategori: <span>{{ $product->productCategory->title }}</span></p>
