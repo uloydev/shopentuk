@@ -57,8 +57,5 @@ mix.disableSuccessNotifications();
 mix.browserSync({
     proxy: 'http://localhost:8000'
 });
-mix.babelConfig({
-    plugins: ['@babel/plugin-syntax-dynamic-import'],
-});
 
 if (mix.inProduction()) { mix.version() }

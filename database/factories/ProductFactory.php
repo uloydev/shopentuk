@@ -28,8 +28,9 @@ class ProductFactory extends Factory
             'description' => strtolower($this->faker->paragraph($nbSentences=10, $variableNbSentences=true)),
             'price' => $this->faker->numberBetween($min=10000, $max=100000),
             'point_price' => $this->faker->numberBetween($min=10, $max=100),
-            'category_id' => ProductCategory::factory(),
+            'category_id' => rand(1, 10),
             'sub_category_id' => ProductSubCategory::factory(),
+            'is_redeem' => $this->faker->boolean($chanceOfGettingTrue = 50)
         ];
     }
 }
