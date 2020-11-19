@@ -89,13 +89,15 @@ class ProductController extends Controller
      * Display the specified product.
      *
      */
-    public function show(Product $product)
+    public function show($id)
     {
+        $product = Product::findOrFail($id);
+        $products = Product::inRandomOrder()->limit(4)->get();
         // return response()->json([
         //     'success' => true,
         //     'data' => Product::findOrFail($id)
         // ], 200);
-        return view('store.product.show', ['product' => $product]);
+        return view('store.product.show', ['product' => $product, 'products' => $products]);
     }
 
     /**
@@ -104,8 +106,9 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
+        $product = Product::findOrFail($id);
         // dd($product);
         return view('admin.product.edit', ['product' => $product]);
     }
@@ -136,29 +139,14 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-        // if ($product) {
-        //     if ($product->productImages) {
-        //         $product->productImages->each(function ($item, $key) {
-        //             Storage::delete($item->url);
-        //             $item->delete();
-        //         });
-        //     }
-        //     $product->delete();
-        //     return response()->json([
-        //         'success' => true,
-        //         'message' => 'Product ' . $product->title . ' deleted'
-        //     ]);
-        // }
-        // else {
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => 'Product Not Found',
-        //     ], 404);
-        // }
         $product->productImages->each(function ($item, $key) {
             Storage::delete($item->url);
             $item->delete();
         });
+        if ($product->discount) {
+            $product->discount->delete();
+        }
+        $product->delete();
         return redirect()->back()->with(['msg' => 'product deleted successfuly']);
     }
 
