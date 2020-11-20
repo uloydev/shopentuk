@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
             $table->integer('shipping_point')->nullable();
             $table->integer('product_point')->nullable();
             $table->integer('point_total')->nullable();
-            $table->enum('status', ['unpaid', 'paid', 'canceled', 'refunded'])->default('unpaid');
+            $table->enum('status', ['unpaid', 'paid', 'shipping', 'canceled', 'refunded', 'finished'])->default('unpaid');
             $table->timestamps();
         });
     }

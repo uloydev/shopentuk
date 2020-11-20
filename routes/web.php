@@ -44,7 +44,9 @@ Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'
 Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name('admin.')->group(function(){
     Route::permanentRedirect('/', 'dashboard');
     Route::get('dashboard', 'DashboardController')->name('dashboard');
-    Route::view('order', 'payment.manage-order');
+    Route::prefix('order')->name('order.')->group(function () {
+        Route::get('/', 'OrderController@index')->name('index');
+    });
     Route::resources([
         'all-category' => 'AllCategoryController',
         'products' => 'ProductController'
