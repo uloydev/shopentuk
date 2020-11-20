@@ -18,6 +18,7 @@ class CreateSiteSettingsTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->integer('shipping_price');
+            $table->integer('point_value');
             $table->timestamps();
         });
     }

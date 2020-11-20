@@ -16,7 +16,7 @@
                 <li class="nav-small-cap">
                     <span class="hide-menu">others</span>
                 </li>
-                <x-menu-admin icon="shopping-bag" type="solid" text="order" to="{{ route('admin.order') }}"/>
+                <x-menu-admin icon="shopping-bag" type="solid" text="order" to="{{ route('admin.order.index') }}"/>
                 @if (Auth::user()->role == 'superadmin')
                     <x-menu-admin icon="joystick" class="has-arrow"
                     text="game management" to="{{ route('landing-page') }}">

@@ -13,5 +13,6 @@ class SiteSetting extends Model
         'title',
         'description',
         'shipping_price',
+        'point_value',
     ];
 }
