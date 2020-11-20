@@ -46,7 +46,7 @@ html, body {
     @apply font-bold p-2 text-white rounded transition duration-150 transform 
     flex items-center outline-none border-b-4;
 
-    &:focus {
+    &:active {
         @apply translate-y-1 border-b-2;
     }
 
