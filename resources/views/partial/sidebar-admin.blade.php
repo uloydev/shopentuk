@@ -16,7 +16,14 @@
                 <li class="nav-small-cap">
                     <span class="hide-menu">others</span>
                 </li>
-                <x-menu-admin icon="shopping-bag" type="solid" text="order" to="{{ route('admin.order.index') }}"/>
+                <x-menu-admin icon="shopping-bag" class="has-arrow"
+                text="order management" to="{{ route('admin.order.new') }}">
+                    <ul aria-expanded="false" class="collapse first-level base-level-line">
+                        <x-menu-admin icon="shopping-bag" type="solid" text="all order" to="{{ route('admin.order.index') }}"/>
+                        <x-menu-admin icon="shopping-bag" type="solid" text="new order" to="{{ route('admin.order.new') }}"/>
+                        <x-menu-admin icon="shopping-bag" type="solid" text="order to refund" to="{{ route('admin.order.refund.index') }}"/>
+                    </ul>
+                </x-menu-admin>
                 @if (Auth::user()->role == 'superadmin')
                     <x-menu-admin icon="joystick" class="has-arrow"
                     text="game management" to="{{ route('landing-page') }}">

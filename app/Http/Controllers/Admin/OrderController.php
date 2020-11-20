@@ -46,7 +46,7 @@ class OrderController extends Controller
     public function orderToRefund()
     {
         $orders = Order::where('status', 'refunded')->doesntHave('refund')->get();
-        return view('adnmin.order.need-to-refund', [
+        return view('adnmin.order.refund', [
             'orders' => $orders,
         ]);
     }
@@ -85,7 +85,7 @@ class OrderController extends Controller
         $user->save();
         Mail::to($user->email)->send(new OrderRefunded($user, $order));
 
-        return redirect()->route('admin.order.need-to-refund')
+        return redirect()->route('admin.order.refund.index')
         ->with('success', 'sukses refund order!');
     }
 }
