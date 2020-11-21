@@ -16,16 +16,25 @@
                 <li class="nav-small-cap">
                     <span class="hide-menu">others</span>
                 </li>
-                <x-menu-admin icon="shopping-bag" type="solid" text="order" to="'javascript:void(0)'"/>
-                <x-menu-admin icon="joystick" class="has-arrow"
-                text="game management" to="{{ route('landing-page') }}">
+                <x-menu-admin icon="shopping-bag" class="has-arrow"
+                text="order management" to="{{ route('admin.order.new') }}">
                     <ul aria-expanded="false" class="collapse first-level base-level-line">
-                        @if (auth()->user()->role == 'superadmin')
-                        <x-menu-admin icon="customize" type="solid" text="Custom game" to="{{ url('/') }}" />
-                        @endif
-                        <x-menu-admin icon="history" text="Game history" to="{{ url('/') }}" />
+                        <x-menu-admin icon="shopping-bag" type="solid" text="all order" to="{{ route('admin.order.index') }}"/>
+                        <x-menu-admin icon="shopping-bag" type="solid" text="new order" to="{{ route('admin.order.new') }}"/>
+                        <x-menu-admin icon="shopping-bag" type="solid" text="order to refund" to="{{ route('admin.order.refund.index') }}"/>
                     </ul>
                 </x-menu-admin>
+                @if (Auth::user()->role == 'superadmin')
+                    <x-menu-admin icon="joystick" class="has-arrow"
+                    text="game management" to="{{ route('landing-page') }}">
+                        <ul aria-expanded="false" class="collapse first-level base-level-line">
+                            @if (auth()->user()->role == 'superadmin')
+                            <x-menu-admin icon="customize" type="solid" text="Custom game" to="{{ url('/') }}" />
+                            @endif
+                            <x-menu-admin icon="history" text="Game history" to="{{ url('/') }}" />
+                        </ul>
+                    </x-menu-admin>
+                @endif
 
                 <x-menu-admin icon="report" type="solid" text="report penjualan" to="{{ route('landing-page') }}"/>
                 <x-menu-admin icon="shield-quarter" text="list admin" to="{{ route('superadmin.admins.index') }}"/>

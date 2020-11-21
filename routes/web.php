@@ -41,10 +41,19 @@ Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'
     Route::get('point', 'DashboardController@accountPoint')->name('account.point');
 });
 
+// admin route
 Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name('admin.')->group(function(){
     Route::permanentRedirect('/', 'dashboard');
     Route::get('dashboard', 'DashboardController')->name('dashboard');
-    Route::view('order', 'payment.manage-order');
+    Route::prefix('order')->name('order.')->group(function () {
+        Route::get('/', 'OrderController@index')->name('index');
+        Route::get('new', 'OrderController@newOrder')->name('new');
+        Route::name('refund.')->prefix('refund')->group(function () {
+            Route::get('/', 'OrderController@toRefund')->name('index');
+            Route::get('/{order}', 'OrderController@showRefundForm')->name('show');
+            Route::post('/{order}', 'OrderController@makeRefund')->name('store');
+        });
+    });
     Route::resources([
         'all-category' => 'AllCategoryController',
         'products' => 'ProductController'

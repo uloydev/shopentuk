@@ -52,11 +52,15 @@
                                         {{ Str::words($product->productSubCategory->title, 2) }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.products.show', $product->slug) }}" 
+                                        <a href="{{ route('admin.products.show', $product->id) }}" 
                                         class="btn btn-sm btn-primary btn-rounded mr-2">
                                             View
                                         </a>
-                                        <form action="{{ route('admin.products.destroy', $product->slug) }}"
+                                        <a href="{{ route('admin.products.edit', $product->id) }}" 
+                                            class="btn btn-sm btn-warning btn-rounded mr-2">
+                                                Edit
+                                            </a>
+                                        <form action="{{ route('admin.products.destroy', $product->id) }}"
                                         method="POST" class="d-inline-block">
                                             @csrf @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger btn-rounded">
