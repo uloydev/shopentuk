@@ -17,9 +17,14 @@
             class="w-full max-w-screen-md shadow-md rounded px-8 py-5 bg-white">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10">
-                    <x-input-basic name="name" label="Nama "/>
-                    <x-input-basic name="telephone" type="tel" label="No Telepon / Wa"/>
-                    <x-input-basic name="email" label="Email" box-width="col-span-full" />
+                    <x-input-basic name="name" label="Nama" value="{{ Auth::user()->name ?? '' }}"
+                    title="Mohon isi nama asli mu" required />
+                    <x-input-basic name="telephone" type="tel" label="No Telepon / Wa" 
+                    value="{{ Auth::user()->phone ?? '' }}" 
+                    title="Mohon isi nomor hp aktif mu" required />
+                    <x-input-basic name="email" label="Email" box-width="col-span-full"
+                    value="{{ Auth::user()->email ?? '' }}" 
+                    title="Mohon isi email mu dengan format valid" required />
                     <div class="mb-6 col-span-full">
                         <label for="pesan" class="block mb-2">
                             <span>Pesan kamu</span>
