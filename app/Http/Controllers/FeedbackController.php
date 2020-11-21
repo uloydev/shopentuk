@@ -16,11 +16,11 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->role == 'customer') {
-            return view('feedback.contact-us', ['title' => 'contact us']);
+        if (auth()->check() and auth()->user()->role == 'admin') {
+            return view('feedback.manage', ['title' => 'manage contact us']);
         }
         else {
-            return view('feedback.manage', ['title' => 'manage contact us']);
+            return view('feedback.contact-us', ['title' => 'contact us']);
         }
     }
 

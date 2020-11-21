@@ -300,13 +300,6 @@ inputElement.forEach(function (input) {
     return console.log(input.value);
   });
 });
-
-var setAttributes = function setAttributes(el, attrs) {
-  for (var key in attrs) {
-    el.setAttribute(key, attrs[key]);
-  }
-};
-
 var inputOnlyNumberAndSpace = document.querySelectorAll('.only-alpha-space');
 inputOnlyNumberAndSpace.forEach(function (input) {
   input.setAttribute('pattern', '[a-zA-Z]+');
@@ -325,22 +318,26 @@ rupiahCurrency.forEach(function (money) {
   money.textContent = formattingRupiah(money.textContent);
 });
 /**
- * convert string into camelCase
- */
-
-var camelCase = function camelCase(str) {
-  return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
-    return index === 0 ? word.toLowerCase() : word.toUpperCase();
-  }).replace(/\s+/g, '');
-};
-/**
  * set form action
  */
-
 
 var setFormAction = function setFormAction(form, url) {
   document.querySelector(form).action = url;
 };
+/**
+ *  Set box-icon component color just using class
+ */
+
+
+var boxIcons = document.querySelectorAll('box-icon');
+boxIcons.forEach(function (boxIcon) {
+  if (boxIcon.className.split(' ').some(function (color) {
+    return /text-.*/.test(color);
+  })) {
+    var colorIcon = getComputedStyle(boxIcon).color;
+    boxIcon.setAttribute('color', colorIcon);
+  }
+});
 
 /***/ }),
 

@@ -1,4 +1,6 @@
 import 'boxicons'
+import './helper-utilities.js'
+import * as HelperModule from './helper-module.js'
 
 const btnOpenMenu = document.querySelector('.nav__toggle-menu')
 const btnOpenChildMenu = document.querySelectorAll('.nav__link--open-child')
@@ -44,7 +46,7 @@ btnOpenChildMenu.forEach(openChild => {
     openChild.addEventListener('click', (e) => {
         e.preventDefault()
 
-        const siblingsChild = getSiblings(openChild.parentNode);
+        const siblingsChild = HelperModule.getSiblings(openChild.parentNode);
 
         siblingsChild.forEach(eachSibling => {
             if (eachSibling.classList.contains(classToOpenNavItemHasChild)) {
@@ -152,9 +154,69 @@ if (pageUrl.indexOf('/my-account') > -1) {
     
 }
 
+if (pageUrl === '/cart') {
+    const cartPage = document.querySelector('#cartPage')
+    const openCloseModal = (modalSelector) => {
+        const modalEl = cartPage.querySelector(modalSelector)
+        const classToCloseModal = ['invisible', 'h-0', 'opacity-0']
+        const isModalOpen = modalEl.classList.contains(...classToCloseModal) ? true : false
+        
+        if (isModalOpen === true) {
+            modalEl.classList.remove(...classToCloseModal)
+        }
+        else {
+            modalEl.classList.add(...classToCloseModal)
+        }
+    }
+
+    const modalCheckout = cartPage.querySelector('#modal')
+    const firstStep = modalCheckout.querySelector('.step-form > form')
+    const secondStep = modalCheckout.querySelector('.step-form > div')
+    const nextStepBtn = modalCheckout.querySelector('.next-step')
+
+    const btnShowCheckoutStep = cartPage.querySelector('#btnShowCheckoutStep')
+    btnShowCheckoutStep.addEventListener('click', () => {
+        openCloseModal('#' + modalCheckout.getAttribute('id'))
+    })
+
+    const addressUser = firstStep.querySelector('textarea')
+    addressUser.addEventListener('change', () => {
+        nextStepBtn.disabled = addressUser.value.trim() !== '' ? false : true
+    })
+
+    function setNextStepBtnText(textBtn) {
+        nextStepBtn.textContent = textBtn
+    }
+
+    const btnCloseModal = cartPage.querySelector('#closeModal')
+    btnCloseModal.addEventListener('click', () => {
+        openCloseModal('#' + modalCheckout.getAttribute('id'))
+
+        firstStep.classList.add('show-step')
+        firstStep.classList.remove('hide-step')
+
+        secondStep.classList.add('hide-step')
+        secondStep.classList.remove('show-step')
+
+        setNextStepBtnText('Next')
+    })
+
+    
+    nextStepBtn.addEventListener('click', () => {
+        secondStep.classList.add('show-step')
+        secondStep.classList.remove('hide-step')
+
+        firstStep.classList.add('hide-step')
+        firstStep.classList.remove('show-step')
+
+        setNextStepBtnText('Checkout')
+    })
+}
+
 //plugin js
 if (document.querySelector('[data-tabs]')) {
     new Tabby('[data-tabs]')
 }
 
 //general js
+

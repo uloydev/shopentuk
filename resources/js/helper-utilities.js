@@ -1,23 +1,4 @@
-/*!
- * Get all siblings of an element
- * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
- */
-
-const getSiblings = (elem) => {
-	return Array.prototype.filter.call(elem.parentNode.children, (sibling) => {
-		return sibling !== elem;
-	});
-};
-
-
-/*
-	formatting currency to rupiah
-*/
-const formattingRupiah = (currency) => {
-	return new Intl.NumberFormat('id-ID', {
-		style: 'currency', currency: 'IDR'
-	}).format(currency).replace(',00', '');
-};
+import * as Helper from './helper-module.js'
 
 /*
  * Make all input lowercase
@@ -42,18 +23,10 @@ Array.from(requiredInput).map(input => {
  * utilities class helper for instant formatting to rupiah
  */
 const rupiahCurrency = document.querySelectorAll('.rupiah-currency')
-
 rupiahCurrency.forEach(money => {
 	money.classList.add('not-italic')
-	money.textContent = formattingRupiah(money.textContent)
+	money.textContent = Helper.formattingRupiah(money.textContent)
 });
-
-/**
- * set form action
- */
-const setFormAction = (form, url) => {
-	document.querySelector(form).action = url
-}
 
 /**
  *  Set box-icon component color just using class

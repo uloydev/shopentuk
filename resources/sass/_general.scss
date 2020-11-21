@@ -58,6 +58,15 @@ html, body {
     box-icon #icon {
         fill: red;
     }
+
+}
+
+:disabled {
+    @apply opacity-50 cursor-not-allowed;
+}
+
+.w-full-2x {
+    width: 200%;
 }
 
 .section {
@@ -76,6 +85,8 @@ html, body {
         }
     }
 }
+
+
 
 .card-product {
     max-width: 100%;

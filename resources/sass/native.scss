@@ -62,6 +62,22 @@
         @apply p-4 border border-gray-400;
     }
 }
+
+/*cartPage style*/
+ #cartPage {
+
+    .hide-step {
+        // transition: transform 50ms;
+        opacity: 0;
+
+        + .show-step {
+            opacity: 1;
+            transform: translateX(-100%);
+        }
+    }
+ }
+/*end of cartPage style*/
+
 /*end of storePage style*/
 #konfirmasiPembayaranPage {
     .box-upload {
