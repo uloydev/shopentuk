@@ -126,16 +126,14 @@ if (pageUrl === '/login') {
     }
 }
 
-//cart js
-
 // customer dashboard js
 if (pageUrl.indexOf('/my-account') > -1) {
     const tabsMenu = document.querySelectorAll('.change-menu-btn')
-    const pageUrlWithoutProtocol = window.location.href.replace(window.location.protocol, '')
+    const pageUrlWithoutProtocol = HelperModule.getUrlWithoutProtocol(window.location.href)
+    
 
     tabsMenu.forEach(menu => {
-        const tabLinkMenu = menu.getAttribute('href')
-        console.log(tabLinkMenu)
+        const tabLinkMenu = HelperModule.getUrlWithoutProtocol(menu.getAttribute('href'))
         if (tabLinkMenu === pageUrlWithoutProtocol) {
             menu.classList.add('text-blue-500', 'border-b', 'border-blue-500')
             menu.classList.remove('text-gray-600')
@@ -143,72 +141,107 @@ if (pageUrl.indexOf('/my-account') > -1) {
     });
 
     if (pageUrl === '/my-account/point') {
+        //collecting each point and sum-ing it
         const pointQty = Array.from(document.querySelectorAll('.point-item__qty')).map(point => {
             return Number(point.textContent)
         })
         
         const pointTotal = pointQty.reduce((acc, val) => acc + val)
         document.querySelector('.point-item__total').textContent = pointTotal
-        
+        //end of that   
     }
     
 }
 
+// cart page js
 if (pageUrl === '/cart') {
     const cartPage = document.querySelector('#cartPage')
+
+    /**
+     * function to open modal if modal closed, 
+     * close modal if modal opened
+     */
     const openCloseModal = (modalSelector) => {
         const modalEl = cartPage.querySelector(modalSelector)
         const classToCloseModal = ['invisible', 'h-0', 'opacity-0']
+
+        // if modal open, set isModalOpen = true. else, isModalOpen = false
         const isModalOpen = modalEl.classList.contains(...classToCloseModal) ? true : false
         
         if (isModalOpen === true) {
+            // close modal
             modalEl.classList.remove(...classToCloseModal)
         }
         else {
+            // open modal
             modalEl.classList.add(...classToCloseModal)
         }
     }
 
-    const modalCheckout = cartPage.querySelector('#modal')
+    // modal checkout and it's child
+    const modalCheckout = cartPage.querySelector('#modalCheckout')
     const firstStep = modalCheckout.querySelector('.step-form > form')
     const secondStep = modalCheckout.querySelector('.step-form > div')
     const nextStepBtn = modalCheckout.querySelector('.next-step')
 
+    // open modal checkout
     const btnShowCheckoutStep = cartPage.querySelector('#btnShowCheckoutStep')
     btnShowCheckoutStep.addEventListener('click', () => {
         openCloseModal('#' + modalCheckout.getAttribute('id'))
     })
 
-    const addressUser = firstStep.querySelector('textarea')
-    addressUser.addEventListener('change', () => {
-        nextStepBtn.disabled = addressUser.value.trim() !== '' ? false : true
-    })
-
+    /*
+     * change '.next-step' text
+    */
     function setNextStepBtnText(textBtn) {
         nextStepBtn.textContent = textBtn
     }
 
-    const btnCloseModal = cartPage.querySelector('#closeModal')
+    /*
+     * open step on checkout modal
+     */
+    function openStep(step) {
+        step.classList.add('show-step')
+        step.classList.remove('hide-step')
+    }
+    /**
+     * close step on checkout modal
+     */
+    function closeStep(step) {
+        step.classList.add('hide-step')
+        step.classList.remove('show-step')
+    }
+
+    const btnCloseModal = cartPage.querySelector('#closeModalCheckout')
+    // when user close the modal
     btnCloseModal.addEventListener('click', () => {
         openCloseModal('#' + modalCheckout.getAttribute('id'))
-
-        firstStep.classList.add('show-step')
-        firstStep.classList.remove('hide-step')
-
-        secondStep.classList.add('hide-step')
-        secondStep.classList.remove('show-step')
-
+        openStep(firstStep)
+        closeStep(secondStep)
         setNextStepBtnText('Next')
+    });
+
+    // each btn to manage modal address
+    const btnOpenModalAddress = cartPage.querySelector('#add-new-address-btn')
+    const btnCloseModalAddress = cartPage.querySelector('#btn-close-modalAddNewAddress')
+    const btnsManageModalAddress = [btnOpenModalAddress, btnCloseModalAddress]
+    
+    /**
+     * when one of btnsManageModalAddress is click, 
+     * open modal if it closed. Otherwise close it
+     */
+    btnsManageModalAddress.forEach(btnOnModalAddNewAddress => {
+        btnOnModalAddNewAddress.addEventListener('click', () => {
+            openCloseModal('#modalAddNewAddress')
+        })
     })
 
-    
+    /**
+     * when user go to next step on checkout
+     */
     nextStepBtn.addEventListener('click', () => {
-        secondStep.classList.add('show-step')
-        secondStep.classList.remove('hide-step')
-
-        firstStep.classList.add('hide-step')
-        firstStep.classList.remove('show-step')
-
+        openStep(secondStep)
+        closeStep(firstStep)
         setNextStepBtnText('Checkout')
     })
 }
