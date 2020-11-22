@@ -32,7 +32,9 @@
                 <tr class="bg-gray-200">
                     <td colspan="2" class="border border-gray-400 py-3 px-4">Total point</td>
                     <td class="border border-gray-400 py-3 px-4">
-                        <var class="not-italic point-item__total"></var>
+                        <var class="not-italic point-item__total">
+                            {{--  ini engga usah diitung manual make PHP, udh gue itung di JS --}}
+                        </var>
                         <span>Point</span>
                     </td>
                 </tr>

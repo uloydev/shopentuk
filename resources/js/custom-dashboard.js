@@ -3,6 +3,8 @@ import 'boxicons'
 const appUrl = window.location.origin;
 const pageUrl = window.location.pathname
 
+
+
 const logoutBtn = document.querySelector('#logoutBtn');
 logoutBtn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -144,6 +146,10 @@ if (pageUrl === '/superadmin/admins') {
 
     setFormAction('#form-add-admin', `${appUrl}/${urlFormAdmin}`)
     
+}
+
+if (pageUrl === '/admin/order') {
+    //
 }
 
 // general js

@@ -26,4 +26,10 @@ export const setFormAction = (form, url) => {
 	document.querySelector(form).action = url
 }
 
+/**
+ * get url without protocol
+ */
+export function getUrlWithoutProtocol(urlnya) {
+	return urlnya.split('//').pop()
+}
 

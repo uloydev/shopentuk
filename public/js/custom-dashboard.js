@@ -248,6 +248,9 @@ if (pageUrl === '/superadmin/admins') {
     });
   });
   setFormAction('#form-add-admin', "".concat(appUrl, "/").concat(urlFormAdmin));
+}
+
+if (pageUrl === '/admin/order') {//
 } // general js
 
 

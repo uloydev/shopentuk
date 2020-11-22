@@ -38,8 +38,10 @@
                                         {{ $item->product->price  * $item->quantity}}
                                     </var>
                                 @endif
-                                <input type="number" name="qty" value="{{ $item->quantity }}" min="1" max="99" 
-                                class="cart-item__qty appearance-none text-center h-8 w-8 lg:w-12 bg-white border border-gray-300" data-item-id="{{ $item->id }}" required>
+                                <input type="number" name="qty" value="{{ $item->quantity }}" 
+                                min="1" max="99" data-item-id="{{ $item->id }}" 
+                                class="cart-item__qty appearance-none text-center h-8 w-8 lg:w-12
+                                bg-white border border-gray-300" required>
                             </div>
                         </figcaption>
                     </figure>
@@ -76,8 +78,9 @@
         <div class="flex justify-center items-center flex-col lg:flex-row">
             <div class="lg:mr-auto flex items-center text-xs justify-between w-full mb-3 lg:mb-0">
                 <a href="{{ url()->previous() }}" id="test"
-                class="btn-outline hpver:bg-blue-600 border-blue-500 text-blue-500">
-                    <box-icon name='left-arrow-alt' class="text-blue-500"></box-icon>
+                class="btn-outline hpver:bg-blue-600 border-blue-500 text-blue-500 
+                hover:bg-blue-500 hover:text-white">
+                    <box-icon name='left-arrow-alt' class="text-blue-500 hover:text-white"></box-icon>
                     Kembali
                 </a>
                 <x-btn-primary type="button" text="Perbarui keranjang" id="updateCartBtn"
@@ -90,60 +93,8 @@
             w-full justify-center"/>
         </div>
 
-        <div id="modal"
-        class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 opacity-0">
-            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-            </div>
-
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
-                &#8203;
-            </span>
-            <div role="dialog" aria-modal="true" aria-labelledby="modal-headline"
-            class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div class="bg-white pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div class="mt-3 text-center sm:mt-0 sm:text-left">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                            Let's checkout
-                        </h3>
-                        <div class="mt-5 flex w-full-2x step-form">
-                            <form action="{{-- routing on js --}}" method="POST" 
-                            class="block w-full show-step">
-                                <label class="block mb-3">
-                                    <span class="text-gray-700">Please fill your address</span>
-                                </label>
-                                <textarea class="form-textarea mt-1 block w-full" 
-                                placeholder="Ex: Swadaya gudang baru, no 16 A, Ciganjur, Jagakarsa, Jakarta Selatan" rows="3"></textarea>
-                            </form>
-                            <div class="w-full hide-step">
-                                <p>Summary order</p>
-                                <ul>
-                                    @for ($i = 0; $i < 3; $i++)
-                                        <li>item {{ $i }}</li>    
-                                    @endfor
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" 
-                    class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm
-                    px-4 py-2 bg-teal-400 text-base font-medium text-white hover:bg-teal-500
-                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3
-                    sm:w-auto sm:text-sm next-step" disabled>
-                        Next
-                    </button>
-                    <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700
-                    hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
-                    sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" id="closeModal">
-                        Cancel
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+        @include('payment.step-checkout')
+        @include('payment.add-new-address', ['columns' => $addressColumn])
 
     @else
         @include('payment.no-item')

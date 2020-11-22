@@ -27,7 +27,6 @@ mix.js('resources/js/app.js', 'public/js')
         'resources/css/custom-dashboard.css'
     ], 'public/css/dashboard.css')
     .scripts([
-        
         'public/js/addons/jquery.min.js',
         'public/js/addons/popper.min.js',
         'public/js/addons/bootstrap.min.js',
@@ -42,10 +41,12 @@ mix.js('resources/js/app.js', 'public/js')
         'public/template/assets/extra-libs/c3/c3.min.js',
         'public/template/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js',
         'public/template/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js',
+        'public/template/assets/libs/chart.js/dist/Chart.min.js',
         // 'public/template/assets/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js',
         // 'public/template/assets/libs/chartist/chartist.min.js',
         'resources/plugin/datatables.net/js/jquery.dataTables.min.js',
         'resources/plugin/datatables.net/js/datatable-basic.init.min.js',
+        // 'resources/js/admin-chartjs.init.js',
         'public/js/custom-dashboard.js'
     ], 'public/js/dashboard.js')
     .copyDirectory('resources/plugin/datatables.net', 'public/library')

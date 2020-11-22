@@ -2,7 +2,9 @@
 @use 'general';
 
 .header {
+    z-index: 1;
     position: relative;
+    
     #landingPage & {
         background: {
             image: url('../img/header-landing.jpg');

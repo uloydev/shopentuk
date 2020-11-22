@@ -133,7 +133,7 @@ module.exports = g;
 /*!***************************************!*\
   !*** ./resources/js/helper-module.js ***!
   \***************************************/
-/*! exports provided: getSiblings, formattingRupiah, setFormAction */
+/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -141,6 +141,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSiblings", function() { return getSiblings; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formattingRupiah", function() { return formattingRupiah; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setFormAction", function() { return setFormAction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUrlWithoutProtocol", function() { return getUrlWithoutProtocol; });
 /*!
  * Get all siblings of an element
  * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
@@ -167,6 +168,13 @@ var formattingRupiah = function formattingRupiah(currency) {
 var setFormAction = function setFormAction(form, url) {
   document.querySelector(form).action = url;
 };
+/**
+ * get url without protocol
+ */
+
+function getUrlWithoutProtocol(urlnya) {
+  return urlnya.split('//').pop();
+}
 
 /***/ }),
 
@@ -357,16 +365,14 @@ if (pageUrl === '/login') {
   } else if (localStorage.getItem('sessionFailed') === 'login') {
     removeValidationOnFalseForm(formRegister);
   }
-} //cart js
-// customer dashboard js
+} // customer dashboard js
 
 
 if (pageUrl.indexOf('/my-account') > -1) {
   var tabsMenu = document.querySelectorAll('.change-menu-btn');
-  var pageUrlWithoutProtocol = window.location.href.replace(window.location.protocol, '');
+  var pageUrlWithoutProtocol = _helper_module_js__WEBPACK_IMPORTED_MODULE_2__["getUrlWithoutProtocol"](window.location.href);
   tabsMenu.forEach(function (menu) {
-    var tabLinkMenu = menu.getAttribute('href');
-    console.log(tabLinkMenu);
+    var tabLinkMenu = _helper_module_js__WEBPACK_IMPORTED_MODULE_2__["getUrlWithoutProtocol"](menu.getAttribute('href'));
 
     if (tabLinkMenu === pageUrlWithoutProtocol) {
       menu.classList.add('text-blue-500', 'border-b', 'border-blue-500');
@@ -375,67 +381,110 @@ if (pageUrl.indexOf('/my-account') > -1) {
   });
 
   if (pageUrl === '/my-account/point') {
+    //collecting each point and sum-ing it
     var pointQty = Array.from(document.querySelectorAll('.point-item__qty')).map(function (point) {
       return Number(point.textContent);
     });
     var pointTotal = pointQty.reduce(function (acc, val) {
       return acc + val;
     });
-    document.querySelector('.point-item__total').textContent = pointTotal;
+    document.querySelector('.point-item__total').textContent = pointTotal; //end of that   
   }
-}
+} // cart page js
+
 
 if (pageUrl === '/cart') {
+  /*
+   * change '.next-step' text
+  */
   var setNextStepBtnText = function setNextStepBtnText(textBtn) {
     nextStepBtn.textContent = textBtn;
   };
+  /*
+   * open step on checkout modal
+   */
+
+
+  var openStep = function openStep(step) {
+    step.classList.add('show-step');
+    step.classList.remove('hide-step');
+  };
+  /**
+   * close step on checkout modal
+   */
+
+
+  var closeStep = function closeStep(step) {
+    step.classList.add('hide-step');
+    step.classList.remove('show-step');
+  };
 
   var cartPage = document.querySelector('#cartPage');
+  /**
+   * function to open modal if modal closed, 
+   * close modal if modal opened
+   */
 
   var openCloseModal = function openCloseModal(modalSelector) {
     var _modalEl$classList;
 
     var modalEl = cartPage.querySelector(modalSelector);
-    var classToCloseModal = ['invisible', 'h-0', 'opacity-0'];
+    var classToCloseModal = ['invisible', 'h-0', 'opacity-0']; // if modal open, set isModalOpen = true. else, isModalOpen = false
+
     var isModalOpen = (_modalEl$classList = modalEl.classList).contains.apply(_modalEl$classList, classToCloseModal) ? true : false;
 
     if (isModalOpen === true) {
       var _modalEl$classList2;
 
+      // close modal
       (_modalEl$classList2 = modalEl.classList).remove.apply(_modalEl$classList2, classToCloseModal);
     } else {
       var _modalEl$classList3;
 
+      // open modal
       (_modalEl$classList3 = modalEl.classList).add.apply(_modalEl$classList3, classToCloseModal);
     }
-  };
+  }; // modal checkout and it's child
 
-  var modalCheckout = cartPage.querySelector('#modal');
+
+  var modalCheckout = cartPage.querySelector('#modalCheckout');
   var firstStep = modalCheckout.querySelector('.step-form > form');
   var secondStep = modalCheckout.querySelector('.step-form > div');
-  var nextStepBtn = modalCheckout.querySelector('.next-step');
+  var nextStepBtn = modalCheckout.querySelector('.next-step'); // open modal checkout
+
   var btnShowCheckoutStep = cartPage.querySelector('#btnShowCheckoutStep');
   btnShowCheckoutStep.addEventListener('click', function () {
     openCloseModal('#' + modalCheckout.getAttribute('id'));
   });
-  var addressUser = firstStep.querySelector('textarea');
-  addressUser.addEventListener('change', function () {
-    nextStepBtn.disabled = addressUser.value.trim() !== '' ? false : true;
-  });
-  var btnCloseModal = cartPage.querySelector('#closeModal');
+  var btnCloseModal = cartPage.querySelector('#closeModalCheckout'); // when user close the modal
+
   btnCloseModal.addEventListener('click', function () {
     openCloseModal('#' + modalCheckout.getAttribute('id'));
-    firstStep.classList.add('show-step');
-    firstStep.classList.remove('hide-step');
-    secondStep.classList.add('hide-step');
-    secondStep.classList.remove('show-step');
+    openStep(firstStep);
+    closeStep(secondStep);
     setNextStepBtnText('Next');
+  }); // each btn to manage modal address
+
+  var btnOpenModalAddress = cartPage.querySelector('#add-new-address-btn');
+  var btnCloseModalAddress = cartPage.querySelector('#btn-close-modalAddNewAddress');
+  var btnsManageModalAddress = [btnOpenModalAddress, btnCloseModalAddress];
+  /**
+   * when one of btnsManageModalAddress is click, 
+   * open modal if it closed. Otherwise close it
+   */
+
+  btnsManageModalAddress.forEach(function (btnOnModalAddNewAddress) {
+    btnOnModalAddNewAddress.addEventListener('click', function () {
+      openCloseModal('#modalAddNewAddress');
+    });
   });
+  /**
+   * when user go to next step on checkout
+   */
+
   nextStepBtn.addEventListener('click', function () {
-    secondStep.classList.add('show-step');
-    secondStep.classList.remove('hide-step');
-    firstStep.classList.add('hide-step');
-    firstStep.classList.remove('show-step');
+    openStep(secondStep);
+    closeStep(firstStep);
     setNextStepBtnText('Checkout');
   });
 } //plugin js

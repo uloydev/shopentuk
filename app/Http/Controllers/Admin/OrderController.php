@@ -22,13 +22,13 @@ class OrderController extends Controller
 
     public function index()
     {
-        return view('admin.order.index', ['orders' => Order::all()]);
+        return view('order.manage', ['orders' => Order::all(), 'title' => 'manage order']);
     }
 
     public function newOrder()
     {
         $orders = Order::whereIn('status', ['paid', 'unpaid'])->get();
-        return view('admin.order.new', ['orders' => $orders]);
+        return view('order.new', ['orders' => $orders]);
     }
 
     public function rejectOrder(Order $order)
@@ -40,20 +40,20 @@ class OrderController extends Controller
         $order->save();
         $user = $order->user;
         Mail::to($user->email)->send(new OrderRejected($user, $order));
-        return redirect()->back()->with('success', 'order berhasil ditolak');
+        return redirect()->back()->with('success', 'order ditolak');
     }
 
     public function orderToRefund()
     {
         $orders = Order::where('status', 'refunded')->doesntHave('refund')->get();
-        return view('adnmin.order.refund', [
+        return view('order.refund', [
             'orders' => $orders,
         ]);
     }
 
     public function showRefundForm(Order $order)
     {
-        return view('admin.order.refund-form', [
+        return view('order.refund-form', [
             'order' => $order,
         ]);
     }
@@ -64,7 +64,7 @@ class OrderController extends Controller
         
         $siteSetting = SiteSetting::first();
         $user = $order->user;
-        $refund = new Refund();
+        $refund = new Refund;
         
         $refund->full_name = $user->name;
         $refund->phone = $user->phone;
@@ -78,14 +78,16 @@ class OrderController extends Controller
             $refund->payment_date = Carbon::now();
             $user->point += round($order->price_total / $siteSetting->point_value);
             $user->point += $order->point_total;
-        }else{
+        }
+        else {
             $refund->payment_date = Carbon::parse($request->payment_date);
         }
         $refund->save();
         $user->save();
         Mail::to($user->email)->send(new OrderRefunded($user, $order));
 
-        return redirect()->route('admin.order.refund.index')
-        ->with('success', 'sukses refund order!');
+        return redirect()->route('admin.order.refund.index')->with(
+            'success', 'sukses refund order!'
+        );
     }
 }

@@ -1,0 +1,70 @@
+<div id="modalCheckout"
+        class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 opacity-0">
+            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                    <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                </div>
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+                    &#8203;
+                </span>
+                <div role="dialog" aria-modal="true" aria-labelledby="modal-headline"
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden
+                shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                    <div class="bg-white pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+                                Let's checkout
+                            </h3>
+                            <div class="mt-5 flex w-full-2x step-form">
+                                <form action="{{-- routing on js --}}" method="POST" 
+                                class="block w-full show-step">
+                                    <div class="mb-5">
+                                        <label class="block mt-4">
+                                            <span class="text-gray-700">Pilih alamat</span>
+                                        </label>
+                                        <select class="form-select mt-1 block w-full mb-1">
+                                            @forelse ($addresses as $address)
+                                                <option value="{{ $address->id }}">
+                                                    {{ $address->title }}
+                                                </option>
+                                            @empty
+                                                <option>
+                                                    Kamu belum pernah memasukan data alamatmu
+                                                </option>
+                                            @endforelse
+                                        </select>
+                                        <a href="javascript:void(0)" id="add-new-address-btn"
+                                        class="text-blue-400 underline">
+                                            Tambah alamat
+                                        </a>
+                                    </div>
+                                </form>
+                                <div class="w-full hide-step">
+                                    <p>Summary order</p>
+                                    <ul>
+                                        @for ($i = 0; $i < 3; $i++)
+                                            <li>item {{ $i }}</li>    
+                                        @endfor
+                                    </ul>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <button type="button" 
+                        class="w-full inline-flex justify-center rounded-md border border-transparent
+                        shadow-sm px-4 py-2 bg-teal-400 text-base font-medium text-white
+                        hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2
+                        focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm next-step">
+                            Next
+                        </button>
+                        <button type="button" 
+                        class="mt-3 w-full inline-flex justify-center rounded-md font-medium
+                        border border-gray-300 shadow-sm px-4 py-2 bg-white text-base
+                        text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 sm:text-sm
+                        focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto"
+                        id="closeModalCheckout">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
