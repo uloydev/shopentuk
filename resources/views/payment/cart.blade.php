@@ -94,7 +94,7 @@
         </div>
 
         @include('payment.step-checkout')
-        @include('payment.add-new-address')
+        @include('payment.add-new-address', ['columns' => $addressColumn])
 
     @else
         @include('payment.no-item')

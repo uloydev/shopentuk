@@ -19,7 +19,7 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                 <div class="mt-5 flex w-full-2x step-form">
                     <form action="{{-- routing on js --}}" method="POST" 
                     class="grid lg:grid-cols-2 gap-x-5 w-full show-step">
-                        @foreach ($addressColumn as $column)
+                        @foreach ($columns as $column)
                             @php
                                 $id = Str::kebab($column);
                                 $text = Str::of($column)->replace('_', ' ')->title();
