@@ -9,6 +9,8 @@ use App\Models\Order;
 use App\Models\SiteSetting;
 use App\Models\CartItem;
 use App\Models\Product;
+use App\Models\User;
+use App\Models\UserAddress;
 
 class CartController extends Controller
 {
@@ -26,6 +28,12 @@ class CartController extends Controller
         $priceTotal = 0;
         $cart = Auth::user()->cart;
 
+        $addresses = UserAddress::where('id', Auth::id())->get();
+        $userAddress = new UserAddress();
+
+        //get all column on UserAddress except user_id, bcz user_id is not on backend
+        $addressColumnExceptUserId = array_diff($userAddress->getFillable(), ['user_id']);
+
         if ($cart && $cart->cartItems->count() > 0) {
             foreach ($cart->cartItems as $item) {
                 if ($item->is_toko_point) {
@@ -42,6 +50,8 @@ class CartController extends Controller
             'siteSetting' => $this->siteSetting,
             'pointTotal' => $pointTotal,
             'priceTotal' => $priceTotal,
+            'addresses' => $addresses,
+            'addressColumn' => $addressColumnExceptUserId
         ]);
     }
 
