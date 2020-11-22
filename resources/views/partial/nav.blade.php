@@ -29,20 +29,27 @@
                 </a>
                 <ul class="nav__ul lg:border-0 divide-y lg:divide-gray-300 lg:bg-white pr-0 lg:pr-8 lg:shadow">
                     @foreach ($categories->where('is_digital_product', false) as $category)
-                        <li class="nav__item nav__item--menu nav__item-has-child">
-                            <a href="" class="nav__link nav__link--open-child">
-                                <x-menu-has-child text="{{ Str::words($category->title, 2) }}" />
-                            </a>
-                            <ul class="nav__ul divide-y divide-gray-400 lg:bg-white">
-                                @foreach ($category->productSubCategory as $subCategory)
-                                    <x-menu-standar 
-                                    id="{{ Str::slug($subCategory->title, '-') }}" 
-                                    text="{{ $subCategory->title }}" 
-                                    to="{{ route('store.product.index', ['subCatId' => $subCategory->id]) }}" 
-                                    have-icon="true" />
-                                @endforeach
-                            </ul>
-                        </li>
+                        @if($category->productSubCategory->count() > 0)
+                            <li class="nav__item nav__item--menu nav__item-has-child">
+                                <a href="" class="nav__link nav__link--open-child">
+                                    <x-menu-has-child text="{{ Str::words($category->title, 2) }}" />
+                                </a>
+                                <ul class="nav__ul divide-y divide-gray-400 lg:bg-white">
+                                    @foreach ($category->productSubCategory as $subCategory)
+                                        <x-menu-standar 
+                                        id="{{ Str::slug($subCategory->title, '-') }}" 
+                                        text="{{ $subCategory->title }}" 
+                                        to="{{ route('store.product.index', ['subCatId' => $subCategory->id]) }}" 
+                                        have-icon="true" />
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @else
+                            <x-menu-standar 
+                            id="{{ Str::slug($category->title, '-') }}" 
+                            text="{{ $category->title }}" 
+                            to="{{ route('store.product.index', ['catId' => $category->id]) }}" have-icon="true"  />
+                        @endif
                     @endforeach
                     <x-menu-standar id="menu-store-all" text="All"
                     to="{{ route('store.product.index') }}" have-icon="false" />
@@ -54,20 +61,28 @@
                 </a>
                 <ul class="nav__ul lg:bg-white pr-0 lg:pr-4 divide-y lg:divide-gray-400 lg:w-48 lg:shadow">
                     @foreach ($categories->where('is_digital_product', true) as $category)
-                        <li class="nav__item nav__item--menu nav__item-has-child">
-                            <a href="" class="nav__link nav__link--open-child">
-                                <x-menu-has-child text="{{ $category->title }}" />
-                            </a>
-                            <ul class="nav__ul lg:bg-white divide-y lg:divide-gray-400 border-0 lg:w-48">
-                                @foreach ($category->productSubCategory as $subCategory)
-                                    <x-menu-standar 
-                                    id="{{ Str::slug($subCategory->title, '-') }}" 
-                                    text="{{ $subCategory->title }}" 
-                                    to="{{route('store.voucher.index', ['subCatId'=>$subCategory->id])}}" 
-                                    have-icon="true" />
-                                @endforeach
-                            </ul>
-                        </li>
+                        @if($category->productSubCategory->count() > 0)
+                            <li class="nav__item nav__item--menu nav__item-has-child">
+                                <a href="" class="nav__link nav__link--open-child">
+                                    <x-menu-has-child text="{{ $category->title }}" />
+                                </a>
+                                <ul class="nav__ul lg:bg-white divide-y lg:divide-gray-400 border-0 lg:w-48">
+                                    @foreach ($category->productSubCategory as $subCategory)
+                                        <x-menu-standar 
+                                        id="{{ Str::slug($subCategory->title, '-') }}" 
+                                        text="{{ $subCategory->title }}" 
+                                        to="{{route('store.voucher.index', ['subCatId'=>$subCategory->id])}}" 
+                                        have-icon="true" />
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @else
+                            <x-menu-standar 
+                            id="{{ Str::slug($category->title, '-') }}" 
+                            text="{{ $category->title }}" 
+                            to="{{route('store.voucher.index', ['catId'=>$category->id])}}" 
+                            have-icon="true" />
+                        @endif
                     @endforeach
                     <x-menu-standar id="menu-store-all" to="{{ route('store.voucher.index') }}" 
                     text="All" have-icon="false"/>

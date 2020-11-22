@@ -33,7 +33,7 @@ class HomeController extends Controller
 
     public function landingPage()
     {
-        $products = Product::limit(10)->latest()->get();
+        $products = Product::where('is_redeem', false)->limit(10)->latest()->get();
         return view('landing', ['products' => $products]);
     }
 }

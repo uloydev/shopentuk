@@ -27,13 +27,13 @@ class ProductCategory extends Model
     }
 
     // image_url mutator
-    public function setImageAttribute($value)
-    {
-        $this->attributes['image'] = base64_encode($value);
-    }
+    // public function setImageAttribute($value)
+    // {
+    //     $this->attributes['image'] = base64_encode($value);
+    // }
 
-    public function getImageAttribute()
-    {
-        return base64_decode($this->attributes['image']);
-    }
+    // public function getImageAttribute()
+    // {
+    //     return base64_decode($this->attributes['image']);
+    // }
 }
