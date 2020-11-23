@@ -10,6 +10,7 @@ const dividerMenu = ['divide-y', 'divide-gray-400'] //ini class buat nambah bord
 const classToOpenNavItemHasChild = 'nav__item-has-child--open'
 const pageUrl = window.location.pathname
 const elementOnHeaderExceptNav = document.querySelectorAll('header nav + *')
+const metaToken = document.querySelector('meta[name="csrf-token"]').content
 
 const closeNav =  () => {
     nav.classList.remove('nav--open')
@@ -162,7 +163,7 @@ if (pageUrl === '/cart') {
      * close modal if modal opened
      */
     const openCloseModal = (modalSelector) => {
-        const modalEl = cartPage.querySelector(modalSelector)
+        const modalEl = document.querySelector(modalSelector)
         const classToCloseModal = ['invisible', 'h-0', 'opacity-0']
 
         // if modal open, set isModalOpen = true. else, isModalOpen = false
@@ -179,71 +180,112 @@ if (pageUrl === '/cart') {
     }
 
     // modal checkout and it's child
-    const modalCheckout = cartPage.querySelector('#modalCheckout')
-    const firstStep = modalCheckout.querySelector('.step-form > form')
-    const secondStep = modalCheckout.querySelector('.step-form > div')
-    const nextStepBtn = modalCheckout.querySelector('.next-step')
+    if (cartPage.querySelector('#modalCheckout')) {
+        const modalCheckout = cartPage.querySelector('#modalCheckout')
+        const firstStep = modalCheckout.querySelector('.step-form > form')
+        const secondStep = modalCheckout.querySelector('.step-form > div')
+        const nextStepBtn = modalCheckout.querySelector('.next-step')
 
-    // open modal checkout
-    const btnShowCheckoutStep = cartPage.querySelector('#btnShowCheckoutStep')
-    btnShowCheckoutStep.addEventListener('click', () => {
-        openCloseModal('#' + modalCheckout.getAttribute('id'))
-    })
-
-    /*
-     * change '.next-step' text
-    */
-    function setNextStepBtnText(textBtn) {
-        nextStepBtn.textContent = textBtn
-    }
-
-    /*
-     * open step on checkout modal
-     */
-    function openStep(step) {
-        step.classList.add('show-step')
-        step.classList.remove('hide-step')
-    }
-    /**
-     * close step on checkout modal
-     */
-    function closeStep(step) {
-        step.classList.add('hide-step')
-        step.classList.remove('show-step')
-    }
-
-    const btnCloseModal = cartPage.querySelector('#closeModalCheckout')
-    // when user close the modal
-    btnCloseModal.addEventListener('click', () => {
-        openCloseModal('#' + modalCheckout.getAttribute('id'))
-        openStep(firstStep)
-        closeStep(secondStep)
-        setNextStepBtnText('Next')
-    });
-
-    // each btn to manage modal address
-    const btnOpenModalAddress = cartPage.querySelector('#add-new-address-btn')
-    const btnCloseModalAddress = cartPage.querySelector('#btn-close-modalAddNewAddress')
-    const btnsManageModalAddress = [btnOpenModalAddress, btnCloseModalAddress]
-    
-    /**
-     * when one of btnsManageModalAddress is click, 
-     * open modal if it closed. Otherwise close it
-     */
-    btnsManageModalAddress.forEach(btnOnModalAddNewAddress => {
-        btnOnModalAddNewAddress.addEventListener('click', () => {
-            openCloseModal('#modalAddNewAddress')
+        // open modal checkout
+        const btnShowCheckoutStep = cartPage.querySelector('#btnShowCheckoutStep')
+        btnShowCheckoutStep.addEventListener('click', () => {
+            openCloseModal('#' + modalCheckout.getAttribute('id'))
         })
-    })
+    
+        /*
+         * change '.next-step' text
+        */
+        function setNextStepBtnText(textBtn) {
+            nextStepBtn.textContent = textBtn
+        }
+    
+        /*
+         * open step on checkout modal
+         */
+        function openStep(step) {
+            step.classList.add('show-step')
+            step.classList.remove('hide-step')
+        }
+        /**
+         * close step on checkout modal
+         */
+        function closeStep(step) {
+            step.classList.add('hide-step')
+            step.classList.remove('show-step')
+        }
+    
+        const btnCloseModal = cartPage.querySelector('#closeModalCheckout')
+        // when user close the modal
+        btnCloseModal.addEventListener('click', () => {
+            openCloseModal('#' + modalCheckout.getAttribute('id'))
+            openStep(firstStep)
+            closeStep(secondStep)
+            setNextStepBtnText('Next')
+        });
+    
+        // each btn to manage modal address
+        const btnOpenModalAddress = cartPage.querySelector('#add-new-address-btn')
+        const btnCloseModalAddress = cartPage.querySelector('#btn-close-modalAddNewAddress')
+        const btnsManageModalAddress = [btnOpenModalAddress, btnCloseModalAddress]
+        
+        /**
+         * when one of btnsManageModalAddress is click, 
+         * open modal if it closed. Otherwise close it
+         */
+        btnsManageModalAddress.forEach(btnOnModalAddNewAddress => {
+            btnOnModalAddNewAddress.addEventListener('click', () => {
+                openCloseModal('#modalAddNewAddress')
+            })
+        })
+    
+        /**
+         * when user go to next step on checkout
+         */
+        nextStepBtn.addEventListener('click', () => {
+            openStep(secondStep)
+            closeStep(firstStep)
+            setNextStepBtnText('Checkout')
+        })
+    
+        const newAddressBtn = document.querySelector('#newAddressSubmit');
+        const newAddressForm = document.querySelector('#newAddressForm');
+        const addresses = cartPage.querySelector('#form-checkout select');
 
-    /**
-     * when user go to next step on checkout
-     */
-    nextStepBtn.addEventListener('click', () => {
-        openStep(secondStep)
-        closeStep(firstStep)
-        setNextStepBtnText('Checkout')
-    })
+        newAddressForm.addEventListener('submit', (e) => {
+    
+            e.preventDefault()
+            newAddressBtn.disabled = true;
+    
+            let data = new FormData(newAddressForm);
+            fetch(newAddressForm.getAttribute('action'), {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'X-CSRF-Token': metaToken,
+                    },
+                    body: JSON.stringify(Object.fromEntries(data)),
+                })
+                .then(res => res.json())
+                .then(json => {
+
+                    addresses.innerHTML = ''
+                    for (const [key, value] of Object.entries(json)) {
+                        addresses.innerHTML += `
+                        <option value="${value.id}">
+                            ${value.title}
+                        </option>
+                        `
+                    }
+                    
+                    
+                    openCloseModal('#modalAddNewAddress')
+    
+                });
+            newAddressBtn.disabled = false;
+        });
+    }
+    
+
 }
 
 //plugin js

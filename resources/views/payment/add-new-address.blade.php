@@ -17,8 +17,8 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                     Tambah alamat baru
                 </h3>
                 <div class="mt-5 flex">
-                    <form action="{{-- routing on js --}}" method="POST" id="newAddressForm"
-                    class="grid lg:grid-cols-2 gap-x-5 w-full">
+                    <form action="{{ route("my-account.address.store") }}" method="POST" 
+                    id="newAddressForm" class="grid lg:grid-cols-2 gap-x-5 w-full">
                         @foreach ($columns as $column)
                             @php
                                 $id = Str::kebab($column);
@@ -34,14 +34,15 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                                     </label>
                                     <textarea id="{{ $id }}" 
                                     class="form-textarea mt-1 block w-full" rows="3" 
-                                    placeholder="Masukan nama jalanmu" name="street_address" required></textarea>
+                                    placeholder="Masukan nama jalanmu" 
+                                    name="street_address" required>{{ Str::random(15) }}</textarea>
                                 </div>
                                 @break
 
                                 @case('postal_code')
                                 <x-input-basic
                                     name="{{ $column }}" box-width="lg:col-span-full"
-                                    label="{{ $text }}" 
+                                    label="{{ $text }}" value="{{ Str::random(15) }}"
                                     required />
                                 @break
                                 
@@ -58,7 +59,7 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                                                 <input type="radio" 
                                                 class="form-radio" 
                                                 checked name="is_main_address" 
-                                                value="1">
+                                                value="1" checked>
                                                 <span class="ml-2">
                                                 ya
                                                 </span>
@@ -68,10 +69,10 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                                             <label class="inline-flex items-center">
                                                 <input type="radio" 
                                                 class="form-radio" 
-                                                checked name="is_main_address" 
+                                                name="is_main_address" 
                                                 value="0">
                                                 <span class="ml-2">
-                                                tidak
+                                                    tidak
                                                 </span>
                                             </label>
                                         </div>
@@ -82,7 +83,7 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                                 @default
                                     <x-input-basic
                                     name="{{ $column }}" 
-                                    label="{{ $text }}" 
+                                    label="{{ $text }}" value="{{ Str::random(15) }}"
                                     required />
                             @endswitch
                         @endforeach
@@ -90,7 +91,7 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                 </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button type="button" id="newAddressSubmit"
+                <button type="submit" id="newAddressSubmit" form="newAddressForm"
                 class="w-full inline-flex justify-center rounded-md border border-transparent
                 shadow-sm px-4 py-2 bg-teal-400 text-base font-medium text-white
                 hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2

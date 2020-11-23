@@ -16,7 +16,7 @@
                             </h3>
                             <div class="mt-5 flex w-full-2x step-form">
                                 <form action="{{-- routing on js --}}" method="POST" 
-                                class="block w-full show-step">
+                                class="block w-full show-step" id="form-checkout">
                                     <div class="mb-5">
                                         <label class="block mt-4">
                                             <span class="text-gray-700">Pilih alamat</span>
