@@ -26,9 +26,9 @@ class CartController extends Controller
     {
         $pointTotal = 0;
         $priceTotal = 0;
-        $cart = Auth::user()->cart;
-
-        $addresses = UserAddress::where('id', Auth::id())->get();
+        $user = Auth::user();
+        $cart = $user->cart;
+        $addresses = $user->userAddresses->sortByDesc('is_main_address');
         $userAddress = new UserAddress();
 
         //get all column on UserAddress except user_id, bcz user_id is not on backend

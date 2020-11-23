@@ -41,9 +41,9 @@
                                 <div class="w-full hide-step">
                                     <p>Summary order</p>
                                     <ul>
-                                        @for ($i = 0; $i < 3; $i++)
-                                            <li>item {{ $i }}</li>    
-                                        @endfor
+                                        @foreach ($cart->cartItems as $item)
+                                            <li>{{ $item->product->title }} x {{ $item->quantity }}</li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>

@@ -100,34 +100,54 @@
         @include('payment.no-item')
     @endif
 </div>
+@endsection
 
-<script>
-    const cartPage = document.querySelector('#cartPage')
-
-    const updateCartBtn = cartPage.querySelector('#updateCartBtn');
-    updateCartBtn.addEventListener('click', () => {
-        let data = [];
-        const cartItems = cartPage.querySelectorAll('.cart-item__qty');
-        cartItems.forEach(item => {
-            data.push({
-                'item_id' : item.dataset.itemId,
-                'quantity' : item.value,
+@push('script')
+    <script>
+        const cartPage = document.querySelector('#cartPage')
+    
+        const updateCartBtn = cartPage.querySelector('#updateCartBtn');
+        updateCartBtn.addEventListener('click', () => {
+            let data = [];
+            const cartItems = cartPage.querySelectorAll('.cart-item__qty');
+            cartItems.forEach(item => {
+                data.push({
+                    'item_id' : item.dataset.itemId,
+                    'quantity' : item.value,
+                });
+            });
+            fetch('/cart/{{ Auth::user()->cart->id ?? "" }}', {
+                method:'PUT',
+                headers:{
+                    'Content-type': 'application/json',
+                    'X-CSRF-Token': '{{csrf_token()}}',
+                },
+                body:JSON.stringify(data),
+            }).then(res => res.json())
+            .then(json => {
+                console.log(json);
+                location.reload();
             });
         });
-        fetch('/cart/{{ Auth::user()->cart->id ?? "" }}', {
-            method:'PUT',
-            headers:{
-                'Content-type': 'application/json',
-                'X-CSRF-Token': '{{csrf_token()}}',
-            },
-            body:JSON.stringify(data),
-        }).then(res => res.json())
-        .then(json => {
-            console.log(json);
-            location.reload();
+    
+        // new address
+        const newAddressBtn = document.querySelector('#newAddressSubmit');
+        const newAddressForm = document.querySelector('#newAddressForm');
+        newAddressBtn.addEventListener('click', () => {
+            this.disabled = true;
+            let data = new FormData(newAddressForm);
+            fetch('{{ route("my-account.address.store") }}', {
+                method:'POST',
+                headers:{
+                    'Content-type': 'application/json',
+                    'X-CSRF-Token': '{{csrf_token()}}',
+                },
+                body:JSON.stringify(Object.fromEntries(data)),
+            }).then(res => res.json())
+            .then(json => {
+                
+            });
+            this.disabled = false;
         });
-    });
-
-</script>
-
-@endsection
+    </script>
+@endpush

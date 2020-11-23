@@ -39,6 +39,7 @@ Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'
     Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');
     Route::get('detail', 'DashboardController@accountDetail')->name('account.detail');
     Route::get('point', 'DashboardController@accountPoint')->name('account.point');
+    Route::resource('address', 'UserAddressController');
 });
 
 // admin route

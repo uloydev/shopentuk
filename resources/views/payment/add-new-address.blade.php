@@ -16,9 +16,9 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                 id="modal-headline">
                     Tambah alamat baru
                 </h3>
-                <div class="mt-5 flex w-full-2x step-form">
-                    <form action="{{-- routing on js --}}" method="POST" 
-                    class="grid lg:grid-cols-2 gap-x-5 w-full show-step">
+                <div class="mt-5 flex">
+                    <form action="{{-- routing on js --}}" method="POST" id="newAddressForm"
+                    class="grid lg:grid-cols-2 gap-x-5 w-full">
                         @foreach ($columns as $column)
                             @php
                                 $id = Str::kebab($column);
@@ -34,7 +34,7 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                                     </label>
                                     <textarea id="{{ $id }}" 
                                     class="form-textarea mt-1 block w-full" rows="3" 
-                                    placeholder="Masukan nama jalanmu" required></textarea>
+                                    placeholder="Masukan nama jalanmu" name="street_address" required></textarea>
                                 </div>
                                 @break
 
@@ -49,26 +49,32 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                                 <div class="block mb-6 lg:col-span-full">
                                     <label for="" class="required-input">
                                         <span class="text-gray-700">
-                                            {{ $text }}
+                                            Jadikan sebagai alamat utama ?
                                         </span>
                                     </label>
                                     <div class="mt-2 flex">
-                                        @php
-                                        $options = ['true', 'false'];
-                                        @endphp
-                                        @for ($i = 0; $i < count($options); $i++)
-                                        <div @if ($i !== 0) class="ml-2" @endif>
+                                        <div>
                                             <label class="inline-flex items-center">
                                                 <input type="radio" 
                                                 class="form-radio" 
-                                                checked name="{{ $column }}" 
-                                                value="{{ $options[$i] }}">
+                                                checked name="is_main_address" 
+                                                value="1">
                                                 <span class="ml-2">
-                                                {{ $options[$i] }}
+                                                ya
                                                 </span>
                                             </label>
                                         </div>
-                                        @endfor
+                                        <div class="ml-2">
+                                            <label class="inline-flex items-center">
+                                                <input type="radio" 
+                                                class="form-radio" 
+                                                checked name="is_main_address" 
+                                                value="0">
+                                                <span class="ml-2">
+                                                tidak
+                                                </span>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                                 @break
@@ -81,22 +87,14 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                             @endswitch
                         @endforeach
                     </form>
-                    <div class="w-full hide-step">
-                        <p>Summary order</p>
-                        <ul>
-                            @for ($i = 0; $i < 3; $i++)
-                                <li>item {{ $i }}</li>
-                            @endfor
-                        </ul>
-                    </div>
                 </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button type="button" 
+                <button type="button" id="newAddressSubmit"
                 class="w-full inline-flex justify-center rounded-md border border-transparent
                 shadow-sm px-4 py-2 bg-teal-400 text-base font-medium text-white
                 hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2
-                focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm next-step" disabled>
+                focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm next-step">
                     Submit
                 </button>
                 <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium
