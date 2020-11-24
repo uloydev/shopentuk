@@ -24,8 +24,8 @@ class ProductImageFactory extends Factory
     {
         return [
             'url' => 'https://via.placeholder.com/150/b6f/FFF?text=Shopentuk',
-            'product_id' => Product::factory(),
-            'is_main_image' => false,
+            'product_id' => $this->faker->unique(true)->numberBetween(1, 7),
+            'is_main_image' => $this->faker->boolean(50),
         ];
     }
 }

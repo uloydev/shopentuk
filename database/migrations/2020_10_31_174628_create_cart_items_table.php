@@ -16,7 +16,6 @@ class CreateCartItemsTable extends Migration
         Schema::create('cart_item', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cart_id');
-            $table->string('image')->nullable();
             $table->foreignId('product_id');
             $table->integer('quantity');
             $table->boolean('is_toko_point')->default(false);

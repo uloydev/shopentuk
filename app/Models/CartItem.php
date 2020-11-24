@@ -13,7 +13,6 @@ class CartItem extends Model
     protected $fillable = [
         'cart_id',
         'product_id',
-        'image',
         'quantity',
         'is_toko_point',
     ];
