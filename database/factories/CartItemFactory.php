@@ -24,6 +24,7 @@ class CartItemFactory extends Factory
     public function definition()
     {
         return [
+            'image' => $this->faker->image(),
             'cart_id' => Cart::factory(),
             'product_id' => Product::factory(),
             'quantity' => rand(1, 5),
