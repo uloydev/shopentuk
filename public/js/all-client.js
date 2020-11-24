@@ -532,6 +532,32 @@ if (pageUrl === '/cart') {
       });
       newAddressBtn.disabled = false;
     });
+  } // update cart
+
+
+  if (cartPage.querySelector('#updateCartBtn')) {
+    var updateCartBtn = cartPage.querySelector('#updateCartBtn');
+    var cartId = updateCartBtn.dataset.cartId;
+    updateCartBtn.addEventListener('click', function () {
+      var boughtItems = [];
+      var cartItems = cartPage.querySelectorAll('.cart-item__qty');
+      cartItems.forEach(function (item) {
+        boughtItems.push({
+          'item_id': item.dataset.itemId,
+          'quantity': item.value
+        });
+      });
+      fetch("/cart/".concat(cartId), {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json',
+          'X-CSRF-Token': metaToken
+        },
+        body: JSON.stringify(boughtItems)
+      }).then(function () {
+        return location.reload();
+      });
+    });
   }
 } //plugin js
 

@@ -83,7 +83,8 @@
                     <box-icon name='left-arrow-alt' class="text-blue-500 hover:text-white"></box-icon>
                     Kembali
                 </a>
-                <x-btn-primary type="button" text="Perbarui keranjang" id="updateCartBtn"
+                <x-btn-primary type="button" text="Perbarui keranjang" 
+                id="updateCartBtn" data-cart-id="{{ Auth::user()->cart->id }}"
                 class="border-gray-500 hover:border-gray-900 flex items-center lg:mr-3">
                     <box-icon name='refresh' class="mr-1" animation="tada-hover"></box-icon>
                 </x-btn-primary>
@@ -103,41 +104,3 @@
     
 </div>
 @endsection
-
-@push('script')
-    <script>
-        const cartPage = document.querySelector('#cartPage')
-
-        if (cartPage.querySelector('#updateCartBtn')) {
-            
-            const updateCartBtn = cartPage.querySelector('#updateCartBtn');
-            updateCartBtn.addEventListener('click', () => {
-                let data = [];
-                const cartItems = cartPage.querySelectorAll('.cart-item__qty');
-                cartItems.forEach(item => {
-                    data.push({
-                        'item_id' : item.dataset.itemId,
-                        'quantity' : item.value,
-                    });
-                });
-                fetch('/cart/{{ Auth::user()->cart->id ?? "" }}', {
-                    method:'PUT',
-                    headers:{
-                        'Content-type': 'application/json',
-                        'X-CSRF-Token': '{{csrf_token()}}',
-                    },
-                    body:JSON.stringify(data),
-                }).then(res => res.json())
-                .then(json => {
-                    console.log(json);
-                    location.reload();
-                });
-            });
-            
-        }
-    
-    
-        // new address
-        
-    </script>
-@endpush
