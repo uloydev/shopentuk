@@ -25,16 +25,16 @@ class ProductSubCategoryFactory extends Factory
         $categoryId = $this->faker->randomElement([1, 2, 4]);
         
         switch ($categoryId) {
-            case 1:
+            case 2:
                 $titleOption = ['baju', 'celana'];
                 $descriptions = ['baju pria', 'celana pria'];
             break;
 
-            case 2:
+            case 4:
                 $titleOption = ['gaun', 'baju'];
                 $descriptions = ['gaun wanita', 'baju wanita'];
             break;
-            case 4:
+            case 1:
                 $titleOption = ['google play', 'amazon'];
                 $descriptions = ['voucher google play', 'voucher amazon'];
             break;
@@ -45,7 +45,7 @@ class ProductSubCategoryFactory extends Factory
         return [
             'title' => $titles,
             'description' => $this->faker->randomElement($descriptions),
-            'category_id' => ProductCategory::factory(),
+            'category_id' => $categoryId,
         ];
     }
 }

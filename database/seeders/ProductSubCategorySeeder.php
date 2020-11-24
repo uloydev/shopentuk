@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product;
-use App\Models\ProductImage;
 use Illuminate\Database\Seeder;
+use App\Models\ProductSubCategory;
 
-class ProductImageSeeder extends Seeder
+class ProductSubCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +14,6 @@ class ProductImageSeeder extends Seeder
      */
     public function run()
     {
-        ProductImage::factory()->times(10)->create();
+        ProductSubCategory::factory()->times(6)->create();
     }
 }

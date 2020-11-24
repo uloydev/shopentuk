@@ -23,9 +23,16 @@ class ProductImageFactory extends Factory
     public function definition()
     {
         return [
-            'url' => 'https://via.placeholder.com/150/b6f/FFF?text=Shopentuk',
+            'url' => $this->faker->randomElement([
+                'img/hoodie.jpg',
+                'img/telkomsel.jpg',
+                'img/bag.jpg',
+                'img/hoodie_blue.jpg',
+                'img/jeans_women.jpg',
+                'img/tshirt.jpg'
+            ]),
             'product_id' => Product::factory(), //create new product based on ProductFactory, no need ProductSeeder
-            'is_main_image' => $this->faker->boolean(50),
+            'is_main_image' => true,
         ];
     }
 }
