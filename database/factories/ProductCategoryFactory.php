@@ -21,7 +21,7 @@ class ProductCategoryFactory extends Factory
      */
     public function definition()
     {
-        $categories = $this->faker->unique()->randomElement(['pria', 'wanita', 'pulsa', 'voucher']);
+        $categories = $this->faker->unique(true)->randomElement(['pria', 'wanita', 'pulsa', 'voucher']);
         
         $isDigitalProduct = false;
         switch ($categories) {

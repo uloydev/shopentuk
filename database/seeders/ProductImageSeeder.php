@@ -15,6 +15,6 @@ class ProductImageSeeder extends Seeder
      */
     public function run()
     {
-        ProductImage::factory()->times(14)->create();
+        ProductImage::factory()->times(7)->create();
     }
 }

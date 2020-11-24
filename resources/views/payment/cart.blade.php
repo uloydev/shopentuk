@@ -15,7 +15,8 @@
             @foreach ($cart->cartItems as $item)
                 <div class="py-10 cart-item">
                     <figure class="flex flex-wrap items-center">
-                        <img src="{{ $item->product->mainImage->url }}" alt="Product on cart" class="h-24 mx-auto">
+                        <img src="{{ $item->product->mainImage->url }}" 
+                        alt="Product on cart" class="h-24 mx-auto">
                         <figcaption class="p-3 flex-grow flex flex-col lg:flex-row lg:justify-between">
                             <div class="mb-5 lg:mb-0">
                                 <p class="mb-2">Item {{ $item->product->title }}</p>
@@ -33,8 +34,8 @@
                                     </var>
                                 @else
                                     <var class="rupiah-currency cart-item__price not-italic ml-3"
-                                    data-price="{{ $item->product->price }}" 
-                                    data-init-price="{{ $item->product->price }} " data-is-point="false">
+                                    data-price="{{ $item->product->price }}" data-is-point="false"
+                                    data-init-price="{{ $item->product->price }}">
                                         {{ $item->product->price  * $item->quantity}}
                                     </var>
                                 @endif
@@ -56,8 +57,8 @@
                 </li>
                 <li class="py-3 flex justify-between items-center">
                     <span>Shipping: </span>
-                    <var class="font-bold rupiah-currency" 
-                    id="cart__shipping" data-price="{{ $siteSetting->shipping_price }}">
+                    <var class="font-bold rupiah-currency" id="cart__shipping"
+                    data-price="{{ $siteSetting->shipping_price }}">
                     {{ $siteSetting->shipping_price }}
                     </var>
                 </li>
