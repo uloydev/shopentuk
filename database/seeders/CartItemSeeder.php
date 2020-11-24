@@ -2,13 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 
-class CartSeeder extends Seeder
+class CartItemSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,7 +16,7 @@ class CartSeeder extends Seeder
      */
     public function run()
     {
-        Cart::factory()->times(10)->create();
+        CartItem::factory()->times(20)->create();
         // $users = User::where('role', 'customer')->get();
         // foreach ($users as $user) {
         //     CartItem::create([

@@ -3,8 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Cart;
-use App\Models\CartItem;
+use App\Models\User;
 use App\Models\Product;
+use App\Models\CartItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CartItemFactory extends Factory
@@ -23,12 +24,15 @@ class CartItemFactory extends Factory
      */
     public function definition()
     {
+        // $userIds = User::select('id')->where('role', 'customer')->get();
+        $productIds = Product::all()->pluck('id');
+
         return [
             'image' => $this->faker->image(),
-            'cart_id' => Cart::factory(),
-            'product_id' => Product::factory(),
-            'quantity' => rand(1, 5),
-            'is_toko_point' => $this->faker->boolean($chanceOfGettingTrue = 50),
+            'cart_id' => $this->faker->randomElement(Cart::all()->pluck('id')),
+            'product_id' => $this->faker->randomElement($productIds),
+            'quantity' => rand(1, 3),
+            'is_toko_point' => false,
         ];
     }
 }
