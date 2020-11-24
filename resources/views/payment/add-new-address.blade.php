@@ -19,31 +19,22 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                 <div class="mt-5 flex">
                     <form action="{{ route("my-account.address.store") }}" method="POST" 
                     id="newAddressForm" class="grid lg:grid-cols-2 gap-x-5 w-full">
-                        @foreach ($columns as $column)
-                            @php
-                                $id = Str::kebab($column);
-                                $text = Str::of($column)->replace('_', ' ')->title();
-                            @endphp
+                        @foreach ($columns as $key => $column)
                             @switch($column)
                                 @case('street_address')
                                 <div class="mb-6 lg:col-span-full">
-                                    <label class="block" for="{{ $id }}">
+                                    <label class="block" for="{{ $inputIds[$key] }}">
                                         <span class="text-gray-700">
-                                            {{ $text }}
+                                            {{ $inputText[$key] }}
                                         </span>
                                     </label>
-                                    <textarea id="{{ $id }}" 
+                                    <textarea id="{{ $inputIds[$key] }}" 
                                     class="form-textarea mt-1 block w-full" rows="3" 
                                     placeholder="Masukan nama jalanmu" 
-                                    name="street_address" required>{{ Str::random(15) }}</textarea>
+                                    name="street_address" required>
+                                        {{ config('app.env') == 'local' ? trim(Str::random(15)) : '' }}
+                                    </textarea>
                                 </div>
-                                @break
-
-                                @case('postal_code')
-                                <x-input-basic
-                                    name="{{ $column }}" box-width="lg:col-span-full"
-                                    label="{{ $text }}" value="{{ Str::random(15) }}"
-                                    required />
                                 @break
                                 
                                 @case('is_main_address')
@@ -79,11 +70,18 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                                     </div>
                                 </div>
                                 @break
+
+                                @case('postal_code')
+                                <x-input-basic
+                                    name="{{ $column }}" box-width="lg:col-span-full"
+                                    label="{{ $inputText[$key] }}" value="{{ Str::random(15) }}"
+                                    required />
+                                @break
                                 
                                 @default
                                     <x-input-basic
                                     name="{{ $column }}" 
-                                    label="{{ $text }}" value="{{ Str::random(15) }}"
+                                    label="{{ $inputText[$key] }}"  value="{{ Str::random(15) }}"
                                     required />
                             @endswitch
                         @endforeach
