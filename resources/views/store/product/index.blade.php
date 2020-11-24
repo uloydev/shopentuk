@@ -18,7 +18,8 @@
                         <li class="pb-3">
                             @if ($product->discount)
                                 <x-card-product
-                                product-img="{{ $product->mainImage ? $product->mainImage->url : 'example.jpg' }}"
+                                data-product-id="{{ $product->id }}"
+                                product-img="{{ $product->mainImage ? asset('storage/' . $product->mainImage->url) : asset('img/static/example.jpg') }}"
                                 product-name="{{ Str::words($product->title, 2) }}"
                                 product-category="{{ $product->productCategory->title }}" 
                                 product-category-id="{{ $product->productCategory->id }}" 
@@ -29,7 +30,7 @@
                                 is-horizontal="true" />
                             @else
                                 <x-card-product 
-                                product-img="{{ $product->mainImage ? $product->mainImage->url : 'example.jpg' }}" 
+                                product-img="{{ $product->mainImage ? asset('storage/' . $product->mainImage->url) : asset('img/static/example.jpg') }}" 
                                 product-name="{{ Str::words($product->title, 2) }}"
                                 product-category="{{ $product->productCategory->title }}" 
                                 product-category-id="{{ $product->productCategory->id }}" 
@@ -78,7 +79,7 @@
                 </ul>
             </div>
         </aside>
-        <section class="w-full lg:w-9/12 lg:pl-12">
+        <section class="w-full lg:w-9/12 lg:pl-12" id="section-product">
             @include('partial.breadcumb')
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                 <form action="" method="GET">
@@ -104,10 +105,11 @@
             </div>
             <div class="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-10 mt-10">
                 {{-- foreach --}}
-                @foreach ($products as $product)
+                @forelse ($products as $product)
                     @if ($product->discount)
                         <x-card-product
-                            product-img="{{ $product->mainImage ? $product->mainImage->url : 'example.jpg' }}" 
+                            data-product-id="{{ $product->id }}"
+                            product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : asset('img/static/example.jpg') }}" 
                             product-name="{{ $product->title }}"
                             product-category="{{ $product->productCategory->title }}" 
                             product-category-id="{{ $product->productCategory->id }}" 
@@ -118,7 +120,8 @@
                             is-horizontal="false" />
                     @else
                         <x-card-product 
-                            product-img="{{ $product->mainImage ? $product->mainImage->url : 'example.jpg' }}" 
+                            data-product-id="{{ $product->id }}"
+                            product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : asset('img/static/example.jpg') }}" 
                             product-name="{{ $product->title }}"
                             product-category="{{ $product->productCategory->title }}" 
                             product-category-id="{{ $product->productCategory->id }}" 
@@ -127,7 +130,11 @@
                             product-is-obral="false"
                             is-horizontal="false" />
                     @endif
-                @endforeach
+                @empty
+                    @include('store.product.empty', [
+                        'message' => "Oops, there's no product on this categories"
+                    ])
+                @endforelse
                 {{-- end of foreach --}}
             </div>
             <div class="mt-8">

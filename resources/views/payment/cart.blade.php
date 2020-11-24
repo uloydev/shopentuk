@@ -15,7 +15,7 @@
             @foreach ($cart->cartItems as $item)
                 <div class="py-10 cart-item">
                     <figure class="flex flex-wrap items-center">
-                        <img src="{{ $item->product->mainImage->url }}" 
+                        <img src="{{ asset('storage/' . $item->product->mainImage->url) }}" 
                         alt="Product on cart" class="h-24 mx-auto">
                         <figcaption class="p-3 flex-grow flex flex-col lg:flex-row lg:justify-between">
                             <div class="mb-5 lg:mb-0">

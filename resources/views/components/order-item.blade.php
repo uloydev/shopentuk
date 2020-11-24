@@ -3,7 +3,7 @@
         <p class="font-bold text-3xl">{{ $productName }}</p>
         {{ $addonBtn ?? '' }}
     </div>
-    <img src="{{ asset('img/example.jpg') }}" alt="{{ $productName }} image" class="h-48 rounded-lg">
+    <img src="{{ asset('storage/img/hoodie.jpg') }}" alt="{{ $productName }} image" class="h-48 rounded-lg">
     <div class="w-full flex justify-between items-end text-md">
         <var class="rupiah-currency text-lg">{{ $productPrice }}</var>
         <ul class="text-gray-800">

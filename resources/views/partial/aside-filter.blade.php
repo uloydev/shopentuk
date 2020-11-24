@@ -11,7 +11,7 @@
         <ul class="mt-3 divide-y divide-gray-400">
             @for ($i = 0; $i < 3; $i++)
                 <li class="pb-3">
-                    <x-card-product product-img="{{ Storage::url('img/telkomsel.jpg') }}" 
+                    <x-card-product product-img="{{ asset('storage/img/telkomsel.jpg') }}" 
                     product-name="{{ 'title' }}" product-category="{{ 'category' }}" 
                     product-final-price="{{ 3000 }}" product-rating="{{ rand(1, 5) }}"
                     product-is-obral="false" is-horizontal="true" />
