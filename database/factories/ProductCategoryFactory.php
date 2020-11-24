@@ -21,11 +21,34 @@ class ProductCategoryFactory extends Factory
      */
     public function definition()
     {
+        $categories = $this->faker->unique()->randomElement(['pria', 'wanita', 'pulsa', 'voucher']);
+        
+        $isDigitalProduct = false;
+        switch ($categories) {
+            case 'pria':
+                $description = 'pakaian pria';
+                break;
+
+            case 'wanita':
+                $description = 'pakaian wanita';
+                break;
+
+            case 'pulsa':
+                $description = 'pulsa sim prabayar';
+                $isDigitalProduct = true;
+                break;
+    
+            case 'voucher':
+                $description = 'voucher';
+                $isDigitalProduct = true;
+                break;
+        }
+        
         return [
-            'title' => $this->faker->sentence($nbWords=2, $variableNbWords=true),
-            'description' => $this->faker->paragraph($nbSentences=3, $variableNbSentences=true),
+            'title' => $categories,
+            'description' => $description,
             'image' => "img/baju.jpg",
-            'is_digital_product' => $this->faker->randomElement([1,0]),
+            'is_digital_product' => $isDigitalProduct,
         ];
     }
 }
