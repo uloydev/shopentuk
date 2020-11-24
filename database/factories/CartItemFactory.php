@@ -24,13 +24,9 @@ class CartItemFactory extends Factory
      */
     public function definition()
     {
-        // $userIds = User::select('id')->where('role', 'customer')->get();
-        $productIds = Product::all()->pluck('id');
-
         return [
-            'image' => $this->faker->image(),
-            'cart_id' => $this->faker->randomElement(Cart::all()->pluck('id')),
-            'product_id' => $this->faker->randomElement($productIds),
+            'cart_id' => $this->faker->numberBetween(1, 10),
+            'product_id' => $this->faker->numberBetween(1, 7),
             'quantity' => rand(1, 3),
             'is_toko_point' => false,
         ];
