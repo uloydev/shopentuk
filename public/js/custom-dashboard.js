@@ -98,6 +98,49 @@
 
 /***/ }),
 
+/***/ "./node_modules/num-words/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/num-words/index.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* eslint-disable eqeqeq */
+
+const a = ['', 'one ', 'two ', 'three ', 'four ', 'five ', 'six ', 'seven ', 'eight ', 'nine ', 'ten ', 'eleven ', 'twelve ', 'thirteen ', 'fourteen ', 'fifteen ', 'sixteen ', 'seventeen ', 'eighteen ', 'nineteen ']
+const b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
+
+const regex = /^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/
+
+const getLT20 = (n) => a[Number(n)]
+const getGT20 = (n) => b[n[0]] + ' ' + a[n[1]]
+
+module.exports = function numWords (input) {
+  const num = Number(input)
+  if (isNaN(num)) return ''
+  if (num === 0) return 'zero'
+
+  const numStr = num.toString()
+  if (numStr.length > 9) {
+    throw new Error('overflow') // Does not support converting more than 9 digits yet
+  }
+
+  const [, n1, n2, n3, n4, n5] = ('000000000' + numStr).substr(-9).match(regex) // left pad zeros
+
+  let str = ''
+  str += n1 != 0 ? (getLT20(n1) || getGT20(n1)) + 'crore ' : ''
+  str += n2 != 0 ? (getLT20(n2) || getGT20(n2)) + 'lakh ' : ''
+  str += n3 != 0 ? (getLT20(n3) || getGT20(n3)) + 'thousand ' : ''
+  str += n4 != 0 ? getLT20(n4) + 'hundred ' : ''
+  str += n5 != 0 && str != '' ? 'and ' : ''
+  str += n5 != 0 ? (getLT20(n5) || getGT20(n5)) : ''
+
+  return str.trim()
+}
+
+
+/***/ }),
+
 /***/ "./resources/js/custom-dashboard.js":
 /*!******************************************!*\
   !*** ./resources/js/custom-dashboard.js ***!
@@ -109,6 +152,11 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper-module */ "./resources/js/helper-module.js");
+
+
+
+var numWords = __webpack_require__(/*! num-words */ "./node_modules/num-words/index.js");
 
 var appUrl = window.location.origin;
 var pageUrl = window.location.pathname;
@@ -250,7 +298,23 @@ if (pageUrl === '/superadmin/admins') {
   setFormAction('#form-add-admin', "".concat(appUrl, "/").concat(urlFormAdmin));
 }
 
-if (pageUrl === '/admin/order') {//
+if (pageUrl === '/admin/order') {
+  var manageOrderPage = document.querySelector('#manageOrderPage');
+  var orderItem = manageOrderPage.querySelectorAll('.order-item');
+  orderItem.forEach(function (currentItem, index) {
+    var indexToWord = Object(_helper_module__WEBPACK_IMPORTED_MODULE_1__["capitalizeFirstLetter"])(numWords(Number(index) + 1)); // const attrWillChange = ['href', '']
+
+    Object(_helper_module__WEBPACK_IMPORTED_MODULE_1__["setAttributes"])(document.querySelectorAll('.order-item__btn')[index], {
+      'href': "#collapse".concat(indexToWord),
+      'aria-controls': "#collapse".concat(indexToWord)
+    });
+    Object(_helper_module__WEBPACK_IMPORTED_MODULE_1__["setAttributes"])(document.querySelectorAll('.order-item__detail')[index], {
+      'id': "collapse".concat(indexToWord),
+      'aria-labelledby': "heading".concat(indexToWord)
+    }); // for (const attr in attrWillChange) {
+    //     currentItem.querySelector('.order-item__detail').setAttribute(attr, `#collapse${indexToWord}`)
+    // }
+  });
 } // general js
 
 
@@ -259,6 +323,73 @@ Array.from(document.querySelectorAll('box-icon')).map(function (icon) {
 
   icon.classList.add('mr-2');
 });
+
+/***/ }),
+
+/***/ "./resources/js/helper-module.js":
+/*!***************************************!*\
+  !*** ./resources/js/helper-module.js ***!
+  \***************************************/
+/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSiblings", function() { return getSiblings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formattingRupiah", function() { return formattingRupiah; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setFormAction", function() { return setFormAction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUrlWithoutProtocol", function() { return getUrlWithoutProtocol; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "capitalizeFirstLetter", function() { return capitalizeFirstLetter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAttributes", function() { return setAttributes; });
+/*!
+ * Get all siblings of an element
+ * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
+ */
+var getSiblings = function getSiblings(elem) {
+  return Array.prototype.filter.call(elem.parentNode.children, function (sibling) {
+    return sibling !== elem;
+  });
+};
+/*
+	formatting currency to rupiah
+*/
+
+var formattingRupiah = function formattingRupiah(currency) {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR'
+  }).format(currency).replace(',00', '');
+};
+/**
+ * set form action
+ */
+
+var setFormAction = function setFormAction(form, url) {
+  document.querySelector(form).action = url;
+};
+/**
+ * get url without protocol
+ */
+
+function getUrlWithoutProtocol(urlnya) {
+  return urlnya.split('//').pop();
+}
+/**
+ * capitalize first letter each word
+ */
+
+var capitalizeFirstLetter = function capitalizeFirstLetter(string) {
+  return string[0].toUpperCase() + string.slice(1);
+};
+/**
+ * set multiple attr
+ */
+
+var setAttributes = function setAttributes(el, attrs) {
+  for (var key in attrs) {
+    el.setAttribute(key, attrs[key]);
+  }
+};
 
 /***/ }),
 

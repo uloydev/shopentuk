@@ -1,9 +1,9 @@
 import 'boxicons'
+import { capitalizeFirstLetter, setAttributes } from './helper-module';
+const numWords = require('num-words')
 
 const appUrl = window.location.origin;
 const pageUrl = window.location.pathname
-
-
 
 const logoutBtn = document.querySelector('#logoutBtn');
 logoutBtn.addEventListener('click', (e) => {
@@ -149,7 +149,28 @@ if (pageUrl === '/superadmin/admins') {
 }
 
 if (pageUrl === '/admin/order') {
-    //
+    const manageOrderPage = document.querySelector('#manageOrderPage')
+    const orderItem = manageOrderPage.querySelectorAll('.order-item')
+
+    orderItem.forEach((currentItem, index) => {
+        const indexToWord = capitalizeFirstLetter(numWords(Number(index) + 1))
+        // const attrWillChange = ['href', '']
+        
+        setAttributes(document.querySelectorAll('.order-item__btn')[index], {
+            'href': `#collapse${indexToWord}`,
+            'aria-controls': `#collapse${indexToWord}`
+        })
+        
+        setAttributes(document.querySelectorAll('.order-item__detail')[index], {
+            'id': `collapse${indexToWord}`,
+            'aria-labelledby': `heading${indexToWord}`
+        })
+
+        // for (const attr in attrWillChange) {
+        //     currentItem.querySelector('.order-item__detail').setAttribute(attr, `#collapse${indexToWord}`)
+        // }
+        
+    });
 }
 
 // general js
