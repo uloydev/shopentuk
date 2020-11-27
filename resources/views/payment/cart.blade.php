@@ -15,7 +15,8 @@
             @foreach ($cart->cartItems as $item)
                 <div class="py-10 cart-item">
                     <figure class="flex flex-wrap items-center">
-                        <img src="https://picsum.photos/800" alt="Product on cart" class="h-24 mx-auto">
+                        <img src="{{ asset('storage/' . $item->product->mainImage->url) }}" 
+                        alt="Product on cart" class="h-24 mx-auto">
                         <figcaption class="p-3 flex-grow flex flex-col lg:flex-row lg:justify-between">
                             <div class="mb-5 lg:mb-0">
                                 <p class="mb-2">Item {{ $item->product->title }}</p>
@@ -33,8 +34,8 @@
                                     </var>
                                 @else
                                     <var class="rupiah-currency cart-item__price not-italic ml-3"
-                                    data-price="{{ $item->product->price }}" 
-                                    data-init-price="{{ $item->product->price }} " data-is-point="false">
+                                    data-price="{{ $item->product->price }}" data-is-point="false"
+                                    data-init-price="{{ $item->product->price }}">
                                         {{ $item->product->price  * $item->quantity}}
                                     </var>
                                 @endif
@@ -56,8 +57,8 @@
                 </li>
                 <li class="py-3 flex justify-between items-center">
                     <span>Shipping: </span>
-                    <var class="font-bold rupiah-currency" 
-                    id="cart__shipping" data-price="{{ $siteSetting->shipping_price }}">
+                    <var class="font-bold rupiah-currency" id="cart__shipping"
+                    data-price="{{ $siteSetting->shipping_price }}">
                     {{ $siteSetting->shipping_price }}
                     </var>
                 </li>
@@ -83,7 +84,8 @@
                     <box-icon name='left-arrow-alt' class="text-blue-500 hover:text-white"></box-icon>
                     Kembali
                 </a>
-                <x-btn-primary type="button" text="Perbarui keranjang" id="updateCartBtn"
+                <x-btn-primary type="button" text="Perbarui keranjang" 
+                id="updateCartBtn" data-cart-id="{{ Auth::user()->cart->id }}"
                 class="border-gray-500 hover:border-gray-900 flex items-center lg:mr-3">
                     <box-icon name='refresh' class="mr-1" animation="tada-hover"></box-icon>
                 </x-btn-primary>
@@ -103,41 +105,3 @@
     
 </div>
 @endsection
-
-@push('script')
-    <script>
-        const cartPage = document.querySelector('#cartPage')
-
-        if (cartPage.querySelector('#updateCartBtn')) {
-            
-            const updateCartBtn = cartPage.querySelector('#updateCartBtn');
-            updateCartBtn.addEventListener('click', () => {
-                let data = [];
-                const cartItems = cartPage.querySelectorAll('.cart-item__qty');
-                cartItems.forEach(item => {
-                    data.push({
-                        'item_id' : item.dataset.itemId,
-                        'quantity' : item.value,
-                    });
-                });
-                fetch('/cart/{{ Auth::user()->cart->id ?? "" }}', {
-                    method:'PUT',
-                    headers:{
-                        'Content-type': 'application/json',
-                        'X-CSRF-Token': '{{csrf_token()}}',
-                    },
-                    body:JSON.stringify(data),
-                }).then(res => res.json())
-                .then(json => {
-                    console.log(json);
-                    location.reload();
-                });
-            });
-            
-        }
-    
-    
-        // new address
-        
-    </script>
-@endpush

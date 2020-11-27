@@ -2,7 +2,7 @@
     @forelse ($products as $product)
         @if ($product->discount)
         <x-card-product
-            product-img="{{ 'example.jpg' }}" 
+            product-img="{{ $product->mainImage ? asset('storage/' . $product->mainImage->url) : asset('img/static/example.jpg') }}" 
             product-name="{{ $product->title }}"
             product-category="{{ $product->productCategory->title }}" 
             product-category-id="{{ $product->productCategory->id }}" 
@@ -13,7 +13,7 @@
             product-is-obral="true" />
         @else
             <x-card-product 
-                product-img="{{ 'example.jpg' }}" 
+                product-img="{{ $product->mainImage ? asset('storage/' . $product->mainImage->url) : asset('img/static/example.jpg') }}" 
                 product-name="{{ $product->title }}"
                 product-category="{{ $product->productCategory->title }}" 
                 product-category-id="{{ $product->productCategory->id }}" 
@@ -23,14 +23,8 @@
                 product-is-obral="false" />
         @endif
     @empty
-        <figure class="col-span-full flex justify-center flex-col items-center">
-            <img src="{{ asset('img/static/empty.png') }}" alt="Empty catalog" class="h-64">
-            <figcaption>
-                <p class="text-2xl text-center">
-                    Oops, currently we don't have any product. <br> 
-                    Please check it later
-                </p>
-            </figcaption>
-        </figure>
+        @include('store.product.empty', [
+            'message' => "Oops, currently we don't have any product"
+        ])
     @endforelse
 </div>

@@ -22,10 +22,30 @@ class ProductSubCategoryFactory extends Factory
      */
     public function definition()
     {
+        $categoryId = $this->faker->randomElement([1, 2, 4]);
+        
+        switch ($categoryId) {
+            case 2:
+                $titleOption = ['baju', 'celana'];
+                $descriptions = ['baju pria', 'celana pria'];
+            break;
+
+            case 4:
+                $titleOption = ['gaun', 'baju'];
+                $descriptions = ['gaun wanita', 'baju wanita'];
+            break;
+            case 1:
+                $titleOption = ['google play', 'amazon'];
+                $descriptions = ['voucher google play', 'voucher amazon'];
+            break;
+        }
+        
+        $titles = $this->faker->randomElement($titleOption);
+        
         return [
-            'title' => $this->faker->sentence($nbWords=2, $variableNbWords=true),
-            'description' => $this->faker->paragraph($nbSentences=3, $variableNbSentences=true),
-            'category_id' => ProductCategory::factory(),
+            'title' => $titles,
+            'description' => $this->faker->randomElement($descriptions),
+            'category_id' => $categoryId,
         ];
     }
 }

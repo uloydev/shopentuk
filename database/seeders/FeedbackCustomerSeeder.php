@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\FeedbackCustomer;
 use Illuminate\Database\Seeder;
 
 class FeedbackCustomerSeeder extends Seeder
@@ -13,6 +14,6 @@ class FeedbackCustomerSeeder extends Seeder
      */
     public function run()
     {
-        //
+        FeedbackCustomer::factory()->times(15)->create();
     }
 }

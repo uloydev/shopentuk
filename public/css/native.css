@@ -1403,6 +1403,14 @@ html, body {
 
 /*end of cartPage style*/
 
+/**/
+
+#section-product .card-product img {
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 /*end of storePage style*/
 
 #konfirmasiPembayaranPage .box-upload {

@@ -190,7 +190,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_module_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helper-module.js */ "./resources/js/helper-module.js");
 
 /*
- * Make all input lowercase
+ * .input-lowercase utitlies to make all input lowercase
  */
 
 var inputElement = document.querySelectorAll(".input-lowercase");
@@ -202,10 +202,19 @@ inputElement.forEach(function (input) {
     return console.log(input.value);
   });
 });
+/**
+ * .only-alpha-space utitlies to make all input have pattern with 
+ * regex only allow alpha & space
+ */
+
 var inputOnlyNumberAndSpace = document.querySelectorAll('.only-alpha-space');
 inputOnlyNumberAndSpace.forEach(function (input) {
   input.setAttribute('pattern', '[a-zA-Z]+');
 });
+/**
+ * Make all input with required att, have a '*' icon in their label
+ */
+
 var requiredInput = document.querySelectorAll('[required="required"], textarea[required]');
 Array.from(requiredInput).map(function (input) {
   return input.previousElementSibling.classList.add('required-input');
@@ -220,7 +229,7 @@ rupiahCurrency.forEach(function (money) {
   money.textContent = _helper_module_js__WEBPACK_IMPORTED_MODULE_0__["formattingRupiah"](money.textContent);
 });
 /**
- *  Set box-icon component color just using class
+ *  Set box-icon component color just using tailwind text color class
  */
 
 var boxIcons = document.querySelectorAll('box-icon');
@@ -231,6 +240,14 @@ boxIcons.forEach(function (boxIcon) {
     var colorIcon = getComputedStyle(boxIcon).color;
     boxIcon.setAttribute('color', colorIcon);
   }
+});
+/*
+ * trim all input value
+ */
+
+document.querySelectorAll('input, textarea').forEach(function (input) {
+  var valueTrimmed = input.value.trim();
+  input.value = valueTrimmed;
 });
 
 /***/ }),
@@ -531,6 +548,32 @@ if (pageUrl === '/cart') {
         openCloseModal('#modalAddNewAddress');
       });
       newAddressBtn.disabled = false;
+    });
+  } // update cart
+
+
+  if (cartPage.querySelector('#updateCartBtn')) {
+    var updateCartBtn = cartPage.querySelector('#updateCartBtn');
+    var cartId = updateCartBtn.dataset.cartId;
+    updateCartBtn.addEventListener('click', function () {
+      var boughtItems = [];
+      var cartItems = cartPage.querySelectorAll('.cart-item__qty');
+      cartItems.forEach(function (item) {
+        boughtItems.push({
+          'item_id': item.dataset.itemId,
+          'quantity': item.value
+        });
+      });
+      fetch("/cart/".concat(cartId), {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json',
+          'X-CSRF-Token': metaToken
+        },
+        body: JSON.stringify(boughtItems)
+      }).then(function () {
+        return location.reload();
+      });
     });
   }
 } //plugin js

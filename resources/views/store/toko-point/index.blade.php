@@ -17,7 +17,7 @@
                     @foreach ($bestProducts as $product)
                         <li class="pb-3">
                             <x-card-product 
-                            product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
+                            product-img="{{ $product->mainImage ? asset('storage/' . $product->mainImage->url) : asset('storage/img/telkomsel.jpg')) }}" 
                             product-name="{{ Str::words($product->title, 2) }}"
                             product-category="{{ $product->productCategory->title }}" 
                             product-category-id="{{ $product->productCategory->id }}" 
@@ -94,16 +94,16 @@
             <div class="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-10 mt-10">
                 {{-- foreach --}}
                 @foreach ($products as $product)
-                    <x-card-product 
-                        product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
-                        product-name="{{ $product->title }}"
-                        product-category="{{ $product->productCategory->title }}" 
-                        product-category-id="{{ $product->productCategory->id }}" 
-                        product-point-price="{{ $product->point_price }}"
-                        product-rating="0" 
-                        product-is-obral="false"
-                        is-horizontal="false"
-                        is-toko-point="true"/>
+                    <x-card-product
+                    product-img="{{ $product->mainImage ? asset('storage/img/' . $product->mainImage->url) : asset('storage/img/telkomsel.jpg') }}" 
+                    product-name="{{ $product->title }}"
+                    product-category="{{ $product->productCategory->title }}" 
+                    product-category-id="{{ $product->productCategory->id }}" 
+                    product-point-price="{{ $product->point_price }}"
+                    product-rating="0" 
+                    product-is-obral="false"
+                    is-horizontal="false"
+                    is-toko-point="true"/>
                 @endforeach
                 {{-- end of foreach --}}
             </div>

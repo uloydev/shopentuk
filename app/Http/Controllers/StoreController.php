@@ -22,8 +22,7 @@ class StoreController extends Controller
 
     private function getProductFromSlug($slug)
     {
-        $productTitle = strtolower(ucwords(str_replace('-', ' ', $slug)));
-        $product = $this->productWhere('title', 'LIKE', "%$productTitle%")->firstOrFail();
+        $product = $this->productWhere('slug', '=', $slug)->firstOrFail();
         if ($product->is_redeem) {
             $similarProducts = $this->productWhere('is_redeem', '=', true);
         } else {

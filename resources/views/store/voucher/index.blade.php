@@ -18,7 +18,7 @@
                         <li class="pb-3">
                             @if ($product->discount)
                                 <x-card-product
-                                product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}"
+                                product-img="{{ $product->mainImage ? $product->mainImage->url : asset('storage/img/telkomsel.jpg') }}"
                                 product-name="{{ Str::words($product->title, 2) }}"
                                 product-category="{{ $product->productCategory->title }}" 
                                 product-category-id="{{ $product->productCategory->id }}" 
@@ -30,7 +30,7 @@
                                 is-digital-product="true" />
                             @else
                                 <x-card-product 
-                                product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
+                                product-img="{{ $product->mainImage ? $product->mainImage->url : asset('storage/img/telkomsel.jpg') }}" 
                                 product-name="{{ Str::words($product->title, 2) }}"
                                 product-category="{{ $product->productCategory->title }}" 
                                 product-category-id="{{ $product->productCategory->id }}" 
@@ -110,23 +110,23 @@
                 @foreach ($products as $product)
                     @if ($product->discount)
                         <x-card-product
-                            product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
+                            product-img="{{ $product->mainImage ? asset('storage/' . $product->mainImage->url) : asset('storage/img/telkomsel.jpg') }}" 
                             product-name="{{ $product->title }}"
                             product-category="{{ $product->productCategory->title }}" 
                             product-category-id="{{ $product->productCategory->id }}" 
-                            product-original-price="{{ number_format($product->price) }}"
-                            product-final-price="{{ number_format($product->discount->discounted_price) }}"
+                            product-original-price="{{ $product->price }}"
+                            product-final-price="{{ $product->discount->discounted_price }}"
                             product-rating="0" 
                             product-is-obral="true"
                             is-horizontal="false"
                             is-digital-product="true" />
                     @else
                         <x-card-product 
-                            product-img="{{ $product->mainImage ? $product->mainImage->url : 'static/telkomsel.jpg' }}" 
+                            product-img="{{ $product->mainImage ? asset('storage/' . $product->mainImage->url) : asset('storage/img/telkomsel.jpg') }}" 
                             product-name="{{ $product->title }}"
                             product-category="{{ $product->productCategory->title }}" 
                             product-category-id="{{ $product->productCategory->id }}" 
-                            product-final-price="{{ number_format($product->price) }}"
+                            product-final-price="{{ $product->price }}"
                             product-rating="0" 
                             product-is-obral="false"
                             is-horizontal="false"

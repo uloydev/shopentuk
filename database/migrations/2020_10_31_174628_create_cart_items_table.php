@@ -13,12 +13,12 @@ class CreateCartItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cart_items', function (Blueprint $table) {
+        Schema::create('cart_item', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cart_id');
             $table->foreignId('product_id');
             $table->integer('quantity');
-            $table->boolean('is_toko_point')->defalut(false);
+            $table->boolean('is_toko_point')->default(false);
             $table->timestamps();
         });
     }

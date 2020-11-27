@@ -23,14 +23,26 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
+        $titles = [
+            'baju merah pria', 'celana coklat pria', 'gaun putih', 'saldo ovo 50000',
+            'baju pink wanita', 'pulsa tri 10000', 'voucher amazon 100000'
+        ];
+
+        // product description dummy
+        $descriptions = array_map(function($title) {
+            return strtolower($title . ' description');
+        }, $titles);
+
+        $titleProduct = strtolower($this->faker->randomElement($titles));
+
         return [
-            'title' => strtolower($this->faker->sentence($nbWords=5, $variableNbWords=true)),
-            'description' => strtolower($this->faker->paragraph($nbSentences=10, $variableNbSentences=true)),
-            'price' => $this->faker->numberBetween($min=10000, $max=100000),
-            'point_price' => $this->faker->numberBetween($min=10, $max=100),
-            'category_id' => rand(1, 10),
-            'sub_category_id' => ProductSubCategory::factory(),
-            'is_redeem' => $this->faker->boolean($chanceOfGettingTrue = 50)
+            'title' => $titleProduct,
+            'description' => $this->faker->randomElement($descriptions),
+            'price' => $this->faker->numberBetween(10000, 1000000),
+            'point_price' => $this->faker->numberBetween(10, 150),
+            'category_id' => $titleProduct != 'saldo ovo 50000' ? rand(1, 4) : null,
+            'sub_category_id' => $titleProduct != 'pulsa tri 10000' ? rand(1, 5) : null,
+            'is_redeem' => $this->faker->boolean(50)
         ];
     }
 }

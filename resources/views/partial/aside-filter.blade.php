@@ -9,23 +9,14 @@
     <div class="py-4">
         <h1 class="text-3xl">Our best sellers</h1>
         <ul class="mt-3 divide-y divide-gray-400">
-            {{-- foreach --}}
-            <li class="pb-3">
-                <x-card-product product-img="{{ 'static/telkomsel.jpg' }}" product-name="{{ 'title' }}" 
-                product-category="{{ 'category' }}" product-final-price="{{ 3000 }}"
-                product-rating="0" product-is-obral="false" is-horizontal="true" />
-            </li>
-            <li class="pb-3">
-                <x-card-product product-img="{{ 'static/telkomsel.jpg' }}" product-name="{{ 'title' }}" 
-                product-category="{{ 'category' }}" product-final-price="{{ 3000 }}"
-                product-rating="0" product-is-obral="false" is-horizontal="true" />
-            </li>
-            <li class="pb-3">
-                <x-card-product product-img="{{ 'static/telkomsel.jpg' }}" product-name="{{ 'title' }}" 
-                product-category="{{ 'category' }}" product-final-price="{{ 3000 }}"
-                product-rating="0" product-is-obral="false" is-horizontal="true" />
-            </li>
-            {{-- end of foreach --}}
+            @for ($i = 0; $i < 3; $i++)
+                <li class="pb-3">
+                    <x-card-product product-img="{{ asset('storage/img/telkomsel.jpg') }}" 
+                    product-name="{{ 'title' }}" product-category="{{ 'category' }}" 
+                    product-final-price="{{ 3000 }}" product-rating="{{ rand(1, 5) }}"
+                    product-is-obral="false" is-horizontal="true" />
+                </li>
+            @endfor
         </ul>
     </div>
 </aside>

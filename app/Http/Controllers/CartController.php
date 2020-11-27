@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\User;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\CartItem;
+use App\Models\SiteSetting;
+use App\Models\UserAddress;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Cart;
-use App\Models\Order;
-use App\Models\SiteSetting;
-use App\Models\CartItem;
-use App\Models\Product;
-use App\Models\User;
-use App\Models\UserAddress;
 
 class CartController extends Controller
 {
@@ -26,6 +27,7 @@ class CartController extends Controller
     {
         $pointTotal = 0;
         $priceTotal = 0;
+
         $user = Auth::user();
         $cart = $user->cart;
         $addresses = $user->userAddresses->sortByDesc('is_main_address');
@@ -33,6 +35,14 @@ class CartController extends Controller
 
         //get all column on UserAddress except user_id, bcz user_id is not on backend
         $addressColumnExceptUserId = array_diff($userAddress->getFillable(), ['user_id']);
+        
+        // this is just for html attributes needed, doesn't affect to backend
+        $inputIds = array_map(function($label) {
+            return Str::kebab($label);
+        }, $addressColumnExceptUserId);
+        $inputText = array_map(function($text) {
+            return Str::of($text)->replace('_', ' ')->title();
+        }, $addressColumnExceptUserId);
 
         if ($cart && $cart->cartItems->count() > 0) {
             foreach ($cart->cartItems as $item) {
@@ -51,7 +61,9 @@ class CartController extends Controller
             'pointTotal' => $pointTotal,
             'priceTotal' => $priceTotal,
             'addresses' => $addresses,
-            'addressColumn' => $addressColumnExceptUserId
+            'addressColumn' => $addressColumnExceptUserId,
+            'inputIds' => $inputIds,
+            'inputText' => $inputText
         ]);
     }
 
