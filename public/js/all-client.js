@@ -458,6 +458,8 @@ if (pageUrl === '/cart') {
     */
     var setNextStepBtnText = function setNextStepBtnText(textBtn) {
       nextStepBtn.textContent = textBtn;
+
+      if (textBtn == "Next") {}
     };
     /*
      * open step on checkout modal
@@ -481,7 +483,8 @@ if (pageUrl === '/cart') {
     var modalCheckout = cartPage.querySelector('#modalCheckout');
     var firstStep = modalCheckout.querySelector('.step-form > form');
     var secondStep = modalCheckout.querySelector('.step-form > div');
-    var nextStepBtn = modalCheckout.querySelector('.next-step'); // open modal checkout
+    var nextStepBtn = modalCheckout.querySelector('#btnNextStep');
+    var checkoutBtn = modalCheckout.querySelector('#btnCheckout'); // open modal checkout
 
     var btnShowCheckoutStep = cartPage.querySelector('#btnShowCheckoutStep');
     btnShowCheckoutStep.addEventListener('click', function () {
@@ -492,8 +495,7 @@ if (pageUrl === '/cart') {
     btnCloseModal.addEventListener('click', function () {
       openCloseModal('#' + modalCheckout.getAttribute('id'));
       openStep(firstStep);
-      closeStep(secondStep);
-      setNextStepBtnText('Next');
+      closeStep(secondStep); // setNextStepBtnText('Next')
     }); // each btn to manage modal address
 
     var btnOpenModalAddress = cartPage.querySelector('#add-new-address-btn');
@@ -514,9 +516,15 @@ if (pageUrl === '/cart') {
      */
 
     nextStepBtn.addEventListener('click', function () {
-      openStep(secondStep);
-      closeStep(firstStep);
-      setNextStepBtnText('Checkout');
+      if (modalCheckout.querySelector('select').value == '') {
+        alert('kamu belum pilih alamat pengiriman!');
+      } else {
+        openStep(secondStep);
+        closeStep(firstStep);
+        nextStepBtn.classList.add('hidden');
+        checkoutBtn.classList.remove('hidden');
+      } // setNextStepBtnText('Checkout')
+
     });
     var newAddressBtn = document.querySelector('#newAddressSubmit');
     var newAddressForm = document.querySelector('#newAddressForm');
