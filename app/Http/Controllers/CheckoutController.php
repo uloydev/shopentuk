@@ -15,6 +15,9 @@ class CheckoutController extends Controller
     {
         $siteSetting = SiteSetting::first();
         $user = Auth::user();
+        // $user->point  = 100;
+        // $user->save();
+        // return redirect()->back()->with(['error' => 'point kamu gak cukup buat order!']);
         $cart = $user->cart;
         $isAllPoint = $cart->cartItems->where('is_toko_point', false)->count() == 0;
 
@@ -47,16 +50,16 @@ class CheckoutController extends Controller
             $orderProduct->product_id = $item->product_id;
             $orderProduct->point_price = $itemProduct->point_price;
             $orderProduct->original_price = $item->product->price;
-            if ($itemProduct->has('discount')) {
+            if (!empty($itemProduct->discount)) {
                 $orderProduct->discounted_price = $itemProduct->discount->discounted_price;
             }
             $orderProduct->quantity = $item->quantity;
             $orderProduct->is_toko_point = $item->is_toko_point;
             $orderProduct->save();
+            $item->delete();
         }
-
         return redirect()->route('my-account.current.order')->with([
-            'success' => 'sukses membuat order' + !$isAllPoint ? ", silahkan bayar pesanan anda !" : "",
+            'success' => 'sukses membuat order' . !$isAllPoint ? ", silahkan bayar pesanan anda !" : "",
         ]);
     }
 }

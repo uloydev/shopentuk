@@ -34,7 +34,7 @@ class Cart extends Model
     public function getTotalPriceAttribute() {
         $price = 0;
         foreach ($this->cartItems->where('is_toko_point', false) as $item) {
-            if ($item->has('discount')) {
+            if (!empty($item->product->discount)) {
                 $price += $item->product->discount->discounted_price * $item->quantity;
             } else {
                 $price += $item->product->price * $item->quantity;

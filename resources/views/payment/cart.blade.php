@@ -42,7 +42,7 @@
                                         {{ $item->product->point_price * $item->quantity }} point
                                     </var>
                                 @else
-                                    @if ($item->product->has('discount'))
+                                    @if (!empty($item->product->discount))
                                         <var class="rupiah-currency cart-item__price not-italic ml-3"
                                         data-price="{{ $item->product->discount->discounted_price }}" data-is-point="false"
                                         data-init-price="{{ $item->product->discount->discounted_price }}">
