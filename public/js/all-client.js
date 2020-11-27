@@ -133,7 +133,7 @@ module.exports = g;
 /*!***************************************!*\
   !*** ./resources/js/helper-module.js ***!
   \***************************************/
-/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol */
+/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -142,6 +142,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formattingRupiah", function() { return formattingRupiah; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setFormAction", function() { return setFormAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUrlWithoutProtocol", function() { return getUrlWithoutProtocol; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "capitalizeFirstLetter", function() { return capitalizeFirstLetter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAttributes", function() { return setAttributes; });
 /*!
  * Get all siblings of an element
  * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
@@ -175,6 +177,22 @@ var setFormAction = function setFormAction(form, url) {
 function getUrlWithoutProtocol(urlnya) {
   return urlnya.split('//').pop();
 }
+/**
+ * capitalize first letter each word
+ */
+
+var capitalizeFirstLetter = function capitalizeFirstLetter(string) {
+  return string[0].toUpperCase() + string.slice(1);
+};
+/**
+ * set multiple attr
+ */
+
+var setAttributes = function setAttributes(el, attrs) {
+  for (var key in attrs) {
+    el.setAttribute(key, attrs[key]);
+  }
+};
 
 /***/ }),
 

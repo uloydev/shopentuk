@@ -33,3 +33,19 @@ export function getUrlWithoutProtocol(urlnya) {
 	return urlnya.split('//').pop()
 }
 
+/**
+ * capitalize first letter each word
+ */
+
+export const capitalizeFirstLetter = (string) => {
+    return string[0].toUpperCase() + string.slice(1);
+}
+
+/**
+ * set multiple attr
+ */
+export const setAttributes = (el, attrs) => {
+    for (var key in attrs) {
+      el.setAttribute(key, attrs[key]);
+    }
+}
