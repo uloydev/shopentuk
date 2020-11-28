@@ -938,10 +938,38 @@ video {
   border-color: #63b3ed;
 }
 
+.required-input span {
+  position: relative;
+  padding-right: 0.75rem;
+}
+
+.required-input span::after {
+  content: "*";
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  right: 0;
+  --text-opacity: 1;
+  color: #fc8181;
+  color: rgba(252, 129, 129, var(--text-opacity));
+}
+
+.font-architects {
+  font-family: "Architects Daughter", cursive;
+}
+
+.font-shadows-light {
+  font-family: "Shadows Into Light", cursive;
+}
+
+.w-full-2x {
+  width: 200%;
+}
+
 * {
-  box-sizing: border-box;
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 html, body {
@@ -964,11 +992,6 @@ html, body {
   --bg-opacity: 1;
   background-color: #4a5568;
   background-color: rgba(74, 85, 104, var(--bg-opacity));
-}
-
-.center-x {
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .box-promo__heading, .box-promo__subheading {
@@ -1020,10 +1043,6 @@ html, body {
   cursor: not-allowed;
 }
 
-.w-full-2x {
-  width: 200%;
-}
-
 .section__heading span {
   position: relative;
 }
@@ -1043,30 +1062,6 @@ html, body {
 
 .card-product {
   max-width: 100%;
-}
-
-.font-architects {
-  font-family: "Architects Daughter", cursive;
-}
-
-.font-shadows-light {
-  font-family: "Shadows Into Light", cursive;
-}
-
-.required-input span {
-  position: relative;
-  padding-right: 0.75rem;
-}
-
-.required-input span::after {
-  content: "*";
-  top: 50%;
-  transform: translateY(-50%);
-  position: absolute;
-  right: 0;
-  --text-opacity: 1;
-  color: #fc8181;
-  color: rgba(252, 129, 129, var(--text-opacity));
 }
 
 .nav {

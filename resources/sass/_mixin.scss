@@ -1,0 +1,26 @@
+@mixin sameSize($size) {
+    width: $size;
+    height: $size;
+}
+
+@mixin openNav($depthParent: 1) {
+    $rootString: #{&};
+    $parentIndex: str-index($rootString, " ");
+    $parent: str_slice($rootString, 0, $parentIndex - $depthParent);
+    $children: str_slice($rootString, $parentIndex);
+
+    @at-root #{$parent}.nav--open #{$children} {
+        @content;
+    }
+}
+
+@mixin center-x($position: absolute) {
+    @if $position != static or $position != relative {
+        position: $position;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    @else {
+
+    }
+}

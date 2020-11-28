@@ -4,9 +4,11 @@
 @tailwind base;
 @tailwind components;
 
+@import 'mixin';
+@import 'helper';
+
 * {
-    box-sizing: border-box;
-    @apply p-0 m-0;
+    @apply p-0 m-0 box-border;
 }
 
 html, body {
@@ -15,22 +17,6 @@ html, body {
 
 ::selection {
     @apply text-white bg-gray-700;
-}
-
-.center-x {
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-@mixin center-x($position: absolute) {
-    @if $position != static or $position != relative {
-        position: $position;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    @else {
-
-    }
 }
 
 .box-promo {
@@ -65,10 +51,6 @@ html, body {
     @apply opacity-50 cursor-not-allowed;
 }
 
-.w-full-2x {
-    width: 200%;
-}
-
 .section {
     &__heading {
 
@@ -90,40 +72,5 @@ html, body {
 .card-product {
     max-width: 100%;
 }
-.font-architects {
-    font-family: 'Architects Daughter', cursive;
-}
-.font-shadows-light {
-    font-family: 'Shadows Into Light', cursive;
-}
-
-.required-input {
-    
-    span {
-        @apply relative pr-3;
-        
-        &::after {
-            content: '*';
-            top: 50%;
-            transform: translateY(-50%);
-            @apply absolute right-0 text-red-400;
-        }
-    }
-}
 
 //mixin
-@mixin sameSize($size) {
-    width: $size;
-    height: $size;
-}
-
-@mixin openNav($depthParent: 1) {
-    $rootString: #{&};
-    $parentIndex: str-index($rootString, " ");
-    $parent: str_slice($rootString, 0, $parentIndex - $depthParent);
-    $children: str_slice($rootString, $parentIndex);
-
-    @at-root #{$parent}.nav--open #{$children} {
-        @content;
-    }
-}
