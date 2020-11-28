@@ -129,14 +129,14 @@ if (pageUrl === '/login') {
 
 // customer dashboard js
 if (pageUrl.indexOf('/my-account') > -1) {
-    const tabsMenu = document.querySelectorAll('.change-menu-btn')
+    const tabsMenu = document.querySelectorAll('.dashboard-customer__menu-link')
     const pageUrlWithoutProtocol = HelperModule.getUrlWithoutProtocol(window.location.href)
     
 
     tabsMenu.forEach(menu => {
         const tabLinkMenu = HelperModule.getUrlWithoutProtocol(menu.getAttribute('href'))
         if (tabLinkMenu === pageUrlWithoutProtocol) {
-            menu.classList.add('text-blue-500', 'border-b', 'border-blue-500')
+            menu.classList.add('text-blue-500', 'bg-gray-100')
             menu.classList.remove('text-gray-600')
         }
     });

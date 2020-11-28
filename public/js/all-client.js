@@ -417,13 +417,13 @@ if (pageUrl === '/login') {
 
 
 if (pageUrl.indexOf('/my-account') > -1) {
-  var tabsMenu = document.querySelectorAll('.change-menu-btn');
+  var tabsMenu = document.querySelectorAll('.dashboard-customer__menu-link');
   var pageUrlWithoutProtocol = _helper_module_js__WEBPACK_IMPORTED_MODULE_2__["getUrlWithoutProtocol"](window.location.href);
   tabsMenu.forEach(function (menu) {
     var tabLinkMenu = _helper_module_js__WEBPACK_IMPORTED_MODULE_2__["getUrlWithoutProtocol"](menu.getAttribute('href'));
 
     if (tabLinkMenu === pageUrlWithoutProtocol) {
-      menu.classList.add('text-blue-500', 'border-b', 'border-blue-500');
+      menu.classList.add('text-blue-500', 'bg-gray-100');
       menu.classList.remove('text-gray-600');
     }
   });
@@ -993,8 +993,8 @@ if (document.querySelector('[data-tabs]')) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/js/native.js */"./resources/js/native.js");
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/plugin/tabbyjs/js/tabby.js */"./resources/plugin/tabbyjs/js/tabby.js");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/js/native.js */"./resources/js/native.js");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/plugin/tabbyjs/js/tabby.js */"./resources/plugin/tabbyjs/js/tabby.js");
 
 
 /***/ })

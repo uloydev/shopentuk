@@ -938,10 +938,38 @@ video {
   border-color: #63b3ed;
 }
 
+.required-input span {
+  position: relative;
+  padding-right: 0.75rem;
+}
+
+.required-input span::after {
+  content: "*";
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  right: 0;
+  --text-opacity: 1;
+  color: #fc8181;
+  color: rgba(252, 129, 129, var(--text-opacity));
+}
+
+.font-architects {
+  font-family: "Architects Daughter", cursive;
+}
+
+.font-shadows-light {
+  font-family: "Shadows Into Light", cursive;
+}
+
+.w-full-2x {
+  width: 200%;
+}
+
 * {
-  box-sizing: border-box;
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 html, body {
@@ -964,11 +992,6 @@ html, body {
   --bg-opacity: 1;
   background-color: #4a5568;
   background-color: rgba(74, 85, 104, var(--bg-opacity));
-}
-
-.center-x {
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .box-promo__heading, .box-promo__subheading {
@@ -1020,10 +1043,6 @@ html, body {
   cursor: not-allowed;
 }
 
-.w-full-2x {
-  width: 200%;
-}
-
 .section__heading span {
   position: relative;
 }
@@ -1043,30 +1062,6 @@ html, body {
 
 .card-product {
   max-width: 100%;
-}
-
-.font-architects {
-  font-family: "Architects Daughter", cursive;
-}
-
-.font-shadows-light {
-  font-family: "Shadows Into Light", cursive;
-}
-
-.required-input span {
-  position: relative;
-  padding-right: 0.75rem;
-}
-
-.required-input span::after {
-  content: "*";
-  top: 50%;
-  transform: translateY(-50%);
-  position: absolute;
-  right: 0;
-  --text-opacity: 1;
-  color: #fc8181;
-  color: rgba(252, 129, 129, var(--text-opacity));
 }
 
 .nav {
@@ -1410,6 +1405,43 @@ html, body {
   -o-object-fit: cover;
      object-fit: cover;
 }
+
+/*dashboard customer*/
+
+.dashboard-customer__menu-box {
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-radius: 0.25rem;
+  position: -webkit-sticky;
+  position: sticky;
+  width: 25%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  border-width: 1px;
+  --border-opacity: 1;
+  border-color: #cbd5e0;
+  border-color: rgba(203, 213, 224, var(--border-opacity));
+  top: 20px;
+}
+
+.dashboard-customer__menu-item {
+  flex-grow: 1;
+  text-transform: capitalize;
+}
+
+.dashboard-customer__menu-link {
+  text-align: center;
+  display: block;
+  padding: 1rem;
+  --text-opacity: 1;
+  color: #718096;
+  color: rgba(113, 128, 150, var(--text-opacity));
+}
+
+/*end of dashboard customer*/
 
 /*end of storePage style*/
 

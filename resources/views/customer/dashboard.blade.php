@@ -1,6 +1,6 @@
 @include('layouts.skeleton-top')
 @include('layouts.header')
-<main class="bg-gray-100">
+<main class="bg-gray-100 dashboard-customer">
     <div class="container py-10">
         <div class="mb-5">
             <div class="col-12">
@@ -20,25 +20,20 @@
                 </figure>
             </div>
         </div>
-    
-        <div class="flex-flex-wrap" id="tabs-id">
-            <div class="w-full">
-                <ul class="flex flex-wrap bg-white shadow-md mb-5 rounded">
-                    @for ($i = 0; $i < 4; $i++)
-                        <li class="flex-grow capitalize">
-                            <a href="{{ route('my-account.' . Str::slug($tabMenus[$i], '.')) }}"
-                            class="change-menu-btn text-center block py-2 px-4 text-gray-600">
-                                {{ $tabMenus[$i] }}
-                            </a>
-                        </li>
-                    @endfor
-                </ul>
-                <div class="relative flex flex-col min-w-0 break-words w-full mb-6">
-                    <div class="py-5 flex-auto">
-                        <div class="tab-content tab-space">
-                            @yield('content')
-                        </div>
-                    </div>
+        <div class="flex flex-col lg:flex-row items-start relative">
+            <ul class="mb-5 dashboard-customer__menu-box">
+                @for ($i = 0; $i < 4; $i++)
+                    <li class="dashboard-customer__menu-item">
+                        <a href="{{ route('my-account.' . Str::slug($tabMenus[$i], '.')) }}"
+                        class="dashboard-customer__menu-link">
+                            {{ $tabMenus[$i] }}
+                        </a>
+                    </li>
+                @endfor
+            </ul>
+            <div class="break-words mb-6 lg:mb-0 ml-10 w-full">
+                <div class="tab-content tab-space">
+                    @yield('content')
                 </div>
             </div>
         </div>
