@@ -20,6 +20,7 @@ Route::prefix('store')->name('store.')->group(function() {
         Route::get('/redeem', 'StoreController@redeem')->name('redeem.index');
         Route::get('/{slug}', 'StoreController@showTokoPoint')->name('show');
     });
+    Route::post('checkout', 'CheckoutController@store')->name('checkout')->middleware(['auth', 'customer']);
 });
 
 Route::prefix('payment')->name('payment.')->group(function() {

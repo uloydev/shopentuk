@@ -17,10 +17,10 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('user_address_id');
-            $table->integer('shipping_price')->nullable();
+            $table->integer('shipping_price')->default(0);
+            $table->integer('shipping_point')->default(0);
             $table->integer('product_price')->nullable();
             $table->integer('price_total')->nullable();
-            $table->integer('shipping_point')->nullable();
             $table->integer('product_point')->nullable();
             $table->integer('point_total')->nullable();
             $table->enum('status', ['unpaid', 'paid', 'shipping', 'canceled', 'refunded', 'finished'])->default('unpaid');

@@ -15,19 +15,20 @@
                                 Let's checkout
                             </h3>
                             <div class="mt-5 flex w-full-2x step-form">
-                                <form action="{{-- routing on js --}}" method="POST" 
+                                <form action="{{ route('store.checkout') }}" method="POST" 
                                 class="block w-full show-step" id="form-checkout">
+                                @csrf
                                     <div class="mb-5">
                                         <label class="block mt-4">
                                             <span class="text-gray-700">Pilih alamat</span>
                                         </label>
-                                        <select class="form-select mt-1 block w-full mb-1">
+                                        <select class="form-select mt-1 block w-full mb-1" name="address_id" required>
                                             @forelse ($addresses as $address)
                                                 <option value="{{ $address->id }}">
                                                     {{ $address->title }}
                                                 </option>
                                             @empty
-                                                <option>
+                                                <option selected disabled value="">
                                                     Kamu belum pernah memasukan data alamatmu
                                                 </option>
                                             @endforelse
@@ -49,12 +50,19 @@
                             </div>
                     </div>
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button type="button" 
+                        <button type="button" id="btnNextStep"
                         class="w-full inline-flex justify-center rounded-md border border-transparent
                         shadow-sm px-4 py-2 bg-teal-400 text-base font-medium text-white
                         hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2
                         focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm next-step">
                             Next
+                        </button>
+                        <button type="submit" id="btnCheckout" form="form-checkout"
+                        class="w-full inline-flex justify-center rounded-md border border-transparent
+                        shadow-sm px-4 py-2 bg-teal-400 text-base font-medium text-white
+                        hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2
+                        focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm next-step hidden">
+                            Checkout
                         </button>
                         <button type="button" 
                         class="mt-3 w-full inline-flex justify-center rounded-md font-medium

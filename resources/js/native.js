@@ -184,7 +184,8 @@ if (pageUrl === '/cart') {
         const modalCheckout = cartPage.querySelector('#modalCheckout')
         const firstStep = modalCheckout.querySelector('.step-form > form')
         const secondStep = modalCheckout.querySelector('.step-form > div')
-        const nextStepBtn = modalCheckout.querySelector('.next-step')
+        const nextStepBtn = modalCheckout.querySelector('#btnNextStep')
+        const checkoutBtn = modalCheckout.querySelector('#btnCheckout')
 
         // open modal checkout
         const btnShowCheckoutStep = cartPage.querySelector('#btnShowCheckoutStep')
@@ -197,6 +198,10 @@ if (pageUrl === '/cart') {
         */
         function setNextStepBtnText(textBtn) {
             nextStepBtn.textContent = textBtn
+            if (textBtn == "Next"){
+
+            }
+
         }
     
         /*
@@ -220,7 +225,9 @@ if (pageUrl === '/cart') {
             openCloseModal('#' + modalCheckout.getAttribute('id'))
             openStep(firstStep)
             closeStep(secondStep)
-            setNextStepBtnText('Next')
+            // setNextStepBtnText('Next')
+
+
         });
     
         // each btn to manage modal address
@@ -242,9 +249,18 @@ if (pageUrl === '/cart') {
          * when user go to next step on checkout
          */
         nextStepBtn.addEventListener('click', () => {
-            openStep(secondStep)
-            closeStep(firstStep)
-            setNextStepBtnText('Checkout')
+            
+
+            if (modalCheckout.querySelector('select').value == '') {
+                alert('kamu belum pilih alamat pengiriman!')
+            }
+            else {
+                openStep(secondStep)
+                closeStep(firstStep)
+                nextStepBtn.classList.add('hidden')
+                checkoutBtn.classList.remove('hidden')
+            }
+            // setNextStepBtnText('Checkout')
         })
     
         const newAddressBtn = document.querySelector('#newAddressSubmit');

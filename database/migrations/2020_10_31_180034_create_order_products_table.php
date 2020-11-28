@@ -17,8 +17,9 @@ class CreateOrderProductsTable extends Migration
             $table->id();
             $table->foreignId('order_id');
             $table->foreignId('product_id');
-            $table->integer('original_price')->nullable();
-            $table->integer('discounted_price')->nullable();
+            $table->integer('original_price')->default(0);
+            $table->integer('point_price')->default(0);
+            $table->integer('discounted_price')->default(0);
             $table->integer('quantity');
             $table->boolean('is_toko_point')->default(false);
             $table->timestamps();
