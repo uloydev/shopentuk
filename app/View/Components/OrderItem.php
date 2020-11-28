@@ -7,19 +7,21 @@ use Illuminate\View\Component;
 class OrderItem extends Component
 {
 
-    public $productName, $productPrice, $productQty, $productBoughtDate;
+    public $orderId, $totalPoint, $totalPrice, $orderDate;
+    public $orderStatus;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($productName, $productPrice, $productQty, $productBoughtDate)
+    public function __construct($orderId, $totalPoint, $totalPrice, $orderDate, $orderStatus)
     {
-        $this->productName = $productName;
-        $this->productPrice = $productPrice;
-        $this->productQty = $productQty;
-        $this->productBoughtDate = $productBoughtDate;
+        $this->orderId = $orderId;
+        $this->totalPoint = $totalPoint;
+        $this->totalPrice = $totalPrice;
+        $this->orderDate = $orderDate;
+        $this->orderStatus = $orderStatus;
     }
 
     /**

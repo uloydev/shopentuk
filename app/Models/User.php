@@ -50,7 +50,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\UserAddress');
     }
     
-    public function Orders()
+    public function orders()
     {
         return $this->hasMany('App\Models\Order');
     }

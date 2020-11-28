@@ -13,6 +13,7 @@ class OrderProduct extends Model
         'order_id',
         'product_id',
         'original_price',
+        'point_price',
         'discounted_price',
         'quantity',
         'is_toko_point',

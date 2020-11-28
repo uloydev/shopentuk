@@ -21,9 +21,9 @@ class Order extends Model
         'status',
     ];
 
-    public function OrderProducts()
+    public function orderProducts()
     {
-        return $this->hasMany('Appp\Models\OrderPorduct');
+        return $this->hasMany('App\Models\OrderProduct');
     }
 
     public function user()

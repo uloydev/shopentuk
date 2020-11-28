@@ -11,12 +11,13 @@ class DashboardController extends Controller
 {
 
     protected $tabMenus = ['history order', 'current order', 'account detail', 'account point'];
-    
+
     public function currentOrder()
     {
         return view('customer.order.current', [
             'title' => 'current order',
-            'tabMenus' => $this->tabMenus
+            'tabMenus' => $this->tabMenus,
+            'orders' => Auth::user()->orders->whereNotIn('status', ['canceled', 'refunded', 'finished'])
         ]);
     }
 
@@ -24,7 +25,8 @@ class DashboardController extends Controller
     {
         return view('customer.order.history', [
             'title' => 'order history', 
-            'tabMenus' => $this->tabMenus
+            'tabMenus' => $this->tabMenus,
+            'orders' => Auth::user()->orders->whereIn('status', ['canceled', 'refunded', 'finished'])
         ]);
     }
 
