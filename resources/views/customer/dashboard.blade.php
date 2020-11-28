@@ -21,9 +21,9 @@
             </div>
         </div>
     
-        <div class="flex-flex-wrap" id="tabs-id">
-            <div class="w-full">
-                <ul class="flex flex-wrap bg-white shadow-md mb-5 rounded">
+        
+            <div class="flex flex-wrap flex-col items-start lg:flex-row">
+                <ul class="flex flex-wrap bg-white shadow-md mb-5 rounded border border-gray-400 flex-col w-1/4">
                     @for ($i = 0; $i < 4; $i++)
                         <li class="flex-grow capitalize">
                             <a href="{{ route('my-account.' . Str::slug($tabMenus[$i], '.')) }}"
@@ -33,15 +33,12 @@
                         </li>
                     @endfor
                 </ul>
-                <div class="relative flex flex-col min-w-0 break-words w-full mb-6">
-                    <div class="py-5 flex-auto">
-                        <div class="tab-content tab-space">
-                            @yield('content')
-                        </div>
+                <div class="break-words flex-grow mb-6 lg:mb-0 lg:ml-10">
+                    <div class="tab-content tab-space">
+                        @yield('content')
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 </main>
 @include('layouts.skeleton-bottom')
