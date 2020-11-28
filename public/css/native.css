@@ -1406,6 +1406,43 @@ html, body {
      object-fit: cover;
 }
 
+/*dashboard customer*/
+
+.dashboard-customer__menu-box {
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-radius: 0.25rem;
+  position: -webkit-sticky;
+  position: sticky;
+  width: 25%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  border-width: 1px;
+  --border-opacity: 1;
+  border-color: #cbd5e0;
+  border-color: rgba(203, 213, 224, var(--border-opacity));
+  top: 20px;
+}
+
+.dashboard-customer__menu-item {
+  flex-grow: 1;
+  text-transform: capitalize;
+}
+
+.dashboard-customer__menu-link {
+  text-align: center;
+  display: block;
+  padding: 1rem;
+  --text-opacity: 1;
+  color: #718096;
+  color: rgba(113, 128, 150, var(--text-opacity));
+}
+
+/*end of dashboard customer*/
+
 /*end of storePage style*/
 
 #konfirmasiPembayaranPage .box-upload {

@@ -417,7 +417,7 @@ if (pageUrl === '/login') {
 
 
 if (pageUrl.indexOf('/my-account') > -1) {
-  var tabsMenu = document.querySelectorAll('.change-menu-btn');
+  var tabsMenu = document.querySelectorAll('.dashboard-customer__menu-link');
   var pageUrlWithoutProtocol = _helper_module_js__WEBPACK_IMPORTED_MODULE_2__["getUrlWithoutProtocol"](window.location.href);
   tabsMenu.forEach(function (menu) {
     var tabLinkMenu = _helper_module_js__WEBPACK_IMPORTED_MODULE_2__["getUrlWithoutProtocol"](menu.getAttribute('href'));

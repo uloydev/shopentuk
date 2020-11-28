@@ -87,6 +87,23 @@
         object-fit: cover;
     }
 }
+
+/*dashboard customer*/
+.dashboard-customer {
+    &__menu-box {
+        @apply bg-white shadow-md rounded sticky w-1/4 flex flex-wrap flex-col border border-gray-400;
+        top: 20px;
+    }
+    &__menu-item {
+        @apply flex-grow capitalize;
+    }
+    &__menu-link {
+        @apply text-center block p-4 text-gray-600;
+    }
+}
+
+/*end of dashboard customer*/
+
 /*end of storePage style*/
 #konfirmasiPembayaranPage {
     .box-upload {
@@ -96,13 +113,11 @@
 
         &__file {
             @include general.sameSize(0.1px);
-            opacity: 0;
-            overflow: hidden;
-            position: absolute;
+            @apply opacity-0 overflow-hidden absolute;
             z-index: -1;
         }
         &__text {
-            @apply absolute flex items-center justify-center h-full w-full
+            @apply absolute flex items-center justify-center h-full w-full;
         }
     }
 }
