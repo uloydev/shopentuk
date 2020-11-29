@@ -4,7 +4,7 @@
             $type = 'bg-green-600'; 
         @endphp
         @break
-    @case('danger')
+    @case('error')
         @php
             $type = 'bg-red-600';
         @endphp
