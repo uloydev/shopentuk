@@ -482,8 +482,8 @@ boxIcons.forEach(function (boxIcon) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/shopentuk/resources/js/helper.js */"./resources/js/helper.js");
-module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/js/custom-dashboard.js */"./resources/js/custom-dashboard.js");
+__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/js/helper.js */"./resources/js/helper.js");
+module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/js/custom-dashboard.js */"./resources/js/custom-dashboard.js");
 
 
 /***/ })

@@ -25,6 +25,7 @@ Route::prefix('store')->name('store.')->group(function() {
 
 Route::prefix('payment')->name('payment.')->group(function() {
     Route::get('confirmation', 'PaymentController@showConfirm')->name('show-confirm');
+    Route::post('confirmation', 'PaymentController@store')->name('store');
     Route::get('returning', 'PaymentController@showReturning')->name('returning');
 });
 

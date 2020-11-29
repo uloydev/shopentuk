@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymentConfirmationsTable extends Migration
+class CreatePaymentConfirmationImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreatePaymentConfirmationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payment_confirmations', function (Blueprint $table) {
+        Schema::create('payment_confirmation_images', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');
-            $table->string('phone');
-            $table->foreignId('order_id');
-            $table->date('payment_date');
-            $table->enum('payment_method', ['bca', 'ovo']);
+            $table->string('file');
+            $table->foreignId('payment_confirmation_id');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreatePaymentConfirmationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_confirmations');
+        Schema::dropIfExists('payment_confirmation_images');
     }
 }
