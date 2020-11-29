@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->enum('role', ['customer', 'admin', 'superadmin'])->default('customer');
             $table->integer('point')->default(0);
+            $table->string('bank')->nullable();
+            $table->integer('rekening')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

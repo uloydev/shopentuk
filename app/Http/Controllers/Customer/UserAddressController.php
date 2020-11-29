@@ -14,4 +14,10 @@ class UserAddressController extends Controller
         UserAddress::create(array_merge($request->all(), ['user_id' => $user->id]));
         return response()->json($user->userAddresses->sortByDesc('is_main_address'));
     }
+
+    public function update(Request $request) {
+        $address = UserAddress::findOrFail($request->id);
+        $address->update($request->all());
+        return redirect()->back()->with(['success' => 'alamat berhasil diperbarui!']);
+    }
 }
