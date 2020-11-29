@@ -15,7 +15,6 @@ class PaymentConfirmation extends Model
         'order_id',
         'payment_date',
         'payment_method',
-        'image',
     ];
 
     protected $casts = [
@@ -25,5 +24,10 @@ class PaymentConfirmation extends Model
     public function order()
     {
         return $this->belongsTo('App\Models\Order');
+    }
+
+    public function images()
+    {
+        return $this->hasMany('App\Model\PaymentConfirmationImage');
     }
 }
