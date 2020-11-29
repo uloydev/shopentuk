@@ -7,13 +7,13 @@
                 <figure class="text-center">
                     <img src="{{ asset('img/static/people.png') }}"
                     class="h-48 w-48 rounded-full inline-block"
-                    alt="Photo profile of {{ Auth::user()->name }}">
+                    alt="Photo profile of {{ auth()->user()->name }}">
                     <figcaption class="py-3">
-                        <p class="mb-3 text-2xl font-bold">{{ Auth::user()->name }}</p>
+                        <p class="mb-3 text-2xl font-bold">{{ auth()->user()->name }}</p>
                         <p class="text-gray-800">
                             <span class="mr-1">Joined at:</span>
-                            <time datetime="{{ Auth::user()->created_at }}">
-                                {{ Auth::user()->created_at }}
+                            <time datetime="{{ auth()->user()->created_at }}">
+                                {{ auth()->user()->created_at }}
                             </time>
                         </p>
                     </figcaption>

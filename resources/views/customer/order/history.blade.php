@@ -8,7 +8,8 @@
     <div class="block">
         @forelse ($orders as $order)
             <x-order-item order-id="{{ $order->id }}"
-            total-price="{{ $order->price_total }}" total-point="{{ $order->point_total }}" order-date="{{ $order->created_at }}" order-status="{{ $order->status }}" >
+            total-price="{{ $order->price_total }}" total-point="{{ $order->point_total }}" 
+            order-date="{{ $order->created_at }}" order-status="{{ $order->status }}" >
                 <x-slot name="products">
                     @foreach ($order->orderProducts as $orderProduct)
                         <div class="w-full mb-3">
