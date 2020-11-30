@@ -20,4 +20,10 @@ class UserAddressController extends Controller
         $address->update($request->all());
         return redirect()->back()->with(['success' => 'alamat berhasil diperbarui!']);
     }
+
+    public function destroy(Request $request) {
+        $address = UserAddress::findOrFail($request->id);
+        $address->delete();
+        return redirect()->back()->with(['success' => 'alamat berhasil dihapus!']);
+    }
 }
