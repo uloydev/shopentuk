@@ -1,7 +1,31 @@
 import 'boxicons'
-import { capitalizeFirstLetter, setAttributes } from './helper-module';
-const numWords = require('num-words')
+import { capitalizeFirstLetter, setAttributes } from './helper-module'
 
+// let $ = require( "jquery" )
+// import './bootstrap.min'
+// import './../template/dist/js/dashboard1.min'
+// import './popper.min'
+// import './../template/dist/js/app-style-switcher.min'
+// import './../template/dist/js/feather.min'
+// import './perfect-scrollbar.jquery.min'
+// import './../template/assets/extra-libs/sparkline/sparkline'
+// import './../template/dist/js/sidebarmenu.min'
+// import './../template/dist/js/custom.min'
+
+// (async function () {
+//     await (await import('./../template/assets/extra-libs/c3/d3.min')).default()
+//     await (await import('./../template/assets/extra-libs/c3/c3.min')).default()
+// })()
+
+// import './../template/assets/extra-libs/prism/prism'
+// import './../template/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min'
+// import './../template/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en'
+// import './../template/assets/libs/chart.js/dist/Chart.min'
+// import './../plugin/datatables.net/js/jquery.dataTables.min'
+// import './../plugin/datatables.net/js/datatable-basic.init.min'
+// let dt      = require( 'datatables.net' )( window, $ )
+
+const numWords = require('num-words')
 const appUrl = window.location.origin;
 const pageUrl = window.location.pathname
 
@@ -174,6 +198,7 @@ if (pageUrl === '/admin/order') {
 }
 
 // general js
+$("#zero_config").DataTable()
 Array.from(document.querySelectorAll('box-icon')).map(icon => {
     icon.classList.remove('has-arrow') // remove ::after style because of adminmart template
     icon.classList.add('mr-2')

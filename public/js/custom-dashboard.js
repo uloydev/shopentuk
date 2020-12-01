@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -141,10 +141,10 @@ module.exports = function numWords (input) {
 
 /***/ }),
 
-/***/ "./resources/js/custom-dashboard.js":
-/*!******************************************!*\
-  !*** ./resources/js/custom-dashboard.js ***!
-  \******************************************/
+/***/ "./resources/assets/js/custom-dashboard.js":
+/*!*************************************************!*\
+  !*** ./resources/assets/js/custom-dashboard.js ***!
+  \*************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -152,9 +152,29 @@ module.exports = function numWords (input) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper-module */ "./resources/js/helper-module.js");
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper-module */ "./resources/assets/js/helper-module.js");
 
-
+ // let $ = require( "jquery" )
+// import './bootstrap.min'
+// import './../template/dist/js/dashboard1.min'
+// import './popper.min'
+// import './../template/dist/js/app-style-switcher.min'
+// import './../template/dist/js/feather.min'
+// import './perfect-scrollbar.jquery.min'
+// import './../template/assets/extra-libs/sparkline/sparkline'
+// import './../template/dist/js/sidebarmenu.min'
+// import './../template/dist/js/custom.min'
+// (async function () {
+//     await (await import('./../template/assets/extra-libs/c3/d3.min')).default()
+//     await (await import('./../template/assets/extra-libs/c3/c3.min')).default()
+// })()
+// import './../template/assets/extra-libs/prism/prism'
+// import './../template/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min'
+// import './../template/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en'
+// import './../template/assets/libs/chart.js/dist/Chart.min'
+// import './../plugin/datatables.net/js/jquery.dataTables.min'
+// import './../plugin/datatables.net/js/datatable-basic.init.min'
+// let dt      = require( 'datatables.net' )( window, $ )
 
 var numWords = __webpack_require__(/*! num-words */ "./node_modules/num-words/index.js");
 
@@ -318,6 +338,7 @@ if (pageUrl === '/admin/order') {
 } // general js
 
 
+$("#zero_config").DataTable();
 Array.from(document.querySelectorAll('box-icon')).map(function (icon) {
   icon.classList.remove('has-arrow'); // remove ::after style because of adminmart template
 
@@ -326,10 +347,10 @@ Array.from(document.querySelectorAll('box-icon')).map(function (icon) {
 
 /***/ }),
 
-/***/ "./resources/js/helper-module.js":
-/*!***************************************!*\
-  !*** ./resources/js/helper-module.js ***!
-  \***************************************/
+/***/ "./resources/assets/js/helper-module.js":
+/*!**********************************************!*\
+  !*** ./resources/assets/js/helper-module.js ***!
+  \**********************************************/
 /*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -393,97 +414,14 @@ var setAttributes = function setAttributes(el, attrs) {
 
 /***/ }),
 
-/***/ "./resources/js/helper.js":
-/*!********************************!*\
-  !*** ./resources/js/helper.js ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/*!
- * Get all siblings of an element
- * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
- */
-var getSiblings = function getSiblings(elem) {
-  return Array.prototype.filter.call(elem.parentNode.children, function (sibling) {
-    return sibling !== elem;
-  });
-};
-/*
-	formatting currency to rupiah
-*/
-
-
-var formattingRupiah = function formattingRupiah(currency) {
-  return new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR'
-  }).format(currency).replace(',00', '');
-};
-/*
- * Make all input lowercase
- */
-
-
-var inputElement = document.querySelectorAll(".input-lowercase");
-inputElement.forEach(function (input) {
-  input.addEventListener('input', function () {
-    return input.value = input.value.toLowerCase();
-  });
-  input.addEventListener('change', function () {
-    return console.log(input.value);
-  });
-});
-var inputOnlyNumberAndSpace = document.querySelectorAll('.only-alpha-space');
-inputOnlyNumberAndSpace.forEach(function (input) {
-  input.setAttribute('pattern', '[a-zA-Z]+');
-});
-var requiredInput = document.querySelectorAll('[required="required"], textarea[required]');
-Array.from(requiredInput).map(function (input) {
-  return input.previousElementSibling.classList.add('required-input');
-});
-/**
- * utilities class helper for instant formatting to rupiah
- */
-
-var rupiahCurrency = document.querySelectorAll('.rupiah-currency');
-rupiahCurrency.forEach(function (money) {
-  money.classList.add('not-italic');
-  money.textContent = formattingRupiah(money.textContent);
-});
-/**
- * set form action
- */
-
-var setFormAction = function setFormAction(form, url) {
-  document.querySelector(form).action = url;
-};
-/**
- *  Set box-icon component color just using class
- */
-
-
-var boxIcons = document.querySelectorAll('box-icon');
-boxIcons.forEach(function (boxIcon) {
-  if (boxIcon.className.split(' ').some(function (color) {
-    return /text-.*/.test(color);
-  })) {
-    var colorIcon = getComputedStyle(boxIcon).color;
-    boxIcon.setAttribute('color', colorIcon);
-  }
-});
-
-/***/ }),
-
-/***/ 2:
-/*!*************************************************************************!*\
-  !*** multi ./resources/js/helper.js ./resources/js/custom-dashboard.js ***!
-  \*************************************************************************/
+/***/ 1:
+/*!*******************************************************!*\
+  !*** multi ./resources/assets/js/custom-dashboard.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/js/helper.js */"./resources/js/helper.js");
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/js/custom-dashboard.js */"./resources/js/custom-dashboard.js");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/custom-dashboard.js */"./resources/assets/js/custom-dashboard.js");
 
 
 /***/ })

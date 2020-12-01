@@ -16,7 +16,6 @@
         "browser-sync": "^2.26.13",
         "browser-sync-webpack-plugin": "^2.0.1",
         "cross-env": "^7.0.2",
-        "jquery": "^3.2",
         "laravel-mix": "^5.0.1",
         "lodash": "^4.17.19",
         "popper.js": "^1.12",
@@ -27,6 +26,7 @@
     },
     "dependencies": {
         "boxicons": "^2.0.7",
+        "jquery": "^3.5.1",
         "num-words": "^1.2.2",
         "tailwindcss": "^1.9.5"
     }

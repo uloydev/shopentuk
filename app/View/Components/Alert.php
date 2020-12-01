@@ -24,7 +24,6 @@ class Alert extends Component
                 $this->type = 'bg-red-600';
                 break;
         }
-        
     }
 
     /**

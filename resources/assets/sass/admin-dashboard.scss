@@ -1,0 +1,16 @@
+@import './../template/assets/extra-libs/c3/c3.min.css';
+@import './../template/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css';
+@import './../template/dist/css/style.css';
+@import './../plugin/datatables.net/css/dataTables.bootstrap4.min.css';
+
+#dashboardPage #add-product-btn {
+    display: flex;
+}
+#dashboardPage #add-product-btn span {
+    height: 100%;
+    width: 100%;
+}
+#dashboardPage #add-product-btn svg {
+    width: 2rem !important;
+    height: 2rem !important;
+}

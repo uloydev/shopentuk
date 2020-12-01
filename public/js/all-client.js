@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -98,41 +98,10 @@
 
 /***/ }),
 
-/***/ "./node_modules/webpack/buildin/global.js":
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ "./resources/js/helper-module.js":
-/*!***************************************!*\
-  !*** ./resources/js/helper-module.js ***!
-  \***************************************/
+/***/ "./resources/assets/js/helper-module.js":
+/*!**********************************************!*\
+  !*** ./resources/assets/js/helper-module.js ***!
+  \**********************************************/
 /*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -196,16 +165,16 @@ var setAttributes = function setAttributes(el, attrs) {
 
 /***/ }),
 
-/***/ "./resources/js/helper-utilities.js":
-/*!******************************************!*\
-  !*** ./resources/js/helper-utilities.js ***!
-  \******************************************/
+/***/ "./resources/assets/js/helper-utilities.js":
+/*!*************************************************!*\
+  !*** ./resources/assets/js/helper-utilities.js ***!
+  \*************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helper_module_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helper-module.js */ "./resources/js/helper-module.js");
+/* harmony import */ var _helper_module_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helper-module.js */ "./resources/assets/js/helper-module.js");
 
 /*
  * .input-lowercase utitlies to make all input lowercase
@@ -270,10 +239,10 @@ document.querySelectorAll('input, textarea').forEach(function (input) {
 
 /***/ }),
 
-/***/ "./resources/js/native.js":
-/*!********************************!*\
-  !*** ./resources/js/native.js ***!
-  \********************************/
+/***/ "./resources/assets/js/native.js":
+/*!***************************************!*\
+  !*** ./resources/assets/js/native.js ***!
+  \***************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -281,8 +250,8 @@ document.querySelectorAll('input, textarea').forEach(function (input) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _helper_utilities_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper-utilities.js */ "./resources/js/helper-utilities.js");
-/* harmony import */ var _helper_module_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helper-module.js */ "./resources/js/helper-module.js");
+/* harmony import */ var _helper_utilities_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper-utilities.js */ "./resources/assets/js/helper-utilities.js");
+/* harmony import */ var _helper_module_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helper-module.js */ "./resources/assets/js/helper-module.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -611,390 +580,38 @@ if (document.querySelector('[data-tabs]')) {
 
 /***/ }),
 
-/***/ "./resources/plugin/tabbyjs/js/tabby.js":
-/*!**********************************************!*\
-  !*** ./resources/plugin/tabbyjs/js/tabby.js ***!
-  \**********************************************/
+/***/ "./resources/assets/sass/admin-dashboard.scss":
+/*!****************************************************!*\
+  !*** ./resources/assets/sass/admin-dashboard.scss ***!
+  \****************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-/* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-(function (root, factory) {
-  if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
-      return factory(root);
-    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else {}
-})(typeof global !== 'undefined' ? global : typeof window !== 'undefined' ? window : this, function (window) {
-  'use strict'; //
-  // Variables
-  //
-
-  var defaults = {
-    idPrefix: 'tabby-toggle_',
-    "default": '[data-tabby-default]'
-  }; //
-  // Methods
-  //
-
-  /**
-   * Merge two or more objects together.
-   * @param   {Object}   objects  The objects to merge together
-   * @returns {Object}            Merged values of defaults and options
-   */
-
-  var extend = function extend() {
-    var merged = {};
-    Array.prototype.forEach.call(arguments, function (obj) {
-      for (var key in obj) {
-        if (!obj.hasOwnProperty(key)) return;
-        merged[key] = obj[key];
-      }
-    });
-    return merged;
-  };
-  /**
-   * Emit a custom event
-   * @param  {String} type    The event type
-   * @param  {Node}   tab     The tab to attach the event to
-   * @param  {Node}   details Details about the event
-   */
-
-
-  var emitEvent = function emitEvent(tab, details) {
-    // Create a new event
-    var event;
-
-    if (typeof window.CustomEvent === 'function') {
-      event = new CustomEvent('tabby', {
-        bubbles: true,
-        cancelable: true,
-        detail: details
-      });
-    } else {
-      event = document.createEvent('CustomEvent');
-      event.initCustomEvent('tabby', true, true, details);
-    } // Dispatch the event
-
-
-    tab.dispatchEvent(event);
-  };
-  /**
-   * Remove roles and attributes from a tab and its content
-   * @param  {Node}   tab      The tab
-   * @param  {Node}   content  The tab content
-   * @param  {Object} settings User settings and options
-   */
-
-
-  var destroyTab = function destroyTab(tab, content, settings) {
-    // Remove the generated ID
-    if (tab.id.slice(0, settings.idPrefix.length) === settings.idPrefix) {
-      tab.id = '';
-    } // Remove roles
-
-
-    tab.removeAttribute('role');
-    tab.removeAttribute('aria-controls');
-    tab.removeAttribute('aria-selected');
-    tab.removeAttribute('tabindex');
-    tab.closest('li').removeAttribute('role');
-    content.removeAttribute('role');
-    content.removeAttribute('aria-labelledby');
-    content.removeAttribute('hidden');
-  };
-  /**
-   * Add the required roles and attributes to a tab and its content
-   * @param  {Node}   tab      The tab
-   * @param  {Node}   content  The tab content
-   * @param  {Object} settings User settings and options
-   */
-
-
-  var setupTab = function setupTab(tab, content, settings) {
-    // Give tab an ID if it doesn't already have one
-    if (!tab.id) {
-      tab.id = settings.idPrefix + content.id;
-    } // Add roles
-
-
-    tab.setAttribute('role', 'tab');
-    tab.setAttribute('aria-controls', content.id);
-    tab.closest('li').setAttribute('role', 'presentation');
-    content.setAttribute('role', 'tabpanel');
-    content.setAttribute('aria-labelledby', tab.id); // Add selected state
-
-    if (tab.matches(settings["default"])) {
-      tab.setAttribute('aria-selected', 'true');
-    } else {
-      tab.setAttribute('aria-selected', 'false');
-      tab.setAttribute('tabindex', '-1');
-      content.setAttribute('hidden', 'hidden');
-    }
-  };
-  /**
-   * Hide a tab and its content
-   * @param  {Node} newTab The new tab that's replacing it
-   */
-
-
-  var hide = function hide(newTab) {
-    // Variables
-    var tabGroup = newTab.closest('[role="tablist"]');
-    if (!tabGroup) return {};
-    var tab = tabGroup.querySelector('[role="tab"][aria-selected="true"]');
-    if (!tab) return {};
-    var content = document.querySelector(tab.hash); // Hide the tab
-
-    tab.setAttribute('aria-selected', 'false');
-    tab.setAttribute('tabindex', '-1'); // Hide the content
-
-    if (!content) return {
-      previousTab: tab
-    };
-    content.setAttribute('hidden', 'hidden'); // Return the hidden tab and content
-
-    return {
-      previousTab: tab,
-      previousContent: content
-    };
-  };
-  /**
-   * Show a tab and its content
-   * @param  {Node} tab      The tab
-   * @param  {Node} content  The tab content
-   */
-
-
-  var show = function show(tab, content) {
-    tab.setAttribute('aria-selected', 'true');
-    tab.setAttribute('tabindex', '0');
-    content.removeAttribute('hidden');
-    tab.focus();
-  };
-  /**
-   * Toggle a new tab
-   * @param  {Node} tab The tab to show
-   */
-
-
-  var toggle = function toggle(tab) {
-    // Make sure there's a tab to toggle and it's not already active
-    if (!tab || tab.getAttribute('aria-selected') == 'true') return; // Variables
-
-    var content = document.querySelector(tab.hash);
-    if (!content) return; // Hide active tab and content
-
-    var details = hide(tab); // Show new tab and content
-
-    show(tab, content); // Add event details
-
-    details.tab = tab;
-    details.content = content; // Emit a custom event
-
-    emitEvent(tab, details);
-  };
-  /**
-   * Get all of the tabs in a tablist
-   * @param  {Node}   tab  A tab from the list
-   * @return {Object}      The tabs and the index of the currently active one
-   */
-
-
-  var getTabsMap = function getTabsMap(tab) {
-    var tabGroup = tab.closest('[role="tablist"]');
-    var tabs = tabGroup ? tabGroup.querySelectorAll('[role="tab"]') : null;
-    if (!tabs) return;
-    return {
-      tabs: tabs,
-      index: Array.prototype.indexOf.call(tabs, tab)
-    };
-  };
-  /**
-   * Switch the active tab based on keyboard activity
-   * @param  {Node} tab The currently active tab
-   * @param  {Key}  key The key that was pressed
-   */
-
-
-  var switchTabs = function switchTabs(tab, key) {
-    // Get a map of tabs
-    var map = getTabsMap(tab);
-    if (!map) return;
-    var length = map.tabs.length - 1;
-    var index; // Go to previous tab
-
-    if (['ArrowUp', 'ArrowLeft', 'Up', 'Left'].indexOf(key) > -1) {
-      index = map.index < 1 ? length : map.index - 1;
-    } // Go to next tab
-    else if (['ArrowDown', 'ArrowRight', 'Down', 'Right'].indexOf(key) > -1) {
-        index = map.index === length ? 0 : map.index + 1;
-      } // Go to home
-      else if (key === 'Home') {
-          index = 0;
-        } // Go to end
-        else if (key === 'End') {
-            index = length;
-          } // Toggle the tab
-
-
-    toggle(map.tabs[index]);
-  };
-  /**
-   * Activate a tab based on the URL
-   * @param  {String} selector The selector for this instantiation
-   */
-
-
-  var loadFromURL = function loadFromURL(selector) {
-    if (window.location.hash.length < 1) return;
-    var tab = document.querySelector(selector + ' [role="tab"][href*="' + window.location.hash + '"]');
-    toggle(tab);
-  };
-  /**
-   * Create the Constructor object
-   */
-
-
-  var Constructor = function Constructor(selector, options) {
-    //
-    // Variables
-    //
-    var publicAPIs = {};
-    var settings, tabWrapper; //
-    // Methods
-    //
-
-    publicAPIs.destroy = function () {
-      // Get all tabs
-      var tabs = tabWrapper.querySelectorAll('a'); // Add roles to tabs
-
-      Array.prototype.forEach.call(tabs, function (tab) {
-        // Get the tab content
-        var content = document.querySelector(tab.hash);
-        if (!content) return; // Setup the tab
-
-        destroyTab(tab, content, settings);
-      }); // Remove role from wrapper
-
-      tabWrapper.removeAttribute('role'); // Remove event listeners
-
-      document.documentElement.removeEventListener('click', clickHandler, true);
-      tabWrapper.removeEventListener('keydown', keyHandler, true); // Reset variables
-
-      settings = null;
-      tabWrapper = null;
-    };
-    /**
-     * Setup the DOM with the proper attributes
-     */
-
-
-    publicAPIs.setup = function () {
-      // Variables
-      tabWrapper = document.querySelector(selector);
-      if (!tabWrapper) return;
-      var tabs = tabWrapper.querySelectorAll('a'); // Add role to wrapper
-
-      tabWrapper.setAttribute('role', 'tablist'); // Add roles to tabs
-
-      Array.prototype.forEach.call(tabs, function (tab) {
-        // Get the tab content
-        var content = document.querySelector(tab.hash);
-        if (!content) return; // Setup the tab
-
-        setupTab(tab, content, settings);
-      });
-    };
-    /**
-     * Toggle a tab based on an ID
-     * @param  {String|Node} id The tab to toggle
-     */
-
-
-    publicAPIs.toggle = function (id) {
-      // Get the tab
-      var tab = id;
-
-      if (typeof id === 'string') {
-        tab = document.querySelector(selector + ' [role="tab"][href*="' + id + '"]');
-      } // Toggle the tab
-
-
-      toggle(tab);
-    };
-    /**
-     * Handle click events
-     */
-
-
-    var clickHandler = function clickHandler(event) {
-      // Only run on toggles
-      var tab = event.target.closest(selector + ' [role="tab"]');
-      if (!tab) return; // Prevent link behavior
-
-      event.preventDefault(); // Toggle the tab
-
-      toggle(tab);
-    };
-    /**
-     * Handle keydown events
-     */
-
-
-    var keyHandler = function keyHandler(event) {
-      // Only run if a tab is in focus
-      var tab = document.activeElement;
-      if (!tab.matches(selector + ' [role="tab"]')) return; // Only run for specific keys
-
-      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Up', 'Down', 'Left', 'Right', 'Home', 'End'].indexOf(event.key) < 0) return; // Switch tabs
-
-      switchTabs(tab, event.key);
-    };
-    /**
-     * Initialize the instance
-     */
-
-
-    var init = function init() {
-      // Merge user options with defaults
-      settings = extend(defaults, options || {}); // Setup the DOM
-
-      publicAPIs.setup(); // Load a tab from the URL
-
-      loadFromURL(selector); // Add event listeners
-
-      document.documentElement.addEventListener('click', clickHandler, true);
-      tabWrapper.addEventListener('keydown', keyHandler, true);
-    }; //
-    // Initialize and return the Public APIs
-    //
-
-
-    init();
-    return publicAPIs;
-  }; //
-  // Return the Constructor
-  //
-
-
-  return Constructor;
-});
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 1:
-/*!*****************************************************************************!*\
-  !*** multi ./resources/js/native.js ./resources/plugin/tabbyjs/js/tabby.js ***!
-  \*****************************************************************************/
+/***/ "./resources/assets/sass/native.scss":
+/*!*******************************************!*\
+  !*** ./resources/assets/sass/native.scss ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 0:
+/*!******************************************************************************************************************************!*\
+  !*** multi ./resources/assets/js/native.js ./resources/assets/sass/native.scss ./resources/assets/sass/admin-dashboard.scss ***!
+  \******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/js/native.js */"./resources/js/native.js");
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/plugin/tabbyjs/js/tabby.js */"./resources/plugin/tabbyjs/js/tabby.js");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
 
 
 /***/ })
