@@ -32,6 +32,8 @@ class UserFactory extends Factory
             'role' => $this->faker->randomElement(['customer', 'admin']),
             'point' => 0,
             'remember_token' => Str::random(10),
+            'bank' => 'bca',
+            'rekening' => 123456789,
         ];
     }
 }

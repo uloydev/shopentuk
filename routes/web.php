@@ -41,7 +41,11 @@ Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'
     Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');
     Route::get('detail', 'DashboardController@accountDetail')->name('account.detail');
     Route::get('point', 'DashboardController@accountPoint')->name('account.point');
-    Route::resource('address', 'UserAddressController');
+    Route::prefix('address')->name('address.')->group(function () {
+        Route::post('/', 'UserAddressController@store')->name('store');
+        Route::post('/update', 'UserAddressController@update')->name('update');
+        Route::post('/delete', 'UserAddressController@destroy')->name('destroy');
+    });
 });
 
 // admin route

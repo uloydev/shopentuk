@@ -32,15 +32,20 @@ class DashboardController extends Controller
 
     public function accountDetail()
     {
+        $user = Auth::user();
+        // dd($user->userAddresses->toJson());
         return view('customer.account.detail', [
             'title' => 'my dashboard',
             'tabMenus' => $this->tabMenus,
-            'labelInput' => ['full name', 'email', 'phone number'],
+            'labelInput' => ['full name', 'email', 'phone number', 'bank', 'no rekening'],
             'userData' => [
-                auth()->user()->name, 
-                auth()->user()->email, 
-                substr(auth()->user()->phone, 3)
-            ]
+                $user->name, 
+                $user->email, 
+                substr($user->phone, 3),
+                $user->bank,
+                $user->rekening
+            ],
+            'userAddresses' => $user->userAddresses,
         ]);
     }
 
