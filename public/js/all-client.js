@@ -102,7 +102,7 @@
 /*!**********************************************!*\
   !*** ./resources/assets/js/helper-module.js ***!
   \**********************************************/
-/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes */
+/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -113,6 +113,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUrlWithoutProtocol", function() { return getUrlWithoutProtocol; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "capitalizeFirstLetter", function() { return capitalizeFirstLetter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAttributes", function() { return setAttributes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openCloseModal", function() { return openCloseModal; });
 /*!
  * Get all siblings of an element
  * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
@@ -162,6 +163,30 @@ var setAttributes = function setAttributes(el, attrs) {
     el.setAttribute(key, attrs[key]);
   }
 };
+/**
+ * open / close a modal
+ */
+
+function openCloseModal(modalSelector) {
+  var _modalEl$classList;
+
+  var modalEl = document.querySelector(modalSelector);
+  var classToCloseModal = ['invisible', 'h-0', 'opacity-0']; // if modal open, set isModalOpen = true. else, isModalOpen = false
+
+  var isModalOpen = (_modalEl$classList = modalEl.classList).contains.apply(_modalEl$classList, classToCloseModal) ? true : false;
+
+  if (isModalOpen === true) {
+    var _modalEl$classList2;
+
+    // close modal
+    (_modalEl$classList2 = modalEl.classList).remove.apply(_modalEl$classList2, classToCloseModal);
+  } else {
+    var _modalEl$classList3;
+
+    // open modal
+    (_modalEl$classList3 = modalEl.classList).add.apply(_modalEl$classList3, classToCloseModal);
+  }
+}
 
 /***/ }),
 
@@ -239,6 +264,43 @@ document.querySelectorAll('input, textarea').forEach(function (input) {
 
 /***/ }),
 
+/***/ "./resources/assets/js/modal.js":
+/*!**************************************!*\
+  !*** ./resources/assets/js/modal.js ***!
+  \**************************************/
+/*! exports provided: openCloseModal */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openCloseModal", function() { return openCloseModal; });
+var classToCloseModal = ['invisible', 'h-0', 'opacity-0'];
+/**
+ * open / close a modal
+ */
+
+function openCloseModal(modalSelector) {
+  var _modalEl$classList;
+
+  var modalEl = document.querySelector(modalSelector); // if modal open, set isModalOpen = true. else, isModalOpen = false
+
+  var isModalOpen = (_modalEl$classList = modalEl.classList).contains.apply(_modalEl$classList, classToCloseModal) ? true : false;
+
+  if (isModalOpen === true) {
+    var _modalEl$classList2;
+
+    // close modal
+    (_modalEl$classList2 = modalEl.classList).remove.apply(_modalEl$classList2, classToCloseModal);
+  } else {
+    var _modalEl$classList3;
+
+    // open modal
+    (_modalEl$classList3 = modalEl.classList).add.apply(_modalEl$classList3, classToCloseModal);
+  }
+}
+
+/***/ }),
+
 /***/ "./resources/assets/js/native.js":
 /*!***************************************!*\
   !*** ./resources/assets/js/native.js ***!
@@ -251,7 +313,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _helper_utilities_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper-utilities.js */ "./resources/assets/js/helper-utilities.js");
-/* harmony import */ var _helper_module_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helper-module.js */ "./resources/assets/js/helper-module.js");
+/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal */ "./resources/assets/js/modal.js");
+/* harmony import */ var _helper_module_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./helper-module.js */ "./resources/assets/js/helper-module.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -263,6 +326,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -313,7 +377,7 @@ btnOpenChildMenu.forEach(function (openChild) {
   var parentOfBtnOpenChild = openChild.parentNode.classList;
   openChild.addEventListener('click', function (e) {
     e.preventDefault();
-    var siblingsChild = _helper_module_js__WEBPACK_IMPORTED_MODULE_2__["getSiblings"](openChild.parentNode);
+    var siblingsChild = _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["getSiblings"](openChild.parentNode);
     siblingsChild.forEach(function (eachSibling) {
       if (eachSibling.classList.contains(classToOpenNavItemHasChild)) {
         eachSibling.classList.remove(classToOpenNavItemHasChild);
@@ -387,9 +451,9 @@ if (pageUrl === '/login') {
 
 if (pageUrl.indexOf('/my-account') > -1) {
   var tabsMenu = document.querySelectorAll('.dashboard-customer__menu-link');
-  var pageUrlWithoutProtocol = _helper_module_js__WEBPACK_IMPORTED_MODULE_2__["getUrlWithoutProtocol"](window.location.href);
+  var pageUrlWithoutProtocol = _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["getUrlWithoutProtocol"](window.location.href);
   tabsMenu.forEach(function (menu) {
-    var tabLinkMenu = _helper_module_js__WEBPACK_IMPORTED_MODULE_2__["getUrlWithoutProtocol"](menu.getAttribute('href'));
+    var tabLinkMenu = _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["getUrlWithoutProtocol"](menu.getAttribute('href'));
 
     if (tabLinkMenu === pageUrlWithoutProtocol) {
       menu.classList.add('text-blue-500', 'bg-gray-100');
@@ -407,37 +471,20 @@ if (pageUrl.indexOf('/my-account') > -1) {
     });
     document.querySelector('.point-item__total').textContent = pointTotal; //end of that   
   }
+}
+
+if (pageUrl === '/my-account/detail') {
+  var btnAddNewAddress = document.querySelectorAll('.btn-modal-address');
+  btnAddNewAddress.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["openCloseModal"]('#modalAddress');
+    });
+  });
 } // cart page js
 
 
 if (pageUrl === '/cart') {
-  var cartPage = document.querySelector('#cartPage');
-  /**
-   * function to open modal if modal closed, 
-   * close modal if modal opened
-   */
-
-  var openCloseModal = function openCloseModal(modalSelector) {
-    var _modalEl$classList;
-
-    var modalEl = document.querySelector(modalSelector);
-    var classToCloseModal = ['invisible', 'h-0', 'opacity-0']; // if modal open, set isModalOpen = true. else, isModalOpen = false
-
-    var isModalOpen = (_modalEl$classList = modalEl.classList).contains.apply(_modalEl$classList, classToCloseModal) ? true : false;
-
-    if (isModalOpen === true) {
-      var _modalEl$classList2;
-
-      // close modal
-      (_modalEl$classList2 = modalEl.classList).remove.apply(_modalEl$classList2, classToCloseModal);
-    } else {
-      var _modalEl$classList3;
-
-      // open modal
-      (_modalEl$classList3 = modalEl.classList).add.apply(_modalEl$classList3, classToCloseModal);
-    }
-  }; // modal checkout and it's child
-
+  var cartPage = document.querySelector('#cartPage'); // modal checkout and it's child
 
   if (cartPage.querySelector('#modalCheckout')) {
     /*
@@ -475,12 +522,12 @@ if (pageUrl === '/cart') {
 
     var btnShowCheckoutStep = cartPage.querySelector('#btnShowCheckoutStep');
     btnShowCheckoutStep.addEventListener('click', function () {
-      openCloseModal('#' + modalCheckout.getAttribute('id'));
+      _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["openCloseModal"]('#' + modalCheckout.getAttribute('id'));
     });
     var btnCloseModal = cartPage.querySelector('#closeModalCheckout'); // when user close the modal
 
     btnCloseModal.addEventListener('click', function () {
-      openCloseModal('#' + modalCheckout.getAttribute('id'));
+      _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["openCloseModal"]('#' + modalCheckout.getAttribute('id'));
       openStep(firstStep);
       closeStep(secondStep); // setNextStepBtnText('Next')
     }); // each btn to manage modal address
@@ -495,7 +542,7 @@ if (pageUrl === '/cart') {
 
     btnsManageModalAddress.forEach(function (btnOnModalAddNewAddress) {
       btnOnModalAddNewAddress.addEventListener('click', function () {
-        openCloseModal('#modalAddNewAddress');
+        _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["openCloseModal"]('#modalAddNewAddress');
       });
     });
     /**
@@ -540,7 +587,7 @@ if (pageUrl === '/cart') {
           addresses.innerHTML += "\n                        <option value=\"".concat(value.id, "\">\n                            ").concat(value.title, "\n                        </option>\n                        ");
         }
 
-        openCloseModal('#modalAddNewAddress');
+        _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["openCloseModal"]('#modalAddNewAddress');
       });
       newAddressBtn.disabled = false;
     });

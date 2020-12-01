@@ -21,5 +21,5 @@ Route::name('api.')->group(function(){
             'all-category' => 'AllCategoryController',
             'products' => 'ProductController'
         ]);
-    }); 
+    });
 });

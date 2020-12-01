@@ -1,5 +1,6 @@
 import 'boxicons'
 import './helper-utilities.js'
+import './modal'
 import * as HelperModule from './helper-module.js'
 
 const btnOpenMenu = document.querySelector('.nav__toggle-menu')
@@ -154,30 +155,21 @@ if (pageUrl.indexOf('/my-account') > -1) {
     
 }
 
+if (pageUrl === '/my-account/detail') {
+    
+    const btnAddNewAddress = document.querySelectorAll('.btn-modal-address')
+    
+    btnAddNewAddress.forEach(btn => {
+        btn.addEventListener('click', () => {
+            HelperModule.openCloseModal('#modalAddress')
+        })
+    })
+
+}
+
 // cart page js
 if (pageUrl === '/cart') {
     const cartPage = document.querySelector('#cartPage')
-
-    /**
-     * function to open modal if modal closed, 
-     * close modal if modal opened
-     */
-    const openCloseModal = (modalSelector) => {
-        const modalEl = document.querySelector(modalSelector)
-        const classToCloseModal = ['invisible', 'h-0', 'opacity-0']
-
-        // if modal open, set isModalOpen = true. else, isModalOpen = false
-        const isModalOpen = modalEl.classList.contains(...classToCloseModal) ? true : false
-        
-        if (isModalOpen === true) {
-            // close modal
-            modalEl.classList.remove(...classToCloseModal)
-        }
-        else {
-            // open modal
-            modalEl.classList.add(...classToCloseModal)
-        }
-    }
 
     // modal checkout and it's child
     if (cartPage.querySelector('#modalCheckout')) {
@@ -190,7 +182,7 @@ if (pageUrl === '/cart') {
         // open modal checkout
         const btnShowCheckoutStep = cartPage.querySelector('#btnShowCheckoutStep')
         btnShowCheckoutStep.addEventListener('click', () => {
-            openCloseModal('#' + modalCheckout.getAttribute('id'))
+            HelperModule.openCloseModal('#' + modalCheckout.getAttribute('id'))
         })
     
         /*
@@ -222,7 +214,7 @@ if (pageUrl === '/cart') {
         const btnCloseModal = cartPage.querySelector('#closeModalCheckout')
         // when user close the modal
         btnCloseModal.addEventListener('click', () => {
-            openCloseModal('#' + modalCheckout.getAttribute('id'))
+            HelperModule.openCloseModal('#' + modalCheckout.getAttribute('id'))
             openStep(firstStep)
             closeStep(secondStep)
             // setNextStepBtnText('Next')
@@ -241,7 +233,7 @@ if (pageUrl === '/cart') {
          */
         btnsManageModalAddress.forEach(btnOnModalAddNewAddress => {
             btnOnModalAddNewAddress.addEventListener('click', () => {
-                openCloseModal('#modalAddNewAddress')
+                HelperModule.openCloseModal('#modalAddNewAddress')
             })
         })
     
@@ -294,7 +286,7 @@ if (pageUrl === '/cart') {
                     }
                     
                     
-                    openCloseModal('#modalAddNewAddress')
+                    HelperModule.openCloseModal('#modalAddNewAddress')
     
                 });
             newAddressBtn.disabled = false;

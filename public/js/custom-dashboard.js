@@ -351,7 +351,7 @@ Array.from(document.querySelectorAll('box-icon')).map(function (icon) {
 /*!**********************************************!*\
   !*** ./resources/assets/js/helper-module.js ***!
   \**********************************************/
-/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes */
+/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -362,6 +362,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUrlWithoutProtocol", function() { return getUrlWithoutProtocol; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "capitalizeFirstLetter", function() { return capitalizeFirstLetter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAttributes", function() { return setAttributes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openCloseModal", function() { return openCloseModal; });
 /*!
  * Get all siblings of an element
  * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
@@ -411,6 +412,30 @@ var setAttributes = function setAttributes(el, attrs) {
     el.setAttribute(key, attrs[key]);
   }
 };
+/**
+ * open / close a modal
+ */
+
+function openCloseModal(modalSelector) {
+  var _modalEl$classList;
+
+  var modalEl = document.querySelector(modalSelector);
+  var classToCloseModal = ['invisible', 'h-0', 'opacity-0']; // if modal open, set isModalOpen = true. else, isModalOpen = false
+
+  var isModalOpen = (_modalEl$classList = modalEl.classList).contains.apply(_modalEl$classList, classToCloseModal) ? true : false;
+
+  if (isModalOpen === true) {
+    var _modalEl$classList2;
+
+    // close modal
+    (_modalEl$classList2 = modalEl.classList).remove.apply(_modalEl$classList2, classToCloseModal);
+  } else {
+    var _modalEl$classList3;
+
+    // open modal
+    (_modalEl$classList3 = modalEl.classList).add.apply(_modalEl$classList3, classToCloseModal);
+  }
+}
 
 /***/ }),
 
