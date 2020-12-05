@@ -2,8 +2,8 @@
     "/js/all-client.js": "/js/all-client.js",
     "/css/native.css": "/css/native.css",
     "/css/admin-dashboard.css": "/css/admin-dashboard.css",
-    "/js/custom-dashboard.js": "/js/custom-dashboard.js",
+    "/js/dashboard-admin.js": "/js/dashboard-admin.js",
     "/css/dashboard.css": "/css/dashboard.css",
-    "/js/dashboard.js": "/js/dashboard.js",
+    "/js/all-admin.js": "/js/all-admin.js",
     "/library/datatables.net": "/library/datatables.net"
 }

@@ -98,11 +98,99 @@
 
 /***/ }),
 
+/***/ "./resources/assets/js/component/nav.js":
+/*!**********************************************!*\
+  !*** ./resources/assets/js/component/nav.js ***!
+  \**********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helper-module */ "./resources/assets/js/helper-module.js");
+
+var nav = document.querySelector('nav');
+var btnOpenMenu = document.querySelector('.nav__toggle-menu');
+var navUl = nav.querySelector('.nav__ul');
+var dividerMenu = ['divide-y', 'divide-gray-400']; //ini class buat nambah border ke menu
+
+var elementOnHeaderExceptNav = document.querySelectorAll('header nav + *');
+
+var closeNav = function closeNav() {
+  var _navUl$classList;
+
+  nav.classList.remove('nav--open');
+
+  (_navUl$classList = navUl.classList).remove.apply(_navUl$classList, dividerMenu);
+};
+
+var openNav = function openNav() {
+  var _navUl$classList2;
+
+  nav.classList.add('nav--open');
+
+  (_navUl$classList2 = navUl.classList).add.apply(_navUl$classList2, dividerMenu);
+};
+
+var closeAllMenu = function closeAllMenu() {
+  closeNav();
+  var allChild = document.querySelectorAll('.nav__item-has-child--open');
+  allChild.forEach(function (child) {
+    child.classList.remove('nav__item-has-child--open');
+  });
+};
+
+btnOpenMenu.addEventListener('click', function () {
+  if (nav.classList.contains('nav--open')) {
+    closeNav();
+  } else {
+    openNav();
+  }
+});
+
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/') {
+  nav.classList.add('bg-gray-800', 'bg-opacity-25');
+} else {
+  nav.classList.add('lg:border-b', 'border-gray-400');
+}
+
+if (elementOnHeaderExceptNav.length > 0) {
+  document.querySelector('header nav + *').addEventListener('click', function () {
+    closeAllMenu();
+  });
+}
+
+var btnOpenChildMenu = document.querySelectorAll('.nav__link--open-child');
+var classToOpenNavItemHasChild = 'nav__item-has-child--open';
+btnOpenChildMenu.forEach(function (openChild) {
+  var parentOfBtnOpenChild = openChild.parentNode.classList;
+  openChild.addEventListener('click', function (e) {
+    e.preventDefault();
+    var siblingsChild = _helper_module__WEBPACK_IMPORTED_MODULE_0__["getSiblings"](openChild.parentNode);
+    siblingsChild.forEach(function (eachSibling) {
+      if (eachSibling.classList.contains(classToOpenNavItemHasChild)) {
+        eachSibling.classList.remove(classToOpenNavItemHasChild);
+      }
+    });
+
+    if (parentOfBtnOpenChild.contains(classToOpenNavItemHasChild)) {
+      parentOfBtnOpenChild.remove(classToOpenNavItemHasChild);
+    } else {
+      parentOfBtnOpenChild.add(classToOpenNavItemHasChild);
+    }
+  });
+});
+document.querySelector('main').addEventListener('click', function () {
+  closeAllMenu();
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/helper-module.js":
 /*!**********************************************!*\
   !*** ./resources/assets/js/helper-module.js ***!
   \**********************************************/
-/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal */
+/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, pageUrl */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -114,6 +202,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "capitalizeFirstLetter", function() { return capitalizeFirstLetter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAttributes", function() { return setAttributes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openCloseModal", function() { return openCloseModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pageUrl", function() { return pageUrl; });
 /*!
  * Get all siblings of an element
  * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
@@ -187,6 +276,7 @@ function openCloseModal(modalSelector) {
     (_modalEl$classList3 = modalEl.classList).add.apply(_modalEl$classList3, classToCloseModal);
   }
 }
+var pageUrl = window.location.pathname;
 
 /***/ }),
 
@@ -264,43 +354,6 @@ document.querySelectorAll('input, textarea').forEach(function (input) {
 
 /***/ }),
 
-/***/ "./resources/assets/js/modal.js":
-/*!**************************************!*\
-  !*** ./resources/assets/js/modal.js ***!
-  \**************************************/
-/*! exports provided: openCloseModal */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openCloseModal", function() { return openCloseModal; });
-var classToCloseModal = ['invisible', 'h-0', 'opacity-0'];
-/**
- * open / close a modal
- */
-
-function openCloseModal(modalSelector) {
-  var _modalEl$classList;
-
-  var modalEl = document.querySelector(modalSelector); // if modal open, set isModalOpen = true. else, isModalOpen = false
-
-  var isModalOpen = (_modalEl$classList = modalEl.classList).contains.apply(_modalEl$classList, classToCloseModal) ? true : false;
-
-  if (isModalOpen === true) {
-    var _modalEl$classList2;
-
-    // close modal
-    (_modalEl$classList2 = modalEl.classList).remove.apply(_modalEl$classList2, classToCloseModal);
-  } else {
-    var _modalEl$classList3;
-
-    // open modal
-    (_modalEl$classList3 = modalEl.classList).add.apply(_modalEl$classList3, classToCloseModal);
-  }
-}
-
-/***/ }),
-
 /***/ "./resources/assets/js/native.js":
 /*!***************************************!*\
   !*** ./resources/assets/js/native.js ***!
@@ -313,110 +366,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _helper_utilities_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper-utilities.js */ "./resources/assets/js/helper-utilities.js");
-/* harmony import */ var _modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal */ "./resources/assets/js/modal.js");
-/* harmony import */ var _helper_module_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./helper-module.js */ "./resources/assets/js/helper-module.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+/* harmony import */ var _component_nav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./component/nav */ "./resources/assets/js/component/nav.js");
+/* harmony import */ var _page_homepage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./page/homepage */ "./resources/assets/js/page/homepage.js");
+/* harmony import */ var _page_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./page/auth */ "./resources/assets/js/page/auth.js");
+/* harmony import */ var _page_cart_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./page/cart-page */ "./resources/assets/js/page/cart-page.js");
+/* harmony import */ var _page_dashboard_customer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./page/dashboard-customer */ "./resources/assets/js/page/dashboard-customer.js");
 
 
 
 
 
-var btnOpenMenu = document.querySelector('.nav__toggle-menu');
-var btnOpenChildMenu = document.querySelectorAll('.nav__link--open-child');
-var nav = document.querySelector('nav');
-var navUl = nav.querySelector('.nav__ul');
-var dividerMenu = ['divide-y', 'divide-gray-400']; //ini class buat nambah border ke menu
 
-var classToOpenNavItemHasChild = 'nav__item-has-child--open';
-var pageUrl = window.location.pathname;
-var elementOnHeaderExceptNav = document.querySelectorAll('header nav + *');
-var metaToken = document.querySelector('meta[name="csrf-token"]').content;
+ //plugin js
 
-var closeNav = function closeNav() {
-  var _navUl$classList;
+if (document.querySelector('[data-tabs]')) {
+  new Tabby('[data-tabs]');
+} //general js
 
-  nav.classList.remove('nav--open');
+/***/ }),
 
-  (_navUl$classList = navUl.classList).remove.apply(_navUl$classList, dividerMenu);
-};
+/***/ "./resources/assets/js/page/auth.js":
+/*!******************************************!*\
+  !*** ./resources/assets/js/page/auth.js ***!
+  \******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var openNav = function openNav() {
-  var _navUl$classList2;
-
-  nav.classList.add('nav--open');
-
-  (_navUl$classList2 = navUl.classList).add.apply(_navUl$classList2, dividerMenu);
-};
-
-var closeAllMenu = function closeAllMenu() {
-  var allChild = document.querySelectorAll('.nav__item-has-child--open');
-  allChild.forEach(function (child) {
-    child.classList.remove('nav__item-has-child--open');
-  });
-  closeNav();
-};
-
-btnOpenMenu.addEventListener('click', function () {
-  if (nav.classList.contains('nav--open')) {
-    closeNav();
-  } else {
-    openNav();
-  }
-});
-btnOpenChildMenu.forEach(function (openChild) {
-  var parentOfBtnOpenChild = openChild.parentNode.classList;
-  openChild.addEventListener('click', function (e) {
-    e.preventDefault();
-    var siblingsChild = _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["getSiblings"](openChild.parentNode);
-    siblingsChild.forEach(function (eachSibling) {
-      if (eachSibling.classList.contains(classToOpenNavItemHasChild)) {
-        eachSibling.classList.remove(classToOpenNavItemHasChild);
-      }
-    });
-
-    if (parentOfBtnOpenChild.contains(classToOpenNavItemHasChild)) {
-      parentOfBtnOpenChild.remove(classToOpenNavItemHasChild);
-    } else {
-      parentOfBtnOpenChild.add(classToOpenNavItemHasChild);
-    }
-  });
-});
-
-if (elementOnHeaderExceptNav.length > 0) {
-  document.querySelector('header nav + *').addEventListener('click', function () {
-    closeAllMenu();
-  });
-}
-
-document.querySelector('main').addEventListener('click', function () {
-  closeAllMenu();
-});
-
-if (pageUrl === '/') {
-  nav.classList.add('bg-gray-800', 'bg-opacity-25');
-  document.querySelector('header, main').classList.remove('bg-gray-100'); //jika lg di landing page dan di mode tablet keatas, icon menu ganti warna jd putih
-
-  if (window.screen.width > 768) {
-    document.querySelectorAll('.nav .container > .nav__ul > .nav__item > .nav__link > .child-dropdown-icon').forEach(function (dropdownIcon) {
-      dropdownIcon.setAttribute('color', '#fff');
-    });
-  }
-} else {
-  nav.classList.add('lg:border-b', 'border-gray-400');
-} //auth page script
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helper-module */ "./resources/assets/js/helper-module.js");
 
 
-if (pageUrl === '/login') {
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/login') {
   var removeValidationOnFalseForm = function removeValidationOnFalseForm(falseForm) {
     var falseErrorMessage = falseForm.querySelectorAll('.error-message');
     var falseErrorInput = falseForm.querySelectorAll('.border-red-400');
@@ -446,44 +427,36 @@ if (pageUrl === '/login') {
   } else if (localStorage.getItem('sessionFailed') === 'login') {
     removeValidationOnFalseForm(formRegister);
   }
-} // customer dashboard js
-
-
-if (pageUrl.indexOf('/my-account') > -1) {
-  var tabsMenu = document.querySelectorAll('.dashboard-customer__menu-link');
-  var pageUrlWithoutProtocol = _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["getUrlWithoutProtocol"](window.location.href);
-  tabsMenu.forEach(function (menu) {
-    var tabLinkMenu = _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["getUrlWithoutProtocol"](menu.getAttribute('href'));
-
-    if (tabLinkMenu === pageUrlWithoutProtocol) {
-      menu.classList.add('text-blue-500', 'bg-gray-100');
-      menu.classList.remove('text-gray-600');
-    }
-  });
-
-  if (pageUrl === '/my-account/point') {
-    //collecting each point and sum-ing it
-    var pointQty = Array.from(document.querySelectorAll('.point-item__qty')).map(function (point) {
-      return Number(point.textContent);
-    });
-    var pointTotal = pointQty.reduce(function (acc, val) {
-      return acc + val;
-    });
-    document.querySelector('.point-item__total').textContent = pointTotal; //end of that   
-  }
 }
 
-if (pageUrl === '/my-account/detail') {
-  var btnAddNewAddress = document.querySelectorAll('.btn-modal-address');
-  btnAddNewAddress.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["openCloseModal"]('#modalAddress');
-    });
-  });
-} // cart page js
+/***/ }),
+
+/***/ "./resources/assets/js/page/cart-page.js":
+/*!***********************************************!*\
+  !*** ./resources/assets/js/page/cart-page.js ***!
+  \***********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helper-module */ "./resources/assets/js/helper-module.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
-if (pageUrl === '/cart') {
+var metaToken = document.querySelector('meta[name="csrf-token"]').content;
+
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
   var cartPage = document.querySelector('#cartPage'); // modal checkout and it's child
 
   if (cartPage.querySelector('#modalCheckout')) {
@@ -522,12 +495,12 @@ if (pageUrl === '/cart') {
 
     var btnShowCheckoutStep = cartPage.querySelector('#btnShowCheckoutStep');
     btnShowCheckoutStep.addEventListener('click', function () {
-      _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["openCloseModal"]('#' + modalCheckout.getAttribute('id'));
+      Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["openCloseModal"])('#' + modalCheckout.getAttribute('id'));
     });
     var btnCloseModal = cartPage.querySelector('#closeModalCheckout'); // when user close the modal
 
     btnCloseModal.addEventListener('click', function () {
-      _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["openCloseModal"]('#' + modalCheckout.getAttribute('id'));
+      Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["openCloseModal"])('#' + modalCheckout.getAttribute('id'));
       openStep(firstStep);
       closeStep(secondStep); // setNextStepBtnText('Next')
     }); // each btn to manage modal address
@@ -542,7 +515,7 @@ if (pageUrl === '/cart') {
 
     btnsManageModalAddress.forEach(function (btnOnModalAddNewAddress) {
       btnOnModalAddNewAddress.addEventListener('click', function () {
-        _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["openCloseModal"]('#modalAddNewAddress');
+        Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["openCloseModal"])('#modalAddNewAddress');
       });
     });
     /**
@@ -587,7 +560,7 @@ if (pageUrl === '/cart') {
           addresses.innerHTML += "\n                        <option value=\"".concat(value.id, "\">\n                            ").concat(value.title, "\n                        </option>\n                        ");
         }
 
-        _helper_module_js__WEBPACK_IMPORTED_MODULE_3__["openCloseModal"]('#modalAddNewAddress');
+        Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["openCloseModal"])('#modalAddNewAddress');
       });
       newAddressBtn.disabled = false;
     });
@@ -618,12 +591,78 @@ if (pageUrl === '/cart') {
       });
     });
   }
-} //plugin js
+}
+
+/***/ }),
+
+/***/ "./resources/assets/js/page/dashboard-customer.js":
+/*!********************************************************!*\
+  !*** ./resources/assets/js/page/dashboard-customer.js ***!
+  \********************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_module_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helper-module.js */ "./resources/assets/js/helper-module.js");
 
 
-if (document.querySelector('[data-tabs]')) {
-  new Tabby('[data-tabs]');
-} //general js
+if (_helper_module_js__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/my-account') > -1) {
+  var tabsMenu = document.querySelectorAll('.dashboard-customer__menu-link');
+  var pageUrlWithoutProtocol = _helper_module_js__WEBPACK_IMPORTED_MODULE_0__["getUrlWithoutProtocol"](window.location.href);
+  tabsMenu.forEach(function (menu) {
+    var tabLinkMenu = _helper_module_js__WEBPACK_IMPORTED_MODULE_0__["getUrlWithoutProtocol"](menu.getAttribute('href'));
+
+    if (tabLinkMenu === pageUrlWithoutProtocol) {
+      menu.classList.add('text-blue-500', 'bg-gray-100');
+      menu.classList.remove('text-gray-600');
+    }
+  }); // script on '/my-account/point' page
+
+  if (_helper_module_js__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/my-account/point') {
+    //collecting each point and sum-ing it
+    var pointQty = Array.from(document.querySelectorAll('.point-item__qty')).map(function (point) {
+      return Number(point.textContent);
+    });
+    var pointTotal = pointQty.reduce(function (acc, val) {
+      return acc + val;
+    });
+    document.querySelector('.point-item__total').textContent = pointTotal;
+  }
+
+  if (_helper_module_js__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/my-account/detail') {
+    var btnAddNewAddress = document.querySelectorAll('.btn-modal-address');
+    btnAddNewAddress.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        _helper_module_js__WEBPACK_IMPORTED_MODULE_0__["openCloseModal"]('#modalAddress');
+      });
+    });
+  }
+}
+
+/***/ }),
+
+/***/ "./resources/assets/js/page/homepage.js":
+/*!**********************************************!*\
+  !*** ./resources/assets/js/page/homepage.js ***!
+  \**********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helper-module */ "./resources/assets/js/helper-module.js");
+
+
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/') {
+  document.querySelector('header, main').classList.remove('bg-gray-100'); //jika lg di landing page dan di mode tablet keatas, icon menu ganti warna jd putih
+
+  if (window.screen.width > 768) {
+    document.querySelectorAll('.nav .container > .nav__ul > .nav__item > .nav__link > .child-dropdown-icon').forEach(function (dropdownIcon) {
+      dropdownIcon.setAttribute('color', '#fff');
+    });
+  }
+}
 
 /***/ }),
 

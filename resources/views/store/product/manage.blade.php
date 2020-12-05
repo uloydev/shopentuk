@@ -48,7 +48,8 @@
                                         data-original="{{ $product->productCategory->title }}">
                                             {{ Str::words($product->productCategory->title, 1) }}
                                         </td>
-                                        <td class="product-item__sub-cat" data-original="{{ $product->productSubCategory->title }}">
+                                        <td class="product-item__sub-cat" 
+                                        data-original="{{ $product->productSubCategory->title }}">
                                             {{ Str::words($product->productSubCategory->title, 2) }}
                                         </td>
                                         <td>
@@ -57,13 +58,14 @@
                                                 View
                                             </a>
                                             <a href="{{ route('admin.products.edit', $product->id) }}" 
-                                                class="btn btn-sm btn-warning btn-rounded mr-2">
-                                                    Edit
-                                                </a>
-                                            <form action="{{ route('admin.products.destroy', $product->id) }}"
-                                            method="POST" class="d-inline-block">
+                                            class="btn btn-sm btn-warning btn-rounded mr-2">
+                                                Edit
+                                            </a>
+                                            <form method="POST" class="d-inline-block"
+                                            action="{{ route('admin.products.destroy', $product->id) }}">
                                                 @csrf @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger btn-rounded">
+                                                <button type="submit" 
+                                                class="btn btn-sm btn-danger btn-rounded">
                                                     Delete
                                                 </button>
                                             </form>

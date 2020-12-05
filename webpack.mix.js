@@ -2,7 +2,7 @@ const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
 
 mix.js('resources/assets/js/native.js', 'public/js/all-client.js')
-    .js('resources/assets/js/custom-dashboard.js', 'public/js/')
+    .js('resources/assets/js/page/dashboard-admin.js', 'public/js')
     .sass('resources/assets/sass/native.scss', 'public/css')
     .sass('resources/assets/sass/admin-dashboard.scss', 'public/css')
     .options({
@@ -20,12 +20,12 @@ mix.js('resources/assets/js/native.js', 'public/js/all-client.js')
         'resources/assets/template/dist/css/style.css',
     ], 'public/css/dashboard.css')
     .scripts([
-        'resources/assets/js/jquery.min.js',
-        'resources/assets/js/popper.min.js',
-        'resources/assets/js/bootstrap.min.js',
+        'resources/assets/js/addons/jquery.min.js',
+        'resources/assets/js/addons/popper.min.js',
+        'resources/assets/js/addons/bootstrap.min.js',
         'resources/assets/template/dist/js/app-style-switcher.min.js',
         'resources/assets/template/dist/js/feather.min.js',
-        'resources/assets/js/perfect-scrollbar.jquery.min.js',
+        'resources/assets/js/addons/perfect-scrollbar.jquery.min.js',
         'resources/assets/template/assets/extra-libs/sparkline/sparkline.js',
         'resources/assets/template/dist/js/sidebarmenu.min.js',
         'resources/assets/template/dist/js/custom.min.js',
@@ -39,9 +39,9 @@ mix.js('resources/assets/js/native.js', 'public/js/all-client.js')
         // 'resources/assets/template/assets/libs/chartist/chartist.min.js',
         'resources/assets/plugin/datatables.net/js/jquery.dataTables.min.js',
         'resources/assets/plugin/datatables.net/js/datatable-basic.init.min.js',
-        'resources/assets/js/admin-chartjs.init.js',
-        'public/js/custom-dashboard.js'
-    ], 'public/js/dashboard.js')
+        'resources/assets/js/addons/admin-chartjs.init.js',
+        'public/js/dashboard-admin.js'
+    ], 'public/js/all-admin.js')
     .copyDirectory('resources/assets/plugin/datatables.net', 'public/library')
     .setPublicPath('public');
 
