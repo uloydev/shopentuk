@@ -141,217 +141,11 @@ module.exports = function numWords (input) {
 
 /***/ }),
 
-/***/ "./resources/assets/js/custom-dashboard.js":
-/*!*************************************************!*\
-  !*** ./resources/assets/js/custom-dashboard.js ***!
-  \*************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
-/* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper-module */ "./resources/assets/js/helper-module.js");
-
- // let $ = require( "jquery" )
-// import './bootstrap.min'
-// import './../template/dist/js/dashboard1.min'
-// import './popper.min'
-// import './../template/dist/js/app-style-switcher.min'
-// import './../template/dist/js/feather.min'
-// import './perfect-scrollbar.jquery.min'
-// import './../template/assets/extra-libs/sparkline/sparkline'
-// import './../template/dist/js/sidebarmenu.min'
-// import './../template/dist/js/custom.min'
-// (async function () {
-//     await (await import('./../template/assets/extra-libs/c3/d3.min')).default()
-//     await (await import('./../template/assets/extra-libs/c3/c3.min')).default()
-// })()
-// import './../template/assets/extra-libs/prism/prism'
-// import './../template/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min'
-// import './../template/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en'
-// import './../template/assets/libs/chart.js/dist/Chart.min'
-// import './../plugin/datatables.net/js/jquery.dataTables.min'
-// import './../plugin/datatables.net/js/datatable-basic.init.min'
-// let dt      = require( 'datatables.net' )( window, $ )
-
-var numWords = __webpack_require__(/*! num-words */ "./node_modules/num-words/index.js");
-
-var appUrl = window.location.origin;
-var pageUrl = window.location.pathname;
-var logoutBtn = document.querySelector('#logoutBtn');
-logoutBtn.addEventListener('click', function (e) {
-  e.preventDefault();
-  document.getElementById('logout-form').submit();
-}); // /admin/all-category page
-
-if (pageUrl === '/admin/all-category') {
-  var manageCategoryPage = document.querySelector('#manageCategoryPage');
-  var editSubCategoryBtn = manageCategoryPage.querySelectorAll(".edit-sub-category-btn");
-  var subCategoryFocused = ['border', 'border-primary', 'p-2'];
-  editSubCategoryBtn.forEach(function (btnEditSub) {
-    var subcategoryTitle = btnEditSub.parentElement.querySelector('.subcategory__title');
-    btnEditSub.addEventListener('click', function () {
-      var _subcategoryTitle$cla;
-
-      (_subcategoryTitle$cla = subcategoryTitle.classList).add.apply(_subcategoryTitle$cla, subCategoryFocused);
-
-      subcategoryTitle.setAttribute('contenteditable', true);
-      subcategoryTitle.focus();
-    });
-    subcategoryTitle.addEventListener('focusout', function () {
-      var _subcategoryTitle$cla2;
-
-      subcategoryTitle.setAttribute('contenteditable', false);
-
-      (_subcategoryTitle$cla2 = subcategoryTitle.classList).remove.apply(_subcategoryTitle$cla2, subCategoryFocused); //ksh ajax disini ntar buat save perubahan di subcategory nya
-
-    });
-  });
-}
-
-if (pageUrl == '/admin/products') {
-  var findMultiElOnManageProductPage = function findMultiElOnManageProductPage(element) {
-    return manageProductPage.querySelectorAll(element);
-  };
-
-  var manageProductPage = document.querySelector('#manageProductPage');
-  var columnFocusedClass = ['border', 'border-primary', 'p-2'];
-  var productTitle = findMultiElOnManageProductPage('.product-item__title');
-  var productPrice = findMultiElOnManageProductPage('.product-item__price');
-  var productPoint = findMultiElOnManageProductPage('.product-item__point');
-  var productCat = findMultiElOnManageProductPage('.product-item__cat');
-  var productSubCat = findMultiElOnManageProductPage('.product-item__sub-cat');
-  var originalValue, changedValue;
-  productTitle.forEach(function (element, index) {
-    var eachTitle = productTitle[index];
-    var eachPrice = productPrice[index];
-    var eachPoint = productPoint[index];
-    var eachCat = productCat[index];
-    var eachSubCat = productSubCat[index];
-    var allElement = [eachTitle, eachPrice, eachPoint, eachCat, eachSubCat];
-    allElement.forEach(function (element) {
-      var formattedValue = element.textContent.trim();
-      element.addEventListener('click', function () {
-        var _element$classList;
-
-        originalValue = element.dataset.original.trim();
-
-        (_element$classList = element.classList).add.apply(_element$classList, columnFocusedClass);
-
-        element.setAttribute('contenteditable', true);
-        element.textContent = originalValue;
-        element.focus();
-      });
-      element.addEventListener('input', function (e) {
-        //jika yg lg diedit adalah kolom price, hapus karakter yg bkn integer
-        if (element === eachPrice) {
-          changedValue = element.textContent.replace(/\D/g, '');
-          element.dataset.original = changedValue;
-          element.textContent = changedValue;
-        } else {
-          changedValue = element.textContent;
-        }
-
-        element.setAttribute('data-original', changedValue);
-        formattedValue = changedValue;
-      });
-      element.addEventListener('focusout', function () {
-        var _element$classList2;
-
-        element.setAttribute('contenteditable', false);
-
-        (_element$classList2 = element.classList).remove.apply(_element$classList2, columnFocusedClass);
-
-        if (originalValue === element.textContent) {
-          //jika yg lg diedit adalah kolom price, hapus karakter yg bkn integer
-          if (element === eachPrice) {
-            element.textContent = new Intl.NumberFormat('id-ID', {
-              style: 'currency',
-              currency: 'IDR'
-            }).format(originalValue).replace(',00', '');
-          } else {
-            element.textContent = formattedValue;
-          }
-        } else {
-          element.dataset.original = changedValue; //jika yg lg diedit adalah kolom price, hapus karakter yg bkn integer
-
-          if (element === eachPrice) {
-            element.textContent = new Intl.NumberFormat('id-ID', {
-              style: 'currency',
-              currency: 'IDR'
-            }).format(changedValue).replace(',00', '');
-          } else {
-            formattedValue = changedValue.substring(0, 10) + '...';
-            element.textContent = formattedValue;
-            element.dataset.original = changedValue;
-          }
-        }
-      });
-    });
-  });
-}
-
-if (pageUrl === '/superadmin/admins') {
-  var manageAdminPage = document.querySelector("#manageAdminPage");
-  var totalError = manageAdminPage.querySelectorAll('.invalid-feedback').length;
-
-  if (totalError > 0) {
-    //if there's an error when add/update admin acc
-    $("#addNewAdmin").modal('show');
-  }
-
-  var urlFormAdmin = 'superadmin/admins';
-  var btnEditAdmin = manageAdminPage.querySelectorAll('.btn-edit-admin');
-  var adminId, adminName, adminEmail, adminPhone, adminJoinedAt;
-  btnEditAdmin.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      adminId = btn.dataset.adminId;
-      adminName = btn.closest('.admin').querySelector('.admin__name').dataset.adminName.trim();
-      adminEmail = btn.closest('.admin').querySelector('.admin__email').textContent.trim();
-      adminPhone = btn.closest('.admin').querySelector('.admin__phone').textContent.trim();
-      adminJoinedAt = btn.closest('.admin').querySelector('.admin__joined-at').textContent.trim();
-      setFormAction('#form-edit-admin', "".concat(appUrl, "/").concat(urlFormAdmin, "/").concat(adminId));
-    });
-  });
-  setFormAction('#form-add-admin', "".concat(appUrl, "/").concat(urlFormAdmin));
-}
-
-if (pageUrl === '/admin/order') {
-  var manageOrderPage = document.querySelector('#manageOrderPage');
-  var orderItem = manageOrderPage.querySelectorAll('.order-item');
-  orderItem.forEach(function (currentItem, index) {
-    var indexToWord = Object(_helper_module__WEBPACK_IMPORTED_MODULE_1__["capitalizeFirstLetter"])(numWords(Number(index) + 1)); // const attrWillChange = ['href', '']
-
-    Object(_helper_module__WEBPACK_IMPORTED_MODULE_1__["setAttributes"])(document.querySelectorAll('.order-item__btn')[index], {
-      'href': "#collapse".concat(indexToWord),
-      'aria-controls': "#collapse".concat(indexToWord)
-    });
-    Object(_helper_module__WEBPACK_IMPORTED_MODULE_1__["setAttributes"])(document.querySelectorAll('.order-item__detail')[index], {
-      'id': "collapse".concat(indexToWord),
-      'aria-labelledby': "heading".concat(indexToWord)
-    }); // for (const attr in attrWillChange) {
-    //     currentItem.querySelector('.order-item__detail').setAttribute(attr, `#collapse${indexToWord}`)
-    // }
-  });
-} // general js
-
-
-$("#zero_config").DataTable();
-Array.from(document.querySelectorAll('box-icon')).map(function (icon) {
-  icon.classList.remove('has-arrow'); // remove ::after style because of adminmart template
-
-  icon.classList.add('mr-2');
-});
-
-/***/ }),
-
 /***/ "./resources/assets/js/helper-module.js":
 /*!**********************************************!*\
   !*** ./resources/assets/js/helper-module.js ***!
   \**********************************************/
-/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal */
+/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, pageUrl */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -363,6 +157,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "capitalizeFirstLetter", function() { return capitalizeFirstLetter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAttributes", function() { return setAttributes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openCloseModal", function() { return openCloseModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pageUrl", function() { return pageUrl; });
 /*!
  * Get all siblings of an element
  * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
@@ -436,17 +231,121 @@ function openCloseModal(modalSelector) {
     (_modalEl$classList3 = modalEl.classList).add.apply(_modalEl$classList3, classToCloseModal);
   }
 }
+var pageUrl = window.location.pathname;
+
+/***/ }),
+
+/***/ "./resources/assets/js/page/dashboard-admin.js":
+/*!*****************************************************!*\
+  !*** ./resources/assets/js/page/dashboard-admin.js ***!
+  \*****************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
+/* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../helper-module */ "./resources/assets/js/helper-module.js");
+
+
+
+var numWords = __webpack_require__(/*! num-words */ "./node_modules/num-words/index.js");
+
+var appUrl = window.location.origin;
+var pageUrl = window.location.pathname;
+var logoutBtn = document.querySelector('#logoutBtn');
+logoutBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+  document.getElementById('logout-form').submit();
+}); // /admin/all-category page
+
+if (pageUrl === '/admin/all-category') {
+  var manageCategoryPage = document.querySelector('#manageCategoryPage');
+  var editSubCategoryBtn = manageCategoryPage.querySelectorAll(".edit-sub-category-btn");
+  var subCategoryFocused = ['border', 'border-primary', 'p-2'];
+  editSubCategoryBtn.forEach(function (btnEditSub) {
+    var subcategoryTitle = btnEditSub.parentElement.querySelector('.subcategory__title');
+    btnEditSub.addEventListener('click', function () {
+      var _subcategoryTitle$cla;
+
+      (_subcategoryTitle$cla = subcategoryTitle.classList).add.apply(_subcategoryTitle$cla, subCategoryFocused);
+
+      subcategoryTitle.setAttribute('contenteditable', true);
+      subcategoryTitle.focus();
+    });
+    subcategoryTitle.addEventListener('focusout', function () {
+      var _subcategoryTitle$cla2;
+
+      subcategoryTitle.setAttribute('contenteditable', false);
+
+      (_subcategoryTitle$cla2 = subcategoryTitle.classList).remove.apply(_subcategoryTitle$cla2, subCategoryFocused); //ksh ajax disini ntar buat save perubahan di subcategory nya
+
+    });
+  });
+}
+
+if (pageUrl === '/superadmin/admins') {
+  var manageAdminPage = document.querySelector("#manageAdminPage");
+  var totalError = manageAdminPage.querySelectorAll('.invalid-feedback').length;
+
+  if (totalError > 0) {
+    //if there's an error when add/update admin acc
+    $("#addNewAdmin").modal('show');
+  }
+
+  var urlFormAdmin = 'superadmin/admins';
+  var btnEditAdmin = manageAdminPage.querySelectorAll('.btn-edit-admin');
+  var adminId, adminName, adminEmail, adminPhone, adminJoinedAt;
+  btnEditAdmin.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      adminId = btn.dataset.adminId;
+      adminName = btn.closest('.admin').querySelector('.admin__name').dataset.adminName.trim();
+      adminEmail = btn.closest('.admin').querySelector('.admin__email').textContent.trim();
+      adminPhone = btn.closest('.admin').querySelector('.admin__phone').textContent.trim();
+      adminJoinedAt = btn.closest('.admin').querySelector('.admin__joined-at').textContent.trim();
+      setFormAction('#form-edit-admin', "".concat(appUrl, "/").concat(urlFormAdmin, "/").concat(adminId));
+    });
+  });
+  setFormAction('#form-add-admin', "".concat(appUrl, "/").concat(urlFormAdmin));
+}
+
+if (pageUrl === '/admin/order') {
+  var manageOrderPage = document.querySelector('#manageOrderPage');
+  var orderItem = manageOrderPage.querySelectorAll('.order-item');
+  orderItem.forEach(function (currentItem, index) {
+    var indexToWord = Object(_helper_module__WEBPACK_IMPORTED_MODULE_1__["capitalizeFirstLetter"])(numWords(Number(index) + 1));
+    Object(_helper_module__WEBPACK_IMPORTED_MODULE_1__["setAttributes"])(document.querySelectorAll('.order-item__btn')[index], {
+      'href': "#collapse".concat(indexToWord),
+      'aria-controls': "#collapse".concat(indexToWord)
+    });
+    Object(_helper_module__WEBPACK_IMPORTED_MODULE_1__["setAttributes"])(document.querySelectorAll('.order-item__detail')[index], {
+      'id': "collapse".concat(indexToWord),
+      'aria-labelledby': "heading".concat(indexToWord)
+    }); // for (const attr in attrWillChange) {
+    //     currentItem.querySelector('.order-item__detail').setAttribute(attr, `#collapse${indexToWord}`)
+    // }
+  });
+} // general js
+
+
+$("#zero_config").DataTable();
+Array.from(document.querySelectorAll('box-icon')).map(function (icon) {
+  icon.classList.remove('has-arrow'); // remove ::after style because of adminmart template
+
+  icon.classList.add('mr-2');
+});
 
 /***/ }),
 
 /***/ 1:
-/*!*******************************************************!*\
-  !*** multi ./resources/assets/js/custom-dashboard.js ***!
-  \*******************************************************/
+/*!***********************************************************!*\
+  !*** multi ./resources/assets/js/page/dashboard-admin.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/custom-dashboard.js */"./resources/assets/js/custom-dashboard.js");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/page/dashboard-admin.js */"./resources/assets/js/page/dashboard-admin.js");
 
 
 /***/ })

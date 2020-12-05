@@ -27,7 +27,7 @@
             </footer>
         </div>
     </div>
-    <script src="{{ asset('js/dashboard.js') }}"></script>
+    <script src="{{ asset('js/all-admin.js') }}"></script>
     @stack('scripts')
 </body>
 

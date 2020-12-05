@@ -69,3 +69,5 @@ export function openCloseModal (modalSelector) {
         modalEl.classList.add(...classToCloseModal)
     }
 }
+
+export const pageUrl = window.location.pathname
