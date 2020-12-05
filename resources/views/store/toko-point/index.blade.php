@@ -17,7 +17,7 @@
                     @foreach ($bestProducts as $product)
                         <li class="pb-3">
                             <x-card-product 
-                            product-img="{{ $product->mainImage ? asset('storage/' . $product->mainImage->url) : asset('storage/img/telkomsel.jpg')) }}" 
+                            product-img="{{ $product->mainImage ? asset('storage/' . $product->mainImage->url) : asset('storage/img/telkomsel.jpg') }}" 
                             product-name="{{ Str::words($product->title, 2) }}"
                             product-category="{{ $product->productCategory->title }}" 
                             product-category-id="{{ $product->productCategory->id }}" 

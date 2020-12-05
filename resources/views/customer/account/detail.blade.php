@@ -5,11 +5,6 @@
 @section('title', ucwords($title))
 
 @section('content')
-    @if(session('success'))
-        <x-alert type="success" class="mb-5">
-            {{ session('success') }}
-        </x-alert>
-    @endif
     <div class="block">
         <form action="{{route('my-account.address.destroy')}}" id="deleteAddressForm" method="post">
             @csrf
@@ -22,7 +17,7 @@
             </button>
             @forelse ($userAddresses as $address)
             <div class="flex user-address my-2 bg-gray-100 p-2 rounded-md address" 
-            data-userAddressId="">
+                data-userAddressId="{{$address->id}}">
                 <p class="w-full">
                     <span class="address__title"></span>
                     {{ $address->title }}
@@ -44,7 +39,7 @@
             @endforelse
         </div>
 
-        <form action="">
+        <form action="{{ route('my-account.update') }}" method="post">
             @csrf
             @for ($i = 0; $i < count($labelInput); $i++)
                 <x-input-basic label="{{ ucwords($labelInput[$i]) }}" name="{{ Str::snake($labelInput[$i]) }}"
@@ -57,49 +52,70 @@
 
         
     </div>
-    {{-- @include('customer.account.edit-address') --}}
+    @include('customer.account.edit-address')
     @include('customer.account.add-address')
 @endsection
 @push('script')
     <script>
-        // const userAddresses = JSON.parse('{!!  $userAddresses->toJson() !!}');
-        // const editAddressBtn = document.querySelectorAll('.btn-edit-address');
+        function openCloseModal (modalSelector) {
+            const modalEl = document.querySelector(modalSelector)
+            const classToCloseModal = ['invisible', 'h-0', 'opacity-0']
+
+            // if modal open, set isModalOpen = true. else, isModalOpen = false
+            const isModalOpen = modalEl.classList.contains(...classToCloseModal) ? true : false
+            
+            if (isModalOpen === true) {
+                // close modal
+                modalEl.classList.remove(...classToCloseModal)
+            }
+            else {
+                // open modal
+                modalEl.classList.add(...classToCloseModal)
+            }
+        }
+        const userAddresses = JSON.parse('{!!  $userAddresses->toJson() !!}');
+        const editAddressBtn = document.querySelectorAll('.btn-edit-address');
         // const newAddressBtn = document.querySelector('#newAddressBtn');
         const deleteAddressBtn = document.querySelectorAll('.btn-delete-address');
-        // const editAddressForm = document.querySelector('#editAddressForm');
+        const editAddressForm = document.querySelector('#editAddressForm');
         const deleteAddressForm = document.querySelector('#deleteAddressForm');
+        const closeEditModalBtn = document.querySelector('#btn-close-modalEditAddress')
 
-        // editAddressBtn.forEach((btn) => {
-        //     btn.addEventListener('click', () => {
-        //         let address = userAddresses.find((data) => {
-        //             return btn.parentElement.dataset.useraddressid == data.id
-        //         })
+        editAddressBtn.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                let address = userAddresses.find((data) => {
+                    return btn.parentElement.dataset.useraddressid == data.id
+                })
                 
-        //         editAddressForm.querySelector('input#addressId').value = address.id
-        //         editAddressForm.querySelector('input#title').value = address.title
-        //         editAddressForm.querySelector('input#name').value = address.name
-        //         editAddressForm.querySelector('input#email').value = address.email
-        //         editAddressForm.querySelector('input#phone').value = address.phone
-        //         editAddressForm.querySelector('input#kelurahan').value = address.kelurahan
-        //         editAddressForm.querySelector('input#kecamatan').value = address.kecamatan
-        //         editAddressForm.querySelector('input#city').value = address.city
-        //         editAddressForm.querySelector('input#province').value = address.province
-        //         editAddressForm.querySelector('input#postal_code').value = address.postal_code
-        //         editAddressForm.querySelector('input#main1').checked = address.is_main_address
-        //         editAddressForm.querySelector('input#main0').checked = !address.is_main_address
-        //         editAddressForm.querySelector('textarea#street_address').value = address.street_address
-        //         let formData = new FormData(editAddressForm)
-        //         console.log(Object.fromEntries(formData))
-        //         // please fix open modal
-        //         // openCloseModal('#modalEditAddress')
-        //     })
-        // })
+                editAddressForm.querySelector('input#addressId').value = address.id
+                editAddressForm.querySelector('input#title').value = address.title
+                editAddressForm.querySelector('input#name').value = address.name
+                editAddressForm.querySelector('input#email').value = address.email
+                editAddressForm.querySelector('input#phone').value = address.phone
+                editAddressForm.querySelector('input#kelurahan').value = address.kelurahan
+                editAddressForm.querySelector('input#kecamatan').value = address.kecamatan
+                editAddressForm.querySelector('input#city').value = address.city
+                editAddressForm.querySelector('input#province').value = address.province
+                editAddressForm.querySelector('input#postal_code').value = address.postal_code
+                editAddressForm.querySelector('input#main1').checked = address.is_main_address
+                editAddressForm.querySelector('input#main0').checked = !address.is_main_address
+                editAddressForm.querySelector('textarea#street_address').value = address.street_address
+                let formData = new FormData(editAddressForm)
+                console.log(Object.fromEntries(formData))
+                // please fix open modal
+                openCloseModal('#modalEditAddress')
+            })
+        })
 
         deleteAddressBtn.forEach(btn => {
             btn.addEventListener('click', () => {
                 deleteAddressForm.querySelector('input[name="id"]').value = btn.parentElement.dataset.useraddressid
                 deleteAddressForm.submit()
             })
+        })
+
+        closeEditModalBtn.addEventListener('click', () => {
+            openCloseModal('#modalEditAddress')
         })
 
     </script>

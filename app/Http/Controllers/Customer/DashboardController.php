@@ -33,11 +33,10 @@ class DashboardController extends Controller
     public function accountDetail()
     {
         $user = Auth::user();
-        // dd($user->userAddresses->toJson());
         return view('customer.account.detail', [
             'title' => 'my dashboard',
             'tabMenus' => $this->tabMenus,
-            'labelInput' => ['full name', 'email', 'phone number', 'bank', 'no rekening'],
+            'labelInput' => ['name', 'email', 'phone', 'bank', 'rekening'],
             'userData' => [
                 $user->name, 
                 $user->email, 
@@ -55,5 +54,11 @@ class DashboardController extends Controller
             'title' => 'my point',
             'tabMenus' => $this->tabMenus
         ]);
+    }
+
+    public function updateAccount(Request $request)
+    {
+        Auth::user()->update($request->all());
+        return redirect()->back()->with(['success' => 'data user berhasil diupdate!']);
     }
 }

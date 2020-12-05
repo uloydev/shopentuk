@@ -2,6 +2,16 @@
 @include('layouts.header')
 <main class="bg-gray-100 dashboard-customer">
     <div class="container py-10">
+        @if(session('success'))
+            <x-alert type="success">
+                {{ session('success') }}
+            </x-alert>
+        @endif
+        @if(session('error'))
+            <x-alert type="error">
+                {{ session('error') }}
+            </x-alert>
+        @endif
         <div class="mb-5">
             <div class="col-12">
                 <figure class="text-center">

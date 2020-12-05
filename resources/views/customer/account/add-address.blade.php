@@ -15,7 +15,7 @@
                     Tambah alamat baru
                 </h3>
                 <div class="mt-5 flex">
-                    <form action="{{ route('my-account.address.store') }}" method="post" id="newAddressForm"
+                    <form action="{{ route('my-account.address.store-redirect') }}" method="post" id="newAddressForm"
                         class="grid lg:grid-cols-2 gap-x-5 w-full">
                         @csrf
                         <div class="mb-6 ">
@@ -116,29 +116,23 @@
                                 </span>
                             </label>
                             <div class="mt-2 grid grid-cols-2 gap-x-5">
-                                @for ($i = 0; $i < 2; $i++)
-                                    @php
-                                        if ($i == 0) {
-                                            $value = 0;
-                                            $text = 'ya';
-                                            $isChecked = 'checked';
-                                        }
-                                        else {
-                                            $value = 1;
-                                            $text = 'tidak';
-                                            $isChecked = '';
-                                        }                                 
-                                    @endphp
-                                    <div>
-                                        <label class="inline-flex items-center">
-                                            <input type="radio" class="form-radio" 
-                                            name="is_main_address" value="{{ $value }}" {{ $isChecked }}>
-                                            <span class="ml-2 capitalize">
-                                                {{ $text }}
-                                            </span>
-                                        </label>
-                                    </div>
-                                @endfor
+                                <div class="mr-5">
+                                    <label class="inline-flex items-center">
+                                        <input type="radio" class="form-radio" name="is_main_address"
+                                            value="1" id="main1" checked>
+                                        <span>
+                                            ya
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="ml-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="radio" class="form-radio" name="is_main_address" value="0" id="main0">
+                                        <span>
+                                            tidak
+                                        </span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </form>
