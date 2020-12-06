@@ -28,7 +28,10 @@ class OrderController extends Controller
     public function newOrder()
     {
         $orders = Order::whereIn('status', ['paid', 'unpaid'])->get();
-        return view('order.new', ['orders' => $orders]);
+        return view('order.new', [
+            'orders' => $orders,
+            'title' => 'latest order'
+        ]);
     }
 
     public function rejectOrder(Order $order)
@@ -61,11 +64,11 @@ class OrderController extends Controller
     public function makeRefund(Order $order, Request $request)
     {
         // payment_method = ['bca', 'ovo', 'point']
-        
+
         $siteSetting = SiteSetting::first();
         $user = $order->user;
         $refund = new Refund;
-        
+
         $refund->full_name = $user->name;
         $refund->phone = $user->phone;
         $refund->order_id = $order->id;
@@ -73,13 +76,12 @@ class OrderController extends Controller
         if ($request->hasFile('image')) {
             $refund->image = $request->file('image')->store('refund_images');
         }
-        
-        if($request->paymentMethod == 'point'){
+
+        if ($request->paymentMethod == 'point') {
             $refund->payment_date = Carbon::now();
             $user->point += round($order->price_total / $siteSetting->point_value);
             $user->point += $order->point_total;
-        }
-        else {
+        } else {
             $refund->payment_date = Carbon::parse($request->payment_date);
         }
         $refund->save();
@@ -87,7 +89,8 @@ class OrderController extends Controller
         Mail::to($user->email)->send(new OrderRefunded($user, $order));
 
         return redirect()->route('admin.order.refund.index')->with(
-            'success', 'sukses refund order!'
+            'success',
+            'sukses refund order!'
         );
     }
 }

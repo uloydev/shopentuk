@@ -12,27 +12,56 @@ logoutBtn.addEventListener('click', (e) => {
 });
 
 // /admin/all-category page
-if (pageUrl === '/admin/all-category') {
-    const manageCategoryPage = document.querySelector('#manageCategoryPage')
-    const editSubCategoryBtn = manageCategoryPage.querySelectorAll(".edit-sub-category-btn")
-    const subCategoryFocused = ['border', 'border-primary', 'p-2']
+if (pageUrl === '/admin/all-category/sub') {
+    // edit sub category
+    const modalEditSub = document.querySelectorAll('.edit-sub-category-btn')
+    const modalManipulateCategory = document.querySelector('.modal-manipulate-category')
+    let modalTitle = modalManipulateCategory.querySelector('.modal-title')
+    let modalTitleText, subCategoryVal, parentCategoryVal
 
-    editSubCategoryBtn.forEach(btnEditSub => {
-        const subcategoryTitle = btnEditSub.parentElement.querySelector('.subcategory__title')
+    const parentCategoryOptionEl = modalManipulateCategory
+                                .querySelectorAll('#parent-category option:enabled')
+    
+    modalEditSub.forEach(btnEditSub => {
+        const modalEditId = btnEditSub.dataset.target
+        const subCategoryEl = btnEditSub.parentNode.querySelector('.subcategory__title')
 
         btnEditSub.addEventListener('click', () => {
-            subcategoryTitle.classList.add(...subCategoryFocused)
-            subcategoryTitle.setAttribute('contenteditable', true)
-            subcategoryTitle.focus()
-        });
+            modalTitleText = 'edit category'
+            modalManipulateCategory.setAttribute(
+                'aria-labelledby', modalEditId.replace('#', '') + 'Label'
+            );
+            $(".modal-manipulate-category").modal('show')
+            modalTitle.setAttribute('id', 'modalEditCategoryLabel')
+            modalTitle.textContent = modalTitleText
 
-        subcategoryTitle.addEventListener('focusout', () => {
-            subcategoryTitle.setAttribute('contenteditable', false)
-            subcategoryTitle.classList.remove(...subCategoryFocused)
-
-            //ksh ajax disini ntar buat save perubahan di subcategory nya
-        });
+            subCategoryVal = subCategoryEl.textContent.trim()
+            parentCategoryVal = subCategoryEl.dataset.categoryParent.trim()
+            modalManipulateCategory.querySelector('#sub-category').value = subCategoryVal
+            
+            parentCategoryOptionEl.forEach(parentCategory => {
+                if (parentCategory.textContent.trim() === parentCategoryVal) {
+                    parentCategory.selected = true
+                }
+            })
+        })
     })
+
+    $('.modal-manipulate-category').on('hidden.bs.modal', function (e) {
+        parentCategoryOptionEl[0].selected = true
+        modalManipulateCategory.querySelector('#sub-category').value = null
+    })
+    // end of edit sub category
+
+    // add new sub category
+    const addSubCategory = document.querySelector('#btn-add-sub-category')
+    addSubCategory.addEventListener('click', function(){
+        $(".modal-manipulate-category").modal('show')
+        modalTitleText = 'add new category'
+        modalManipulateCategory.setAttribute('aria-labelledby', 'addNewCategoryLabel')
+        modalTitle.textContent = modalTitleText
+    })
+    // end of add new sub category
 }
 
 if (pageUrl === '/superadmin/admins') {
@@ -92,4 +121,9 @@ $("#zero_config").DataTable()
 Array.from(document.querySelectorAll('box-icon')).map(icon => {
     icon.classList.remove('has-arrow') // remove ::after style because of adminmart template
     icon.classList.add('mr-2')
+})
+
+$(".refresh-btn").on('click', function (e) {
+    e.preventDefault()
+    location.reload()
 })

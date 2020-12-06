@@ -14,7 +14,7 @@ class MenuAdmin extends Component
      *
      * @return void
      */
-    public function __construct($to, $icon, $text)
+    public function __construct($to = '', $icon, $text)
     {
         $this->to = $to;
         $this->icon = $icon;

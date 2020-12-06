@@ -42,7 +42,7 @@
                                         <var class="rupiah-currency cart-item__price not-italic ml-3"
                                         data-price="{{ $item->product->discount->discounted_price }}" data-is-point="false"
                                         data-init-price="{{ $item->product->discount->discounted_price }}">
-                                            {{ $item->product->discount->discounted_price  * $item->quantity}}
+                                        {{ $item->product->discount->discounted_price  * $item->quantity }}
                                         </var>
                                     @else
                                         <var class="rupiah-currency cart-item__price not-italic ml-3"
@@ -114,7 +114,7 @@
                 class="btn-outline hpver:bg-blue-600 border-blue-500 text-blue-500 
                 hover:bg-blue-500 hover:text-white">
                     <box-icon name='left-arrow-alt' class="text-blue-500 hover:text-white"></box-icon>
-                    Kembali
+                    <span>Kembali</span>
                 </a>
                 <x-btn-primary type="button" text="Perbarui keranjang" 
                 id="updateCartBtn" data-cart-id="{{ Auth::user()->cart->id }}"
@@ -128,7 +128,7 @@
         </div>
 
         @include('payment.step-checkout')
-        @include('payment.add-new-address', ['columns' => $addressColumn])
+        @include('payment.add-address', ['columns' => $addressColumn])
 
     @else
         @include('payment.no-item')
