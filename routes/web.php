@@ -36,16 +36,17 @@ Route::resource('cart', 'CartController');
 Route::get('register', fn () => redirect('login'));
 
 Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'])
-    ->namespace('Customer')->group(function () {
-        Route::get('order/history', 'DashboardController@orderHistory')->name('history.order');
-        Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');
-        Route::get('detail', 'DashboardController@accountDetail')->name('account.detail');
-        Route::get('point', 'DashboardController@accountPoint')->name('account.point');
-        Route::prefix('address')->name('address.')->group(function () {
-            Route::post('/', 'UserAddressController@store')->name('store');
-            Route::post('/update', 'UserAddressController@update')->name('update');
-            Route::post('/delete', 'UserAddressController@destroy')->name('destroy');
-        });
+->namespace('Customer')->group(function(){
+    Route::post('update', 'DashboardController@updateAccount')->name('update');
+    Route::get('order/history', 'DashboardController@orderHistory')->name('history.order');
+    Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');
+    Route::get('detail', 'DashboardController@accountDetail')->name('account.detail');
+    Route::get('point', 'DashboardController@accountPoint')->name('account.point');
+    Route::prefix('address')->name('address.')->group(function () {
+        Route::post('/', 'UserAddressController@store')->name('store');
+        Route::post('/store-redirect', 'UserAddressController@storeRedirect')->name('store-redirect');
+        Route::post('/update', 'UserAddressController@update')->name('update');
+        Route::post('/delete', 'UserAddressController@destroy')->name('destroy');
     });
 
 // admin route

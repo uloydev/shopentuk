@@ -1,4 +1,4 @@
-<div id="modalEditAddress" class="fixed z-10 inset-0 overflow-y-auto transition duration-200" modal-closed>
+<div id="modalEditAddress" class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 opacity-0">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20
         text-center sm:block sm:p-0">
         <div class="fixed inset-0 transition-opacity" aria-hidden="true">
@@ -140,7 +140,7 @@
                 </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button type="submit" form="newAddressForm" 
+                <button type="submit" form="editAddressForm" 
                 class="w-full inline-flex justify-center rounded-md border border-transparent
                 shadow-sm px-4 py-2 bg-teal-400 text-base font-medium text-white
                 hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2
