@@ -13,11 +13,11 @@ aria-labelledby="modalAddCategoryLabel" aria-hidden="true">
                 method="post" id="form-add-sub-category">
                     @csrf
                     <div class="form-group">
-                        <label class="form-control-label" for="parentCategory">
+                        <label class="form-control-label" for="parent-category">
                             Pick a parent category
                         </label>
                         <select class="custom-select @error('category') is-invalid @enderror mr-sm-2" 
-                        name="category" id="parentCategory" aria-describedby="helperTitle" required autofocus>
+                        name="category" id="parent-category" aria-describedby="helperTitle" required autofocus>
                             <option disabled>Pick category</option>
                             @foreach ($categories as $category)
                             <option value="{{ $category->id }}" {{ $loop->first ? 'selected' : '' }}>

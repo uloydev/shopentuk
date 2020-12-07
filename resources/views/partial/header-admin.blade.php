@@ -1,15 +1,12 @@
 <header class="topbar" data-navbarbg="skin6">
     <nav class="navbar top-navbar navbar-expand-md">
         <div class="navbar-header" data-logobg="skin6">
-            <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
+            <a class="nav-toggler waves-effect waves-light d-block d-md-none"
+            href="javascript:void(0)">
                 <i class="ti-menu ti-close"></i>
             </a>
             <div class="navbar-brand">
                 <a href="index.html">
-                    <b class="logo-icon">
-                        <img src="{{ asset('template/assets/images/logo-icon.png') }}" 
-                        alt="homepage" class="dark-logo" />
-                    </b>
                     <span class="logo-text">Shopentuk</span>
                 </a>
             </div>
@@ -31,8 +28,8 @@
                     <a class="nav-link" href="javascript:void(0)">
                         <form>
                             <div class="customize-input">
-                                <input class="form-control custom-shadow custom-radius border-0 bg-white"
-                                type="search" placeholder="Search" aria-label="Search">
+                                <input type="search" placeholder="Search" aria-label="Search"
+                                class="form-control custom-shadow custom-radius border-0 bg-white">
                                 <i class="form-control-icon" data-feather="search"></i>
                             </div>
                         </form>
@@ -43,8 +40,6 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="javascript:void(0)"
                     aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
-                        <img src="{{ asset('template/assets/images/users/profile-pic.jpg') }}"
-                        alt="user" class="rounded-circle" width="40">
                         <span class="ml-2 d-none d-lg-inline-block">
                             <span>Hello,</span>
                             <span class="text-dark">{{ Auth::user()->name }}</span> 
@@ -54,8 +49,10 @@
                     <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                         <x-menu-header-admin :to="url('/')" icon="user" text="My Profile"/>
                         <x-menu-header-admin :to="url('/')" icon="credit-card" text="My Balance"/>
-                        <x-menu-header-admin :to="route('logout')" icon="power" text="Logout" id="logoutBtn"/>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        <x-menu-header-admin :to="route('logout')" icon="power" 
+                        text="Logout" id="logoutBtn"/>
+                        <form id="logout-form" action="{{ route('logout') }}"
+                        method="POST" class="d-none">
                             @csrf
                         </form>
                     </div>

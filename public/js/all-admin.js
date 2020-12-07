@@ -5563,29 +5563,45 @@ logoutBtn.addEventListener('click', function (e) {
   document.getElementById('logout-form').submit();
 }); // /admin/all-category page
 
-if (pageUrl === '/admin/all-category') {
-  var manageCategoryPage = document.querySelector('#manageCategoryPage');
-  var editSubCategoryBtn = manageCategoryPage.querySelectorAll(".edit-sub-category-btn");
-  var subCategoryFocused = ['border', 'border-primary', 'p-2'];
-  editSubCategoryBtn.forEach(function (btnEditSub) {
-    var subcategoryTitle = btnEditSub.parentElement.querySelector('.subcategory__title');
+if (pageUrl === '/admin/all-category/sub') {
+  // edit sub category
+  var modalEditSub = document.querySelectorAll('.edit-sub-category-btn');
+  var modalManipulateCategory = document.querySelector('.modal-manipulate-category');
+  var modalTitle = modalManipulateCategory.querySelector('.modal-title');
+  var modalTitleText, subCategoryVal, parentCategoryVal;
+  var parentCategoryOptionEl = modalManipulateCategory.querySelectorAll('#parent-category option:enabled');
+  modalEditSub.forEach(function (btnEditSub) {
+    var modalEditId = btnEditSub.dataset.target;
+    var subCategoryEl = btnEditSub.parentNode.querySelector('.subcategory__title');
     btnEditSub.addEventListener('click', function () {
-      var _subcategoryTitle$cla;
-
-      (_subcategoryTitle$cla = subcategoryTitle.classList).add.apply(_subcategoryTitle$cla, subCategoryFocused);
-
-      subcategoryTitle.setAttribute('contenteditable', true);
-      subcategoryTitle.focus();
-    });
-    subcategoryTitle.addEventListener('focusout', function () {
-      var _subcategoryTitle$cla2;
-
-      subcategoryTitle.setAttribute('contenteditable', false);
-
-      (_subcategoryTitle$cla2 = subcategoryTitle.classList).remove.apply(_subcategoryTitle$cla2, subCategoryFocused); //ksh ajax disini ntar buat save perubahan di subcategory nya
-
+      modalTitleText = 'edit category';
+      modalManipulateCategory.setAttribute('aria-labelledby', modalEditId.replace('#', '') + 'Label');
+      $(".modal-manipulate-category").modal('show');
+      modalTitle.setAttribute('id', 'modalEditCategoryLabel');
+      modalTitle.textContent = modalTitleText;
+      subCategoryVal = subCategoryEl.textContent.trim();
+      parentCategoryVal = subCategoryEl.dataset.categoryParent.trim();
+      modalManipulateCategory.querySelector('#sub-category').value = subCategoryVal;
+      parentCategoryOptionEl.forEach(function (parentCategory) {
+        if (parentCategory.textContent.trim() === parentCategoryVal) {
+          parentCategory.selected = true;
+        }
+      });
     });
   });
+  $('.modal-manipulate-category').on('hidden.bs.modal', function (e) {
+    parentCategoryOptionEl[0].selected = true;
+    modalManipulateCategory.querySelector('#sub-category').value = null;
+  }); // end of edit sub category
+  // add new sub category
+
+  var addSubCategory = document.querySelector('#btn-add-sub-category');
+  addSubCategory.addEventListener('click', function () {
+    $(".modal-manipulate-category").modal('show');
+    modalTitleText = 'add new category';
+    modalManipulateCategory.setAttribute('aria-labelledby', 'addNewCategoryLabel');
+    modalTitle.textContent = modalTitleText;
+  }); // end of add new sub category
 }
 
 if (pageUrl === '/superadmin/admins') {
@@ -5637,6 +5653,10 @@ Array.from(document.querySelectorAll('box-icon')).map(function (icon) {
   icon.classList.remove('has-arrow'); // remove ::after style because of adminmart template
 
   icon.classList.add('mr-2');
+});
+$(".refresh-btn").on('click', function (e) {
+  e.preventDefault();
+  location.reload();
 });
 
 /***/ }),

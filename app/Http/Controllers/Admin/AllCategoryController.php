@@ -10,14 +10,14 @@ use Illuminate\Http\Request;
 class AllCategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of parent category
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function parentCategoryIndex()
     {
         $categories = ProductCategory::where('is_digital_product', false)->get();
-        return view('store.product.category.manage', [
+        return view('store.product.category.manage-parent', [
             'title' => 'manage category',
             'categories' => $categories
         ]);
@@ -39,7 +39,18 @@ class AllCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function parentCategoryStore(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Store a new sub category
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function subCategoryStore(Request $request)
     {
         //
     }
@@ -79,17 +90,42 @@ class AllCategoryController extends Controller
     }
 
     /**
+     * Remove the parent category with his product
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function parentCategoryDestroy($id)
+    {
+        $productCategory = ProductCategory::findOrFail($id);
+        $productCategory->products()->delete();
+        $productCategory->productSubCategory()->delete();
+        $productCategory->delete();
+
+        return redirect()->back()->with('msg', 'Successfully delete this sub category');
+    }
+
+    /**
      * Remove the sub category with his product
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function subCategoryDestroy($id)
     {
         $productSubCategory = ProductSubCategory::findOrFail($id);
         $productSubCategory->products()->delete();
         $productSubCategory->delete();
 
         return redirect()->back()->with('msg', 'Successfully delete this sub category');
+    }
+
+    public function subCategoryIndex()
+    {
+        $categories = ProductCategory::where('is_digital_product', false)->get();
+        return view('store.product.category.manage-sub', [
+            'title' => 'manage category',
+            'categories' => $categories
+        ]);
     }
 }

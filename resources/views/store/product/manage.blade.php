@@ -9,11 +9,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                <div class="mb-3">
-                    <h1 class="h3">All products</h1>
-                    <small class="text-success font-weight-bold">
-                        Click the data on each column for editing
-                    </small>
+                    <div class="mb-3">
+                        <h1 class="h3">All products</h1>
                     </div>
                 </div>
                 <div class="card-body">

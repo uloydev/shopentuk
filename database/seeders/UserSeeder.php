@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
                 'email' => 'admin@mail.com',
                 'phone' => '1234567891',
                 'role' => 'admin',
-                'password' => Hash::make('gakadapassword'),
+                'password' => Hash::make('password'),
                 'created_at' => Carbon::parse(now())->subMonths(8)
             ]
         ]);
