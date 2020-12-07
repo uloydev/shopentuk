@@ -39,17 +39,20 @@
             @endforelse
         </div>
 
-        <form action="{{ route('my-account.update') }}" method="post">
+        <form action="{{-- route('my-account.update') --}}" method="post">
             @csrf
             @for ($i = 0; $i < count($labelInput); $i++)
                 <x-input-basic label="{{ ucwords($labelInput[$i]) }}" 
                 name="{{ Str::snake($labelInput[$i]) }}"
                 placeholder="Input Your {{ ucwords($labelInput[$i]) }}" 
-                value="{{ $userData[$i] ?? '' }}" required />
+                value="{{ $userData[$i] ?? '' }}" required disabled/>
             @endfor
-            <x-btn-primary text="Save changes" class="w-full md:w-auto text-white rounded 
+            <p class="text-center">
+                untuk mengubah data akun silahkan gunakan form <a class="text-blue-500" href="{{route('contact-us.index')}}">contact us</a> atau hubungi admin
+            </p>
+            {{-- <x-btn-primary text="Save changes" class="w-full md:w-auto text-white rounded 
             bg-teal-500 hover:bg-teal-600 focus:bg-teal-700
-            border-b-4 border-red-900 border-opacity-25 transform focus:translate-y-1" />
+            border-b-4 border-red-900 border-opacity-25 transform focus:translate-y-1" /> --}}
         </form>
     </div>
     @include('customer.account.edit-address')
