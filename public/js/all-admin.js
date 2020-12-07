@@ -5648,7 +5648,7 @@ Array.from(document.querySelectorAll('box-icon')).map(function (icon) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/page/dashboard-admin.js */"./resources/assets/js/page/dashboard-admin.js");
+module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/page/dashboard-admin.js */"./resources/assets/js/page/dashboard-admin.js");
 
 
 /***/ })
