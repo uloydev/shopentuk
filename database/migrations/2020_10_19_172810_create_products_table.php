@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('category_id')->nullable();
             $table->foreignId('sub_category_id')->nullable();
             $table->boolean('is_redeem')->default(false);
+            $table->integer('weight')->default(0);
             $table->timestamps();
         });
     }

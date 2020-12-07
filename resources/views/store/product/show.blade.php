@@ -30,6 +30,12 @@
                 </div>
                 <hr>
                 <p class="mt-5 text-gray-700">
+                    Berat: 
+                    <span>
+                        {{ $product->weight }} gram
+                    </span>
+                </p>
+                <p class="mt-5 text-gray-700">
                     Kategori: 
                     <span>
                         {{ $product->productCategory->title }}
