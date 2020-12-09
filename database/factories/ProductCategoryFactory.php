@@ -22,7 +22,7 @@ class ProductCategoryFactory extends Factory
     public function definition()
     {
         $categories = $this->faker->unique()->randomElement(['pria', 'wanita', 'pulsa', 'voucher']);
-        
+
         $isDigitalProduct = false;
         switch ($categories) {
             case 'pria':
@@ -37,17 +37,16 @@ class ProductCategoryFactory extends Factory
                 $description = 'pulsa sim prabayar';
                 $isDigitalProduct = true;
                 break;
-    
+
             case 'voucher':
                 $description = 'voucher';
                 $isDigitalProduct = true;
                 break;
         }
-        
+
         return [
             'title' => $categories,
             'description' => $description,
-            'image' => "img/baju.jpg",
             'is_digital_product' => $isDigitalProduct,
         ];
     }

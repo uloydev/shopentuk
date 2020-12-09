@@ -9,6 +9,23 @@ use Illuminate\Http\Request;
 
 class AllCategoryController extends Controller
 {
+
+    protected function saveCategory($request, ProductCategory $productCategory)
+    {
+        $title = $request->title;
+        if (ProductCategory::where('title', $title)->first()) {
+            $action = 'add new';
+        } else {
+            $action = 'update';
+        }
+        $productCategory->title = $title;
+        $productCategory->description = $request->description;
+        $productCategory->is_digital_product = $request->boolean('is_digital_product');
+        $productCategory->save();
+
+        return redirect()->back()->with('msg', "Succesfully $action category called $title");
+    }
+
     /**
      * Display a listing of parent category
      *
@@ -16,7 +33,7 @@ class AllCategoryController extends Controller
      */
     public function parentCategoryIndex()
     {
-        $categories = ProductCategory::where('is_digital_product', false)->get();
+        $categories = ProductCategory::all();
         return view('store.product.category.manage-parent', [
             'title' => 'manage category',
             'categories' => $categories
@@ -41,7 +58,8 @@ class AllCategoryController extends Controller
      */
     public function parentCategoryStore(Request $request)
     {
-        //
+        $addNew = new ProductCategory;
+        return $this->saveCategory($request, $addNew);
     }
 
     /**
@@ -86,7 +104,8 @@ class AllCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $updateCategory = ProductCategory::findOrFail($id);
+        return $this->saveCategory($request, $updateCategory);
     }
 
     /**

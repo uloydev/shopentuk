@@ -14,7 +14,7 @@ class InputTemplate extends Component
      *
      * @return void
      */
-    public function __construct($id, $label, $type, $name, $placeholder)
+    public function __construct($id = '', $label, $type, $name, $placeholder)
     {
         $this->id = $id;
         $this->label = $label;

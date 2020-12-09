@@ -16,8 +16,8 @@
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h1 class="h3">Primary Category</h1>
-                <button type="button" data-target="#modal-add-parent-category" data-toggle="modal"
-                class="btn btn-sm waves-effect waves-light btn-rounded btn-primary">
+                <button type="button" data-toggle="modal"
+                class="btn btn-sm waves-effect waves-light btn-rounded btn-primary add-primary-category">
                     Add new category
                 </button>
             </div>
@@ -25,10 +25,13 @@
                 <ul class="list-group">
                     @forelse ($categories as $category)
                     <li class="list-group-item d-flex align-items-center">
-                        <span class="mr-auto">{{ Str::words($category->title, 1) }}</span>
-                        <a href="javascript:void(0);" data-target="#modalEditPrimaryCategory" 
-                        data-toggle="modal"
-                        class="badge badge-warning badge-pill ml-auto edit-primary-category-btn">
+                        <span class="mr-auto primary-category__title">
+                            {{ Str::words($category->title, 1) }}
+                        </span>
+                        <a href="javascript:void(0);" 
+                        data-is-digital="{{ $category->is_digital_product }}"
+                        data-toggle="modal" data-desc="{{ $category->description }}"
+                        class="badge badge-warning badge-pill ml-auto edit-primary-category">
                             Edit
                         </a>
                         <form class="ml-2 d-inline-block" method="POST" 
@@ -41,7 +44,9 @@
                         </form>
                     </li>
                     @empty
-                    <li class="list-group-item">There's no category right now</li>
+                    <li class="list-group-item">
+                        There's no category right now
+                    </li>
                     @endforelse
                 </ul>
             </div>
@@ -49,6 +54,6 @@
     </div>
 </div>
 
-@include('store.product.category.parent.add')
+@include('store.product.category.parent.manipulate')
 
 @endsection

@@ -247,6 +247,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../helper-module */ "./resources/assets/js/helper-module.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 
 
@@ -259,6 +271,34 @@ logoutBtn.addEventListener('click', function (e) {
   e.preventDefault();
   document.getElementById('logout-form').submit();
 }); // /admin/all-category page
+
+if (pageUrl === '/admin/all-category/parent') {
+  var modalManipulatePrimaryCategory = document.querySelector('#modal-manipulate-primary-category');
+  var editPrimaryBtn = document.querySelectorAll('.edit-primary-category');
+  var addPrimaryCategory = document.querySelector('.add-primary-category');
+  var btnManipulateCategory = [addPrimaryCategory].concat(_toConsumableArray(editPrimaryBtn));
+  var titleModal, primaryTitle, primaryDesc, primaryIsDigitalProduct;
+  btnManipulateCategory.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (btn.classList.contains('edit-primary-category')) {
+        titleModal = 'edit primary';
+        primaryTitle = btn.parentNode.querySelector('.primary-category__title').textContent.trim();
+        primaryDesc = btn.dataset.desc;
+        primaryIsDigitalProduct = Boolean(Number(btn.dataset.isDigital));
+        console.log(primaryIsDigitalProduct);
+        modalManipulatePrimaryCategory.querySelector('input[name="title"]').value = primaryTitle;
+        modalManipulatePrimaryCategory.querySelector('input[name="is_digital_product"]').checked = primaryIsDigitalProduct == false ? false : true;
+      } else {
+        titleModal = 'add new primary';
+      }
+
+      titleModal = "".concat(titleModal, " category");
+      $("#modal-manipulate-primary-category").modal('show');
+      modalManipulatePrimaryCategory.querySelector('.modal-title').textContent = titleModal;
+      modalManipulatePrimaryCategory.querySelector('.desc-category').value = primaryDesc;
+    });
+  });
+}
 
 if (pageUrl === '/admin/all-category/sub') {
   // edit sub category

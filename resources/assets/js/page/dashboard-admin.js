@@ -2,16 +2,51 @@ import 'boxicons'
 import { capitalizeFirstLetter, setAttributes } from './../helper-module'
 
 const numWords = require('num-words')
-const appUrl = window.location.origin;
+const appUrl = window.location.origin
 const pageUrl = window.location.pathname
 
-const logoutBtn = document.querySelector('#logoutBtn');
+const logoutBtn = document.querySelector('#logoutBtn')
 logoutBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    document.getElementById('logout-form').submit();
+    e.preventDefault()
+    document.getElementById('logout-form').submit()
 });
 
 // /admin/all-category page
+if (pageUrl === '/admin/all-category/parent') {
+    const modalManipulatePrimaryCategory = document.querySelector('#modal-manipulate-primary-category')
+    const editPrimaryBtn = document.querySelectorAll('.edit-primary-category')
+    const addPrimaryCategory = document.querySelector('.add-primary-category')
+    const btnManipulateCategory = [addPrimaryCategory, ...editPrimaryBtn]
+    let titleModal, primaryTitle, primaryDesc, primaryIsDigitalProduct
+
+    btnManipulateCategory.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (btn.classList.contains('edit-primary-category')) {
+                titleModal = 'edit primary'
+                primaryTitle = btn.parentNode.querySelector('.primary-category__title').textContent.trim()
+                primaryDesc = btn.dataset.desc
+                primaryIsDigitalProduct = Boolean(Number(btn.dataset.isDigital))
+
+                console.log(primaryIsDigitalProduct)
+                
+                modalManipulatePrimaryCategory.querySelector('input[name="title"]').value = primaryTitle
+                modalManipulatePrimaryCategory
+                .querySelector('input[name="is_digital_product"]')
+                .checked = primaryIsDigitalProduct == false ? false : true
+            }
+            else {
+                titleModal = 'add new primary'
+            }
+            titleModal = `${titleModal} category`
+
+            $("#modal-manipulate-primary-category").modal('show')
+            modalManipulatePrimaryCategory.querySelector('.modal-title').textContent = titleModal
+            
+            modalManipulatePrimaryCategory.querySelector('.desc-category').value = primaryDesc
+
+        })
+    })
+}
 if (pageUrl === '/admin/all-category/sub') {
     // edit sub category
     const modalEditSub = document.querySelectorAll('.edit-sub-category-btn')

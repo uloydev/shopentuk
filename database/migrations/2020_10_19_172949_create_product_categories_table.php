@@ -17,7 +17,6 @@ class CreateProductCategoriesTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('image')->nullable();
             $table->boolean('is_digital_product');
             $table->timestamps();
         });

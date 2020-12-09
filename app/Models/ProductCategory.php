@@ -12,7 +12,6 @@ class ProductCategory extends Model
     protected $fillable = [
         'title',
         'description',
-        'image',
         'is_digital_product',
     ];
 

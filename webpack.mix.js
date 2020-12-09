@@ -34,12 +34,12 @@ mix.js('resources/assets/js/native.js', 'public/js/all-client.js')
         'resources/assets/template/assets/extra-libs/c3/c3.min.js',
         'resources/assets/template/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js',
         'resources/assets/template/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js',
-        'resources/assets/template/assets/libs/chart.js/dist/Chart.min.js',
+        // 'resources/assets/template/assets/libs/chart.js/dist/Chart.min.js',
         // 'resources/assets/template/assets/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js',
         // 'resources/assets/template/assets/libs/chartist/chartist.min.js',
         'resources/assets/plugin/datatables.net/js/jquery.dataTables.min.js',
         'resources/assets/plugin/datatables.net/js/datatable-basic.init.min.js',
-        'resources/assets/js/addons/admin-chartjs.init.js',
+        // 'resources/assets/js/addons/admin-chartjs.init.js',
         'public/js/dashboard-admin.js'
     ], 'public/js/all-admin.js')
     .copyDirectory('resources/assets/plugin/datatables.net', 'public/library')
