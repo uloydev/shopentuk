@@ -158,49 +158,55 @@ if (pageUrl === '/cart') {
     }
 
     // update cart
-    const cartItems = cartPage.querySelectorAll('.cart-item__qty');
-    const cartId = updateCartBtn.dataset.cartId
-    updateCart(cartItems);
-    cartItems.forEach(item => {
-        item.addEventListener('change', () => {
-            const itemPrice = item.previousElementSibling;
-            if (item.value == 0) {
-                if (window.confirm('Anda yakin ingin menghapus produk dari cart ?')) {
-                    fetch(`/cart/${cartId}` , {
-                        method: 'DELETE',
+    let cartItems = cartPage.querySelectorAll('.cart-item__qty');
+    const cartId = cartPage.querySelector('#cartId').value
+    if (cartItems.length > 0) {
+        updateCart(cartItems);
+        cartItems.forEach((item, index) => {
+            item.addEventListener('change', () => {
+                const itemPrice = item.previousElementSibling;
+                if (item.value == 0) {
+                    if (window.confirm('Anda yakin ingin menghapus produk dari cart ?')) {
+                        fetch(`/cart/${cartId}` , {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-type': 'application/json',
+                                'X-CSRF-Token': metaToken,
+                            },
+                            body: JSON.stringify({'item_id': item.dataset.itemId}),
+                        })
+                        .then(() => {
+                            getParents(item, '.cart-item')[0].remove()
+                            if (!cartPage.querySelector('.cart-item__qty')) {
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        item.value = 1
+                    }
+                }
+                if (itemPrice.dataset.isPoint === 'true') {
+                    itemPrice.textContent = `${itemPrice.dataset.price * item.value} point`;
+                } else {
+                    itemPrice.textContent = `Rp. ${itemPrice.dataset.price * item.value}`;
+                }
+                let boughtItems = [];
+                cartItems.forEach(item => {
+                    boughtItems.push({
+                        'item_id': item.dataset.itemId,
+                        'quantity': item.value,
+                    });
+                });
+                fetch(`/cart/${cartId}` , {
+                        method: 'PUT',
                         headers: {
                             'Content-type': 'application/json',
                             'X-CSRF-Token': metaToken,
                         },
-                        body: JSON.stringify({'item_id': item.dataset.itemId}),
-                    })
-                    .then(() => getParents(item, '.cart-item')[0].remove());
-                } else {
-                    item.value = 1
-                }
-            }
-            if (itemPrice.dataset.isPoint === 'true') {
-                itemPrice.textContent = `${itemPrice.dataset.price * item.value} point`;
-            } else {
-                itemPrice.textContent = `Rp. ${itemPrice.dataset.price * item.value}`;
-            }
-            let boughtItems = [];
-            cartItems.forEach(item => {
-                boughtItems.push({
-                    'item_id': item.dataset.itemId,
-                    'quantity': item.value,
-                });
+                        body: JSON.stringify(boughtItems),
+                })
+                .then(() => updateCart(cartItems));
             });
-            fetch(`/cart/${cartId}` , {
-                    method: 'PUT',
-                    headers: {
-                        'Content-type': 'application/json',
-                        'X-CSRF-Token': metaToken,
-                    },
-                    body: JSON.stringify(boughtItems),
-            })
-            .then(() => updateCart(cartItems));
         });
-    });
-
+    }
 }
