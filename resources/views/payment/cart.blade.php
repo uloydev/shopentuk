@@ -63,9 +63,9 @@
             @endforeach
             <ul class="mb-3">
                 <li class="py-3 flex justify-between items-center">
-                    <span>Sub total : </span>
-                    <var class="not-italic font-bold rupiah-currency" id="cart__sub-total">
-                        {{ $priceTotal }}
+                    <span>Berat total : </span>
+                    <var class="not-italic font-bold" id="cart__sub-total">
+                        {{ $weightTotal }} gram
                     </var>
                 </li>
                 <li class="py-3 flex justify-between items-center">
@@ -73,12 +73,12 @@
                     @if ($cart->cartItems->where('is_toko_point', false)->count() == 0)
                         <var class="font-bold" id="cart__shipping"
                         data-price="{{ $siteSetting->shipping_price / $siteSetting->point_value}}">
-                        {{ $siteSetting->shipping_price / $siteSetting->point_value }} point
+                        {{ $siteSetting->shipping_price / $siteSetting->point_value * ceil($weightTotal / 1000) }} point
                         </var>
                     @else
                         <var class="font-bold rupiah-currency" id="cart__shipping"
                         data-price="{{ $siteSetting->shipping_price }}">
-                        {{ $siteSetting->shipping_price }}
+                        {{ $siteSetting->shipping_price * ceil($weightTotal / 1000)}}
                         </var>
                     @endif
                 </li>

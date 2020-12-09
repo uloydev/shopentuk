@@ -27,6 +27,7 @@ class CartController extends Controller
     {
         $pointTotal = 0;
         $priceTotal = 0;
+        $weightTotal = 0;
 
         $user = Auth::user();
         $cart = $user->cart;
@@ -51,6 +52,9 @@ class CartController extends Controller
                 } else {
                     $priceTotal += $item->product->price * $item->quantity;
                 }
+                if (!$item->product->productCategory->is_digital_product) {
+                    $weightTotal += $item->product->weight * $item->quantity;
+                }
             }
         }
 
@@ -58,6 +62,7 @@ class CartController extends Controller
             'title' => 'cart',
             'cart' => $cart,
             'siteSetting' => $this->siteSetting,
+            'weightTotal' => $weightTotal,
             'pointTotal' => $pointTotal,
             'priceTotal' => $priceTotal,
             'addresses' => $addresses,

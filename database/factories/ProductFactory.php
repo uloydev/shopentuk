@@ -49,7 +49,7 @@ class ProductFactory extends Factory
             'category_id' => $cat_id,
             'sub_category_id' => $titleProduct != 'pulsa tri 10000' ? rand(1, 4) : 5,
             'is_redeem' => $this->faker->boolean(50),
-            'weight' => !in_array($cat_id, [4,5]) ? $this->faker->randomElement($weights) : 0,
+            'weight' => $this->faker->randomElement($weights),
         ];
     }
 }

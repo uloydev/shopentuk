@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->integer('price_total')->nullable();
             $table->integer('product_point')->nullable();
             $table->integer('point_total')->nullable();
+            $table->integer('weight_total')->default(0);
             $table->enum('status', ['unpaid', 'paid', 'shipping', 'canceled', 'refunded', 'finished'])->default('unpaid');
             $table->timestamps();
         });
