@@ -284,13 +284,43 @@ var pageUrl = window.location.pathname;
 /*!*************************************************!*\
   !*** ./resources/assets/js/helper-utilities.js ***!
   \*************************************************/
-/*! no exports provided */
+/*! exports provided: getParents */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getParents", function() { return getParents; });
 /* harmony import */ var _helper_module_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helper-module.js */ "./resources/assets/js/helper-module.js");
 
+/*!
+ * Get all of an element's parent elements up the DOM tree
+ * (c) 2019 Chris Ferdinandi, MIT License, https://gomakethings.com
+ * @param  {Node}   elem     The element
+ * @param  {String} selector Selector to match against [optional]
+ * @return {Array}           The parent elements
+ */
+
+var getParents = function getParents(elem, selector) {
+  // Setup parents array
+  var parents = []; // Get matching parent elements
+
+  while (elem && elem !== document) {
+    // If using a selector, add matching parents to array
+    // Otherwise, add all parents
+    if (selector) {
+      if (elem.matches(selector)) {
+        parents.push(elem);
+      }
+    } else {
+      parents.push(elem);
+    } // Jump to the next parent node
+
+
+    elem = elem.parentNode;
+  }
+
+  return parents;
+};
 /*
  * .input-lowercase utitlies to make all input lowercase
  */
@@ -441,6 +471,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/login') {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helper-module */ "./resources/assets/js/helper-module.js");
+/* harmony import */ var _helper_utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../helper-utilities */ "./resources/assets/js/helper-utilities.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -454,9 +485,41 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+
 var metaToken = document.querySelector('meta[name="csrf-token"]').content;
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
+  var updateCart = function updateCart(cartItems) {
+    var totalPointElement = cartPage.querySelector('#cart__total-point');
+    var totalMoneyElement = cartPage.querySelector('#cart__total-money');
+    var weightTotalElement = cartPage.querySelector('#cart__weight-total');
+    var cartShipping = cartPage.querySelector('#cart__shipping');
+    var totalPoint = 0;
+    var totalMoney = 0;
+    var weight = 0;
+    cartItems.forEach(function (item) {
+      var itemPrice = item.previousElementSibling;
+      weight += itemPrice.dataset.weight * item.value;
+
+      if (itemPrice.dataset.isPoint === 'true') {
+        totalPoint += itemPrice.dataset.price * item.value;
+      } else {
+        totalMoney += itemPrice.dataset.price * item.value;
+      }
+    });
+
+    if (cartShipping.dataset.isPoint === 'true') {
+      cartShipping.textContent = cartShipping.dataset.price * Math.ceil(weight / 1000) + ' point';
+    } else {
+      cartShipping.textContent = 'Rp. ' + cartShipping.dataset.price * Math.ceil(weight / 1000);
+    }
+
+    totalPointElement.textContent = totalPoint + ' point';
+    totalMoneyElement.textContent = 'Rp. ' + totalMoney;
+    weightTotalElement.textContent = weight + ' gram';
+  }; // update cart
+
+
   var cartPage = document.querySelector('#cartPage'); // modal checkout and it's child
 
   if (cartPage.querySelector('#modalCheckout')) {
@@ -564,30 +627,63 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
       });
       newAddressBtn.disabled = false;
     });
-  } // update cart
+  }
 
+  var cartItems = cartPage.querySelectorAll('.cart-item__qty');
+  var cartId = cartPage.querySelector('#cartId').value;
 
-  if (cartPage.querySelector('#updateCartBtn')) {
-    var updateCartBtn = cartPage.querySelector('#updateCartBtn');
-    var cartId = updateCartBtn.dataset.cartId;
-    updateCartBtn.addEventListener('click', function () {
-      var boughtItems = [];
-      var cartItems = cartPage.querySelectorAll('.cart-item__qty');
-      cartItems.forEach(function (item) {
-        boughtItems.push({
-          'item_id': item.dataset.itemId,
-          'quantity': item.value
+  if (cartItems.length > 0) {
+    updateCart(cartItems);
+    cartItems.forEach(function (item, index) {
+      item.addEventListener('change', function () {
+        var itemPrice = item.previousElementSibling;
+
+        if (item.value == 0) {
+          if (window.confirm('Anda yakin ingin menghapus produk dari cart ?')) {
+            fetch("/cart/".concat(cartId), {
+              method: 'DELETE',
+              headers: {
+                'Content-type': 'application/json',
+                'X-CSRF-Token': metaToken
+              },
+              body: JSON.stringify({
+                'item_id': item.dataset.itemId
+              })
+            }).then(function () {
+              Object(_helper_utilities__WEBPACK_IMPORTED_MODULE_1__["getParents"])(item, '.cart-item')[0].remove();
+
+              if (!cartPage.querySelector('.cart-item__qty')) {
+                location.reload();
+              }
+            });
+          } else {
+            item.value = 1;
+          }
+        }
+
+        if (itemPrice.dataset.isPoint === 'true') {
+          itemPrice.textContent = "".concat(itemPrice.dataset.price * item.value, " point");
+        } else {
+          itemPrice.textContent = "Rp. ".concat(itemPrice.dataset.price * item.value);
+        }
+
+        var boughtItems = [];
+        cartItems.forEach(function (item) {
+          boughtItems.push({
+            'item_id': item.dataset.itemId,
+            'quantity': item.value
+          });
         });
-      });
-      fetch("/cart/".concat(cartId), {
-        method: 'PUT',
-        headers: {
-          'Content-type': 'application/json',
-          'X-CSRF-Token': metaToken
-        },
-        body: JSON.stringify(boughtItems)
-      }).then(function () {
-        return location.reload();
+        fetch("/cart/".concat(cartId), {
+          method: 'PUT',
+          headers: {
+            'Content-type': 'application/json',
+            'X-CSRF-Token': metaToken
+          },
+          body: JSON.stringify(boughtItems)
+        }).then(function () {
+          return updateCart(cartItems);
+        });
       });
     });
   }
@@ -695,9 +791,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/') {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
-__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
-module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
+__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
+__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
+module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
 
 
 /***/ })

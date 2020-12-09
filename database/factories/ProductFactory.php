@@ -35,14 +35,21 @@ class ProductFactory extends Factory
 
         $titleProduct = strtolower($this->faker->randomElement($titles));
 
+        $weights = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]; // in grams
+
+        $cat_id = $titleProduct != 'saldo ovo 50000' ? rand(1, 3) : 4;
+        
+
+
         return [
             'title' => $titleProduct,
             'description' => $this->faker->randomElement($descriptions),
             'price' => $this->faker->numberBetween(10000, 1000000),
             'point_price' => $this->faker->numberBetween(10, 150),
-            'category_id' => $titleProduct != 'saldo ovo 50000' ? rand(1, 4) : null,
-            'sub_category_id' => $titleProduct != 'pulsa tri 10000' ? rand(1, 5) : null,
-            'is_redeem' => $this->faker->boolean(50)
+            'category_id' => $cat_id,
+            'sub_category_id' => $titleProduct != 'pulsa tri 10000' ? rand(1, 4) : 5,
+            'is_redeem' => $this->faker->boolean(50),
+            'weight' => $this->faker->randomElement($weights),
         ];
     }
 }

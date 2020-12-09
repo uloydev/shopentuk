@@ -13,6 +13,7 @@ class CheckoutController extends Controller
 {
     public function store(Request $request)
     {
+        $weightTotal = 0;
         $siteSetting = SiteSetting::first();
         $user = Auth::user();
         // $user->point  = 100;
@@ -30,15 +31,6 @@ class CheckoutController extends Controller
         $order->user_address_id = $request->address_id;
         $order->product_price = $cart->total_price;
         $order->product_point = $cart->total_point;
-        if ($isAllPoint) {
-            $order->shipping_point = $siteSetting->shipping_price / $siteSetting->point_value;
-            $order->shipping_price = 0;
-            $order->status = 'paid';
-        } else {
-            $order->shipping_price = $siteSetting->shipping_price;
-            $order->shipping_point = 0;
-            $order->status = 'unpaid';
-        }
         $order->price_total = $order->product_price + $order->shipping_price;
         $order->point_total = $order->product_point + $order->shipping_point;
         $order->save();
@@ -57,7 +49,21 @@ class CheckoutController extends Controller
             $orderProduct->is_toko_point = $item->is_toko_point;
             $orderProduct->save();
             $item->delete();
+            if (!$itemProduct->productCategory->is_digital_product) {
+                $weightTotal += $itemProduct->weight * $orderProduct->quantity;
+            }
         }
+        if ($isAllPoint) {
+            $order->shipping_point = $siteSetting->shipping_price * ceil($weightTotal / 1000) / $siteSetting->point_value;
+            $order->shipping_price = 0;
+            $order->status = 'paid';
+        } else {
+            $order->shipping_price = $siteSetting->shipping_price * ceil($weightTotal / 1000) ;
+            $order->shipping_point = 0;
+            $order->status = 'unpaid';
+        }
+        $order->weight_total = $weightTotal;
+        $order->save();
         return redirect()->route('my-account.current.order')->with([
             'success' => 'sukses membuat order' . !$isAllPoint ? ", silahkan bayar pesanan anda !" : "",
         ]);

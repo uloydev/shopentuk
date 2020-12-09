@@ -20,6 +20,7 @@ class Product extends Model
         'category_id',
         'sub_category_id',
         'is_redeem',
+        'weight',
     ];
 
     /**

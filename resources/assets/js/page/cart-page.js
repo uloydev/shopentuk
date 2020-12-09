@@ -1,4 +1,5 @@
 import { pageUrl, openCloseModal } from './../helper-module'
+import { getParents } from './../helper-utilities'
 
 const metaToken = document.querySelector('meta[name="csrf-token"]').content
 
@@ -127,30 +128,85 @@ if (pageUrl === '/cart') {
         });
     }
 
-    // update cart
-    if (cartPage.querySelector('#updateCartBtn')) {
-        const updateCartBtn = cartPage.querySelector('#updateCartBtn')
-        const cartId = updateCartBtn.dataset.cartId
+    function updateCart(cartItems) {
+        const totalPointElement = cartPage.querySelector('#cart__total-point')
+        const totalMoneyElement = cartPage.querySelector('#cart__total-money')
+        const weightTotalElement = cartPage.querySelector('#cart__weight-total');
+        const cartShipping = cartPage.querySelector('#cart__shipping');
 
-        updateCartBtn.addEventListener('click', () => {
-            let boughtItems = [];
-            const cartItems = cartPage.querySelectorAll('.cart-item__qty');
-            cartItems.forEach(item => {
-                boughtItems.push({
-                    'item_id': item.dataset.itemId,
-                    'quantity': item.value,
-                });
-            });
-            fetch(`/cart/${cartId}` , {
-                    method: 'PUT',
-                    headers: {
-                        'Content-type': 'application/json',
-                        'X-CSRF-Token': metaToken,
-                    },
-                    body: JSON.stringify(boughtItems),
-            })
-            .then(() => location.reload());
-        });
+        let totalPoint = 0;
+        let totalMoney = 0;
+        let weight = 0;
+        cartItems.forEach(item => {
+            const itemPrice = item.previousElementSibling;
+            weight += itemPrice.dataset.weight * item.value;
+            if (itemPrice.dataset.isPoint === 'true') {
+                totalPoint += itemPrice.dataset.price * item.value;
+            } else {
+                totalMoney += itemPrice.dataset.price * item.value;
+            }
+        })
+        if (cartShipping.dataset.isPoint === 'true') {
+            cartShipping.textContent = (cartShipping.dataset.price * Math.ceil(weight / 1000)) + ' point'
+        } else {
+            cartShipping.textContent = 'Rp. ' + (cartShipping.dataset.price * Math.ceil(weight / 1000))
+        }
+
+        totalPointElement.textContent = totalPoint + ' point';
+        totalMoneyElement.textContent = 'Rp. ' + totalMoney;
+        weightTotalElement.textContent = weight + ' gram';
     }
 
+    // update cart
+    let cartItems = cartPage.querySelectorAll('.cart-item__qty');
+    const cartId = cartPage.querySelector('#cartId').value
+    if (cartItems.length > 0) {
+        updateCart(cartItems);
+        cartItems.forEach((item, index) => {
+            item.addEventListener('change', () => {
+                const itemPrice = item.previousElementSibling;
+                if (item.value == 0) {
+                    if (window.confirm('Anda yakin ingin menghapus produk dari cart ?')) {
+                        fetch(`/cart/${cartId}` , {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-type': 'application/json',
+                                'X-CSRF-Token': metaToken,
+                            },
+                            body: JSON.stringify({'item_id': item.dataset.itemId}),
+                        })
+                        .then(() => {
+                            getParents(item, '.cart-item')[0].remove()
+                            if (!cartPage.querySelector('.cart-item__qty')) {
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        item.value = 1
+                    }
+                }
+                if (itemPrice.dataset.isPoint === 'true') {
+                    itemPrice.textContent = `${itemPrice.dataset.price * item.value} point`;
+                } else {
+                    itemPrice.textContent = `Rp. ${itemPrice.dataset.price * item.value}`;
+                }
+                let boughtItems = [];
+                cartItems.forEach(item => {
+                    boughtItems.push({
+                        'item_id': item.dataset.itemId,
+                        'quantity': item.value,
+                    });
+                });
+                fetch(`/cart/${cartId}` , {
+                        method: 'PUT',
+                        headers: {
+                            'Content-type': 'application/json',
+                            'X-CSRF-Token': metaToken,
+                        },
+                        body: JSON.stringify(boughtItems),
+                })
+                .then(() => updateCart(cartItems));
+            });
+        });
+    }
 }

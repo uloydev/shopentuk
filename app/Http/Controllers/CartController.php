@@ -27,6 +27,7 @@ class CartController extends Controller
     {
         $pointTotal = 0;
         $priceTotal = 0;
+        $weightTotal = 0;
 
         $user = Auth::user();
         $cart = $user->cart;
@@ -51,6 +52,9 @@ class CartController extends Controller
                 } else {
                     $priceTotal += $item->product->price * $item->quantity;
                 }
+                if (!$item->product->productCategory->is_digital_product) {
+                    $weightTotal += $item->product->weight * $item->quantity;
+                }
             }
         }
 
@@ -58,6 +62,7 @@ class CartController extends Controller
             'title' => 'cart',
             'cart' => $cart,
             'siteSetting' => $this->siteSetting,
+            'weightTotal' => $weightTotal,
             'pointTotal' => $pointTotal,
             'priceTotal' => $priceTotal,
             'addresses' => $addresses,
@@ -90,6 +95,12 @@ class CartController extends Controller
         foreach ($request->all() as $data) {
             CartItem::find($data['item_id'])->update(['quantity' => $data['quantity']]);
         }
-        return $cart->cartItems;
+        return 'ok';
+    }
+
+    public function destroy(Cart $cart, Request $request)
+    {
+        CartItem::find($request->item_id)->delete();
+        return 'ok';
     }
 }

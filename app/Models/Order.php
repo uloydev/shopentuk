@@ -18,6 +18,7 @@ class Order extends Model
         'product_point',
         'price_total',
         'point_total',
+        'weight_total',
         'status',
     ];
 
