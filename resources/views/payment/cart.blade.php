@@ -34,26 +34,26 @@
                                     <var class="cart-item__price not-italic ml-3"
                                     data-price="{{ $item->product->point_price }}" 
                                     data-init-price="{{ $item->product->point_price }}" 
-                                    data-is-point="true">
+                                    data-is-point="true" data-weight="{{ $item->product->weight }}">
                                         {{ $item->product->point_price * $item->quantity }} point
                                     </var>
                                 @else
                                     @if (!empty($item->product->discount))
                                         <var class="rupiah-currency cart-item__price not-italic ml-3"
                                         data-price="{{ $item->product->discount->discounted_price }}" data-is-point="false"
-                                        data-init-price="{{ $item->product->discount->discounted_price }}">
+                                        data-init-price="{{ $item->product->discount->discounted_price }}" data-weight="{{ $item->product->weight }}">
                                         {{ $item->product->discount->discounted_price  * $item->quantity }}
                                         </var>
                                     @else
                                         <var class="rupiah-currency cart-item__price not-italic ml-3"
                                         data-price="{{ $item->product->price }}" data-is-point="false"
-                                        data-init-price="{{ $item->product->price }}">
+                                        data-init-price="{{ $item->product->price}}" data-weight="{{ $item->product->weight }}">
                                             {{ $item->product->price  * $item->quantity}}
                                         </var>
                                     @endif
                                 @endif
                                 <input type="number" name="qty" value="{{ $item->quantity }}" 
-                                min="1" max="99" data-item-id="{{ $item->id }}" 
+                                min="0" max="99" data-item-id="{{ $item->id }}" 
                                 class="cart-item__qty appearance-none text-center h-8 w-8 lg:w-12
                                 bg-white border border-gray-300" required>
                             </div>
@@ -64,7 +64,7 @@
             <ul class="mb-3">
                 <li class="py-3 flex justify-between items-center">
                     <span>Berat total : </span>
-                    <var class="not-italic font-bold" id="cart__sub-total">
+                    <var class="not-italic font-bold" id="cart__weight-total">
                         {{ $weightTotal }} gram
                     </var>
                 </li>
@@ -72,12 +72,12 @@
                     <span>Shipping: </span>
                     @if ($cart->cartItems->where('is_toko_point', false)->count() == 0)
                         <var class="font-bold" id="cart__shipping"
-                        data-price="{{ $siteSetting->shipping_price / $siteSetting->point_value}}">
+                        data-price="{{ $siteSetting->shipping_price / $siteSetting->point_value}}" data-is-point="true">
                         {{ $siteSetting->shipping_price / $siteSetting->point_value * ceil($weightTotal / 1000) }} point
                         </var>
                     @else
                         <var class="font-bold rupiah-currency" id="cart__shipping"
-                        data-price="{{ $siteSetting->shipping_price }}">
+                        data-price="{{ $siteSetting->shipping_price }}" data-is-point="false">
                         {{ $siteSetting->shipping_price * ceil($weightTotal / 1000)}}
                         </var>
                     @endif
@@ -116,11 +116,6 @@
                     <box-icon name='left-arrow-alt' class="text-blue-500 hover:text-white"></box-icon>
                     <span>Kembali</span>
                 </a>
-                <x-btn-primary type="button" text="Perbarui keranjang" 
-                id="updateCartBtn" data-cart-id="{{ Auth::user()->cart->id }}"
-                class="border-gray-500 hover:border-gray-900 flex items-center lg:mr-3">
-                    <box-icon name='refresh' class="mr-1" animation="tada-hover"></box-icon>
-                </x-btn-primary>
             </div>
             <x-btn-primary text="Lanjutkan checkout" id="btnShowCheckoutStep"
             class="btn bg-teal-500 active:bg-teal-800 hover:bg-teal-600 border-teal-700

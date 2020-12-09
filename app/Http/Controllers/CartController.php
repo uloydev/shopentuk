@@ -95,6 +95,12 @@ class CartController extends Controller
         foreach ($request->all() as $data) {
             CartItem::find($data['item_id'])->update(['quantity' => $data['quantity']]);
         }
-        return $cart->cartItems;
+        return 'ok';
+    }
+
+    public function destroy(Cart $cart, Request $request)
+    {
+        CartItem::find($request->item_id)->delete();
+        return 'ok';
     }
 }
