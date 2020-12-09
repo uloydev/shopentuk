@@ -9,19 +9,12 @@ tabindex="-1" role="dialog" aria-hidden="true">
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.all-category.parent.store') }}" 
+                <form action="{{-- routing set on JS --}}" 
                 method="post" id="form-add-parent-category">
-                    @csrf
+                    @csrf @method('PUT')
                     <x-input-template type="text" name="title" 
                     label="Type a new primary category"
                     id="primary-category" placeholder="Ex: Car" required />
-                    <div class="form-group">
-                        <label class="form-control-label">
-                            Description
-                        </label>
-                        <textarea class="form-control desc-category" rows="3" 
-                        placeholder="Ex: This is car category" name="description"></textarea>
-                    </div>
                     <fieldset class="checkbox">
                         <label>
                             <input type="checkbox" value="true" name="is_digital_product">

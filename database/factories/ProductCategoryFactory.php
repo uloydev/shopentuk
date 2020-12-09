@@ -26,27 +26,22 @@ class ProductCategoryFactory extends Factory
         $isDigitalProduct = false;
         switch ($categories) {
             case 'pria':
-                $description = 'pakaian pria';
                 break;
 
             case 'wanita':
-                $description = 'pakaian wanita';
                 break;
 
             case 'pulsa':
-                $description = 'pulsa sim prabayar';
                 $isDigitalProduct = true;
                 break;
 
             case 'voucher':
-                $description = 'voucher';
                 $isDigitalProduct = true;
                 break;
         }
 
         return [
             'title' => $categories,
-            'description' => $description,
             'is_digital_product' => $isDigitalProduct,
         ];
     }

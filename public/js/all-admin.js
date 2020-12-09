@@ -5405,9 +5405,11 @@ if (pageUrl === '/admin/all-category/parent') {
   var editPrimaryBtn = document.querySelectorAll('.edit-primary-category');
   var addPrimaryCategory = document.querySelector('.add-primary-category');
   var btnManipulateCategory = [addPrimaryCategory].concat(_toConsumableArray(editPrimaryBtn));
-  var titleModal, primaryTitle, primaryDesc, primaryIsDigitalProduct;
+  var titleModal, primaryTitle, primaryDesc, primaryIsDigitalProduct, urlForm;
   btnManipulateCategory.forEach(function (btn) {
     btn.addEventListener('click', function () {
+      urlForm = btn.dataset.routing;
+
       if (btn.classList.contains('edit-primary-category')) {
         titleModal = 'edit primary';
         primaryTitle = btn.parentNode.querySelector('.primary-category__title').textContent.trim();
@@ -5416,14 +5418,19 @@ if (pageUrl === '/admin/all-category/parent') {
         console.log(primaryIsDigitalProduct);
         modalManipulatePrimaryCategory.querySelector('input[name="title"]').value = primaryTitle;
         modalManipulatePrimaryCategory.querySelector('input[name="is_digital_product"]').checked = primaryIsDigitalProduct == false ? false : true;
+        modalManipulatePrimaryCategory.querySelector('input[name="_method"]').disabled = false;
       } else {
         titleModal = 'add new primary';
+        modalManipulatePrimaryCategory.querySelector('input[name="_method"]').disabled = true;
       }
 
       titleModal = "".concat(titleModal, " category");
       $("#modal-manipulate-primary-category").modal('show');
       modalManipulatePrimaryCategory.querySelector('.modal-title').textContent = titleModal;
-      modalManipulatePrimaryCategory.querySelector('.desc-category').value = primaryDesc;
+      modalManipulatePrimaryCategory.querySelector('form').action = urlForm;
+      $('#modal-manipulate-primary-category').on('hidden.bs.modal', function (e) {
+        $(this).find("input:not([name='_method']), textarea").val("").prop('checked', false);
+      });
     });
   });
 }

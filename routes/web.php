@@ -82,6 +82,9 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
         Route::post('all-category/parent', 'AllCategoryController@parentCategoryStore')->name(
             'all-category.parent.store'
         );
+        Route::put('all-category/{id}/parent', 'AllCategoryController@parentCategoryUpdate')->name(
+            'all-category.parent.update'
+        );
         Route::delete('all-category/parent/{id}', 'AllCategoryController@parentCategoryDestroy')->name(
             'all-category.parent.destroy'
         );

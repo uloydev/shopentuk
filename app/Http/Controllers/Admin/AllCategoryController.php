@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductCategoryValidation;
 use App\Models\ProductCategory;
 use App\Models\ProductSubCategory;
 use Illuminate\Http\Request;
@@ -19,7 +20,6 @@ class AllCategoryController extends Controller
             $action = 'update';
         }
         $productCategory->title = $title;
-        $productCategory->description = $request->description;
         $productCategory->is_digital_product = $request->boolean('is_digital_product');
         $productCategory->save();
 
@@ -56,7 +56,7 @@ class AllCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function parentCategoryStore(Request $request)
+    public function parentCategoryStore(ProductCategoryValidation $request)
     {
         $addNew = new ProductCategory;
         return $this->saveCategory($request, $addNew);
@@ -102,7 +102,7 @@ class AllCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function parentCategoryUpdate(Request $request, $id)
     {
         $updateCategory = ProductCategory::findOrFail($id);
         return $this->saveCategory($request, $updateCategory);

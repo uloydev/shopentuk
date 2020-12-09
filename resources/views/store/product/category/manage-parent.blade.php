@@ -16,7 +16,8 @@
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h1 class="h3">Primary Category</h1>
-                <button type="button" data-toggle="modal"
+                <button type="button" data-toggle="modal" 
+                data-routing="{{ route('admin.all-category.parent.store') }}"
                 class="btn btn-sm waves-effect waves-light btn-rounded btn-primary add-primary-category">
                     Add new category
                 </button>
@@ -28,7 +29,8 @@
                         <span class="mr-auto primary-category__title">
                             {{ Str::words($category->title, 1) }}
                         </span>
-                        <a href="javascript:void(0);" 
+                        <a href="javascript:void(0);"
+                        data-routing="{{ route('admin.all-category.parent.update', $category->id) }}"
                         data-is-digital="{{ $category->is_digital_product }}"
                         data-toggle="modal" data-desc="{{ $category->description }}"
                         class="badge badge-warning badge-pill ml-auto edit-primary-category">
@@ -38,7 +40,8 @@
                         title="delete primary category {{ $category->id }}"
                         action="{{ route('admin.all-category.parent.destroy', $category->id) }}">
                             @csrf @method('DELETE')
-                            <button class="badge badge-danger badge-pill" type="submit">
+                            <button class="badge badge-danger badge-pill" 
+                            type="submit" data-toggle="modal">
                                 Delete
                             </button>
                         </form>
