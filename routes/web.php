@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@landingPage')->name('landing-page');
 Route::resource('contact-us', 'FeedbackController')->only('index', 'store', 'destroy');
 
+Route::prefix('voucher')->name('voucher.')->group(function () {
+    Route::get('validate/{voucher}', 'VoucherController@validate')->name('validate');
+});
+
 Route::prefix('store')->name('store.')->group(function () {
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', 'StoreController@product')->name('index');
