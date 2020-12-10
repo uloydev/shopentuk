@@ -7,8 +7,19 @@ use App\Models\Voucher;
 
 class VoucherController extends Controller
 {
-    public function validate(Request $request)
+    public function check(Request $request)
     {
-        return Voucher::where('code', $request->voucher_code)->firstOrFail();
+        try {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'sukses menggunakan voucher',
+                'data' => Voucher::where('code', $request->voucher_code)->firstOrFail()
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'voucher tidak ditemukan!'
+            ]);
+        }
     }
 }

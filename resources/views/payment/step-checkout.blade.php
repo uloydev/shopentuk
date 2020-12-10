@@ -18,6 +18,7 @@
                                 <form action="{{ route('store.checkout') }}" method="POST" 
                                 class="block w-full show-step" id="form-checkout">
                                 @csrf
+                                <input type="hidden" name="voucher">
                                     <div class="mb-5">
                                         <label class="block mt-4">
                                             <span class="text-gray-700">Pilih alamat</span>

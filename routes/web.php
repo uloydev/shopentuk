@@ -7,7 +7,7 @@ Route::get('/', 'HomeController@landingPage')->name('landing-page');
 Route::resource('contact-us', 'FeedbackController')->only('index', 'store', 'destroy');
 
 Route::prefix('voucher')->name('voucher.')->group(function () {
-    Route::post('validate', 'VoucherController@validate')->name('validate');
+    Route::post('validate', 'VoucherController@check')->name('validate');
 });
 
 Route::prefix('store')->name('store.')->group(function () {

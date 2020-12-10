@@ -514,10 +514,15 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
       cartShipping.textContent = 'Rp. ' + cartShipping.dataset.price * Math.ceil(weight / 1000);
     }
 
+    if (voucher) {
+      totalMoney -= voucher.discount_value;
+      totalMoney = totalMoney > 0 ? totalMoney : 0;
+    }
+
     totalPointElement.textContent = totalPoint + ' point';
     totalMoneyElement.textContent = 'Rp. ' + totalMoney;
     weightTotalElement.textContent = weight + ' gram';
-  }; // update cart
+  }; // check voucher
 
 
   var cartPage = document.querySelector('#cartPage'); // modal checkout and it's child
@@ -571,10 +576,13 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
     var btnOpenModalAddress = cartPage.querySelector('#add-new-address-btn');
     var btnCloseModalAddress = cartPage.querySelector('#btn-close-modalAddNewAddress');
     var btnsManageModalAddress = [btnOpenModalAddress, btnCloseModalAddress];
+
+    var _checkoutVoucherInput = cartPage.querySelector('input[name="voucher"]');
     /**
      * when one of btnsManageModalAddress is click, 
      * open modal if it closed. Otherwise close it
      */
+
 
     btnsManageModalAddress.forEach(function (btnOnModalAddNewAddress) {
       btnOnModalAddNewAddress.addEventListener('click', function () {
@@ -629,8 +637,47 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
     });
   }
 
+  var checkVoucherBtn = cartPage.querySelector('#btnCheckVoucher');
+  var voucherInput = cartPage.querySelector('input[name="voucher_code"]');
+  var voucherElement = cartPage.querySelector('#cart__voucher-discount');
+  var voucher = null;
   var cartItems = cartPage.querySelectorAll('.cart-item__qty');
   var cartId = cartPage.querySelector('#cartId').value;
+
+  if (voucherInput) {
+    checkVoucherBtn.addEventListener('click', function () {
+      if (voucherInput.value != "") {
+        fetch('/voucher/validate', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-Token': metaToken
+          },
+          body: JSON.stringify({
+            'voucher_code': voucherInput.value
+          })
+        }).then(function (res) {
+          return res.json();
+        }).then(function (data) {
+          alert(data.message);
+
+          if (data.status == 'success') {
+            voucher = data.data;
+            voucherElement.textContent = 'Rp. ' + voucher.discount_value;
+            checkoutVoucherInput.value = voucher.code;
+          } else {
+            voucher = null;
+            voucherElement.textContent = 'Rp. 0';
+            checkoutVoucherInput.value = '';
+          }
+
+          updateCart(cartItems);
+        });
+      }
+    });
+  } // update cart
+
 
   if (cartItems.length > 0) {
     updateCart(cartItems);
@@ -650,9 +697,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
                 'item_id': item.dataset.itemId
               })
             }).then(function () {
-              if (cartPage.querySelector('.cart-item__qty')) {
-                Object(_helper_utilities__WEBPACK_IMPORTED_MODULE_1__["getParents"])(item, '.cart-item')[0].remove();
-              } else {
+              Object(_helper_utilities__WEBPACK_IMPORTED_MODULE_1__["getParents"])(item, '.cart-item')[0].remove();
+
+              if (!cartPage.querySelector('.cart-item__qty')) {
                 location.reload();
               }
             });

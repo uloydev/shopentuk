@@ -61,6 +61,7 @@ if (pageUrl === '/cart') {
         const btnOpenModalAddress = cartPage.querySelector('#add-new-address-btn')
         const btnCloseModalAddress = cartPage.querySelector('#btn-close-modalAddNewAddress')
         const btnsManageModalAddress = [btnOpenModalAddress, btnCloseModalAddress]
+        const checkoutVoucherInput = cartPage.querySelector('input[name="voucher"]');
         
         /**
          * when one of btnsManageModalAddress is click, 
@@ -152,14 +153,55 @@ if (pageUrl === '/cart') {
             cartShipping.textContent = 'Rp. ' + (cartShipping.dataset.price * Math.ceil(weight / 1000))
         }
 
+        if (voucher) {
+            totalMoney -= voucher.discount_value;
+            totalMoney = totalMoney > 0 ? totalMoney : 0
+        }
+
         totalPointElement.textContent = totalPoint + ' point';
         totalMoneyElement.textContent = 'Rp. ' + totalMoney;
         weightTotalElement.textContent = weight + ' gram';
     }
 
-    // update cart
+    // check voucher
+    const checkVoucherBtn = cartPage.querySelector('#btnCheckVoucher');
+    const voucherInput = cartPage.querySelector('input[name="voucher_code"]');
+    const voucherElement = cartPage.querySelector('#cart__voucher-discount');
+    let voucher = null;
     let cartItems = cartPage.querySelectorAll('.cart-item__qty');
     const cartId = cartPage.querySelector('#cartId').value
+
+    if (voucherInput) {
+        checkVoucherBtn.addEventListener('click', () => {
+            if (voucherInput.value != "") {
+                fetch('/voucher/validate' , {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-Token': metaToken,
+                    },
+                    body: JSON.stringify({'voucher_code': voucherInput.value}),
+                })
+                .then(res => res.json())
+                .then(data => {
+                    alert(data.message);
+                    if (data.status == 'success') {
+                        voucher = data.data;
+                        voucherElement.textContent = 'Rp. ' + voucher.discount_value;
+                        checkoutVoucherInput.value = voucher.code;
+                    } else {
+                        voucher = null;
+                        voucherElement.textContent = 'Rp. 0';
+                        checkoutVoucherInput.value = '';
+                    }
+                    updateCart(cartItems);
+                });
+            }
+        });
+    }
+
+    // update cart
     if (cartItems.length > 0) {
         updateCart(cartItems);
         cartItems.forEach((item, index) => {
@@ -176,9 +218,8 @@ if (pageUrl === '/cart') {
                             body: JSON.stringify({'item_id': item.dataset.itemId}),
                         })
                         .then(() => {
-                            if (cartPage.querySelector('.cart-item__qty')) {
-                                getParents(item, '.cart-item')[0].remove()
-                            } else {
+                            getParents(item, '.cart-item')[0].remove()
+                            if (!cartPage.querySelector('.cart-item__qty')) {
                                 location.reload();
                             }
                         });

@@ -62,11 +62,37 @@
                     </figure>
                 </div>
             @endforeach
+
+            {{-- please fix this voucher input ui --}}
+            @if($cart->cartItems->where('is_toko_point', false)->count() > 0)
+                <div class="grid grid-cols-3">
+                    <div>
+                        <x-input-basic
+                        name="voucher_code" box-width="sm:col-span-full"
+                        label="kode voucher"/>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3">
+                    <div>
+                        <x-btn-primary text="Kode Voucher" id="btnCheckVoucher"
+                        class="btn bg-teal-500 active:bg-teal-800 hover:bg-teal-600 border-teal-700"/>
+                    </div>
+                </div>
+            @else
+                <p>Anda tidak bisa menggunakan voucher karena semua belanjaan anda menggunakan point</p>
+            @endif
+            
             <ul class="mb-3">
                 <li class="py-3 flex justify-between items-center">
                     <span>Berat total : </span>
                     <var class="not-italic font-bold" id="cart__weight-total">
                         {{ $weightTotal }} gram
+                    </var>
+                </li>
+                <li class="py-3 flex justify-between items-center">
+                    <span>voucher diskon : </span>
+                    <var class="not-italic font-bold" id="cart__voucher-discount">
+                        Rp. 0
                     </var>
                 </li>
                 <li class="py-3 flex justify-between items-center">
