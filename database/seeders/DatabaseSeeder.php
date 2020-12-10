@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             CartSeeder::class,
             CartItemSeeder::class,
             FeedbackCustomerSeeder::class,
-            Voucher::class,
+            VoucherSeeder::class,
             // OrderSeeder::class,
             // ProductDiscountSeeder::class,
         ]);
