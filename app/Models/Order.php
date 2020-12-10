@@ -19,6 +19,7 @@ class Order extends Model
         'price_total',
         'point_total',
         'weight_total',
+        'voucher_discount',
         'status',
     ];
 
