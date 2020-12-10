@@ -22,8 +22,8 @@ class VoucherFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->sentence($nmWords=2),
-            'code' => $this->faker->asciify('******'),
+            'name' => 'voucher ' . $this->faker->sentence($nmWords=2),
+            'code' => $this->faker->regexify('[A-Za-z0-9]{6}'),
             'discount_value' => $this->faker->numberBetween(1000, 10000)
         ];
     }
