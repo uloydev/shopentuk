@@ -176,8 +176,9 @@ if (pageUrl === '/cart') {
                             body: JSON.stringify({'item_id': item.dataset.itemId}),
                         })
                         .then(() => {
-                            getParents(item, '.cart-item')[0].remove()
-                            if (!cartPage.querySelector('.cart-item__qty')) {
+                            if (cartPage.querySelector('.cart-item__qty')) {
+                                getParents(item, '.cart-item')[0].remove()
+                            } else {
                                 location.reload();
                             }
                         });
