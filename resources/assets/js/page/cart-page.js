@@ -61,7 +61,6 @@ if (pageUrl === '/cart') {
         const btnOpenModalAddress = cartPage.querySelector('#add-new-address-btn')
         const btnCloseModalAddress = cartPage.querySelector('#btn-close-modalAddNewAddress')
         const btnsManageModalAddress = [btnOpenModalAddress, btnCloseModalAddress]
-        const checkoutVoucherInput = cartPage.querySelector('input[name="voucher"]');
         
         /**
          * when one of btnsManageModalAddress is click, 
@@ -164,6 +163,7 @@ if (pageUrl === '/cart') {
     }
 
     // check voucher
+    const checkoutVoucherInput = cartPage.querySelector('input[name="voucher"]');
     const checkVoucherBtn = cartPage.querySelector('#btnCheckVoucher');
     const voucherInput = cartPage.querySelector('input[name="voucher_code"]');
     const voucherElement = cartPage.querySelector('#cart__voucher-discount');

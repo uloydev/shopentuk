@@ -576,13 +576,10 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
     var btnOpenModalAddress = cartPage.querySelector('#add-new-address-btn');
     var btnCloseModalAddress = cartPage.querySelector('#btn-close-modalAddNewAddress');
     var btnsManageModalAddress = [btnOpenModalAddress, btnCloseModalAddress];
-
-    var _checkoutVoucherInput = cartPage.querySelector('input[name="voucher"]');
     /**
      * when one of btnsManageModalAddress is click, 
      * open modal if it closed. Otherwise close it
      */
-
 
     btnsManageModalAddress.forEach(function (btnOnModalAddNewAddress) {
       btnOnModalAddNewAddress.addEventListener('click', function () {
@@ -637,6 +634,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
     });
   }
 
+  var checkoutVoucherInput = cartPage.querySelector('input[name="voucher"]');
   var checkVoucherBtn = cartPage.querySelector('#btnCheckVoucher');
   var voucherInput = cartPage.querySelector('input[name="voucher_code"]');
   var voucherElement = cartPage.querySelector('#cart__voucher-discount');

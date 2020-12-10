@@ -8,19 +8,22 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\SiteSetting;
+use App\Models\Voucher;
 
 class CheckoutController extends Controller
 {
     public function store(Request $request)
     {
+        $voucher = Null;
         $weightTotal = 0;
         $siteSetting = SiteSetting::first();
         $user = Auth::user();
-        // $user->point  = 100;
-        // $user->save();
-        // return redirect()->back()->with(['error' => 'point kamu gak cukup buat order!']);
         $cart = $user->cart;
         $isAllPoint = $cart->cartItems->where('is_toko_point', false)->count() == 0;
+
+        if ($request->voucher != '') {
+            $voucher = Voucher::where('code', $request->voucher)->first();
+        }
 
         if ($cart->total_point > $user->point) {
             return redirect()->back()->with(['error' => 'point kamu gak cukup buat order!']);
@@ -32,6 +35,13 @@ class CheckoutController extends Controller
         $order->product_price = $cart->total_price;
         $order->product_point = $cart->total_point;
         $order->price_total = $order->product_price + $order->shipping_price;
+        if ($voucher) {
+            $order->price_total = $order->price_total - $voucher->discount_value;
+            $order->voucher_discount = $voucher->discount_value;
+            if ($order->price_total < 0) {
+                $order->price_total = 0;
+            }
+        }
         $order->point_total = $order->product_point + $order->shipping_point;
         $order->save();
 
@@ -60,7 +70,7 @@ class CheckoutController extends Controller
         } else {
             $order->shipping_price = $siteSetting->shipping_price * ceil($weightTotal / 1000) ;
             $order->shipping_point = 0;
-            $order->status = 'unpaid';
+            $order->status = ($voucher && $order->price_total == 0) ? 'paid' : 'unpaid';
         }
         $order->weight_total = $weightTotal;
         $order->save();
