@@ -19,7 +19,7 @@ class CartController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'customer']);
         $this->siteSetting = SiteSetting::first();
     }
 
@@ -36,12 +36,12 @@ class CartController extends Controller
 
         //get all column on UserAddress except user_id, bcz user_id is not on backend
         $addressColumnExceptUserId = array_diff($userAddress->getFillable(), ['user_id']);
-        
+
         // this is just for html attributes needed, doesn't affect to backend
-        $inputIds = array_map(function($label) {
+        $inputIds = array_map(function ($label) {
             return Str::kebab($label);
         }, $addressColumnExceptUserId);
-        $inputText = array_map(function($text) {
+        $inputText = array_map(function ($text) {
             return Str::of($text)->replace('_', ' ')->title();
         }, $addressColumnExceptUserId);
 
@@ -87,7 +87,7 @@ class CartController extends Controller
             $cartItem->quantity += $request->quantity;
             $cartItem->save();
         }
-        return redirect()->back()->with(['success'=>'berhasil menambahkan produk kedalam keranjang']);
+        return redirect()->back()->with(['success' => 'berhasil menambahkan produk kedalam keranjang']);
     }
 
     public function update(Cart $cart, Request $request)
