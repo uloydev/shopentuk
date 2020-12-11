@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PaymentConfirmation;
 use App\Models\PaymentConfirmationImage;
+use App\Rules\AlphaSpace;
+use Illuminate\Validation\Rule;
 
 class PaymentController extends Controller
 {
@@ -23,11 +25,19 @@ class PaymentController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'full_name' => ['required', new AlphaSpace, 'max:100', 'min:3'],
+            'phone' => ['required', 'digits_between:6,13'],
+            'order_id' => ['required', 'integer', 'min:1'],
+            'payment_date' => ['required'],
+            'payment_method' => ['required', Rule::in(['bca', 'ovo'])]
+        ]);
+
         $paymentConfirmation = PaymentConfirmation::create($request->only([
-            'full_name', 
-            'phone', 
-            'order_id', 
-            'payment_date', 
+            'full_name',
+            'phone',
+            'order_id',
+            'payment_date',
             'payment_method'
         ]));
         if ($request->hasFile('files')) {

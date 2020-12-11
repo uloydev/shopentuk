@@ -15,28 +15,23 @@
         <form action="{{ route('payment.store') }}" method="post" enctype="multipart/form-data"
         class="w-full max-w-screen-md shadow-md rounded px-8 py-5 bg-white">
             @csrf
-            <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10">
-                <x-input-basic name="full_name" add-class="input-lowercase" label="Nama lengkap" required />
-                <x-input-basic name="phone" type="text" label="No Telepon / Wa" required />
-                <x-input-basic name="order_id" type="text" box-width="col-span-full"
-                label="Nomor Order" value="{{ $order_id ?? '' }}" required />
-                <x-input-basic name="payment_date" type="date" 
-                box-width="col-span-full" label="Tanggal bayar" required />
-                <div class="flex flex-col mb-5">
-                    <span class="text-gray-900 text-base mr-5 mb-0">Pembayaran via</span>
-                    <div class="mt-2 flex">
-                        <div class="mr-5">
-                            <label class="inline-flex items-center">
-                                <input type="radio" class="form-radio" name="payment_method" value="bca" checked>
-                                <span class="ml-2">BCA</span>
-                            </label>
-                        </div>
-                        <div>
-                            <label class="inline-flex items-center">
-                                <input type="radio" class="form-radio" name="payment_method" value="ovo">
-                                <span class="ml-2">OVO</span>
-                            </label>
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 mb-5">
+                <x-input-basic name="full_name" add-class="input-lowercase" 
+                value="{{ Auth::user()->name }}" placeholder="Tulis nama lengkap akun mu" 
+                label="Nama lengkap" required />
+                <x-input-basic name="phone" type="text" 
+                value="{{ old('phone') ?? Auth::user()->phone }}" label="No Telepon / Wa" 
+                min="999999" max="9999999999999" placeholder="Contoh: 087771xxx" required />
+                <x-input-basic name="order_id" type="number" box-width="col-span-full"
+                label="Nomor Order" value="{{ old('order_id') }}" autocomplete="off" min="1"
+                placeholder="Nomor order harus berupa angka" required />
+                <x-input-basic name="payment_date" type="date" value="{{ old('payment_date') }}"
+                box-width="col-span-full" label="Tanggal bayar" max="{{ date('Y-m-d') }}" required />
+                <div class="mb-5 col-span-full">
+                    <span class="text-gray-900 text-base mr-5 mb-0 block">Pembayaran via</span>
+                    <div class="mt-2 flex space-x-5">
+                        <x-input-checkbox label="BCA" value="bca" id="bca-option" name="payment_method" required />
+                        <x-input-checkbox label="OVO" value="ovo" id="ovo-option" name="payment_method" />
                     </div>
                 </div>
                 <div class="box-upload">
@@ -48,7 +43,7 @@
                         </label>
                     </div>
                 </div>
-                <small class="text-red:500">*tidak wajib untuk upload bukti pembayaran</small>
+                <small class="text-green-500 font-bold">* tidak wajib untuk upload bukti pembayaran</small>
             </div>
             <x-btn-primary text="Kirim" 
             class="flex w-full text-center justify-center md:w-auto bg-blue-500
