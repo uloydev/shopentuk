@@ -15,15 +15,7 @@ class Alert extends Component
      */
     public function __construct($type)
     {
-        switch ($type) {
-            case 'success':
-                $this->type = 'bg-green-600';
-                break;
-            
-            default:
-                $this->type = 'bg-red-600';
-                break;
-        }
+        $this->type = $type;
     }
 
     /**

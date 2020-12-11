@@ -11,7 +11,8 @@
     @apply p-0 m-0 box-border;
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -21,7 +22,8 @@ html, body {
 
 .box-promo {
 
-    &__heading, &__subheading {
+    &__heading,
+    &__subheading {
         @apply max-w-full overflow-hidden;
         text-overflow: ellipsis;
         font-family: 'Amita', cursive;
@@ -29,8 +31,7 @@ html, body {
 }
 
 .btn {
-    @apply font-bold p-2 text-white rounded transition duration-150 transform 
-    flex items-center outline-none border-b-4;
+    @apply font-bold p-2 text-white rounded transition duration-150 transform flex items-center outline-none border-b-4;
 
     &:active {
         @apply translate-y-1 border-b-2;
@@ -71,6 +72,27 @@ html, body {
 
 .card-product {
     max-width: 100%;
+}
+
+.alert {
+    @apply text-white;
+
+    &-success {
+        @apply bg-green-600;
+    }
+
+    &-danger {
+        @apply bg-red-600;
+    }
+
+    &-info {
+        @apply bg-gray-400 text-gray-800;
+    }
+
+    &--fade-out {
+        @apply opacity-0 overflow-hidden transition transition-all duration-300;
+        max-height: 0;
+    }
 }
 
 //mixin
