@@ -98,6 +98,22 @@
 
 /***/ }),
 
+/***/ "./resources/assets/js/component/alert.js":
+/*!************************************************!*\
+  !*** ./resources/assets/js/component/alert.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var alerts = document.querySelectorAll('.alert');
+alerts.forEach(function (alert) {
+  setTimeout(function () {
+    alert.classList.add('alert--fade-out');
+  }, 2500);
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/component/nav.js":
 /*!**********************************************!*\
   !*** ./resources/assets/js/component/nav.js ***!
@@ -347,7 +363,7 @@ inputOnlyNumberAndSpace.forEach(function (input) {
  * Make all input with required att, have a '*' icon in their label
  */
 
-var requiredInput = document.querySelectorAll('[required="required"], textarea[required]');
+var requiredInput = document.querySelectorAll('input:not([type="radio"])[required="required"], textarea[required]');
 Array.from(requiredInput).map(function (input) {
   return input.previousElementSibling.classList.add('required-input');
 });
@@ -396,22 +412,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _helper_utilities_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper-utilities.js */ "./resources/assets/js/helper-utilities.js");
-/* harmony import */ var _component_nav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./component/nav */ "./resources/assets/js/component/nav.js");
-/* harmony import */ var _page_homepage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./page/homepage */ "./resources/assets/js/page/homepage.js");
-/* harmony import */ var _page_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./page/auth */ "./resources/assets/js/page/auth.js");
-/* harmony import */ var _page_cart_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./page/cart-page */ "./resources/assets/js/page/cart-page.js");
-/* harmony import */ var _page_dashboard_customer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./page/dashboard-customer */ "./resources/assets/js/page/dashboard-customer.js");
+/* harmony import */ var _component_alert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./component/alert */ "./resources/assets/js/component/alert.js");
+/* harmony import */ var _component_alert__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_component_alert__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _component_nav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./component/nav */ "./resources/assets/js/component/nav.js");
+/* harmony import */ var _page_homepage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./page/homepage */ "./resources/assets/js/page/homepage.js");
+/* harmony import */ var _page_auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./page/auth */ "./resources/assets/js/page/auth.js");
+/* harmony import */ var _page_cart_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./page/cart-page */ "./resources/assets/js/page/cart-page.js");
+/* harmony import */ var _page_dashboard_customer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./page/dashboard-customer */ "./resources/assets/js/page/dashboard-customer.js");
 
 
 
 
 
 
- //plugin js
 
-if (document.querySelector('[data-tabs]')) {
-  new Tabby('[data-tabs]');
-} //general js
+
 
 /***/ }),
 

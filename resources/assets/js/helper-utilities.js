@@ -56,7 +56,7 @@ inputOnlyNumberAndSpace.forEach(input => {
 /**
  * Make all input with required att, have a '*' icon in their label
  */
-const requiredInput = document.querySelectorAll('[required="required"], textarea[required]');
+const requiredInput = document.querySelectorAll('input:not([type="radio"])[required="required"], textarea[required]');
 Array.from(requiredInput).map(input => {
 	return input.previousElementSibling.classList.add('required-input');
 });
