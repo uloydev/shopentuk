@@ -17,9 +17,11 @@
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10">
                 <x-input-basic name="full_name" add-class="input-lowercase" label="Nama lengkap" required />
-                <x-input-basic name="phone" type="number" label="No Telepon / Wa" required />
-                <x-input-basic name="order_id" type="number" box-width="col-span-full"
+                <x-input-basic name="phone" type="text" label="No Telepon / Wa" required />
+                <x-input-basic name="order_id" type="text" box-width="col-span-full"
                 label="Nomor Order" value="{{ $order_id ?? '' }}" required />
+                <x-input-basic name="payment_date" type="date" 
+                box-width="col-span-full" label="Tanggal bayar" required />
                 <div class="flex flex-col mb-5">
                     <span class="text-gray-900 text-base mr-5 mb-0">Pembayaran via</span>
                     <div class="mt-2 flex">
@@ -40,14 +42,13 @@
                 <div class="box-upload">
                     <div class="box-upload__input">
                         <input class="box-upload__file" type="file" name="files[]" id="file"
-                            data-multiple-caption="{count} files selected" multiple />
+                        data-multiple-caption="{count} files selected" multiple />
                         <label for="file" class="box-upload__text">
-                            <strong>Click to choose a file</strong>
+                            <strong>klik untuk pilih bukti pembayaran</strong>
                         </label>
                     </div>
                 </div>
-                <x-input-basic name="payment_date" type="date" 
-                box-width="col-span-full" label="Tanggal bayar" required />
+                <small class="text-red:500">*tidak wajib untuk upload bukti pembayaran</small>
             </div>
             <x-btn-primary text="Kirim" 
             class="flex w-full text-center justify-center md:w-auto bg-blue-500
