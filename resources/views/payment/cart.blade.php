@@ -17,7 +17,7 @@
             <h1>Order</h1>
             <p>Price</p>
         </div>
-        <div class="grid grid-cols-1 divide-y divide-gray-300">
+        <div class="grid grid-cols-1">
             @foreach ($cart->cartItems as $item)
                 <div class="py-10 cart-item">
                     <figure class="flex flex-wrap items-center">
@@ -65,18 +65,11 @@
 
             {{-- please fix this voucher input ui --}}
             @if($cart->cartItems->where('is_toko_point', false)->count() > 0)
-                <div class="grid grid-cols-3">
-                    <div>
-                        <x-input-basic
-                        name="voucher_code" box-width="sm:col-span-full"
-                        label="kode voucher"/>
-                    </div>
-                </div>
-                <div class="grid grid-cols-3">
-                    <div>
-                        <x-btn-primary text="Kode Voucher" id="btnCheckVoucher"
-                        class="btn bg-teal-500 active:bg-teal-800 hover:bg-teal-600 border-teal-700"/>
-                    </div>
+                <div class="flex items-center justify-end space-x-0">
+                    <x-input-basic name="voucher_code" add-class="transform scale-90" 
+                    placeholder="Ketik kode voucher"/>
+                    <x-btn-primary text="Cek Kode" id="btnCheckVoucher"
+                    class="transform scale-90 btn bg-teal-500 active:bg-teal-800 hover:bg-teal-600 border-teal-700 mb-5"/>
                 </div>
             @else
                 <p>Anda tidak bisa menggunakan voucher karena semua belanjaan anda menggunakan point</p>
