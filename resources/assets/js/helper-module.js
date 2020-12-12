@@ -58,7 +58,7 @@ export function openCloseModal (modalSelector) {
     const classToCloseModal = ['invisible', 'h-0', 'opacity-0']
 
     // if modal open, set isModalOpen = true. else, isModalOpen = false
-    const isModalOpen = modalEl.classList.contains(...classToCloseModal) ? true : false
+    let isModalOpen = modalEl.classList.contains(...classToCloseModal) ? true : false
     
     if (isModalOpen === true) {
         // close modal
