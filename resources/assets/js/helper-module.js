@@ -67,6 +67,12 @@ export function openCloseModal (modalSelector) {
     else {
         // open modal
         modalEl.classList.add(...classToCloseModal)
+
+        if (modalEl.querySelectorAll('input, textarea')) {
+            modalEl.querySelectorAll('input, textarea').forEach(inputOrTextarea => {
+                inputOrTextarea.value = ''
+            })
+        }
     }
 }
 

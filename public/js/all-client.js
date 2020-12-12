@@ -11208,6 +11208,12 @@ function openCloseModal(modalSelector) {
 
     // open modal
     (_modalEl$classList3 = modalEl.classList).add.apply(_modalEl$classList3, classToCloseModal);
+
+    if (modalEl.querySelectorAll('input, textarea')) {
+      modalEl.querySelectorAll('input, textarea').forEach(function (inputOrTextarea) {
+        inputOrTextarea.value = '';
+      });
+    }
   }
 }
 var pageUrl = window.location.pathname;
