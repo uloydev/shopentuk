@@ -29,7 +29,7 @@ class UserAddressValidation extends FormRequest
             'name' => ['required', 'min:5', 'max:100'],
             'email' => ['required', 'email'],
             'phone' => ['required', 'digits_between:7,13', 'starts_with:0'],
-            'street_address' => ['required', ''],
+            'street_address' => ['required'],
             'kelurahan' => ['required', 'min:5', 'max:50'],
             'kecamatan' => ['required', 'min:5', 'max:50'],
             'city' => ['required', new AlphaSpace],
