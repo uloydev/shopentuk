@@ -1451,9 +1451,7 @@ body {
   background-color: rgba(255, 255, 255, var(--bg-opacity));
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   border-radius: 0.25rem;
-  position: -webkit-sticky;
-  position: sticky;
-  width: 25%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -1461,7 +1459,15 @@ body {
   --border-opacity: 1;
   border-color: #cbd5e0;
   border-color: rgba(203, 213, 224, var(--border-opacity));
-  top: 20px;
+}
+
+@media (min-width: 1024px) {
+  .dashboard-customer__menu-box {
+    top: 20px;
+    width: 25%;
+    position: -webkit-sticky;
+    position: sticky;
+  }
 }
 
 .dashboard-customer__menu-item {

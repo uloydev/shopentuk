@@ -32,8 +32,8 @@ class CartController extends Controller
         $user = Auth::user();
         $cart = $user->cart;
         $addresses = $user->userAddresses->sortByDesc('is_main_address');
-        $userAddress = new UserAddress();
 
+        $userAddress = new UserAddress();
         //get all column on UserAddress except user_id, bcz user_id is not on backend
         $addressColumnExceptUserId = array_diff($userAddress->getFillable(), ['user_id']);
 
