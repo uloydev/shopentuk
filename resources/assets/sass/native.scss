@@ -4,7 +4,7 @@
 .header {
     z-index: 1;
     position: relative;
-    
+
     #landingPage & {
         background: {
             image: url('../img/header-landing.jpg');
@@ -13,6 +13,7 @@
             attachment: fixed;
             size: cover;
         }
+
         @apply flex flex-col;
         height: 90vh;
     }
@@ -34,19 +35,22 @@
             @apply w-full relative;
             background-image: url('../img/special-edition.jpg');
         }
+
         &__overlay {
             @apply absolute top-0 left-0 h-full w-full;
             opacity: 0.43;
-            background-image: linear-gradient(100deg, #000000 0%, rgba(17,107,191,0.39) 100%);
+            background-image: linear-gradient(100deg, #000000 0%, rgba(17, 107, 191, 0.39) 100%);
         }
     }
 }
+
 /*end of landing-page style*/
 
 /*auth style*/
 #authPage {
     header {
         @apply flex flex-col flex-grow;
+
         background: {
             image: url('../img/static/auth-bg.jpg');
             attachment: fixed;
@@ -66,18 +70,19 @@
 }
 
 /*cartPage style*/
- #cartPage {
+#cartPage {
 
     .hide-step {
         // transition: transform 50ms;
         opacity: 0;
 
-        + .show-step {
+        +.show-step {
             opacity: 1;
             transform: translateX(-100%);
         }
     }
- }
+}
+
 /*end of cartPage style*/
 
 /**/
@@ -91,12 +96,18 @@
 /*dashboard customer*/
 .dashboard-customer {
     &__menu-box {
-        @apply bg-white shadow-md rounded sticky w-1/4 flex flex-wrap flex-col border border-gray-400;
-        top: 20px;
+        @apply bg-white shadow-md rounded w-full flex flex-wrap flex-col border border-gray-400;
+
+        @screen lg {
+            top: 20px;
+            @apply w-1/4 sticky;
+        }
     }
+
     &__menu-item {
         @apply flex-grow capitalize;
     }
+
     &__menu-link {
         @apply text-center block p-4 text-gray-600;
     }
@@ -116,6 +127,7 @@
             @apply opacity-0 overflow-hidden absolute;
             z-index: -1;
         }
+
         &__text {
             @apply absolute flex items-center justify-center h-full w-full;
         }

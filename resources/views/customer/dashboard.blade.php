@@ -4,12 +4,16 @@
     <div class="container py-10">
         @if(session('success'))
             <x-alert type="success">
-                {{ session('success') }}
+                <p>
+                    {{ session('success') }}
+                </p>
             </x-alert>
         @endif
         @if(session('error'))
             <x-alert type="error">
-                {{ session('error') }}
+                <p>
+                    {{ session('error') }}
+                </p>
             </x-alert>
         @endif
         <div class="mb-5">
@@ -41,7 +45,7 @@
                     </li>
                 @endfor
             </ul>
-            <div class="break-words mb-6 lg:mb-0 ml-10 w-full">
+            <div class="break-words mb-6 lg:ml-10 w-full">
                 <div class="tab-content tab-space">
                     @yield('content')
                 </div>

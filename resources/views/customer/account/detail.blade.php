@@ -10,14 +10,24 @@
             @csrf
             <input type="hidden" name="id">
         </form>
-
-        <div class="bg-white shadow-md p-5 my-10">
-            <button type="button" class="btn bg-green-600 btn-sm m-2 btn-modal-address capitalize">
+        @if ($errors->any())
+            <x-alert type="danger">
+                <ul class="list-decimal">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </x-alert>
+        @endif
+        <div class="bg-white shadow-md p-5 my-10 lg:my-0">
+            <button type="button" 
+            class="btn bg-green-600 btn-sm m-2 w-full justify-center lg:w-auto lg:justify-start btn-open-close-modal-address capitalize" id="btn-add-address" 
+            data-url="{{ route('my-account.address.store') }}">
                 tambah alamat
             </button>
             @forelse ($userAddresses as $address)
-            <div class="flex user-address my-2 bg-gray-100 p-2 rounded-md address" 
-                data-userAddressId="{{$address->id}}">
+            <div class="flex user-address items-center my-2 bg-gray-100 p-2 rounded-md address" 
+            data-userAddressId="{{$address->id}}">
                 <p class="w-full">
                     <span class="address__title"></span>
                     {{ $address->title }}
@@ -39,7 +49,7 @@
             @endforelse
         </div>
 
-        <form action="{{-- route('my-account.update') --}}" method="post">
+        <form action="{{-- route('my-account.update') --}}" method="post" class="mt-5">
             @csrf
             @for ($i = 0; $i < count($labelInput); $i++)
                 <x-input-basic label="{{ ucwords($labelInput[$i]) }}" 
@@ -50,13 +60,11 @@
             <p class="text-center">
                 untuk mengubah data akun silahkan gunakan form <a class="text-blue-500" href="{{route('contact-us.index')}}">contact us</a> atau hubungi admin
             </p>
-            {{-- <x-btn-primary text="Save changes" class="w-full md:w-auto text-white rounded 
-            bg-teal-500 hover:bg-teal-600 focus:bg-teal-700
-            border-b-4 border-red-900 border-opacity-25 transform focus:translate-y-1" /> --}}
         </form>
     </div>
     @include('customer.account.edit-address')
-    @include('customer.account.add-address')
+    @include('partial.modal-add-address', ['formUrl' => route('my-account.address.store-redirect')])
+
 @endsection
 @push('script')
     <script>
@@ -67,7 +75,7 @@
             // if modal open, set isModalOpen = true. else, isModalOpen = false
             const isModalOpen = modalEl.classList.contains(...classToCloseModal) ? true : false
             
-            if (isModalOpen === true) {
+            if (isModalOpen) {
                 // close modal
                 modalEl.classList.remove(...classToCloseModal)
             }
@@ -76,7 +84,7 @@
                 modalEl.classList.add(...classToCloseModal)
             }
         }
-        const userAddresses = JSON.parse('{!!  $userAddresses->toJson() !!}');
+        const userAddresses = JSON.parse('{!! $userAddresses->toJson() !!}');
         const editAddressBtn = document.querySelectorAll('.btn-edit-address');
         // const newAddressBtn = document.querySelector('#newAddressBtn');
         const deleteAddressBtn = document.querySelectorAll('.btn-delete-address');
@@ -112,7 +120,10 @@
 
         deleteAddressBtn.forEach(btn => {
             btn.addEventListener('click', () => {
-                deleteAddressForm.querySelector('input[name="id"]').value = btn.parentElement.dataset.useraddressid
+                deleteAddressForm
+                .querySelector('input[name="id"]')
+                .value = btn.parentElement.dataset.useraddressid
+                
                 deleteAddressForm.submit()
             })
         })
