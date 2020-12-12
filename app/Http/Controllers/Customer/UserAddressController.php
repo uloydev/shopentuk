@@ -2,38 +2,41 @@
 
 namespace App\Http\Controllers\Customer;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\UserAddress;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\UserAddressValidation;
+use Illuminate\Support\Facades\Auth;
 
 class UserAddressController extends Controller
 {
-    public function store(Request $request) 
+    public function store(UserAddressValidation $request)
     {
         $userId = Auth::id();
         if ($request->is_main_address) {
-            UserAddress::where('is_main_address', true)->where('user_id', $userId)->update(['is_main_address'=> false]);
+            UserAddress::where('is_main_address', true)->where('user_id', $userId)
+                ->update(['is_main_address' => false]);
         }
         UserAddress::create(array_merge($request->all(), ['user_id' => $userId]));
-        return response()->json($user->userAddresses->sortByDesc('is_main_address'));
+        return response()->json(User::find($userId)->userAddresses->sortByDesc('is_main_address'));
     }
 
     public function storeRedirect(Request $request)
     {
         $userId = Auth::id();
         if ($request->is_main_address) {
-            UserAddress::where('is_main_address', true)->where('user_id', $userId)->update(['is_main_address'=> false]);
+            UserAddress::where('is_main_address', true)->where('user_id', $userId)->update(['is_main_address' => false]);
         }
         UserAddress::create(array_merge($request->all(), ['user_id' => $userId]));
         return redirect()->back()->with(['success' => 'alamat berhasil ditambahkan!']);
     }
 
-    public function update(Request $request) 
+    public function update(UserAddressValidation $request)
     {
         $userId = Auth::id();
         if ($request->is_main_address) {
-            UserAddress::where('is_main_address', true)->where('user_id', $userId)->update(['is_main_address'=> false]);
+            UserAddress::where('is_main_address', true)->where('user_id', $userId)->update(['is_main_address' => false]);
         }
         $address = UserAddress::findOrFail($request->id);
         $address->update($request->all());
