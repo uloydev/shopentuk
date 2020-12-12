@@ -1,3 +1,5 @@
+import { error } from 'jquery'
+import * as Modal from '../component/modal'
 import { pageUrl, openCloseModal } from './../helper-module'
 import { getParents } from './../helper-utilities'
 
@@ -8,28 +10,17 @@ if (pageUrl === '/cart') {
 
     // modal checkout and it's child
     if (cartPage.querySelector('#modalCheckout')) {
-        const modalCheckout = cartPage.querySelector('#modalCheckout')
+        const modalCheckout = document.querySelector('#modalCheckout')
         const firstStep = modalCheckout.querySelector('.step-form > form')
         const secondStep = modalCheckout.querySelector('.step-form > div')
         const nextStepBtn = modalCheckout.querySelector('#btnNextStep')
         const checkoutBtn = modalCheckout.querySelector('#btnCheckout')
 
         // open modal checkout
-        const btnShowCheckoutStep = cartPage.querySelector('#btnShowCheckoutStep')
+        const btnShowCheckoutStep = document.querySelector('#btnShowCheckoutStep')
         btnShowCheckoutStep.addEventListener('click', () => {
-            openCloseModal('#' + modalCheckout.getAttribute('id'))
+            openCloseModal('#modalCheckout')
         })
-    
-        /*
-         * change '.next-step' text
-        */
-        function setNextStepBtnText(textBtn) {
-            nextStepBtn.textContent = textBtn
-            if (textBtn == "Next"){
-
-            }
-
-        }
     
         /*
          * open step on checkout modal
@@ -52,27 +43,24 @@ if (pageUrl === '/cart') {
             openCloseModal('#' + modalCheckout.getAttribute('id'))
             openStep(firstStep)
             closeStep(secondStep)
-            // setNextStepBtnText('Next')
-
-
         });
     
-        // each btn to manage modal address
-        const btnOpenModalAddress = cartPage.querySelector('#add-new-address-btn')
-        const btnCloseModalAddress = cartPage.querySelector('#btn-close-modalAddNewAddress')
+         /*
+          * open #modalAddAddress if it closed. Otherwise close it
+          */
+        const btnOpenModalAddress = document.querySelector('.btn-open-close-modal-address')
+        const btnCloseModalAddress = document.querySelector('#btn-close-modalAddAddress')
         const btnsManageModalAddress = [btnOpenModalAddress, btnCloseModalAddress]
         
-        /**
-         * when one of btnsManageModalAddress is click, 
-         * open modal if it closed. Otherwise close it
-         */
         btnsManageModalAddress.forEach(btnOnModalAddNewAddress => {
             btnOnModalAddNewAddress.addEventListener('click', () => {
-                openCloseModal('#modalAddNewAddress')
+                openCloseModal('#modalAddAddress')
             })
         })
+
+        // Modal.openCloseModalAddress()
     
-        /**
+        /*
          * when user go to next step on checkout
          */
         nextStepBtn.addEventListener('click', () => {
@@ -97,34 +85,35 @@ if (pageUrl === '/cart') {
         newAddressForm.addEventListener('submit', (e) => {
     
             e.preventDefault()
-            newAddressBtn.disabled = true;
     
             let data = new FormData(newAddressForm);
+
             fetch(newAddressForm.getAttribute('action'), {
                     method: 'POST',
                     headers: {
                         'Content-type': 'application/json',
+                        'Accept': 'application/json',
                         'X-CSRF-Token': metaToken,
                     },
                     body: JSON.stringify(Object.fromEntries(data)),
-                })
-                .then(res => res.json())
-                .then(json => {
-
-                    addresses.innerHTML = ''
-                    for (const [key, value] of Object.entries(json)) {
-                        addresses.innerHTML += `
+            })
+            .then(res => res.json())
+            .then(json => {
+                addresses.innerHTML = ''
+                for (const [key, value] of Object.entries(json)) {
+                    addresses.innerHTML += `
                         <option value="${value.id}">
                             ${value.title}
                         </option>
-                        `
-                    }
-                    
-                    
-                    openCloseModal('#modalAddNewAddress')
-    
-                });
-            newAddressBtn.disabled = false;
+                    `
+                }
+            })
+            .catch(error => {
+                console.error(error)
+            })
+
+            openCloseModal('#modalAddAddress')
+            
         });
     }
 

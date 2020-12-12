@@ -1,3 +1,4 @@
+import { openCloseModalAddress } from '../component/modal.js';
 import * as HelperModule from './../helper-module.js'
 
 if (HelperModule.pageUrl.indexOf('/my-account') > -1) {
@@ -24,15 +25,7 @@ if (HelperModule.pageUrl.indexOf('/my-account') > -1) {
     }
 
     if (HelperModule.pageUrl === '/my-account/detail') {
-    
-        const btnAddNewAddress = document.querySelectorAll('.btn-modal-address')
-        
-        btnAddNewAddress.forEach(btn => {
-            btn.addEventListener('click', () => {
-                HelperModule.openCloseModal('#modalAddress')
-            })
-        })
-    
+        openCloseModalAddress()
     }
     
 }
