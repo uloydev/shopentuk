@@ -12,10 +12,11 @@
             shadow-xl transform transition-all sm:my-8 sm:align-middle max-w-3xl">
             <div class="bg-white pt-5 pb-4 p-4 md:p-6 sm:pb-4">
                 <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                    Tambah alamat baru
+                    Ubah detail alamat
                 </h3>
                 <div class="mt-5 flex">
-                    <form action="{{route('my-account.address.update')}}" method="post" id="editAddressForm"
+                    <form action="{{ route('my-account.address.update') }}" 
+                    method="post" id="editAddressForm"
                         class="grid lg:grid-cols-2 gap-x-5 w-full">
                         @csrf
                         <input type="number" name="id" id="addressId" hidden>

@@ -11,8 +11,8 @@
         {{ session('error') }}
     </x-alert>
     @endif
-    <input type="hidden" id="cartId" value="{{ $cart->id }}">
     @if (isset($cart) && $cart->cartItems->count() > 0)
+        <input type="hidden" id="cartId" value="{{ $cart->id }}">
         <div class="border-b border-gray-400 flex justify-between pb-5 font-bold">
             <h1>Order</h1>
             <p>Price</p>
@@ -143,7 +143,9 @@
         </div>
 
         @include('payment.step-checkout')
-        @include('payment.add-address', ['columns' => $addressColumn])
+        @include('partial.modal-add-address',[
+            'formUrl' => route('my-account.address.store')
+        ])
 
     @else
         @include('payment.no-item')

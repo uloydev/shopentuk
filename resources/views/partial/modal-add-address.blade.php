@@ -13,8 +13,13 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                     Tambah alamat baru
                 </h3>
                 <div class="mt-5 flex">
-                    <form action="{{ route("my-account.address.store") }}" method="POST" 
+                    <form action="{{ $formUrl }}" method="POST" 
                     id="newAddressForm" class="grid lg:grid-cols-2 gap-x-5 w-full">
+                    @csrf
+                        {{-- 
+                            $columns is from AppServiceProvider, it return all
+                            UserAddress column except id 
+                        --}}
                         @foreach ($columns as $key => $column)
                             @switch($column)
                                 @case('street_address')
@@ -28,8 +33,13 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                                     class="form-textarea mt-1 block w-full" rows="3" 
                                     placeholder="Masukan nama jalanmu" 
                                     name="street_address" required>
-                                        {{ config('app.env') == 'local' ? trim(Str::random(15)) : '' }}
+                                        {{ config('app.env') == 'local' ? trim(Str::random(15)) : old('street_address') }}
                                     </textarea>
+                                    @error('street_address')
+                                        <p class="text-red-500 text-xs">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
                                 </div>
                                 @break
                                 
@@ -48,7 +58,7 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                                                 checked name="is_main_address" 
                                                 value="1" checked>
                                                 <span class="ml-2">
-                                                ya
+                                                    ya
                                                 </span>
                                             </label>
                                         </div>
@@ -64,20 +74,27 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                                             </label>
                                         </div>
                                     </div>
+                                    @error('is_main_address')
+                                        <p class="text-red-500 text-xs">
+                                            {{ $message }}
+                                        </p>
+                                    @enderror
                                 </div>
                                 @break
 
                                 @case('postal_code')
                                 <x-input-basic
                                     name="{{ $column }}" box-width="lg:col-span-full"
-                                    label="{{ $inputText[$key] }}" value="{{ Str::random(15) }}"
+                                    label="{{ $inputText[$key] }}" 
+                                    value="{{ old($column) }}"
                                     required />
                                 @break
                                 
                                 @default
                                     <x-input-basic
                                     name="{{ $column }}" 
-                                    label="{{ $inputText[$key] }}"  value="{{ Str::random(15) }}"
+                                    label="{{ $inputText[$key] }}" 
+                                    value="{{ old($column) }}"
                                     required />
                             @endswitch
                         @endforeach
@@ -95,7 +112,7 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                 <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium
                 text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2
                 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto
-                sm:text-sm" id="btn-close-modalAddAddress">
+                sm:text-sm btn-open-close-modal-address" id="btn-close-modalAddAddress">
                     Cancel
                 </button>
             </div>
