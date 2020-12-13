@@ -1,5 +1,3 @@
-import { error } from 'jquery'
-import * as Modal from '../component/modal'
 import { pageUrl, openCloseModal } from './../helper-module'
 import { getParents } from './../helper-utilities'
 

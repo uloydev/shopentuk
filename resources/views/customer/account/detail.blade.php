@@ -25,6 +25,9 @@
             data-url="{{ route('my-account.address.store') }}">
                 tambah alamat
             </button>
+
+            <div id="userAddresses" hidden>{!! $userAddresses->toJson() !!}</div>
+
             @forelse ($userAddresses as $address)
             <div class="flex user-address items-center my-2 bg-gray-100 p-2 rounded-md address" 
             data-userAddressId="{{$address->id}}">
@@ -62,75 +65,7 @@
             </p>
         </form>
     </div>
-    @include('customer.account.edit-address')
-    @include('partial.modal-add-address', ['formUrl' => route('my-account.address.store-redirect')])
+    @include('partial.modal-edit-address')
+    @include('partial.modal-add-address')
 
 @endsection
-@push('script')
-    <script>
-        function openCloseModal (modalSelector) {
-            const modalEl = document.querySelector(modalSelector)
-            const classToCloseModal = ['invisible', 'h-0', 'opacity-0']
-
-            // if modal open, set isModalOpen = true. else, isModalOpen = false
-            const isModalOpen = modalEl.classList.contains(...classToCloseModal) ? true : false
-            
-            if (isModalOpen) {
-                // close modal
-                modalEl.classList.remove(...classToCloseModal)
-            }
-            else {
-                // open modal
-                modalEl.classList.add(...classToCloseModal)
-            }
-        }
-        const userAddresses = JSON.parse('{!! $userAddresses->toJson() !!}');
-        const editAddressBtn = document.querySelectorAll('.btn-edit-address');
-        // const newAddressBtn = document.querySelector('#newAddressBtn');
-        const deleteAddressBtn = document.querySelectorAll('.btn-delete-address');
-        const editAddressForm = document.querySelector('#editAddressForm');
-        const deleteAddressForm = document.querySelector('#deleteAddressForm');
-        const closeEditModalBtn = document.querySelector('#btn-close-modalEditAddress')
-
-        editAddressBtn.forEach((btn) => {
-            btn.addEventListener('click', () => {
-                let address = userAddresses.find((data) => {
-                    return btn.parentElement.dataset.useraddressid == data.id
-                })
-                
-                editAddressForm.querySelector('input#addressId').value = address.id
-                editAddressForm.querySelector('input#title').value = address.title
-                editAddressForm.querySelector('input#name').value = address.name
-                editAddressForm.querySelector('input#email').value = address.email
-                editAddressForm.querySelector('input#phone').value = address.phone
-                editAddressForm.querySelector('input#kelurahan').value = address.kelurahan
-                editAddressForm.querySelector('input#kecamatan').value = address.kecamatan
-                editAddressForm.querySelector('input#city').value = address.city
-                editAddressForm.querySelector('input#province').value = address.province
-                editAddressForm.querySelector('input#postal_code').value = address.postal_code
-                editAddressForm.querySelector('input#main1').checked = address.is_main_address
-                editAddressForm.querySelector('input#main0').checked = !address.is_main_address
-                editAddressForm.querySelector('textarea#street_address').value = address.street_address
-                let formData = new FormData(editAddressForm)
-                console.log(Object.fromEntries(formData))
-                // please fix open modal
-                openCloseModal('#modalEditAddress')
-            })
-        })
-
-        deleteAddressBtn.forEach(btn => {
-            btn.addEventListener('click', () => {
-                deleteAddressForm
-                .querySelector('input[name="id"]')
-                .value = btn.parentElement.dataset.useraddressid
-                
-                deleteAddressForm.submit()
-            })
-        })
-
-        closeEditModalBtn.addEventListener('click', () => {
-            openCloseModal('#modalEditAddress')
-        })
-
-    </script>
-@endpush
