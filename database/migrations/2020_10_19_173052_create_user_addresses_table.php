@@ -23,7 +23,7 @@ class CreateUserAddressesTable extends Migration
             $table->string('kelurahan');
             $table->string('kecamatan');
             $table->string('city');
-            $table->string('province');
+            $table->string('province_id');
             $table->string('postal_code');
             $table->boolean('is_main_address');
             $table->foreignId('user_id');

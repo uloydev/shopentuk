@@ -77,54 +77,36 @@
             
             <ul class="mb-3">
                 <li class="py-3 flex justify-between items-center">
-                    <span>Berat total : </span>
+                    <span>Berat total</span>
                     <var class="not-italic font-bold" id="cart__weight-total">
-                        {{ $weightTotal }} gram
                     </var>
                 </li>
                 <li class="py-3 flex justify-between items-center">
-                    <span>voucher diskon : </span>
+                    <span>voucher diskon </span>
                     <var class="not-italic font-bold" id="cart__voucher-discount">
                         Rp. 0
                     </var>
                 </li>
                 <li class="py-3 flex justify-between items-center">
-                    <span>Shipping: </span>
-                    @if ($cart->cartItems->where('is_toko_point', false)->count() == 0)
-                        <var class="font-bold" id="cart__shipping"
-                        data-price="{{ $siteSetting->shipping_price / $siteSetting->point_value}}" data-is-point="true">
-                        {{ $siteSetting->shipping_price / $siteSetting->point_value * ceil($weightTotal / 1000) }} point
-                        </var>
-                    @else
-                        <var class="font-bold rupiah-currency" id="cart__shipping"
-                        data-price="{{ $siteSetting->shipping_price }}" data-is-point="false">
-                        {{ $siteSetting->shipping_price * ceil($weightTotal / 1000)}}
-                        </var>
-                    @endif
+                    <span>Shipping 
+                        <span class="text-sm font-medium bg-blue-100 py-1 px-2 rounded text-blue-500" id="isJavaAddress">
+                        </span>
+                    </span>
+                    <var class="font-bold" id="cart__shipping"
+                    data-price="{{ $siteSetting->shipping_price }}" 
+                    data-non-java-price="{{ $siteSetting->non_java_shipping_price }}"
+                    data-point-value="{{ $siteSetting->point_value }}">
+                    </var>
                 </li>
                 <li class="py-3 flex justify-between items-center">
-                    <span>Point total: </span>
-                    @if ($cart->cartItems->where('is_toko_point', false)->count() == 0)
-                        <var class="not-italic font-bold" id="cart__total-point">
-                            {{ $pointTotal + ($siteSetting->shipping_price / $siteSetting->point_value) }} point
-                        </var>
-                    @else
-                        <var class="not-italic font-bold" id="cart__total-point">
-                            {{ $pointTotal }} point
-                        </var>
-                    @endif
+                    <span>Point total</span>
+                    <var class="not-italic font-bold" id="cart__total-point">
+                    </var>
                 </li>
                 <li class="py-3 flex justify-between items-center">
-                    <span>Price Total: </span>
-                    @if ($cart->cartItems->where('is_toko_point', false)->count() == 0)
-                        <var class="font-bold rupiah-currency" id="cart__total-money">
-                            {{ $priceTotal}}
-                        </var>
-                    @else
-                        <var class="font-bold rupiah-currency" id="cart__total-money">
-                            {{ $priceTotal + $siteSetting->shipping_price }}
-                        </var>
-                    @endif
+                    <span>Price Total</span>
+                    <var class="font-bold rupiah-currency" id="cart__total-money">
+                    </var>
                 </li>
             </ul>
         </div>

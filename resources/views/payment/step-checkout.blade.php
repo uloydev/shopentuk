@@ -25,11 +25,11 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                                 </label>
                                 <select class="form-select mt-1 block w-full mb-1" name="address_id" required>
                                     @forelse ($addresses as $address)
-                                        <option value="{{ $address->id }}">
+                                        <option value="{{ $address->id }}" data-is-java="{{ $address->is_java }}">
                                             {{ $address->title }}
                                         </option>
                                     @empty
-                                        <option selected disabled value="">
+                                        <option selected disabled value="" data-is-java="0">
                                             Kamu belum pernah memasukan data alamatmu
                                         </option>
                                     @endforelse

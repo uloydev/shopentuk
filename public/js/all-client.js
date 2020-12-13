@@ -11438,9 +11438,20 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_2__["pageUrl"] === '/cart') {
     var totalMoneyElement = cartPage.querySelector('#cart__total-money');
     var weightTotalElement = cartPage.querySelector('#cart__weight-total');
     var cartShipping = cartPage.querySelector('#cart__shipping');
+    var isShippingPoint = cartPage.querySelectorAll('.cart-item__price[data-is-point="false"]').length == 0;
+    var selectAddress = cartPage.querySelector('select[name="address_id"]');
+    var addressLabel = cartPage.querySelector('#isJavaAddress');
+    var isJavaAddress = false;
+
+    if (selectAddress.value !== "") {
+      var selectedAddress = selectAddress.querySelector("option[value=\"".concat(selectAddress.value, "\"]"));
+      isJavaAddress = selectedAddress.dataset.isJava == 1 ? true : false;
+    }
+
     var totalPoint = 0;
     var totalMoney = 0;
     var weight = 0;
+    var shippingTotal = 0;
     cartItems.forEach(function (item) {
       var itemPrice = item.previousElementSibling;
       weight += itemPrice.dataset.weight * item.value;
@@ -11452,10 +11463,18 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_2__["pageUrl"] === '/cart') {
       }
     });
 
-    if (cartShipping.dataset.isPoint === 'true') {
-      cartShipping.textContent = cartShipping.dataset.price * Math.ceil(weight / 1000) + ' point';
+    if (isJavaAddress) {
+      shippingTotal = cartShipping.dataset.price * Math.ceil(weight / 1000);
+      addressLabel.textContent = "jawa";
     } else {
-      cartShipping.textContent = 'Rp. ' + cartShipping.dataset.price * Math.ceil(weight / 1000);
+      shippingTotal = cartShipping.dataset.nonJavaPrice * Math.ceil(weight / 1000);
+      addressLabel.textContent = "luar jawa";
+    }
+
+    if (isShippingPoint) {
+      cartShipping.textContent = Math.ceil(shippingTotal / cartShipping.dataset.pointValue) + ' point';
+    } else {
+      cartShipping.textContent = 'Rp. ' + shippingTotal;
     }
 
     if (voucher) {
@@ -11507,8 +11526,8 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_2__["pageUrl"] === '/cart') {
       closeStep(secondStep);
     });
     /*
-     * open #modalAddAddress if it closed. Otherwise close it
-     */
+      * open #modalAddAddress if it closed. Otherwise close it
+      */
 
     var btnOpenModalAddress = document.querySelector('.btn-open-close-modal-address');
     var btnCloseModalAddress = document.querySelector('#btn-close-modalAddAddress');

@@ -9,6 +9,8 @@ class UserAddress extends Model
 {
     use HasFactory;
 
+    protected $appends = ['province', 'is_java'];
+
     protected $fillable = [
         'title',
         'name',
@@ -18,7 +20,7 @@ class UserAddress extends Model
         'kelurahan',
         'kecamatan',
         'city',
-        'province',
+        'province_id',
         'postal_code',
         'is_main_address',
         'user_id',
@@ -27,5 +29,20 @@ class UserAddress extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function provinceData()
+    {
+        return $this->belongsTo('App\Models\Province', 'province_id');
+    }
+
+    public function getProvinceAttribute()
+    {
+        return $this->provinceData->name;
+    }
+
+    public function getIsJavaAttribute()
+    {
+        return $this->provinceData->is_java;
     }
 }
