@@ -43,7 +43,7 @@ if (pageUrl === '/cart') {
             closeStep(secondStep)
         });
     
-         /*
+        /*
           * open #modalAddAddress if it closed. Otherwise close it
           */
         const btnOpenModalAddress = document.querySelector('.btn-open-close-modal-address')
@@ -120,10 +120,20 @@ if (pageUrl === '/cart') {
         const totalMoneyElement = cartPage.querySelector('#cart__total-money')
         const weightTotalElement = cartPage.querySelector('#cart__weight-total');
         const cartShipping = cartPage.querySelector('#cart__shipping');
+        const isShippingPoint = cartPage.querySelectorAll('.cart-item__price[data-is-point="false"]').length == 0;
+        const selectAddress = cartPage.querySelector('select[name="address_id"]');
+        const addressLabel = cartPage.querySelector('#isJavaAddress');
+
+        let isJavaAddress = false;
+        if (selectAddress.value !== "") {
+            const selectedAddress = selectAddress.querySelector(`option[value="${selectAddress.value}"]`)
+            isJavaAddress = selectedAddress.dataset.isJava == 1 ? true : false;
+        }
 
         let totalPoint = 0;
         let totalMoney = 0;
         let weight = 0;
+        let shippingTotal = 0;
         cartItems.forEach(item => {
             const itemPrice = item.previousElementSibling;
             weight += itemPrice.dataset.weight * item.value;
@@ -133,10 +143,17 @@ if (pageUrl === '/cart') {
                 totalMoney += itemPrice.dataset.price * item.value;
             }
         })
-        if (cartShipping.dataset.isPoint === 'true') {
-            cartShipping.textContent = (cartShipping.dataset.price * Math.ceil(weight / 1000)) + ' point'
+        if (isJavaAddress) {
+            shippingTotal = cartShipping.dataset.price * Math.ceil(weight / 1000)
+            addressLabel.textContent = "jawa";
         } else {
-            cartShipping.textContent = 'Rp. ' + (cartShipping.dataset.price * Math.ceil(weight / 1000))
+            shippingTotal = cartShipping.dataset.nonJavaPrice * Math.ceil(weight / 1000)
+            addressLabel.textContent = "luar jawa";
+        }
+        if (isShippingPoint) {
+            cartShipping.textContent = Math.ceil(shippingTotal / cartShipping.dataset.pointValue) + ' point'
+        } else {
+            cartShipping.textContent = 'Rp. ' + shippingTotal
         }
 
         if (voucher) {

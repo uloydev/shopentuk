@@ -31,7 +31,7 @@ class UserAddressFactory extends Factory
             'kelurahan' => 'meruyung',
             'kecamatan' => 'limo',
             'city' => 'depok',
-            'province' => 'jawa barat',
+            'province_id' => $this->faker->numberBetween(1, 34),
             'postal_code' => '16515',
             'is_main_address' => 0,
             'user_id' => User::factory()
