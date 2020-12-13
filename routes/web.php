@@ -51,7 +51,7 @@ Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'
         Route::prefix('address')->name('address.')->group(function () {
             Route::post('/', 'UserAddressController@store')->name('store');
             Route::post('/store-redirect', 'UserAddressController@storeRedirect')->name('store-redirect');
-            Route::post('/update', 'UserAddressController@update')->name('update');
+            Route::put('/update', 'UserAddressController@update')->name('update');
             Route::post('/delete', 'UserAddressController@destroy')->name('destroy');
         });
     });
