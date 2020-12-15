@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
 
-    protected $tabMenus = ['history order', 'current order', 'account detail', 'account point'];
+    protected $tabMenus = ['history order', 'current order', 'account detail', 'point history'];
 
     public function currentOrder()
     {
@@ -48,11 +48,12 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function accountPoint()
+    public function pointHistory()
     {
         return view('customer.account.my-point', [
             'title' => 'my point',
-            'tabMenus' => $this->tabMenus
+            'tabMenus' => $this->tabMenus,
+            'history' => Auth::user()->pointHistory,
         ]);
     }
 
