@@ -20,11 +20,9 @@
             </x-alert>
         @endif
         <div class="bg-white shadow-md p-5 my-10 lg:my-0">
-            <button type="button" 
-            class="btn bg-green-600 btn-sm m-2 w-full justify-center lg:w-auto lg:justify-start btn-open-close-modal-address capitalize" id="btn-add-address" 
-            data-url="{{ route('my-account.address.store') }}">
-                tambah alamat
-            </button>
+            <x-btn type="secondary"
+            add-class="btn-open-close-modal-address justify-center"
+            data-url="{{ route('my-account.address.store') }} " text="tambah alamat" />
 
             <div id="userAddresses" hidden>{!! $userAddresses->toJson() !!}</div>
 
@@ -48,20 +46,22 @@
                 </button>
             </div>
             @empty
-                <p>anda belum punya alamat</p>
+                <p class="mt-4">anda belum punya alamat</p>
             @endforelse
         </div>
 
-        <form action="{{-- route('my-account.update') --}}" method="post" class="mt-5">
+        <form action="" method="post" class="mt-5">
             @csrf
             @for ($i = 0; $i < count($labelInput); $i++)
                 <x-input-basic label="{{ ucwords($labelInput[$i]) }}" 
                 name="{{ Str::snake($labelInput[$i]) }}"
                 placeholder="Input Your {{ ucwords($labelInput[$i]) }}" 
-                value="{{ $userData[$i] ?? '' }}" required disabled/>
+                value="{{ $userData[$i] ?? '' }}" disabled/>
             @endfor
             <p class="text-center">
-                untuk mengubah data akun silahkan gunakan form <a class="text-blue-500" href="{{route('contact-us.index')}}">contact us</a> atau hubungi admin
+                untuk mengubah data akun silahkan gunakan form
+                <a class="text-blue-500" href="{{ route('contact-us.index') }}">contact us</a>
+                atau hubungi admin
             </p>
         </form>
     </div>

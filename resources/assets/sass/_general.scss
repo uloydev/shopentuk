@@ -31,10 +31,14 @@ body {
 }
 
 .btn {
-    @apply font-bold p-2 text-white rounded transition duration-150 transform flex items-center outline-none border-b-4;
+    @apply font-bold py-2 px-4 text-white rounded transition duration-150 inline-flex items-center justify-center outline-none border-b-4 shadow-md capitalize;
 
     &:active {
-        @apply translate-y-1 border-b-2;
+        @apply transform translate-y-1 border-b-2;
+    }
+
+    &:focus {
+        @apply outline-none;
     }
 
     &-outline {
@@ -44,6 +48,23 @@ body {
 
     box-icon #icon {
         fill: red;
+    }
+
+    &--primary {
+        @apply bg-blue-500 text-white;
+
+        &:focus,
+        &:hover {
+            @apply border-blue-600;
+        }
+    }
+
+    &--secondary {
+        @apply bg-teal-400;
+
+        &:hover {
+            @apply bg-teal-500;
+        }
     }
 
 }

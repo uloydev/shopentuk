@@ -33,8 +33,8 @@
                         @enderror
                     </div>
                 </div>
-                <x-btn-primary text="Kirim" 
-                class="flex w-full text-center justify-center md:w-auto bg-blue-500 hover:bg-blue-600 focus:border-blue-600 text-white shadow-md focus:shadow-outline" />
+                <x-btn action="submit" type="primary" text="Kirim"
+                add-class="w-full md:w-auto focus:shadow-outline" />
             </form>
         </div>
     </div>
