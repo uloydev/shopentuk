@@ -13,6 +13,12 @@ class Cart extends Model
         'user_id',
     ];
 
+    protected $appends = [
+        'total_price',
+        'total_point',
+        'total_weight'
+    ];
+
     public function cartItems()
     {
         return $this->hasMany('App\Models\CartItem');
@@ -41,5 +47,15 @@ class Cart extends Model
             }
         }
         return $price;
+    }
+
+    public function getTotalWeightAttribute() {
+        $weight = 0;
+        foreach ($this->cartItems as $item) {
+            if (!$item->product->productCategory->is_digital_product) {
+                $weight += $item->product->weight * $item->quantity;
+            }
+        }
+        return $weight;
     }
 }
