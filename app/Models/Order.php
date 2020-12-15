@@ -48,4 +48,9 @@ class Order extends Model
     {
         return $this->belongsTo('App\Models\UserAddress');
     }
+
+    public function pointHistory()
+    {
+        return $this->hasOne('App\Models\PointHistory');
+    }
 }
