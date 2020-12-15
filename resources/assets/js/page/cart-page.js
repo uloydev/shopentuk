@@ -116,13 +116,13 @@ if (pageUrl === '/cart') {
     }
 
     function updateCart(cartItems) {
-        const totalPointElement = cartPage.querySelector('#cart__total-point')
-        const totalMoneyElement = cartPage.querySelector('#cart__total-money')
         const weightTotalElement = cartPage.querySelector('#cart__weight-total');
-        const cartShipping = cartPage.querySelector('#cart__shipping');
+        const totalPointElement = cartPage.querySelectorAll('#cart__total-point')
+        const totalMoneyElement = cartPage.querySelectorAll('#cart__total-money')
+        const cartShipping = cartPage.querySelectorAll('#cart__shipping');
         const isShippingPoint = cartPage.querySelectorAll('.cart-item__price[data-is-point="false"]').length == 0;
         const selectAddress = cartPage.querySelector('select[name="address_id"]');
-        const addressLabel = cartPage.querySelector('#isJavaAddress');
+        const addressLabel = cartPage.querySelectorAll('#isJavaAddress');
 
         let isJavaAddress = false;
         if (selectAddress.value !== "") {
@@ -144,16 +144,26 @@ if (pageUrl === '/cart') {
             }
         })
         if (isJavaAddress) {
-            shippingTotal = cartShipping.dataset.price * Math.ceil(weight / 1000)
-            addressLabel.textContent = "jawa";
+            shippingTotal = cartShipping[0].dataset.price * Math.ceil(weight / 1000)
+            addressLabel.forEach(item => {
+                item.textContent = "jawa";
+            })
         } else {
-            shippingTotal = cartShipping.dataset.nonJavaPrice * Math.ceil(weight / 1000)
-            addressLabel.textContent = "luar jawa";
+            shippingTotal = cartShipping[0].dataset.nonJavaPrice * Math.ceil(weight / 1000)
+            addressLabel.forEach(item => {
+                item.textContent = "luar jawa";
+            })
         }
         if (isShippingPoint) {
-            cartShipping.textContent = Math.ceil(shippingTotal / cartShipping.dataset.pointValue) + ' point'
+            cartShipping.forEach(item => {
+                item.textContent = Math.ceil(shippingTotal / cartShipping[0].dataset.pointValue) + ' point'
+
+            })
         } else {
-            cartShipping.textContent = 'Rp. ' + shippingTotal
+            cartShipping.forEach(item => {
+                item.textContent = 'Rp. ' + shippingTotal
+
+            })
         }
 
         if (voucher) {
@@ -161,8 +171,12 @@ if (pageUrl === '/cart') {
             totalMoney = totalMoney > 0 ? totalMoney : 0
         }
 
-        totalPointElement.textContent = totalPoint + ' point';
-        totalMoneyElement.textContent = 'Rp. ' + totalMoney;
+        totalPointElement.forEach(item => {
+            item.textContent = totalPoint + ' point';
+        })
+        totalMoneyElement.forEach(item => {
+            item.textContent = 'Rp. ' + totalMoney;
+        });
         weightTotalElement.textContent = weight + ' gram';
     }
 
@@ -208,6 +222,11 @@ if (pageUrl === '/cart') {
     // update cart
     if (cartItems.length > 0) {
         updateCart(cartItems);
+
+        // address select input change listener
+        cartPage.querySelector('select[name="address_id"]').addEventListener('change', () => updateCart(cartItems));
+
+        // cart item event listener
         cartItems.forEach((item, index) => {
             item.addEventListener('change', () => {
                 const itemPrice = item.previousElementSibling;

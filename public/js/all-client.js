@@ -511,13 +511,13 @@ var metaToken = document.querySelector('meta[name="csrf-token"]').content;
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
   var updateCart = function updateCart(cartItems) {
-    var totalPointElement = cartPage.querySelector('#cart__total-point');
-    var totalMoneyElement = cartPage.querySelector('#cart__total-money');
     var weightTotalElement = cartPage.querySelector('#cart__weight-total');
-    var cartShipping = cartPage.querySelector('#cart__shipping');
+    var totalPointElement = cartPage.querySelectorAll('#cart__total-point');
+    var totalMoneyElement = cartPage.querySelectorAll('#cart__total-money');
+    var cartShipping = cartPage.querySelectorAll('#cart__shipping');
     var isShippingPoint = cartPage.querySelectorAll('.cart-item__price[data-is-point="false"]').length == 0;
     var selectAddress = cartPage.querySelector('select[name="address_id"]');
-    var addressLabel = cartPage.querySelector('#isJavaAddress');
+    var addressLabel = cartPage.querySelectorAll('#isJavaAddress');
     var isJavaAddress = false;
 
     if (selectAddress.value !== "") {
@@ -541,17 +541,25 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
     });
 
     if (isJavaAddress) {
-      shippingTotal = cartShipping.dataset.price * Math.ceil(weight / 1000);
-      addressLabel.textContent = "jawa";
+      shippingTotal = cartShipping[0].dataset.price * Math.ceil(weight / 1000);
+      addressLabel.forEach(function (item) {
+        item.textContent = "jawa";
+      });
     } else {
-      shippingTotal = cartShipping.dataset.nonJavaPrice * Math.ceil(weight / 1000);
-      addressLabel.textContent = "luar jawa";
+      shippingTotal = cartShipping[0].dataset.nonJavaPrice * Math.ceil(weight / 1000);
+      addressLabel.forEach(function (item) {
+        item.textContent = "luar jawa";
+      });
     }
 
     if (isShippingPoint) {
-      cartShipping.textContent = Math.ceil(shippingTotal / cartShipping.dataset.pointValue) + ' point';
+      cartShipping.forEach(function (item) {
+        item.textContent = Math.ceil(shippingTotal / cartShipping[0].dataset.pointValue) + ' point';
+      });
     } else {
-      cartShipping.textContent = 'Rp. ' + shippingTotal;
+      cartShipping.forEach(function (item) {
+        item.textContent = 'Rp. ' + shippingTotal;
+      });
     }
 
     if (voucher) {
@@ -559,8 +567,12 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
       totalMoney = totalMoney > 0 ? totalMoney : 0;
     }
 
-    totalPointElement.textContent = totalPoint + ' point';
-    totalMoneyElement.textContent = 'Rp. ' + totalMoney;
+    totalPointElement.forEach(function (item) {
+      item.textContent = totalPoint + ' point';
+    });
+    totalMoneyElement.forEach(function (item) {
+      item.textContent = 'Rp. ' + totalMoney;
+    });
     weightTotalElement.textContent = weight + ' gram';
   }; // check voucher
 
@@ -707,7 +719,12 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
 
 
   if (cartItems.length > 0) {
-    updateCart(cartItems);
+    updateCart(cartItems); // address select input change listener
+
+    cartPage.querySelector('select[name="address_id"]').addEventListener('change', function () {
+      return updateCart(cartItems);
+    }); // cart item event listener
+
     cartItems.forEach(function (item, index) {
       item.addEventListener('change', function () {
         var itemPrice = item.previousElementSibling;
@@ -947,9 +964,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/') {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
-__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
-module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
+__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
+__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
+module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
 
 
 /***/ })

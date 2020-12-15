@@ -11,7 +11,7 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
         class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden
         shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
             <div class="bg-white pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900 text-center" id="modal-headline">
                         Let's checkout
                     </h3>
                     <div class="mt-5 flex w-full-2x step-form">
@@ -41,11 +41,33 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                             </div>
                         </form>
                         <div class="w-full hide-step">
-                            <p>Summary order</p>
+                            <p class="font-bold">Summary order</p>
                             <ul>
                                 @foreach ($cart->cartItems as $item)
                                     <li>{{ $item->product->title }} x {{ $item->quantity }}</li>
                                 @endforeach
+                                <hr class="my-3">
+                                <li class="py-1 flex justify-between items-center">
+                                    <span>Shipping 
+                                        <span class="text-sm font-medium bg-blue-100 py-1 px-2 rounded text-blue-500" id="isJavaAddress">
+                                        </span>
+                                    </span>
+                                    <var class="font-bold" id="cart__shipping"
+                                    data-price="{{ $siteSetting->shipping_price }}" 
+                                    data-non-java-price="{{ $siteSetting->non_java_shipping_price }}"
+                                    data-point-value="{{ $siteSetting->point_value }}">
+                                    </var>
+                                </li>
+                                <li class="py-3 flex justify-between items-center">
+                                    <span>Point total</span>
+                                    <var class="not-italic font-bold" id="cart__total-point">
+                                    </var>
+                                </li>
+                                <li class="py-3 flex justify-between items-center">
+                                    <span>Price Total</span>
+                                    <var class="font-bold rupiah-currency" id="cart__total-money">
+                                    </var>
+                                </li>
                             </ul>
                         </div>
                     </div>
