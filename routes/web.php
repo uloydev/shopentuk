@@ -42,58 +42,59 @@ Route::get('register', function () {
 });
 
 Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'])
-    ->namespace('Customer')->group(function () {
-        Route::post('update', 'DashboardController@updateAccount')->name('update');
-        Route::get('order/history', 'DashboardController@orderHistory')->name('history.order');
-        Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');
-        Route::get('detail', 'DashboardController@accountDetail')->name('account.detail');
-        Route::get('point', 'DashboardController@accountPoint')->name('account.point');
-        Route::prefix('address')->name('address.')->group(function () {
-            Route::post('/', 'UserAddressController@store')->name('store');
-            Route::post('/store-redirect', 'UserAddressController@storeRedirect')->name('store-redirect');
-            Route::put('/update', 'UserAddressController@update')->name('update');
-            Route::post('/delete', 'UserAddressController@destroy')->name('destroy');
-        });
+->namespace('Customer')->group(function () {
+    Route::post('update', 'DashboardController@updateAccount')->name('update');
+    Route::get('order/history', 'DashboardController@orderHistory')->name('history.order');
+    Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');
+    Route::get('detail', 'DashboardController@accountDetail')->name('account.detail');
+    Route::get('point', 'DashboardController@accountPoint')->name('account.point');
+    Route::prefix('address')->name('address.')->group(function () {
+        Route::post('/', 'UserAddressController@store')->name('store');
+        Route::post('/store-redirect', 'UserAddressController@storeRedirect')->name('store-redirect');
+        Route::put('/update', 'UserAddressController@update')->name('update');
+        Route::post('/delete', 'UserAddressController@destroy')->name('destroy');
     });
+});
+
 // admin route
 Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name('admin.')
-    ->group(function () {
-        Route::permanentRedirect('/', 'dashboard');
-        Route::get('dashboard', 'DashboardController')->name('dashboard');
-        Route::prefix('order')->name('order.')->group(function () {
-            Route::get('/', 'OrderController@index')->name('index');
-            Route::get('new', 'OrderController@newOrder')->name('new');
-            Route::name('refund.')->prefix('refund')->group(function () {
-                Route::get('/', 'OrderController@toRefund')->name('index');
-                Route::get('/{order}', 'OrderController@showRefundForm')->name('show');
-                Route::post('/{order}', 'OrderController@makeRefund')->name('store');
-            });
+->group(function () {
+    Route::permanentRedirect('/', 'dashboard');
+    Route::get('dashboard', 'DashboardController')->name('dashboard');
+    Route::prefix('order')->name('order.')->group(function () {
+        Route::get('/', 'OrderController@index')->name('index');
+        Route::get('new', 'OrderController@newOrder')->name('new');
+        Route::name('refund.')->prefix('refund')->group(function () {
+            Route::get('/', 'OrderController@toRefund')->name('index');
+            Route::get('/{order}', 'OrderController@showRefundForm')->name('show');
+            Route::post('/{order}', 'OrderController@makeRefund')->name('store');
         });
-
-        Route::get('all-category/sub', 'AllCategoryController@subCategoryIndex')->name(
-            'all-category.sub.index'
-        );
-        Route::post('all-category/sub/store', 'AllCategoryController@subCategoryStore')->name(
-            'all-category.sub.store'
-        );
-        Route::delete('all-category/sub/destroy/{id}', 'AllCategoryController@subCategoryDestroy')->name(
-            'all-category.sub.destroy'
-        );
-
-        Route::get('all-category/parent', 'AllCategoryController@parentCategoryIndex')->name(
-            'all-category.parent.index'
-        );
-        Route::post('all-category/parent', 'AllCategoryController@parentCategoryStore')->name(
-            'all-category.parent.store'
-        );
-        Route::put('all-category/{id}/parent', 'AllCategoryController@parentCategoryUpdate')->name(
-            'all-category.parent.update'
-        );
-        Route::delete('all-category/parent/{id}', 'AllCategoryController@parentCategoryDestroy')->name(
-            'all-category.parent.destroy'
-        );
-        Route::resource('products', 'ProductController');
     });
+
+    Route::get('all-category/sub', 'AllCategoryController@subCategoryIndex')->name(
+        'all-category.sub.index'
+    );
+    Route::post('all-category/sub/store', 'AllCategoryController@subCategoryStore')->name(
+        'all-category.sub.store'
+    );
+    Route::delete('all-category/sub/destroy/{id}', 'AllCategoryController@subCategoryDestroy')->name(
+        'all-category.sub.destroy'
+    );
+
+    Route::get('all-category/parent', 'AllCategoryController@parentCategoryIndex')->name(
+        'all-category.parent.index'
+    );
+    Route::post('all-category/parent', 'AllCategoryController@parentCategoryStore')->name(
+        'all-category.parent.store'
+    );
+    Route::put('all-category/{id}/parent', 'AllCategoryController@parentCategoryUpdate')->name(
+        'all-category.parent.update'
+    );
+    Route::delete('all-category/parent/{id}', 'AllCategoryController@parentCategoryDestroy')->name(
+        'all-category.parent.destroy'
+    );
+    Route::resource('products', 'ProductController');
+});
 
 Route::prefix('superadmin')->middleware('superadmin')->name('superadmin.')->group(function () {
     Route::resource('admins', 'Admin\AdminController')->only('index', 'store', 'update', 'destroy');
