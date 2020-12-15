@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PhoneValidation;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserValidaion extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,7 +28,7 @@ class UserValidaion extends FormRequest
         return [
             'name' => ['required', 'min:3', 'max:100', 'unique:users'],
             'email' => ['required', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'max:12', 'min:6', 'numeric', 'unique:users'],
+            'phone' => ['required', 'unique:users', new PhoneValidation],
             'password' => ['required', 'min:8', 'confirmed']
         ];
     }
