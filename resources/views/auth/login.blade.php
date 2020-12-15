@@ -25,15 +25,18 @@
                 ])
                 <div class="mb-3 flex items-center">
                     <label for="remember" class="ml-2 order-last">Ingat saya</label>
-                    <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                    <input type="checkbox" name="remember" 
+                    id="remember" {{ old('remember') ? 'checked' : '' }}>
                 </div>
             </x-section-auth>
             <x-section-auth name="Daftar" :action="url('register')">
-                <x-input-basic name="name" label="Nama pengguna" 
-                placeholder="Contoh: bariqdharmawans" required />
-                <x-input-basic name="phone" type="text" label="Nomor telepon" 
-                placeholder="Contoh: 87771406656" autocomplete="tel" pattern="^[0-9]+$" 
-                title="Phone number should be a valid phone number" required />
+                <x-input-basic name="name" label="Nama pengguna" value="{{ old('name') }}"
+                placeholder="Contoh: bariq dharmawan" required />
+                <x-input-basic name="phone" type="tel" label="Nomor telepon" 
+                placeholder="Contoh: 087771406656" minlength="6" maxlength="13" autocomplete="tel" 
+                pattern="^[0-9]+$" 
+                title="Phone number should be a valid phone number: start with 0, length between " 
+                value="{{ old('phone') }}" required />
                 @include('auth.email-pw', [
                     'placeholderEmail' => 'Email akun anda',
                     'placeholderPw' => 'Kata sandi akun anda'

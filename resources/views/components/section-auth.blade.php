@@ -4,7 +4,8 @@
         <form action="{{ $action }}" method="POST" id="form-{{ strtolower($name) }}">
             @csrf
             {{ $slot }}
-            <x-btn-primary text="{{ $name }}" class="mt-5"/>
+            <x-btn el="button" action="submit" text="{{ $name }}" type="primary" 
+            add-class="mt-5"/>
         </form>
     </div>
 </section>

@@ -1,5 +1,6 @@
 <x-input-basic name="email" type="email" label="Alamat email" 
 placeholder="{{ $placeholderEmail }}" 
-value="{{ App\Models\User::where('role', '!=', 'admin')->inRandomOrder()->first()->email }}" required />
+value="{{ config('app.env') === 'local' ? 
+App\Models\User::where('role', '!=', 'admin')->inRandomOrder()->first()->email : old('email') }}" required />
 <x-input-basic name="password" type="password" label="Kata sandi" 
-placeholder="{{ $placeholderPw }}" value="{{ 'password' }}" required />
+placeholder="{{ $placeholderPw }}" value="{{ config('app.env') === 'local' ? 'password' : '' }}" required />
