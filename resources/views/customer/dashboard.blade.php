@@ -45,10 +45,8 @@
                     </li>
                 @endfor
             </ul>
-            <div class="break-words mb-6 lg:ml-10 w-full">
-                <div class="tab-content tab-space">
-                    @yield('content')
-                </div>
+            <div class="mb-6 lg:ml-10 w-full">
+                @yield('content')
             </div>
         </div>
     </div>
