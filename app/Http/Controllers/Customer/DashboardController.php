@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,18 +31,21 @@ class DashboardController extends Controller
 
     public function accountDetail()
     {
+        $user = auth()->user();
+        $userAddresses = $user->userAddresses;
+        // dd($userAddresses);
         return view('customer.account.detail', [
             'title' => 'my dashboard',
             'tabMenus' => $this->tabMenus,
             'labelInput' => ['name', 'email', 'phone', 'bank', 'rekening'],
             'userData' => [
-                Auth::user()->name,
-                Auth::user()->email,
-                Auth::user()->phone,
-                Auth::user()->bank,
-                Auth::user()->rekening
+                $user->name,
+                $user->email,
+                $user->phone,
+                $user->bank,
+                $user->rekening
             ],
-            'userAddresses' => Auth::user()->userAddresses,
+            'userAddresses' => $userAddresses,
         ]);
     }
 
