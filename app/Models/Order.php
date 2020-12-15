@@ -21,6 +21,7 @@ class Order extends Model
         'weight_total',
         'voucher_discount',
         'status',
+        'no_resi',
     ];
 
     public function orderProducts()

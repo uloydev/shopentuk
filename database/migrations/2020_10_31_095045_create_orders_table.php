@@ -25,6 +25,7 @@ class CreateOrdersTable extends Migration
             $table->integer('point_total')->nullable();
             $table->integer('weight_total')->default(0);
             $table->integer('voucher_discount')->nullable();
+            $table->string('no_resi')->nullable();
             $table->enum('status', ['unpaid', 'paid', 'shipping', 'canceled', 'refunded', 'finished'])->default('unpaid');
             $table->timestamps();
         });
