@@ -24,7 +24,7 @@ class DashboardController extends Controller
     public function orderHistory()
     {
         return view('customer.order.history', [
-            'title' => 'order history', 
+            'title' => 'order history',
             'tabMenus' => $this->tabMenus,
             'orders' => Auth::user()->orders->whereIn('status', ['canceled', 'refunded', 'finished'])
         ]);
@@ -32,19 +32,18 @@ class DashboardController extends Controller
 
     public function accountDetail()
     {
-        $user = Auth::user();
         return view('customer.account.detail', [
             'title' => 'my dashboard',
             'tabMenus' => $this->tabMenus,
             'labelInput' => ['name', 'email', 'phone', 'bank', 'rekening'],
             'userData' => [
-                $user->name, 
-                $user->email, 
-                substr($user->phone, 3),
-                $user->bank,
-                $user->rekening
+                Auth::user()->name,
+                Auth::user()->email,
+                Auth::user()->phone,
+                Auth::user()->bank,
+                Auth::user()->rekening
             ],
-            'userAddresses' => $user->userAddresses,
+            'userAddresses' => Auth::user()->userAddresses,
         ]);
     }
 
