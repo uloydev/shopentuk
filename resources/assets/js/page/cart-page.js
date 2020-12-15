@@ -41,6 +41,10 @@ if (pageUrl === '/cart') {
             openCloseModal('#' + modalCheckout.getAttribute('id'))
             openStep(firstStep)
             closeStep(secondStep)
+            if (nextStepBtn.classList.contains('hidden')) {
+                nextStepBtn.classList.remove('hidden')
+                checkoutBtn.classList.add('hidden')
+            }
         });
     
         /*

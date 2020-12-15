@@ -613,6 +613,11 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
       Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["openCloseModal"])('#' + modalCheckout.getAttribute('id'));
       openStep(firstStep);
       closeStep(secondStep);
+
+      if (nextStepBtn.classList.contains('hidden')) {
+        nextStepBtn.classList.remove('hidden');
+        checkoutBtn.classList.add('hidden');
+      }
     });
     /*
       * open #modalAddAddress if it closed. Otherwise close it
