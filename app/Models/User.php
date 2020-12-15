@@ -62,6 +62,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Cart');
     }
 
+    public function pointHistory()
+    {
+        return $this->hasMany('App\Models\PointHistory');
+    }
+
     public function getMainAddressAttribute()
     {
         $address = $this->userAddresses()->where('is_main_address', true)->first();

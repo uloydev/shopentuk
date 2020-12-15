@@ -21,6 +21,7 @@ class Order extends Model
         'weight_total',
         'voucher_discount',
         'status',
+        'no_resi',
     ];
 
     public function orderProducts()
@@ -46,5 +47,10 @@ class Order extends Model
     public function userAddress()
     {
         return $this->belongsTo('App\Models\UserAddress');
+    }
+
+    public function pointHistory()
+    {
+        return $this->hasOne('App\Models\PointHistory');
     }
 }

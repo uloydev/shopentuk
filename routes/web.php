@@ -47,7 +47,7 @@ Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'
     Route::get('order/history', 'DashboardController@orderHistory')->name('history.order');
     Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');
     Route::get('detail', 'DashboardController@accountDetail')->name('account.detail');
-    Route::get('point', 'DashboardController@accountPoint')->name('account.point');
+    Route::get('point', 'DashboardController@pointHistory')->name('point.history');
     Route::prefix('address')->name('address.')->group(function () {
         Route::post('/', 'UserAddressController@store')->name('store');
         Route::post('/store-redirect', 'UserAddressController@storeRedirect')->name('store-redirect');
