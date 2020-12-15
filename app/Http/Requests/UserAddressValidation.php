@@ -24,7 +24,6 @@ class UserAddressValidation extends FormRequest
      */
     public function rules()
     {
-        $addRules = [];
         if ($this->isMethod('post')) {
 
             $rules = [
@@ -36,7 +35,7 @@ class UserAddressValidation extends FormRequest
                 'kelurahan' => ['required', 'min:3', 'max:50'],
                 'kecamatan' => ['required', 'min:3', 'max:50'],
                 'city' => ['required', new AlphaSpace],
-                'province' => ['required', new AlphaSpace],
+                'province_id' => ['required', new AlphaSpace],
                 'postal_code' => ['required', 'numeric'],
                 'is_main_address' => ['required', 'boolean']
             ];
@@ -50,7 +49,7 @@ class UserAddressValidation extends FormRequest
                 'kelurahan' => ['required', 'min:3', 'max:50'],
                 'kecamatan' => ['required', 'min:3', 'max:50'],
                 'city' => ['required', new AlphaSpace],
-                'province' => ['required', new AlphaSpace],
+                'province_id' => ['required', new AlphaSpace],
                 'postal_code' => ['required', 'numeric'],
                 'is_main_address' => ['required', 'boolean']
             ];
