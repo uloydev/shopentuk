@@ -17,10 +17,10 @@
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 mb-5">
                 <x-input-basic name="full_name" add-class="input-lowercase" 
-                value="{{ Auth::user()->name }}" placeholder="Tulis nama lengkap akun mu" 
+                value="{{ $auth->name ?? '' }}" placeholder="Tulis nama lengkap akun mu" 
                 label="Nama lengkap" required />
                 <x-input-basic name="phone" type="text" 
-                value="{{ old('phone') ?? Auth::user()->phone }}" label="No Telepon / Wa" 
+                value="{{ old('phone') ?? $auth->phone ?? '' }}" label="No Telepon / Wa" 
                 min="999999" max="9999999999999" placeholder="Contoh: 087771xxx" required />
                 <x-input-basic name="order_id" type="number" box-width="col-span-full"
                 label="Nomor Order" value="{{ old('order_id') }}" autocomplete="off" min="1"
