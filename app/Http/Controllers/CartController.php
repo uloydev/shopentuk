@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\CartItem;
 use App\Models\SiteSetting;
 use App\Models\UserAddress;
+use App\Models\Province;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,7 +69,8 @@ class CartController extends Controller
             'addresses' => $addresses,
             'addressColumn' => $addressColumnExceptUserId,
             'inputIds' => $inputIds,
-            'inputText' => $inputText
+            'inputText' => $inputText,
+            'provinces' => Province::all(),
         ]);
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Province;
 
 class DashboardController extends Controller
 {
@@ -46,6 +47,7 @@ class DashboardController extends Controller
                 $user->rekening
             ],
             'userAddresses' => $userAddresses,
+            'provinces' => Province::all(),
         ]);
     }
 

@@ -99,7 +99,7 @@
                         'input#kelurahan': address.kelurahan,
                         'input#kecamatan': address.kecamatan,
                         'input#city': address.city,
-                        'input#province': address.province,
+                        'select#province': address.province_id,
                         'input#postal_code': address.postal_code,
                         'textarea#street_address': address.street_address
                     }
@@ -117,22 +117,21 @@
                     }
 
                     
-                    editAddressForm.querySelector('input#title').value = address.title
-                    editAddressForm.querySelector('input#name').value = address.name
-                    editAddressForm.querySelector('input#email').value = address.email
-                    editAddressForm.querySelector('input#phone').value = address.phone
-                    editAddressForm.querySelector('input#kelurahan').value = address.kelurahan
-                    editAddressForm.querySelector('input#kecamatan').value = address.kecamatan
-                    editAddressForm.querySelector('input#city').value = address.city
-                    editAddressForm.querySelector('input#province').value = address.province
-                    editAddressForm.querySelector('input#postal_code').value = address.postal_code
-                    editAddressForm.querySelector('input#main1').checked = address.is_main_address
-                    editAddressForm.querySelector('input#main0').checked = !address.is_main_address
-                    editAddressForm.querySelector('textarea#street_address').value
-                    = address.street_address
-                    
+                    // editAddressForm.querySelector('input#title').value = address.title
+                    // editAddressForm.querySelector('input#name').value = address.name
+                    // editAddressForm.querySelector('input#email').value = address.email
+                    // editAddressForm.querySelector('input#phone').value = address.phone
+                    // editAddressForm.querySelector('input#kelurahan').value = address.kelurahan
+                    // editAddressForm.querySelector('input#kecamatan').value = address.kecamatan
+                    // editAddressForm.querySelector('input#city').value = address.city
+                    // editAddressForm.querySelector('select#province').value = address.province_id
+                    // editAddressForm.querySelector('input#postal_code').value = address.postal_code
+                    // editAddressForm.querySelector('input#main1').checked = address.is_main_address
+                    // editAddressForm.querySelector('input#main0').checked = !address.is_main_address
+                    // editAddressForm.querySelector('textarea#street_address').value
+                    // = address.street_address
                     let formData = new FormData(editAddressForm)
-                    console.log(Object.fromEntries(formData))
+                    // console.log(Object.fromEntries(formData))
                     // please fix open modal
                     // HelperModule.openCloseModal('#modalEditAddress')
                 })
