@@ -1,5 +1,4 @@
-import { pageUrl, openCloseModal } from './../helper-module'
-import { getParents } from './../helper-utilities'
+import { pageUrl, openCloseModal, getParents } from './../helper-module'
 
 const metaToken = document.querySelector('meta[name="csrf-token"]').content
 
