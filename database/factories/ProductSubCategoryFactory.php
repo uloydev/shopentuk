@@ -22,30 +22,50 @@ class ProductSubCategoryFactory extends Factory
      */
     public function definition()
     {
-        $categoryId = $this->faker->randomElement([1, 2, 4]);
-        
-        switch ($categoryId) {
-            case 2:
-                $titleOption = ['baju', 'celana'];
-                $descriptions = ['baju pria', 'celana pria'];
+        $temps = [];
+        $categories = ProductCategory::all();
+        foreach( $categories as $category) {
+            switch ($category->title) {
+                case 'pria':
+                    array_push($temps, [1,0,$category->id], [1,1,$category->id]);
+                    break;
+                case 'wanita':
+                    array_push($temps, [2,0,$category->id], [2,1,$category->id]);
+                    break;    
+                case 'voucher':
+                    array_push($temps, [3,0,$category->id], [3,1,$category->id]);
+                    break;
+                case 'pulsa':
+                    break;
+                }
+        }
+        $temp = $this->faker->unique()->randomElement($temps);
+        switch ($temp[0]) {
+            case 1:
+                $combinations = [
+                    ['baju', 'baju pria'],
+                    ['celana', 'celana pria']
+                ];
             break;
 
-            case 4:
-                $titleOption = ['gaun', 'baju'];
-                $descriptions = ['gaun wanita', 'baju wanita'];
+            case 2:
+                $combinations = [
+                    ['baju', 'baju wanita'],
+                    ['gaun', 'gaun wanita']
+                ];
             break;
-            case 1:
-                $titleOption = ['google play', 'amazon'];
-                $descriptions = ['voucher google play', 'voucher amazon'];
+            case 3:
+                $combinations = [
+                    ['google play', 'voucher google play'],
+                    ['amazon', 'voucher amazon']
+                ];
             break;
         }
-        
-        $titles = $this->faker->randomElement($titleOption);
-        
+        $data = $combinations[$temp[1]];
         return [
-            'title' => $titles,
-            'description' => $this->faker->randomElement($descriptions),
-            'category_id' => $categoryId,
+            'title' => $data[0],
+            'description' => $data[1],
+            'category_id' => $temp[2],
         ];
     }
 }

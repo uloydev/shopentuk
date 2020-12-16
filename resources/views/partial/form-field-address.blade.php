@@ -39,7 +39,7 @@
     </label>
     <textarea id="street_address" class="form-textarea mt-1 block w-full" 
     rows="3" placeholder="Masukan nama jalanmu" 
-    name="street_address" required>{{ old('street_address') }}"</textarea>
+    name="street_address" required>{{ old('street_address') }}</textarea>
 </div>
 <div class="mb-6">
     <label for="kelurahan" class="block mb-2 required-input">
@@ -69,9 +69,13 @@
     <label for="province" class="block mb-2 required-input">
         <span class="text-gray-700">Province</span>
     </label>
-    <input type="text" id="province" name="province_id" value="{{ old('province_id') }}"
-    class="form-input mt-1 block w-full border-gray-400"
-        required>
+    <select id="province" name="province_id" value="{{ old('province_id') }}"
+    class="form-input mt-1 block w-full border-gray-400" required>
+        <option value="" disabled selected>pilih provinsi</option>
+        @foreach ($provinces as $province)
+            <option value="{{ $province->id }}">{{ $province->name }}</option>
+        @endforeach
+    </select>
 
 </div>
 <div class="mb-6 lg:col-span-full">

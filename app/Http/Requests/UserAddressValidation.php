@@ -30,12 +30,12 @@ class UserAddressValidation extends FormRequest
                 'title' => ['required', 'min:5', 'max:100', 'unique:user_addresses'],
                 'name' => ['required', 'min:5', 'max:100', 'unique:user_addresses'],
                 'email' => ['required', 'email'],
-                'phone' => ['required', 'digits_between:7,13', 'starts_with:0'],
+                'phone' => ['required', 'starts_with:0'],
                 'street_address' => ['required'],
                 'kelurahan' => ['required', 'min:3', 'max:50'],
                 'kecamatan' => ['required', 'min:3', 'max:50'],
                 'city' => ['required', new AlphaSpace],
-                'province_id' => ['required', new AlphaSpace],
+                'province_id' => ['required', 'numeric'],
                 'postal_code' => ['required', 'numeric'],
                 'is_main_address' => ['required', 'boolean']
             ];
@@ -44,12 +44,12 @@ class UserAddressValidation extends FormRequest
                 'title' => ['required', 'min:5', 'max:100'],
                 'name' => ['required', 'min:5', 'max:100'],
                 'email' => ['required', 'email'],
-                'phone' => ['required', 'digits_between:7,13', 'starts_with:0'],
+                'phone' => ['required', 'starts_with:0'],
                 'street_address' => ['required'],
                 'kelurahan' => ['required', 'min:3', 'max:50'],
                 'kecamatan' => ['required', 'min:3', 'max:50'],
                 'city' => ['required', new AlphaSpace],
-                'province_id' => ['required', new AlphaSpace],
+                'province_id' => ['required', 'numeric'],
                 'postal_code' => ['required', 'numeric'],
                 'is_main_address' => ['required', 'boolean']
             ];
