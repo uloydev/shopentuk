@@ -28,17 +28,18 @@ if (HelperModule.pageUrl.indexOf('/my-account') > -1) {
         // add new address
         document.querySelectorAll('.btn-open-close-modal-address').forEach(btnManageModal => {
             btnManageModal.addEventListener('click', () => {
-                console.log('clicked')
                 HelperModule.openCloseModal('#modalAddAddress')
             })
         })
         
         if (document.querySelectorAll('.btn-edit-addresss')) {
-            const deleteAddressBtn = document.querySelectorAll('.btn-delete-address');
-            const closeEditModalBtn = document.querySelector('#btn-close-modalEditAddress')
-            const deleteAddressForm = document.querySelector('#deleteAddressForm');
-            
-            
+            const deleteAddressBtn = document.querySelectorAll('.btn-delete-address')
+            const openEditModalBtns = document.querySelectorAll('.btn-edit-address')
+            const btnManageModalAddress = [
+                ...openEditModalBtns,
+                document.querySelector('#btn-close-modalEditAddress')
+            ]
+            const deleteAddressForm = document.querySelector('#deleteAddressForm')
     
             deleteAddressBtn.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -49,9 +50,11 @@ if (HelperModule.pageUrl.indexOf('/my-account') > -1) {
                     deleteAddressForm.submit()
                 })
             })
-    
-            closeEditModalBtn.addEventListener('click', () => {
-                HelperModule.openCloseModal('#modalEditAddress')
+
+            btnManageModalAddress.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    HelperModule.openCloseModal('#modalEditAddress')
+                })
             })
         }
     }
