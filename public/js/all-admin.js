@@ -5273,7 +5273,7 @@ module.exports = function numWords (input) {
 /*!**********************************************!*\
   !*** ./resources/assets/js/helper-module.js ***!
   \**********************************************/
-/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, pageUrl */
+/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, getParents, pageUrl */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5285,6 +5285,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "capitalizeFirstLetter", function() { return capitalizeFirstLetter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAttributes", function() { return setAttributes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openCloseModal", function() { return openCloseModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getParents", function() { return getParents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pageUrl", function() { return pageUrl; });
 /*!
  * Get all siblings of an element
@@ -5359,12 +5360,41 @@ function openCloseModal(modalSelector) {
     (_modalEl$classList3 = modalEl.classList).add.apply(_modalEl$classList3, classToCloseModal);
 
     if (modalEl.querySelectorAll('input, textarea')) {
-      modalEl.querySelectorAll('input, textarea').forEach(function (inputOrTextarea) {
+      modalEl.querySelectorAll('input:not([name="_method"]):not([name="_token"]), textarea').forEach(function (inputOrTextarea) {
         inputOrTextarea.value = '';
       });
     }
   }
 }
+/*!
+ * Get all of an element's parent elements up the DOM tree
+ * (c) 2019 Chris Ferdinandi, MIT License, https://gomakethings.com
+ * @param  {Node}   elem     The element
+ * @param  {String} selector Selector to match against [optional]
+ * @return {Array}           The parent elements
+ */
+
+var getParents = function getParents(elem, selector) {
+  // Setup parents array
+  var parents = []; // Get matching parent elements
+
+  while (elem && elem !== document) {
+    // If using a selector, add matching parents to array
+    // Otherwise, add all parents
+    if (selector) {
+      if (elem.matches(selector)) {
+        parents.push(elem);
+      }
+    } else {
+      parents.push(elem);
+    } // Jump to the next parent node
+
+
+    elem = elem.parentNode;
+  }
+
+  return parents;
+};
 var pageUrl = window.location.pathname;
 
 /***/ }),

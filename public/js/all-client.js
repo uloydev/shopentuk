@@ -206,7 +206,7 @@ document.querySelector('main').addEventListener('click', function () {
 /*!**********************************************!*\
   !*** ./resources/assets/js/helper-module.js ***!
   \**********************************************/
-/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, pageUrl */
+/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, getParents, pageUrl */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -218,6 +218,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "capitalizeFirstLetter", function() { return capitalizeFirstLetter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAttributes", function() { return setAttributes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openCloseModal", function() { return openCloseModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getParents", function() { return getParents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pageUrl", function() { return pageUrl; });
 /*!
  * Get all siblings of an element
@@ -292,28 +293,12 @@ function openCloseModal(modalSelector) {
     (_modalEl$classList3 = modalEl.classList).add.apply(_modalEl$classList3, classToCloseModal);
 
     if (modalEl.querySelectorAll('input, textarea')) {
-      modalEl.querySelectorAll('input, textarea').forEach(function (inputOrTextarea) {
+      modalEl.querySelectorAll('input:not([name="_method"]):not([name="_token"]), textarea').forEach(function (inputOrTextarea) {
         inputOrTextarea.value = '';
       });
     }
   }
 }
-var pageUrl = window.location.pathname;
-
-/***/ }),
-
-/***/ "./resources/assets/js/helper-utilities.js":
-/*!*************************************************!*\
-  !*** ./resources/assets/js/helper-utilities.js ***!
-  \*************************************************/
-/*! exports provided: getParents */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getParents", function() { return getParents; });
-/* harmony import */ var _helper_module_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helper-module.js */ "./resources/assets/js/helper-module.js");
-
 /*!
  * Get all of an element's parent elements up the DOM tree
  * (c) 2019 Chris Ferdinandi, MIT License, https://gomakethings.com
@@ -343,6 +328,21 @@ var getParents = function getParents(elem, selector) {
 
   return parents;
 };
+var pageUrl = window.location.pathname;
+
+/***/ }),
+
+/***/ "./resources/assets/js/helper-utilities.js":
+/*!*************************************************!*\
+  !*** ./resources/assets/js/helper-utilities.js ***!
+  \*************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_module_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helper-module.js */ "./resources/assets/js/helper-module.js");
+
 /*
  * .input-lowercase utitlies to make all input lowercase
  */
@@ -492,7 +492,6 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/login') {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helper-module */ "./resources/assets/js/helper-module.js");
-/* harmony import */ var _helper_utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../helper-utilities */ "./resources/assets/js/helper-utilities.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -504,7 +503,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 var metaToken = document.querySelector('meta[name="csrf-token"]').content;
@@ -746,7 +744,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
                 'item_id': item.dataset.itemId
               })
             }).then(function () {
-              Object(_helper_utilities__WEBPACK_IMPORTED_MODULE_1__["getParents"])(item, '.cart-item')[0].remove();
+              Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["getParents"])(item, '.cart-item')[0].remove();
 
               if (!cartPage.querySelector('.cart-item__qty')) {
                 location.reload();
@@ -797,6 +795,18 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_module_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helper-module.js */ "./resources/assets/js/helper-module.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 
 if (_helper_module_js__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/my-account') > -1) {
@@ -826,14 +836,14 @@ if (_helper_module_js__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/my-accou
     // add new address
     document.querySelectorAll('.btn-open-close-modal-address').forEach(function (btnManageModal) {
       btnManageModal.addEventListener('click', function () {
-        console.log('clicked');
         _helper_module_js__WEBPACK_IMPORTED_MODULE_0__["openCloseModal"]('#modalAddAddress');
       });
     });
 
     if (document.querySelectorAll('.btn-edit-addresss')) {
       var deleteAddressBtn = document.querySelectorAll('.btn-delete-address');
-      var closeEditModalBtn = document.querySelector('#btn-close-modalEditAddress');
+      var openEditModalBtns = document.querySelectorAll('.btn-edit-address');
+      var btnManageModalAddress = [].concat(_toConsumableArray(openEditModalBtns), [document.querySelector('#btn-close-modalEditAddress')]);
       var deleteAddressForm = document.querySelector('#deleteAddressForm');
       deleteAddressBtn.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -841,8 +851,10 @@ if (_helper_module_js__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/my-accou
           deleteAddressForm.submit();
         });
       });
-      closeEditModalBtn.addEventListener('click', function () {
-        _helper_module_js__WEBPACK_IMPORTED_MODULE_0__["openCloseModal"]('#modalEditAddress');
+      btnManageModalAddress.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          _helper_module_js__WEBPACK_IMPORTED_MODULE_0__["openCloseModal"]('#modalEditAddress');
+        });
       });
     }
   }
