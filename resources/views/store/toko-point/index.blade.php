@@ -80,8 +80,6 @@
                             {{ ($httpQuery['sort'] ?? '') == 'cheap' ? 'selected' : '' }}>Termurah</option>
                             <option value="expensive" 
                             {{ ($httpQuery['sort'] ?? '') == 'expensive' ? 'selected' : '' }}>Termahal</option>
-                            <option value="promo" 
-                            {{ ($httpQuery['sort'] ?? '') == 'promo' ? 'selected' : '' }}>Promo</option>
                         </select>
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -95,7 +93,7 @@
                 {{-- foreach --}}
                 @foreach ($products as $product)
                     <x-card-product
-                    product-img="{{ $product->mainImage ? asset('storage/img/' . $product->mainImage->url) : asset('storage/img/telkomsel.jpg') }}" 
+                    product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : asset('img/static/example.jpg') }}" 
                     product-name="{{ $product->title }}"
                     product-category="{{ $product->productCategory->title }}" 
                     product-category-id="{{ $product->productCategory->id }}" 
