@@ -86,22 +86,10 @@
             Jadikan sebagai alamat utama ?
         </span>
     </label>
-    <div class="mt-2 flex">
-        <div class="mr-5">
-            <label class="inline-flex items-center">
-                <input type="radio" class="form-radio" name="is_main_address" value="1" id="main1">
-                <span>
-                    ya
-                </span>
-            </label>
-        </div>
-        <div class="ml-2">
-            <label class="inline-flex items-center">
-                <input type="radio" class="form-radio" name="is_main_address" value="0" id="main0">
-                <span>
-                    tidak
-                </span>
-            </label>
-        </div>
+    <div class="mt-2 flex space-x-5">
+        <x-input-checkbox label="ya" name="is_main_address" id="main1" 
+        value="1" is-required="true" />
+        <x-input-checkbox label="tidak" name="is_main_address" id="main0"
+        value="0" is-checked="true" is-required="true" />
     </div>
 </div>
