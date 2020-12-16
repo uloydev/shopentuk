@@ -575,7 +575,20 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
   }; // check voucher
 
 
-  var cartPage = document.querySelector('#cartPage'); // modal checkout and it's child
+  var cartPage = document.querySelector('#cartPage');
+  /**
+   * set icon color when btn #btn-back hovered
+   */
+
+  var backToPrevBtn = document.querySelector('#btn-back');
+  var icon = backToPrevBtn.querySelector('box-icon');
+  var iconOriginalColor = icon.getAttribute('color');
+  backToPrevBtn.addEventListener('mouseover', function () {
+    icon.setAttribute('color', '#fff');
+  });
+  backToPrevBtn.addEventListener('mouseleave', function () {
+    icon.setAttribute('color', iconOriginalColor);
+  }); // modal checkout and it's child
 
   if (cartPage.querySelector('#modalCheckout')) {
     /*
@@ -915,9 +928,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/') {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
 
 
 /***/ })

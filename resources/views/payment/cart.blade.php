@@ -68,8 +68,7 @@
                 <div class="flex items-center justify-end space-x-0">
                     <x-input-basic name="voucher_code" add-class="transform scale-90" 
                     placeholder="Ketik kode voucher"/>
-                    <x-btn-primary text="Cek Kode" id="btnCheckVoucher"
-                    class="transform scale-90 btn bg-teal-500 active:bg-teal-800 hover:bg-teal-600 border-teal-700 mb-5"/>
+                    <x-btn action="submit" text="Cek Kode" type="secondary" id="btnCheckVoucher" add-class="transform scale-90 mb-6" />
                 </div>
             @else
                 <p>Anda tidak bisa menggunakan voucher karena semua belanjaan anda menggunakan point</p>
@@ -110,18 +109,19 @@
                 </li>
             </ul>
         </div>
-        <div class="flex justify-center items-center flex-col lg:flex-row">
-            <div class="lg:mr-auto flex items-center text-xs justify-between w-full mb-3 lg:mb-0">
-                <a href="{{ url()->previous() }}" id="test"
-                class="btn-outline hpver:bg-blue-600 border-blue-500 text-blue-500 
-                hover:bg-blue-500 hover:text-white">
-                    <box-icon name='left-arrow-alt' class="text-blue-500 hover:text-white"></box-icon>
-                    <span>Kembali</span>
-                </a>
-            </div>
-            <x-btn-primary text="Lanjutkan checkout" id="btnShowCheckoutStep"
+        <div class="flex justify-between items-center flex-col lg:flex-row space-y-5 lg:space-y-0">
+            <a href="{{ url()->previous() }}" id="btn-back"
+            class="btn-outline hpver:bg-blue-600 border-blue-500 text-blue-500 
+            hover:bg-blue-500 hover:text-white w-full lg:w-auto">
+                <box-icon name='left-arrow-alt'
+                class="text-blue-500"></box-icon>
+                <span>Kembali</span>
+            </a>
+            <x-btn action="submit" type="primary" text="Lanjutkan checkout" 
+            id="btnShowCheckoutStep" add-class="w-full lg:w-auto" />
+            {{-- <x-btn-primary text="Lanjutkan checkout" id="btnShowCheckoutStep"
             class="btn bg-teal-500 active:bg-teal-800 hover:bg-teal-600 border-teal-700
-            w-full justify-center"/>
+            w-full justify-center"/> --}}
         </div>
 
         @include('payment.step-checkout')
