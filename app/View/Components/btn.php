@@ -14,7 +14,7 @@ class btn extends Component
      *
      * @return void
      */
-    public function __construct($text, $action, $addClass = '')
+    public function __construct($text, $action = '', $addClass = '')
     {
         $this->text = $text;
         $this->action = $action;
