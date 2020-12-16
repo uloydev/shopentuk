@@ -9,6 +9,18 @@ class UserValidaion extends FormRequest
 {
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'phone' => str_replace(' ', '', $this->phone),
+        ]);
+    }
+
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool

@@ -35,6 +35,7 @@ class UserAddressController extends Controller
 
     public function update(UserAddressValidation $request)
     {
+
         $userId = Auth::id();
         if ($request->is_main_address) {
             UserAddress::where('is_main_address', true)->where('user_id', $userId)->update(['is_main_address' => false]);

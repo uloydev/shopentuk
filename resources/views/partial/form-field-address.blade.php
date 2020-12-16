@@ -3,7 +3,7 @@
     <label for="title" class="block mb-2 required-input">
         <span class="text-gray-700">Title</span>
     </label>
-    <input type="text" id="title" name="title" 
+    <input type="text" id="title" name="title" value="{{ old('title') }}"
     class="form-input mt-1 block w-full border-gray-400" required>
 
 </div>
@@ -11,7 +11,7 @@
     <label for="name" class="block mb-2 required-input">
         <span class="text-gray-700">Name</span>
     </label>
-    <input type="text" id="name" name="name"
+    <input type="text" id="name" name="name" value="{{ old('name') }}"
     class="form-input mt-1 block w-full border-gray-400" required>
 
 </div>
@@ -19,7 +19,7 @@
     <label for="email" class="block mb-2 required-input">
         <span class="text-gray-700">Email</span>
     </label>
-    <input type="text" id="email" name="email"
+    <input type="text" id="email" name="email" value="{{ old('email') }}"
     class="form-input mt-1 block w-full border-gray-400" required>
 
 </div>
@@ -27,7 +27,8 @@
     <label for="phone" class="block mb-2 required-input">
         <span class="text-gray-700">Phone</span>
     </label>
-    <input type="text" id="phone" name="phone"
+    <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" 
+    maxlength="13" minlength="6"
     class="form-input mt-1 block w-full border-gray-400" required>
 </div>
 <div class="mb-6 lg:col-span-full">
@@ -36,14 +37,15 @@
             Street Address
         </span>
     </label>
-    <textarea id="street_address" class="form-textarea mt-1 block w-full" rows="3" 
-    placeholder="Masukan nama jalanmu" name="street_address" required></textarea>
+    <textarea id="street_address" class="form-textarea mt-1 block w-full" 
+    rows="3" placeholder="Masukan nama jalanmu" 
+    name="street_address" required>{{ old('street_address') }}"</textarea>
 </div>
 <div class="mb-6">
     <label for="kelurahan" class="block mb-2 required-input">
         <span class="text-gray-700">Kelurahan</span>
     </label>
-    <input type="text" id="kelurahan" name="kelurahan"
+    <input type="text" id="kelurahan" name="kelurahan" value="{{ old('kelurahan') }}"
     class="form-input mt-1 block w-full border-gray-400" required>
 
 </div>
@@ -51,7 +53,7 @@
     <label for="kecamatan" class="block mb-2 required-input">
         <span class="text-gray-700">Kecamatan</span>
     </label>
-    <input type="text" id="kecamatan" name="kecamatan"
+    <input type="text" id="kecamatan" name="kecamatan" value="{{ old('kecamatan') }}"
     class="form-input mt-1 block w-full border-gray-400" required>
 
 </div>
@@ -59,7 +61,7 @@
     <label for="city" class="block mb-2 required-input">
         <span class="text-gray-700">City</span>
     </label>
-    <input type="text" id="city" name="city"
+    <input type="text" id="city" name="city" value="{{ old('city') }}"
     class="form-input mt-1 block w-full border-gray-400" required>
 
 </div>
@@ -67,7 +69,7 @@
     <label for="province" class="block mb-2 required-input">
         <span class="text-gray-700">Province</span>
     </label>
-    <input type="text" id="province" name="province_id"
+    <input type="text" id="province" name="province_id" value="{{ old('province_id') }}"
     class="form-input mt-1 block w-full border-gray-400"
         required>
 
@@ -76,8 +78,8 @@
     <label for="postal_code" class="block mb-2 required-input">
         <span class="text-gray-700">Postal Code</span>
     </label>
-    <input type="text" id="postal_code" name="postal_code"
-    class="form-input mt-1 block w-ful border-gray-400"required>
+    <input type="text" id="postal_code" name="postal_code" value="{{ old('postal_code') }}"
+    class="form-input mt-1 block w-ful border-gray-400" required>
 
 </div>
 <div class="block mb-6 lg:col-span-full">
