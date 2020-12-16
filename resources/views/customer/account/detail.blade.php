@@ -30,8 +30,9 @@
             <div class="flex user-address items-center my-2 bg-gray-100 p-2 rounded-md address" 
             data-userAddressId="{{$address->id}}">
                 <p class="w-full">
-                    <span class="address__title"></span>
-                    {{ $address->title }}
+                    <span class="address__title">
+                        {{ $address->title }}
+                    </span>
                     @if ($address->is_main_address)
                         <span class="rounded-full bg-blue-500 mx-2 px-2 text-white">
                             alamat utama
@@ -70,11 +71,11 @@
 
 @endsection
 
-@push('scripts')
+@push('script')
     <script>
         const editAddressBtn = document.querySelectorAll('.btn-edit-address');
-            const userAddresses = JSON.parse('{!! $userAddresses->toJson() !!}');
-            const editAddressForm = document.querySelector('#editAddressForm');
+        const userAddresses = JSON.parse('{!! $userAddresses->toJson() !!}');
+        const editAddressForm = document.querySelector('#editAddressForm');
             
             const setValue = (field, val) => {
                 editAddressForm.querySelector(field).value = val
@@ -115,7 +116,7 @@
                         setChecked(addressIsChecked, addressFieldsIsChecked)
                     }
 
-                    /*
+                    
                     editAddressForm.querySelector('input#title').value = address.title
                     editAddressForm.querySelector('input#name').value = address.name
                     editAddressForm.querySelector('input#email').value = address.email
@@ -129,11 +130,11 @@
                     editAddressForm.querySelector('input#main0').checked = !address.is_main_address
                     editAddressForm.querySelector('textarea#street_address').value
                     = address.street_address
-                    */
+                    
                     let formData = new FormData(editAddressForm)
                     console.log(Object.fromEntries(formData))
                     // please fix open modal
-                    HelperModule.openCloseModal('#modalEditAddress')
+                    // HelperModule.openCloseModal('#modalEditAddress')
                 })
             })
     </script>
