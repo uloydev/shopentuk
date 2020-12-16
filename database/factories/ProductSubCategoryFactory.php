@@ -22,30 +22,41 @@ class ProductSubCategoryFactory extends Factory
      */
     public function definition()
     {
-        $categoryId = $this->faker->randomElement([1, 2, 4]);
+        $category = $this->faker->unique()->randomElement([
+            [1, 0],
+            [1, 1],
+            [2, 0],
+            [2, 1],
+            [4, 0],
+            [4, 1]
+        ]);
         
-        switch ($categoryId) {
+        switch ($category[0]) {
             case 2:
-                $titleOption = ['baju', 'celana'];
-                $descriptions = ['baju pria', 'celana pria'];
+                $combinations = [
+                    ['baju', 'baju pria'],
+                    ['celana', 'celana pria']
+                ];
             break;
 
             case 4:
-                $titleOption = ['gaun', 'baju'];
-                $descriptions = ['gaun wanita', 'baju wanita'];
+                $combinations = [
+                    ['baju', 'baju wanita'],
+                    ['gaun', 'gaun pria']
+                ];
             break;
             case 1:
-                $titleOption = ['google play', 'amazon'];
-                $descriptions = ['voucher google play', 'voucher amazon'];
+                $combinations = [
+                    ['google play', 'voucher google play'],
+                    ['amazon', 'voucher amazon']
+                ];
             break;
         }
-        
-        $titles = $this->faker->randomElement($titleOption);
-        
+        $data = $combinations[$category[1]];
         return [
-            'title' => $titles,
-            'description' => $this->faker->randomElement($descriptions),
-            'category_id' => $categoryId,
+            'title' => $data[0],
+            'description' => $data[1],
+            'category_id' => $category[0],
         ];
     }
 }
