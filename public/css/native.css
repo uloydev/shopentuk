@@ -1019,12 +1019,10 @@ body {
   justify-content: center;
   outline: 2px solid transparent;
   outline-offset: 2px;
+  border-width: 1px;
   border-bottom-width: 4px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   text-transform: capitalize;
-}
-
-.btn:active, .btn-outline:active {
   --transform-translate-x: 0;
   --transform-translate-y: 0;
   --transform-rotate: 0;
@@ -1033,6 +1031,9 @@ body {
   --transform-scale-x: 1;
   --transform-scale-y: 1;
   transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+}
+
+.btn:active, .btn-outline:active {
   --transform-translate-y: 0.25rem;
   border-bottom-width: 2px;
 }
@@ -1057,24 +1058,63 @@ body {
   --text-opacity: 1;
   color: #fff;
   color: rgba(255, 255, 255, var(--text-opacity));
+  --border-opacity: 1;
+  border-color: #3182ce;
+  border-color: rgba(49, 130, 206, var(--border-opacity));
 }
 
 .btn--primary:focus, .btn--primary:hover {
   --border-opacity: 1;
   border-color: #3182ce;
   border-color: rgba(49, 130, 206, var(--border-opacity));
+  --border-opacity: 1;
+  border-color: #4299e1;
+  border-color: rgba(66, 153, 225, var(--border-opacity));
 }
 
 .btn--secondary {
   --bg-opacity: 1;
   background-color: #4fd1c5;
   background-color: rgba(79, 209, 197, var(--bg-opacity));
+  --border-opacity: 1;
+  border-color: #4fd1c5;
+  border-color: rgba(79, 209, 197, var(--border-opacity));
 }
 
 .btn--secondary:hover {
   --bg-opacity: 1;
   background-color: #38b2ac;
   background-color: rgba(56, 178, 172, var(--bg-opacity));
+  --border-opacity: 1;
+  border-color: #38b2ac;
+  border-color: rgba(56, 178, 172, var(--border-opacity));
+}
+
+.btn--third {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  font-size: 1rem;
+  font-weight: 500;
+  --text-opacity: 1;
+  color: #4a5568;
+  color: rgba(74, 85, 104, var(--text-opacity));
+  --border-opacity: 1;
+  border-color: #edf2f7;
+  border-color: rgba(237, 242, 247, var(--border-opacity));
+}
+
+.btn--third:hover {
+  --bg-opacity: 1;
+  background-color: #a0aec0;
+  background-color: rgba(160, 174, 192, var(--bg-opacity));
+  --border-opacity: 1;
+  border-color: #a0aec0;
+  border-color: rgba(160, 174, 192, var(--border-opacity));
 }
 
 :disabled {

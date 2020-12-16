@@ -31,10 +31,10 @@ body {
 }
 
 .btn {
-    @apply font-bold py-2 px-4 text-white rounded transition duration-150 inline-flex items-center justify-center outline-none border-b-4 shadow-md capitalize;
+    @apply font-bold py-2 px-4 text-white rounded transition duration-150 inline-flex items-center justify-center outline-none border border-b-4 shadow-md capitalize transform;
 
     &:active {
-        @apply transform translate-y-1 border-b-2;
+        @apply translate-y-1 border-b-2;
     }
 
     &:focus {
@@ -51,19 +51,31 @@ body {
     }
 
     &--primary {
-        @apply bg-blue-500 text-white;
+        @apply bg-blue-500 text-white border-blue-600;
 
         &:focus,
         &:hover {
-            @apply border-blue-600;
+            @apply border-blue-600 border-blue-500;
         }
     }
 
     &--secondary {
-        @apply bg-teal-400;
+        @apply bg-teal-400 border-teal-400;
 
         &:hover {
-            @apply bg-teal-500;
+            @apply bg-teal-500 border-teal-500;
+        }
+    }
+
+    &--third {
+        @apply px-4 py-2 bg-white text-base font-medium text-gray-700 border-gray-200;
+
+        // @screen sm {
+        //     @apply mt-0 ml-3 w-auto;
+        // }
+
+        &:hover {
+            @apply bg-gray-500 border-gray-500;
         }
     }
 
