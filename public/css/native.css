@@ -1074,20 +1074,26 @@ body {
 
 .btn--secondary {
   --bg-opacity: 1;
-  background-color: #4fd1c5;
-  background-color: rgba(79, 209, 197, var(--bg-opacity));
+  background-color: #38b2ac;
+  background-color: rgba(56, 178, 172, var(--bg-opacity));
   --border-opacity: 1;
-  border-color: #4fd1c5;
-  border-color: rgba(79, 209, 197, var(--border-opacity));
+  border-color: #319795;
+  border-color: rgba(49, 151, 149, var(--border-opacity));
 }
 
 .btn--secondary:hover {
   --bg-opacity: 1;
-  background-color: #38b2ac;
-  background-color: rgba(56, 178, 172, var(--bg-opacity));
+  background-color: #319795;
+  background-color: rgba(49, 151, 149, var(--bg-opacity));
   --border-opacity: 1;
-  border-color: #38b2ac;
-  border-color: rgba(56, 178, 172, var(--border-opacity));
+  border-color: #2c7a7b;
+  border-color: rgba(44, 122, 123, var(--border-opacity));
+}
+
+.btn--secondary:active {
+  --bg-opacity: 1;
+  background-color: #285e61;
+  background-color: rgba(40, 94, 97, var(--bg-opacity));
 }
 
 .btn--third {
