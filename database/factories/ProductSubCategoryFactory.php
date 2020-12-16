@@ -22,41 +22,50 @@ class ProductSubCategoryFactory extends Factory
      */
     public function definition()
     {
-        $category = $this->faker->unique()->randomElement([
-            [1, 0],
-            [1, 1],
-            [2, 0],
-            [2, 1],
-            [4, 0],
-            [4, 1]
-        ]);
-        
-        switch ($category[0]) {
-            case 2:
+        $temps = [];
+        $categories = ProductCategory::all();
+        foreach( $categories as $category) {
+            switch ($category->title) {
+                case 'pria':
+                    array_push($temps, [1,0,$category->id], [1,1,$category->id]);
+                    break;
+                case 'wanita':
+                    array_push($temps, [2,0,$category->id], [2,1,$category->id]);
+                    break;    
+                case 'voucher':
+                    array_push($temps, [3,0,$category->id], [3,1,$category->id]);
+                    break;
+                case 'pulsa':
+                    break;
+                }
+        }
+        $temp = $this->faker->unique()->randomElement($temps);
+        switch ($temp[0]) {
+            case 1:
                 $combinations = [
                     ['baju', 'baju pria'],
                     ['celana', 'celana pria']
                 ];
             break;
 
-            case 4:
+            case 2:
                 $combinations = [
                     ['baju', 'baju wanita'],
-                    ['gaun', 'gaun pria']
+                    ['gaun', 'gaun wanita']
                 ];
             break;
-            case 1:
+            case 3:
                 $combinations = [
                     ['google play', 'voucher google play'],
                     ['amazon', 'voucher amazon']
                 ];
             break;
         }
-        $data = $combinations[$category[1]];
+        $data = $combinations[$temp[1]];
         return [
             'title' => $data[0],
             'description' => $data[1],
-            'category_id' => $category[0],
+            'category_id' => $temp[2],
         ];
     }
 }
