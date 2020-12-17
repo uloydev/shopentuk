@@ -16,3 +16,5 @@ public/stuff/.~lock.Sample game.xlsx#
 public/js/dashboard-admin.js
 public/js/all-admin.js
 public/storage
+public/js/all-client.js
+public/css/native.css

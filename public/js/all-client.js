@@ -12582,24 +12582,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var swiper_bundle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper/bundle */ "./node_modules/swiper/swiper-bundle.esm.js");
 /* harmony import */ var swiper_swiper_bundle_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper/swiper-bundle.css */ "./node_modules/swiper/swiper-bundle.css");
 /* harmony import */ var swiper_swiper_bundle_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(swiper_swiper_bundle_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helper-module */ "./resources/assets/js/helper-module.js");
 
 
-var listGame = new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__["default"]('.section-game__list', {
-  setWrapperSize: true,
-  slidesPerView: 2,
-  spaceBetween: 30,
-  centeredSlides: true,
-  initialSlide: 2,
-  loop: true,
-  slideActiveClass: 'section-game__item--active',
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev'
-  }
-});
-listGame.on('slideChange', function () {
-  console.log('test');
-});
+
+
+if (_helper_module__WEBPACK_IMPORTED_MODULE_2__["pageUrl"] === '/game') {
+  var elGameSwiper = '.section-game__list';
+  var listGame = new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__["default"](elGameSwiper, {
+    setWrapperSize: true,
+    slidesPerView: 2,
+    spaceBetween: 30,
+    centeredSlides: true,
+    initialSlide: 2,
+    loop: true,
+    grabCursor: true,
+    slideActiveClass: 'section-game__item--active',
+    slideNextClass: 'section-game__item--next',
+    slidePrevClass: 'section-game__item--prev',
+    navigation: {
+      nextEl: '.section-game__btn-slide--next',
+      prevEl: '.section-game__btn-slide--prev'
+    }
+  });
+  var listGameSwiper = document.querySelector(elGameSwiper).swiper;
+  document.querySelectorAll('.section-game__list .swiper-slide').forEach(function (eachSlide) {
+    eachSlide.addEventListener('click', function () {
+      if (eachSlide.classList.contains('section-game__item--next')) {
+        listGameSwiper.slideNext();
+      } else if (eachSlide.classList.contains('section-game__item--prev')) {
+        listGameSwiper.slidePrev();
+      }
+    });
+  });
+}
 
 /***/ }),
 
