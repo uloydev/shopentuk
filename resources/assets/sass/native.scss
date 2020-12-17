@@ -1,5 +1,6 @@
 @use 'nav';
 @use 'general';
+@use 'mixin';
 
 .header {
     z-index: 1;
@@ -150,14 +151,24 @@
             @apply h-64 flex-col relative;
 
             $colors: #2da4c2, #27ba62, #fc5a4e, #182c99, #b43cc9,
-                #c93c74, #61eda5, #238c6b, #ffffff, #000000;
+                #c93c74, #61eda5, #238c6b, #000000;
 
-            @for $i from 0 through 9 {
+            @for $i from 0 through 8 {
                 $color: nth($colors, $i + 1);
 
                 &[data-swiper-slide-index="#{$i}"] {
                     background-color: $color;
+                    color: white;
                 }
+            }
+
+            &[data-swiper-slide-index="9"] {
+                @apply bg-white text-gray-800;
+            }
+
+            &--next,
+            &--prev {
+                @apply cursor-pointer;
             }
 
             &--active {
@@ -174,6 +185,21 @@
                 }
 
                 background-color: inherit;
+            }
+        }
+
+        &__btn-slide {
+            @include general.sameSize(40px);
+            @include mixin.centerPosition($isHorizontalCenter: false);
+            @include mixin.centerFlex;
+            @apply rounded-full bg-black bg-opacity-25 z-10;
+
+            &--prev {
+                left: 1rem;
+            }
+
+            &--next {
+                right: 1rem;
             }
         }
 

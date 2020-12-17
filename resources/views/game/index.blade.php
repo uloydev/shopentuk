@@ -7,7 +7,7 @@
             <div class="swiper-container section-game__list">
                 <div class="swiper-wrapper items-center">
                     @for ($i = 1; $i <= 10; $i++)
-                        <div class="swiper-slide section-game__item text-white">
+                        <div class="swiper-slide section-game__item">
                             <label for="choose-option-{{ $i }}" class="text-6xl cursor-pointer">
                                 {{ $i }}
                             </label>
@@ -31,8 +31,12 @@
                     @endfor
                 </div>
                 <!-- Add Arrows -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+                <div class="section-game__btn-slide section-game__btn-slide--next">
+                    <box-icon type='solid' name='chevron-right' class="text-white"></box-icon>
+                </div>
+                <div class="section-game__btn-slide section-game__btn-slide--prev">
+                    <box-icon name='chevron-left' type='solid' class="text-white"></box-icon>
+                </div>
             </div>
         </section>
     </div>
