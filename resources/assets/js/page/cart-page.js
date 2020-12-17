@@ -122,12 +122,7 @@ if (pageUrl === '/cart') {
                     `
                 }
             })
-            .catch(error => {
-                console.error(error)
-            })
-
             openCloseModal('#modalAddAddress')
-            
         });
     }
 
