@@ -3,8 +3,10 @@
         <div class="nav__item nav__item--first lg:border-b-0 lg:pb-0 lg:px-0">
             <a href="{{ route('landing-page') }}" class="nav__logo">
                 <picture class="overflow-hidden">
-                    <source media="(min-width: 1024px)" srcset="{{ asset('img/logo/shopentuk-desktop.png') }}">
-                    <source media="(max-width: 1023px)" srcset="{{ asset('img/logo/shopentuk.png') }}">
+                    <source media="(min-width: 1024px)" 
+                    srcset="{{ asset('img/logo/shopentuk-desktop.png') }}">
+                    <source media="(max-width: 1023px)" 
+                    srcset="{{ asset('img/logo/shopentuk.png') }}">
                     <img src="{{ asset('img/logo/shopentuk.png') }}">
                 </picture>
             </a>
@@ -89,7 +91,7 @@
                 </ul>
             </li>
             <li class="nav__item nav__item--menu lg:mr-6 lg:flex-grow lg:justify-center">
-                <a href="{{ route('landing-page') }}" class="nav__link">Game</a>
+                <a href="{{ route('game.index') }}" class="nav__link">Game</a>
             </li>
             <li class="nav__item nav__item--menu lg:mr-6 lg:flex-grow lg:justify-center">
                 <a href="{{ route('store.toko-point.index') }}" class="nav__link">Point</a>

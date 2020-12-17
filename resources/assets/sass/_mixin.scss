@@ -15,12 +15,29 @@
 }
 
 @mixin center-x($position: absolute) {
-    @if $position != static or $position != relative {
+    @if $position !=static or $position !=relative {
         position: $position;
         left: 50%;
         transform: translateX(-50%);
     }
-    @else {
 
+    @else {}
+}
+
+@mixin centerFlex($isBlock: true, $isPrimaryAxisCenter: true, $isSecondaryAxisCenter: true) {
+    @if $isBlock {
+        @apply flex;
+    }
+
+    @else {
+        @apply inline-flex;
+    }
+
+    @if $isPrimaryAxisCenter {
+        @apply justify-center;
+    }
+
+    @if $isSecondaryAxisCenter {
+        @apply items-center;
     }
 }
