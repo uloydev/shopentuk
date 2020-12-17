@@ -103,14 +103,14 @@ body {
     &__heading {
 
         span {
-            position: relative;
+            @apply relative;
 
             &::after {
                 content: '';
                 @apply bg-black w-3/5;
                 bottom: -30px;
                 height: 2px;
-                @include center-x;
+                @include centerPosition;
             }
         }
     }
@@ -118,7 +118,7 @@ body {
 
 
 .card-product {
-    max-width: 100%;
+    @apply max-w-full;
 }
 
 .alert {

@@ -14,14 +14,20 @@
     }
 }
 
-@mixin center-x($position: absolute) {
-    @if $position !=static or $position !=relative {
+@mixin centerPosition($position: absolute, $isHorizontalCenter: true, $isVerticalCenter: true) {
+    @if $position !=static {
         position: $position;
+    }
+
+    @if $isHorizontalCenter {
         left: 50%;
         transform: translateX(-50%);
     }
 
-    @else {}
+    @if $isVerticalCenter {
+        top: 50%;
+        transform: translateY(-50%);
+    }
 }
 
 @mixin centerFlex($isBlock: true, $isPrimaryAxisCenter: true, $isSecondaryAxisCenter: true) {
