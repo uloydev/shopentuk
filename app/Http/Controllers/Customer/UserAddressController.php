@@ -22,10 +22,10 @@ class UserAddressController extends Controller
         return response()->json(User::find($userId)->userAddresses->sortByDesc('is_main_address'));
     }
 
-    public function storeRedirect(UserAddressValidation $request)
+    public function storeRedirect(Request $request)
     {
         $userId = Auth::id();
-        if ($request->is_main_address) {
+        if ($request->is_main_address == '1') {
             UserAddress::where('is_main_address', true)->where('user_id', $userId)
                 ->update(['is_main_address' => false]);
         }
