@@ -674,8 +674,6 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
         arr.forEach(function (value) {
           addresses.innerHTML += "\n                        <option value=\"".concat(value.id, "\">\n                            ").concat(value.title, "\n                        </option>\n                    ");
         });
-      })["catch"](function (error) {
-        console.error(error);
       });
       Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["openCloseModal"])('#modalAddAddress');
     });
