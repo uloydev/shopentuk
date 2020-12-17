@@ -67,7 +67,7 @@
         </form>
     </div>
     @include('partial.modal-edit-address')
-    @include('partial.modal-add-address')
+    @include('partial.modal-add-address', ['formUrl' => route('my-account.address.store-redirect')])
 
 @endsection
 

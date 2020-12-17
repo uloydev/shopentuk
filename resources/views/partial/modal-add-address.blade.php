@@ -13,9 +13,10 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                     Tambah alamat baru
                 </h3>
                 <div class="mt-5 flex">
-                    <form action="{{ route('my-account.address.store-redirect') }}" 
+                    <form action="{{ $formUrl }}" 
                         method="post" id="newAddressForm"
                         class="grid lg:grid-cols-2 gap-x-5 w-full">
+                        <input type="hidden" name="user_id" value="{{ Auth::id() }}"/>
                         @include('partial.form-field-address')
                     </form>
                 </div>

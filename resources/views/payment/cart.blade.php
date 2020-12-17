@@ -126,8 +126,7 @@
 
         @include('payment.step-checkout')
         @include('partial.modal-add-address',[
-            'idModal' => 'modalAddAddress',
-            'formId' => 'newAddressForm'
+            'formUrl' => route('my-account.address.store')
         ])
 
     @else

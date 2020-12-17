@@ -101,7 +101,6 @@ if (pageUrl === '/cart') {
             e.preventDefault()
     
             let data = new FormData(newAddressForm);
-
             fetch(newAddressForm.getAttribute('action'), {
                     method: 'POST',
                     headers: {
@@ -113,14 +112,22 @@ if (pageUrl === '/cart') {
             })
             .then(res => res.json())
             .then(json => {
+                let arr=[];
+                Object.keys(json).forEach(key => {
+                    arr.push(json[key]);
+                })
+                arr = arr.sort(function(a, b){
+                    return b.is_main_address - a.is_main_address;
+                })
                 addresses.innerHTML = ''
-                for (const [key, value] of Object.entries(json)) {
+                arr.forEach(value => {
                     addresses.innerHTML += `
                         <option value="${value.id}">
                             ${value.title}
                         </option>
                     `
-                }
+                    
+                });
             })
             .catch(error => {
                 console.error(error)

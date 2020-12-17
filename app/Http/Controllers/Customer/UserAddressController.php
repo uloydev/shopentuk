@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class UserAddressController extends Controller
 {
-    public function store(UserAddressValidation $request)
+    public function store(Request $request)
     {
-        $userId = Auth::id();
-        if ($request->is_main_address) {
+        $userId = $request->user_id;
+        if ($request->is_main_address == '1') {
             UserAddress::where('is_main_address', true)->where('user_id', $userId)
                 ->update(['is_main_address' => false]);
         }
@@ -37,7 +37,7 @@ class UserAddressController extends Controller
     {
 
         $userId = Auth::id();
-        if ($request->is_main_address) {
+        if ($request->is_main_address == '1') {
             UserAddress::where('is_main_address', true)->where('user_id', $userId)->update(['is_main_address' => false]);
         }
         $address = UserAddress::findOrFail($request->id);
