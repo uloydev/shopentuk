@@ -1097,15 +1097,9 @@ body {
 }
 
 .btn--third {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
   --bg-opacity: 1;
   background-color: #fff;
   background-color: rgba(255, 255, 255, var(--bg-opacity));
-  font-size: 1rem;
-  font-weight: 500;
   --text-opacity: 1;
   color: #4a5568;
   color: rgba(74, 85, 104, var(--text-opacity));
@@ -1121,6 +1115,19 @@ body {
   --border-opacity: 1;
   border-color: #a0aec0;
   border-color: rgba(160, 174, 192, var(--border-opacity));
+}
+
+.btn--transparent {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.btn--transparent:hover {
+  --bg-opacity: 1;
+  background-color: #1a202c;
+  background-color: rgba(26, 32, 44, var(--bg-opacity));
+  --bg-opacity: 0.25;
 }
 
 :disabled {
@@ -1143,6 +1150,8 @@ body {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .card-product {
@@ -1597,6 +1606,162 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+#gamePage {
+  display: flex;
+  flex-direction: column;
+}
+
+#gamePage main {
+  flex-grow: 1;
+}
+
+#gamePage .section-game__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: height 250ms;
+  height: 16rem;
+  flex-direction: column;
+  position: relative;
+}
+
+#gamePage .section-game__item[data-swiper-slide-index="0"] {
+  background-color: #2da4c2;
+  color: white;
+}
+
+#gamePage .section-game__item[data-swiper-slide-index="1"] {
+  background-color: #27ba62;
+  color: white;
+}
+
+#gamePage .section-game__item[data-swiper-slide-index="2"] {
+  background-color: #fc5a4e;
+  color: white;
+}
+
+#gamePage .section-game__item[data-swiper-slide-index="3"] {
+  background-color: #182c99;
+  color: white;
+}
+
+#gamePage .section-game__item[data-swiper-slide-index="4"] {
+  background-color: #b43cc9;
+  color: white;
+}
+
+#gamePage .section-game__item[data-swiper-slide-index="5"] {
+  background-color: #c93c74;
+  color: white;
+}
+
+#gamePage .section-game__item[data-swiper-slide-index="6"] {
+  background-color: #61eda5;
+  color: white;
+}
+
+#gamePage .section-game__item[data-swiper-slide-index="7"] {
+  background-color: #238c6b;
+  color: white;
+}
+
+#gamePage .section-game__item[data-swiper-slide-index="8"] {
+  background-color: #000000;
+  color: white;
+}
+
+#gamePage .section-game__item[data-swiper-slide-index="9"] {
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #2d3748;
+  color: rgba(45, 55, 72, var(--text-opacity));
+}
+
+#gamePage .section-game__item--next, #gamePage .section-game__item--prev {
+  cursor: pointer;
+}
+
+#gamePage .section-game__item--active {
+  height: 25rem;
+}
+
+#gamePage .section-game__item--checked {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition-property: height, width;
+  transition-duration: 250ms;
+  background-color: inherit;
+}
+
+#gamePage .section-game__btn-slide {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9999px;
+  --bg-opacity: 1;
+  background-color: #000;
+  background-color: rgba(0, 0, 0, var(--bg-opacity));
+  --bg-opacity: 0.25;
+  z-index: 10;
+}
+
+#gamePage .section-game__btn-slide--prev {
+  left: 1rem;
+}
+
+#gamePage .section-game__btn-slide--next {
+  right: 1rem;
+}
+
+#gamePage .section-game__input {
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  border-color: transparent;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  --text-opacity: 1;
+  color: #1a202c;
+  color: rgba(26, 32, 44, var(--text-opacity));
+}
+
+#gamePage .section-game input[name=choose_option] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+#gamePage .section-game input[name=choose_option]:checked + .section-game__item--checked {
+  transition: all 250ms;
+  opacity: 1;
+  visibility: visible;
   height: 100%;
   width: 100%;
 }

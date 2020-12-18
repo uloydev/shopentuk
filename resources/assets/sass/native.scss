@@ -1,5 +1,6 @@
 @use 'nav';
 @use 'general';
+@use 'mixin';
 
 .header {
     z-index: 1;
@@ -132,6 +133,91 @@
             @apply absolute flex items-center justify-center h-full w-full;
         }
     }
+}
+
+#gamePage {
+
+    @apply flex flex-col;
+
+    main {
+        @apply flex-grow;
+    }
+
+    .section-game {
+
+        &__item {
+            @include general.centerFlex;
+            transition: height general.$trans-duration;
+            @apply h-64 flex-col relative;
+
+            $colors: #2da4c2, #27ba62, #fc5a4e, #182c99, #b43cc9,
+                #c93c74, #61eda5, #238c6b, #000000;
+
+            @for $i from 0 through 8 {
+                $color: nth($colors, $i + 1);
+
+                &[data-swiper-slide-index="#{$i}"] {
+                    background-color: $color;
+                    color: white;
+                }
+            }
+
+            &[data-swiper-slide-index="9"] {
+                @apply bg-white text-gray-800;
+            }
+
+            &--next,
+            &--prev {
+                @apply cursor-pointer;
+            }
+
+            &--active {
+                height: 25rem;
+            }
+
+            &--checked {
+                @apply absolute inset-0 h-0 w-0 invisible;
+                @include general.centerFlex;
+
+                transition: {
+                    property: height, width;
+                    duration: general.$trans-duration;
+                }
+
+                background-color: inherit;
+            }
+        }
+
+        &__btn-slide {
+            @include general.sameSize(40px);
+            @include mixin.centerPosition($isHorizontalCenter: false);
+            @include mixin.centerFlex;
+            @apply rounded-full bg-black bg-opacity-25 z-10;
+
+            &--prev {
+                left: 1rem;
+            }
+
+            &--next {
+                right: 1rem;
+            }
+        }
+
+        &__input {
+            @apply bg-white border-transparent text-center p-2 rounded text-gray-900;
+        }
+
+        input[name=choose_option] {
+            @apply absolute inset-0 z-10 h-0 w-0 overflow-hidden;
+        }
+
+        input[name=choose_option]:checked+.section-game__item--checked {
+            transition: all general.$trans-duration;
+            @apply opacity-100 visible h-full w-full;
+        }
+
+    }
+
 }
 
 @tailwind utilities;

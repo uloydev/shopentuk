@@ -27,6 +27,7 @@
         "jquery": "^3.5.1",
         "jsdom": "^16.4.0",
         "num-words": "^1.2.2",
+        "swiper": "^6.4.1",
         "tailwindcss": "^1.9.5"
     }
 }
