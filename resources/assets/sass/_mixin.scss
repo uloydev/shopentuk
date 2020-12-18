@@ -30,7 +30,9 @@
     }
 }
 
-@mixin centerFlex($isBlock: true, $isPrimaryAxisCenter: true, $isSecondaryAxisCenter: true) {
+@mixin centerFlex($isBlock: true, $direction: row, $isPrimaryAxisCenter: true, $isSecondaryAxisCenter: true) {
+    flex-direction: $direction;
+
     @if $isBlock {
         @apply flex;
     }
