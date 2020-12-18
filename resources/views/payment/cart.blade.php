@@ -119,9 +119,6 @@
             </a>
             <x-btn action="submit" type="primary" text="Lanjutkan checkout" 
             id="btnShowCheckoutStep" add-class="w-full lg:w-auto" />
-            {{-- <x-btn-primary text="Lanjutkan checkout" id="btnShowCheckoutStep"
-            class="btn bg-teal-500 active:bg-teal-800 hover:bg-teal-600 border-teal-700
-            w-full justify-center"/> --}}
         </div>
 
         @include('payment.step-checkout')

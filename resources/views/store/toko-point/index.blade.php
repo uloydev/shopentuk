@@ -9,7 +9,7 @@
                 <input type="text" placeholder="Cari produk..."
                 class="appearance-none w-full leading-tight py-2 px-4 border-2 border-r-0 placeholder-gray-700 border-gray-400" name="search" 
                 value="{{ $httpQuery['search'] ?? ''}}" id="search-input">
-                <x-btn-primary text="Cari" class="border-gray-400"/>
+                <x-btn type="primary" text="Cari" action="submit"/>
             </form>
             <div class="py-4">
                 <h1 class="text-2xl">Our best sellers</h1>

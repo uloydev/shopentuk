@@ -8,8 +8,8 @@
             <form action="" method="get" class="flex mb-5" id="form-search">
                 <input type="text" placeholder="Cari produk..."
                 class="appearance-none w-full leading-tight py-2 px-4 border-2 border-r-0 placeholder-gray-700 border-gray-400" name="search" 
-                value="{{ $httpQuery['search'] ?? ''}}" id="search-input">
-                <x-btn-primary text="Cari" class="border-gray-400"/>
+                value="{{ $httpQuery['search'] ?? ''}}" id="search-input" required>
+                <x-btn type="primary" action="submit" text="Cari" />
             </form>
             <div class="py-4">
                 <h1 class="text-2xl">Our best sellers</h1>

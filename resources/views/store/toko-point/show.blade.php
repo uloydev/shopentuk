@@ -18,7 +18,7 @@
                     min="1" max="999" value="1" required name="quantity">
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                     <input type="hidden" name="is_toko_point" value="true">
-                    <x-btn-primary text="Tambah ke keranjang" class="ml-2" type="submit"/>
+                    <x-btn type="primary" text="Tambah ke keranjang" add-class="ml-2" action="submit"/>
                 </form>
             </div>
             <hr>
