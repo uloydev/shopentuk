@@ -9,4 +9,17 @@ if (HelperModule.pageUrl === '/game') {
             chooseOption.checked = false
         })
     })
+
+    const btnSubmitPoint = document.querySelectorAll('.section-game__btn-submit')
+    btnSubmitPoint.forEach(btn => {
+        const originalIconColor = btn.querySelector('box-icon').getAttribute('color')
+
+        btn.addEventListener('mouseover', () => {
+            btn.querySelector('box-icon').setAttribute('color', '#ededed')
+        })
+        btn.addEventListener('mouseleave', () => {
+            console.log('mouse leave')
+            btn.querySelector('box-icon').setAttribute('color', originalIconColor)
+        })
+    })
 }

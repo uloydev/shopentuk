@@ -207,6 +207,17 @@
             @apply bg-white border-transparent text-center p-2 rounded text-gray-900;
         }
 
+        &__thank-you {
+            background-color: inherit;
+            color: inherit;
+            @apply absolute inset-0 h-full w-full capitalize transition transition-all opacity-0 invisible text-xl;
+            @include mixin.centerFlex($direction: column);
+
+            &--show {
+                @apply visible opacity-100;
+            }
+        }
+
         input[name=choose_option] {
             @apply absolute inset-0 z-10 h-0 w-0 overflow-hidden;
         }
