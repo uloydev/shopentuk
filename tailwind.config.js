@@ -5,6 +5,9 @@ module.exports = {
     },
     purge: [],
     theme: {
+        extends: {
+            'full-2x': '200%'
+        },
         container: {
             center: true,
             padding: '1.25rem'

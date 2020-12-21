@@ -16,16 +16,31 @@
                             </p>
                             <input type="checkbox" name="choose_option" id="choose-option-{{ $i }}">
                             <div class="section-game__item--checked">
-                                <div class="flex space-x-4 items-center">
-                                    <label for="input-point" class="capitalize">
+                                <form action="/test" method="POST" 
+                                class="flex items-center section-game__form">
+                                    @csrf
+                                    <label for="input-point" class="capitalize mr-4">
                                         input point
                                     </label>
-                                    <input type="number" name="input_point" id="input-point" class="section-game__input" max="100" min="1">
-                                </div>
+                                    <input type="number" name="input_point" id="input-point" class="section-game__input" max="100" min="1" required>
+                                    <x-btn action="submit" type="transparent" add-class="btn--without-hover section-game__btn-submit">
+                                        <box-icon type='solid' name='send' 
+                                        class="text-white"></box-icon>
+                                    </x-btn>
+                                </form>
                                 <x-btn type="transparent" text="" 
                                 add-class="absolute top-0 right-0 section-game__uncheck">
                                     <box-icon name='x' class="text-white"></box-icon>
                                 </x-btn>
+                            </div>
+                            <div class="section-game__thank-you">
+                                <p>
+                                    you're inputing
+                                    <span class="font-bold">
+                                        <var class="point-submitted not-italic"></var>PTS
+                                    </span>
+                                </p>
+                                <p>good luck with your gambling!</p>
                             </div>
                         </div>
                     @endfor
@@ -41,3 +56,29 @@
         </section>
     </div>
 @endsection
+
+@push('script')
+    <script>
+        document.querySelectorAll('.section-game__form').forEach(formSubmitGame => {
+            const gameItem = formSubmitGame.parentElement.parentElement
+            const gameInputPoint = formSubmitGame.querySelector('.section-game__input')
+
+            formSubmitGame.addEventListener('submit', (e) => {
+                e.preventDefault()
+
+                if (gameInputPoint.value.trim() != null) {
+                    // close the form input point
+                    gameItem.querySelector('input[name="choose_option"]').checked = false
+                    
+                    // open the modal says "you're inputing {point_value}, 
+                    // good luck with your gambling!"
+                    gameItem.querySelector('.point-submitted').textContent = gameInputPoint.value.trim()
+                    gameItem.querySelector('.section-game__thank-you')
+                    .classList
+                    .add('section-game__thank-you--show')
+                }
+
+            })
+        })
+    </script>
+@endpush

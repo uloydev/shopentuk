@@ -1,0 +1,13 @@
+.required-input {
+
+    span {
+        @apply relative pr-3;
+
+        &::after {
+            content: '*';
+            top: 50%;
+            transform: translateY(-50%);
+            @apply absolute right-0 text-red-400;
+        }
+    }
+}

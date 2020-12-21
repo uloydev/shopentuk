@@ -26,9 +26,7 @@
                         placeholder="Contoh: saya ingin order tapi tidak tahu caranya" required></textarea>
                     </div>
                 </div>
-                <x-btn-primary text="Kirim"
-                class="flex w-full text-center justify-center md:w-auto bg-blue-500 hover:bg-blue-600
-                focus:border-blue-600 text-white shadow-md focus:shadow-outline" />
+                <x-btn action="submit" text="Kirim" type="primary" add-class="w-full lg:w-auto" />
             </form>
         </div>
     </div>

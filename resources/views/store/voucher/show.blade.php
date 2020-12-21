@@ -22,10 +22,11 @@
             <div class="flex my-5">
                 <form action="{{ route('cart.store') }}" method="post">
                     @csrf
-                    <input type="number" class="appearance-none bg-white border border-gray-400 p-1 text-center w-12"
+                    <input type="number" class="appearance-none bg-white border 
+                    border-gray-400 p-1 text-center w-12 mr-2"
                     min="1" max="999" value="1" required name="quantity">
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <x-btn-primary text="Tambah ke keranjang" class="ml-2" type="submit"/>
+                    <x-btn type="primary" text="Tambah ke keranjang" action="submit"/>
                 </form>
             </div>
             <hr>

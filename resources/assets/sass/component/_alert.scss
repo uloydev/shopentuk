@@ -1,0 +1,20 @@
+.alert {
+    @apply text-white;
+
+    &-success {
+        @apply bg-green-600;
+    }
+
+    &-danger {
+        @apply bg-red-600;
+    }
+
+    &-info {
+        @apply bg-gray-400 text-gray-800;
+    }
+
+    &--fade-out {
+        @apply opacity-0 overflow-hidden transition transition-all duration-300;
+        max-height: 0;
+    }
+}

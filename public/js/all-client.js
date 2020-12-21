@@ -13310,6 +13310,17 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
       chooseOption.checked = false;
     });
   });
+  var btnSubmitPoint = document.querySelectorAll('.section-game__btn-submit');
+  btnSubmitPoint.forEach(function (btn) {
+    var originalIconColor = btn.querySelector('box-icon').getAttribute('color');
+    btn.addEventListener('mouseover', function () {
+      btn.querySelector('box-icon').setAttribute('color', '#ededed');
+    });
+    btn.addEventListener('mouseleave', function () {
+      console.log('mouse leave');
+      btn.querySelector('box-icon').setAttribute('color', originalIconColor);
+    });
+  });
 }
 
 /***/ }),

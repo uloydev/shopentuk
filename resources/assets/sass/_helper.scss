@@ -1,26 +1,7 @@
-.required-input {
-    
-    span {
-        @apply relative pr-3;
-        
-        &::after {
-            content: '*';
-            top: 50%;
-            transform: translateY(-50%);
-            @apply absolute right-0 text-red-400;
-        }
-    }
+.font-architects {
+    font-family: 'Architects Daughter', cursive;
 }
 
-.font{
-    &-architects {
-        font-family: 'Architects Daughter', cursive;
-    }
-    &-shadows-light {
-        font-family: 'Shadows Into Light', cursive;
-    }
-}
-
-.w-full-2x {
-    width: 200%;
+.font-shadows-light {
+    font-family: 'Shadows Into Light', cursive;
 }
