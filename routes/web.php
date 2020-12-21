@@ -11,8 +11,6 @@ Route::prefix('voucher')->name('voucher.')->group(function () {
     Route::post('validate', 'VoucherController@check')->name('validate');
 });
 
-Route::view('game', 'game.index')->name('game.index');
-
 Route::prefix('store')->name('store.')->group(function () {
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', 'StoreController@product')->name('index');
@@ -44,13 +42,16 @@ Route::get('register', function () {
     return redirect('login');
 });
 
-Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'])
-    ->namespace('Customer')->group(function () {
+// customer only routes
+Route::namespace('Customer')->middleware(['auth', 'customer'])->group(function () {
+    // my account routes
+    Route::prefix('my-account')->name('my-account.')->group(function () {
         Route::post('update', 'DashboardController@updateAccount')->name('update');
         Route::get('order/history', 'DashboardController@orderHistory')->name('history.order');
         Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');
         Route::get('detail', 'DashboardController@accountDetail')->name('account.detail');
         Route::get('point', 'DashboardController@pointHistory')->name('point.history');
+        // address routes
         Route::prefix('address')->name('address.')->group(function () {
             Route::post('/', 'UserAddressController@store')->name('store');
             Route::post('/store-redirect', 'UserAddressController@storeRedirect')->name('store-redirect');
@@ -58,6 +59,11 @@ Route::prefix('my-account')->name('my-account.')->middleware(['auth', 'customer'
             Route::post('/delete', 'UserAddressController@destroy')->name('destroy');
         });
     });
+    // game routes
+    Route::prefix('game')->name('game.')->group(function () {
+        Route::get('/', 'GameController@index')->name('index');
+    });
+});
 
 // admin route
 Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name('admin.')
