@@ -12843,6 +12843,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _page_cart_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./page/cart-page */ "./resources/assets/js/page/cart-page.js");
 /* harmony import */ var _page_dashboard_customer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./page/dashboard-customer */ "./resources/assets/js/page/dashboard-customer.js");
 /* harmony import */ var _page_game_index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./page/game-index */ "./resources/assets/js/page/game-index.js");
+/* harmony import */ var _page_product__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./page/product */ "./resources/assets/js/page/product.js");
+
 
 
 
@@ -13349,6 +13351,91 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/') {
 
 /***/ }),
 
+/***/ "./resources/assets/js/page/product.js":
+/*!*********************************************!*\
+  !*** ./resources/assets/js/page/product.js ***!
+  \*********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helper-module */ "./resources/assets/js/helper-module.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/product' > -1) || _helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/toko-point') > -1 || _helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/voucher') > -1) {
+  // let httpQuery = {!! json_encode($httpQuery) !!}
+  var urlQueriesAsArray = window.location.search.slice(1).split('&');
+  var httpQueries = urlQueriesAsArray.map(function (p) {
+    return p.split('=');
+  }).reduce(function (obj, _ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        key = _ref2[0],
+        value = _ref2[1];
+
+    var encodingQuery = _objectSpread(_objectSpread({}, obj), {}, _defineProperty({}, key, value));
+
+    return encodingQuery;
+  }, []); // let currentPage = {{ $products->currentPage() }};
+
+  var currentUrl = window.location.href.split('?')[0];
+  var newUrl;
+  document.querySelector('#form-search').addEventListener('submit', function () {
+    e.preventDefault();
+    var searchInput = document.querySelector("#search-input").value;
+    newUrl = currentUrl + "?search=" + searchInput;
+    console.log(newUrl);
+
+    for (var _i2 = 0, _Object$entries = Object.entries(httpQueries); _i2 < _Object$entries.length; _i2++) {
+      var _Object$entries$_i = _slicedToArray(_Object$entries[_i2], 2),
+          key = _Object$entries$_i[0],
+          value = _Object$entries$_i[1];
+
+      if (key != 'search') {
+        newUrl += "&" + key + "=" + (value !== null && value !== void 0 ? value : '');
+      }
+    }
+
+    window.location.href = newUrl;
+  });
+  var selectSortProduct = document.querySelector('#sort-product');
+  selectSortProduct.addEventListener('change', function () {
+    newUrl = currentUrl + "?sort=" + selectSortProduct.value;
+
+    for (var _i3 = 0, _Object$entries2 = Object.entries(httpQueries); _i3 < _Object$entries2.length; _i3++) {
+      var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i3], 2),
+          key = _Object$entries2$_i[0],
+          value = _Object$entries2$_i[1];
+
+      if (key != 'sort') {
+        newUrl += "&" + key + "=" + (value !== null && value !== void 0 ? value : '');
+      }
+    }
+
+    window.location.href = newUrl;
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/assets/sass/admin-dashboard.scss":
 /*!****************************************************!*\
   !*** ./resources/assets/sass/admin-dashboard.scss ***!
@@ -13378,9 +13465,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/') {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
 
 
 /***/ })
