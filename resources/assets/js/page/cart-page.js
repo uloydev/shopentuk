@@ -141,6 +141,7 @@ if (pageUrl === '/cart') {
         const isShippingPoint = cartPage.querySelectorAll('.cart-item__price[data-is-point="false"]').length == 0;
         const selectAddress = cartPage.querySelector('select[name="address_id"]');
         const addressLabel = cartPage.querySelectorAll('#isJavaAddress');
+        const cartItemCount = document.querySelectorAll('#total-shopping');
 
         let isJavaAddress = false;
         if (selectAddress.value !== "") {
@@ -152,14 +153,19 @@ if (pageUrl === '/cart') {
         let totalMoney = 0;
         let weight = 0;
         let shippingTotal = 0;
+        let totalItem = 0;
         cartItems.forEach(item => {
             const itemPrice = item.previousElementSibling;
             weight += itemPrice.dataset.weight * item.value;
+            totalItem += Number(item.value);
             if (itemPrice.dataset.isPoint === 'true') {
                 totalPoint += itemPrice.dataset.price * item.value;
             } else {
                 totalMoney += itemPrice.dataset.price * item.value;
             }
+        })
+        cartItemCount.forEach(item => {
+            item.textContent = totalItem
         })
         if (isJavaAddress) {
             shippingTotal = cartShipping[0].dataset.price * Math.ceil(weight / 1000)

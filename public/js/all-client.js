@@ -12923,6 +12923,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
     var isShippingPoint = cartPage.querySelectorAll('.cart-item__price[data-is-point="false"]').length == 0;
     var selectAddress = cartPage.querySelector('select[name="address_id"]');
     var addressLabel = cartPage.querySelectorAll('#isJavaAddress');
+    var cartItemCount = document.querySelectorAll('#total-shopping');
     var isJavaAddress = false;
 
     if (selectAddress.value !== "") {
@@ -12934,15 +12935,20 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
     var totalMoney = 0;
     var weight = 0;
     var shippingTotal = 0;
+    var totalItem = 0;
     cartItems.forEach(function (item) {
       var itemPrice = item.previousElementSibling;
       weight += itemPrice.dataset.weight * item.value;
+      totalItem += Number(item.value);
 
       if (itemPrice.dataset.isPoint === 'true') {
         totalPoint += itemPrice.dataset.price * item.value;
       } else {
         totalMoney += itemPrice.dataset.price * item.value;
       }
+    });
+    cartItemCount.forEach(function (item) {
+      item.textContent = totalItem;
     });
 
     if (isJavaAddress) {
@@ -13361,9 +13367,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/') {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
-__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
-module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
+__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
+__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
+module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
 
 
 /***/ })
