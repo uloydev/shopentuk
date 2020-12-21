@@ -6,15 +6,18 @@
         <section class="section-game">
             <div class="swiper-container section-game__list">
                 <div class="swiper-wrapper items-center">
-                    @for ($i = 1; $i <= 10; $i++)
-                        <div class="swiper-slide section-game__item">
-                            <label for="choose-option-{{ $i }}" class="text-6xl cursor-pointer">
-                                {{ $i }}
+                    @foreach($gameOptions as $option)
+                        <div class="swiper-slide section-game__item bg-{{ $option->color }}-600 text-white">
+                            <label for="choose-option-{{ $option->number }}" class="text-6xl cursor-pointer">
+                                {{ $option->number }}
                             </label>
                             <p class="capitalize">
                                 klik nomor untuk pilih nomor ini
                             </p>
-                            <input type="checkbox" name="choose_option" id="choose-option-{{ $i }}">
+                            <p>
+                                Hadiah Point X{{ $option->point_multiplier }}
+                            </p>
+                            <input type="checkbox" name="choose_option" id="choose-option-{{ $option->number }}">
                             <div class="section-game__item--checked">
                                 <form action="/test" method="POST" 
                                 class="flex items-center section-game__form">
@@ -43,7 +46,7 @@
                                 <p>good luck with your gambling!</p>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
                 <!-- Add Arrows -->
                 <div class="section-game__btn-slide section-game__btn-slide--next">

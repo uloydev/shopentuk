@@ -150,21 +150,21 @@
             transition: height general.$trans-duration;
             @apply h-64 flex-col relative;
 
-            $colors: #2da4c2, #27ba62, #fc5a4e, #182c99, #b43cc9,
-                #c93c74, #61eda5, #238c6b, #000000;
+            // $colors: #2da4c2, #27ba62, #fc5a4e, #182c99, #b43cc9,
+            //     #c93c74, #61eda5, #238c6b, #000000;
 
-            @for $i from 0 through 8 {
-                $color: nth($colors, $i + 1);
+            // @for $i from 0 through 8 {
+            //     $color: nth($colors, $i + 1);
 
-                &[data-swiper-slide-index="#{$i}"] {
-                    background-color: $color;
-                    color: white;
-                }
-            }
+            //     &[data-swiper-slide-index="#{$i}"] {
+            //         background-color: $color;
+            //         color: white;
+            //     }
+            // }
 
-            &[data-swiper-slide-index="9"] {
-                @apply bg-white text-gray-800;
-            }
+            // &[data-swiper-slide-index="9"] {
+            //     @apply bg-white text-gray-800;
+            // }
 
             &--next,
             &--prev {
