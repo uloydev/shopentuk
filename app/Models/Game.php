@@ -12,10 +12,16 @@ class Game extends Model
     protected $fillable = [
         'started_at',
         'ended_at',
+        'status',
     ];
 
     protected $casts = [
         'started_at' => 'datetime',
         'ended_at' => 'datetime',
     ];
+
+    public function bids()
+    {
+        return $this->hasMany('App\Models\GameBid');
+    }
 }
