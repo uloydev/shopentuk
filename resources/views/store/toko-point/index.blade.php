@@ -4,7 +4,8 @@
 @section('content')
 <div class="container py-10 px-5 lg:px-0 mx-auto">
     <div class="flex flex-wrap justify-between">
-        <aside class="w-full lg:w-3/12 lg:border-r-2 pr-5 lg:pr-10 order-last lg:order-first mt-10 lg:mt-0">
+        <aside class="w-full lg:w-3/12 lg:border-r-2 pr-5 lg:pr-10 order-last 
+        lg:order-first mt-10 lg:mt-0">
             <form action="" method="get" class="flex mb-5" id="form-search">
                 <input type="text" placeholder="Cari produk..."
                 class="appearance-none w-full leading-tight py-2 px-4 border-2 border-r-0 placeholder-gray-700 border-gray-400" name="search" 
@@ -69,19 +70,25 @@
         <section class="w-full lg:w-9/12 lg:pl-12">
             @include('partial.breadcumb')
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                {{-- <p class="mb-5 sm:mb-0">Menampilkan 1–12 dari 39 hasil</p> --}}
                 <form action="" method="GET">
                     <div class="relative">
                         <select id="sort-product"
                         class="block appearance-none w-full bg-white border border-gray-400
                         hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none" name="sort">
-                            <option value="default">Urutan default</option>
+                            <option value="default">
+                                Urutan default
+                            </option>
                             <option value="cheap" 
-                            {{ ($httpQuery['sort'] ?? '') == 'cheap' ? 'selected' : '' }}>Termurah</option>
+                            {{ ($httpQuery['sort'] ?? '') == 'cheap' ? 'selected' : '' }}>
+                                Termurah
+                            </option>
                             <option value="expensive" 
-                            {{ ($httpQuery['sort'] ?? '') == 'expensive' ? 'selected' : '' }}>Termahal</option>
+                            {{ ($httpQuery['sort'] ?? '') == 'expensive' ? 'selected' : '' }}>
+                            Termahal
+                            </option>
                         </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex 
+                        items-center px-2 text-gray-700">
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                             </svg>
@@ -90,15 +97,15 @@
                 </form>
             </div>
             <div class="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-10 mt-10">
-                {{-- foreach --}}
                 @forelse ($products as $product)
                     <x-card-product
-                    product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : asset('img/static/example.jpg') }}" 
+                    product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : 
+                    asset('img/static/example.jpg') }}"
                     product-name="{{ $product->title }}"
-                    product-category="{{ $product->productCategory->title }}" 
-                    product-category-id="{{ $product->productCategory->id }}" 
+                    product-category="{{ $product->productCategory->title }}"
+                    product-category-id="{{ $product->productCategory->id }}"
                     product-point-price="{{ $product->point_price }}"
-                    product-rating="0" 
+                    product-rating="0"
                     product-is-obral="false"
                     is-horizontal="false"
                     is-toko-point="true"/>
@@ -108,7 +115,6 @@
                                      "<q>" . $httpQuery['search'] . "</q>" . " on this categories"
                     ])
                 @endforelse
-                {{-- end of foreach --}}
             </div>
             <div class="mt-8">
                 {{ $products->links() }}
@@ -116,7 +122,5 @@
         </section>
     </div>
 </div>
-
-{{-- rapihin briq jsnya --}}
 @endsection
 

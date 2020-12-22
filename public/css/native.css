@@ -1440,179 +1440,57 @@ body {
   box-shadow: none;
 }
 
-.header {
-  z-index: 1;
-  position: relative;
-}
-
-#landingPage .header {
-  background-image: url("../img/header-landing.jpg");
-  background-color: rgba(0, 58, 105, 0.6);
-  background-blend-mode: overlay;
-  background-attachment: fixed;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  height: 90vh;
-}
-
-/*landing-page style*/
-
-#landingPage #section-new-product .card-product img {
-  width: 100%;
-}
-
-#landingPage #section-catalog__promo {
-  width: 100%;
-  position: relative;
-  background-image: url("../img/special-edition.jpg");
-}
-
-#landingPage #section-catalog__overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0.43;
-  background-image: linear-gradient(100deg, #000000 0%, rgba(17, 107, 191, 0.39) 100%);
-}
-
-/*end of landing-page style*/
-
-/*auth style*/
-
-#authPage header {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  background-image: url("../img/static/auth-bg.jpg");
-  background-attachment: fixed;
-  background-size: cover;
-}
-
-#authPage header .bg-overlay {
-  background-image: linear-gradient(180deg, #000000 0%, #54595f 100%);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  opacity: 0.5;
-}
-
-#authPage .auth-box {
-  padding: 1rem;
-  border-width: 1px;
-  --border-opacity: 1;
-  border-color: #cbd5e0;
-  border-color: rgba(203, 213, 224, var(--border-opacity));
-}
-
-/*cartPage style*/
-
-#cartPage .hide-step {
-  opacity: 0;
-}
-
-#cartPage .hide-step + .show-step {
-  opacity: 1;
-  transform: translateX(-100%);
-}
-
-/*end of cartPage style*/
-
-/**/
-
-#section-product .card-product img {
-  height: 200px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-/*dashboard customer*/
-
-.dashboard-customer__menu-box {
-  --bg-opacity: 1;
-  background-color: #fff;
-  background-color: rgba(255, 255, 255, var(--bg-opacity));
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  border-radius: 0.25rem;
-  width: 100%;
+#gamePage main {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
-  border-width: 1px;
-  --border-opacity: 1;
-  border-color: #cbd5e0;
-  border-color: rgba(203, 213, 224, var(--border-opacity));
+  justify-content: space-between;
+  height: 100%;
+  padding-bottom: 1rem;
 }
 
-@media (min-width: 1024px) {
-  .dashboard-customer__menu-box {
-    top: 20px;
-    width: 25%;
-    position: -webkit-sticky;
-    position: sticky;
+#gamePage .sidebar-game {
+  --bg-opacity: 1;
+  background-color: #e2e8f0;
+  background-color: rgba(226, 232, 240, var(--bg-opacity));
+  display: flex;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  #gamePage .sidebar-game {
+    width: 300px;
+    height: 100vh;
+    flex-direction: column;
   }
 }
 
-.dashboard-customer__menu-item {
-  flex-grow: 1;
+#gamePage .sidebar-game__link {
+  width: calc(100% / 3);
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  text-align: center;
   text-transform: capitalize;
 }
 
-.dashboard-customer__menu-link {
-  text-align: center;
-  display: block;
-  padding: 1rem;
-  --text-opacity: 1;
-  color: #718096;
-  color: rgba(113, 128, 150, var(--text-opacity));
+@media (min-width: 768px) {
+  #gamePage .sidebar-game__link {
+    width: auto;
+  }
 }
 
-/*end of dashboard customer*/
-
-/*end of storePage style*/
-
-#konfirmasiPembayaranPage .box-upload {
-  outline: 2px dashed black;
-  grid-column: 1 / -1;
-  margin-bottom: 0.75rem;
-  position: relative;
-  --bg-opacity: 1;
-  background-color: #fff;
-  background-color: rgba(255, 255, 255, var(--bg-opacity));
-  height: 100px;
-}
-
-#konfirmasiPembayaranPage .box-upload__file {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-
-#konfirmasiPembayaranPage .box-upload__text {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+#gamePage .section-game {
   width: 100%;
+  height: 100%;
 }
 
-#gamePage {
-  display: flex;
-  flex-direction: column;
-}
-
-#gamePage main {
-  flex-grow: 1;
+@media (min-width: 768px) {
+  #gamePage .section-game {
+    width: calc(100% - 300px);
+  }
 }
 
 #gamePage .section-game__item {
@@ -1734,6 +1612,172 @@ body {
   transition: all 250ms;
   opacity: 1;
   visibility: visible;
+  height: 100%;
+  width: 100%;
+}
+
+.header {
+  position: relative;
+  z-index: 10;
+}
+
+#landingPage .header {
+  background-image: url("../img/header-landing.jpg");
+  background-color: rgba(0, 58, 105, 0.6);
+  background-blend-mode: overlay;
+  display: flex;
+  flex-direction: column;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 90vh;
+}
+
+/*landing-page style*/
+
+#landingPage #section-new-product .card-product img {
+  width: 100%;
+}
+
+#landingPage #section-catalog__promo {
+  width: 100%;
+  position: relative;
+  background-image: url("../img/special-edition.jpg");
+}
+
+#landingPage #section-catalog__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.43;
+  background-image: linear-gradient(100deg, #000000 0%, rgba(17, 107, 191, 0.39) 100%);
+}
+
+/*end of landing-page style*/
+
+/*auth style*/
+
+#authPage header {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-image: url("../img/static/auth-bg.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+#authPage header .bg-overlay {
+  background-image: linear-gradient(180deg, #000000 0%, #54595f 100%);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.5;
+}
+
+#authPage .auth-box {
+  padding: 1rem;
+  border-width: 1px;
+  --border-opacity: 1;
+  border-color: #cbd5e0;
+  border-color: rgba(203, 213, 224, var(--border-opacity));
+}
+
+/*cartPage style*/
+
+#cartPage .hide-step {
+  opacity: 0;
+}
+
+#cartPage .hide-step + .show-step {
+  opacity: 1;
+  transform: translateX(-100%);
+}
+
+/*end of cartPage style*/
+
+/**/
+
+#section-product .card-product img {
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+/*dashboard customer*/
+
+.dashboard-customer__menu-box {
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-radius: 0.25rem;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  border-width: 1px;
+  --border-opacity: 1;
+  border-color: #cbd5e0;
+  border-color: rgba(203, 213, 224, var(--border-opacity));
+}
+
+@media (min-width: 768px) {
+  .dashboard-customer__menu-box {
+    top: 20px;
+    width: 25%;
+    position: -webkit-sticky;
+    position: sticky;
+  }
+}
+
+.dashboard-customer__menu-item {
+  flex-grow: 1;
+  text-transform: capitalize;
+}
+
+.dashboard-customer__menu-link {
+  text-align: center;
+  display: block;
+  padding: 1rem;
+  --text-opacity: 1;
+  color: #718096;
+  color: rgba(113, 128, 150, var(--text-opacity));
+}
+
+/*end of dashboard customer*/
+
+/*end of storePage style*/
+
+#konfirmasiPembayaranPage .box-upload {
+  outline: 2px dashed black;
+  grid-column: 1 / -1;
+  margin-bottom: 0.75rem;
+  position: relative;
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  height: 100px;
+}
+
+#konfirmasiPembayaranPage .box-upload__file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+#konfirmasiPembayaranPage .box-upload__text {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100%;
   width: 100%;
 }

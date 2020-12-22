@@ -1,13 +1,16 @@
 @extends('layouts.master')
-@section('title', 'Pakaian dan sepatu')
+@section('title', 'Game saat ini')
 @section('body-id', 'game')
 @section('content')
-    <div class="container py-10">
-        <section class="section-game">
+
+    @include('game.sidebar')
+    <section class="section-game py-10">
+        <div class="container h-full">
             <div class="swiper-container section-game__list">
                 <div class="swiper-wrapper items-center">
                     @foreach($gameOptions as $option)
-                        <div class="swiper-slide section-game__item bg-{{ $option->color }}-600 text-white">
+                        <div class="swiper-slide text-white
+                        section-game__item bg-{{ $option->color }}-600">
                             <label for="choose-option-{{ $option->number }}" class="text-6xl cursor-pointer">
                                 {{ $option->number }}
                             </label>
@@ -15,9 +18,10 @@
                                 klik nomor untuk pilih nomor ini
                             </p>
                             <p>
-                                Hadiah Point X{{ $option->point_multiplier }}
+                                Hadiah Point x {{ $option->point_multiplier }}
                             </p>
-                            <input type="checkbox" name="choose_option" id="choose-option-{{ $option->number }}">
+                            <input type="checkbox" name="choose_option" 
+                            id="choose-option-{{ $option->number }}">
                             <div class="section-game__item--checked">
                                 <form action="/test" method="POST" 
                                 class="flex items-center section-game__form">
@@ -56,8 +60,9 @@
                     <box-icon name='chevron-left' type='solid' class="text-white"></box-icon>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+
 @endsection
 
 {{-- js nya ada di resources/assets/js/page/game-index.js --}}

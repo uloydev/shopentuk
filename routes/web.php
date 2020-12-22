@@ -62,6 +62,8 @@ Route::namespace('Customer')->middleware(['auth', 'customer'])->group(function (
     // game routes
     Route::prefix('game')->name('game.')->group(function () {
         Route::get('/', 'GameController@index')->name('index');
+        Route::get('next', 'GameController@nextGame')->name('next');
+        Route::get('rules', 'GameController@rulesGame')->name('rules');
     });
 });
 

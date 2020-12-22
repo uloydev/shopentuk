@@ -17,4 +17,14 @@ class GameController extends Controller
             'gameOptions' => GameOption::orderBy('number')->get(),
         ]);
     }
+
+    public function nextGame()
+    {
+        return view('game.next', ['title' => 'next game']);
+    }
+
+    public function rules()
+    {
+        return view('game.rules', ['title' => 'rules game']);
+    }
 }
