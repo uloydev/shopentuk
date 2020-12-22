@@ -60,28 +60,4 @@
     </div>
 @endsection
 
-@push('script')
-    <script>
-        document.querySelectorAll('.section-game__form').forEach(formSubmitGame => {
-            const gameItem = formSubmitGame.parentElement.parentElement
-            const gameInputPoint = formSubmitGame.querySelector('.section-game__input')
-
-            formSubmitGame.addEventListener('submit', (e) => {
-                e.preventDefault()
-
-                if (gameInputPoint.value.trim() != null) {
-                    // close the form input point
-                    gameItem.querySelector('input[name="choose_option"]').checked = false
-                    
-                    // open the modal says "you're inputing {point_value}, 
-                    // good luck with your gambling!"
-                    gameItem.querySelector('.point-submitted').textContent = gameInputPoint.value.trim()
-                    gameItem.querySelector('.section-game__thank-you')
-                    .classList
-                    .add('section-game__thank-you--show')
-                }
-
-            })
-        })
-    </script>
-@endpush
+{{-- js nya ada di resources/assets/js/page/game-index.js --}}
