@@ -1,7 +1,6 @@
 import { pageUrl } from "../helper-module";
 
-if (
-    pageUrl.indexOf('/store/product' > -1) || 
+if (pageUrl.indexOf('/store/product') > -1 || 
     pageUrl.indexOf('/store/toko-point') > -1 || 
     pageUrl.indexOf('/store/voucher') > -1
 ) {

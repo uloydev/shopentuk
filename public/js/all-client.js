@@ -12623,7 +12623,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_2__["pageUrl"] === '/game') {
 /*!**********************************************!*\
   !*** ./resources/assets/js/helper-module.js ***!
   \**********************************************/
-/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, getParents, pageUrl */
+/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, getParents, boxiconHoverChangeColor, pageUrl */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12636,6 +12636,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAttributes", function() { return setAttributes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openCloseModal", function() { return openCloseModal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getParents", function() { return getParents; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "boxiconHoverChangeColor", function() { return boxiconHoverChangeColor; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pageUrl", function() { return pageUrl; });
 /*!
  * Get all siblings of an element
@@ -12744,6 +12745,17 @@ var getParents = function getParents(elem, selector) {
   }
 
   return parents;
+};
+var boxiconHoverChangeColor = function boxiconHoverChangeColor(icon, hoverColor) {
+  var originalIconColor = icon.getAttribute('color');
+  icon.addEventListener('mouseover', function () {
+    console.log('mouse over');
+    icon.setAttribute('color', hoverColor);
+  });
+  icon.addEventListener('mouseleave', function () {
+    console.log('mouse leave');
+    icon.setAttribute('color', originalIconColor);
+  });
 };
 var pageUrl = window.location.pathname;
 
@@ -13305,6 +13317,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
+  /**
+   * pick number
+   */
   var btnUncheckGame = document.querySelectorAll('.section-game__uncheck');
   btnUncheckGame.forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -13312,16 +13327,34 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
       chooseOption.checked = false;
     });
   });
+  /**
+   * submit point
+   */
+
+  document.querySelectorAll('.section-game__form').forEach(function (formSubmitGame) {
+    var gameItem = formSubmitGame.parentElement.parentElement;
+    var gameInputPoint = formSubmitGame.querySelector('.section-game__input');
+    formSubmitGame.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (gameInputPoint.value.trim() != null) {
+        // close the form input point
+        gameItem.querySelector('input[name="choose_option"]').checked = false; // open the modal says "you're inputing {point_value}, 
+        // good luck with your gambling!"
+
+        gameItem.querySelector('.point-submitted').textContent = gameInputPoint.value.trim();
+        gameItem.querySelector('.section-game__thank-you').classList.add('section-game__thank-you--show');
+      }
+    });
+  });
+  /**
+   * icon style for button submit point
+   */
+
   var btnSubmitPoint = document.querySelectorAll('.section-game__btn-submit');
   btnSubmitPoint.forEach(function (btn) {
-    var originalIconColor = btn.querySelector('box-icon').getAttribute('color');
-    btn.addEventListener('mouseover', function () {
-      btn.querySelector('box-icon').setAttribute('color', '#ededed');
-    });
-    btn.addEventListener('mouseleave', function () {
-      console.log('mouse leave');
-      btn.querySelector('box-icon').setAttribute('color', originalIconColor);
-    });
+    var iconBtn = btn.querySelector('box-icon');
+    _helper_module__WEBPACK_IMPORTED_MODULE_0__["boxiconHoverChangeColor"](iconBtn, '#ededed');
   });
 }
 
@@ -13381,7 +13414,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/product' > -1) || _helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/toko-point') > -1 || _helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/voucher') > -1) {
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/product') > -1 || _helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/toko-point') > -1 || _helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/voucher') > -1) {
   // let httpQuery = {!! json_encode($httpQuery) !!}
   var urlQueriesAsArray = window.location.search.slice(1).split('&');
   var httpQueries = urlQueriesAsArray.map(function (p) {

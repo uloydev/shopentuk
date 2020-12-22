@@ -5273,7 +5273,7 @@ module.exports = function numWords (input) {
 /*!**********************************************!*\
   !*** ./resources/assets/js/helper-module.js ***!
   \**********************************************/
-/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, getParents, pageUrl */
+/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, getParents, boxiconHoverChangeColor, pageUrl */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5286,6 +5286,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAttributes", function() { return setAttributes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openCloseModal", function() { return openCloseModal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getParents", function() { return getParents; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "boxiconHoverChangeColor", function() { return boxiconHoverChangeColor; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pageUrl", function() { return pageUrl; });
 /*!
  * Get all siblings of an element
@@ -5394,6 +5395,17 @@ var getParents = function getParents(elem, selector) {
   }
 
   return parents;
+};
+var boxiconHoverChangeColor = function boxiconHoverChangeColor(icon, hoverColor) {
+  var originalIconColor = icon.getAttribute('color');
+  icon.addEventListener('mouseover', function () {
+    console.log('mouse over');
+    icon.setAttribute('color', hoverColor);
+  });
+  icon.addEventListener('mouseleave', function () {
+    console.log('mouse leave');
+    icon.setAttribute('color', originalIconColor);
+  });
 };
 var pageUrl = window.location.pathname;
 
@@ -5576,7 +5588,7 @@ $(".refresh-btn").on('click', function (e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/page/dashboard-admin.js */"./resources/assets/js/page/dashboard-admin.js");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/page/dashboard-admin.js */"./resources/assets/js/page/dashboard-admin.js");
 
 
 /***/ })
