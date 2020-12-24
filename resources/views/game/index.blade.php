@@ -25,7 +25,7 @@
                                     <label for="input-point" class="capitalize mr-4">
                                         input point
                                     </label>
-                                    <input type="number" name="input_point" id="input-point" class="section-game__input" max="100" min="1" required>
+                                    <input type="number" name="point" id="input-point" class="section-game__input" max="100" min="1" required>
                                     <x-btn action="submit" type="transparent" add-class="btn--without-hover section-game__btn-submit">
                                         <box-icon type='solid' name='send' 
                                         class="text-white"></box-icon>

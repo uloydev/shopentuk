@@ -17,4 +17,9 @@ class GameController extends Controller
             'gameOptions' => GameOption::orderBy('number')->get(),
         ]);
     }
+
+    public function makeBid(Request $request)
+    {
+        
+    }
 }
