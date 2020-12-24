@@ -1,0 +1,106 @@
+@use 'mixin';
+@use 'general';
+
+#gamePage {
+
+    main {
+        @apply flex flex-wrap justify-between h-full pb-4;
+    }
+
+    .sidebar-game {
+        @apply bg-gray-300 flex w-full;
+
+        @screen md {
+            width: general.$width-sidebar-game;
+            @apply h-screen flex-col;
+        }
+
+        &__link {
+            width: calc(100% / 3);
+            @include mixin.centerFlex;
+
+            @screen md {
+                @apply w-auto;
+            }
+
+            @apply py-4 text-center capitalize;
+        }
+
+    }
+
+    .section-game {
+        @include mixin.sameSize(100%);
+
+        @screen md {
+            width: calc(100% - #{general.$width-sidebar-game});
+        }
+
+        &__item {
+            @include general.centerFlex;
+            transition: height general.$trans-duration;
+            @apply h-64 flex-col relative;
+
+            &--next,
+            &--prev {
+                @apply cursor-pointer;
+            }
+
+            &--active {
+                height: 25rem;
+            }
+
+            &--checked {
+                @apply absolute inset-0 h-0 w-0 invisible;
+                @include general.centerFlex;
+
+                transition: {
+                    property: height, width;
+                    duration: general.$trans-duration;
+                }
+
+                background-color: inherit;
+            }
+        }
+
+        &__btn-slide {
+            @include general.sameSize(40px);
+            @include mixin.centerPosition($isHorizontalCenter: false);
+            @include mixin.centerFlex;
+            @apply rounded-full bg-black bg-opacity-25 z-10;
+
+            &--prev {
+                left: 1rem;
+            }
+
+            &--next {
+                right: 1rem;
+            }
+        }
+
+        &__input {
+            @apply bg-white border-transparent text-center p-2 rounded text-gray-900;
+        }
+
+        &__thank-you {
+            background-color: inherit;
+            color: inherit;
+            @apply absolute inset-0 h-full w-full capitalize transition transition-all opacity-0 invisible text-xl;
+            @include mixin.centerFlex($direction: column);
+
+            &--show {
+                @apply visible opacity-100;
+            }
+        }
+
+        input[name=choose_option] {
+            @apply absolute inset-0 z-10 h-0 w-0 overflow-hidden;
+        }
+
+        input[name=choose_option]:checked+.section-game__item--checked {
+            transition: all general.$trans-duration;
+            @apply opacity-100 visible h-full w-full;
+        }
+
+    }
+
+}

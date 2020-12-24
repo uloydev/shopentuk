@@ -18,8 +18,13 @@ class GameController extends Controller
         ]);
     }
 
-    public function makeBid(Request $request)
+    public function nextGame()
     {
-        
+        return view('game.next', ['title' => 'next game']);
+    }
+
+    public function rules()
+    {
+        return view('game.rules', ['title' => 'rules game']);
     }
 }
