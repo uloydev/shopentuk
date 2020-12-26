@@ -13340,9 +13340,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
+  var getCurrentGame = function getCurrentGame() {
+    fetch('/game/current', {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRF-Token': csrf
+      }
+    }).then(function (response) {
+      return response.json();
+    });
+  };
+
+  var csrf = document.querySelector('meta[name="csrf-token"]').content;
+  var userId = document.querySelector('input[name="user_id"]').value;
+  var game = getCurrentGame();
   /**
    * pick number
    */
+
   var btnUncheckGame = document.querySelectorAll('.section-game__uncheck');
   btnUncheckGame.forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -13378,6 +13395,32 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
   btnSubmitPoint.forEach(function (btn) {
     var iconBtn = btn.querySelector('box-icon');
     _helper_module__WEBPACK_IMPORTED_MODULE_0__["boxiconHoverChangeColor"](iconBtn, '#ededed');
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      var pointInput = btn.parentElement.querySelector('input[name="point"]');
+      fetch('/game/bid', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+          'X-CSRF-Token': csrf
+        },
+        body: JSON.stringify({
+          user_id: userId,
+          game_id: game.id,
+          game_option_id: pointInput.dataset.gameOptionId,
+          point: pointInput.value
+        })
+      }).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        if (data.status == 'success') {
+          alert(data.message);
+        } else {
+          alert(data.message);
+        }
+      });
+    });
   });
 }
 

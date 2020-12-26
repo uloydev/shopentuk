@@ -8,6 +8,7 @@
         <div class="container h-full">
             <div class="swiper-container section-game__list">
                 <div class="swiper-wrapper items-center">
+                    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                     @foreach($gameOptions as $option)
                         <div class="swiper-slide text-white
                         section-game__item bg-{{ $option->color }}-600">
@@ -24,13 +25,13 @@
                             <input type="checkbox" name="choose_option" 
                             id="choose-option-{{ $option->number }}">
                             <div class="section-game__item--checked">
-                                <form action="/test" method="POST" 
+                                <form action="" method="POST" 
                                 class="flex items-center section-game__form">
                                     @csrf
                                     <label for="input-point" class="capitalize mr-4">
                                         input point
                                     </label>
-                                    <input type="number" name="input_point" id="input-point" class="section-game__input" max="100" min="1" required>
+                                    <input type="number" name="point" id="input-point" class="section-game__input" max="100" min="1" data-game-option-id="{{ $option->id }}" required>
                                     <x-btn action="submit" type="transparent" add-class="btn--without-hover section-game__btn-submit">
                                         <box-icon type='solid' name='send' 
                                         class="text-white"></box-icon>
