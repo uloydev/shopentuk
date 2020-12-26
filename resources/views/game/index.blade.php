@@ -27,7 +27,6 @@
                             <div class="section-game__item--checked">
                                 <form action="" method="POST" 
                                 class="flex items-center section-game__form">
-                                    @csrf
                                     <label for="input-point" class="capitalize mr-4">
                                         input point
                                     </label>

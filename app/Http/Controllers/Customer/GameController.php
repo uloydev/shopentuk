@@ -28,21 +28,46 @@ class GameController extends Controller
             $user = User::findOrFail($request->user_id);
             $game = Game::findOrFail($request->game_id);
             $gameOption = GameOption::findOrFail($request->game_option_id);
-            if ($user->point < $request->point) {
-                throw new Exception;
+            $bid = GameBid::where('user_id', $user->id)
+            ->where('game_id', $game->id)
+            ->where('game_option_id', $gameOption->id)
+            ->first();
+            if ($bid) {
+                if ($user->point + $bid->point < $request->point) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'point anda tidak cukup'
+                    ]);
+                }
+                $user->point += $bid->point - $request->point;
+                $bid->point = $request->point;
+                $bid->save();
+            } else {
+                if ($user->point < $request->point) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'point anda tidak cukup'
+                    ]);
+                }
+                $user->point -= $request->point;
+                $bid = GameBid::create([
+                    'game_id' => $game->id,
+                    'user_id' => $user->id,
+                    'game_option_id' => $gameOption->id,
+                    'point' => $request->point
+                ]);
             }
-            $user->point -= $request->point;
+            $user->save();
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'gagal untuk pasang bid !'
             ]);
         }
-        GameBid::create([
-            'game_id' => $game->id,
-            'user_id' => $user->id,
-            'game_option_id' => $gameOption->id,
-            'point' => $request->point
+        return response()->json([
+            'status' => 'success',
+            'message' => 'berhasil pasang bid !',
+            'bid' => $bid
         ]);
     }
 

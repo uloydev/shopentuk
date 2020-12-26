@@ -13315,22 +13315,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
-  var getCurrentGame = function getCurrentGame() {
-    fetch('/game/current', {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-        'X-CSRF-Token': csrf
-      }
-    }).then(function (response) {
-      return response.json();
-    });
-  };
-
   var csrf = document.querySelector('meta[name="csrf-token"]').content;
   var userId = document.querySelector('input[name="user_id"]').value;
-  var game = getCurrentGame();
+  var game;
+  fetch('/game/current', {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'X-CSRF-Token': csrf
+    }
+  }).then(function (response) {
+    return response.json();
+  }).then(function (response) {
+    game = response;
+  });
   /**
    * pick number
    */
@@ -13402,7 +13401,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
           user_id: userId,
           game_id: game.id,
           game_option_id: pointInput.dataset.gameOptionId,
-          point: pointInput.value
+          point: Number(pointInput.value)
         })
       }).then(function (response) {
         return response.json();
@@ -13557,9 +13556,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/produ
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
-__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
-module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
+__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
+__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
+module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
 
 
 /***/ })
