@@ -1,5 +1,5 @@
 module.exports = {
-  // important: true,
+    important: true,
     future: {
         removeDeprecatedGapUtilities: true,
     },

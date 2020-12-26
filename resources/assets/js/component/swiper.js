@@ -19,6 +19,35 @@ if (pageUrl === '/game') {
             nextEl: '.section-game__btn-slide--next',
             prevEl: '.section-game__btn-slide--prev',
         },
+        on: {
+            init: function () {
+                // const prevAndNextSlide = this.el.querySelectorAll(
+                //     '.section-game__item--next, .section-game__item--prev'
+                // )
+                // prevAndNextSlide.forEach(notActive => {
+                //     notActive.classList.add('items-end')
+                //     notActive.querySelectorAll('p').forEach(child => child.classList.add('invisible'))
+                // })
+            },
+        }
+    })
+
+    listGame.on('slideChange', function () {
+        // const activeSlide = listGame.el.querySelector('.section-game__item[data-swiper-slide-index="' + listGame.realIndex + '"]')
+        // activeSlide.classList.remove('items-end')
+        // activeSlide.querySelectorAll('p').forEach(paragraph => {
+        //     paragraph.classList.remove('invisible')
+        // })
+
+        // const prevSlide = listGame.el.querySelector('.section-game__item--prev').previousElementSibling
+        // const nextSlide = listGame.el.querySelector('.section-game__item--prev').nextElementSibling
+        // const slideNotActive = [prevSlide, nextSlide]
+
+        // prevSlide.classList.add('items-end')
+        // prevSlide.querySelectorAll('p').forEach(paragraph => paragraph.classList.add('invisible'))
+
+        // nextSlide.classList.add('items-end')
+        // prevSlide.querySelectorAll('p').forEach(paragraph => paragraph.classList.add('invisible'))
     })
 
     const listGameSwiper = document.querySelector(elGameSwiper).swiper
@@ -32,6 +61,5 @@ if (pageUrl === '/game') {
                 listGameSwiper.slidePrev()
             }
         })
-
     })
 }

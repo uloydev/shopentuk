@@ -4,15 +4,16 @@
 #gamePage {
 
     main {
-        @apply flex flex-wrap justify-between h-full pb-4;
+        @apply flex flex-wrap h-full pb-4;
     }
 
     .sidebar-game {
-        @apply bg-gray-300 flex w-full;
+        min-width: general.$width-sidebar-game;
+        @apply bg-gray-300 flex;
 
         @screen md {
-            width: general.$width-sidebar-game;
-            @apply h-screen flex-col;
+            min-width: general.$width-sidebar-game-lg;
+            @apply flex-col;
         }
 
         &__link {
@@ -32,7 +33,15 @@
         @include mixin.sameSize(100%);
 
         @screen md {
-            width: calc(100% - #{general.$width-sidebar-game});
+            width: calc(100% - #{general.$width-sidebar-game-lg});
+        }
+
+        &__slide-number {
+            @apply text-6xl cursor-pointer;
+        }
+
+        &__paragraph {
+            @apply capitalize;
         }
 
         &__item {
@@ -43,6 +52,21 @@
             &--next,
             &--prev {
                 @apply cursor-pointer;
+            }
+
+            &--prev .section-game__paragraph,
+            &--next .section-game__paragraph {
+                @apply invisible;
+            }
+
+            &--prev .section-game__slide-number {
+                right: 25%;
+                @apply relative transform translate-x-1/2;
+            }
+
+            &--next .section-game__slide-number {
+                left: 25%;
+                @apply relative transform -translate-x-1/2;
             }
 
             &--active {

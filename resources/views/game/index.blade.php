@@ -11,13 +11,14 @@
                     @foreach($gameOptions as $option)
                         <div class="swiper-slide text-white
                         section-game__item bg-{{ $option->color }}-600">
-                            <label for="choose-option-{{ $option->number }}" class="text-6xl cursor-pointer">
+                            <label for="choose-option-{{ $option->number }}" 
+                            class="section-game__slide-number">
                                 {{ $option->number }}
                             </label>
-                            <p class="capitalize">
+                            <p class="section-game__paragraph">
                                 klik nomor untuk pilih nomor ini
                             </p>
-                            <p>
+                            <p class="section-game__paragraph">
                                 Hadiah Point x {{ $option->point_multiplier }}
                             </p>
                             <input type="checkbox" name="choose_option" 

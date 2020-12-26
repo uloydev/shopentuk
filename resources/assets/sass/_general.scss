@@ -11,10 +11,7 @@
 
 $trans-duration: 250ms;
 $width-sidebar-game: 100%;
-
-@screen lg {
-    $width-sidebar-game: 300px;
-}
+$width-sidebar-game-lg: 300px;
 
 * {
     @apply p-0 m-0 box-border;

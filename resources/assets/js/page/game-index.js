@@ -48,4 +48,5 @@ if (HelperModule.pageUrl === '/game') {
         const iconBtn = btn.querySelector('box-icon')
         HelperModule.boxiconHoverChangeColor(iconBtn, '#ededed')
     })
+    
 }
