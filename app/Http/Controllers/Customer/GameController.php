@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers\Customer;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 use App\Models\Game;
-use App\Models\GameOption;
-use App\Models\GameBid;
 use App\Models\User;
+use App\Models\GameBid;
+use App\Models\GameOption;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class GameController extends Controller
 {
     public function index()
     {
+        // dd(Carbon::now()->addHours(3)->toDateTimeString());
         return view('game.index', [
+            'nextGame' => Game::where('status', 'queued')->limit(3)->get(),
             'gameOptions' => GameOption::orderBy('number')->get(),
         ]);
     }

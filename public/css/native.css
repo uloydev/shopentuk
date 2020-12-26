@@ -1498,6 +1498,7 @@ body {
   padding-top: 1rem;
   padding-bottom: 1rem;
   text-transform: capitalize;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {
