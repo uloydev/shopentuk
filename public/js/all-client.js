@@ -13360,26 +13360,6 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
     }
   });
   /**
-   * submit point
-   */
-
-  document.querySelectorAll('.section-game__form').forEach(function (formSubmitGame) {
-    var gameItem = formSubmitGame.parentElement.parentElement;
-    var gameInputPoint = formSubmitGame.querySelector('.section-game__input');
-    formSubmitGame.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      if (gameInputPoint.value.trim() != null) {
-        // close the form input point
-        gameItem.querySelector('input[name="choose_option"]').checked = false; // open the modal says "you're inputing {point_value}, 
-        // good luck with your gambling!"
-
-        gameItem.querySelector('.point-submitted').textContent = gameInputPoint.value.trim();
-        gameItem.querySelector('.section-game__thank-you').classList.add('section-game__thank-you--show');
-      }
-    });
-  });
-  /**
    * icon style for button submit point
    */
 
@@ -13407,7 +13387,14 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
         return response.json();
       }).then(function (data) {
         if (data.status == 'success') {
-          alert(data.message);
+          alert(data.message); // close the form input point
+
+          var gameItem = pointInput.parentElement.parentElement.parentElement;
+          gameItem.querySelector('input[name="choose_option"]').checked = false; // open the modal says "you're inputing {point_value}, 
+          // good luck with your gambling!"
+
+          gameItem.querySelector('.point-submitted').textContent = pointInput.value;
+          gameItem.querySelector('.section-game__thank-you').classList.add('section-game__thank-you--show');
         } else {
           alert(data.message);
         }
@@ -13556,9 +13543,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/produ
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
 
 
 /***/ })
