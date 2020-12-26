@@ -2,6 +2,24 @@ import * as HelperModule from './../helper-module'
 import './../component/swiper'
 
 if (HelperModule.pageUrl === '/game') {
+    function getCurrentGame() {
+        fetch('/game/current', {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-Token': csrf,
+            },
+        })
+        .then(response => {
+            return response.json()
+        })
+    }
+    
+    const csrf = document.querySelector('meta[name="csrf-token"]').content;
+    const userId = document.querySelector('input[name="user_id"]').value
+    let game = getCurrentGame();
+    
 
     /**
      * pick number
@@ -47,5 +65,31 @@ if (HelperModule.pageUrl === '/game') {
     btnSubmitPoint.forEach(btn => {
         const iconBtn = btn.querySelector('box-icon')
         HelperModule.boxiconHoverChangeColor(iconBtn, '#ededed')
+        btn.addEventListener('click', e => {
+            e.preventDefault()
+            const pointInput = btn.parentElement.querySelector('input[name="point"]');
+            fetch('/game/bid', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-Token': csrf,
+                },
+                body: JSON.stringify({
+                    user_id : userId,
+                    game_id : game.id,
+                    game_option_id: pointInput.dataset.gameOptionId,
+                    point : pointInput.value
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status == 'success') {
+                    alert(data.message)
+                } else {
+                    alert(data.message)
+                }
+            })
+        })
     })
 }

@@ -15,11 +15,11 @@ class CreateGameBidsTable extends Migration
     {
         Schema::create('game_bids', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['playing', 'win', 'lose']);
-            $table->integer('point');
+            $table->enum('status', ['playing', 'win', 'lose'])->default('playing');
+            $table->foreignId('game_option_id');
             $table->foreignId('game_id');
             $table->foreignId('user_id');
-            $table->foreignId('game_option_id');
+            $table->integer('point');
             $table->timestamps();
         });
     }
