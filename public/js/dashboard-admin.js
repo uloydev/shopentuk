@@ -271,11 +271,9 @@ var getParents = function getParents(elem, selector) {
 var boxiconHoverChangeColor = function boxiconHoverChangeColor(icon, hoverColor) {
   var originalIconColor = icon.getAttribute('color');
   icon.addEventListener('mouseover', function () {
-    console.log('mouse over');
     icon.setAttribute('color', hoverColor);
   });
   icon.addEventListener('mouseleave', function () {
-    console.log('mouse leave');
     icon.setAttribute('color', originalIconColor);
   });
 };
@@ -460,7 +458,7 @@ $(".refresh-btn").on('click', function (e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/page/dashboard-admin.js */"./resources/assets/js/page/dashboard-admin.js");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/page/dashboard-admin.js */"./resources/assets/js/page/dashboard-admin.js");
 
 
 /***/ })

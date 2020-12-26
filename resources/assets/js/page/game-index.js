@@ -30,6 +30,25 @@ if (HelperModule.pageUrl === '/game') {
     })
 
     /**
+     * dropdown menu for sideebar
+     */
+    const btnShowNextSchedule = document.querySelector('.sidebar-game__link--dropdown')
+    const iconBtnNextSchedule = btnShowNextSchedule.querySelector('box-icon')
+    const dropdownBox = btnShowNextSchedule.nextElementSibling
+
+    btnShowNextSchedule.addEventListener('click', (e) => {
+        e.preventDefault()
+        if (dropdownBox.classList.contains('sidebar-game__dropdown-box--active')) {
+            iconBtnNextSchedule.classList.remove('transform', 'rotate-90')
+            dropdownBox.classList.remove('sidebar-game__dropdown-box--active')
+        }
+        else {
+            iconBtnNextSchedule.classList.add('transform', 'rotate-90')
+            dropdownBox.classList.add('sidebar-game__dropdown-box--active')
+        }
+    })
+
+    /**
      * submit point
      */
     document.querySelectorAll('.section-game__form').forEach(formSubmitGame => {

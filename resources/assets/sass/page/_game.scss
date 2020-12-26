@@ -9,22 +9,38 @@
 
     .sidebar-game {
         min-width: general.$width-sidebar-game;
-        @apply bg-gray-300 flex;
+        @apply bg-gray-300;
 
         @screen md {
             min-width: general.$width-sidebar-game-lg;
-            @apply flex-col;
         }
 
+        &__container {
+            @apply h-full flex;
+
+            @screen md {
+                @apply flex-col;
+            }
+        }
+
+        &__dropdown-box {
+            transition-duration: general.$trans-duration;
+            @apply pl-5 opacity-0 invisible h-0 overflow-hidden transition transition-all;
+
+            &--active {
+                @apply opacity-100 visible h-auto;
+            }
+        }
+
+
         &__link {
-            width: calc(100% / 3);
-            @include mixin.centerFlex;
+            @include mixin.centerFlex($isPrimaryAxisCenter: false);
+            @apply px-4 w-1/3 py-4 capitalize;
 
             @screen md {
                 @apply w-auto;
             }
 
-            @apply py-4 text-center capitalize;
         }
 
     }

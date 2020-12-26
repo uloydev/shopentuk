@@ -62,8 +62,7 @@ Route::namespace('Customer')->middleware(['auth', 'customer'])->group(function (
     // game routes
     Route::prefix('game')->name('game.')->group(function () {
         Route::get('/', 'GameController@index')->name('index');
-        Route::post('bid','GameController@makeBid')->name('bid');
-        Route::get('next', 'GameController@nextGame')->name('next');
+        Route::post('bid', 'GameController@makeBid')->name('bid');
         Route::get('current', 'GameController@currentGame')->name('current');
         Route::get('rules', 'GameController@rulesGame')->name('rules');
     });

@@ -12603,30 +12603,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_2__["pageUrl"] === '/game') {
     navigation: {
       nextEl: '.section-game__btn-slide--next',
       prevEl: '.section-game__btn-slide--prev'
-    },
-    on: {
-      init: function init() {// const prevAndNextSlide = this.el.querySelectorAll(
-        //     '.section-game__item--next, .section-game__item--prev'
-        // )
-        // prevAndNextSlide.forEach(notActive => {
-        //     notActive.classList.add('items-end')
-        //     notActive.querySelectorAll('p').forEach(child => child.classList.add('invisible'))
-        // })
-      }
     }
-  });
-  listGame.on('slideChange', function () {// const activeSlide = listGame.el.querySelector('.section-game__item[data-swiper-slide-index="' + listGame.realIndex + '"]')
-    // activeSlide.classList.remove('items-end')
-    // activeSlide.querySelectorAll('p').forEach(paragraph => {
-    //     paragraph.classList.remove('invisible')
-    // })
-    // const prevSlide = listGame.el.querySelector('.section-game__item--prev').previousElementSibling
-    // const nextSlide = listGame.el.querySelector('.section-game__item--prev').nextElementSibling
-    // const slideNotActive = [prevSlide, nextSlide]
-    // prevSlide.classList.add('items-end')
-    // prevSlide.querySelectorAll('p').forEach(paragraph => paragraph.classList.add('invisible'))
-    // nextSlide.classList.add('items-end')
-    // prevSlide.querySelectorAll('p').forEach(paragraph => paragraph.classList.add('invisible'))
   });
   var listGameSwiper = document.querySelector(elGameSwiper).swiper;
   document.querySelectorAll('.section-game__list .swiper-slide').forEach(function (eachSlide) {
@@ -12772,11 +12749,9 @@ var getParents = function getParents(elem, selector) {
 var boxiconHoverChangeColor = function boxiconHoverChangeColor(icon, hoverColor) {
   var originalIconColor = icon.getAttribute('color');
   icon.addEventListener('mouseover', function () {
-    console.log('mouse over');
     icon.setAttribute('color', hoverColor);
   });
   icon.addEventListener('mouseleave', function () {
-    console.log('mouse leave');
     icon.setAttribute('color', originalIconColor);
   });
 };
@@ -13365,6 +13340,24 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
       var chooseOption = btn.parentNode.parentNode.querySelector('input[name="choose_option"]');
       chooseOption.checked = false;
     });
+  });
+  /**
+   * dropdown menu for sideebar
+   */
+
+  var btnShowNextSchedule = document.querySelector('.sidebar-game__link--dropdown');
+  var iconBtnNextSchedule = btnShowNextSchedule.querySelector('box-icon');
+  var dropdownBox = btnShowNextSchedule.nextElementSibling;
+  btnShowNextSchedule.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    if (dropdownBox.classList.contains('sidebar-game__dropdown-box--active')) {
+      iconBtnNextSchedule.classList.remove('transform', 'rotate-90');
+      dropdownBox.classList.remove('sidebar-game__dropdown-box--active');
+    } else {
+      iconBtnNextSchedule.classList.add('transform', 'rotate-90');
+      dropdownBox.classList.add('sidebar-game__dropdown-box--active');
+    }
   });
   /**
    * submit point
