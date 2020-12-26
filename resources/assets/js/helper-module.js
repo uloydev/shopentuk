@@ -114,11 +114,9 @@ export const boxiconHoverChangeColor = (icon, hoverColor) => {
     const originalIconColor = icon.getAttribute('color')
 
     icon.addEventListener('mouseover', () => {
-        console.log('mouse over')
         icon.setAttribute('color', hoverColor)
     })
     icon.addEventListener('mouseleave', () => {
-        console.log('mouse leave')
         icon.setAttribute('color', originalIconColor)
     })
 

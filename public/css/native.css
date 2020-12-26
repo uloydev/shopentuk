@@ -1452,25 +1452,51 @@ body {
   --bg-opacity: 1;
   background-color: #e2e8f0;
   background-color: rgba(226, 232, 240, var(--bg-opacity));
-  display: flex;
 }
 
 @media (min-width: 768px) {
   #gamePage .sidebar-game {
     min-width: 300px;
+  }
+}
+
+#gamePage .sidebar-game__container {
+  height: 100%;
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  #gamePage .sidebar-game__container {
     flex-direction: column;
   }
 }
 
+#gamePage .sidebar-game__dropdown-box {
+  transition-duration: 250ms;
+  padding-left: 1.25rem;
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-property: all;
+}
+
+#gamePage .sidebar-game__dropdown-box--active {
+  opacity: 1;
+  visibility: visible;
+  height: auto;
+}
+
 #gamePage .sidebar-game__link {
-  width: calc(100% / 3);
   flex-direction: row;
   display: flex;
-  justify-content: center;
   align-items: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 33.333333%;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  text-align: center;
   text-transform: capitalize;
 }
 
