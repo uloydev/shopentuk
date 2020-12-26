@@ -4,7 +4,7 @@
             <a href="{{ route('game.rules') }}" class="sidebar-game__link">rules</a>
         </li>
         <li>
-            <a href="{{ route('game.next') }}" class="sidebar-game__link justify-between sidebar-game__link--dropdown">
+            <a class="sidebar-game__link justify-between sidebar-game__link--dropdown">
                 <span>next game schedule</span>
                 <box-icon name='chevron-right' type='solid' ></box-icon>
             </a>
