@@ -5273,7 +5273,7 @@ module.exports = function numWords (input) {
 /*!**********************************************!*\
   !*** ./resources/assets/js/helper-module.js ***!
   \**********************************************/
-/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, getParents, boxiconHoverChangeColor, pageUrl */
+/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, getParents, boxiconHoverChangeColor, pageUrl, appUrl */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5288,6 +5288,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getParents", function() { return getParents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "boxiconHoverChangeColor", function() { return boxiconHoverChangeColor; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pageUrl", function() { return pageUrl; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appUrl", function() { return appUrl; });
 /*!
  * Get all siblings of an element
  * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
@@ -5406,21 +5407,20 @@ var boxiconHoverChangeColor = function boxiconHoverChangeColor(icon, hoverColor)
   });
 };
 var pageUrl = window.location.pathname;
+var appUrl = window.location.origin;
 
 /***/ }),
 
-/***/ "./resources/assets/js/page/dashboard-admin.js":
-/*!*****************************************************!*\
-  !*** ./resources/assets/js/page/dashboard-admin.js ***!
-  \*****************************************************/
+/***/ "./resources/assets/js/page/admin/category-parent.js":
+/*!***********************************************************!*\
+  !*** ./resources/assets/js/page/admin/category-parent.js ***!
+  \***********************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
-/* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../helper-module */ "./resources/assets/js/helper-module.js");
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper-module */ "./resources/assets/js/helper-module.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -5435,18 +5435,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
-
-var numWords = __webpack_require__(/*! num-words */ "./node_modules/num-words/index.js");
-
-var appUrl = window.location.origin;
-var pageUrl = window.location.pathname;
-var logoutBtn = document.querySelector('#logoutBtn');
-logoutBtn.addEventListener('click', function (e) {
-  e.preventDefault();
-  document.getElementById('logout-form').submit();
-}); // /admin/all-category page
-
-if (pageUrl === '/admin/all-category/parent') {
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/all-category/parent') {
   var modalManipulatePrimaryCategory = document.querySelector('#modal-manipulate-primary-category');
   var editPrimaryBtn = document.querySelectorAll('.edit-primary-category');
   var addPrimaryCategory = document.querySelector('.add-primary-category');
@@ -5461,7 +5450,6 @@ if (pageUrl === '/admin/all-category/parent') {
         primaryTitle = btn.parentNode.querySelector('.primary-category__title').textContent.trim();
         primaryDesc = btn.dataset.desc;
         primaryIsDigitalProduct = Boolean(Number(btn.dataset.isDigital));
-        console.log(primaryIsDigitalProduct);
         modalManipulatePrimaryCategory.querySelector('input[name="title"]').value = primaryTitle;
         modalManipulatePrimaryCategory.querySelector('input[name="is_digital_product"]').checked = primaryIsDigitalProduct == false ? false : true;
         modalManipulatePrimaryCategory.querySelector('input[name="_method"]').disabled = false;
@@ -5481,7 +5469,21 @@ if (pageUrl === '/admin/all-category/parent') {
   });
 }
 
-if (pageUrl === '/admin/all-category/sub') {
+/***/ }),
+
+/***/ "./resources/assets/js/page/admin/category-sub.js":
+/*!********************************************************!*\
+  !*** ./resources/assets/js/page/admin/category-sub.js ***!
+  \********************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper-module */ "./resources/assets/js/helper-module.js");
+
+
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/all-category/sub') {
   // edit sub category
   var modalEditSub = document.querySelectorAll('.edit-sub-category-btn');
   var modalManipulateCategory = document.querySelector('.modal-manipulate-category');
@@ -5522,7 +5524,21 @@ if (pageUrl === '/admin/all-category/sub') {
   }); // end of add new sub category
 }
 
-if (pageUrl === '/superadmin/admins') {
+/***/ }),
+
+/***/ "./resources/assets/js/page/admin/manage-admin.js":
+/*!********************************************************!*\
+  !*** ./resources/assets/js/page/admin/manage-admin.js ***!
+  \********************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper-module */ "./resources/assets/js/helper-module.js");
+
+
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/superadmin/admins') {
   var manageAdminPage = document.querySelector("#manageAdminPage");
   var totalError = manageAdminPage.querySelectorAll('.invalid-feedback').length;
 
@@ -5541,30 +5557,123 @@ if (pageUrl === '/superadmin/admins') {
       adminEmail = btn.closest('.admin').querySelector('.admin__email').textContent.trim();
       adminPhone = btn.closest('.admin').querySelector('.admin__phone').textContent.trim();
       adminJoinedAt = btn.closest('.admin').querySelector('.admin__joined-at').textContent.trim();
-      setFormAction('#form-edit-admin', "".concat(appUrl, "/").concat(urlFormAdmin, "/").concat(adminId));
+      Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["setFormAction"])('#form-edit-admin', "".concat(_helper_module__WEBPACK_IMPORTED_MODULE_0__["appUrl"], "/").concat(urlFormAdmin, "/").concat(adminId));
     });
   });
-  setFormAction('#form-add-admin', "".concat(appUrl, "/").concat(urlFormAdmin));
+  Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["setFormAction"])('#form-add-admin', "".concat(_helper_module__WEBPACK_IMPORTED_MODULE_0__["appUrl"], "/").concat(urlFormAdmin));
 }
 
-if (pageUrl === '/admin/order') {
+/***/ }),
+
+/***/ "./resources/assets/js/page/admin/manage-order.js":
+/*!********************************************************!*\
+  !*** ./resources/assets/js/page/admin/manage-order.js ***!
+  \********************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper-module */ "./resources/assets/js/helper-module.js");
+
+
+var numWords = __webpack_require__(/*! num-words */ "./node_modules/num-words/index.js");
+
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/order') {
   var manageOrderPage = document.querySelector('#manageOrderPage');
   var orderItem = manageOrderPage.querySelectorAll('.order-item');
   orderItem.forEach(function (currentItem, index) {
-    var indexToWord = Object(_helper_module__WEBPACK_IMPORTED_MODULE_1__["capitalizeFirstLetter"])(numWords(Number(index) + 1));
-    Object(_helper_module__WEBPACK_IMPORTED_MODULE_1__["setAttributes"])(document.querySelectorAll('.order-item__btn')[index], {
+    var indexToWord = capitalizeFirstLetter(numWords(Number(index) + 1));
+    Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["setAttributes"])(document.querySelectorAll('.order-item__btn')[index], {
       'href': "#collapse".concat(indexToWord),
       'aria-controls': "#collapse".concat(indexToWord)
     });
-    Object(_helper_module__WEBPACK_IMPORTED_MODULE_1__["setAttributes"])(document.querySelectorAll('.order-item__detail')[index], {
+    Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["setAttributes"])(document.querySelectorAll('.order-item__detail')[index], {
       'id': "collapse".concat(indexToWord),
       'aria-labelledby': "heading".concat(indexToWord)
-    }); // for (const attr in attrWillChange) {
-    //     currentItem.querySelector('.order-item__detail').setAttribute(attr, `#collapse${indexToWord}`)
-    // }
+    });
   });
-} // general js
+}
 
+/***/ }),
+
+/***/ "./resources/assets/js/page/admin/manage-product.js":
+/*!**********************************************************!*\
+  !*** ./resources/assets/js/page/admin/manage-product.js ***!
+  \**********************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper-module */ "./resources/assets/js/helper-module.js");
+
+
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products') {
+  var btnOpenEditModal = document.querySelectorAll('.btn[data-target="#modal-edit-product"]');
+  btnOpenEditModal.forEach(function (btn) {
+    var productItem = btn.parentNode.parentNode;
+    var fieldInputs = ['title', 'price', 'point'];
+    var fieldSelects = ['category', 'sub-category'];
+    var parentCategoryVal;
+    btn.addEventListener('click', function () {
+      var categorySelect = document.querySelector('#category-id');
+      var subCatSelect = document.querySelectorAll('#sub-category-id option');
+      document.querySelector('#modal-edit-product .modal-title').innerHTML = "edit product <b>".concat(productItem.querySelector('.product-item__title').dataset.original, "</b>");
+
+      for (var i = 0; i < fieldInputs.length; i++) {
+        document.querySelector("input[name=\"".concat(fieldInputs[i], "\"]")).value = productItem.querySelector(".product-item__".concat(fieldInputs[i])).dataset.original;
+      }
+
+      for (var _i = 0; _i < fieldSelects.length; _i++) {
+        document.querySelector("select[name=\"".concat(fieldSelects[_i], "\"]")).value = productItem.querySelector(".product-item__".concat(fieldSelects[_i])).dataset.original;
+      }
+
+      categorySelect.addEventListener('change', function () {
+        parentCategoryVal = categorySelect.options[categorySelect.selectedIndex].text;
+        subCatSelect.forEach(function (optionSubCat) {
+          optionSubCat.selected = false;
+
+          if (optionSubCat.dataset.parentCategory !== parentCategoryVal) {
+            optionSubCat.hidden = true;
+          } else {
+            optionSubCat.hidden = false;
+          }
+        });
+      });
+    });
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/assets/js/page/dashboard-admin.js":
+/*!*****************************************************!*\
+  !*** ./resources/assets/js/page/dashboard-admin.js ***!
+  \*****************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
+/* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _admin_category_parent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin/category-parent */ "./resources/assets/js/page/admin/category-parent.js");
+/* harmony import */ var _admin_category_sub__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin/category-sub */ "./resources/assets/js/page/admin/category-sub.js");
+/* harmony import */ var _admin_manage_admin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./admin/manage-admin */ "./resources/assets/js/page/admin/manage-admin.js");
+/* harmony import */ var _admin_manage_order__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./admin/manage-order */ "./resources/assets/js/page/admin/manage-order.js");
+/* harmony import */ var _admin_manage_product__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./admin/manage-product */ "./resources/assets/js/page/admin/manage-product.js");
+
+
+
+
+
+
+var logoutBtn = document.querySelector('#logoutBtn');
+logoutBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+  document.getElementById('logout-form').submit();
+}); // general js
 
 $("#zero_config").DataTable();
 Array.from(document.querySelectorAll('box-icon')).map(function (icon) {

@@ -123,3 +123,4 @@ export const boxiconHoverChangeColor = (icon, hoverColor) => {
 }
 
 export const pageUrl = window.location.pathname
+export const appUrl = window.location.origin

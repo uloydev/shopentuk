@@ -28,6 +28,7 @@
         </div>
     </div>
     <script src="{{ asset('js/all-admin.js') }}"></script>
+    @yield('components')
     @stack('scripts')
 </body>
 

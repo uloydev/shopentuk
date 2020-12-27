@@ -68,10 +68,8 @@ if (HelperModule.pageUrl === '/game') {
             btn.disabled = true
             gameItem.querySelector('.point-submitted').textContent = pointInput.value
 
-            gameItem
-            .querySelector('.section-game__thank-you')
-            .classList
-            .add('section-game__thank-you--show')
+            gameItem.querySelector('.section-game__thank-you')
+            .classList.add('section-game__thank-you--show')
         }
 
         btn.addEventListener('click', e => {
