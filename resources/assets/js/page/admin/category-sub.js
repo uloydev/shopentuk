@@ -1,6 +1,6 @@
-import { pageUrl } from "../../helper-module"
+import * as HelperModule from "../../helper-module";
 
-if (pageUrl === '/admin/all-category/sub') {
+if (HelperModule.pageUrl === '/admin/all-category/sub') {
     // edit sub category
     const modalEditSub = document.querySelectorAll('.edit-sub-category-btn')
     const modalManipulateCategory = document.querySelector('.modal-manipulate-category')

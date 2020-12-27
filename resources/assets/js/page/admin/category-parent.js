@@ -1,6 +1,6 @@
-import { pageUrl } from "../../helper-module"
+import * as HelperModule from "../../helper-module";
 
-if (pageUrl === '/admin/all-category/parent') {
+if (HelperModule.pageUrl === '/admin/all-category/parent') {
     const modalManipulatePrimaryCategory = document.querySelector('#modal-manipulate-primary-category')
     const editPrimaryBtn = document.querySelectorAll('.edit-primary-category')
     const addPrimaryCategory = document.querySelector('.add-primary-category')
@@ -28,6 +28,7 @@ if (pageUrl === '/admin/all-category/parent') {
                 titleModal = 'add new primary'
                 modalManipulatePrimaryCategory.querySelector('input[name="_method"]').disabled = true
             }
+            
             titleModal = `${titleModal} category`
 
             $("#modal-manipulate-primary-category").modal('show')

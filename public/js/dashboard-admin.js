@@ -398,6 +398,31 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/all-categ
 
 /***/ }),
 
+/***/ "./resources/assets/js/page/admin/general.js":
+/*!***************************************************!*\
+  !*** ./resources/assets/js/page/admin/general.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var logoutBtn = document.querySelector('#logoutBtn');
+logoutBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+  document.getElementById('logout-form').submit();
+});
+$("#zero_config").DataTable();
+document.querySelectorAll('box-icon').forEach(function (icon) {
+  icon.classList.remove('has-arrow'); // remove ::after style because of adminmart template
+
+  icon.classList.add('mr-2');
+});
+$(".refresh-btn").on('click', function (e) {
+  e.preventDefault();
+  location.reload();
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/page/admin/manage-admin.js":
 /*!********************************************************!*\
   !*** ./resources/assets/js/page/admin/manage-admin.js ***!
@@ -407,7 +432,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/all-categ
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper-module */ "./resources/assets/js/helper-module.js");
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../helper-module */ "./resources/assets/js/helper-module.js");
 
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/superadmin/admins') {
@@ -429,10 +454,10 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/superadmin/admi
       adminEmail = btn.closest('.admin').querySelector('.admin__email').textContent.trim();
       adminPhone = btn.closest('.admin').querySelector('.admin__phone').textContent.trim();
       adminJoinedAt = btn.closest('.admin').querySelector('.admin__joined-at').textContent.trim();
-      Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["setFormAction"])('#form-edit-admin', "".concat(_helper_module__WEBPACK_IMPORTED_MODULE_0__["appUrl"], "/").concat(urlFormAdmin, "/").concat(adminId));
+      _helper_module__WEBPACK_IMPORTED_MODULE_0__["setFormAction"]('#form-edit-admin', "".concat(appUrl, "/").concat(urlFormAdmin, "/").concat(adminId));
     });
   });
-  Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["setFormAction"])('#form-add-admin', "".concat(_helper_module__WEBPACK_IMPORTED_MODULE_0__["appUrl"], "/").concat(urlFormAdmin));
+  _helper_module__WEBPACK_IMPORTED_MODULE_0__["setFormAction"]('#form-add-admin', "".concat(appUrl, "/").concat(urlFormAdmin));
 }
 
 /***/ }),
@@ -455,12 +480,12 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/order') {
   var manageOrderPage = document.querySelector('#manageOrderPage');
   var orderItem = manageOrderPage.querySelectorAll('.order-item');
   orderItem.forEach(function (currentItem, index) {
-    var indexToWord = capitalizeFirstLetter(numWords(Number(index) + 1));
-    Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["setAttributes"])(document.querySelectorAll('.order-item__btn')[index], {
+    var indexToWord = _helper_module__WEBPACK_IMPORTED_MODULE_0__["capitalizeFirstLetter"](numWords(Number(index) + 1));
+    _helper_module__WEBPACK_IMPORTED_MODULE_0__["setAttributes"](document.querySelectorAll('.order-item__btn')[index], {
       'href': "#collapse".concat(indexToWord),
       'aria-controls': "#collapse".concat(indexToWord)
     });
-    Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["setAttributes"])(document.querySelectorAll('.order-item__detail')[index], {
+    _helper_module__WEBPACK_IMPORTED_MODULE_0__["setAttributes"](document.querySelectorAll('.order-item__detail')[index], {
       'id': "collapse".concat(indexToWord),
       'aria-labelledby': "heading".concat(indexToWord)
     });
@@ -478,7 +503,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/order') {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper-module */ "./resources/assets/js/helper-module.js");
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../helper-module */ "./resources/assets/js/helper-module.js");
 
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products') {
@@ -492,6 +517,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products'
       var categorySelect = document.querySelector('#category-id');
       var subCatSelect = document.querySelectorAll('#sub-category-id option');
       document.querySelector('#modal-edit-product .modal-title').innerHTML = "edit product <b>".concat(productItem.querySelector('.product-item__title').dataset.original, "</b>");
+      document.querySelector('#modal-edit-product form').action = btn.dataset.updateUrl;
 
       for (var i = 0; i < fieldInputs.length; i++) {
         document.querySelector("input[name=\"".concat(fieldInputs[i], "\"]")).value = productItem.querySelector(".product-item__".concat(fieldInputs[i])).dataset.original;
@@ -530,33 +556,22 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products'
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _admin_category_parent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin/category-parent */ "./resources/assets/js/page/admin/category-parent.js");
-/* harmony import */ var _admin_category_sub__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin/category-sub */ "./resources/assets/js/page/admin/category-sub.js");
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../helper-module */ "./resources/assets/js/helper-module.js");
+/* harmony import */ var _admin_manage_product__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin/manage-product */ "./resources/assets/js/page/admin/manage-product.js");
 /* harmony import */ var _admin_manage_admin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./admin/manage-admin */ "./resources/assets/js/page/admin/manage-admin.js");
 /* harmony import */ var _admin_manage_order__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./admin/manage-order */ "./resources/assets/js/page/admin/manage-order.js");
-/* harmony import */ var _admin_manage_product__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./admin/manage-product */ "./resources/assets/js/page/admin/manage-product.js");
+/* harmony import */ var _admin_category_sub__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./admin/category-sub */ "./resources/assets/js/page/admin/category-sub.js");
+/* harmony import */ var _admin_category_parent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./admin/category-parent */ "./resources/assets/js/page/admin/category-parent.js");
+/* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./admin/general */ "./resources/assets/js/page/admin/general.js");
+/* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_admin_general__WEBPACK_IMPORTED_MODULE_7__);
 
 
 
 
 
 
-var logoutBtn = document.querySelector('#logoutBtn');
-logoutBtn.addEventListener('click', function (e) {
-  e.preventDefault();
-  document.getElementById('logout-form').submit();
-}); // general js
 
-$("#zero_config").DataTable();
-Array.from(document.querySelectorAll('box-icon')).map(function (icon) {
-  icon.classList.remove('has-arrow'); // remove ::after style because of adminmart template
 
-  icon.classList.add('mr-2');
-});
-$(".refresh-btn").on('click', function (e) {
-  e.preventDefault();
-  location.reload();
-});
 
 /***/ }),
 
@@ -567,7 +582,7 @@ $(".refresh-btn").on('click', function (e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/page/dashboard-admin.js */"./resources/assets/js/page/dashboard-admin.js");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/page/dashboard-admin.js */"./resources/assets/js/page/dashboard-admin.js");
 
 
 /***/ })
