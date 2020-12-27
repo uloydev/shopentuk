@@ -13360,16 +13360,29 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
     }
   });
   /**
-   * icon style for button submit point
+   * submit bid
    */
 
   var btnSubmitPoint = document.querySelectorAll('.section-game__btn-submit');
   btnSubmitPoint.forEach(function (btn) {
     var iconBtn = btn.querySelector('box-icon');
     _helper_module__WEBPACK_IMPORTED_MODULE_0__["boxiconHoverChangeColor"](iconBtn, '#ededed');
+    var pointInput = btn.parentElement.querySelector('input[name="point"]');
+    var gameItem = pointInput.parentElement.parentElement.parentElement;
+    /**
+     * defined "thank you" message overlay after submit point
+     */
+
+    var openThankYouMessage = function openThankYouMessage() {
+      gameItem.querySelector('input[name="choose_option"]').checked = false;
+      pointInput.disabled = true;
+      btn.disabled = true;
+      gameItem.querySelector('.point-submitted').textContent = pointInput.value;
+      gameItem.querySelector('.section-game__thank-you').classList.add('section-game__thank-you--show');
+    };
+
     btn.addEventListener('click', function (e) {
       e.preventDefault();
-      var pointInput = btn.parentElement.querySelector('input[name="point"]');
       fetch('/game/bid', {
         method: 'POST',
         headers: {
@@ -13386,17 +13399,10 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
       }).then(function (response) {
         return response.json();
       }).then(function (data) {
+        alert(data.message);
+
         if (data.status == 'success') {
-          alert(data.message); // close the form input point
-
-          var gameItem = pointInput.parentElement.parentElement.parentElement;
-          gameItem.querySelector('input[name="choose_option"]').checked = false; // open the modal says "you're inputing {point_value}, 
-          // good luck with your gambling!"
-
-          gameItem.querySelector('.point-submitted').textContent = pointInput.value;
-          gameItem.querySelector('.section-game__thank-you').classList.add('section-game__thank-you--show');
-        } else {
-          alert(data.message);
+          openThankYouMessage();
         }
       });
     });

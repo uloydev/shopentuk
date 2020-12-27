@@ -49,16 +49,33 @@ if (HelperModule.pageUrl === '/game') {
     })
 
     /**
-     * icon style for button submit point
+     * submit bid
      */
-
     const btnSubmitPoint = document.querySelectorAll('.section-game__btn-submit')
     btnSubmitPoint.forEach(btn => {
         const iconBtn = btn.querySelector('box-icon')
         HelperModule.boxiconHoverChangeColor(iconBtn, '#ededed')
+
+        const pointInput = btn.parentElement.querySelector('input[name="point"]');
+        const gameItem = pointInput.parentElement.parentElement.parentElement
+
+        /**
+         * defined "thank you" message overlay after submit point
+         */
+        const openThankYouMessage = () => {
+            gameItem.querySelector('input[name="choose_option"]').checked = false
+            pointInput.disabled = true
+            btn.disabled = true
+            gameItem.querySelector('.point-submitted').textContent = pointInput.value
+
+            gameItem
+            .querySelector('.section-game__thank-you')
+            .classList
+            .add('section-game__thank-you--show')
+        }
+
         btn.addEventListener('click', e => {
             e.preventDefault()
-            const pointInput = btn.parentElement.querySelector('input[name="point"]');
             fetch('/game/bid', {
                     method: 'POST',
                     headers: {
@@ -75,23 +92,9 @@ if (HelperModule.pageUrl === '/game') {
                 })
                 .then(response => response.json())
                 .then(data => {
+                    alert(data.message)
                     if (data.status == 'success') {
-                        alert(data.message)
-
-                        // close the form input point
-                        const gameItem = pointInput.parentElement.parentElement.parentElement
-                        gameItem.querySelector('input[name="choose_option"]').checked = false
-
-                        // open the modal says "you're inputing {point_value}, 
-                        // good luck with your gambling!"
-                        gameItem.querySelector('.point-submitted').textContent = 
-                        pointInput.value
-                        gameItem.querySelector('.section-game__thank-you')
-                        .classList
-                        .add('section-game__thank-you--show')
-
-                    } else {
-                        alert(data.message)
+                        openThankYouMessage()
                     }
                 })
         })
