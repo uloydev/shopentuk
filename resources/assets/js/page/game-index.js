@@ -72,9 +72,22 @@ if (HelperModule.pageUrl === '/game') {
             .classList.add('section-game__thank-you--show')
         }
 
+        const closeThankYouMessage = () => {
+            gameItem.querySelector('input[name="choose_option"]').checked = true
+            pointInput.disabled = false
+            btn.disabled = false
+            gameItem.querySelector('.point-submitted').textContent = ''
+
+            gameItem
+            .querySelector('.section-game__thank-you')
+            .classList
+            .remove('section-game__thank-you--show')
+        }
+
         btn.addEventListener('click', e => {
             e.preventDefault()
-            fetch('/game/bid', {
+            if (Number(pointInput.value) > 0) {
+                fetch('/game/bid', {
                     method: 'POST',
                     headers: {
                         'Content-type': 'application/json',
@@ -95,6 +108,28 @@ if (HelperModule.pageUrl === '/game') {
                         openThankYouMessage()
                     }
                 })
+            } else {
+                fetch('/game/bid/cancel', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-Token': csrf,
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        game_id: game.id,
+                        game_option_id: pointInput.dataset.gameOptionId
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message)
+                    if (data.status == 'success') {
+                        closeThankYouMessage()
+                    }
+                })
+            }
         })
     })
 

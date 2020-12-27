@@ -13383,30 +13383,63 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
       gameItem.querySelector('.section-game__thank-you').classList.add('section-game__thank-you--show');
     };
 
+    var closeThankYouMessage = function closeThankYouMessage() {
+      gameItem.querySelector('input[name="choose_option"]').checked = true;
+      pointInput.disabled = false;
+      btn.disabled = false;
+      gameItem.querySelector('.point-submitted').textContent = '';
+      gameItem.querySelector('.section-game__thank-you').classList.remove('section-game__thank-you--show');
+    };
+
     btn.addEventListener('click', function (e) {
       e.preventDefault();
-      fetch('/game/bid', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-          'Accept': 'application/json',
-          'X-CSRF-Token': csrf
-        },
-        body: JSON.stringify({
-          user_id: userId,
-          game_id: game.id,
-          game_option_id: pointInput.dataset.gameOptionId,
-          point: Number(pointInput.value)
-        })
-      }).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        alert(data.message);
 
-        if (data.status == 'success') {
-          openThankYouMessage();
-        }
-      });
+      if (Number(pointInput.value) > 0) {
+        fetch('/game/bid', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-Token': csrf
+          },
+          body: JSON.stringify({
+            user_id: userId,
+            game_id: game.id,
+            game_option_id: pointInput.dataset.gameOptionId,
+            point: Number(pointInput.value)
+          })
+        }).then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          alert(data.message);
+
+          if (data.status == 'success') {
+            openThankYouMessage();
+          }
+        });
+      } else {
+        fetch('/game/bid/cancel', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-Token': csrf
+          },
+          body: JSON.stringify({
+            user_id: userId,
+            game_id: game.id,
+            game_option_id: pointInput.dataset.gameOptionId
+          })
+        }).then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          alert(data.message);
+
+          if (data.status == 'success') {
+            closeThankYouMessage();
+          }
+        });
+      }
     });
   });
 }
@@ -13551,9 +13584,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/produ
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
-__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
-module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
+__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
+__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
+module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
 
 
 /***/ })

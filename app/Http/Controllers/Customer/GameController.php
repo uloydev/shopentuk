@@ -71,6 +71,33 @@ class GameController extends Controller
         ]);
     }
 
+    public function cancelBid(Request $request)
+    {
+        try {
+            $user = User::findOrFail($request->user_id);
+            $game = Game::findOrFail($request->game_id);
+            $gameOption = GameOption::findOrFail($request->game_option_id);
+            $bid = GameBid::where('user_id', $user->id)
+            ->where('game_id', $game->id)
+            ->where('game_option_id', $gameOption->id)
+            ->first();
+            if ($bid) {
+                $user->point += $bid->point;
+                $bid->delete();
+                $user->save();
+            }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'gagal untuk menghapus bid !'
+            ]);
+        }
+        return response()->json([
+            'status' => 'success',
+            'message' => 'berhasil menghapus bid !'
+        ]);
+    }
+
     public function rules()
     {
         return view('game.rules', ['title' => 'rules game']);
