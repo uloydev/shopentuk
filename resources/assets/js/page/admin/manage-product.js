@@ -1,6 +1,6 @@
-import { pageUrl } from "../../helper-module"
+import * as HelperModule from "./../../helper-module"
 
-if (pageUrl === '/admin/products') {
+if (HelperModule.pageUrl === '/admin/products') {
     const btnOpenEditModal = document.querySelectorAll('.btn[data-target="#modal-edit-product"]')
 
     btnOpenEditModal.forEach(btn => {
@@ -17,6 +17,8 @@ if (pageUrl === '/admin/products') {
 
             document.querySelector('#modal-edit-product .modal-title').innerHTML =
             `edit product <b>${productItem.querySelector('.product-item__title').dataset.original}</b>`
+            
+            document.querySelector('#modal-edit-product form').action = btn.dataset.updateUrl
 
             for (let i = 0; i < fieldInputs.length; i++) {
                 document.querySelector(`input[name="${fieldInputs[i]}"]`).value =

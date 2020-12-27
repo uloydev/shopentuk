@@ -7,7 +7,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form action="" method="post">
+                <form action="{{-- route set on assets/js/page/admin/manage-product.js --}}" method="post">
                     @csrf
                     <x-input-template id="product-title" label="product title"
                     placeholder="Input the title of the product" name="title" required />

@@ -59,7 +59,8 @@
                                             data-toggle="modal"
                                             data-target="#modal-edit-product"
                                             data-product-title="{{ $product->title }}"
-                                            data-product-id="{{ $product->id }}">
+                                            data-product-id="{{ $product->id }}"
+                                            data-update-url="{{ route('admin.products.update', $product->id) }}">
                                                 Edit
                                             </a>
                                             <form method="POST" class="d-inline-block"
