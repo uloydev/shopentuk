@@ -173,3 +173,10 @@ $(".refresh-btn").on('click', function (e) {
     e.preventDefault()
     location.reload()
 })
+
+import './admin/manage-product'
+import './admin/manage-admin'
+import './admin/manage-order'
+import './admin/category-sub'
+import './admin/category-parent'
+import './admin/general'

@@ -12,6 +12,7 @@ mix.js('resources/assets/js/native.js', 'public/js/all-client.js')
         ],
     })
     .copyDirectory('resources/img', 'public/img/static')
+    .copyDirectory('resources/assets/template/assets/images', 'public/img/template')
     .styles([
         'resources/assets/template/assets/extra-libs/c3/c3.min.css',
         'resources/assets/template/assets/libs/chartist/chartist.min.css',

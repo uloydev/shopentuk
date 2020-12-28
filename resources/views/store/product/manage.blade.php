@@ -41,12 +41,12 @@
                                         data-original="{{ $product->point_price }}">
                                             {{ $product->point_price }}
                                         </td>
-                                        <td class="product-item__cat" 
-                                        data-original="{{ $product->productCategory->title }}">
+                                        <td class="product-item__category" 
+                                        data-original="{{ $product->productCategory->id }}">
                                             {{ Str::words($product->productCategory->title, 1) }}
                                         </td>
-                                        <td class="product-item__sub-cat" 
-                                        data-original="{{ $product->productSubCategory->title }}">
+                                        <td class="product-item__sub-category" 
+                                        data-original="{{ $product->productSubCategory->id }}">
                                             {{ Str::words($product->productSubCategory->title, 2) }}
                                         </td>
                                         <td>
@@ -55,7 +55,12 @@
                                                 View
                                             </a>
                                             <a href="{{ route('admin.products.edit', $product->id) }}" 
-                                            class="btn btn-sm btn-warning btn-rounded mr-2">
+                                            class="btn btn-sm btn-warning btn-rounded mr-2"
+                                            data-toggle="modal"
+                                            data-target="#modal-edit-product"
+                                            data-product-title="{{ $product->title }}"
+                                            data-product-id="{{ $product->id }}"
+                                            data-update-url="{{ route('admin.products.update', $product->id) }}">
                                                 Edit
                                             </a>
                                             <form method="POST" class="d-inline-block"
@@ -76,4 +81,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('components')
+    @include('store.product.edit')
 @endsection

@@ -17,7 +17,7 @@ class ProductSubCategory extends Model
 
     public function productCategory()
     {
-        return $this->belogsTo('App\Models\ProductCategory', 'category_id');
+        return $this->belongsTo('App\Models\ProductCategory', 'category_id');
     }
 
     public function products()

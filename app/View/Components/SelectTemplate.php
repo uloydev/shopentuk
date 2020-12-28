@@ -4,23 +4,21 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class InputTemplate extends Component
+class SelectTemplate extends Component
 {
 
-    public $id, $label, $type, $name, $placeholder;
+    public $label, $id, $name;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($id = '', $label, $type = 'text', $name, $placeholder)
+    public function __construct($label, $id, $name)
     {
-        $this->id = $id;
         $this->label = $label;
-        $this->type = $type;
+        $this->id = $id;
         $this->name = $name;
-        $this->placeholder = $placeholder;
     }
 
     /**
@@ -30,6 +28,6 @@ class InputTemplate extends Component
      */
     public function render()
     {
-        return view('components.input-template');
+        return view('components.select-template');
     }
 }
