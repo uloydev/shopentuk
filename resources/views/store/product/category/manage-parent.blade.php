@@ -15,7 +15,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
-                <h1 class="h3">Primary Category</h1>
+                <h1 class="h3">Product Category</h1>
                 <button type="button" data-toggle="modal" 
                 data-routing="{{ route('admin.all-category.store') }}"
                 class="btn btn-sm waves-effect waves-light btn-rounded btn-primary add-primary-category">
