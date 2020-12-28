@@ -307,7 +307,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
-if (pageUrl === '/admin/all-category' || pageUrl === '/admin/all-category/') {
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/all-category' || _helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/all-category/') {
   var modalManipulatePrimaryCategory = document.querySelector('#modal-manipulate-primary-category');
   var editPrimaryBtn = document.querySelectorAll('.edit-primary-category');
   var addPrimaryCategory = document.querySelector('.add-primary-category');

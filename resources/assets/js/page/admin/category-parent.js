@@ -1,6 +1,6 @@
 import * as HelperModule from "../../helper-module";
 
-if (pageUrl === '/admin/all-category' || pageUrl === '/admin/all-category/') {
+if (HelperModule.pageUrl === '/admin/all-category' || HelperModule.pageUrl === '/admin/all-category/') {
     const modalManipulatePrimaryCategory = document.querySelector('#modal-manipulate-primary-category')
     const editPrimaryBtn = document.querySelectorAll('.edit-primary-category')
     const addPrimaryCategory = document.querySelector('.add-primary-category')
