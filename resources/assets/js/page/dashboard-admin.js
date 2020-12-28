@@ -12,7 +12,8 @@ logoutBtn.addEventListener('click', (e) => {
 });
 
 // /admin/all-category page
-if (pageUrl === '/admin/all-category/parent') {
+if (pageUrl === '/admin/all-category' || pageUrl === '/admin/all-category/') {
+    console.log('ok')
     const modalManipulatePrimaryCategory = document.querySelector('#modal-manipulate-primary-category')
     const editPrimaryBtn = document.querySelectorAll('.edit-primary-category')
     const addPrimaryCategory = document.querySelector('.add-primary-category')
@@ -23,7 +24,7 @@ if (pageUrl === '/admin/all-category/parent') {
         btn.addEventListener('click', () => {
             urlForm = btn.dataset.routing
             if (btn.classList.contains('edit-primary-category')) {
-                titleModal = 'edit primary'
+                titleModal = 'edit'
                 primaryTitle = btn.parentNode.querySelector('.primary-category__title').textContent.trim()
                 primaryDesc = btn.dataset.desc
                 primaryIsDigitalProduct = Boolean(Number(btn.dataset.isDigital))
@@ -38,7 +39,7 @@ if (pageUrl === '/admin/all-category/parent') {
                 modalManipulatePrimaryCategory.querySelector('input[name="_method"]').disabled = false
             }
             else {
-                titleModal = 'add new primary'
+                titleModal = 'add new'
                 modalManipulatePrimaryCategory.querySelector('input[name="_method"]').disabled = true
             }
             titleModal = `${titleModal} category`
@@ -54,12 +55,13 @@ if (pageUrl === '/admin/all-category/parent') {
         })
     })
 }
-if (pageUrl === '/admin/all-category/sub') {
+if (pageUrl.includes('/sub')) {
     // edit sub category
     const modalEditSub = document.querySelectorAll('.edit-sub-category-btn')
     const modalManipulateCategory = document.querySelector('.modal-manipulate-category')
     let modalTitle = modalManipulateCategory.querySelector('.modal-title')
     let modalTitleText, subCategoryVal, parentCategoryVal
+    const modalForm = modalManipulateCategory.querySelector('#form-edit-sub-category')
 
     const parentCategoryOptionEl = modalManipulateCategory
                                 .querySelectorAll('#parent-category option:enabled')
@@ -68,8 +70,9 @@ if (pageUrl === '/admin/all-category/sub') {
         const modalEditId = btnEditSub.dataset.target
         const subCategoryEl = btnEditSub.parentNode.querySelector('.subcategory__title')
 
-        btnEditSub.addEventListener('click', () => {
-            modalTitleText = 'edit category'
+        btnEditSub.addEventListener('click', function() {
+            modalForm.action = this.dataset.editLink
+            modalTitleText = 'edit sub category'
             modalManipulateCategory.setAttribute(
                 'aria-labelledby', modalEditId.replace('#', '') + 'Label'
             );
@@ -98,8 +101,9 @@ if (pageUrl === '/admin/all-category/sub') {
     // add new sub category
     const addSubCategory = document.querySelector('#btn-add-sub-category')
     addSubCategory.addEventListener('click', function(){
+        modalForm.action = modalForm.dataset.addLink
         $(".modal-manipulate-category").modal('show')
-        modalTitleText = 'add new category'
+        modalTitleText = 'add new sub category for ' + this.dataset.category
         modalManipulateCategory.setAttribute('aria-labelledby', 'addNewCategoryLabel')
         modalTitle.textContent = modalTitleText
     })

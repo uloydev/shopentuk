@@ -84,27 +84,30 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
             });
         });
 
-        Route::get('all-category/sub', 'AllCategoryController@subCategoryIndex')->name(
+        Route::get('all-category/{cat}/sub', 'AllCategoryController@subCategoryIndex')->name(
             'all-category.sub.index'
         );
-        Route::post('all-category/sub/store', 'AllCategoryController@subCategoryStore')->name(
+        Route::post('all-category/{cat}/sub/store', 'AllCategoryController@subCategoryStore')->name(
             'all-category.sub.store'
         );
-        Route::delete('all-category/sub/destroy/{id}', 'AllCategoryController@subCategoryDestroy')->name(
+        Route::post('all-category/{cat}/sub/update/{sub}', 'AllCategoryController@subCategoryUpdate')->name(
+            'all-category.sub.update'
+        );
+        Route::delete('all-category/{cat}/sub/destroy/{sub}', 'AllCategoryController@subCategoryDestroy')->name(
             'all-category.sub.destroy'
         );
 
-        Route::get('all-category/parent', 'AllCategoryController@parentCategoryIndex')->name(
-            'all-category.parent.index'
+        Route::get('all-category', 'AllCategoryController@parentCategoryIndex')->name(
+            'all-category.index'
         );
-        Route::post('all-category/parent', 'AllCategoryController@parentCategoryStore')->name(
-            'all-category.parent.store'
+        Route::post('all-category', 'AllCategoryController@parentCategoryStore')->name(
+            'all-category.store'
         );
-        Route::put('all-category/{id}/parent', 'AllCategoryController@parentCategoryUpdate')->name(
-            'all-category.parent.update'
+        Route::put('all-category/{id}', 'AllCategoryController@parentCategoryUpdate')->name(
+            'all-category.update'
         );
-        Route::delete('all-category/parent/{id}', 'AllCategoryController@parentCategoryDestroy')->name(
-            'all-category.parent.destroy'
+        Route::delete('all-category/{id}', 'AllCategoryController@parentCategoryDestroy')->name(
+            'all-category.destroy'
         );
         Route::resource('products', 'ProductController');
     });

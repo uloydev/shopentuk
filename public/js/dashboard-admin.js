@@ -318,7 +318,8 @@ logoutBtn.addEventListener('click', function (e) {
   document.getElementById('logout-form').submit();
 }); // /admin/all-category page
 
-if (pageUrl === '/admin/all-category/parent') {
+if (pageUrl === '/admin/all-category' || pageUrl === '/admin/all-category/') {
+  console.log('ok');
   var modalManipulatePrimaryCategory = document.querySelector('#modal-manipulate-primary-category');
   var editPrimaryBtn = document.querySelectorAll('.edit-primary-category');
   var addPrimaryCategory = document.querySelector('.add-primary-category');
@@ -329,7 +330,7 @@ if (pageUrl === '/admin/all-category/parent') {
       urlForm = btn.dataset.routing;
 
       if (btn.classList.contains('edit-primary-category')) {
-        titleModal = 'edit primary';
+        titleModal = 'edit';
         primaryTitle = btn.parentNode.querySelector('.primary-category__title').textContent.trim();
         primaryDesc = btn.dataset.desc;
         primaryIsDigitalProduct = Boolean(Number(btn.dataset.isDigital));
@@ -338,7 +339,7 @@ if (pageUrl === '/admin/all-category/parent') {
         modalManipulatePrimaryCategory.querySelector('input[name="is_digital_product"]').checked = primaryIsDigitalProduct == false ? false : true;
         modalManipulatePrimaryCategory.querySelector('input[name="_method"]').disabled = false;
       } else {
-        titleModal = 'add new primary';
+        titleModal = 'add new';
         modalManipulatePrimaryCategory.querySelector('input[name="_method"]').disabled = true;
       }
 
@@ -353,18 +354,20 @@ if (pageUrl === '/admin/all-category/parent') {
   });
 }
 
-if (pageUrl === '/admin/all-category/sub') {
+if (pageUrl.includes('/sub')) {
   // edit sub category
   var modalEditSub = document.querySelectorAll('.edit-sub-category-btn');
   var modalManipulateCategory = document.querySelector('.modal-manipulate-category');
   var modalTitle = modalManipulateCategory.querySelector('.modal-title');
   var modalTitleText, subCategoryVal, parentCategoryVal;
+  var modalForm = modalManipulateCategory.querySelector('#form-edit-sub-category');
   var parentCategoryOptionEl = modalManipulateCategory.querySelectorAll('#parent-category option:enabled');
   modalEditSub.forEach(function (btnEditSub) {
     var modalEditId = btnEditSub.dataset.target;
     var subCategoryEl = btnEditSub.parentNode.querySelector('.subcategory__title');
     btnEditSub.addEventListener('click', function () {
-      modalTitleText = 'edit category';
+      modalForm.action = this.dataset.editLink;
+      modalTitleText = 'edit sub category';
       modalManipulateCategory.setAttribute('aria-labelledby', modalEditId.replace('#', '') + 'Label');
       $(".modal-manipulate-category").modal('show');
       modalTitle.setAttribute('id', 'modalEditCategoryLabel');
@@ -387,8 +390,9 @@ if (pageUrl === '/admin/all-category/sub') {
 
   var addSubCategory = document.querySelector('#btn-add-sub-category');
   addSubCategory.addEventListener('click', function () {
+    modalForm.action = modalForm.dataset.addLink;
     $(".modal-manipulate-category").modal('show');
-    modalTitleText = 'add new category';
+    modalTitleText = 'add new sub category for ' + this.dataset.category;
     modalManipulateCategory.setAttribute('aria-labelledby', 'addNewCategoryLabel');
     modalTitle.textContent = modalTitleText;
   }); // end of add new sub category

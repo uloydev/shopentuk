@@ -8,14 +8,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.all-category.sub.store') }}" 
+                <form action=""
+                data-add-link="{{ route('admin.all-category.sub.store', $category->id) }}"
                 method="post" id="form-edit-sub-category">
                     @csrf
                     <div class="form-group">
-                        <label class="form-control-label" for="parent-category">
+                        {{-- <label class="form-control-label" for="parent-category">
                             Pick a parent category
-                        </label>
-                        <select class="custom-select @error('category') is-invalid @enderror mr-sm-2 category__parent" 
+                        </label> --}}
+                        {{-- <select class="custom-select @error('category') is-invalid @enderror mr-sm-2 category__parent" 
                         name="category" id="parent-category" aria-describedby="helperTitle" 
                         required autofocus>
                             <option disabled>Pick category</option>
@@ -24,15 +25,15 @@
                                 {{ $category->title }}
                             </option>
                             @endforeach
-                        </select>
+                        </select> --}}
                     </div>
                     <x-input-template type="text" name="subcategory" label="Type a sub category" 
-                    id="sub-category" placeholder="Ex: Car - electric" required />
+                    id="sub-category" placeholder="Ex: celana" required />
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success" form="form-edit-sub-category">
-                    Add new category
+                    Submit
                 </button>
             </div>
         </div>
