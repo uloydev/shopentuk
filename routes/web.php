@@ -70,8 +70,8 @@ Route::namespace('Customer')->middleware(['auth', 'customer'])->group(function (
 });
 
 // admin route
-Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name('admin.')
-    ->group(function () {
+Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name('admin.')->group(
+    function () {
         Route::permanentRedirect('/', 'dashboard');
         Route::get('dashboard', 'DashboardController')->name('dashboard');
         Route::prefix('order')->name('order.')->group(function () {
@@ -107,7 +107,8 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
             'all-category.parent.destroy'
         );
         Route::resource('products', 'ProductController');
-    });
+    }
+);
 
 Route::prefix('superadmin')->middleware('superadmin')->name('superadmin.')->group(function () {
     Route::resource('admins', 'Admin\AdminController')->only('index', 'store', 'update', 'destroy');

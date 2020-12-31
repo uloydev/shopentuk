@@ -122,5 +122,9 @@ export const boxiconHoverChangeColor = (icon, hoverColor) => {
 
 }
 
+export const kebabToSnake = (string) => {
+    return string.replace('-', '_')
+}
+
 export const pageUrl = window.location.pathname
 export const appUrl = window.location.origin

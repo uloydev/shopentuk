@@ -145,7 +145,7 @@ module.exports = function numWords (input) {
 /*!**********************************************!*\
   !*** ./resources/assets/js/helper-module.js ***!
   \**********************************************/
-/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, getParents, boxiconHoverChangeColor, pageUrl, appUrl */
+/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, getParents, boxiconHoverChangeColor, kebabToSnake, pageUrl, appUrl */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -159,6 +159,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openCloseModal", function() { return openCloseModal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getParents", function() { return getParents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "boxiconHoverChangeColor", function() { return boxiconHoverChangeColor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "kebabToSnake", function() { return kebabToSnake; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pageUrl", function() { return pageUrl; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appUrl", function() { return appUrl; });
 /*!
@@ -277,6 +278,9 @@ var boxiconHoverChangeColor = function boxiconHoverChangeColor(icon, hoverColor)
   icon.addEventListener('mouseleave', function () {
     icon.setAttribute('color', originalIconColor);
   });
+};
+var kebabToSnake = function kebabToSnake(string) {
+  return string.replace('-', '_');
 };
 var pageUrl = window.location.pathname;
 var appUrl = window.location.origin;
@@ -508,34 +512,49 @@ __webpack_require__.r(__webpack_exports__);
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products') {
   var btnOpenEditModal = document.querySelectorAll('.btn[data-target="#modal-edit-product"]');
-  btnOpenEditModal.forEach(function (btn) {
+  btnOpenEditModal.forEach(function (btn, index) {
     var productItem = btn.parentNode.parentNode;
-    var fieldInputs = ['title', 'price', 'point'];
-    var fieldSelects = ['category', 'sub-category'];
-    var parentCategoryVal;
+    var subCatSelect = document.querySelector('select[name="sub_category_id"]'); // const fieldInputs = ['title', 'price', 'point']
+
+    var fieldSelects = ['category', 'sub-category-id'];
+    var categoryVal, subCategoryVal, parentCategoryVal;
     btn.addEventListener('click', function () {
       var categorySelect = document.querySelector('#category-id');
-      var subCatSelect = document.querySelectorAll('#sub-category-id option');
+      var subCatOption = document.querySelectorAll('#sub-category-id option');
       document.querySelector('#modal-edit-product .modal-title').innerHTML = "edit product <b>".concat(productItem.querySelector('.product-item__title').dataset.original, "</b>");
-      document.querySelector('#modal-edit-product form').action = btn.dataset.updateUrl;
+      document.querySelector('#modal-edit-product form').action = btn.dataset.updateUrl; //title
 
-      for (var i = 0; i < fieldInputs.length; i++) {
-        document.querySelector("input[name=\"".concat(fieldInputs[i], "\"]")).value = productItem.querySelector(".product-item__".concat(fieldInputs[i])).dataset.original;
-      }
+      document.querySelector('input[name="title"]').value = productItem.querySelector('.product-item__title').dataset.original; //price
 
-      for (var _i = 0; _i < fieldSelects.length; _i++) {
-        document.querySelector("select[name=\"".concat(fieldSelects[_i], "\"]")).value = productItem.querySelector(".product-item__".concat(fieldSelects[_i])).dataset.original;
-      }
+      document.querySelector('input[name="price"]').value = productItem.querySelector('.product-item__price').dataset.original; //point
 
+      var point = productItem.querySelector('.product-item__point').dataset.original;
+      console.log("point: ".concat(point));
+      document.querySelector('input[name="point_price"]').value = point;
+      document.querySelector('textarea[name="description"]').value = btn.dataset.productDesc;
+      categoryVal = document.querySelectorAll('.product-item__category')[index].dataset.original;
+      document.querySelector('select[name="category_id"]').value = categoryVal;
+      subCategoryVal = document.querySelectorAll('.product-item__sub-category')[index].dataset.original;
+      document.querySelector('select[name="sub_category_id"]').value = subCategoryVal;
+      console.log("subCategoryVal: ".concat(subCategoryVal));
+      var subCategoryOption;
+      subCatOption.forEach(function (subCat) {
+        subCategoryOption = subCat.dataset.parentCategory;
+
+        if (subCategoryOption !== categoryVal) {
+          subCat.hidden = true;
+        }
+      });
       categorySelect.addEventListener('change', function () {
-        parentCategoryVal = categorySelect.options[categorySelect.selectedIndex].text;
-        subCatSelect.forEach(function (optionSubCat) {
-          optionSubCat.selected = false;
+        parentCategoryVal = categorySelect.options[categorySelect.selectedIndex].value;
+        subCatOption.forEach(function (subCat) {
+          subCat.hidden = false;
 
-          if (optionSubCat.dataset.parentCategory !== parentCategoryVal) {
-            optionSubCat.hidden = true;
+          if (subCat.dataset.parentCategory != parentCategoryVal) {
+            subCat.hidden = true;
           } else {
-            optionSubCat.hidden = false;
+            subCat.selected = true;
+            subCat.hidden = false;
           }
         });
       });

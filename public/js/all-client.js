@@ -12623,7 +12623,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_2__["pageUrl"] === '/game') {
 /*!**********************************************!*\
   !*** ./resources/assets/js/helper-module.js ***!
   \**********************************************/
-/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, getParents, boxiconHoverChangeColor, pageUrl, appUrl */
+/*! exports provided: getSiblings, formattingRupiah, setFormAction, getUrlWithoutProtocol, capitalizeFirstLetter, setAttributes, openCloseModal, getParents, boxiconHoverChangeColor, kebabToSnake, pageUrl, appUrl */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12637,6 +12637,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "openCloseModal", function() { return openCloseModal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getParents", function() { return getParents; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "boxiconHoverChangeColor", function() { return boxiconHoverChangeColor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "kebabToSnake", function() { return kebabToSnake; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pageUrl", function() { return pageUrl; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appUrl", function() { return appUrl; });
 /*!
@@ -12755,6 +12756,9 @@ var boxiconHoverChangeColor = function boxiconHoverChangeColor(icon, hoverColor)
   icon.addEventListener('mouseleave', function () {
     icon.setAttribute('color', originalIconColor);
   });
+};
+var kebabToSnake = function kebabToSnake(string) {
+  return string.replace('-', '_');
 };
 var pageUrl = window.location.pathname;
 var appUrl = window.location.origin;

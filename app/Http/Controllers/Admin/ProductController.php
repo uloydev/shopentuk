@@ -20,10 +20,8 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->point_price = $request->point_price;
-        $product->category_id = $request->category;
-        if ($request->has('sub_category_id')) {
-            $product->sub_category_id = $request->input('sub-category');
-        }
+        $product->category_id = $request->category_id;
+        $product->sub_category_id = $request->sub_category_id;
         $product->save();
     }
 
@@ -58,8 +56,9 @@ class ProductController extends Controller
         return view('store.product.show', ['product' => $product, 'products' => $products]);
     }
 
-    public function update(ProductValidation $request, $id)
+    public function update(Request $request, $id)
     {
+        // dd($request->all());
         $updateProduct = Product::findOrFail($id);
         $this->saveProduct($updateProduct, $request);
 
