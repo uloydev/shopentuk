@@ -68,9 +68,21 @@ class AllCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function subCategoryStore(Request $request)
+    public function subCategoryStore(ProductCategory $cat, Request $request)
     {
-        //
+        ProductSubCategory::create([
+            'category_id' => $cat->id,
+            'title' => $request->subcategory
+        ]);
+        return redirect()->back()->with('msg', "Successfully add sub category to $cat->title category");
+    }
+
+    public function subCategoryUpdate($cat, ProductSubCategory $sub, Request $request)
+    {
+        $sub->update([
+            'title' => $request->subcategory,
+        ]);
+        return redirect()->back()->with('msg', "Successfully update sub category");
     }
 
     /**
@@ -130,21 +142,19 @@ class AllCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function subCategoryDestroy($id)
+    public function subCategoryDestroy($cat, ProductSubCategory $sub)
     {
-        $productSubCategory = ProductSubCategory::findOrFail($id);
-        $productSubCategory->products()->delete();
-        $productSubCategory->delete();
+        $sub->products()->delete();
+        $sub->delete();
 
         return redirect()->back()->with('msg', 'Successfully delete this sub category');
     }
 
-    public function subCategoryIndex()
+    public function subCategoryIndex(ProductCategory $cat)
     {
-        $categories = ProductCategory::where('is_digital_product', false)->get();
         return view('store.product.category.manage-sub', [
             'title' => 'manage category',
-            'categories' => $categories
+            'category' => $cat
         ]);
     }
 }

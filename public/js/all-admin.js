@@ -5439,7 +5439,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
-if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/all-category/parent') {
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/all-category' || _helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/all-category/') {
   var modalManipulatePrimaryCategory = document.querySelector('#modal-manipulate-primary-category');
   var editPrimaryBtn = document.querySelectorAll('.edit-primary-category');
   var addPrimaryCategory = document.querySelector('.add-primary-category');
@@ -5450,15 +5450,16 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/all-categ
       urlForm = btn.dataset.routing;
 
       if (btn.classList.contains('edit-primary-category')) {
-        titleModal = 'edit primary';
+        titleModal = 'edit';
         primaryTitle = btn.parentNode.querySelector('.primary-category__title').textContent.trim();
         primaryDesc = btn.dataset.desc;
         primaryIsDigitalProduct = Boolean(Number(btn.dataset.isDigital));
+        console.log(primaryIsDigitalProduct);
         modalManipulatePrimaryCategory.querySelector('input[name="title"]').value = primaryTitle;
         modalManipulatePrimaryCategory.querySelector('input[name="is_digital_product"]').checked = primaryIsDigitalProduct == false ? false : true;
         modalManipulatePrimaryCategory.querySelector('input[name="_method"]').disabled = false;
       } else {
-        titleModal = 'add new primary';
+        titleModal = 'add new';
         modalManipulatePrimaryCategory.querySelector('input[name="_method"]').disabled = true;
       }
 
@@ -5487,18 +5488,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper-module */ "./resources/assets/js/helper-module.js");
 
 
-if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/all-category/sub') {
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].includes('/sub')) {
   // edit sub category
   var modalEditSub = document.querySelectorAll('.edit-sub-category-btn');
   var modalManipulateCategory = document.querySelector('.modal-manipulate-category');
   var modalTitle = modalManipulateCategory.querySelector('.modal-title');
   var modalTitleText, subCategoryVal, parentCategoryVal;
+  var modalForm = modalManipulateCategory.querySelector('#form-edit-sub-category');
   var parentCategoryOptionEl = modalManipulateCategory.querySelectorAll('#parent-category option:enabled');
   modalEditSub.forEach(function (btnEditSub) {
     var modalEditId = btnEditSub.dataset.target;
     var subCategoryEl = btnEditSub.parentNode.querySelector('.subcategory__title');
     btnEditSub.addEventListener('click', function () {
-      modalTitleText = 'edit category';
+      modalForm.action = this.dataset.editLink;
+      modalTitleText = 'edit sub category';
       modalManipulateCategory.setAttribute('aria-labelledby', modalEditId.replace('#', '') + 'Label');
       $(".modal-manipulate-category").modal('show');
       modalTitle.setAttribute('id', 'modalEditCategoryLabel');
@@ -5521,8 +5524,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/all-categ
 
   var addSubCategory = document.querySelector('#btn-add-sub-category');
   addSubCategory.addEventListener('click', function () {
+    modalForm.action = modalForm.dataset.addLink;
     $(".modal-manipulate-category").modal('show');
-    modalTitleText = 'add new category';
+    modalTitleText = 'add new sub category for ' + this.dataset.category;
     modalManipulateCategory.setAttribute('aria-labelledby', 'addNewCategoryLabel');
     modalTitle.textContent = modalTitleText;
   }); // end of add new sub category
@@ -5703,15 +5707,13 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products'
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../helper-module */ "./resources/assets/js/helper-module.js");
-/* harmony import */ var _admin_manage_product__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin/manage-product */ "./resources/assets/js/page/admin/manage-product.js");
-/* harmony import */ var _admin_manage_admin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./admin/manage-admin */ "./resources/assets/js/page/admin/manage-admin.js");
-/* harmony import */ var _admin_manage_order__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./admin/manage-order */ "./resources/assets/js/page/admin/manage-order.js");
-/* harmony import */ var _admin_category_sub__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./admin/category-sub */ "./resources/assets/js/page/admin/category-sub.js");
-/* harmony import */ var _admin_category_parent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./admin/category-parent */ "./resources/assets/js/page/admin/category-parent.js");
-/* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./admin/general */ "./resources/assets/js/page/admin/general.js");
-/* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_admin_general__WEBPACK_IMPORTED_MODULE_7__);
-
+/* harmony import */ var _admin_manage_product__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin/manage-product */ "./resources/assets/js/page/admin/manage-product.js");
+/* harmony import */ var _admin_manage_admin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin/manage-admin */ "./resources/assets/js/page/admin/manage-admin.js");
+/* harmony import */ var _admin_manage_order__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./admin/manage-order */ "./resources/assets/js/page/admin/manage-order.js");
+/* harmony import */ var _admin_category_sub__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./admin/category-sub */ "./resources/assets/js/page/admin/category-sub.js");
+/* harmony import */ var _admin_category_parent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./admin/category-parent */ "./resources/assets/js/page/admin/category-parent.js");
+/* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./admin/general */ "./resources/assets/js/page/admin/general.js");
+/* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_admin_general__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -5729,7 +5731,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/page/dashboard-admin.js */"./resources/assets/js/page/dashboard-admin.js");
+module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/page/dashboard-admin.js */"./resources/assets/js/page/dashboard-admin.js");
 
 
 /***/ })

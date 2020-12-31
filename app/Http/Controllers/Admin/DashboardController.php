@@ -15,8 +15,7 @@ class DashboardController extends Controller
         $totalUser = User::where('role', 'customer')->count();
         $links = [
             route('admin.products.index'),
-            route('admin.all-category.sub.index'),
-            route('admin.all-category.parent.index'),
+            route('admin.all-category.index'),
             route('admin.products.index')
         ];
 

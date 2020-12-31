@@ -5,18 +5,23 @@
 @section('title', ucfirst($title))
 
 @section('content')
+@if (session('msg'))
+<div class="mb-5">
+    <x-adminmart-alert is-dismissable="true" type="success" message="{{ session('msg') }}" />
+</div>
+@endif
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
-                <h1 class="h3">Sub category</h1>
+                <h1 class="h3">Sub category for {{ $category->title }}</h1>
                 <button type="button" data-target="#modalAddCategory" data-toggle="modal"
-                class="btn btn-sm waves-effect waves-light btn-rounded btn-primary" id="btn-add-sub-category">
+                class="btn btn-sm waves-effect waves-light btn-rounded btn-primary" id="btn-add-sub-category" data-category="{{ $category->title }}">
                     Add new sub category
                 </button>
             </div>
             <div class="card-body">
-                <ul class="nav nav-tabs nav-justified nav-bordered mb-3">
+                {{-- <ul class="nav nav-tabs nav-justified nav-bordered mb-3">
                     @forelse ($categories as $category)
                     <li class="nav-item">
                         <a href="#{{ Str::slug($category->title) }}" data-toggle="tab" 
@@ -33,12 +38,12 @@
                         There's no sub category right now
                     </li>
                     @endforelse
-                </ul>
+                </ul> --}}
             
                 <div class="tab-content">
-                    @foreach ($categories as $category)
+                    {{-- @foreach ($categories as $category)
                     <div class="tab-pane {{ $loop->first ? 'active' : '' }}" 
-                    id="{{ Str::slug($category->title) }}">
+                    id="{{ Str::slug($category->title) }}"> --}}
                         <ul class="list-group list-group-full list-group-flush">
                             @forelse ($category->productSubCategory as $sub)
                                 <li class="list-group-item d-flex align-items-center subcategory"> 
@@ -48,12 +53,19 @@
                                     </span>
                                     <a href="javascript:void(0);" 
                                     data-target="#modalEditCategory" data-toggle="modal"
-                                    class="badge badge-warning badge-pill ml-auto edit-sub-category-btn">
+                                    class="badge badge-warning badge-pill ml-auto edit-sub-category-btn"
+                                    data-edit-link="{{ route('admin.all-category.sub.update',[
+                                        'cat' => $category->id, 
+                                        'sub' => $sub->id
+                                    ]) }}">
                                         Edit
                                     </a>
                                     <form class="ml-2 d-inline-block" method="POST" 
                                     title="sub category {{ $sub->id }}"
-                                    action="{{ route('admin.all-category.sub.destroy', $sub->id) }}">
+                                    action="{{ route('admin.all-category.sub.destroy',[
+                                        'cat' => $category->id, 
+                                        'sub' => $sub->id
+                                        ]) }}">
                                         @csrf @method('DELETE')
                                         <button class="badge badge-danger badge-pill" type="submit">
                                             Delete
@@ -66,8 +78,8 @@
                             </li>
                             @endforelse
                         </ul>
-                    </div>
-                    @endforeach
+                    {{-- </div>
+                    @endforeach --}}
                 </div>
             </div>
         </div>

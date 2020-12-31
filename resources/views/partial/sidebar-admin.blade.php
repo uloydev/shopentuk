@@ -11,13 +11,8 @@
                     <span class="hide-menu">products</span>
                 </li>
                 <x-menu-admin icon="purchase-tag" type="solid"
-                text="category & sub" class="has-arrow" to="javascript:void(0);">
-                    <ul aria-expanded="false" class="collapse first-level base-level-line">
-                        <x-menu-admin icon="shopping-bag" type="solid" 
-                        text="primary category" to="{{ route('admin.all-category.parent.index') }}"/>
-                        <x-menu-admin icon="shopping-bag" type="solid"
-                        text="sub category" to="{{ route('admin.all-category.sub.index') }}"/>
-                    </ul>
+                text="product category" to="{{ route('admin.all-category.index') }}">
+
                 </x-menu-admin>
                 <x-menu-admin icon="list-ul" text="All product" 
                 to="{{ route('admin.products.index') }}"/>

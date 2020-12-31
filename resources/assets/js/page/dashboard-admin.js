@@ -1,5 +1,4 @@
 import 'boxicons'
-import { capitalizeFirstLetter, setAttributes } from './../helper-module'
 import './admin/manage-product'
 import './admin/manage-admin'
 import './admin/manage-order'
