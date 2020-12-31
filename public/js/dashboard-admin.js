@@ -518,10 +518,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products'
   var btnOpenEditModal = document.querySelectorAll('.btn[data-target="#modal-edit-product"]');
   btnOpenEditModal.forEach(function (btn, index) {
     var productItem = btn.parentNode.parentNode;
-    var subCatSelect = document.querySelector('select[name="sub_category_id"]'); // const fieldInputs = ['title', 'price', 'point']
-
-    var fieldSelects = ['category', 'sub-category-id'];
-    var categoryVal, subCategoryVal, parentCategoryVal;
+    var categoryVal, subCategoryVal, parentCategoryValOnChange;
     btn.addEventListener('click', function () {
       var categorySelect = document.querySelector('#category-id');
       var subCatOption = document.querySelectorAll('#sub-category-id option');
@@ -533,28 +530,28 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products'
       document.querySelector('input[name="price"]').value = productItem.querySelector('.product-item__price').dataset.original; //point
 
       var point = productItem.querySelector('.product-item__point').dataset.original;
-      console.log("point: ".concat(point));
       document.querySelector('input[name="point_price"]').value = point;
       document.querySelector('textarea[name="description"]').value = btn.dataset.productDesc;
       categoryVal = document.querySelectorAll('.product-item__category')[index].dataset.original;
       document.querySelector('select[name="category_id"]').value = categoryVal;
       subCategoryVal = document.querySelectorAll('.product-item__sub-category')[index].dataset.original;
       document.querySelector('select[name="sub_category_id"]').value = subCategoryVal;
-      console.log("subCategoryVal: ".concat(subCategoryVal));
       var subCategoryOption;
       subCatOption.forEach(function (subCat) {
         subCategoryOption = subCat.dataset.parentCategory;
 
         if (subCategoryOption !== categoryVal) {
           subCat.hidden = true;
+        } else {
+          subCat.hidden = false;
         }
       });
       categorySelect.addEventListener('change', function () {
-        parentCategoryVal = categorySelect.options[categorySelect.selectedIndex].value;
+        parentCategoryValOnChange = categorySelect.options[categorySelect.selectedIndex].value;
         subCatOption.forEach(function (subCat) {
           subCat.hidden = false;
 
-          if (subCat.dataset.parentCategory != parentCategoryVal) {
+          if (subCat.dataset.parentCategory != parentCategoryValOnChange) {
             subCat.hidden = true;
           } else {
             subCat.selected = true;
@@ -603,7 +600,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/page/dashboard-admin.js */"./resources/assets/js/page/dashboard-admin.js");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/page/dashboard-admin.js */"./resources/assets/js/page/dashboard-admin.js");
 
 
 /***/ })
