@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "boxicons": "^2.0.7",
+        "micromodal": "^0.4.6",
         "num-words": "^1.2.2",
         "swiper": "^6.4.1",
         "tailwindcss": "^1.9.5"
