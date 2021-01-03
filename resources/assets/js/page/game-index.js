@@ -121,6 +121,12 @@ if (HelperModule.pageUrl === '/game') {
                     alert(data.message)
                     if (data.status == 'success') {
                         openThankYouMessage()
+                        const point = document.querySelector('.sidebar-game__total-point')
+                        const pointInit = Number(point.textContent.trim().replace('PTS', ''))
+
+                        const pointAfterSubmit = pointInit - Number(pointInput.value)
+                        console.log(`pointAfterSubmit: ${pointAfterSubmit}`)
+                        point.textContent = pointAfterSubmit + 'PTS'
                     }
                 })
             } else {

@@ -13887,6 +13887,11 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
 
           if (data.status == 'success') {
             openThankYouMessage();
+            var point = document.querySelector('.sidebar-game__total-point');
+            var pointInit = Number(point.textContent.trim().replace('PTS', ''));
+            var pointAfterSubmit = pointInit - Number(pointInput.value);
+            console.log("pointAfterSubmit: ".concat(pointAfterSubmit));
+            point.textContent = pointAfterSubmit + 'PTS';
           }
         });
       } else {
