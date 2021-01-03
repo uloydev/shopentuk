@@ -1,9 +1,9 @@
 <aside class="sidebar-game">
     <ul class="sidebar-game__container">
         <li class="sidebar-game__menu text-lg">
-            <a href="" class="sidebar-game__link">
+            <a href="javascript:void(0)" class="sidebar-game__link cursor-default">
                 <span>Jumlah point mu:</span>
-                <var class="not-italic font-bold ml-2">{{ $jumlahPoint ?? 0 . 'PTS' }}</var>
+                <var class="not-italic font-bold ml-2">{{ Auth::user()->point . 'PTS' }}</var>
             </a>
         </li>
         <li class="sidebar-game__menu">
