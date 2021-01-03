@@ -65,7 +65,6 @@ Route::namespace('Customer')->middleware(['auth', 'customer'])->group(function (
         Route::post('bid', 'GameController@makeBid')->name('bid');
         Route::post('bid/cancel', 'GameController@cancelBid')->name('bid.cancel');
         Route::get('current', 'GameController@currentGame')->name('current');
-        Route::get('rules', 'GameController@rulesGame')->name('rules');
     });
 });
 
@@ -109,7 +108,10 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
         Route::delete('all-category/{id}', 'AllCategoryController@parentCategoryDestroy')->name(
             'all-category.destroy'
         );
-        Route::resource('products', 'ProductController');
+        Route::resources([
+            'products' => 'ProductController',
+            'rules' => 'RulesController'
+        ]);
     }
 );
 

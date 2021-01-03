@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             GameOptionSeeder::class,
             // OrderSeeder::class,
             // ProductDiscountSeeder::class,
+            RulesSeeder::class
         ]);
     }
 }

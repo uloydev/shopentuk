@@ -1,9 +1,18 @@
 <aside class="sidebar-game">
     <ul class="sidebar-game__container">
-        <li>
-            <a href="{{ route('game.rules') }}" class="sidebar-game__link">rules</a>
+        <li class="sidebar-game__menu text-lg">
+            <a href="" class="sidebar-game__link">
+                <span>Jumlah point mu:</span>
+                <var class="not-italic font-bold ml-2">{{ $jumlahPoint ?? 0 . 'PTS' }}</var>
+            </a>
         </li>
-        <li>
+        <li class="sidebar-game__menu">
+            <a href="javascript:void(0)" class="sidebar-game__link"
+            data-micromodal-trigger="modal-rules">
+                rules
+            </a>
+        </li>
+        <li class="sidebar-game__menu">
             <a class="sidebar-game__link justify-between sidebar-game__link--dropdown">
                 <span>next 3 game schedule</span>
                 <box-icon name='chevron-right' type='solid'></box-icon>
@@ -25,9 +34,6 @@
                 </li>
                 @endforeach
             </ul>
-        </li>
-        <li>
-            <a href="" class="sidebar-game__link">game history</a>
         </li>
     </ul>
 </aside>

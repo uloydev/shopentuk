@@ -1,0 +1,139 @@
+@use 'mixin';
+
+.modal {
+    font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+
+    &__overlay {
+        background: rgba(0, 0, 0, 0.6);
+        @include mixin.centerFlex;
+        @apply z-10 inset-0 fixed;
+    }
+
+    &__container {
+        background-color: #fff;
+        padding: 30px;
+        max-width: 500px;
+        max-height: 100vh;
+        border-radius: 4px;
+        z-index: 2;
+        overflow-y: auto;
+        box-sizing: border-box;
+    }
+
+    &__header {
+        @apply flex justify-between items-center;
+    }
+
+    &__title {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-weight: 600;
+        font-size: 1.25rem;
+        line-height: 1.25;
+        color: #00449e;
+        box-sizing: border-box;
+    }
+
+    &__close {
+        background: transparent;
+        border: 0;
+
+        &:before {
+            content: "\2715";
+        }
+    }
+
+    &__content {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        line-height: 1.5;
+        color: rgba(0, 0, 0, .8);
+    }
+
+}
+
+@keyframes mmfadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes mmfadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes mmslideIn {
+    from {
+        transform: translateY(15%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes mmslideOut {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-10%);
+    }
+}
+
+.micromodal-slide {
+    display: none;
+
+    &.is-open {
+        display: block;
+    }
+
+    .modal__container,
+    .modal__overlay {
+        will-change: transform;
+    }
+
+    &[aria-hidden="false"] {
+
+        .modal {
+
+            &__overlay {
+                animation: mmfadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+            }
+
+            &__container {
+                animation: mmslideIn .3s cubic-bezier(0, 0, .2, 1);
+            }
+
+        }
+
+    }
+
+    &[aria-hidden="true"] {
+
+        .modal {
+
+            &__overlay {
+                animation: mmfadeOut .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+            }
+
+            &__container {
+                animation: mmslideOut .3s cubic-bezier(0, 0, .2, 1);
+            }
+
+        }
+
+    }
+
+}
