@@ -17,11 +17,14 @@ class Customer
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->role == 'customer') {
-            return $next($request);
-        }
-        else {
-            return redirect()->back()->with('error', 'admin can\'t login to customer dashboard');
+        if (auth()->check()) {
+            if (auth()->user()->role == 'customer') {
+                return $next($request);
+            } else {
+                return redirect()->back()->with('error', 'admin can\'t login to customer dashboard');
+            }
+        } else {
+            return redirect()->back();
         }
     }
 }

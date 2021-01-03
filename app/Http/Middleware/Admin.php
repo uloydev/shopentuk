@@ -17,17 +17,15 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            $role = Auth::user()->role;
+        if (auth()->check()) {
+            $role = auth()->user()->role;
             if ($role == 'admin' || $role == 'superadmin') {
                 return $next($request);
-            }
-            else {
+            } else {
                 return redirect()->back()->with('error', 'you are not allowed to access this page!');
             }
-        }
-        else {
-            return redirect()->back()->with('error', 'you are not login');
+        } else {
+            return redirect()->back();
         }
     }
 }
