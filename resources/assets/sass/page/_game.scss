@@ -4,7 +4,7 @@
 #gamePage {
 
     main {
-        @apply flex flex-wrap h-full pb-4;
+        @apply flex flex-wrap;
     }
 
     .sidebar-game {
@@ -16,7 +16,7 @@
         }
 
         &__container {
-            @apply h-full flex;
+            @apply flex h-full;
 
             @screen md {
                 @apply flex-col;
@@ -31,7 +31,6 @@
                 @apply opacity-100 visible h-auto;
             }
         }
-
 
         &__link {
             @include mixin.centerFlex($isPrimaryAxisCenter: false);
@@ -53,7 +52,7 @@
         }
 
         &__slide-number {
-            @apply text-6xl cursor-pointer;
+            @apply text-3xl cursor-pointer;
         }
 
         &__paragraph {
@@ -63,39 +62,17 @@
         &__item {
             @include general.centerFlex;
             transition: height general.$trans-duration;
-            @apply h-64 flex-col relative;
-
-            &--next,
-            &--prev {
-                @apply cursor-pointer;
-            }
-
-            &--prev .section-game__paragraph,
-            &--next .section-game__paragraph {
-                @apply invisible;
-            }
-
-            &--prev .section-game__slide-number {
-                right: 25%;
-                @apply relative transform translate-x-1/2;
-            }
-
-            &--next .section-game__slide-number {
-                left: 25%;
-                @apply relative transform -translate-x-1/2;
-            }
-
-            &--active {
-                height: 25rem;
-            }
+            @apply flex-col relative p-4;
 
             &--checked {
-                @apply absolute inset-0 h-0 w-0 invisible;
+                @apply invisible mt-5 absolute;
                 @include general.centerFlex;
 
                 transition: {
-                    property: height, width;
-                    duration: general.$trans-duration;
+                    property: height, width, position;
+                    duration: general.$trans-duration,
+                    general.$trans-duration,
+                    calc(#{general.$trans-duration} * 2);
                 }
 
                 background-color: inherit;
@@ -124,8 +101,9 @@
         &__thank-you {
             background-color: inherit;
             color: inherit;
-            @apply absolute inset-0 h-full w-full capitalize transition transition-all opacity-0 invisible text-xl;
             @include mixin.centerFlex($direction: column);
+            @include mixin.sameSize(100%);
+            @apply absolute inset-0 capitalize transition transition-all opacity-0 invisible p-3 text-center;
 
             &--show {
                 @apply visible opacity-100;
@@ -137,8 +115,19 @@
         }
 
         input[name=choose_option]:checked+.section-game__item--checked {
-            transition: all general.$trans-duration;
-            @apply opacity-100 visible h-full w-full;
+            @apply opacity-100 visible h-full w-full static;
+        }
+
+    }
+
+    .game-rule {
+
+        ol {
+            @apply pl-4;
+        }
+
+        li {
+            @apply mb-4 list-decimal;
         }
 
     }

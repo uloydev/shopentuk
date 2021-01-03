@@ -1,11 +1,13 @@
 import * as HelperModule from './../helper-module'
 import './../component/swiper'
+import MicroModal from 'micromodal'
 
 if (HelperModule.pageUrl === '/game') {
 
     const csrf = document.querySelector('meta[name="csrf-token"]').content;
     const userId = document.querySelector('input[name="user_id"]').value
     let game
+
     fetch('/game/current', {
         method: 'GET',
         headers: {
@@ -18,6 +20,19 @@ if (HelperModule.pageUrl === '/game') {
     .then(function (response) {
         game = response
     })
+
+    /**
+     * container page
+     */
+    const heightNav = document.querySelector('.nav').getBoundingClientRect().height
+    const heightContent = `calc(100% - ${heightNav}px)`
+    document.querySelector('main').style.height = heightContent
+
+    /**
+     * open rules modal
+     */
+    MicroModal.init()
+
     /**
      * pick number
      */
@@ -57,7 +72,7 @@ if (HelperModule.pageUrl === '/game') {
         HelperModule.boxiconHoverChangeColor(iconBtn, '#ededed')
 
         const pointInput = btn.parentElement.querySelector('input[name="point"]');
-        const gameItem = pointInput.parentElement.parentElement.parentElement
+        const gameItem = pointInput.parentElement.parentElement.parentElement.parentElement
 
         /**
          * defined "thank you" message overlay after submit point

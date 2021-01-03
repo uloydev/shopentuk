@@ -2,11 +2,30 @@
 @section('title', 'Game saat ini')
 @section('body-id', 'game')
 @section('content')
-
     @include('game.sidebar')
     <section class="section-game py-10">
         <div class="container h-full">
-            <div class="swiper-container section-game__list">
+            <input type="hidden" name="user_id" value="{{ Auth::id() }}" readonly>
+            <div class="section-game__content flex items-center space-x-10">
+                <div class="grid grid-rows-2 text-white gap-4">
+                    @foreach ($gamesGreen as $option)
+                        @include('game.item', ['option' => $option, 'color' => 'green'])
+                    @endforeach
+                </div>
+
+                <div class="grid grid-cols-2 text-white gap-4">
+                    @foreach ($gamesPurple as $option)
+                        @include('game.item', ['option' => $option, 'color' => 'purple'])
+                    @endforeach
+                </div>
+
+                <div class="grid grid-cols-2 text-white gap-4">
+                    @foreach ($gamesRed as $option)
+                        @include('game.item', ['option' => $option, 'color' => 'red'])
+                    @endforeach
+                </div>
+
+            {{-- <div class="swiper-container section-game__list">
                 <div class="swiper-wrapper items-center">
                     <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                     @foreach($gameOptions as $option)
@@ -63,9 +82,11 @@
                 <div class="section-game__btn-slide section-game__btn-slide--prev">
                     <box-icon name='chevron-left' type='solid' class="text-white"></box-icon>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
+
+    @include('game.rules')
 
 @endsection
 

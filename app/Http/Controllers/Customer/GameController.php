@@ -9,15 +9,22 @@ use App\Models\GameBid;
 use App\Models\GameOption;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Rules;
 
 class GameController extends Controller
 {
     public function index()
     {
-        // dd(Carbon::now()->addHours(3)->toDateTimeString());
+        $gamesGreen = GameOption::where('color', 'green')->limit(2)->orderBy('number')->get();
+        $gamesRed = GameOption::where('color', 'red')->orderBy('number')->get();
+        $gamesPurple = GameOption::where('color', 'purple')->orderBy('number')->get();
+
         return view('game.index', [
+            'gamesGreen' => $gamesGreen,
+            'gamesRed' => $gamesRed,
+            'gamesPurple' => $gamesPurple,
             'nextGame' => Game::where('status', 'queued')->limit(3)->get(),
-            'gameOptions' => GameOption::orderBy('number')->get(),
+            'rule' => Rules::first()
         ]);
     }
 
@@ -29,9 +36,9 @@ class GameController extends Controller
             $game = Game::findOrFail($request->game_id);
             $gameOption = GameOption::findOrFail($request->game_option_id);
             $bid = GameBid::where('user_id', $user->id)
-            ->where('game_id', $game->id)
-            ->where('game_option_id', $gameOption->id)
-            ->first();
+                ->where('game_id', $game->id)
+                ->where('game_option_id', $gameOption->id)
+                ->first();
             if ($bid) {
                 if ($user->point + $bid->point < $request->point) {
                     return response()->json([
@@ -78,9 +85,9 @@ class GameController extends Controller
             $game = Game::findOrFail($request->game_id);
             $gameOption = GameOption::findOrFail($request->game_option_id);
             $bid = GameBid::where('user_id', $user->id)
-            ->where('game_id', $game->id)
-            ->where('game_option_id', $gameOption->id)
-            ->first();
+                ->where('game_id', $game->id)
+                ->where('game_option_id', $gameOption->id)
+                ->first();
             if ($bid) {
                 $user->point += $bid->point;
                 $bid->delete();
@@ -96,11 +103,6 @@ class GameController extends Controller
             'status' => 'success',
             'message' => 'berhasil menghapus bid !'
         ]);
-    }
-
-    public function rules()
-    {
-        return view('game.rules', ['title' => 'rules game']);
     }
 
     public function currentGame()
