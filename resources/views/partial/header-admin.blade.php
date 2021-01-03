@@ -50,7 +50,8 @@
                         <x-menu-header-admin :to="url('/')" icon="user" text="My Profile"/>
                         <x-menu-header-admin :to="url('/')" icon="credit-card" text="My Balance"/>
                         <x-menu-header-admin :to="route('logout')" icon="power" 
-                        text="Logout" id="logoutBtn"/>
+                        text="Logout" id="logoutBtn" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();" />
                         <form id="logout-form" action="{{ route('logout') }}"
                         method="POST" class="d-none">
                             @csrf
