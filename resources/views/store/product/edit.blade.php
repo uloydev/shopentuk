@@ -9,26 +9,57 @@
             <div class="modal-body">
                 <form action="{{-- route set on assets/js/page/admin/manage-product.js --}}" method="post">
                     @csrf @method('PUT')
-                    <x-input-template id="product-title" label="product title"
-                    placeholder="Input the title of the product" name="title" required />
-                    <x-input-template id="product-price" type="number" label="product price"
-                    placeholder="Input the price of the product" name="price" required />
-                    <x-input-template id="product-point" type="number" min="1" label="product point"
-                    placeholder="Input the point of the product" name="point_price" required />
-                    
-                    <x-select-template label="category" id="category-id" name="category_id">
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->title }}</option>
-                        @endforeach
-                    </x-select-template>
-                    <x-select-template label="sub category" id="sub-category-id" name="sub_category_id">
-                        @foreach ($subCategories as $subCategory)
-                        <option value="{{ $subCategory->id }}"
-                            data-parent-category="{{ $subCategory->productCategory->id }}">
-                            {{ $subCategory->title }}
-                        </option>
-                        @endforeach
-                    </x-select-template>
+                    @php
+                        $inputs = [
+                            [
+                                'id' => 'title',
+                                'name' => 'title',
+                                'type' => 'text',
+                            ],
+                            [
+                                'id' => 'price',
+                                'name' => 'price',
+                                'type' => 'number',
+                            ],
+                            [
+                                'id' => 'point',
+                                'name' => 'point_price',
+                                'type' => 'number',
+                            ],
+                            [
+                                'id' => 'category-id',
+                                'name' => 'category_id',
+                                'type' => 'select'
+                            ]
+                        ];
+
+                        $selects = [
+                            [
+                                'id' => 'category-id',
+                                'label' => 'category'
+                            ],
+                            [
+                                'id' => 'sub-category-id',
+                                'label' => 'sub category'
+                            ]
+                        ];
+                    @endphp
+
+                    @foreach ($inputs as $input)
+                        <x-input-template id="{{ 'product-' . $input['id'] }}" 
+                        label="{{ str_replace('-', ' ', 'product-' . $input['id']) }}"
+                        placeholder="Input the {{ $input['name'] }} of the product" 
+                        name="{{ $input['name'] }}" type="{{ $input['type'] }}"
+                        add-class="text-capitalize" required />
+                    @endforeach
+                    @foreach ($selects as $select)
+                        <x-select-template label="{{ $select['label'] }}" 
+                        id="{{ $select['id'] }}" name="{{ str_replace('-', '_', $select['id']) }}">
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                            @endforeach
+                        </x-select-template>
+                    @endforeach
                     <div class="form-group">
                         <label for="edit-desc">Description</label>
                         <textarea class="form-control" id="edit-desc" rows="5" name="description"

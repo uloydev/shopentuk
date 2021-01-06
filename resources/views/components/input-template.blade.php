@@ -3,7 +3,7 @@
         {{ $label }}
     </label>
     <input type="{{ $type }}" name="{{ $name }}" id="{{ $id }}" {{ $attributes }}
-    placeholder="{{ $placeholder }}" class="form-control @error($name) is-invalid @enderror">
+    placeholder="{{ $placeholder }}" class="form-control {{ $addClass }} @error($name) is-invalid @enderror">
     {{ $slot }}
     @error($name)
         <div class="invalid-feedback">
