@@ -7,20 +7,21 @@ use Illuminate\View\Component;
 class InputTemplate extends Component
 {
 
-    public $id, $label, $type, $name, $placeholder;
+    public $id, $label, $type, $name, $placeholder, $addClass;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($id = '', $label, $type = 'text', $name, $placeholder)
+    public function __construct($id = '', $label, $type = 'text', $name, $placeholder, $addClass = '')
     {
         $this->id = $id;
         $this->label = $label;
         $this->type = $type;
         $this->name = $name;
         $this->placeholder = $placeholder;
+        $this->addClass = $addClass;
     }
 
     /**
