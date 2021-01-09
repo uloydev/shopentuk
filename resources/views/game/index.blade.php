@@ -9,7 +9,7 @@
                 <time class="text-xl">{{ date('d F Y') }}</time>
                 <div class="flex flex-col">
                     <h1>Waktu</h1>
-                    <time datetime="3:00" class="section-game__timer">03:00</time>
+                    <time datetime="3:00" class="section-game__timer">02:30</time>
                 </div>
             </article>
             <input type="hidden" name="user_id" value="{{ Auth::id() }}" readonly>

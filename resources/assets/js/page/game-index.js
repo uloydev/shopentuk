@@ -41,7 +41,7 @@ if (HelperModule.pageUrl === '/game') {
         }, 1000);
     }
 
-    startTimer(5, document.querySelector('.section-game__timer'))
+    startTimer(60 * 3 - 30, document.querySelector('.section-game__timer'))
     
 
     /**
