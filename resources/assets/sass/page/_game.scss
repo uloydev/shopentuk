@@ -73,7 +73,7 @@
             @apply flex-col relative p-4;
 
             &--checked {
-                @apply invisible mt-5 absolute;
+                @apply invisible mt-5 absolute bg-parent;
                 @include general.centerFlex;
 
                 transition: {
@@ -82,8 +82,6 @@
                     general.$trans-duration,
                     calc(#{general.$trans-duration} * 2);
                 }
-
-                background-color: inherit;
             }
         }
 
@@ -107,11 +105,9 @@
         }
 
         &__thank-you {
-            background-color: inherit;
-            color: inherit;
             @include mixin.centerFlex($direction: column);
             @include mixin.sameSize(100%);
-            @apply absolute inset-0 capitalize transition transition-all opacity-0 invisible p-3 text-center;
+            @apply absolute inset-0 capitalize transition transition-all opacity-0 invisible p-3 text-center bg-parent text-parent;
 
             &--show {
                 @apply visible opacity-100;

@@ -20,13 +20,11 @@
     }
 
     @if $isHorizontalCenter {
-        left: 50%;
-        transform: translateX(-50%);
+        @apply left-1/2 transform -translate-x-1/2;
     }
 
     @if $isVerticalCenter {
-        top: 50%;
-        transform: translateY(-50%);
+        @apply top-1/2 transform -translate-y-1/2;
     }
 }
 

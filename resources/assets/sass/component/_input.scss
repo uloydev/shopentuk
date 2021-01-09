@@ -5,9 +5,7 @@
 
         &::after {
             content: '*';
-            top: 50%;
-            transform: translateY(-50%);
-            @apply absolute right-0 text-red-400;
+            @apply absolute right-0 text-red-400 top-1/2 transform -translate-y-1/2;
         }
     }
 }

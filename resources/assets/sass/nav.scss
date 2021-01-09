@@ -14,10 +14,10 @@
 
     &__ul {
         @apply flex flex-col px-4 flex-grow;
-        
+
 
         & & {
-            padding-left: 1rem;
+            @apply pl-4;
         }
 
         @screen lg {
@@ -26,13 +26,13 @@
     }
 
     &__logo {
-        @apply overflow-hidden inline-flex mr-auto;
-        max-width: 50%;
+        @apply overflow-hidden inline-flex mr-auto max-w-1/2;
 
         @screen lg {
             @apply flex items-center max-w-none mr-0;
         }
     }
+
     &__icon {
         @apply flex items-center justify-center;
 
@@ -40,6 +40,7 @@
             position: absolute;
             transform: translateY(5px);
         }
+
         &--bag box-icon {
             @include general.sameSize(45px);
         }
@@ -49,7 +50,7 @@
         }
     }
 
-    &__toggle-menu{
+    &__toggle-menu {
         transform: translateY(4px);
 
         box-icon {
@@ -57,12 +58,12 @@
         }
 
         @screen lg {
-            display: none;
+            @apply hidden;
         }
     }
 
     &__item {
-        display: flex;
+        @apply flex;
 
         &--first {
             @apply border-b-2 border-gray-200 px-4 pb-4;
@@ -73,7 +74,7 @@
         }
 
         &--cart {
-            width: 50%;
+            @apply w-1/2;
         }
 
         &--menu {
@@ -87,22 +88,23 @@
             @screen lg {
                 @apply z-50 opacity-100 h-auto; //z-50 == z-index teratas di tailwind
             }
-            
+
         }
 
         &-has-child {
             @apply relative;
 
             & & {
-                padding-right: 0;
+                @apply pr-0;
             }
 
             .nav__item {
-                max-height: 0;
+                @apply max-h-0;
             }
 
             .nav__ul {
                 @apply overflow-hidden transition transition-all h-0 opacity-0 invisible;
+
                 @screen lg {
                     @apply flex-col absolute overflow-visible;
                     top: 100%;
@@ -117,21 +119,21 @@
             &--open {
 
                 .nav__item {
-                    max-height: none;
+                    @apply max-h-none;
                 }
 
-                > .nav__link--open-child {
+                >.nav__link--open-child {
 
                     .child-dropdown-icon {
                         @apply transform rotate-180;
                     }
                 }
 
-                > .nav__ul {
+                >.nav__ul {
                     @apply h-auto opacity-100 visible;
 
-                    .nav__link  {
-                        justify-content: start;
+                    .nav__link {
+                        @apply justify-start;
                     }
                 }
 
@@ -144,22 +146,25 @@
         @apply flex py-3;
 
         @screen lg {
-            justify-content: center;
+            @apply justify-center;
 
-            #landingPage .container > .nav__ul > .nav__item > & {
-                color: #fff;
+            #landingPage .container>.nav__ul>.nav__item>& {
+                @apply text-white;
             }
         }
     }
 
     #open-icon {
         display: initial;
+
         @include general.openNav {
-            display: none;
+            @apply hidden;
         }
     }
+
     #close-icon {
-        display: none;
+        @apply hidden;
+
         @include general.openNav {
             display: initial;
         }
