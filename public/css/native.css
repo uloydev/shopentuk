@@ -1313,6 +1313,16 @@ body {
   height: 100%;
 }
 
+body {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+main,
+header {
+  width: 100%;
+}
+
 ::-moz-selection {
   --text-opacity: 1;
   color: #fff;
@@ -1349,10 +1359,6 @@ body {
 
 .section__heading span::after {
   content: "";
-  --bg-opacity: 1;
-  background-color: #000;
-  background-color: rgba(0, 0, 0, var(--bg-opacity));
-  width: 60%;
   bottom: -30px;
   height: 2px;
   position: absolute;
@@ -1360,6 +1366,10 @@ body {
   transform: translateX(-50%);
   top: 50%;
   transform: translateY(-50%);
+  --bg-opacity: 1;
+  background-color: #000;
+  background-color: rgba(0, 0, 0, var(--bg-opacity));
+  width: 60%;
 }
 
 .card-product {
@@ -1690,6 +1700,17 @@ body {
   #gamePage .section-game {
     width: calc(100% - 300px);
   }
+}
+
+#gamePage .section-game__period {
+  padding-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#gamePage .section-game__timer {
+  font-size: 2.25rem;
 }
 
 #gamePage .section-game__slide-number {

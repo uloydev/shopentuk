@@ -1,5 +1,4 @@
-<div class="modal fade" id="modal-edit-product" tabindex="-1" role="dialog" aria-labelledby="modal-edit-product-label"
-    aria-hidden="true">
+<div class="modal fade" id="modal-edit-product" tabindex="-1" role="dialog" aria-labelledby="modal-edit-product-label" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form action="{{-- route set on assets/js/page/admin/manage-product.js --}}" method="post">
+                <form action="{{-- route set on manage-product.js --}}" method="post">
                     @csrf @method('PUT')
                     @php
                         $inputs = [

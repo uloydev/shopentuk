@@ -51,6 +51,14 @@
             width: calc(100% - #{general.$width-sidebar-game-lg});
         }
 
+        &__period {
+            @apply pb-10 flex items-center justify-between;
+        }
+
+        &__timer {
+            @apply text-4xl;
+        }
+
         &__slide-number {
             @apply text-3xl cursor-pointer;
         }

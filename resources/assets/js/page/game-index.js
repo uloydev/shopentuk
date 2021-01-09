@@ -22,6 +22,29 @@ if (HelperModule.pageUrl === '/game') {
     })
 
     /**
+     * coutdown game
+     */
+    const startTimer = (duration, display) => {
+        var timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+    
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+    
+            display.textContent = minutes + ":" + seconds;
+    
+            if (--timer < 0) {
+                timer = duration;
+            }
+        }, 1000);
+    }
+
+    startTimer(5, document.querySelector('.section-game__timer'))
+    
+
+    /**
      * container page
      */
     const heightNav = document.querySelector('.nav').getBoundingClientRect().height

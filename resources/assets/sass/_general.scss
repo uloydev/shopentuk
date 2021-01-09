@@ -19,7 +19,16 @@ $width-sidebar-game-lg: 300px;
 
 html,
 body {
-    height: 100%;
+    @apply h-full;
+}
+
+body {
+    @apply flex flex-wrap;
+}
+
+main,
+header {
+    @apply w-full;
 }
 
 ::selection {
@@ -48,10 +57,10 @@ body {
 
             &::after {
                 content: '';
-                @apply bg-black w-3/5;
                 bottom: -30px;
                 height: 2px;
                 @include centerPosition;
+                @apply bg-black w-3/5;
             }
         }
     }
