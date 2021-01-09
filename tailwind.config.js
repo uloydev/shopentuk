@@ -6,7 +6,17 @@ module.exports = {
     purge: [],
     theme: {
         extends: {
-            'full-2x': '200%'
+            width: {
+                'full-2x': '200%',
+            },
+        },
+        maxHeight: {
+            '0': '0',
+            '1/4': '25%',
+            '1/2': '50%',
+            '3/4': '75%',
+            'full': '100%',
+            'screen': '100vh'
         },
         container: {
             center: true,

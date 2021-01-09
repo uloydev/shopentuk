@@ -1077,27 +1077,36 @@ video {
 }
 
 .alert {
+  display: flex;
+  align-items: center;
   --text-opacity: 1;
   color: #fff;
   color: rgba(255, 255, 255, var(--text-opacity));
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
 }
 
-.alert-success {
+.alert--success {
   --bg-opacity: 1;
   background-color: #38a169;
   background-color: rgba(56, 161, 105, var(--bg-opacity));
 }
 
-.alert-danger {
+.alert--danger {
   --bg-opacity: 1;
   background-color: #e53e3e;
   background-color: rgba(229, 62, 62, var(--bg-opacity));
 }
 
-.alert-info {
+.alert--info {
   --bg-opacity: 1;
-  background-color: #cbd5e0;
-  background-color: rgba(203, 213, 224, var(--bg-opacity));
+  background-color: #718096;
+  background-color: rgba(113, 128, 150, var(--bg-opacity));
   --text-opacity: 1;
   color: #2d3748;
   color: rgba(45, 55, 72, var(--text-opacity));
@@ -14403,6 +14412,22 @@ header {
 
 .-ml-px{
   margin-left: -1px !important;
+}
+
+.max-h-0{
+  max-height: 0 !important;
+}
+
+.max-h-1\/4{
+  max-height: 25% !important;
+}
+
+.max-h-1\/2{
+  max-height: 50% !important;
+}
+
+.max-h-3\/4{
+  max-height: 75% !important;
 }
 
 .max-h-full{
@@ -36499,6 +36524,22 @@ header {
     margin-left: -1px !important;
   }
 
+  .sm\:max-h-0{
+    max-height: 0 !important;
+  }
+
+  .sm\:max-h-1\/4{
+    max-height: 25% !important;
+  }
+
+  .sm\:max-h-1\/2{
+    max-height: 50% !important;
+  }
+
+  .sm\:max-h-3\/4{
+    max-height: 75% !important;
+  }
+
   .sm\:max-h-full{
     max-height: 100% !important;
   }
@@ -58526,6 +58567,22 @@ header {
 
   .md\:-ml-px{
     margin-left: -1px !important;
+  }
+
+  .md\:max-h-0{
+    max-height: 0 !important;
+  }
+
+  .md\:max-h-1\/4{
+    max-height: 25% !important;
+  }
+
+  .md\:max-h-1\/2{
+    max-height: 50% !important;
+  }
+
+  .md\:max-h-3\/4{
+    max-height: 75% !important;
   }
 
   .md\:max-h-full{
@@ -80557,6 +80614,22 @@ header {
     margin-left: -1px !important;
   }
 
+  .lg\:max-h-0{
+    max-height: 0 !important;
+  }
+
+  .lg\:max-h-1\/4{
+    max-height: 25% !important;
+  }
+
+  .lg\:max-h-1\/2{
+    max-height: 50% !important;
+  }
+
+  .lg\:max-h-3\/4{
+    max-height: 75% !important;
+  }
+
   .lg\:max-h-full{
     max-height: 100% !important;
   }
@@ -102584,6 +102657,22 @@ header {
 
   .xl\:-ml-px{
     margin-left: -1px !important;
+  }
+
+  .xl\:max-h-0{
+    max-height: 0 !important;
+  }
+
+  .xl\:max-h-1\/4{
+    max-height: 25% !important;
+  }
+
+  .xl\:max-h-1\/2{
+    max-height: 50% !important;
+  }
+
+  .xl\:max-h-3\/4{
+    max-height: 75% !important;
   }
 
   .xl\:max-h-full{
