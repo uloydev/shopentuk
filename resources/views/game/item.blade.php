@@ -1,4 +1,4 @@
-<div class="section-game__item bg-{{ $color }}-500">
+<div class="section-game__item bg-gray-300">
     @php
         $id = "choose-option-$option->number";
     @endphp

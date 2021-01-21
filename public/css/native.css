@@ -1766,6 +1766,9 @@ header {
   flex-direction: column;
   position: relative;
   padding: 1rem;
+  --text-opacity: 1;
+  color: #2d3748;
+  color: rgba(45, 55, 72, var(--text-opacity));
 }
 
 #gamePage .section-game__item--checked {

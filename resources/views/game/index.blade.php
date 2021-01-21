@@ -13,6 +13,9 @@
                 </div>
             </article>
             <input type="hidden" name="user_id" value="{{ Auth::id() }}" readonly>
+            <div class="section-game__content">
+                
+            </div>
             <div class="section-game__content flex items-center space-x-10">
                 <div class="grid grid-rows-2 text-white gap-4">
                     @foreach ($gamesGreen as $option)

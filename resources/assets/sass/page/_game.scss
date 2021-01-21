@@ -67,10 +67,14 @@
             @apply capitalize;
         }
 
+        &__content {
+            
+        }
+
         &__item {
             @include general.centerFlex;
             transition: height general.$trans-duration;
-            @apply flex-col relative p-4;
+            @apply flex-col relative p-4 text-gray-800;
 
             &--checked {
                 @apply invisible mt-5 absolute bg-parent;
