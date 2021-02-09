@@ -1,5 +1,5 @@
-<aside class="sidebar-game">
-    <ul class="sidebar-game__container">
+<aside class="sidebar-game bg-gray-300">
+    <ul class="sidebar-game__container flex h-full lg:flex-col">
         <li class="sidebar-game__menu text-lg">
             <a href="javascript:void(0)" class="sidebar-game__link cursor-default">
                 <span>Jumlah point mu:</span>
@@ -19,7 +19,7 @@
                 <span>next 3 game schedule</span>
                 <box-icon name='chevron-right' type='solid'></box-icon>
             </a>
-            <ul class="sidebar-game__dropdown-box">
+            <ul class="sidebar-game__dropdown-box pl-5 overflow-hidden transition transition-all">
                 @foreach ($nextGame as $game)
                 <li class="sidebar-game__dropdown-item">
                     <a href="javascript:void(0);" class="sidebar-game__link">

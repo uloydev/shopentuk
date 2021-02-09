@@ -141,6 +141,22 @@ module.exports = function numWords (input) {
 
 /***/ }),
 
+/***/ "./resources/assets/js/component/modal.js":
+/*!************************************************!*\
+  !*** ./resources/assets/js/component/modal.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('button[data-target="#modal-feedback"]').on('click', function (event) {
+  var message = $(this).data('message');
+  var email = $(this).data('email');
+  $('#modal-feedback .modal-title').text('Feedback from ' + email);
+  $('#modal-feedback .modal-body').html(message);
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/helper-module.js":
 /*!**********************************************!*\
   !*** ./resources/assets/js/helper-module.js ***!
@@ -583,6 +599,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_category_parent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./admin/category-parent */ "./resources/assets/js/page/admin/category-parent.js");
 /* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./admin/general */ "./resources/assets/js/page/admin/general.js");
 /* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_admin_general__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _component_modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./../component/modal */ "./resources/assets/js/component/modal.js");
+/* harmony import */ var _component_modal__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_component_modal__WEBPACK_IMPORTED_MODULE_7__);
+
 
 
 

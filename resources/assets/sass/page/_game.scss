@@ -9,23 +9,14 @@
 
     .sidebar-game {
         min-width: general.$width-sidebar-game;
-        @apply bg-gray-300;
 
         @screen md {
             min-width: general.$width-sidebar-game-lg;
         }
 
-        &__container {
-            @apply flex h-full;
-
-            @screen md {
-                @apply flex-col;
-            }
-        }
-
         &__dropdown-box {
             transition-duration: general.$trans-duration;
-            @apply pl-5 opacity-0 invisible h-0 overflow-hidden transition transition-all;
+            @apply opacity-0 invisible h-0;
 
             &--active {
                 @apply opacity-100 visible h-auto;
@@ -51,30 +42,10 @@
             width: calc(100% - #{general.$width-sidebar-game-lg});
         }
 
-        &__period {
-            @apply pb-10 flex items-center justify-between;
-        }
-
-        &__timer {
-            @apply text-4xl;
-        }
-
-        &__slide-number {
-            @apply text-3xl cursor-pointer;
-        }
-
-        &__paragraph {
-            @apply capitalize;
-        }
-
-        &__content {
-            
-        }
-
         &__item {
             @include general.centerFlex;
             transition: height general.$trans-duration;
-            @apply flex-col relative p-4 text-gray-800;
+            @apply flex-col relative;
 
             &--checked {
                 @apply invisible mt-5 absolute bg-parent;
@@ -87,25 +58,6 @@
                     calc(#{general.$trans-duration} * 2);
                 }
             }
-        }
-
-        &__btn-slide {
-            @include general.sameSize(40px);
-            @include mixin.centerPosition($isHorizontalCenter: false);
-            @include mixin.centerFlex;
-            @apply rounded-full bg-black bg-opacity-25 z-10;
-
-            &--prev {
-                left: 1rem;
-            }
-
-            &--next {
-                right: 1rem;
-            }
-        }
-
-        &__input {
-            @apply bg-white border-transparent text-center p-2 rounded text-gray-900;
         }
 
         &__thank-you {

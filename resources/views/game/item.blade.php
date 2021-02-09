@@ -1,12 +1,12 @@
-<div class="section-game__item bg-gray-300">
+<div class="section-game__item text-gray-800 p-4 bg-gray-300">
     @php
         $id = "choose-option-$option->number";
     @endphp
-    <label class="section-game__slide-number" 
+    <label class="section-game__slide-number text-3xl cursor-pointer" 
     for="{{ $id }}">
         {{ $option->number }}
     </label>
-    <p class="section-game__paragraph">
+    <p class="section-game__paragraph capitalize">
         klik nomor untuk pilih nomor ini
     </p>
     <input type="checkbox" name="choose_option"
@@ -20,7 +20,7 @@
             <div class="flex">
                 <input type="number" name="point" 
                 id="input-point{{ $option->number }}" 
-                class="section-game__input" max="100" min="1" 
+                class="section-game__input bg-white border-transparent text-center p-2 rounded text-gray-900" max="100" min="1" 
                 data-game-option-id="{{ $option->id }}" required>
                 <x-btn action="submit" type="transparent" 
                 add-class="btn--without-hover section-game__btn-submit">

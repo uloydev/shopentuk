@@ -1668,9 +1668,6 @@ header {
 
 #gamePage .sidebar-game {
   min-width: 100%;
-  --bg-opacity: 1;
-  background-color: #e2e8f0;
-  background-color: rgba(226, 232, 240, var(--bg-opacity));
 }
 
 @media (min-width: 768px) {
@@ -1679,26 +1676,11 @@ header {
   }
 }
 
-#gamePage .sidebar-game__container {
-  display: flex;
-  height: 100%;
-}
-
-@media (min-width: 768px) {
-  #gamePage .sidebar-game__container {
-    flex-direction: column;
-  }
-}
-
 #gamePage .sidebar-game__dropdown-box {
   transition-duration: 250ms;
-  padding-left: 1.25rem;
   opacity: 0;
   visibility: hidden;
   height: 0;
-  overflow: hidden;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
-  transition-property: all;
 }
 
 #gamePage .sidebar-game__dropdown-box--active {
@@ -1737,26 +1719,6 @@ header {
   }
 }
 
-#gamePage .section-game__period {
-  padding-bottom: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-#gamePage .section-game__timer {
-  font-size: 2.25rem;
-}
-
-#gamePage .section-game__slide-number {
-  font-size: 1.875rem;
-  cursor: pointer;
-}
-
-#gamePage .section-game__paragraph {
-  text-transform: capitalize;
-}
-
 #gamePage .section-game__item {
   flex-direction: row;
   display: flex;
@@ -1765,10 +1727,6 @@ header {
   transition: height 250ms;
   flex-direction: column;
   position: relative;
-  padding: 1rem;
-  --text-opacity: 1;
-  color: #2d3748;
-  color: rgba(45, 55, 72, var(--text-opacity));
 }
 
 #gamePage .section-game__item--checked {
@@ -1782,53 +1740,6 @@ header {
   align-items: center;
   transition-property: height, width, position;
   transition-duration: 250ms, 250ms, calc(250ms * 2);
-}
-
-#gamePage .section-game__btn-slide {
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  top: 50%;
-  --transform-translate-x: 0;
-  --transform-translate-y: 0;
-  --transform-rotate: 0;
-  --transform-skew-x: 0;
-  --transform-skew-y: 0;
-  --transform-scale-x: 1;
-  --transform-scale-y: 1;
-  transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
-  --transform-translate-y: -50%;
-  flex-direction: row;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 9999px;
-  --bg-opacity: 1;
-  background-color: #000;
-  background-color: rgba(0, 0, 0, var(--bg-opacity));
-  --bg-opacity: 0.25;
-  z-index: 10;
-}
-
-#gamePage .section-game__btn-slide--prev {
-  left: 1rem;
-}
-
-#gamePage .section-game__btn-slide--next {
-  right: 1rem;
-}
-
-#gamePage .section-game__input {
-  --bg-opacity: 1;
-  background-color: #fff;
-  background-color: rgba(255, 255, 255, var(--bg-opacity));
-  border-color: transparent;
-  text-align: center;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  --text-opacity: 1;
-  color: #1a202c;
-  color: rgba(26, 32, 44, var(--text-opacity));
 }
 
 #gamePage .section-game__thank-you {
@@ -1886,6 +1797,10 @@ header {
 #gamePage .game-rule li {
   margin-bottom: 1rem;
   list-style-type: decimal;
+}
+
+.card {
+  transition: height 250ms;
 }
 
 .header {
