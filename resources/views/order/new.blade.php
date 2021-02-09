@@ -12,16 +12,16 @@
                     @if (count($orders) > 0)
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered no-wrap" id="zero_config">
-                                <thead>
-                                    <tr class="text-capitalize">
-                                        <th>customer name</th>
-                                        <th>product price</th>
-                                        <th>price total</th>
-                                        <th>point total</th>
-                                        <th>status</th>
-                                        <th>shipping price</th>
-                                    </tr>
-                                </thead>
+                                @include('partial.thead', [
+                                    'thead' => [
+                                        'customer name',
+                                        'product price',
+                                        'price total',
+                                        'point total',
+                                        'status',
+                                        'shipping price'
+                                    ]
+                                ])
                                 <tbody>
                                     @foreach ($orders as $order)
                                         <tr class="order-item">
@@ -52,9 +52,7 @@
                     @else
                         <x-adminmart-alert is-dismissable="false" type="light"
                         message="sedang tidak ada orderan saat ini.">
-                            <a href="" class="refresh-btn ml-1">
-                                <span>Refresh sekarang</span>
-                            </a>
+                            @include('partial.btn-refresh')
                         </x-adminmart-alert>
                     @endif
                 </div>

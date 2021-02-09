@@ -29,16 +29,16 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered no-wrap" id="zero_config">
-                            <thead>
-                                <tr class="text-capitalize">
-                                    <th>title</th>
-                                    <th>price</th>
-                                    <th>point price</th>
-                                    <th>category</th>
-                                    <th>sub category</th>
-                                    <th>action</th>
-                                </tr>
-                            </thead>
+                            @include('partial.thead', [
+                                'thead' => [
+                                    'title',
+                                    'price',
+                                    'point price',
+                                    'category',
+                                    'sub category',
+                                    'action'
+                                ]
+                            ])
                             <tbody>
                                 @foreach ($products as $product)
                                     <tr class="product-item">
