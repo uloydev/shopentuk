@@ -10,18 +10,18 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'user_id', //done
         'user_address_id',
-        'shipping_price',
-        'shipping_point',
-        'product_price',
-        'product_point',
-        'price_total',
-        'point_total',
-        'weight_total',
-        'voucher_discount',
-        'status',
-        'no_resi',
+        'shipping_price', //done
+        'shipping_point', //done
+        'product_price', //done
+        'product_point', // done
+        'price_total', //done
+        'point_total', //done
+        'weight_total', //done
+        'voucher_discount', //done
+        'status', //done
+        'no_resi', //done
     ];
 
     public function orderProducts()

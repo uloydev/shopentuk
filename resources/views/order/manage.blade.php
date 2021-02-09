@@ -9,36 +9,84 @@
                 <div class="card-header">
                     <h1 class="h3 font-weight-bold">{{ ucwords($title) }}</h1>
                 </div>
-                @for ($i = 0; $i < 3; $i++)
-                    <div class="card-body mb-0 order-item">
-                        <div class="bg-white order-item__toggler">
-                            <h5 class="m-0">
-                                <a class="custom-accordion-title d-block pt-2 pb-2 order-item__btn" 
-                                data-toggle="collapse"
-                                aria-expanded="true">
-                                    Title product {{ $i + 1 }}
-                                    <span class="float-right">
-                                        <i class="mdi mdi-chevron-down accordion-arrow"></i>
-                                    </span>
-                                </a>
-                            </h5>
-                        </div>
-                        <div data-parent="#accordion"
-                        class="collapse {{ $i == 0 ? 'show' : '' }} order-item__detail">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                richardson ad squid. 3 wolf moon officia aute,
-                                non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                eiusmod. Brunch 3 wolf moon
-                                tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
-                                shoreditch et. Nihil
-                                anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente
-                                ea proident. Ad vegan
-                                excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw
-                                denim aesthetic synth nesciunt
-                                you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        @if (count($orders) == 0)
+                        <x-adminmart-alert is-dismissable="false" 
+                        message="There's no order right now" type="secondary">
+                            @include('partial.btn-refresh')
+                        </x-adminmart-alert>
+                        @else
+                            <table class="table table-striped table-bordered no-wrap" id="zero_config">
+                                @include('partial.thead', [
+                                    'thead' => [
+                                        'title product',
+                                        'product price',
+                                        'product point ',
+                                        'price total',
+                                        'point total',
+                                        'weight total',
+                                        'voucher discount',
+                                        'status',
+                                        'no resi',
+                                        'shipping price',
+                                        'shipping point',
+                                        'customer email',
+                                        'customer address'
+                                    ]
+                                ])
+                                <tbody>
+                                    @foreach ($orders as $order)
+                                        <tr class="product-item">
+                                            <td class="product-item__title">
+                                                {{ Str::limit(
+                                                    $order->orderProducts->product->title, 10
+                                                ) }}
+                                            </td>
+                                            <td class="product-item__price">
+                                                @currency($order->product_price)
+                                            </td>
+                                            <td class="product-item__point">
+                                                {{ $order->point_price }}
+                                            </td>
+                                            <td class="product-item__category">
+                                                @currency($order->price_total)
+                                            </td>
+                                            <td>{{ $order->point_total }}</td>
+                                            <td>{{ $order->weight_total }}</td>
+                                            <td>{{ $order->voucher_discount }}</td>
+                                            <td>{{ $order->status }}</td>
+                                            <td>{{ $order->no_resi }}</td>
+                                            <td>{{ $order->shipping_price }}</td>
+                                            <td>{{ $order->shipping_point }}</td>
+                                            <td>
+                                                {{ $order->user->email }}
+                                            </td>
+                                            <td class="product-item__sub-category">
+                                                {{ $order->userAddress->title }}
+                                            </td>
+                                            <td>
+                                                {{ $order->userAddress->city }}
+                                            </td>
+                                            <td>
+                                                {{ $order->userAddress->kelurahan }}
+                                            </td>
+                                            <td>
+                                                {{ $order->userAddress->kecamatan }}
+                                            </td>
+                                            <td>
+                                                {{ $order->userAddress->getProvinceAttribute }}
+                                            </td>
+                                            <td>
+                                                {{ $order->userAddress->postal_code }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @endif
                     </div>
-                @endfor
+                </div>
             </div>
         </div> <!-- end custom accordions-->
     </div>
