@@ -16,11 +16,14 @@ class FeedbackController extends Controller
      */
     public function index()
     {
+        $feedbackCustomer = FeedbackCustomer::all();
         if (auth()->check() and auth()->user()->role == 'admin') {
-            return view('feedback.manage', ['title' => 'manage contact us']);
-        }
-        else {
-            return view('feedback.contact-us', ['title' => 'contact us']);
+            return view('feedback.manage', [
+                'title' => 'manage contact us',
+                'feedbackCustomer' => $feedbackCustomer
+            ]);
+        } else {
+            return view('feedback.contact-us', ['title' => 'contact us',]);
         }
     }
 
@@ -33,9 +36,9 @@ class FeedbackController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'max:100', 'min:3', new AlphaSpace], 
+            'name' => ['required', 'max:100', 'min:3', new AlphaSpace],
             'telephone' => ['required', 'digits:12'],
-            'email' => ['required', 'email', 'max:255'], 
+            'email' => ['required', 'email', 'max:255'],
             'message' => ['required', 'min:10']
         ]);
 
