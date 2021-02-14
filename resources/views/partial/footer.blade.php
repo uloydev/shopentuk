@@ -1,1 +1,0 @@
-<a href="http://www.freepik.com" class="hidden">Designed by slidesgo / Freepik</a>

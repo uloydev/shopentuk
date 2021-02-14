@@ -17,15 +17,15 @@
                 </div>
                 <div class="card-body">
                     <table class="table table-striped table-bordered no-wrap" id="zero_config">
-                        <thead>
-                            <tr class="text-capitalize">
-                               <th>name</th>
-                               <th>email</th>
-                               <th>phone</th>
-                               <th>joined at</th>
-                               <th>action</th>
-                            </tr>
-                        </thead>
+                        @include('partial.thead', [
+                            'thead' => [
+                                'name',
+                                'email',
+                                'phone',
+                                'joined at',
+                                'action'
+                            ]
+                        ])
                         <tbody>
                             @foreach ($admins as $account)
                                <tr class="admin">

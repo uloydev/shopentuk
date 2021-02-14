@@ -14,7 +14,7 @@ class ModalTemplate extends Component
      *
      * @return void
      */
-    public function __construct($id, $formTarget, $titleModal)
+    public function __construct($id, $formTarget = '', $titleModal = '')
     {
         $this->id = $id;
         $this->formTarget = $formTarget;

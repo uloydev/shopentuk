@@ -5,14 +5,19 @@
     @include('game.sidebar')
     <section class="section-game py-10">
         <div class="container h-full">
-            <article class="section-game__period">
+            <article class="section-game__period pb-10 flex items-center justify-between">
                 <time class="text-xl">{{ date('d F Y') }}</time>
                 <div class="flex flex-col">
                     <h1>Waktu</h1>
-                    <time datetime="3:00" class="section-game__timer">02:30</time>
+                    <time datetime="3:00" class="section-game__timer text-4xl">
+                        02:30
+                    </time>
                 </div>
             </article>
             <input type="hidden" name="user_id" value="{{ Auth::id() }}" readonly>
+            <div class="section-game__content">
+                
+            </div>
             <div class="section-game__content flex items-center space-x-10">
                 <div class="grid grid-rows-2 text-white gap-4">
                     @foreach ($gamesGreen as $option)

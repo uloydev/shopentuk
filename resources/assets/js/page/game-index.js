@@ -4,6 +4,63 @@ import MicroModal from 'micromodal'
 
 if (HelperModule.pageUrl === '/game') {
 
+    /**
+        function test1(waktu = 1000, isDinamis = false) {
+            console.log(`test 1`)
+        }
+
+        function test2(waktu = 2000, isDinamis = false) {
+            console.log(`test 2`)
+        }
+
+        function strict() {
+            let nyobaGame
+            test1()
+            setTimeout(() => {
+                test2()
+            }, 2000)
+            nyobaGame = setInterval(() => {
+                test1()
+                setTimeout(() => {
+                test2()
+                }, 2000)
+            }, 3000)
+        }
+
+        function dinamis(defineWaktu) {
+            let waktuTest1, waktuTest2
+            if (defineWaktu > 1000) {
+            waktuTest1 = defineWaktu - 1000
+            waktuTest2 = 1000
+        }
+        else {
+            waktuTest1 = 0
+            waktuTest2 = defineWaktu
+        }
+        
+        if (waktuTest1 > 0) {
+            test1(waktuTest1, true)
+            let nyobaGame = setInterval(() => {
+                test2(waktuTest2, true)
+                clearInterval(nyobaGame)
+            }, waktuTest1)
+            
+        }
+        else {
+            test2(waktuTest1, true)
+        }
+        
+        }
+
+        dinamis(5000)
+        setTimeout(() => {
+        strict()
+        }, 5000)
+
+
+         setInterval(() => test1().then(test2), 3000)
+     */
+
     const csrf = document.querySelector('meta[name="csrf-token"]').content;
     const userId = document.querySelector('input[name="user_id"]').value
     let game
