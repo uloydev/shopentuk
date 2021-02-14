@@ -2,6 +2,7 @@
 @use 'general';
 @use 'mixin';
 @use './page/game';
+@use './component/card';
 
 .header {
     @apply relative z-10;
