@@ -1,9 +1,10 @@
 @extends('layouts.master')
 @section('title', 'Game saat ini')
 @section('body-id', 'game')
+@section('main-class', 'flex flex-wrap')
 @section('content')
     @include('game.sidebar')
-    <section class="section-game py-10">
+    <section class="section-game py-10 w-full lg:w-9/12 h-full">
         <div class="container h-full">
             <article class="section-game__period pb-10 flex items-center justify-between">
                 <time class="text-xl">{{ date('d F Y') }}</time>

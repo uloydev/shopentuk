@@ -127,25 +127,6 @@ if (HelperModule.pageUrl === '/game') {
     })
 
     /**
-     * dropdown menu for sideebar
-     */
-    const btnShowNextSchedule = document.querySelector('.sidebar-game__link--dropdown')
-    const iconBtnNextSchedule = btnShowNextSchedule.querySelector('box-icon')
-    const dropdownBox = btnShowNextSchedule.nextElementSibling
-
-    btnShowNextSchedule.addEventListener('click', (e) => {
-        e.preventDefault()
-        if (dropdownBox.classList.contains('sidebar-game__dropdown-box--active')) {
-            iconBtnNextSchedule.classList.remove('transform', 'rotate-90')
-            dropdownBox.classList.remove('sidebar-game__dropdown-box--active')
-        }
-        else {
-            iconBtnNextSchedule.classList.add('transform', 'rotate-90')
-            dropdownBox.classList.add('sidebar-game__dropdown-box--active')
-        }
-    })
-
-    /**
      * submit bid
      */
     const btnSubmitPoint = document.querySelectorAll('.section-game__btn-submit')
@@ -165,8 +146,8 @@ if (HelperModule.pageUrl === '/game') {
             btn.disabled = true
             gameItem.querySelector('.point-submitted').textContent = pointInput.value
 
-            gameItem.querySelector('.section-game__thank-you')
-            .classList.add('section-game__thank-you--show')
+            gameItem.querySelector('.thanks-box')
+            .classList.add('thanks-box--show')
         }
 
         const closeThankYouMessage = () => {
@@ -176,9 +157,9 @@ if (HelperModule.pageUrl === '/game') {
             gameItem.querySelector('.point-submitted').textContent = ''
 
             gameItem
-            .querySelector('.section-game__thank-you')
+            .querySelector('.thanks-box')
             .classList
-            .remove('section-game__thank-you--show')
+            .remove('thanks-box--show')
         }
 
         btn.addEventListener('click', e => {

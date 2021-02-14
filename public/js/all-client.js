@@ -12936,6 +12936,34 @@ alerts.forEach(function (alert) {
 
 /***/ }),
 
+/***/ "./resources/assets/js/component/dropdown-menu.js":
+/*!********************************************************!*\
+  !*** ./resources/assets/js/component/dropdown-menu.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * dropdown menu for sideebar
+ */
+var dropdownToggler = document.querySelector('.dropdown-toggler');
+var iconToggler = dropdownToggler.querySelector('box-icon');
+var dropdownBox = dropdownToggler.nextElementSibling; // .dropdown-box
+
+dropdownToggler.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (dropdownBox.classList.contains('dropdown-box--active')) {
+    iconToggler.classList.remove('transform', 'rotate-90');
+    dropdownBox.classList.remove('dropdown-box--active');
+  } else {
+    iconToggler.classList.add('transform', 'rotate-90');
+    dropdownBox.classList.add('dropdown-box--active');
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/component/nav.js":
 /*!**********************************************!*\
   !*** ./resources/assets/js/component/nav.js ***!
@@ -13308,12 +13336,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_alert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./component/alert */ "./resources/assets/js/component/alert.js");
 /* harmony import */ var _component_alert__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_component_alert__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _component_nav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./component/nav */ "./resources/assets/js/component/nav.js");
-/* harmony import */ var _page_homepage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./page/homepage */ "./resources/assets/js/page/homepage.js");
-/* harmony import */ var _page_auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./page/auth */ "./resources/assets/js/page/auth.js");
-/* harmony import */ var _page_cart_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./page/cart-page */ "./resources/assets/js/page/cart-page.js");
-/* harmony import */ var _page_dashboard_customer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./page/dashboard-customer */ "./resources/assets/js/page/dashboard-customer.js");
-/* harmony import */ var _page_game_index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./page/game-index */ "./resources/assets/js/page/game-index.js");
-/* harmony import */ var _page_product__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./page/product */ "./resources/assets/js/page/product.js");
+/* harmony import */ var _component_dropdown_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./component/dropdown-menu */ "./resources/assets/js/component/dropdown-menu.js");
+/* harmony import */ var _component_dropdown_menu__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_component_dropdown_menu__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _page_homepage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./page/homepage */ "./resources/assets/js/page/homepage.js");
+/* harmony import */ var _page_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./page/auth */ "./resources/assets/js/page/auth.js");
+/* harmony import */ var _page_cart_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./page/cart-page */ "./resources/assets/js/page/cart-page.js");
+/* harmony import */ var _page_dashboard_customer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./page/dashboard-customer */ "./resources/assets/js/page/dashboard-customer.js");
+/* harmony import */ var _page_game_index__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./page/game-index */ "./resources/assets/js/page/game-index.js");
+/* harmony import */ var _page_product__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./page/product */ "./resources/assets/js/page/product.js");
+
 
 
 
@@ -13777,6 +13808,56 @@ __webpack_require__.r(__webpack_exports__);
 
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
+  /**
+      function test1(waktu = 1000, isDinamis = false) {
+          console.log(`test 1`)
+      }
+       function test2(waktu = 2000, isDinamis = false) {
+          console.log(`test 2`)
+      }
+       function strict() {
+          let nyobaGame
+          test1()
+          setTimeout(() => {
+              test2()
+          }, 2000)
+          nyobaGame = setInterval(() => {
+              test1()
+              setTimeout(() => {
+              test2()
+              }, 2000)
+          }, 3000)
+      }
+       function dinamis(defineWaktu) {
+          let waktuTest1, waktuTest2
+          if (defineWaktu > 1000) {
+          waktuTest1 = defineWaktu - 1000
+          waktuTest2 = 1000
+      }
+      else {
+          waktuTest1 = 0
+          waktuTest2 = defineWaktu
+      }
+      
+      if (waktuTest1 > 0) {
+          test1(waktuTest1, true)
+          let nyobaGame = setInterval(() => {
+              test2(waktuTest2, true)
+              clearInterval(nyobaGame)
+          }, waktuTest1)
+          
+      }
+      else {
+          test2(waktuTest1, true)
+      }
+      
+      }
+       dinamis(5000)
+      setTimeout(() => {
+      strict()
+      }, 5000)
+         setInterval(() => test1().then(test2), 3000)
+   */
   var csrf = document.querySelector('meta[name="csrf-token"]').content;
   var userId = document.querySelector('input[name="user_id"]').value;
   var game;
@@ -13839,24 +13920,6 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
     });
   });
   /**
-   * dropdown menu for sideebar
-   */
-
-  var btnShowNextSchedule = document.querySelector('.sidebar-game__link--dropdown');
-  var iconBtnNextSchedule = btnShowNextSchedule.querySelector('box-icon');
-  var dropdownBox = btnShowNextSchedule.nextElementSibling;
-  btnShowNextSchedule.addEventListener('click', function (e) {
-    e.preventDefault();
-
-    if (dropdownBox.classList.contains('sidebar-game__dropdown-box--active')) {
-      iconBtnNextSchedule.classList.remove('transform', 'rotate-90');
-      dropdownBox.classList.remove('sidebar-game__dropdown-box--active');
-    } else {
-      iconBtnNextSchedule.classList.add('transform', 'rotate-90');
-      dropdownBox.classList.add('sidebar-game__dropdown-box--active');
-    }
-  });
-  /**
    * submit bid
    */
 
@@ -13875,7 +13938,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
       pointInput.disabled = true;
       btn.disabled = true;
       gameItem.querySelector('.point-submitted').textContent = pointInput.value;
-      gameItem.querySelector('.section-game__thank-you').classList.add('section-game__thank-you--show');
+      gameItem.querySelector('.thanks-box').classList.add('thanks-box--show');
     };
 
     var closeThankYouMessage = function closeThankYouMessage() {
@@ -13883,7 +13946,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
       pointInput.disabled = false;
       btn.disabled = false;
       gameItem.querySelector('.point-submitted').textContent = '';
-      gameItem.querySelector('.section-game__thank-you').classList.remove('section-game__thank-you--show');
+      gameItem.querySelector('.thanks-box').classList.remove('thanks-box--show');
     };
 
     btn.addEventListener('click', function (e) {
@@ -14084,9 +14147,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/produ
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
 
 
 /***/ })
