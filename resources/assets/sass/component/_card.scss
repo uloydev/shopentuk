@@ -1,0 +1,5 @@
+@use 'general';
+
+.card {
+    transition: height general.$trans-duration;
+}
