@@ -18,6 +18,13 @@ if (pageUrl === '/cart') {
         icon.setAttribute('color', iconOriginalColor)
     })
 
+    var currencyFormatter = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        maximumFractionDigits: 0, 
+        minimumFractionDigits: 0, 
+      });
+
     // modal checkout and it's child
     if (cartPage.querySelector('#modalCheckout')) {
         const modalCheckout = document.querySelector('#modalCheckout')
@@ -185,8 +192,7 @@ if (pageUrl === '/cart') {
             })
         } else {
             cartShipping.forEach(item => {
-                item.textContent = 'Rp. ' + shippingTotal
-
+                item.textContent = currencyFormatter.format(shippingTotal);
             })
         }
 
@@ -199,7 +205,7 @@ if (pageUrl === '/cart') {
             item.textContent = totalPoint + ' point';
         })
         totalMoneyElement.forEach(item => {
-            item.textContent = 'Rp. ' + totalMoney;
+            item.textContent = currencyFormatter.format(totalMoney);
         });
         weightTotalElement.textContent = weight + ' gram';
     }
@@ -230,11 +236,11 @@ if (pageUrl === '/cart') {
                     alert(data.message);
                     if (data.status == 'success') {
                         voucher = data.data;
-                        voucherElement.textContent = 'Rp. ' + voucher.discount_value;
+                        voucherElement.textContent = currencyFormatter.format(voucher.discount_value);
                         checkoutVoucherInput.value = voucher.code;
                     } else {
                         voucher = null;
-                        voucherElement.textContent = 'Rp. 0';
+                        voucherElement.textContent = currencyFormatter.format(0);
                         checkoutVoucherInput.value = '';
                     }
                     updateCart(cartItems);
@@ -277,7 +283,7 @@ if (pageUrl === '/cart') {
                 if (itemPrice.dataset.isPoint === 'true') {
                     itemPrice.textContent = `${itemPrice.dataset.price * item.value} point`;
                 } else {
-                    itemPrice.textContent = `Rp. ${itemPrice.dataset.price * item.value}`;
+                    itemPrice.textContent = currencyFormatter.format(itemPrice.dataset.price * item.value);
                 }
                 let boughtItems = [];
                 cartItems.forEach(item => {
