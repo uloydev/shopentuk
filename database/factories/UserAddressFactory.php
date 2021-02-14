@@ -27,12 +27,12 @@ class UserAddressFactory extends Factory
             'name' => $this->faker->name,
             'email' => $this->faker->email,
             'phone' => $this->faker->phoneNumber,
-            'street_address' => $this->faker->streetAddress,
-            'kelurahan' => 'meruyung',
-            'kecamatan' => 'limo',
-            'city' => 'depok',
+            'street_address' => $this->faker->streetAddress. ", meruyung, limo, depok, 16515",
+            // 'kelurahan' => 'meruyung',
+            // 'kecamatan' => 'limo',
+            // 'city' => 'depok',
+            // 'postal_code' => '16515',
             'province_id' => $this->faker->numberBetween(1, 34),
-            'postal_code' => '16515',
             'is_main_address' => 0,
             'user_id' => User::factory()
         ];

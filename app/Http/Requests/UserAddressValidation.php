@@ -32,11 +32,11 @@ class UserAddressValidation extends FormRequest
                 'email' => ['required', 'email'],
                 'phone' => ['required', 'starts_with:0'],
                 'street_address' => ['required'],
-                'kelurahan' => ['required', 'min:3', 'max:50'],
-                'kecamatan' => ['required', 'min:3', 'max:50'],
-                'city' => ['required', new AlphaSpace],
+                // 'kelurahan' => ['required', 'min:3', 'max:50'],
+                // 'kecamatan' => ['required', 'min:3', 'max:50'],
+                // 'city' => ['required', new AlphaSpace],
+                // 'postal_code' => ['required', 'numeric'],
                 'province_id' => ['required', 'numeric'],
-                'postal_code' => ['required', 'numeric'],
                 'is_main_address' => ['required', 'boolean']
             ];
         } else {
@@ -46,11 +46,11 @@ class UserAddressValidation extends FormRequest
                 'email' => ['required', 'email'],
                 'phone' => ['required', 'starts_with:0'],
                 'street_address' => ['required'],
-                'kelurahan' => ['required', 'min:3', 'max:50'],
-                'kecamatan' => ['required', 'min:3', 'max:50'],
-                'city' => ['required', new AlphaSpace],
+                // 'kelurahan' => ['required', 'min:3', 'max:50'],
+                // 'kecamatan' => ['required', 'min:3', 'max:50'],
+                // 'city' => ['required', new AlphaSpace],
+                // 'postal_code' => ['required', 'numeric'],
                 'province_id' => ['required', 'numeric'],
-                'postal_code' => ['required', 'numeric'],
                 'is_main_address' => ['required', 'boolean']
             ];
         }
