@@ -41,7 +41,9 @@ class UserValidaion extends FormRequest
             'name' => ['required', 'min:3', 'max:100', 'unique:users'],
             'email' => ['required', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'unique:users', new PhoneValidation],
-            'password' => ['required', 'min:8', 'confirmed']
+            'password' => ['required', 'min:8', 'confirmed'],
+            'bank' => ['required', 'min:3'],
+            'rekening' => ['required', 'numeric'],
         ];
     }
 }
