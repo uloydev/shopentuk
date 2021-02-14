@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@landingPage')->name('landing-page');
 Route::resource('contact-us', 'FeedbackController')->only('index', 'store', 'destroy');
+Route::get('admin/feedback-customer', 'FeedbackController@manage')->name('admin.contact-us.manage');
 
 Route::prefix('voucher')->name('voucher.')->group(function () {
     Route::post('validate', 'VoucherController@check')->name('validate');

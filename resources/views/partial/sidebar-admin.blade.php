@@ -49,7 +49,7 @@
                 <x-menu-admin icon="shield-quarter" text="list admin" 
                 to="{{ route('superadmin.admins.index') }}"/>
                 <x-menu-admin icon="shield-quarter" text="Feedback Customer" 
-                to="{{ route('contact-us.index') }}"/>
+                to="{{ route('admin.contact-us.manage') }}"/>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

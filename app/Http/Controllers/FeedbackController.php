@@ -16,15 +16,16 @@ class FeedbackController extends Controller
      */
     public function index()
     {
+        return view('feedback.contact-us', ['title' => 'contact us']);
+    }
+
+    public function manage()
+    {
         $feedbackCustomer = FeedbackCustomer::all();
-        if (auth()->check() and auth()->user()->role == 'admin') {
-            return view('feedback.manage', [
-                'title' => 'manage contact us',
-                'feedbackCustomer' => $feedbackCustomer
-            ]);
-        } else {
-            return view('feedback.contact-us', ['title' => 'contact us',]);
-        }
+        return view('feedback.manage', [
+            'title' => 'manage contact us',
+            'feedbackCustomer' => $feedbackCustomer
+        ]);
     }
 
     /**
