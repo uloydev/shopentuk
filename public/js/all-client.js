@@ -12947,20 +12947,23 @@ alerts.forEach(function (alert) {
  * dropdown menu for sideebar
  */
 var dropdownToggler = document.querySelector('.dropdown-toggler');
-var iconToggler = dropdownToggler.querySelector('box-icon');
-var dropdownBox = dropdownToggler.nextElementSibling; // .dropdown-box
 
-dropdownToggler.addEventListener('click', function (e) {
-  e.preventDefault();
+if (dropdownToggler) {
+  var iconToggler = dropdownToggler.querySelector('box-icon');
+  var dropdownBox = dropdownToggler.nextElementSibling; // .dropdown-box
 
-  if (dropdownBox.classList.contains('dropdown-box--active')) {
-    iconToggler.classList.remove('transform', 'rotate-90');
-    dropdownBox.classList.remove('dropdown-box--active');
-  } else {
-    iconToggler.classList.add('transform', 'rotate-90');
-    dropdownBox.classList.add('dropdown-box--active');
-  }
-});
+  dropdownToggler.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    if (dropdownBox.classList.contains('dropdown-box--active')) {
+      iconToggler.classList.remove('transform', 'rotate-90');
+      dropdownBox.classList.remove('dropdown-box--active');
+    } else {
+      iconToggler.classList.add('transform', 'rotate-90');
+      dropdownBox.classList.add('dropdown-box--active');
+    }
+  });
+}
 
 /***/ }),
 

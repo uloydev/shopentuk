@@ -1,3 +1,6 @@
 .card {
-    transition: height 250ms;
+    transition: all 250ms;
+    display: flex;
+    padding: 10px;
+    height: 300px;
 }
