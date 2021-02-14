@@ -1,11 +1,9 @@
-@use 'mixin';
-
 .modal {
     font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
 
     &__overlay {
         background: rgba(0, 0, 0, 0.6);
-        @include mixin.centerFlex;
+        @include centerFlex;
         @apply z-10 inset-0 fixed;
     }
 

@@ -1,11 +1,9 @@
 @use 'nav';
-@use 'general';
-@use 'mixin';
-@use './page/game';
-@use './component/card';
+@import './component/card';
+@import 'mixin';
+@import 'general';
 
 .header {
-    @apply relative z-10;
 
     #landingPage & {
         background: {
@@ -20,26 +18,20 @@
 }
 
 /*landing-page style*/
-#landingPage {
 
-    #section-new-product {
-        .card-product {
-            img {
-                @apply w-full;
-            }
+#section-new-product {
+    .card-product {
+        img {
+            @apply w-full;
         }
     }
+}
 
-    #section-catalog {
-        &__promo {
-            @apply w-full relative;
-            background-image: url('../img/special-edition.jpg');
-        }
+#section-catalog {
 
-        &__overlay {
-            @apply absolute top-0 left-0 h-full w-full opacity-50;
-            background-image: linear-gradient(100deg, #000000 0%, rgba(17, 107, 191, 0.39) 100%);
-        }
+    &__overlay {
+        @apply absolute top-0 left-0 h-full w-full opacity-50;
+        background-image: linear-gradient(100deg, #000000 0%, rgba(17, 107, 191, 0.39) 100%);
     }
 }
 
@@ -119,7 +111,7 @@
         height: 100px;
 
         &__file {
-            @include general.sameSize(0.1px);
+            @include sameSize(0.1px);
             @apply opacity-0 overflow-hidden absolute;
             z-index: -1;
         }
@@ -128,6 +120,39 @@
             @apply absolute flex items-center justify-center h-full w-full;
         }
     }
+}
+
+.section-game {
+
+    &__item {
+
+        &--checked {
+            @apply invisible mt-5 absolute bg-parent;
+        }
+    }
+
+
+
+    input[name=choose_option] {
+        @apply absolute inset-0 z-10 h-0 w-0 overflow-hidden;
+    }
+
+    input[name=choose_option]:checked+.section-game__item--checked {
+        @apply opacity-100 visible h-full w-full static;
+    }
+
+}
+
+.game-rule {
+
+    ol {
+        @apply pl-4;
+    }
+
+    li {
+        @apply mb-4 list-decimal;
+    }
+
 }
 
 

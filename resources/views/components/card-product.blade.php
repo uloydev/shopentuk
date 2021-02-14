@@ -4,7 +4,8 @@
     $route = $isTokoPoint ? 'store.toko-point.' : $route;
 @endphp
 
-<div class="card-product flex {{ $isHorizontal == 'false' ? 'flex-col' : 'flex-row' }}" {{ $attributes }}>
+<div class="card-product max-w-full flex {{ $isHorizontal == 'false' ? 'flex-col' : 'flex-row' }}" 
+{{ $attributes }}>
     <div class="flex relative {{ $isHorizontal == 'true' ? 'items-center mr-4' : '' }}">
         <a href="{{ route($route . 'show', $slug) }}" class="block">
             <img src="{{ $productImg }}" alt="Image of {{ $productName }}" 

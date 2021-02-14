@@ -1,0 +1,7 @@
+.dropdown-box {
+    @apply opacity-0 invisible h-0;
+
+    &--active {
+        @apply opacity-100 visible h-auto;
+    }
+}

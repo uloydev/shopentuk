@@ -27,7 +27,8 @@
         <div class="w-full grid grid-cols-1 gap-10 md:grid-cols-2">
             @include('partial.catalog-card')
         </div>
-        <div class="mt-5 py-24 bg-fixed" id="section-catalog__promo">
+        <div class="mt-5 py-24 bg-fixed w-full relative" id="section-catalog__promo" 
+        style="background-image: url('{{ asset("img/special-edition.jpg") }}')">
             <div id="section-catalog__overlay"></div>
             <div class="px-5 md:px-10 lg:px-24">
                 <x-box-promo heading="Edisi Spesial"

@@ -1,4 +1,4 @@
-<div class="section-game__item text-gray-800 p-4 bg-gray-300">
+<div class="section-game__item flex items-center justify-center transition-all duration-200 ease-in flex-col relative text-gray-800 p-4 bg-gray-300">
     @php
         $id = "choose-option-$option->number";
     @endphp
@@ -34,7 +34,7 @@
             <box-icon name='x' class="text-white"></box-icon>
         </x-btn>
     </div>
-    <div class="section-game__thank-you">
+    <div class="thanks-box">
         <p>
             you're inputing
             <span class="font-bold">

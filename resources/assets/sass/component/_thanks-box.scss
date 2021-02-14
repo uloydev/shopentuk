@@ -1,0 +1,9 @@
+.thanks-box {
+    @include centerFlex($direction: column);
+    @include sameSize(100%);
+    @apply absolute inset-0 capitalize transition transition-all opacity-0 invisible p-3 text-center bg-parent text-parent;
+
+    &--show {
+        @apply visible opacity-100;
+    }
+}

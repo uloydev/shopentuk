@@ -1,4 +1,4 @@
-@use './../plugin/tabbyjs/sass/tabby-ui.scss';
+@import './../plugin/tabbyjs/sass/tabby-ui.scss';
 @import url('https://fonts.googleapis.com/css2?family=Amita:wght@400;700&family=Architects+Daughter&family=Annie+Use+Your+Telescope&family=Shadows+Into+Light&display=swap');
 
 @tailwind base;
@@ -7,11 +7,8 @@
 @import 'mixin';
 @import 'helper';
 
-@import './component/btn', './component/alert', './component/input', './component/modal';
+@import './component/btn', './component/alert', './component/input', './component/modal', './component/dropdown-menu', './component/thanks-box', './component/card';
 
-$trans-duration: 250ms;
-$width-sidebar-game: 100%;
-$width-sidebar-game-lg: 300px;
 
 * {
     @apply p-0 m-0 box-border;
@@ -64,11 +61,6 @@ header {
             }
         }
     }
-}
-
-
-.card-product {
-    @apply max-w-full;
 }
 
 //mixin
