@@ -96,11 +96,11 @@
                         'input#name': address.name,
                         'input#email': address.email,
                         'input#phone': address.phone,
-                        'input#kelurahan': address.kelurahan,
-                        'input#kecamatan': address.kecamatan,
-                        'input#city': address.city,
+                        // 'input#kelurahan': address.kelurahan,
+                        // 'input#kecamatan': address.kecamatan,
+                        // 'input#city': address.city,
+                        // 'input#postal_code': address.postal_code,
                         'select#province': address.province_id,
-                        'input#postal_code': address.postal_code,
                         'textarea#street_address': address.street_address
                     }
 

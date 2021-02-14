@@ -20,11 +20,11 @@ class CreateUserAddressesTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->text('street_address');
-            $table->string('kelurahan');
-            $table->string('kecamatan');
-            $table->string('city');
+            // $table->string('kelurahan');
+            // $table->string('kecamatan');
+            // $table->string('city');
+            // $table->string('postal_code');
             $table->string('province_id');
-            $table->string('postal_code');
             $table->boolean('is_main_address')->default(false);
             $table->foreignId('user_id');
             $table->timestamps();

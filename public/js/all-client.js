@@ -13472,7 +13472,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
       });
     } else {
       cartShipping.forEach(function (item) {
-        item.textContent = 'Rp. ' + shippingTotal;
+        item.textContent = currencyFormatter.format(shippingTotal);
       });
     }
 
@@ -13485,7 +13485,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
       item.textContent = totalPoint + ' point';
     });
     totalMoneyElement.forEach(function (item) {
-      item.textContent = 'Rp. ' + totalMoney;
+      item.textContent = currencyFormatter.format(totalMoney);
     });
     weightTotalElement.textContent = weight + ' gram';
   }; // check voucher
@@ -13504,6 +13504,12 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
   });
   backToPrevBtn.addEventListener('mouseleave', function () {
     icon.setAttribute('color', iconOriginalColor);
+  });
+  var currencyFormatter = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    maximumFractionDigits: 0,
+    minimumFractionDigits: 0
   }); // modal checkout and it's child
 
   if (cartPage.querySelector('#modalCheckout')) {
@@ -13635,11 +13641,11 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
 
           if (data.status == 'success') {
             voucher = data.data;
-            voucherElement.textContent = 'Rp. ' + voucher.discount_value;
+            voucherElement.textContent = currencyFormatter.format(voucher.discount_value);
             checkoutVoucherInput.value = voucher.code;
           } else {
             voucher = null;
-            voucherElement.textContent = 'Rp. 0';
+            voucherElement.textContent = currencyFormatter.format(0);
             checkoutVoucherInput.value = '';
           }
 
@@ -13687,7 +13693,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
         if (itemPrice.dataset.isPoint === 'true') {
           itemPrice.textContent = "".concat(itemPrice.dataset.price * item.value, " point");
         } else {
-          itemPrice.textContent = "Rp. ".concat(itemPrice.dataset.price * item.value);
+          itemPrice.textContent = currencyFormatter.format(itemPrice.dataset.price * item.value);
         }
 
         var boughtItems = [];
