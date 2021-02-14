@@ -46,7 +46,7 @@
                 <x-input-basic name="bank" minlength="3" label="Nama Bank" value="{{ old('bank') }}"
                 placeholder="Contoh: BCA" required />
                 <x-input-basic name="rekening" label="Nomor Rekening" value="{{ old('rekening') }}"
-                placeholder="Contoh: 1003243823" required />
+                placeholder="Contoh: 1003243823" type="number" max="99999999" required />
                 <small class="text-green-600">data bank dan nomor rekening hanya bisa di isi sekali, mohon di cek kembali.</small>
                 <p class="text-sm text-gray-600">
                     Data pribadi Anda akan digunakan untuk menunjang pengalaman Anda di seluruh situs web ini,
