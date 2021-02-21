@@ -12,6 +12,6 @@ class GameOption extends Model
     protected $fillable = [
         'number',
         'color',
-        'point_multiplier',
+        'type',
     ];
 }

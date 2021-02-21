@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGameOptionsTable extends Migration
+class CreateGameOptionRewardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateGameOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('game_options', function (Blueprint $table) {
+        Schema::create('game_option_rewards', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('number')->nullable();
-            $table->string('color')->nullable();
-            $table->enum('type', ['color', 'number']);
+            $table->unsignedInteger('value');
+            $table->foreignId('game_option_id');
+            $table->foreignId('winner_option_id');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateGameOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('game_options');
+        Schema::dropIfExists('game_option_rewards');
     }
 }

@@ -14,20 +14,18 @@ class GameOptionSeeder extends Seeder
      */
     public function run()
     {
-        $options = [
-            'green' => [1,3,7,9],
-            'red' => [2,4,6,8],
-            'purple' => [0,5]
-        ];
-
-        foreach ($options as $color => $numbers) {
-            foreach ($numbers as $number) {
-                GameOption::create([
-                    'number' => $number,
-                    'color' => $color,
-                    'point_multiplier' => 3,
-                ]);
-            }         
+        $colors = ['red', 'green', 'purple'];
+        foreach ($colors as $color) { 
+            GameOption::create([
+                'type' => 'color',
+                'color' => $color,
+            ]);
+        }
+        for ($i=1; $i <= 10; $i++) { 
+            GameOption::create([
+                'type' => 'number',
+                'number' => $i % 10,
+            ]);
         }
     }
 }
