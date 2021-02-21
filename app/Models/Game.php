@@ -13,6 +13,9 @@ class Game extends Model
         'started_at',
         'ended_at',
         'status',
+        'winner_option_id',
+        'point_in',
+        'point_out',
     ];
 
     protected $casts = [
@@ -23,5 +26,10 @@ class Game extends Model
     public function bids()
     {
         return $this->hasMany('App\Models\GameBid');
+    }
+
+    public function winnerOption()
+    {
+        return $this->belongsTo('App\Models\GameOption', 'winner_option_id');
     }
 }
