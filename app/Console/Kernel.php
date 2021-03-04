@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Game;
 use App\Models\GameBid;
 use App\Models\GameOption;
+use App\Models\GameOptionReward;
 use App\Models\PointHistory;
 
 class Kernel extends ConsoleKernel
@@ -49,75 +50,82 @@ class Kernel extends ConsoleKernel
                     $game->save();
                 }
                 Game::first()->update(['status' => 'playing']);
-            } else {
-                $currentGame = Game::where('status', 'playing')->first();
-                $bids = $currentGame->bids;
-                // check winner bid
-                if ($bids->isNotEmpty()) {
-                    $greenBids = $bids->where('gameOption.color', 'green');
-                    $redBids = $bids->where('gameOption.color', 'red');
-                    $purpleBids = $bids->where('gameOption.color', 'purple');
-                    $colorPoints = collect([
-                        [
-                            'color' => 'green',
-                            'bids' => $greenBids,
-                            'point' => $greenBids->sum('point'),
-                        ],
-                        [
-                            'color' => 'red',
-                            'bids' => $redBids,
-                            'point' => $redBids->sum('point'),
-                        ],
-                        [
-                            'color' => 'purple',
-                            'bids' => $purpleBids,
-                            'point' => $purpleBids->sum('point'),
-                        ],
-                    ]);
-                    $colorPoints = $colorPoints->sortBy('point');
-                    $winnerColor = $colorPoints->first();
-                    $numberPoints = GameOption::where('color', $winnerColor['color'])->get();
-                    foreach ($numberPoints as $number) {
-                        $number['point'] = $winnerColor['bids']->where('gameOption.number', $number->number)->sum('point');
-                    }
-                    if ($winnerColor == 'purple') {
-                        $winnerNumber = $numberPoints->sortBy('point')->first();
-                    } else {
-                        $winnerNumber = $numberPoints->sortByDesc('point')->first();
-                    }
+            }
+
+            sleep(120);
+            $currentGame = Game::where('status', 'playing')->first();
+            $bids = $currentGame->bids;
+            // check winner bid
+            if ($bids->isNotEmpty()) {
+                $greenBids = $bids->where('gameOption.color', 'green');
+                $redBids = $bids->where('gameOption.color', 'red');
+                $purpleBids = $bids->where('gameOption.color', 'purple');
+                $colorPoints = collect([
+                    [
+                        'color' => 'green',
+                        'bids' => $greenBids,
+                        'point' => $greenBids->sum('point'),
+                    ],
+                    [
+                        'color' => 'red',
+                        'bids' => $redBids,
+                        'point' => $redBids->sum('point'),
+                    ],
+                    [
+                        'color' => 'purple',
+                        'bids' => $purpleBids,
+                        'point' => $purpleBids->sum('point'),
+                    ],
+                ]);
+                $colorPoints = $colorPoints->sortBy('point');
+                $winnerColor = $colorPoints->first();
+                $colorOption = GameOption::where('color', $winnerColor['color'])->first();
+                $numberOptionId = GameOptionReward::where('game_option_id', $colorOption->id)->get()->pluck('winner_option_id')->all();
+                $numberPoints = GameOption::whereIn('id', $numberOptionId)->get();
+                
+                
+                foreach ($numberPoints as $number) {
+                    $number['point'] = $winnerColor['bids']->where('game_option_id', $number->id)->sum('point');
                 }
+                $winnerNumber = $numberPoints->where('gameOption.type', 'number')->sortByDesc('point')->first();
+                $winnerOptions = GameOptionReward::where('winner_option_id', $winnerNumber->game_option_id)->get();
+                // if ($winnerColor == 'purple') {
+                //     $winnerNumber = $numberPoints->sortBy('point')->first();
+                // } else {
+                //     $winnerNumber = $numberPoints->sortByDesc('point')->first();
+                // }
                 // reward all winner bids
                 GameBid::where('game_id', $currentGame->id)
-                    ->where('game_option_id', $winnerNumber->id)
-                    ->each(function ($item) {
-                        $winnerUser = $item->user;
-                        $reward = $item->point * $item->gameOption->point_multiplier;
-                        $winnerUser->point += $reward;
-                        // add user's point history
-                        PointHistory::create([
-                            'value' => $reward,
-                            'description' => "winner of game $currentGame->id",
-                            'user_id' => $winnerUser->id
-                        ]);
-                        $winnerUser->save();
-                        $item->update(['status' => 'win']);
-                    });
+                ->where('game_option_id', $winnerNumber->id)
+                ->each(function ($item) {
+                    $winnerUser = $item->user;
+                    $reward = $item->point * $item->gameOption->point_multiplier;
+                    $winnerUser->point += $reward;
+                    // add user's point history
+                    PointHistory::create([
+                        'value' => $reward,
+                        'description' => "winner of game $currentGame->id",
+                        'user_id' => $winnerUser->id
+                    ]);
+                    $winnerUser->save();
+                    $item->update(['status' => 'win']);
+                });
                 // loser bids
                 GameBid::where('game_id', $currentGame->id)
-                    ->where('game_option_id', '!=', $winnerNumber->id)
-                    ->each(function ($item) {
-                        $item->update(['status' => 'lose']);
-                    });
-                // update game status
-                Game::where('status', 'playing')->update(['status' => 'finished']);
-                Game::where('status', 'queued')->first()->update(['status' => 'playing']);
-                // create new game
-                $lastGame = Game::latest()->first();
-                Game::create([
-                    'started_at' => $lastGame->ended_at,
-                    'ended_at' => $lastGame->ended_at->addMinute(3),
-                ]);
+                ->where('game_option_id', '!=', $winnerNumber->id)
+                ->each(function ($item) {
+                    $item->update(['status' => 'lose']);
+                });
             }
+            // update game status
+            Game::where('status', 'playing')->update(['status' => 'finished']);
+            Game::where('status', 'queued')->first()->update(['status' => 'playing']);
+            // create new game
+            $lastGame = Game::latest()->first();
+            Game::create([
+                'started_at' => $lastGame->ended_at,
+                'ended_at' => $lastGame->ended_at->addMinute(3),
+            ]);
             Log::info('Game Count = '. Game::count());
         })->cron('*/3 * * * *');
     }

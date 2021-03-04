@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use App\Models\Game;
+use App\Models\GameBid;
 
 class GameSeeder extends Seeder
 {
@@ -15,16 +16,22 @@ class GameSeeder extends Seeder
      */
     public function run()
     {
-        // create game for 1 hour from now
         $now = Carbon::now();
         $now->second = 0;
-        for ($i=1; $i <= 20; $i++) { 
+        while ($now->minute % 3 != 0) {
+            $now->minute++;
+        }
+        // create new game
+        for ($i=0; $i < 5; $i++) { 
             $game = new Game();
             $game->started_at = $now;
-            $now = $now->addMinute(3);
+            $now->addMinute(3);
             $game->ended_at = $now;
-            $game->status = $i == 1 ? 'playing' : 'queued';
+            $game->status = 'queued';
             $game->save();
         }
+        $game = Game::first()->update(['status' => 'playing']);
+        GameBid::factory()->count(50)->create();
+
     }
 }

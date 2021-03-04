@@ -14,4 +14,8 @@ class GameOption extends Model
         'color',
         'type',
     ];
+
+    public function setGamePoint($value) {
+        $this->attributes['point'] = (int) $value;
+    }
 }
