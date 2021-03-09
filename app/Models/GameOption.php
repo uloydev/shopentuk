@@ -12,6 +12,10 @@ class GameOption extends Model
     protected $fillable = [
         'number',
         'color',
-        'point_multiplier',
+        'type',
     ];
+
+    public function setGamePoint($value) {
+        $this->attributes['point'] = (int) $value;
+    }
 }

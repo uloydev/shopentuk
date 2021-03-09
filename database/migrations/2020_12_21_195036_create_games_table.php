@@ -18,6 +18,9 @@ class CreateGamesTable extends Migration
             $table->datetime('started_at');
             $table->datetime('ended_at');
             $table->enum('status', ['playing', 'queued', 'finished'])->default('queued');
+            $table->foreignId('winner_option_id')->nullable();
+            $table->integer('point_in')->default(0);
+            $table->integer('point_out')->default(0);
             $table->timestamps();
         });
     }
