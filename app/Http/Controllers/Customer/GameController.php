@@ -17,16 +17,11 @@ class GameController extends Controller
 {
     public function index()
     {
-        $gamesGreen = GameOption::where('color', 'green')->limit(2)->orderBy('number')->get();
-        $gamesRed = GameOption::where('color', 'red')->orderBy('number')->get();
-        $gamesPurple = GameOption::where('color', 'purple')->orderBy('number')->get();
-
         return view('game.index', [
-            'gamesGreen' => $gamesGreen,
-            'gamesRed' => $gamesRed,
-            'gamesPurple' => $gamesPurple,
+            'options' => GameOption::all(),
             'nextGame' => Game::where('status', 'queued')->limit(3)->get(),
-            'rule' => Rules::first()
+            'rule' => Rules::first(),
+            'currentTime' => Carbon::now(),
         ]);
     }
 
@@ -109,7 +104,10 @@ class GameController extends Controller
 
     public function currentGame()
     {
-        return response()->json(Game::where('status', 'playing')->first());
+        return response()->json([
+            'game' => Game::where('status', 'playing')->first(),
+            'currentTime' => Carbon::now()
+        ]);
     }
 
     public function test()

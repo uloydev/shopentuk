@@ -3,6 +3,7 @@
 @section('body-id', 'game')
 @section('main-class', 'flex flex-wrap')
 @section('content')
+    {{-- <input type="hidden" id="currentTime" value="{{ $currentTime }}"> --}}
     @include('game.sidebar', ['addClass' => 'lg:h-screen'])
     <section class="section-game py-10 w-full lg:w-9/12">
         <div class="container h-full">
@@ -11,7 +12,7 @@
                 <div class="flex flex-col">
                     <h1>Waktu</h1>
                     <time datetime="3:00" class="section-game__timer text-4xl">
-                        02:30
+                        00:00
                     </time>
                 </div>
             </article>
@@ -22,11 +23,9 @@
             </div>
 
             <div class="grid grid-cols-2 lg:grid-cols-5 gap-5 mb-10">
-
-                    @for ($i = 1; $i <= 10; $i++)
-                        @include('game.item', ['option' => $i % 10, 'color' => 'red'])
-                    @endfor
-                
+                @foreach($options->where('type', 'number') as $option)
+                    @include('game.item', ['option' => $option])
+                @endforeach
             </div>
         </div>
     </section>

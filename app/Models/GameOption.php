@@ -15,7 +15,13 @@ class GameOption extends Model
         'type',
     ];
 
-    public function setGamePoint($value) {
+    public function setGamePoint($value) 
+    {
         $this->attributes['point'] = (int) $value;
+    }
+
+    public function getHtmlClassAttribute() 
+    {
+        return "bg-".$this->attributes['color']."-500";
     }
 }

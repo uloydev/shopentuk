@@ -3,102 +3,60 @@ import './../component/swiper'
 import MicroModal from 'micromodal'
 
 if (HelperModule.pageUrl === '/game') {
-
-    /**
-        function test1(waktu = 1000, isDinamis = false) {
-            console.log(`test 1`)
-        }
-
-        function test2(waktu = 2000, isDinamis = false) {
-            console.log(`test 2`)
-        }
-
-        function strict() {
-            let nyobaGame
-            test1()
-            setTimeout(() => {
-                test2()
-            }, 2000)
-            nyobaGame = setInterval(() => {
-                test1()
-                setTimeout(() => {
-                test2()
-                }, 2000)
-            }, 3000)
-        }
-
-        function dinamis(defineWaktu) {
-            let waktuTest1, waktuTest2
-            if (defineWaktu > 1000) {
-            waktuTest1 = defineWaktu - 1000
-            waktuTest2 = 1000
-        }
-        else {
-            waktuTest1 = 0
-            waktuTest2 = defineWaktu
-        }
-        
-        if (waktuTest1 > 0) {
-            test1(waktuTest1, true)
-            let nyobaGame = setInterval(() => {
-                test2(waktuTest2, true)
-                clearInterval(nyobaGame)
-            }, waktuTest1)
-            
-        }
-        else {
-            test2(waktuTest1, true)
-        }
-        
-        }
-
-        dinamis(5000)
-        setTimeout(() => {
-        strict()
-        }, 5000)
-
-
-         setInterval(() => test1().then(test2), 3000)
-     */
-
     const csrf = document.querySelector('meta[name="csrf-token"]').content;
     const userId = document.querySelector('input[name="user_id"]').value
-    let game
-
-    fetch('/game/current', {
-        method: 'GET',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json',
-            'X-CSRF-Token': csrf,
-        },
-    })
-    .then(response => response.json())
-    .then(function (response) {
-        game = response
-    })
-
+    let game, gameEndTime, currentTime
+    // let currentTime = Date.parse(document.getElementById('currentTime').value);
+    // console.log(currentTime.toString());
     /**
      * coutdown game
      */
-    const startTimer = (duration, display) => {
-        var timer = duration, minutes, seconds;
-        setInterval(function () {
-            minutes = parseInt(timer / 60, 10);
-            seconds = parseInt(timer % 60, 10);
-    
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-    
-            display.textContent = minutes + ":" + seconds;
-    
-            if (--timer < 0) {
-                timer = duration;
-            }
-        }, 1000);
+    const startTimer = function (duration, display) {
+        var timer = duration;
+        var minutes, seconds;
+        console.log(timer)
+        if (timer > 0) {
+            let gameInterval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+        
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+        
+                display.textContent = minutes + ":" + seconds;
+        
+                if (--timer < 0) {
+                    getGame();
+                    clearInterval(gameInterval);
+                }
+            }, 1000);
+        } else {
+            getGame()
+        }
     }
 
-    startTimer(60 * 3, document.querySelector('.section-game__timer'))
+    function getGame() {
+        fetch('/game/current', {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-Token': csrf,
+            },
+        })
+        .then(response => response.json())
+        .then(function (response) {
+            game = response.game
+            gameEndTime = Math.ceil(Date.parse(game.ended_at) / 1000);
+            currentTime = Math.ceil(Date.parse(response.currentTime) / 1000);
+            console.log(gameEndTime, currentTime, gameEndTime-currentTime, response.currentTime)
+            startTimer(gameEndTime-currentTime, document.querySelector('.section-game__timer'))
+            console.log(game)
+        })
+    }
+
+    getGame();
+
     // fetch game data
 
     
