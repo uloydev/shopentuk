@@ -8,9 +8,7 @@ mix.js('resources/assets/js/native.js', 'public/js/all-client.js')
     .sass('resources/assets/sass/admin-dashboard.scss', 'public/css')
     .options({
         processCssUrls: false,
-        postCss: [
-            tailwindcss('./tailwind.config.js')
-        ],
+        postCss: [tailwindcss('./tailwind.config.js')],
     })
     .copyDirectory('resources/img', 'public/img/static')
     .copyDirectory('resources/assets/template/assets/images', 'public/img/template')
