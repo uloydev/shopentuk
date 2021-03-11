@@ -50,6 +50,8 @@
                 to="{{ route('superadmin.admins.index') }}"/>
                 <x-menu-admin icon="shield-quarter" text="Feedback Customer" 
                 to="{{ route('admin.contact-us.manage') }}"/>
+                <x-menu-admin icon="shield-quarter" text="Report" 
+                to="{{ route('admin.report.index') }}" />
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

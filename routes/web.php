@@ -85,8 +85,10 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
         });
 
         Route::prefix('report')->name('report.')->group(function (){
-            Route::get('new-order', 'ReportController@newOrder')->name('new-order');
-            Route::get('/', 'ReportController@index')->name('index');
+            Route::prefix('new-order')->name('new-order.')->group(function(){
+                Route::get('preview', 'ReportController@newOrder')->name('preview');
+                Route::get('download', 'ReportController@generateNewOrder')->name('download');
+            });
         });
 
         Route::get('all-category/{cat}/sub', 'AllCategoryController@subCategoryIndex')->name(

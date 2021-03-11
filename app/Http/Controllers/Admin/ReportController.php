@@ -9,31 +9,17 @@ use App\Http\Controllers\Controller;
 
 class ReportController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function newOrder(Request $request)
     {
         $newOrder = Order::whereIn('status', ['paid', 'unpaid'])->get();
-        if ($request->has('download')) {
-            $pdf = PDF::loadView('order.report', compact('newOrder'));
-            return $pdf->download('new-order.pdf');
-        }
-        else {
-            return view('order.report', compact('newOrder'));
-        }
+        return view('order.report', compact('newOrder'));
+    }
+
+    public function generateNewOrder()
+    {
+        $pdf = PDF::loadView('order.report', compact('newOrder'));
+        return $pdf->download('new-order.pdf');
     }
 
     /**
