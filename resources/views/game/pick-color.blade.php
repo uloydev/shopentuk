@@ -4,27 +4,27 @@
     ];
 @endphp
 
-@foreach ($colors as $color)
-<div class="section-game__item flex items-center justify-center transition-all duration-200 ease-in flex-col relative text-white p-4 {{ $color }}">
+@foreach ($options->where('type', 'color') as $color)
+<div class="section-game__item flex items-center justify-center transition-all duration-200 ease-in flex-col relative text-white p-4 {{ $color->html_class }}">
     <label class="section-game__slide-number text-3xl cursor-pointer capitalize" 
-    for="{{ $color }}">
-        {{ explode("-", $color)[1] }}
+    for="input-color-{{ $color->id }}">
+        {{ $color->color }}
     </label>
     <p class="section-game__paragraph capitalize">
         pilih warna ini
     </p>
-    <input type="checkbox" name="choose_option" id="{{ $color }}">
+    <input type="checkbox" name="choose_option" id="input-color-{{ $color->id }}">
     <div class="section-game__item--checked">
         <form action="" class="w-full flex items-center justify-center" method="POST">
-            <label for="input-point{{ $loop->iteration }}" 
+            <label for="input-point{{ $color->id }}" 
             class="capitalize mr-2">
                 input point
             </label>
             <div class="flex">
                 <input type="number" name="point" 
-                id="input-point{{ $loop->iteration }}" 
+                id="input-point{{ $color->id }}" 
                 class="section-game__input bg-white border-transparent text-center p-2 rounded text-gray-900" max="100" min="1"
-                data-game-option-id="{{ $loop->iteration }}" required>
+                data-game-option-id="{{ $color->id }}" required>
                 <x-btn action="submit" type="transparent" 
                 add-class="btn--without-hover section-game__btn-submit">
                     <box-icon type='solid' name='send' 
