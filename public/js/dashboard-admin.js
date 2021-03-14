@@ -434,7 +434,13 @@ logoutBtn.addEventListener('click', function (e) {
   e.preventDefault();
   document.getElementById('logout-form').submit();
 });
-$("#zero_config").DataTable();
+$("#zero_config").DataTable({
+  dom: 'Bfrtip',
+  buttons: [{
+    extend: 'pdf',
+    text: 'Download as PDF'
+  }]
+});
 document.querySelectorAll('box-icon').forEach(function (icon) {
   icon.classList.remove('has-arrow'); // remove ::after style because of adminmart template
 

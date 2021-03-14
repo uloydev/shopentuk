@@ -34,7 +34,7 @@
                                             </td>
                                             <td class="order-item__point" 
                                             data-original="{{ $order->price_total }}">
-                                                {{ $order->price_total }}
+                                                @currency($order->price_total)
                                             </td>
                                             <td class="order-item__cat" 
                                             data-original="{{ $order->point_total }}">
@@ -43,6 +43,10 @@
                                             <td class="order-item__sub-cat" 
                                             data-original="{{ $order->status }}">
                                                 {{ $order->status }}
+                                            </td> 
+                                            <td class="order-item__sub-cat" 
+                                            data-original="{{ $order->shipping_price }}">
+                                                @currency($order->shipping_price)
                                             </td>  
                                         </tr>
                                     @endforeach

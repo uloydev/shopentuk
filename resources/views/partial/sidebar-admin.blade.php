@@ -43,15 +43,10 @@
                         </ul>
                     </x-menu-admin>
                 @endif
-
-                <x-menu-admin icon="report" type="solid" text="report penjualan" 
-                to="{{ route('landing-page') }}"/>
                 <x-menu-admin icon="shield-quarter" text="list admin" 
                 to="{{ route('superadmin.admins.index') }}"/>
                 <x-menu-admin icon="shield-quarter" text="Feedback Customer" 
                 to="{{ route('admin.contact-us.manage') }}"/>
-                <x-menu-admin icon="shield-quarter" text="Report" 
-                to="{{ route('admin.report.index') }}" />
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

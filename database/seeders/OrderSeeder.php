@@ -54,6 +54,6 @@ class OrderSeeder extends Seeder
                     'payment_method' => 'ovo',
                 ]);
             }
-        }        
+        }
     }
 }

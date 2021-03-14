@@ -27,7 +27,7 @@ class OrderController extends Controller
 
     public function newOrder()
     {
-        $orders = Order::whereIn('status', ['paid', 'unpaid'])->get();
+        $orders = Order::where('status', 'paid')->orWhere('status', 'unpaid')->get();
         return view('order.new', [
             'orders' => $orders,
             'title' => 'latest order'

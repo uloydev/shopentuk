@@ -1,44 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Laravel 8 PDF Generate Example - websolutionstuff.com</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Report new order</title>
+    <link rel="stylesheet" href="{{ asset('css/report.css') }}">
 </head>
 <body>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12" style="margin-top: 15px ">
-        <div class="pull-left">
-          <h2>Laravel 8 PDF Generate Example - websolutionstuff.com</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" 
-            href="{{ route('admin.report.new-order',['download'=>'pdf']) }}">
-                Download PDF
-            </a>
-        </div>
-      </div>
-    </div><br>
-
-    <table class="table table-bordered">
-      <tr>
-        <th>product price</th>
-        <th>product point</th>
-        <th>price total</th>
-        <th>point total</th>
-      </tr>
-
-      @foreach ($newOrder as $order)
-      <tr>
-        <td>{{ $order->product_price }}</td>
-        <td>{{ $order->product_point }}</td>
-        <td>{{ $order->price_total }}</td>
-        <td>{{ $order->point_total }}</td>
-      </tr>
-      @endforeach
-    </table>
-  </div>
+    <div class="aa_htmlTable">
+        <table>
+            <thead>
+                <tr>
+                    @foreach ($fillables as $fillable)
+                        <th>{{ $fillable }}</th>
+                    @endforeach
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>January</td>
+                    <td>$100</td>
+                </tr>
+                <tr>
+                    <td>February</td>
+                    <td>$80</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Sum</td>
+                    <td>$180</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    {{-- get from https://codepen.io/ahmadawais/pen/WbvzQd --}}    
 </body>
 </html>

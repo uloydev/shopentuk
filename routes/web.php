@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@landingPage')->name('landing-page');
 Route::resource('contact-us', 'FeedbackController')->only('index', 'store', 'destroy');
-Route::get('admin/feedback-customer', 'FeedbackController@manage')->name('admin.contact-us.manage');
+Route::get('admin/feedback-customer', 'FeedbackController@manage')->name(
+    'admin.contact-us.manage'
+);
 
 Route::prefix('voucher')->name('voucher.')->group(function () {
     Route::post('validate', 'VoucherController@check')->name('validate');
@@ -25,7 +27,9 @@ Route::prefix('store')->name('store.')->group(function () {
         Route::get('/redeem', 'StoreController@redeem')->name('redeem.index');
         Route::get('/{slug}', 'StoreController@showTokoPoint')->name('show');
     });
-    Route::post('checkout', 'CheckoutController@store')->name('checkout')->middleware(['auth', 'customer']);
+    Route::post('checkout', 'CheckoutController@store')->name('checkout')->middleware([
+        'auth', 'customer'
+    ]);
 });
 
 Route::prefix('payment')->name('payment.')->group(function () {
@@ -54,7 +58,9 @@ Route::namespace('Customer')->middleware(['auth', 'customer'])->group(function (
         // address routes
         Route::prefix('address')->name('address.')->group(function () {
             Route::post('/', 'UserAddressController@store')->name('store');
-            Route::post('/store-redirect', 'UserAddressController@storeRedirect')->name('store-redirect');
+            Route::post('/store-redirect', 'UserAddressController@storeRedirect')->name(
+                'store-redirect'
+            );
             Route::put('/update', 'UserAddressController@update')->name('update');
             Route::post('/delete', 'UserAddressController@destroy')->name('destroy');
         });
@@ -70,7 +76,8 @@ Route::namespace('Customer')->middleware(['auth', 'customer'])->group(function (
 });
 
 // admin route
-Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name('admin.')->group(
+Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name('admin.')
+->group(
     function () {
         Route::permanentRedirect('/', 'dashboard');
         Route::get('dashboard', 'DashboardController')->name('dashboard');
@@ -84,19 +91,11 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
             });
         });
 
-        Route::prefix('report')->name('report.')->group(function (){
-            Route::prefix('new-order')->name('new-order.')->group(function(){
-                Route::get('preview', 'ReportController@newOrder')->name('preview');
-                Route::get('download', 'ReportController@generateNewOrder')->name('download');
-            });
-        });
-
         Route::get('all-category/{cat}/sub', 'AllCategoryController@subCategoryIndex')->name(
             'all-category.sub.index'
         );
-        Route::post('all-category/{cat}/sub/store', 'AllCategoryController@subCategoryStore')->name(
-            'all-category.sub.store'
-        );
+        Route::post('all-category/{cat}/sub/store', 'AllCategoryController@subCategoryStore')
+        ->name('all-category.sub.store');
         Route::post('all-category/{cat}/sub/update/{sub}', 'AllCategoryController@subCategoryUpdate')->name(
             'all-category.sub.update'
         );
@@ -124,5 +123,7 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
 );
 
 Route::prefix('superadmin')->middleware('superadmin')->name('superadmin.')->group(function () {
-    Route::resource('admins', 'Admin\AdminController')->only('index', 'store', 'update', 'destroy');
+    Route::resource('admins', 'Admin\AdminController')->only(
+        'index', 'store', 'update', 'destroy'
+    );
 });

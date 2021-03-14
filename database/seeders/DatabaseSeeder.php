@@ -28,9 +28,10 @@ class DatabaseSeeder extends Seeder
             GameOptionSeeder::class,
             GameOptionRewardSeeder::class,
             GameSeeder::class,
-            // OrderSeeder::class,
+            OrderSeeder::class,
+            NewOrderSeeder::class,
             // ProductDiscountSeeder::class,
-            RulesSeeder::class
+            RulesSeeder::class,
         ]);
     }
 }

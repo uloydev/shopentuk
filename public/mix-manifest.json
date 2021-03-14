@@ -4,6 +4,5 @@
     "/css/admin-dashboard.css": "/css/admin-dashboard.css",
     "/js/dashboard-admin.js": "/js/dashboard-admin.js",
     "/css/dashboard.css": "/css/dashboard.css",
-    "/js/all-admin.js": "/js/all-admin.js",
-    "/library/datatables.net": "/library/datatables.net"
+    "/js/all-admin.js": "/js/all-admin.js"
 }
