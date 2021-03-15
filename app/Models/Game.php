@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Game extends Model
 {
@@ -23,6 +24,10 @@ class Game extends Model
         'ended_at' => 'datetime',
     ];
 
+    protected $appends = [
+        'formatted_start_time'
+    ];
+
     public function bids()
     {
         return $this->hasMany('App\Models\GameBid');
@@ -31,5 +36,11 @@ class Game extends Model
     public function winnerOption()
     {
         return $this->belongsTo('App\Models\GameOption', 'winner_option_id');
+    }
+
+    public function getFormattedStartTimeAttribute()
+    {
+        $startedAt = Carbon::parse($this->attributes['started_at']);
+        return $startedAt->format("d M Y") . " jam " . $startedAt->format("H:i");
     }
 }

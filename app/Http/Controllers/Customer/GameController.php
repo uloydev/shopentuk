@@ -36,6 +36,9 @@ class GameController extends Controller
                 ->where('game_id', $game->id)
                 ->where('game_option_id', $gameOption->id)
                 ->first();
+            if ($request->point <= 0) {
+                throw new Exception("Input Point Salah", 1);
+            }
             if ($bid) {
                 if ($user->point + $bid->point < $request->point) {
                     return response()->json([
@@ -109,13 +112,14 @@ class GameController extends Controller
 
     public function currentGame(Request $request)
     {
-        $game = Game::with('winnerOption')->latest()->where('status', '!=', 'queued')->first();
+        $game = Game::orderBy('started_at', 'DESC')->firstWhere('status', '!=', 'queued');
         return response()->json([
-            'game' => Game::with('winnerOption')->latest()->where('status', '!=', 'queued')->first(),
+            'game' => $game,
             'winnerOptions' => GameOptionReward::with('gameOption')->where('winner_option_id', $game->winner_option_id)->get(),
             'currentTime' => Carbon::now(),
             'nextGame' => Game::where('status', 'queued')->limit(3)->get(),
-            'userPoint' => User::findOrFail($request->userId)->point 
+            'userPoint' => User::findOrFail($request->userId)->point,
+            'userBids' => GameBid::where('user_id', $request->userId)->where('game_id', $game->id)->get()
         ]);
     }
 

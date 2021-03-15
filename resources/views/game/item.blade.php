@@ -3,7 +3,7 @@
     for="option-{{ $option->id }}">
         {{ $option->number }}
     </label>
-    <p class="section-game__paragraph capitalize">
+    <p class="section-game__paragraph capitalize text-center">
         klik nomor untuk pilih nomor ini
     </p>
     <input type="checkbox" name="choose_option" id="option-{{ $option->id }}">
@@ -39,5 +39,8 @@
             </span>
         </p>
         <p>good luck with your gambling!</p>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full btn-delete-bid px-2 mt-2">
+            delete
+        </button>
     </div>
 </div>

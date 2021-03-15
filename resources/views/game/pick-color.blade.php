@@ -23,7 +23,7 @@
             <div class="flex">
                 <input type="number" name="point" 
                 id="input-point{{ $color->id }}" 
-                class="section-game__input bg-white border-transparent text-center p-2 rounded text-gray-900" max="100" min="1"
+                class="section-game__input bg-white border-transparent text-center p-2 rounded text-blue-900" max="100" min="1"
                 data-game-option-id="{{ $color->id }}" required>
                 <x-btn action="submit" type="transparent" 
                 add-class="btn--without-hover section-game__btn-submit">
@@ -46,6 +46,9 @@
             </span>
         </p>
         <p>good luck with your gambling!</p>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full btn-delete-bid px-2 mt-2">
+            delete
+        </button>
     </div>
 </div>
 @endforeach

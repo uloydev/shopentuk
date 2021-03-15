@@ -138,6 +138,9 @@ class Kernel extends ConsoleKernel
                     $game->status = 'queued';
                     $game->save();
                 }
+                if ($now->minute % 3 == 0) {
+                    Game::first()->update(['status' => 'playing']);
+                }
                 // Game::first()->update(['status' => 'playing']);
             }
         })->everyMinute();

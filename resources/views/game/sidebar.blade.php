@@ -20,20 +20,15 @@ lg:w-3/12 lg:border-r-2 order-first mt-0">
                 <span>next 3 game schedule</span>
                 <box-icon name='chevron-right' type='solid'></box-icon>
             </a>
-            <ul class="dropdown-box pl-5 overflow-hidden transition duration-200 ease-in">
+            <ul id="nextGameList" class="dropdown-box pl-5 overflow-hidden transition duration-200 ease-in">
                 @foreach ($nextGame as $game)
                 <li class="sidebar-game__dropdown-item">
-                    <a href="javascript:void(0);" class="flex items-center lg:w-auto px-4 w-1/3 py-4 capitalize cursor-pointer w-full">
-                        @php
-                            $startAtDate = $game->started_at->format("d M Y");
-                            $startAtTime = $game->started_at->format("H:i");
-                            $startAt = $startAtDate . ' jam ' . $startAtTime;
-                        @endphp
+                    <span class="flex items-center lg:w-auto px-4 w-1/3 py-4 capitalize cursor-pointer w-full">
                         <span class="mr-2">Jam:</span>
-                        <time datetime="{{ $startAtDate . ' '. $startAtTime }}">
-                            {{ $startAt }}
+                        <time>
+                            {{ $game->formatted_start_time }}
                         </time>
-                    </a>
+                    </span>
                 </li>
                 @endforeach
             </ul>
