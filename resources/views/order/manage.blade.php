@@ -32,54 +32,42 @@
                                         'shipping price',
                                         'shipping point',
                                         'customer email',
-                                        'customer address'
+                                        'customer address',
+                                        'customer city',
+                                        'customer sub district',
+                                        'customer district',
+                                        'customer province',
+                                        'customer postal code'
                                     ]
                                 ])
                                 <tbody>
                                     @foreach ($orders as $order)
                                         <tr class="product-item">
-                                            <td class="product-item__title">
-                                                {{ Str::limit(
-                                                    $order->orderProducts->product->title, 10
-                                                ) }}
-                                            </td>
-                                            <td class="product-item__price">
-                                                @currency($order->product_price)
-                                            </td>
-                                            <td class="product-item__point">
-                                                {{ $order->point_price }}
-                                            </td>
-                                            <td class="product-item__category">
-                                                @currency($order->price_total)
-                                            </td>
-                                            <td>{{ $order->point_total }}</td>
-                                            <td>{{ $order->weight_total }}</td>
-                                            <td>{{ $order->voucher_discount }}</td>
-                                            <td>{{ $order->status }}</td>
-                                            <td>{{ $order->no_resi }}</td>
-                                            <td>{{ $order->shipping_price }}</td>
-                                            <td>{{ $order->shipping_point }}</td>
-                                            <td>
-                                                {{ $order->user->email }}
-                                            </td>
-                                            <td class="product-item__sub-category">
-                                                {{ $order->userAddress->title }}
-                                            </td>
-                                            <td>
-                                                {{ $order->userAddress->city }}
-                                            </td>
-                                            <td>
-                                                {{ $order->userAddress->kelurahan }}
-                                            </td>
-                                            <td>
-                                                {{ $order->userAddress->kecamatan }}
-                                            </td>
-                                            <td>
-                                                {{ $order->userAddress->getProvinceAttribute }}
-                                            </td>
-                                            <td>
-                                                {{ $order->userAddress->postal_code }}
-                                            </td>
+                                            @include('partial.tbody', [
+                                                'td' => [
+                                                    '',
+                                                    // Str::limit(
+                                                    //     $order->orderProducts->product->title, 10
+                                                    // ) ?? '-',
+                                                    $order->product_price,
+                                                    $order->point_price,
+                                                    $order->price_total,
+                                                    $order->point_total,
+                                                    $order->weight_total,
+                                                    $order->voucher_discount,
+                                                    $order->status,
+                                                    $order->no_resi,
+                                                    $order->shipping_price,
+                                                    $order->shipping_point,
+                                                    $order->user->email,
+                                                    $order->userAddress->title,
+                                                    $order->userAddress->city,
+                                                    $order->userAddress->kelurahan,
+                                                    $order->userAddress->kecamatan,
+                                                    $order->userAddress->getProvinceAttribute(),
+                                                    $order->userAddress->postal_code
+                                                ]
+                                            ])
                                         </tr>
                                     @endforeach
                                 </tbody>

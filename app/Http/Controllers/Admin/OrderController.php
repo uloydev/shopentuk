@@ -22,6 +22,7 @@ class OrderController extends Controller
 
     public function index()
     {
+        // dd(Order::all());
         return view('order.manage', ['orders' => Order::all(), 'title' => 'manage order']);
     }
 
