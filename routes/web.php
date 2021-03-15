@@ -79,8 +79,8 @@ Route::namespace('Customer')->middleware(['auth', 'customer'])->group(function (
 Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name('admin.')
 ->group(
     function () {
-        Route::permanentRedirect('/', 'dashboard');
-        Route::get('dashboard', 'DashboardController')->name('dashboard');
+        Route::get('manage-customer', 'AdminController@manageCustomer')->name('manage-customer');
+        Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
         Route::prefix('order')->name('order.')->group(function () {
             Route::get('/', 'OrderController@index')->name('index');
             Route::get('new', 'OrderController@newOrder')->name('new');

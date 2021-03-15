@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserValidaion;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -127,5 +128,28 @@ class AdminController extends Controller
         $deleteAdmin = $this->adminAcc->where('id', $id);
         $deleteAdmin->destroy($id);
         return redirect()->back()->with('msg', 'Successfully delete admin ' . $deleteAdmin->name);
+    }
+
+    public function dashboard()
+    {
+        $totalUser = User::where('role', 'customer')->count();
+        $links = [
+            route('admin.products.index'),
+            route('admin.all-category.index'),
+            route('admin.products.index')
+        ];
+
+        return view('admin.dashboard', [
+            'menus' => ['Total products', 'Total order', 'Total customer'],
+            'valueMenus' => [Product::count(), 20, $totalUser],
+            'links' => $links
+        ]);
+    }
+
+    public function manageCustomer()
+    {
+        return view('customer.manage', [
+            'customers' => User::where('role', 'customer')->get()
+        ]);
     }
 }
