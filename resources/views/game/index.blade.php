@@ -3,7 +3,6 @@
 @section('body-id', 'game')
 @section('main-class', 'flex flex-wrap')
 @section('content')
-    {{-- <input type="hidden" id="currentTime" value="{{ $currentTime }}"> --}}
     @include('game.sidebar', ['addClass' => 'lg:h-screen'])
     <section class="section-game py-10 w-full lg:w-9/12">
         <div class="container h-full">
@@ -18,14 +17,24 @@
             </article>
             <input type="hidden" name="user_id" value="{{ Auth::id() }}" readonly>
             
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-10">
-                @include('game.pick-color')
+            <div id="playingContent">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-10">
+                    @include('game.pick-color')
+                </div>
+    
+                <div class="grid grid-cols-2 lg:grid-cols-5 gap-5 mb-10">
+                    @foreach($options->where('type', 'number') as $option)
+                        @include('game.item', ['option' => $option])
+                    @endforeach
+                </div>
             </div>
-
-            <div class="grid grid-cols-2 lg:grid-cols-5 gap-5 mb-10">
-                @foreach($options->where('type', 'number') as $option)
-                    @include('game.item', ['option' => $option])
-                @endforeach
+            <div id="finishedContent" class="text-center"  hidden>
+                <h1 class="text-xl font-bold mb-5">Game Telah Selesai</h1>
+                <h3>Pemenang Game Adalah </h3>
+                <ul id="winnerOptions">
+                    <li>Merah</li>
+                    <li>Angka 9</li>
+                </ul>
             </div>
         </div>
     </section>

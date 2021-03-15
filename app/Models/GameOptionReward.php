@@ -22,6 +22,6 @@ class GameOptionReward extends Model
 
     public function winnerOption()
     {
-        return $this->belongsTo('App\Models\winnerOption', 'winner_option_id');
+        return $this->belongsTo('App\Models\GameOption', 'winner_option_id');
     }
 }

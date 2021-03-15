@@ -13817,29 +13817,69 @@ __webpack_require__.r(__webpack_exports__);
 
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
+  var showPlayingContent = function showPlayingContent() {
+    finishedContent.hidden = true;
+    playingContent.hidden = false;
+  };
+
+  var showFinishedContent = function showFinishedContent(winnerOptions) {
+    console.log(winnerOptions);
+    playingContent.hidden = true;
+    var html = '';
+    winnerOptions.forEach(function (option) {
+      if (option.game_option.type == 'color') {
+        html += '<li>' + option.game_option.color + ' => points X' + option.value + '</li>';
+      } else {
+        html += '<li>No ' + option.game_option.number + ' => points X' + option.value + '</li>';
+      }
+    });
+    document.getElementById('winnerOptions').innerHTML = html;
+    finishedContent.hidden = false;
+  };
+
   var getGame = function getGame() {
     fetch('/game/current', {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json',
         'X-CSRF-Token': csrf
-      }
+      },
+      body: JSON.stringify({
+        userId: userId
+      })
     }).then(function (response) {
       return response.json();
     }).then(function (response) {
+      var point = document.querySelector('.sidebar-game__total-point');
       game = response.game;
       gameEndTime = Math.ceil(Date.parse(game.ended_at) / 1000);
       currentTime = Math.ceil(Date.parse(response.currentTime) / 1000);
       console.log(gameEndTime, currentTime, gameEndTime - currentTime, response.currentTime);
-      startTimer(gameEndTime - currentTime, document.querySelector('.section-game__timer'));
+      playingTime = gameEndTime - currentTime - 60;
+      point.textContent = response.userPoint + 'PTS';
+
+      if (playingTime <= 0) {
+        if (game.winner_option_id == null) {
+          getGame();
+        } else {
+          showFinishedContent(response.winnerOptions);
+          startTimer(gameEndTime - currentTime, document.querySelector('.section-game__timer'));
+        }
+      } else {
+        showPlayingContent();
+        startTimer(playingTime, document.querySelector('.section-game__timer'));
+      }
+
       console.log(game);
     });
   };
 
   var csrf = document.querySelector('meta[name="csrf-token"]').content;
   var userId = document.querySelector('input[name="user_id"]').value;
-  var game, gameEndTime, currentTime; // let currentTime = Date.parse(document.getElementById('currentTime').value);
+  var playingContent = document.getElementById('playingContent');
+  var finishedContent = document.getElementById('finishedContent');
+  var game, gameEndTime, currentTime, playingTime; // let currentTime = Date.parse(document.getElementById('currentTime').value);
   // console.log(currentTime.toString());
 
   /**
@@ -14122,9 +14162,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/produ
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
-__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
-module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
+__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
+__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
+module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
 
 
 /***/ })

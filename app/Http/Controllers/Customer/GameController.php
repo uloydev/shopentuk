@@ -60,6 +60,11 @@ class GameController extends Controller
                     'game_option_id' => $gameOption->id,
                     'point' => $request->point
                 ]);
+                PointHistory::create([
+                    'value' => $request->point,
+                    'user_id' => $user->id,
+                    'description' => 'GameBid'
+                ]);
             }
             $user->save();
         } catch (\Throwable $th) {
@@ -102,11 +107,15 @@ class GameController extends Controller
         ]);
     }
 
-    public function currentGame()
+    public function currentGame(Request $request)
     {
+        $game = Game::with('winnerOption')->latest()->where('status', '!=', 'queued')->first();
         return response()->json([
-            'game' => Game::where('status', 'playing')->first(),
-            'currentTime' => Carbon::now()
+            'game' => Game::with('winnerOption')->latest()->where('status', '!=', 'queued')->first(),
+            'winnerOptions' => GameOptionReward::with('gameOption')->where('winner_option_id', $game->winner_option_id)->get(),
+            'currentTime' => Carbon::now(),
+            'nextGame' => Game::where('status', 'queued')->limit(3)->get(),
+            'userPoint' => User::findOrFail($request->userId)->point 
         ]);
     }
 

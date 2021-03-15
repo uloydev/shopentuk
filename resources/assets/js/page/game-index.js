@@ -5,7 +5,9 @@ import MicroModal from 'micromodal'
 if (HelperModule.pageUrl === '/game') {
     const csrf = document.querySelector('meta[name="csrf-token"]').content;
     const userId = document.querySelector('input[name="user_id"]').value
-    let game, gameEndTime, currentTime
+    const playingContent = document.getElementById('playingContent');
+    const finishedContent = document.getElementById('finishedContent');
+    let game, gameEndTime, currentTime, playingTime;
     // let currentTime = Date.parse(document.getElementById('currentTime').value);
     // console.log(currentTime.toString());
     /**
@@ -35,22 +37,59 @@ if (HelperModule.pageUrl === '/game') {
         }
     }
 
+    function showPlayingContent() {
+        finishedContent.hidden = true;
+        playingContent.hidden = false;
+    }
+
+    function showFinishedContent(winnerOptions) {
+        console.log(winnerOptions)
+        playingContent.hidden = true;
+        var html = '';
+        winnerOptions.forEach(option => {
+            if (option.game_option.type == 'color') {
+                html += '<li>' + option.game_option.color + ' => points X' + option.value + '</li>';
+            } else {
+                html += '<li>No ' + option.game_option.number + ' => points X' + option.value + '</li>';
+            }
+        });
+        document.getElementById('winnerOptions').innerHTML = html;
+        finishedContent.hidden = false;
+    }
+
     function getGame() {
         fetch('/game/current', {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-type': 'application/json',
                 'Accept': 'application/json',
                 'X-CSRF-Token': csrf,
             },
+            body: JSON.stringify({
+                userId: userId,
+            })
         })
         .then(response => response.json())
         .then(function (response) {
+            const point = document.querySelector('.sidebar-game__total-point')
             game = response.game
             gameEndTime = Math.ceil(Date.parse(game.ended_at) / 1000);
             currentTime = Math.ceil(Date.parse(response.currentTime) / 1000);
             console.log(gameEndTime, currentTime, gameEndTime-currentTime, response.currentTime)
-            startTimer(gameEndTime-currentTime, document.querySelector('.section-game__timer'))
+            playingTime = gameEndTime - currentTime - 60;
+            point.textContent = response.userPoint + 'PTS';
+
+            if (playingTime <= 0) {
+                if (game.winner_option_id == null) {
+                    getGame()
+                } else {
+                    showFinishedContent(response.winnerOptions);
+                    startTimer(gameEndTime-currentTime, document.querySelector('.section-game__timer'))
+                }
+            } else {
+                showPlayingContent();
+                startTimer(playingTime, document.querySelector('.section-game__timer'))
+            }
             console.log(game)
         })
     }
