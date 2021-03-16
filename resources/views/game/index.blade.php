@@ -35,6 +35,10 @@
                     <li>Merah</li>
                     <li>Angka 9</li>
                 </ul>
+                <h3 class="mt-10 font-bold">Bid Anda</h3>
+                <ul id="userBids">
+                    <li>No 9 (10 point) => 20 point (menang)</li>
+                </ul>
             </div>
         </div>
     </section>

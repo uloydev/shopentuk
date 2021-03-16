@@ -13845,6 +13845,18 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
     document.getElementById('nextGameList').innerHTML = html;
   };
 
+  var updateBidResult = function updateBidResult(userBids, winnerOptions) {
+    console.log(userBids);
+    var html = '';
+    userBids.forEach(function (bid) {
+      html += '<li>';
+      html += bid.game_option.type == 'number' ? 'No ' + bid.game_option.number : bid.game_option.color;
+      html += ' (' + bid.point + ' point) => ';
+      html += bid.reward + ' point (' + bid.status + ')</li>';
+    });
+    document.getElementById('userBids').innerHTML = html;
+  };
+
   var getGame = function getGame() {
     fetch('/game/current', {
       method: 'POST',
@@ -13871,6 +13883,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
         if (game.winner_option_id == null) {
           getGame();
         } else {
+          updateBidResult(response.userBids);
           showFinishedContent(response.winnerOptions);
           document.querySelectorAll('.section-game__btn-submit').forEach(function (btn) {
             var pointInput = btn.parentElement.querySelector('input[name="point"]');
@@ -13901,7 +13914,8 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
       updateNextGameList(response.nextGame);
       console.log(game);
     });
-  };
+  }; // fetch game data
+
 
   var csrf = document.querySelector('meta[name="csrf-token"]').content;
   var userId = document.querySelector('input[name="user_id"]').value;
@@ -13938,8 +13952,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
     }
   };
 
-  getGame(); // fetch game data
-
+  getGame();
   /**
    * container page
    */

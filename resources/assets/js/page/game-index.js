@@ -66,6 +66,18 @@ if (HelperModule.pageUrl === '/game') {
         document.getElementById('nextGameList').innerHTML = html;
     }
 
+    function updateBidResult(userBids, winnerOptions) {
+        console.log(userBids)
+        var html = '';
+        userBids.forEach(bid => {
+            html += '<li>'
+            html += bid.game_option.type == 'number' ? 'No '+ bid.game_option.number : bid.game_option.color; 
+            html += ' ('+ bid.point +' point) => '
+            html += bid.reward + ' point ('+ bid.status +')</li>'
+        });
+        document.getElementById('userBids').innerHTML = html
+    }
+
     function getGame() {
         fetch('/game/current', {
             method: 'POST',
@@ -92,6 +104,7 @@ if (HelperModule.pageUrl === '/game') {
                 if (game.winner_option_id == null) {
                     getGame()
                 } else {
+                    updateBidResult(response.userBids)
                     showFinishedContent(response.winnerOptions);
                     document.querySelectorAll('.section-game__btn-submit').forEach(btn => {
                         const pointInput = btn.parentElement.querySelector('input[name="point"]');
@@ -124,9 +137,9 @@ if (HelperModule.pageUrl === '/game') {
         })
     }
 
-    getGame();
-
+    
     // fetch game data
+    getGame();
 
     
 
