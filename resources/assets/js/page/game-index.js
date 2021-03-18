@@ -108,7 +108,7 @@ if (HelperModule.pageUrl === '/game') {
                     showFinishedContent(response.winnerOptions);
                     document.querySelectorAll('.section-game__btn-submit').forEach(btn => {
                         const pointInput = btn.parentElement.querySelector('input[name="point"]');
-                        const gameItem = pointInput.parentElement.parentElement.parentElement.parentElement;
+                        const gameItem = pointInput.parentElement.parentElement.parentElement.parentElement.parentElement;
                         gameItem.querySelector('input[name="choose_option"]').checked = false
                         pointInput.disabled = false
                         btn.disabled = false
@@ -123,7 +123,7 @@ if (HelperModule.pageUrl === '/game') {
                 startTimer(playingTime, document.querySelector('.section-game__timer'))
                 response.userBids.forEach(bid => {
                     const pointInput = document.querySelector('input#input-point'+bid.game_option_id)
-                    const gameItem = pointInput.parentElement.parentElement.parentElement.parentElement;
+                    const gameItem = pointInput.parentElement.parentElement.parentElement.parentElement.parentElement;
                     pointInput.value = bid.point
                     gameItem.querySelector('input[name="choose_option"]').checked = false
                     pointInput.disabled = true
@@ -160,7 +160,8 @@ if (HelperModule.pageUrl === '/game') {
      */
     const btnUncheckGame = document.querySelectorAll('.section-game__uncheck')
     btnUncheckGame.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
             const chooseOption = btn.parentNode.parentNode.querySelector('input[name="choose_option"]')
             chooseOption.checked = false
         })
@@ -175,7 +176,7 @@ if (HelperModule.pageUrl === '/game') {
         HelperModule.boxiconHoverChangeColor(iconBtn, '#ededed')
 
         const pointInput = btn.parentElement.querySelector('input[name="point"]');
-        const gameItem = pointInput.parentElement.parentElement.parentElement.parentElement
+        const gameItem = pointInput.parentElement.parentElement.parentElement.parentElement.parentElement
 
         /**
          * defined "thank you" message overlay after submit point
@@ -267,5 +268,4 @@ if (HelperModule.pageUrl === '/game') {
             })
         });
     });
-
 }

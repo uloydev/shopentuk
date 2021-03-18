@@ -13887,7 +13887,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
           showFinishedContent(response.winnerOptions);
           document.querySelectorAll('.section-game__btn-submit').forEach(function (btn) {
             var pointInput = btn.parentElement.querySelector('input[name="point"]');
-            var gameItem = pointInput.parentElement.parentElement.parentElement.parentElement;
+            var gameItem = pointInput.parentElement.parentElement.parentElement.parentElement.parentElement;
             gameItem.querySelector('input[name="choose_option"]').checked = false;
             pointInput.disabled = false;
             btn.disabled = false;
@@ -13902,7 +13902,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
         startTimer(playingTime, document.querySelector('.section-game__timer'));
         response.userBids.forEach(function (bid) {
           var pointInput = document.querySelector('input#input-point' + bid.game_option_id);
-          var gameItem = pointInput.parentElement.parentElement.parentElement.parentElement;
+          var gameItem = pointInput.parentElement.parentElement.parentElement.parentElement.parentElement;
           pointInput.value = bid.point;
           gameItem.querySelector('input[name="choose_option"]').checked = false;
           pointInput.disabled = true;
@@ -13971,7 +13971,8 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
 
   var btnUncheckGame = document.querySelectorAll('.section-game__uncheck');
   btnUncheckGame.forEach(function (btn) {
-    btn.addEventListener('click', function () {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
       var chooseOption = btn.parentNode.parentNode.querySelector('input[name="choose_option"]');
       chooseOption.checked = false;
     });
@@ -13985,7 +13986,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
     var iconBtn = btn.querySelector('box-icon');
     _helper_module__WEBPACK_IMPORTED_MODULE_0__["boxiconHoverChangeColor"](iconBtn, '#ededed');
     var pointInput = btn.parentElement.querySelector('input[name="point"]');
-    var gameItem = pointInput.parentElement.parentElement.parentElement.parentElement;
+    var gameItem = pointInput.parentElement.parentElement.parentElement.parentElement.parentElement;
     /**
      * defined "thank you" message overlay after submit point
      */
