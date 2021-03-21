@@ -7,7 +7,7 @@ if (HelperModule.pageUrl === '/game') {
     const userId = document.querySelector('input[name="user_id"]').value
     const playingContent = document.getElementById('playingContent');
     const finishedContent = document.getElementById('finishedContent');
-    const btnDeleteBid = document.querySelectorAll('button.btn-delete-bid');
+    // const btnDeleteBid = document.querySelectorAll('button.btn-delete-bid');
     let game, gameEndTime, currentTime, playingTime;
     // let currentTime = Date.parse(document.getElementById('currentTime').value);
     // console.log(currentTime.toString());
@@ -234,38 +234,38 @@ if (HelperModule.pageUrl === '/game') {
     })
 
     // delete bid
-    btnDeleteBid.forEach(btn => {
-        btn.addEventListener('click', e => {
-            const gameItem = btn.parentElement.parentElement;
-            const pointInput = gameItem.querySelector('input[name="point"]')
-            fetch('/game/bid/cancel', {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-Token': csrf,
-                },
-                body: JSON.stringify({
-                    user_id: userId,
-                    game_id: game.id,
-                    game_option_id: pointInput.dataset.gameOptionId
-                }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                alert(data.message)
-                if (data.status == 'success') {
-                    const point = document.querySelector('.sidebar-game__total-point')
-                    const pointInit = Number(point.textContent.trim().replace('PTS', ''))
-                    document.querySelector('.sidebar-game__total-point').textContent = pointInit + Number(pointInput.value) + 'PTS'
-                    gameItem.querySelector('input[name="choose_option"]').checked = false
-                    pointInput.disabled = false
-                    pointInput.value = null
-                    gameItem.querySelector('.point-submitted').textContent = ''
-                    gameItem.querySelector('.thanks-box').classList.remove('thanks-box--show')
-                }
-            })
-        });
-    });
+    // btnDeleteBid.forEach(btn => {
+    //     btn.addEventListener('click', e => {
+    //         const gameItem = btn.parentElement.parentElement;
+    //         const pointInput = gameItem.querySelector('input[name="point"]')
+    //         fetch('/game/bid/cancel', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-type': 'application/json',
+    //                 'Accept': 'application/json',
+    //                 'X-CSRF-Token': csrf,
+    //             },
+    //             body: JSON.stringify({
+    //                 user_id: userId,
+    //                 game_id: game.id,
+    //                 game_option_id: pointInput.dataset.gameOptionId
+    //             }),
+    //         })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log(data)
+    //             alert(data.message)
+    //             if (data.status == 'success') {
+    //                 const point = document.querySelector('.sidebar-game__total-point')
+    //                 const pointInit = Number(point.textContent.trim().replace('PTS', ''))
+    //                 document.querySelector('.sidebar-game__total-point').textContent = pointInit + Number(pointInput.value) + 'PTS'
+    //                 gameItem.querySelector('input[name="choose_option"]').checked = false
+    //                 pointInput.disabled = false
+    //                 pointInput.value = null
+    //                 gameItem.querySelector('.point-submitted').textContent = ''
+    //                 gameItem.querySelector('.thanks-box').classList.remove('thanks-box--show')
+    //             }
+    //         })
+    //     });
+    // });
 }

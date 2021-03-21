@@ -13920,8 +13920,8 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
   var csrf = document.querySelector('meta[name="csrf-token"]').content;
   var userId = document.querySelector('input[name="user_id"]').value;
   var playingContent = document.getElementById('playingContent');
-  var finishedContent = document.getElementById('finishedContent');
-  var btnDeleteBid = document.querySelectorAll('button.btn-delete-bid');
+  var finishedContent = document.getElementById('finishedContent'); // const btnDeleteBid = document.querySelectorAll('button.btn-delete-bid');
+
   var game, gameEndTime, currentTime, playingTime; // let currentTime = Date.parse(document.getElementById('currentTime').value);
   // console.log(currentTime.toString());
 
@@ -14036,42 +14036,40 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
       });
     });
   }); // delete bid
-
-  btnDeleteBid.forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      var gameItem = btn.parentElement.parentElement;
-      var pointInput = gameItem.querySelector('input[name="point"]');
-      fetch('/game/bid/cancel', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-          'Accept': 'application/json',
-          'X-CSRF-Token': csrf
-        },
-        body: JSON.stringify({
-          user_id: userId,
-          game_id: game.id,
-          game_option_id: pointInput.dataset.gameOptionId
-        })
-      }).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        console.log(data);
-        alert(data.message);
-
-        if (data.status == 'success') {
-          var point = document.querySelector('.sidebar-game__total-point');
-          var pointInit = Number(point.textContent.trim().replace('PTS', ''));
-          document.querySelector('.sidebar-game__total-point').textContent = pointInit + Number(pointInput.value) + 'PTS';
-          gameItem.querySelector('input[name="choose_option"]').checked = false;
-          pointInput.disabled = false;
-          pointInput.value = null;
-          gameItem.querySelector('.point-submitted').textContent = '';
-          gameItem.querySelector('.thanks-box').classList.remove('thanks-box--show');
-        }
-      });
-    });
-  });
+  // btnDeleteBid.forEach(btn => {
+  //     btn.addEventListener('click', e => {
+  //         const gameItem = btn.parentElement.parentElement;
+  //         const pointInput = gameItem.querySelector('input[name="point"]')
+  //         fetch('/game/bid/cancel', {
+  //             method: 'POST',
+  //             headers: {
+  //                 'Content-type': 'application/json',
+  //                 'Accept': 'application/json',
+  //                 'X-CSRF-Token': csrf,
+  //             },
+  //             body: JSON.stringify({
+  //                 user_id: userId,
+  //                 game_id: game.id,
+  //                 game_option_id: pointInput.dataset.gameOptionId
+  //             }),
+  //         })
+  //         .then(response => response.json())
+  //         .then(data => {
+  //             console.log(data)
+  //             alert(data.message)
+  //             if (data.status == 'success') {
+  //                 const point = document.querySelector('.sidebar-game__total-point')
+  //                 const pointInit = Number(point.textContent.trim().replace('PTS', ''))
+  //                 document.querySelector('.sidebar-game__total-point').textContent = pointInit + Number(pointInput.value) + 'PTS'
+  //                 gameItem.querySelector('input[name="choose_option"]').checked = false
+  //                 pointInput.disabled = false
+  //                 pointInput.value = null
+  //                 gameItem.querySelector('.point-submitted').textContent = ''
+  //                 gameItem.querySelector('.thanks-box').classList.remove('thanks-box--show')
+  //             }
+  //         })
+  //     });
+  // });
 }
 
 /***/ }),

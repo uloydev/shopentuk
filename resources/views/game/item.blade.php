@@ -36,8 +36,8 @@
             </span>
         </p>
         <p>good luck with your gambling!</p>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full btn-delete-bid px-2 mt-2">
+        {{-- <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full btn-delete-bid px-2 mt-2">
             delete
-        </button>
+        </button> --}}
     </div>
 </div>
