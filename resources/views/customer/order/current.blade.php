@@ -18,7 +18,11 @@
                         <div class="group inline-block relative">
                             <button
                                 class="btn bg-red-500 px-5 rounded-full top-0 
-                                right-0 mr-4 btn-menu">
+                                right-0 mr-4 btn-menu" 
+                                {{-- 
+                                    todo: if already request refund, add
+                                    'disabled' attribute 
+                                --}}>
                                 <span class="pr-1 font-semibold flex-1">
                                     Refund
                                 </span>
@@ -39,7 +43,7 @@
                                             value="{{ auth()->user()->rekening }}"
                                             type="submit"
                                             title="Request refund"
-                                            class="apperance-none w-full">
+                                            class="apperance-none w-full" >
                                             BCA
                                         </button>
                                     </form>
