@@ -30,10 +30,9 @@
         </label>
         <div class="thanks-box">
             <p>
-                you're inputing
                 <span class="font-bold">
                     <var class="point-submitted not-italic"></var>
-                    <span class="uppercase">pts</span>
+                    {{-- <span class="uppercase">pts</span> --}}
                 </span>
             </p>
             <p>good luck with your gambling!</p>
