@@ -15,12 +15,13 @@ class CreateRefundsTable extends Migration
     {
         Schema::create('refunds', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');
-            $table->string('phone');
+            $table->foreignId('user_id');
             $table->foreignId('order_id');
-            $table->date('payment_date');
-            $table->enum('payment_method', ['bca', 'ovo']);
-            $table->string('image')->nullable();
+            $table->date('payment_date')->nullable();
+            $table->string('rekening')->nullable();
+            $table->boolean('is_refunded')->default(false);
+            $table->enum('payment_method', ['bca', 'ovo'])->nullable();
+            $table->string('struk')->nullable();
             $table->timestamps();
         });
     }

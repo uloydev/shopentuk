@@ -10,12 +10,13 @@ class Refund extends Model
     use HasFactory;
 
     protected $fillable = [
-        'full_name',
-        'phone',
+        'user_id',
         'order_id',
         'payment_date',
+        'rekening',
+        'is_paid',
         'payment_method',
-        'image',
+        'struk'
     ];
 
     protected $casts = [

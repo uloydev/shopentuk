@@ -17,7 +17,9 @@ class DashboardController extends Controller
         return view('customer.order.current', [
             'title' => 'current order',
             'tabMenus' => $this->tabMenus,
-            'orders' => Auth::user()->orders->whereNotIn('status', ['canceled', 'refunded', 'finished'])
+            'orders' => Auth::user()->orders->whereNotIn('status', [
+                'canceled', 'refunded', 'finished'
+            ])
         ]);
     }
 
