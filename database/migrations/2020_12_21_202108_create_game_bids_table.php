@@ -20,6 +20,7 @@ class CreateGameBidsTable extends Migration
             $table->foreignId('game_id');
             $table->foreignId('user_id');
             $table->integer('point');
+            $table->integer('reward')->default(0);
             $table->timestamps();
         });
     }

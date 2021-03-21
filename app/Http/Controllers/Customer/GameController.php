@@ -19,7 +19,7 @@ class GameController extends Controller
     {
         return view('game.index', [
             'options' => GameOption::all(),
-            'nextGame' => Game::where('status', 'queued')->limit(3)->get(),
+            // 'nextGame' => Game::where('status', 'queued')->limit(3)->get(),
             'rule' => Rules::first(),
             'currentTime' => Carbon::now(),
         ]);
@@ -36,6 +36,9 @@ class GameController extends Controller
                 ->where('game_id', $game->id)
                 ->where('game_option_id', $gameOption->id)
                 ->first();
+            if ($request->point <= 0) {
+                throw new Exception("Input Point Salah", 1);
+            }
             if ($bid) {
                 if ($user->point + $bid->point < $request->point) {
                     return response()->json([
@@ -70,52 +73,53 @@ class GameController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'gagal untuk pasang bid !'
+                'message' => 'gagal !'
             ]);
         }
         return response()->json([
             'status' => 'success',
-            'message' => 'berhasil pasang bid !',
+            'message' => 'berhasil !',
             'bid' => $bid
         ]);
     }
 
-    public function cancelBid(Request $request)
-    {
-        try {
-            $user = User::findOrFail($request->user_id);
-            $game = Game::findOrFail($request->game_id);
-            $gameOption = GameOption::findOrFail($request->game_option_id);
-            $bid = GameBid::where('user_id', $user->id)
-                ->where('game_id', $game->id)
-                ->where('game_option_id', $gameOption->id)
-                ->first();
-            if ($bid) {
-                $user->point += $bid->point;
-                $bid->delete();
-                $user->save();
-            }
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'gagal untuk menghapus bid !'
-            ]);
-        }
-        return response()->json([
-            'status' => 'success',
-            'message' => 'berhasil menghapus bid !'
-        ]);
-    }
+    // public function cancelBid(Request $request)
+    // {
+    //     try {
+    //         $user = User::findOrFail($request->user_id);
+    //         $game = Game::findOrFail($request->game_id);
+    //         $gameOption = GameOption::findOrFail($request->game_option_id);
+    //         $bid = GameBid::where('user_id', $user->id)
+    //             ->where('game_id', $game->id)
+    //             ->where('game_option_id', $gameOption->id)
+    //             ->first();
+    //         if ($bid) {
+    //             $user->point += $bid->point;
+    //             $bid->delete();
+    //             $user->save();
+    //         }
+    //     } catch (\Throwable $th) {
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'message' => 'gagal untuk menghapus bid !'
+    //         ]);
+    //     }
+    //     return response()->json([
+    //         'status' => 'success',
+    //         'message' => 'berhasil menghapus bid !'
+    //     ]);
+    // }
 
     public function currentGame(Request $request)
     {
-        $game = Game::with('winnerOption')->latest()->where('status', '!=', 'queued')->first();
+        $game = Game::orderBy('started_at', 'DESC')->firstWhere('status', '!=', 'queued');
         return response()->json([
-            'game' => Game::with('winnerOption')->latest()->where('status', '!=', 'queued')->first(),
+            'game' => $game,
             'winnerOptions' => GameOptionReward::with('gameOption')->where('winner_option_id', $game->winner_option_id)->get(),
             'currentTime' => Carbon::now(),
-            'nextGame' => Game::where('status', 'queued')->limit(3)->get(),
-            'userPoint' => User::findOrFail($request->userId)->point 
+            // 'nextGame' => Game::where('status', 'queued')->limit(3)->get(),
+            'userPoint' => User::findOrFail($request->userId)->point,
+            'userBids' => GameBid::where('user_id', $request->userId)->where('game_id', $game->id)->get()
         ]);
     }
 

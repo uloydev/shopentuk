@@ -15,6 +15,7 @@ class GameBid extends Model
         'game_id',
         'user_id',
         'game_option_id',
+        'reward'
     ];
 
     protected $with = ['gameOption'];

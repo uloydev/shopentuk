@@ -60,7 +60,7 @@ class Kernel extends ConsoleKernel
                             'ended_at' => $lastGame->ended_at->addMinute(3),
                         ]);
                         // seed bid to next game
-                        GameBid::factory()->count(30)->state(['game_id' => $nextGame->id])->create();
+                        GameBid::factory()->count(10)->state(['game_id' => $nextGame->id])->create();
                     } else if ($now->minute % 3 == 2) {
                         // creating variables data
                         $currentGame = Game::firstWhere('status', 'playing');
@@ -113,6 +113,8 @@ class Kernel extends ConsoleKernel
                                 'description' => 'game winner reward',
                                 'user_id' => $user->id
                             ]);
+                            $bid->reward = $pointReward;
+                            $bid->save();
                         }
                         // update current game state
                         $currentGame->update([
@@ -137,6 +139,9 @@ class Kernel extends ConsoleKernel
                     $game->ended_at = $now;
                     $game->status = 'queued';
                     $game->save();
+                }
+                if (Carbon::now()->minute % 3 == 0) {
+                    Game::first()->update(['status' => 'playing']);
                 }
                 // Game::first()->update(['status' => 'playing']);
             }

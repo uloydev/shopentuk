@@ -7,6 +7,10 @@ if (HelperModule.pageUrl === '/game') {
     const userId = document.querySelector('input[name="user_id"]').value
     const playingContent = document.getElementById('playingContent');
     const finishedContent = document.getElementById('finishedContent');
+    const checkboxLabels = document.querySelectorAll('.game-checkbox-label');
+    let isPlaying = false;
+    let isBidDisabled = false;
+    // const btnDeleteBid = document.querySelectorAll('button.btn-delete-bid');
     let game, gameEndTime, currentTime, playingTime;
     // let currentTime = Date.parse(document.getElementById('currentTime').value);
     // console.log(currentTime.toString());
@@ -26,10 +30,14 @@ if (HelperModule.pageUrl === '/game') {
                 seconds = seconds < 10 ? "0" + seconds : seconds;
         
                 display.textContent = minutes + ":" + seconds;
-        
+                
                 if (--timer < 0) {
                     getGame();
                     clearInterval(gameInterval);
+                }
+
+                if (isPlaying && timer <= 30) {
+                    isBidDisabled = true;
                 }
             }, 1000);
         } else {
@@ -57,6 +65,26 @@ if (HelperModule.pageUrl === '/game') {
         finishedContent.hidden = false;
     }
 
+    // function updateNextGameList(nextGames) {
+    //     var html = '';
+    //     nextGames.forEach( game => {
+    //         html += '<li class="sidebar-game__dropdown-item"><span class="flex items-center lg:w-auto px-4 w-1/3 py-4 capitalize cursor-pointer w-full"><span class="mr-2">Jam:</span><time>' + game.formatted_start_time + '</time></span></li>';
+    //     });
+    //     document.getElementById('nextGameList').innerHTML = html;
+    // }
+
+    function updateBidResult(userBids) {
+        console.log(userBids)
+        var html = '';
+        userBids.forEach(bid => {
+            html += '<li>'
+            html += bid.game_option.type == 'number' ? 'No '+ bid.game_option.number : bid.game_option.color; 
+            html += ' ('+ bid.point +' point) => '
+            html += bid.reward + ' point ('+ bid.status +')</li>'
+        });
+        document.getElementById('userBids').innerHTML = html
+    }
+
     function getGame() {
         fetch('/game/current', {
             method: 'POST',
@@ -77,26 +105,51 @@ if (HelperModule.pageUrl === '/game') {
             currentTime = Math.ceil(Date.parse(response.currentTime) / 1000);
             console.log(gameEndTime, currentTime, gameEndTime-currentTime, response.currentTime)
             playingTime = gameEndTime - currentTime - 60;
-            point.textContent = response.userPoint + 'PTS';
+            point.textContent = response.userPoint ;
 
             if (playingTime <= 0) {
+                isPlaying = false;
                 if (game.winner_option_id == null) {
                     getGame()
                 } else {
+                    updateBidResult(response.userBids)
                     showFinishedContent(response.winnerOptions);
+                    document.querySelectorAll('.section-game__btn-submit').forEach(btn => {
+                        const pointInput = btn.parentElement.querySelector('input[name="point"]');
+                        const gameItem = pointInput.parentElement.parentElement.parentElement.parentElement.parentElement;
+                        gameItem.querySelector('input[name="choose_option"]').checked = false
+                        pointInput.disabled = false
+                        btn.disabled = false
+                        pointInput.value = null
+                        gameItem.querySelector('.point-submitted').textContent = ''
+                        gameItem.querySelector('.thanks-box').classList.remove('thanks-box--show')
+                    })
                     startTimer(gameEndTime-currentTime, document.querySelector('.section-game__timer'))
                 }
             } else {
+                isPlaying = true;
+                isBidDisabled = false;
                 showPlayingContent();
                 startTimer(playingTime, document.querySelector('.section-game__timer'))
+                response.userBids.forEach(bid => {
+                    const pointInput = document.querySelector('input#input-point'+bid.game_option_id)
+                    const gameItem = pointInput.parentElement.parentElement.parentElement.parentElement.parentElement;
+                    pointInput.value = bid.point
+                    gameItem.querySelector('input[name="choose_option"]').checked = false
+                    pointInput.disabled = true
+                    gameItem.querySelector('.point-submitted').textContent = pointInput.value
+                    gameItem.querySelector('.thanks-box')
+                    .classList.add('thanks-box--show')
+                })
             }
+            // updateNextGameList(response.nextGame);
             console.log(game)
         })
     }
 
-    getGame();
-
+    
     // fetch game data
+    getGame();
 
     
 
@@ -118,8 +171,8 @@ if (HelperModule.pageUrl === '/game') {
     const btnUncheckGame = document.querySelectorAll('.section-game__uncheck')
     btnUncheckGame.forEach(btn => {
         btn.addEventListener('click', () => {
-            const chooseOption = btn.parentNode.parentNode.querySelector('input[name="choose_option"]')
-            chooseOption.checked = false
+            btn.classList.add('hidden')
+            btn.parentNode.querySelector('input[name="choose_option"]').checked = false
         })
     })
 
@@ -132,7 +185,7 @@ if (HelperModule.pageUrl === '/game') {
         HelperModule.boxiconHoverChangeColor(iconBtn, '#ededed')
 
         const pointInput = btn.parentElement.querySelector('input[name="point"]');
-        const gameItem = pointInput.parentElement.parentElement.parentElement.parentElement
+        const gameItem = pointInput.parentElement.parentElement.parentElement.parentElement.parentElement
 
         /**
          * defined "thank you" message overlay after submit point
@@ -140,7 +193,6 @@ if (HelperModule.pageUrl === '/game') {
         const openThankYouMessage = () => {
             gameItem.querySelector('input[name="choose_option"]').checked = false
             pointInput.disabled = true
-            btn.disabled = true
             gameItem.querySelector('.point-submitted').textContent = pointInput.value
 
             gameItem.querySelector('.thanks-box')
@@ -150,7 +202,6 @@ if (HelperModule.pageUrl === '/game') {
         const closeThankYouMessage = () => {
             gameItem.querySelector('input[name="choose_option"]').checked = true
             pointInput.disabled = false
-            btn.disabled = false
             gameItem.querySelector('.point-submitted').textContent = ''
 
             gameItem
@@ -161,7 +212,7 @@ if (HelperModule.pageUrl === '/game') {
 
         btn.addEventListener('click', e => {
             e.preventDefault()
-            if (Number(pointInput.value) > 0) {
+            if (!isBidDisabled) {
                 fetch('/game/bid', {
                     method: 'POST',
                     headers: {
@@ -182,36 +233,75 @@ if (HelperModule.pageUrl === '/game') {
                     if (data.status == 'success') {
                         openThankYouMessage()
                         const point = document.querySelector('.sidebar-game__total-point')
-                        const pointInit = Number(point.textContent.trim().replace('PTS', ''))
+                        const pointInit = Number(point.textContent.trim())
 
                         const pointAfterSubmit = pointInit - Number(pointInput.value)
                         console.log(`pointAfterSubmit: ${pointAfterSubmit}`)
-                        point.textContent = pointAfterSubmit + 'PTS'
+                        point.textContent = pointAfterSubmit 
                     }
                 })
             } else {
-                fetch('/game/bid/cancel', {
-                    method: 'POST',
-                    headers: {
-                        'Content-type': 'application/json',
-                        'Accept': 'application/json',
-                        'X-CSRF-Token': csrf,
-                    },
-                    body: JSON.stringify({
-                        user_id: userId,
-                        game_id: game.id,
-                        game_option_id: pointInput.dataset.gameOptionId
-                    }),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.message)
-                    if (data.status == 'success') {
-                        closeThankYouMessage()
-                    }
-                })
+                gameItem.querySelector('input[name="choose_option"]').checked = false
+                // alert('Tidak bisa input bid jika waktu kurang dari 30 detik');
             }
         })
     })
 
+    // disable bid if time left 30s
+    checkboxLabels.forEach(label => {
+        var inputCheckbox = label.querySelector('input[name="choose_option"]');
+        var thanksBox = label.parentElement.querySelector('.thanks-box');
+        var uncheckBtn = label.parentElement.querySelector('.section-game__uncheck');
+        label.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (isBidDisabled && !thanksBox.classList.contains('thanks-box--show')) {
+                alert('Tidak bisa input bid jika waktu kurang dari 30 detik');
+                inputCheckbox.checked = false;
+                if (!uncheckBtn.classList.contains('hidden')) {
+                    uncheckBtn.classList.add('hidden');
+                }
+            } else {
+                if (inputCheckbox.checked == false) {
+                    label.parentElement.querySelector('.section-game__uncheck').classList.remove('hidden');
+                    inputCheckbox.checked = true;
+                }
+            }
+        })
+    });
+
+    // delete bid
+    // btnDeleteBid.forEach(btn => {
+    //     btn.addEventListener('click', e => {
+    //         const gameItem = btn.parentElement.parentElement;
+    //         const pointInput = gameItem.querySelector('input[name="point"]')
+    //         fetch('/game/bid/cancel', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-type': 'application/json',
+    //                 'Accept': 'application/json',
+    //                 'X-CSRF-Token': csrf,
+    //             },
+    //             body: JSON.stringify({
+    //                 user_id: userId,
+    //                 game_id: game.id,
+    //                 game_option_id: pointInput.dataset.gameOptionId
+    //             }),
+    //         })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log(data)
+    //             alert(data.message)
+    //             if (data.status == 'success') {
+    //                 const point = document.querySelector('.sidebar-game__total-point')
+    //                 const pointInit = Number(point.textContent.trim())
+    //                 document.querySelector('.sidebar-game__total-point').textContent = pointInit + Number(pointInput.value) 
+    //                 gameItem.querySelector('input[name="choose_option"]').checked = false
+    //                 pointInput.disabled = false
+    //                 pointInput.value = null
+    //                 gameItem.querySelector('.point-submitted').textContent = ''
+    //                 gameItem.querySelector('.thanks-box').classList.remove('thanks-box--show')
+    //             }
+    //         })
+    //     });
+    // });
 }
