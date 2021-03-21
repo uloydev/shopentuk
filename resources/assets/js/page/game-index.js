@@ -7,6 +7,9 @@ if (HelperModule.pageUrl === '/game') {
     const userId = document.querySelector('input[name="user_id"]').value
     const playingContent = document.getElementById('playingContent');
     const finishedContent = document.getElementById('finishedContent');
+    const checkboxLabels = document.querySelectorAll('.game-checkbox-label');
+    let isPlaying = false;
+    let isBidDisabled = false;
     // const btnDeleteBid = document.querySelectorAll('button.btn-delete-bid');
     let game, gameEndTime, currentTime, playingTime;
     // let currentTime = Date.parse(document.getElementById('currentTime').value);
@@ -27,10 +30,14 @@ if (HelperModule.pageUrl === '/game') {
                 seconds = seconds < 10 ? "0" + seconds : seconds;
         
                 display.textContent = minutes + ":" + seconds;
-        
+                
                 if (--timer < 0) {
                     getGame();
                     clearInterval(gameInterval);
+                }
+
+                if (isPlaying && timer <= 30) {
+                    isBidDisabled = true;
                 }
             }, 1000);
         } else {
@@ -58,15 +65,15 @@ if (HelperModule.pageUrl === '/game') {
         finishedContent.hidden = false;
     }
 
-    function updateNextGameList(nextGames) {
-        var html = '';
-        nextGames.forEach( game => {
-            html += '<li class="sidebar-game__dropdown-item"><span class="flex items-center lg:w-auto px-4 w-1/3 py-4 capitalize cursor-pointer w-full"><span class="mr-2">Jam:</span><time>' + game.formatted_start_time + '</time></span></li>';
-        });
-        document.getElementById('nextGameList').innerHTML = html;
-    }
+    // function updateNextGameList(nextGames) {
+    //     var html = '';
+    //     nextGames.forEach( game => {
+    //         html += '<li class="sidebar-game__dropdown-item"><span class="flex items-center lg:w-auto px-4 w-1/3 py-4 capitalize cursor-pointer w-full"><span class="mr-2">Jam:</span><time>' + game.formatted_start_time + '</time></span></li>';
+    //     });
+    //     document.getElementById('nextGameList').innerHTML = html;
+    // }
 
-    function updateBidResult(userBids, winnerOptions) {
+    function updateBidResult(userBids) {
         console.log(userBids)
         var html = '';
         userBids.forEach(bid => {
@@ -101,6 +108,7 @@ if (HelperModule.pageUrl === '/game') {
             point.textContent = response.userPoint ;
 
             if (playingTime <= 0) {
+                isPlaying = false;
                 if (game.winner_option_id == null) {
                     getGame()
                 } else {
@@ -119,6 +127,8 @@ if (HelperModule.pageUrl === '/game') {
                     startTimer(gameEndTime-currentTime, document.querySelector('.section-game__timer'))
                 }
             } else {
+                isPlaying = true;
+                isBidDisabled = false;
                 showPlayingContent();
                 startTimer(playingTime, document.querySelector('.section-game__timer'))
                 response.userBids.forEach(bid => {
@@ -132,7 +142,7 @@ if (HelperModule.pageUrl === '/game') {
                     .classList.add('thanks-box--show')
                 })
             }
-            updateNextGameList(response.nextGame);
+            // updateNextGameList(response.nextGame);
             console.log(game)
         })
     }
@@ -160,10 +170,9 @@ if (HelperModule.pageUrl === '/game') {
      */
     const btnUncheckGame = document.querySelectorAll('.section-game__uncheck')
     btnUncheckGame.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const chooseOption = btn.parentNode.parentNode.querySelector('input[name="choose_option"]')
-            chooseOption.checked = false
+        btn.addEventListener('click', () => {
+            btn.classList.add('hidden')
+            btn.parentNode.querySelector('input[name="choose_option"]').checked = false
         })
     })
 
@@ -203,35 +212,62 @@ if (HelperModule.pageUrl === '/game') {
 
         btn.addEventListener('click', e => {
             e.preventDefault()
-            fetch('/game/bid', {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-Token': csrf,
-                },
-                body: JSON.stringify({
-                    user_id: userId,
-                    game_id: game.id,
-                    game_option_id: pointInput.dataset.gameOptionId,
-                    point: Number(pointInput.value)
-                }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message)
-                if (data.status == 'success') {
-                    openThankYouMessage()
-                    const point = document.querySelector('.sidebar-game__total-point')
-                    const pointInit = Number(point.textContent.trim())
+            if (!isBidDisabled) {
+                fetch('/game/bid', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-Token': csrf,
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        game_id: game.id,
+                        game_option_id: pointInput.dataset.gameOptionId,
+                        point: Number(pointInput.value)
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message)
+                    if (data.status == 'success') {
+                        openThankYouMessage()
+                        const point = document.querySelector('.sidebar-game__total-point')
+                        const pointInit = Number(point.textContent.trim())
 
-                    const pointAfterSubmit = pointInit - Number(pointInput.value)
-                    console.log(`pointAfterSubmit: ${pointAfterSubmit}`)
-                    point.textContent = pointAfterSubmit 
-                }
-            })
+                        const pointAfterSubmit = pointInit - Number(pointInput.value)
+                        console.log(`pointAfterSubmit: ${pointAfterSubmit}`)
+                        point.textContent = pointAfterSubmit 
+                    }
+                })
+            } else {
+                gameItem.querySelector('input[name="choose_option"]').checked = false
+                // alert('Tidak bisa input bid jika waktu kurang dari 30 detik');
+            }
         })
     })
+
+    // disable bid if time left 30s
+    checkboxLabels.forEach(label => {
+        var inputCheckbox = label.querySelector('input[name="choose_option"]');
+        var thanksBox = label.parentElement.querySelector('.thanks-box');
+        var uncheckBtn = label.parentElement.querySelector('.section-game__uncheck');
+        label.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (isBidDisabled && !thanksBox.classList.contains('thanks-box--show')) {
+                alert('Tidak bisa input bid jika waktu kurang dari 30 detik');
+                inputCheckbox.checked = false;
+                if (!uncheckBtn.classList.contains('hidden')) {
+                    uncheckBtn.classList.add('hidden');
+                }
+            } else {
+                if (inputCheckbox.checked == false) {
+                    label.parentElement.querySelector('.section-game__uncheck').classList.remove('hidden');
+                    inputCheckbox.checked = true;
+                }
+            }
+        })
+    });
 
     // delete bid
     // btnDeleteBid.forEach(btn => {

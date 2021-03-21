@@ -1,6 +1,6 @@
 <div
     class="section-game__item flex items-center justify-center transition-all duration-200 ease-in flex-col relative text-gray-800 p-4 bg-gray-300">
-    <label class="section-game__slide-number cursor-pointer w-full h-full" for="option-{{ $option->id }}">
+    <label class="game-checkbox-label section-game__slide-number cursor-pointer w-full h-full" for="option-{{ $option->id }}">
         <div class="text-center text-3xl">
             {{ $option->number }}
         </div>
@@ -9,7 +9,7 @@
         </p>
         <input type="checkbox" name="choose_option" id="option-{{ $option->id }}">
         <div class="section-game__item--checked">
-            <form action="" method="POST">
+            <form action="" method="POST" class="w-full flex items-center justify-center">
                 <label for="input-point{{ $option->id }}" class="capitalize">
                     input point
                 </label>
@@ -22,11 +22,11 @@
                     </x-btn>
                 </div>
             </form>
-            <x-btn type="transparent" text="" add-class="absolute top-0 right-0 section-game__uncheck">
-                <box-icon name='x' class="text-white"></box-icon>
-            </x-btn>
         </div>
     </label>
+    <x-btn type="transparent" text="" add-class="absolute top-0 right-0 section-game__uncheck hidden">
+        <box-icon name='x' class="text-white"></box-icon>
+    </x-btn>
     <div class="thanks-box">
         <p>
             <span class="font-bold">

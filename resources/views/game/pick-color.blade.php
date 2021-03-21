@@ -1,6 +1,6 @@
 @foreach ($options->where('type', 'color') as $color)
     <div class="section-game__item flex items-center justify-center transition-all duration-200 ease-in flex-col relative text-white p-4 {{ $color->html_class }}">
-        <label class="section-game__slide-number cursor-pointer w-full h-full" for="input-color-{{ $color->id }}">
+        <label class="game-checkbox-label section-game__slide-number cursor-pointer w-full h-full" for="input-color-{{ $color->id }}">
             <div class="text-center text-3xl capitalize">
                 {{ $color->color }}
             </div>
@@ -23,11 +23,11 @@
                         </x-btn>
                     </div>
                 </form>
-                <x-btn type="transparent" text="" add-class="absolute top-0 right-0 section-game__uncheck">
-                    <box-icon name='x' class="text-white"></box-icon>
-                </x-btn>
             </div>
         </label>
+        <x-btn type="transparent" text="" add-class="absolute top-0 right-0 section-game__uncheck hidden">
+            <box-icon name='x' class="text-white"></box-icon>
+        </x-btn>
         <div class="thanks-box">
             <p>
                 <span class="font-bold">

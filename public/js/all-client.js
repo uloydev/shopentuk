@@ -13835,17 +13835,16 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
     });
     document.getElementById('winnerOptions').innerHTML = html;
     finishedContent.hidden = false;
-  };
+  }; // function updateNextGameList(nextGames) {
+  //     var html = '';
+  //     nextGames.forEach( game => {
+  //         html += '<li class="sidebar-game__dropdown-item"><span class="flex items-center lg:w-auto px-4 w-1/3 py-4 capitalize cursor-pointer w-full"><span class="mr-2">Jam:</span><time>' + game.formatted_start_time + '</time></span></li>';
+  //     });
+  //     document.getElementById('nextGameList').innerHTML = html;
+  // }
 
-  var updateNextGameList = function updateNextGameList(nextGames) {
-    var html = '';
-    nextGames.forEach(function (game) {
-      html += '<li class="sidebar-game__dropdown-item"><span class="flex items-center lg:w-auto px-4 w-1/3 py-4 capitalize cursor-pointer w-full"><span class="mr-2">Jam:</span><time>' + game.formatted_start_time + '</time></span></li>';
-    });
-    document.getElementById('nextGameList').innerHTML = html;
-  };
 
-  var updateBidResult = function updateBidResult(userBids, winnerOptions) {
+  var updateBidResult = function updateBidResult(userBids) {
     console.log(userBids);
     var html = '';
     userBids.forEach(function (bid) {
@@ -13880,6 +13879,8 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
       point.textContent = response.userPoint;
 
       if (playingTime <= 0) {
+        isPlaying = false;
+
         if (game.winner_option_id == null) {
           getGame();
         } else {
@@ -13898,6 +13899,8 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
           startTimer(gameEndTime - currentTime, document.querySelector('.section-game__timer'));
         }
       } else {
+        isPlaying = true;
+        isBidDisabled = false;
         showPlayingContent();
         startTimer(playingTime, document.querySelector('.section-game__timer'));
         response.userBids.forEach(function (bid) {
@@ -13909,9 +13912,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
           gameItem.querySelector('.point-submitted').textContent = pointInput.value;
           gameItem.querySelector('.thanks-box').classList.add('thanks-box--show');
         });
-      }
+      } // updateNextGameList(response.nextGame);
 
-      updateNextGameList(response.nextGame);
+
       console.log(game);
     });
   }; // fetch game data
@@ -13920,7 +13923,10 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
   var csrf = document.querySelector('meta[name="csrf-token"]').content;
   var userId = document.querySelector('input[name="user_id"]').value;
   var playingContent = document.getElementById('playingContent');
-  var finishedContent = document.getElementById('finishedContent'); // const btnDeleteBid = document.querySelectorAll('button.btn-delete-bid');
+  var finishedContent = document.getElementById('finishedContent');
+  var checkboxLabels = document.querySelectorAll('.game-checkbox-label');
+  var isPlaying = false;
+  var isBidDisabled = false; // const btnDeleteBid = document.querySelectorAll('button.btn-delete-bid');
 
   var game, gameEndTime, currentTime, playingTime; // let currentTime = Date.parse(document.getElementById('currentTime').value);
   // console.log(currentTime.toString());
@@ -13945,6 +13951,10 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
         if (--timer < 0) {
           getGame();
           clearInterval(gameInterval);
+        }
+
+        if (isPlaying && timer <= 30) {
+          isBidDisabled = true;
         }
       }, 1000);
     } else {
@@ -13971,10 +13981,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
 
   var btnUncheckGame = document.querySelectorAll('.section-game__uncheck');
   btnUncheckGame.forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      var chooseOption = btn.parentNode.parentNode.querySelector('input[name="choose_option"]');
-      chooseOption.checked = false;
+    btn.addEventListener('click', function () {
+      btn.classList.add('hidden');
+      btn.parentNode.querySelector('input[name="choose_option"]').checked = false;
     });
   });
   /**
@@ -14007,33 +14016,61 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
 
     btn.addEventListener('click', function (e) {
       e.preventDefault();
-      fetch('/game/bid', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-          'Accept': 'application/json',
-          'X-CSRF-Token': csrf
-        },
-        body: JSON.stringify({
-          user_id: userId,
-          game_id: game.id,
-          game_option_id: pointInput.dataset.gameOptionId,
-          point: Number(pointInput.value)
-        })
-      }).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        alert(data.message);
 
-        if (data.status == 'success') {
-          openThankYouMessage();
-          var point = document.querySelector('.sidebar-game__total-point');
-          var pointInit = Number(point.textContent.trim());
-          var pointAfterSubmit = pointInit - Number(pointInput.value);
-          console.log("pointAfterSubmit: ".concat(pointAfterSubmit));
-          point.textContent = pointAfterSubmit;
+      if (!isBidDisabled) {
+        fetch('/game/bid', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-Token': csrf
+          },
+          body: JSON.stringify({
+            user_id: userId,
+            game_id: game.id,
+            game_option_id: pointInput.dataset.gameOptionId,
+            point: Number(pointInput.value)
+          })
+        }).then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          alert(data.message);
+
+          if (data.status == 'success') {
+            openThankYouMessage();
+            var point = document.querySelector('.sidebar-game__total-point');
+            var pointInit = Number(point.textContent.trim());
+            var pointAfterSubmit = pointInit - Number(pointInput.value);
+            console.log("pointAfterSubmit: ".concat(pointAfterSubmit));
+            point.textContent = pointAfterSubmit;
+          }
+        });
+      } else {
+        gameItem.querySelector('input[name="choose_option"]').checked = false; // alert('Tidak bisa input bid jika waktu kurang dari 30 detik');
+      }
+    });
+  }); // disable bid if time left 30s
+
+  checkboxLabels.forEach(function (label) {
+    var inputCheckbox = label.querySelector('input[name="choose_option"]');
+    var thanksBox = label.parentElement.querySelector('.thanks-box');
+    var uncheckBtn = label.parentElement.querySelector('.section-game__uncheck');
+    label.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      if (isBidDisabled && !thanksBox.classList.contains('thanks-box--show')) {
+        alert('Tidak bisa input bid jika waktu kurang dari 30 detik');
+        inputCheckbox.checked = false;
+
+        if (!uncheckBtn.classList.contains('hidden')) {
+          uncheckBtn.classList.add('hidden');
         }
-      });
+      } else {
+        if (inputCheckbox.checked == false) {
+          label.parentElement.querySelector('.section-game__uncheck').classList.remove('hidden');
+          inputCheckbox.checked = true;
+        }
+      }
     });
   }); // delete bid
   // btnDeleteBid.forEach(btn => {
