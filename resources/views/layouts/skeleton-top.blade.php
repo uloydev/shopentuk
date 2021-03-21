@@ -9,4 +9,4 @@
     <title>Shopentuk Shop | @yield('title')</title>
     @stack('css')
 </head>
-<body id="@yield('body-id')Page" class="overflow-x-hidden">
+<body id="@yield('body-id')Page" class="overflow-x-hidden bg-gray-100">

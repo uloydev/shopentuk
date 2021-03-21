@@ -1,6 +1,6 @@
 <aside class="bg-gray-300 w-full {{ $addClass }}
 lg:w-3/12 lg:border-r-2 order-first mt-0">
-    <ul class="flex h-full flex-col">
+    <ul class="flex h-100 flex-col">
         <li class="text-lg">
             <a href="javascript:void(0)" class="flex items-center lg:w-auto px-4 w-1/3 py-4 capitalize cursor-pointer cursor-default w-full">
                 <span>Jumlah point mu:</span>

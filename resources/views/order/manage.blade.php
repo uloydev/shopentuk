@@ -33,11 +33,7 @@
                                         'shipping point',
                                         'customer email',
                                         'customer address',
-                                        'customer city',
-                                        'customer sub district',
-                                        'customer district',
                                         'customer province',
-                                        'customer postal code'
                                     ]
                                 ])
                                 <tbody>
@@ -61,11 +57,7 @@
                                                     $order->shipping_point,
                                                     $order->user->email,
                                                     $order->userAddress->title,
-                                                    $order->userAddress->city,
-                                                    $order->userAddress->kelurahan,
-                                                    $order->userAddress->kecamatan,
                                                     $order->userAddress->getProvinceAttribute(),
-                                                    $order->userAddress->postal_code
                                                 ]
                                             ])
                                         </tr>

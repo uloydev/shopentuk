@@ -25,7 +25,8 @@ class Game extends Model
     ];
 
     protected $appends = [
-        'formatted_start_time'
+        'formatted_start_time',
+        'game_period'
     ];
 
     public function bids()
@@ -42,5 +43,11 @@ class Game extends Model
     {
         $startedAt = Carbon::parse($this->attributes['started_at']);
         return $startedAt->format("d M Y") . " jam " . $startedAt->format("H:i");
+    }
+
+    public function getGamePeriodAttribute()
+    {
+        $startedAt = Carbon::parse($this->attributes['started_at']);
+        return $startedAt->format('d/m/Y') . '-' . $this->attributes['id'];
     }
 }

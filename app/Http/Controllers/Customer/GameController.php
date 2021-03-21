@@ -73,13 +73,16 @@ class GameController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'gagal !'
+                'message' => 'gagal !',
+                'bid' => $bid,
+                'lastTenBids' => GameBid::where('user_id', $user->id)->latest()->limit(10)->get()
             ]);
         }
         return response()->json([
             'status' => 'success',
             'message' => 'berhasil !',
-            'bid' => $bid
+            'bid' => $bid,
+            'lastTenBids' => GameBid::where('user_id', $user->id)->latest()->limit(10)->get()
         ]);
     }
 
@@ -119,7 +122,8 @@ class GameController extends Controller
             'currentTime' => Carbon::now(),
             // 'nextGame' => Game::where('status', 'queued')->limit(3)->get(),
             'userPoint' => User::findOrFail($request->userId)->point,
-            'userBids' => GameBid::where('user_id', $request->userId)->where('game_id', $game->id)->get()
+            'userBids' => GameBid::where('user_id', $request->userId)->where('game_id', $game->id)->get(),
+            'lastTenBids' => GameBid::where('user_id', $request->userId)->latest()->limit(10)->get(),
         ]);
     }
 

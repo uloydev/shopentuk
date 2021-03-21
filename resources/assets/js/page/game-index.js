@@ -2,13 +2,17 @@ import * as HelperModule from './../helper-module'
 import './../component/swiper'
 import MicroModal from 'micromodal'
 
+
 if (HelperModule.pageUrl === '/game') {
     const csrf = document.querySelector('meta[name="csrf-token"]').content;
     const userId = document.querySelector('input[name="user_id"]').value
-    const playingContent = document.getElementById('playingContent');
-    const finishedContent = document.getElementById('finishedContent');
+    // const playingContent = document.getElementById('playingContent');
+    // const finishedContent = document.getElementById('finishedContent');
     const checkboxLabels = document.querySelectorAll('.game-checkbox-label');
+    const gamePeriod = document.getElementById('gamePeriod');
+    const gameStatus = document.getElementById('gameStatus');
     let isPlaying = false;
+    let isWaiting = false;
     let isBidDisabled = false;
     // const btnDeleteBid = document.querySelectorAll('button.btn-delete-bid');
     let game, gameEndTime, currentTime, playingTime;
@@ -36,8 +40,13 @@ if (HelperModule.pageUrl === '/game') {
                     clearInterval(gameInterval);
                 }
 
+                if (isWaiting) {
+                    isBidDisabled = true;
+                }
+
                 if (isPlaying && timer <= 30) {
                     isBidDisabled = true;
+                    gameStatus.textContent = 'Lock Bid'
                 }
             }, 1000);
         } else {
@@ -45,25 +54,25 @@ if (HelperModule.pageUrl === '/game') {
         }
     }
 
-    function showPlayingContent() {
-        finishedContent.hidden = true;
-        playingContent.hidden = false;
-    }
+    // function showPlayingContent() {
+    //     finishedContent.hidden = true;
+    //     playingContent.hidden = false;
+    // }
 
-    function showFinishedContent(winnerOptions) {
-        console.log(winnerOptions)
-        playingContent.hidden = true;
-        var html = '';
-        winnerOptions.forEach(option => {
-            if (option.game_option.type == 'color') {
-                html += '<li>' + option.game_option.color + ' => points X' + option.value + '</li>';
-            } else {
-                html += '<li>No ' + option.game_option.number + ' => points X' + option.value + '</li>';
-            }
-        });
-        document.getElementById('winnerOptions').innerHTML = html;
-        finishedContent.hidden = false;
-    }
+    // function showFinishedContent(winnerOptions) {
+    //     console.log(winnerOptions)
+    //     playingContent.hidden = true;
+    //     var html = '';
+    //     winnerOptions.forEach(option => {
+    //         if (option.game_option.type == 'color') {
+    //             html += '<li>' + option.game_option.color + ' => points X' + option.value + '</li>';
+    //         } else {
+    //             html += '<li>No ' + option.game_option.number + ' => points X' + option.value + '</li>';
+    //         }
+    //     });
+    //     document.getElementById('winnerOptions').innerHTML = html;
+    //     finishedContent.hidden = false;
+    // }
 
     // function updateNextGameList(nextGames) {
     //     var html = '';
@@ -73,17 +82,30 @@ if (HelperModule.pageUrl === '/game') {
     //     document.getElementById('nextGameList').innerHTML = html;
     // }
 
-    function updateBidResult(userBids) {
-        console.log(userBids)
+    function updateBidResult(bids) {
+        console.log(bids)
         var html = '';
-        userBids.forEach(bid => {
-            html += '<li>'
-            html += bid.game_option.type == 'number' ? 'No '+ bid.game_option.number : bid.game_option.color; 
-            html += ' ('+ bid.point +' point) => '
-            html += bid.reward + ' point ('+ bid.status +')</li>'
+        bids.forEach(bid => {
+            html += '<tr>';
+            html += '<td class="px-4 py-3 whitespace-nowrap">'+ bid.game.game_period +'</td>';
+            html += '<td class="px-4 py-3 whitespace-nowrap">'+ bid.game_option.type +'</td>';
+            html += '<td class="px-4 py-3 whitespace-nowrap">'+ (bid.game_option.number == null ? '-' : bid.game_option.number) +'</td>';
+            html += '<td class="px-4 py-3 whitespace-nowrap">'+ (bid.game_option.color == null ? '-' : bid.game_option.color) +'</td>';
+            html += '<td class="px-4 py-3 whitespace-nowrap">'+ bid.point +'</td>';
+            if (bid.status == 'win') {
+                html += '<td class="px-4 py-3 whitespace-nowrap text-green-500">'+ bid.status +'</td>';
+            } else if (bid.status == 'lose') {
+                html += '<td class="px-4 py-3 whitespace-nowrap text-red-500">'+ bid.status +'</td>';
+            } else {
+                html += '<td class="px-4 py-3 whitespace-nowrap text-blue-500">'+ bid.status +'</td>';
+
+            }
+            html += '<td class="px-4 py-3 whitespace-nowrap">'+ bid.reward +'</td>';
+            html += '</tr>';
         });
-        document.getElementById('userBids').innerHTML = html
+        document.querySelector('#gameTable tbody').innerHTML = html
     }
+
 
     function getGame() {
         fetch('/game/current', {
@@ -105,15 +127,17 @@ if (HelperModule.pageUrl === '/game') {
             currentTime = Math.ceil(Date.parse(response.currentTime) / 1000);
             console.log(gameEndTime, currentTime, gameEndTime-currentTime, response.currentTime)
             playingTime = gameEndTime - currentTime - 60;
-            point.textContent = response.userPoint ;
-
+            point.textContent = response.userPoint;
+            updateBidResult(response.lastTenBids);
+            gamePeriod.textContent = game.game_period;
             if (playingTime <= 0) {
                 isPlaying = false;
                 if (game.winner_option_id == null) {
                     getGame()
                 } else {
-                    updateBidResult(response.userBids)
-                    showFinishedContent(response.winnerOptions);
+                    gameStatus.textContent = "Waiting"
+                    isWaiting = true;
+                    // showFinishedContent(response.winnerOptions);
                     document.querySelectorAll('.section-game__btn-submit').forEach(btn => {
                         const pointInput = btn.parentElement.querySelector('input[name="point"]');
                         const gameItem = pointInput.parentElement.parentElement.parentElement.parentElement.parentElement;
@@ -127,9 +151,11 @@ if (HelperModule.pageUrl === '/game') {
                     startTimer(gameEndTime-currentTime, document.querySelector('.section-game__timer'))
                 }
             } else {
+                gameStatus.textContent = "Playing"
                 isPlaying = true;
+                isWaiting = false;
                 isBidDisabled = false;
-                showPlayingContent();
+                // showPlayingContent();
                 startTimer(playingTime, document.querySelector('.section-game__timer'))
                 response.userBids.forEach(bid => {
                     const pointInput = document.querySelector('input#input-point'+bid.game_option_id)
@@ -230,11 +256,11 @@ if (HelperModule.pageUrl === '/game') {
                 .then(response => response.json())
                 .then(data => {
                     alert(data.message)
+                    updateBidResult(data.lastTenBids)
                     if (data.status == 'success') {
                         openThankYouMessage()
                         const point = document.querySelector('.sidebar-game__total-point')
                         const pointInit = Number(point.textContent.trim())
-
                         const pointAfterSubmit = pointInit - Number(pointInput.value)
                         console.log(`pointAfterSubmit: ${pointAfterSubmit}`)
                         point.textContent = pointAfterSubmit 
@@ -255,10 +281,14 @@ if (HelperModule.pageUrl === '/game') {
         label.addEventListener('click', (e) => {
             e.preventDefault();
             if (isBidDisabled && !thanksBox.classList.contains('thanks-box--show')) {
-                alert('Tidak bisa input bid jika waktu kurang dari 30 detik');
-                inputCheckbox.checked = false;
-                if (!uncheckBtn.classList.contains('hidden')) {
-                    uncheckBtn.classList.add('hidden');
+                if (isWaiting) {
+                    alert('Tidak bisa input bid, game belum dimulai');
+                } else {
+                    alert('Tidak bisa input bid, waktu kurang dari 30 detik');
+                    inputCheckbox.checked = false;
+                    if (!uncheckBtn.classList.contains('hidden')) {
+                        uncheckBtn.classList.add('hidden');
+                    }
                 }
             } else {
                 if (inputCheckbox.checked == false) {
