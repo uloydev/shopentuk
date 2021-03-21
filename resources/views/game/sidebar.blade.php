@@ -15,7 +15,7 @@ lg:w-3/12 lg:border-r-2 order-first mt-0">
                 rules
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a class="flex items-center lg:w-auto px-4 w-1/3 py-4 capitalize cursor-pointer justify-between dropdown-toggler w-full">
                 <span>next 3 game schedule</span>
                 <box-icon name='chevron-right' type='solid'></box-icon>
@@ -32,6 +32,6 @@ lg:w-3/12 lg:border-r-2 order-first mt-0">
                 </li>
                 @endforeach
             </ul>
-        </li>
+        </li> --}}
     </ul>
 </aside>
