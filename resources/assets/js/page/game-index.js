@@ -98,7 +98,7 @@ if (HelperModule.pageUrl === '/game') {
             currentTime = Math.ceil(Date.parse(response.currentTime) / 1000);
             console.log(gameEndTime, currentTime, gameEndTime-currentTime, response.currentTime)
             playingTime = gameEndTime - currentTime - 60;
-            point.textContent = response.userPoint + 'PTS';
+            point.textContent = response.userPoint ;
 
             if (playingTime <= 0) {
                 if (game.winner_option_id == null) {
@@ -227,7 +227,7 @@ if (HelperModule.pageUrl === '/game') {
 
                     const pointAfterSubmit = pointInit - Number(pointInput.value)
                     console.log(`pointAfterSubmit: ${pointAfterSubmit}`)
-                    point.textContent = pointAfterSubmit + 'PTS'
+                    point.textContent = pointAfterSubmit 
                 }
             })
         })
@@ -258,7 +258,7 @@ if (HelperModule.pageUrl === '/game') {
     //             if (data.status == 'success') {
     //                 const point = document.querySelector('.sidebar-game__total-point')
     //                 const pointInit = Number(point.textContent.trim().replace('PTS', ''))
-    //                 document.querySelector('.sidebar-game__total-point').textContent = pointInit + Number(pointInput.value) + 'PTS'
+    //                 document.querySelector('.sidebar-game__total-point').textContent = pointInit + Number(pointInput.value) 
     //                 gameItem.querySelector('input[name="choose_option"]').checked = false
     //                 pointInput.disabled = false
     //                 pointInput.value = null

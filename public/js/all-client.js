@@ -13877,7 +13877,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
       currentTime = Math.ceil(Date.parse(response.currentTime) / 1000);
       console.log(gameEndTime, currentTime, gameEndTime - currentTime, response.currentTime);
       playingTime = gameEndTime - currentTime - 60;
-      point.textContent = response.userPoint + 'PTS';
+      point.textContent = response.userPoint;
 
       if (playingTime <= 0) {
         if (game.winner_option_id == null) {
@@ -14031,7 +14031,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
           var pointInit = Number(point.textContent.trim().replace('PTS', ''));
           var pointAfterSubmit = pointInit - Number(pointInput.value);
           console.log("pointAfterSubmit: ".concat(pointAfterSubmit));
-          point.textContent = pointAfterSubmit + 'PTS';
+          point.textContent = pointAfterSubmit;
         }
       });
     });
@@ -14060,7 +14060,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
   //             if (data.status == 'success') {
   //                 const point = document.querySelector('.sidebar-game__total-point')
   //                 const pointInit = Number(point.textContent.trim().replace('PTS', ''))
-  //                 document.querySelector('.sidebar-game__total-point').textContent = pointInit + Number(pointInput.value) + 'PTS'
+  //                 document.querySelector('.sidebar-game__total-point').textContent = pointInit + Number(pointInput.value) 
   //                 gameItem.querySelector('input[name="choose_option"]').checked = false
   //                 pointInput.disabled = false
   //                 pointInput.value = null

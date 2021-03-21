@@ -5,7 +5,7 @@ lg:w-3/12 lg:border-r-2 order-first mt-0">
             <a href="javascript:void(0)" class="flex items-center lg:w-auto px-4 w-1/3 py-4 capitalize cursor-pointer cursor-default w-full">
                 <span>Jumlah point mu:</span>
                 <var class="not-italic font-bold ml-2 sidebar-game__total-point">
-                    {{ Auth::user()->point . 'PTS' }}
+                    {{ Auth::user()->point}}
                 </var>
             </a>
         </li>
