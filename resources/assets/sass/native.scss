@@ -1,123 +1,8 @@
 @import 'general';
 
-.header {
+@import './component/section', './component/btn', './component/alert', './component/input', './component/modal', './component/dropdown-menu', './component/thanks-box', './component/card', './component/card', './component/nav.scss', './component/overlay', './component/step';
 
-    #landingPage & {
-        background: {
-            image: url('../img/header-landing.jpg');
-            color: rgba($color: #003a69, $alpha: 0.6);
-            blend-mode: overlay;
-        }
-
-        @apply flex flex-col bg-fixed bg-cover;
-        height: 90vh;
-    }
-}
-
-/*landing-page style*/
-
-#section-new-product {
-    .card-product {
-        img {
-            @apply w-full;
-        }
-    }
-}
-
-#section-catalog {
-
-    &__overlay {
-        @apply absolute top-0 left-0 h-full w-full opacity-50;
-        background-image: linear-gradient(100deg, #000000 0%, rgba(17, 107, 191, 0.39) 100%);
-    }
-}
-
-/*end of landing-page style*/
-
-/*auth style*/
-#authPage {
-    header {
-        @apply flex flex-col flex-grow;
-
-        background: {
-            image: url('../img/static/auth-bg.jpg');
-            attachment: fixed;
-            size: cover;
-        }
-
-        .bg-overlay {
-            background-image: linear-gradient(180deg, #000000 0%, #54595f 100%);
-            @apply absolute w-full h-full inset-0 opacity-50;
-        }
-    }
-
-    .auth-box {
-        @apply p-4 border border-gray-400;
-    }
-}
-
-/*cartPage style*/
-#cartPage {
-
-    .hide-step {
-        @apply opacity-0;
-
-        +.show-step {
-            @apply opacity-100 transform -translate-x-full;
-        }
-    }
-}
-
-/*end of cartPage style*/
-
-/**/
-#section-product .card-product {
-    img {
-        height: 200px;
-        @apply object-cover;
-    }
-}
-
-/*dashboard customer*/
-.dashboard-customer {
-    &__menu-box {
-        @apply bg-white shadow-md rounded w-full flex flex-wrap flex-col border border-gray-400;
-
-        @screen md {
-            top: 20px;
-            @apply w-1/4 sticky;
-        }
-    }
-
-    &__menu-item {
-        @apply flex-grow capitalize;
-    }
-
-    &__menu-link {
-        @apply text-center block p-4 text-gray-600;
-    }
-}
-
-/*end of dashboard customer*/
-
-/*end of storePage style*/
-#konfirmasiPembayaranPage {
-    .box-upload {
-        outline: 2px dashed black;
-        @apply col-span-full mb-3 relative bg-white;
-        height: 100px;
-
-        &__file {
-            @include sameSize(0.1px);
-            @apply opacity-0 overflow-hidden absolute;
-            z-index: -1;
-        }
-
-        &__text {
-            @apply absolute flex items-center justify-center h-full w-full;
-        }
-    }
-}
+@import './helper/font', './helper/visibility', "./helper/text";
 
 .section-game {
 
@@ -127,8 +12,6 @@
             @apply invisible mt-5 absolute bg-parent;
         }
     }
-
-
 
     input[name=choose_option] {
         @apply absolute inset-0 z-10 h-0 w-0 overflow-hidden;

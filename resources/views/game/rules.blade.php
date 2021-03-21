@@ -5,7 +5,8 @@
                 <h2 class="modal__title" id="modal-1-title">
                     Rules
                 </h2>
-                <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+                <button class="modal__close" aria-label="Close modal" 
+                data-micromodal-close></button>
             </header>
             <main class="modal__content game-rule" id="modal-1-content">
                 {!! $rule->content !!}

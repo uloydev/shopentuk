@@ -4,9 +4,13 @@
 
 @section('title', 'Login atau register untuk menikmati semua fitur kami')
 
+@section('header-class', 'flex flex-col flex-grow bg-fixed bg-cover')
+
+@section('header-bg', asset('img/static/auth-bg.jpg'))
+
 @section('header')
     <div class="flex py-32 items-center relative flex-grow justify-center">
-        <div class="bg-overlay"></div>
+        <div class="bg-overlay bg-overlay--black-gradient"></div>
         <div class="z-10 text-white font-shadows-light font-bold">
             <h1 class="text-6xl">Akun Saya</h1>
             <hr class="bg-white border-white my-8">

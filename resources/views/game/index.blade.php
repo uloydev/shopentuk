@@ -3,13 +3,17 @@
 @section('body-id', 'game')
 @section('main-class', 'flex flex-wrap')
 @section('content')
-    @include('game.sidebar', ['addClass' => 'lg:h-screen'])
+    @include('game.sidebar')
     <section class="section-game py-10 w-full lg:w-9/12">
         <div class="container h-full">
             <article class="section-game__period pb-10 flex items-center justify-between">
                 <div>
-                    <p class="text-xl">Game Period : <span id="gamePeriod">{{ date('d F Y') }}</span></p>
-                    <p class="text-xl">Game Status : <span id="gameStatus">Playing</span></p>
+                    <p class="text-xl">
+                        Game Period : <span id="gamePeriod">{{ date('d F Y') }}</span>
+                    </p>
+                    <p class="text-xl">
+                        Game Status : <span id="gameStatus">Playing</span>
+                    </p>
                 </div>
                 <div class="flex flex-col">
                     <h1>Waktu</h1>

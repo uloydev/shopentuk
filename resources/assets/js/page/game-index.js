@@ -177,15 +177,6 @@ if (HelperModule.pageUrl === '/game') {
     // fetch game data
     getGame();
 
-    
-
-    /**
-     * container page
-     */
-    const heightNav = document.querySelector('.nav').getBoundingClientRect().height
-    const heightContent = `calc(100% - ${heightNav}px)`
-    document.querySelector('main').style.height = heightContent
-
     /**
      * open rules modal
      */

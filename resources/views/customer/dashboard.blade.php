@@ -35,11 +35,11 @@
             </div>
         </div>
         <div class="flex flex-col lg:flex-row items-start relative">
-            <ul class="mb-5 dashboard-customer__menu-box">
+            <ul class="mb-5 dashboard-customer__menu-box bg-white shadow-md rounded w-full flex flex-wrap flex-col border border-gray-400 md:w-1/4 md:sticky top-base">
                 @for ($i = 0; $i < 4; $i++)
-                    <li class="dashboard-customer__menu-item">
+                    <li class="dashboard-customer__menu-item flex-grow capitalize">
                         <a href="{{ route('my-account.' . Str::slug($tabMenus[$i], '.')) }}"
-                        class="dashboard-customer__menu-link">
+                        class="dashboard-customer__menu-link text-center block p-4 text-gray-600">
                             {{ $tabMenus[$i] }}
                         </a>
                     </li>

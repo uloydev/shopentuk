@@ -1,6 +1,6 @@
 <section>
     <h3 class="mb-5 text-2xl">{{ $name }}</h3>
-    <div class="auth-box">
+    <div class="auth-box p-4 border border-gray-400">
         <form action="{{ $action }}" method="POST" id="form-{{ strtolower($name) }}">
             @csrf
             {{ $slot }}

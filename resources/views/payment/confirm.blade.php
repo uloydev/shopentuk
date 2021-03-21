@@ -34,11 +34,13 @@
                         <x-input-checkbox label="OVO" value="ovo" id="ovo-option" name="payment_method" />
                     </div>
                 </div>
-                <div class="box-upload">
+                <div class="box-upload col-span-full mb-3 relative bg-white">
                     <div class="box-upload__input">
-                        <input class="box-upload__file" type="file" name="files[]" id="file"
+                        <input class="box-upload__file opacity-0 overflow-hidden absolute"
+                        type="file" name="files[]" id="file"
                         data-multiple-caption="{count} files selected" multiple />
-                        <label for="file" class="box-upload__text">
+                        <label for="file" class="box-upload__text 
+                        absolute flex items-center justify-center h-full w-full">
                             <strong>klik untuk pilih bukti pembayaran</strong>
                         </label>
                     </div>

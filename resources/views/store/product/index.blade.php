@@ -117,7 +117,9 @@
                             product-final-price="{{ $product->discount->discounted_price }}"
                             product-rating="0" 
                             product-is-obral="true"
-                            is-horizontal="false" />
+                            is-horizontal="false"
+                            height-img="200px"
+                            class-img="object-cover" />
                     @else
                         <x-card-product 
                             data-product-id="{{ $product->id }}"
@@ -128,7 +130,9 @@
                             product-final-price="{{ $product->price }}"
                             product-rating="0" 
                             product-is-obral="false"
-                            is-horizontal="false" />
+                            is-horizontal="false"
+                            height-img="200px"
+                            class-img="object-cover" />
                     @endif
                 @empty
                     @include('store.product.empty', [

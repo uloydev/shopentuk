@@ -14019,13 +14019,6 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
 
   getGame();
   /**
-   * container page
-   */
-
-  var heightNav = document.querySelector('.nav').getBoundingClientRect().height;
-  var heightContent = "calc(100% - ".concat(heightNav, "px)");
-  document.querySelector('main').style.height = heightContent;
-  /**
    * open rules modal
    */
 

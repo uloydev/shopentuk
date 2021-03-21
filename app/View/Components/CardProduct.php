@@ -10,6 +10,7 @@ class CardProduct extends Component
     public $productImg, $productName, $productOriginalPrice, $productFinalPrice;
     public $productRating, $productCategory, $productIsObral, $isHorizontal, $link;
     public $isDigitalProduct, $productCategoryId, $productPointPrice, $isTokoPoint;
+    public $classImg, $heightImg;
 
     /**
      * Create a new component instance.
@@ -28,7 +29,9 @@ class CardProduct extends Component
         $productIsObral,
         $isHorizontal = null,
         $isDigitalProduct = false,
-        $isTokoPoint = false
+        $isTokoPoint = false,
+        $heightImg = '',
+        $classImg = ''
     ) {
         $this->productImg = $productImg;
         $this->productName = $productName;
@@ -42,6 +45,8 @@ class CardProduct extends Component
         $this->isHorizontal = $isHorizontal;
         $this->isDigitalProduct = $isDigitalProduct;
         $this->isTokoPoint = $isTokoPoint;
+        $this->heightImg = '';
+        $this->classImg = $classImg;
     }
 
     /**

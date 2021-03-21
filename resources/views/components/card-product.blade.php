@@ -2,14 +2,15 @@
     $slug = Str::slug($productName);
     $route = $isDigitalProduct ? 'store.voucher.' : 'store.product.';
     $route = $isTokoPoint ? 'store.toko-point.' : $route;
+    $direction = $isHorizontal == 'false' ? 'flex-col' : 'flex-row';
 @endphp
 
-<div class="card-product max-w-full flex {{ $isHorizontal == 'false' ? 'flex-col' : 'flex-row' }}" 
-{{ $attributes }}>
+<div {{ $attributes->merge(['class' => 'card-product max-w-full flex ' . $direction]) }}>
     <div class="flex relative {{ $isHorizontal == 'true' ? 'items-center mr-4' : '' }}">
         <a href="{{ route($route . 'show', $slug) }}" class="block">
             <img src="{{ $productImg }}" alt="Image of {{ $productName }}" 
-            width="{{ $isHorizontal == 'true' ? '65' : '' }}">
+            width="{{ $isHorizontal == 'true' ? '65' : '' }}" 
+            height="{{ $heightImg }}" class="{{ $classImg }}">
         </a>
         <div class="bg-gray-700 rounded-full text-white h-12 text-xs w-12 flex items-center justify-center
         absolute right-0 top-0 transform translate-x-4 -translate-y-4 {{ $productIsObral == 'false' ? 'hidden' : ''  }}">

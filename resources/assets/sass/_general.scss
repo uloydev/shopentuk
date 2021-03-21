@@ -5,10 +5,6 @@
 @tailwind components;
 
 @import 'mixin';
-@import 'helper';
-
-@import './component/btn', './component/alert', './component/input', './component/modal', './component/dropdown-menu', './component/thanks-box', './component/card', './component/card', './component/nav.scss';
-
 
 * {
     @apply p-0 m-0 box-border;
@@ -16,6 +12,7 @@
 
 html,
 body {
+    scroll-behavior: smooth;
     @apply h-full;
 }
 
@@ -30,37 +27,6 @@ header {
 
 ::selection {
     @apply text-white bg-gray-700;
-}
-
-.box-promo {
-
-    &__heading,
-    &__subheading {
-        @apply max-w-full overflow-hidden;
-        text-overflow: ellipsis;
-        font-family: 'Amita', cursive;
-    }
-}
-
-:disabled {
-    @apply opacity-50 cursor-not-allowed;
-}
-
-.section {
-    &__heading {
-
-        span {
-            @apply relative;
-
-            &::after {
-                content: '';
-                bottom: -30px;
-                height: 2px;
-                @include centerPosition;
-                @apply bg-black w-3/5;
-            }
-        }
-    }
 }
 
 //mixin

@@ -1,0 +1,7 @@
+.hide-step {
+    @apply opacity-0;
+
+    +.show-step {
+        @apply opacity-100 transform -translate-x-full;
+    }
+}

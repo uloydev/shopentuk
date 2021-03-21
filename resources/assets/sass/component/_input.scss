@@ -1,3 +1,17 @@
+:disabled {
+    @apply opacity-50 cursor-not-allowed;
+}
+
+.box-upload {
+    outline: 2px dashed black;
+    height: 100px;
+
+    &__file {
+        @include sameSize(0.1px);
+        z-index: -1;
+    }
+}
+
 .required-input {
 
     span {

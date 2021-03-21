@@ -1,0 +1,16 @@
+.section {
+    &__heading {
+
+        span {
+            @apply relative;
+
+            &::after {
+                content: '';
+                bottom: -30px;
+                height: 2px;
+                @include centerPosition;
+                @apply bg-black w-3/5;
+            }
+        }
+    }
+}
