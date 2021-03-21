@@ -14028,7 +14028,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
         if (data.status == 'success') {
           openThankYouMessage();
           var point = document.querySelector('.sidebar-game__total-point');
-          var pointInit = Number(point.textContent.trim().replace('PTS', ''));
+          var pointInit = Number(point.textContent.trim());
           var pointAfterSubmit = pointInit - Number(pointInput.value);
           console.log("pointAfterSubmit: ".concat(pointAfterSubmit));
           point.textContent = pointAfterSubmit;
@@ -14059,7 +14059,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
   //             alert(data.message)
   //             if (data.status == 'success') {
   //                 const point = document.querySelector('.sidebar-game__total-point')
-  //                 const pointInit = Number(point.textContent.trim().replace('PTS', ''))
+  //                 const pointInit = Number(point.textContent.trim())
   //                 document.querySelector('.sidebar-game__total-point').textContent = pointInit + Number(pointInput.value) 
   //                 gameItem.querySelector('input[name="choose_option"]').checked = false
   //                 pointInput.disabled = false

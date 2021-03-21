@@ -223,7 +223,7 @@ if (HelperModule.pageUrl === '/game') {
                 if (data.status == 'success') {
                     openThankYouMessage()
                     const point = document.querySelector('.sidebar-game__total-point')
-                    const pointInit = Number(point.textContent.trim().replace('PTS', ''))
+                    const pointInit = Number(point.textContent.trim())
 
                     const pointAfterSubmit = pointInit - Number(pointInput.value)
                     console.log(`pointAfterSubmit: ${pointAfterSubmit}`)
@@ -257,7 +257,7 @@ if (HelperModule.pageUrl === '/game') {
     //             alert(data.message)
     //             if (data.status == 'success') {
     //                 const point = document.querySelector('.sidebar-game__total-point')
-    //                 const pointInit = Number(point.textContent.trim().replace('PTS', ''))
+    //                 const pointInit = Number(point.textContent.trim())
     //                 document.querySelector('.sidebar-game__total-point').textContent = pointInit + Number(pointInput.value) 
     //                 gameItem.querySelector('input[name="choose_option"]').checked = false
     //                 pointInput.disabled = false

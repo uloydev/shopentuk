@@ -73,12 +73,12 @@ class GameController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'gagal untuk pasang bid !'
+                'message' => 'gagal !'
             ]);
         }
         return response()->json([
             'status' => 'success',
-            'message' => 'berhasil pasang bid !',
+            'message' => 'berhasil !',
             'bid' => $bid
         ]);
     }

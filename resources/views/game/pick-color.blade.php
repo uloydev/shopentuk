@@ -35,7 +35,7 @@
                     {{-- <span class="uppercase">pts</span> --}}
                 </span>
             </p>
-            <p>good luck with your gambling!</p>
+            <p>good luck!</p>
             {{-- <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full btn-delete-bid px-2 mt-2">
                 delete
             </button> --}}
