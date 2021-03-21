@@ -27,7 +27,7 @@
                         <x-menu-admin icon="shopping-bag" type="solid" text="new order" 
                         to="{{ route('admin.order.new') }}"/>
                         <x-menu-admin icon="shopping-bag" type="solid" text="order to refund" 
-                        to="{{ route('admin.order.refund.index') }}"/>
+                        to="{{ route('refund.manage') }}"/>
                     </ul>
                 </x-menu-admin>
                 @if (Auth::user()->role == 'superadmin')

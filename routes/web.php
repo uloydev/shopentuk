@@ -46,6 +46,12 @@ Route::get('register', function () {
     return redirect('login');
 });
 
+Route::prefix('refund')->name('refund.')->group(function (){
+    Route::post('request/{orderId}', 'RefundController@request')->name('request');
+    Route::get('manage', 'RefundController@manage')->name('manage');
+});
+
+
 // customer only routes
 Route::namespace('Customer')->middleware(['auth', 'customer'])->group(function () {
     // my account routes
@@ -84,11 +90,6 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
         Route::prefix('order')->name('order.')->group(function () {
             Route::get('/', 'OrderController@index')->name('index');
             Route::get('new', 'OrderController@newOrder')->name('new');
-            Route::name('refund.')->prefix('refund')->group(function () {
-                Route::get('/', 'OrderController@toRefund')->name('index');
-                Route::get('/{order}', 'OrderController@showRefundForm')->name('show');
-                Route::post('/{order}', 'OrderController@makeRefund')->name('store');
-            });
         });
 
         Route::get('all-category/{cat}/sub', 'AllCategoryController@subCategoryIndex')->name(

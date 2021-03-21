@@ -40,14 +40,17 @@
                         @if($category->productSubCategory->count() > 0)
                             <li class="nav__item nav__item--menu nav__item-has-child">
                                 <a href="" class="nav__link nav__link--open-child">
-                                    <x-menu-has-child text="{{ Str::words($category->title, 2) }}" />
+                                    <x-menu-has-child 
+                                    text="{{ Str::words($category->title, 2) }}" />
                                 </a>
                                 <ul class="nav__ul divide-y divide-gray-400 lg:bg-white">
                                     @foreach ($category->productSubCategory as $subCategory)
                                         <x-menu-standar 
                                         id="{{ Str::slug($subCategory->title, '-') }}" 
                                         text="{{ $subCategory->title }}" 
-                                        to="{{ route('store.product.index', ['subCatId' => $subCategory->id]) }}" 
+                                        to="{{ route('store.product.index', [
+                                            'subCatId' => $subCategory->id
+                                        ]) }}" 
                                         have-icon="true" />
                                     @endforeach
                                 </ul>

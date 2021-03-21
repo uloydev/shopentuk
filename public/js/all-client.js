@@ -12936,6 +12936,34 @@ alerts.forEach(function (alert) {
 
 /***/ }),
 
+/***/ "./resources/assets/js/component/btn-menu.js":
+/*!***************************************************!*\
+  !*** ./resources/assets/js/component/btn-menu.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var btnsMenu = document.querySelectorAll('.btn-menu');
+var showMenuClass = ['opacity-100', 'visible'];
+document.addEventListener('click', function (e) {
+  for (var i = 0; i < btnsMenu.length; i++) {
+    var btn = btnsMenu[i];
+    var isClickOutside = !btn.contains(e.target);
+
+    if (isClickOutside) {
+      var _btn$nextElementSibli;
+
+      (_btn$nextElementSibli = btn.nextElementSibling.classList).remove.apply(_btn$nextElementSibli, showMenuClass);
+    } else {
+      var _btn$nextElementSibli2;
+
+      (_btn$nextElementSibli2 = btn.nextElementSibling.classList).add.apply(_btn$nextElementSibli2, showMenuClass);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/component/dropdown-menu.js":
 /*!********************************************************!*\
   !*** ./resources/assets/js/component/dropdown-menu.js ***!
@@ -13341,12 +13369,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_nav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./component/nav */ "./resources/assets/js/component/nav.js");
 /* harmony import */ var _component_dropdown_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./component/dropdown-menu */ "./resources/assets/js/component/dropdown-menu.js");
 /* harmony import */ var _component_dropdown_menu__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_component_dropdown_menu__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _page_homepage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./page/homepage */ "./resources/assets/js/page/homepage.js");
-/* harmony import */ var _page_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./page/auth */ "./resources/assets/js/page/auth.js");
-/* harmony import */ var _page_cart_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./page/cart-page */ "./resources/assets/js/page/cart-page.js");
-/* harmony import */ var _page_dashboard_customer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./page/dashboard-customer */ "./resources/assets/js/page/dashboard-customer.js");
-/* harmony import */ var _page_game_index__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./page/game-index */ "./resources/assets/js/page/game-index.js");
-/* harmony import */ var _page_product__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./page/product */ "./resources/assets/js/page/product.js");
+/* harmony import */ var _component_btn_menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./component/btn-menu */ "./resources/assets/js/component/btn-menu.js");
+/* harmony import */ var _component_btn_menu__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_component_btn_menu__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _page_homepage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./page/homepage */ "./resources/assets/js/page/homepage.js");
+/* harmony import */ var _page_auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./page/auth */ "./resources/assets/js/page/auth.js");
+/* harmony import */ var _page_cart_page__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./page/cart-page */ "./resources/assets/js/page/cart-page.js");
+/* harmony import */ var _page_dashboard_customer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./page/dashboard-customer */ "./resources/assets/js/page/dashboard-customer.js");
+/* harmony import */ var _page_game_index__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./page/game-index */ "./resources/assets/js/page/game-index.js");
+/* harmony import */ var _page_product__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./page/product */ "./resources/assets/js/page/product.js");
+
 
 
 
@@ -14162,9 +14193,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/produ
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
 
 
 /***/ })

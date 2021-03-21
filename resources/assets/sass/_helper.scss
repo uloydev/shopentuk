@@ -5,3 +5,12 @@
 .font-shadows-light {
     font-family: 'Shadows Into Light', cursive;
 }
+.hover\:opacity-100-next:hover + * {
+    opacity: 1 !important;
+}
+
+.visible {
+    &-next + * {
+        visibility: visible !important;
+    }
+}

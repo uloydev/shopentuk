@@ -10,10 +10,13 @@ module.exports = {
                 'full-2x': '200%',
             },
             inset: {
-                '1/2': '50%'
+                '1/2': '50%',
+                'base': '1rem',
+                'base2x': '2rem',
+                'base3x': '3rem'
             },
             maxWidth: {
-                '1/2': '50%'
+                '1/2': '50%',
             },
             backgroundColor: {
                 'parent': 'inherit'
@@ -60,6 +63,8 @@ module.exports = {
     borderWidth: ['responsive', 'hover', 'focus'],
     backgroundColor: ['responsive', 'hover', 'focus', 'active'],
     borderColor: ['responsive', 'hover', 'focus', 'active'],
+    // rotate: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+    // scale: ['responsive', 'hover', 'focus', 'active', 'group-hover']
   },
   plugins: [
     require('@tailwindcss/custom-forms'),
