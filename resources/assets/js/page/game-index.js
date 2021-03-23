@@ -146,8 +146,13 @@ if (HelperModule.pageUrl === '/game') {
                         btn.disabled = false
                         pointInput.value = null
                         gameItem.querySelector('.point-submitted').textContent = ''
-                        gameItem.querySelector('.thanks-box').classList.remove('thanks-box--show')
+                        gameItem.querySelector('.thanks-box').classList.remove('thanks-box--show');
                     })
+                    document.querySelectorAll('.section-game__uncheck').forEach(btn => {
+                        if (!btn.classList.contains('hidden')) {
+                            btn.classList.add('hidden');
+                        }
+                    });
                     startTimer(gameEndTime-currentTime, document.querySelector('.section-game__timer'))
                 }
             } else {
