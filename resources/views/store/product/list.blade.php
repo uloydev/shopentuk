@@ -10,8 +10,7 @@
             product-final-price="{{ $product->discount->discounted_price }}"
             product-rating="3" 
             is-horizontal="false"
-            product-is-obral="true"
-            class-img="{{ $classImg }}" />
+            product-is-obral="true" />
         @else
             <x-card-product 
                 product-img="{{ $product->mainImage ? asset('storage/' . $product->mainImage->url) : asset('img/static/example.jpg') }}" 
@@ -21,8 +20,7 @@
                 product-final-price="{{ $product->price }}"
                 product-rating="0" 
                 is-horizontal="false"
-                product-is-obral="false"
-                class-img="{{ $classImg }}" />
+                product-is-obral="false"/>
         @endif
     @empty
         @include('store.product.empty', [
