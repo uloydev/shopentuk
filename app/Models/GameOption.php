@@ -24,4 +24,9 @@ class GameOption extends Model
     {
         return "bg-".$this->attributes['color']."-500";
     }
+
+    public function rewards()
+    {
+        return $this->hasMany('App\Models\GameOptionReward', 'winner_option_id');
+    }
 }

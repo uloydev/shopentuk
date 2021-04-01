@@ -48,6 +48,6 @@ class Game extends Model
     public function getGamePeriodAttribute()
     {
         $startedAt = Carbon::parse($this->attributes['started_at']);
-        return $startedAt->format('d/m/Y') . '-' . $this->attributes['id'];
+        return $startedAt->format('dmy') . '-' . $this->attributes['id'];
     }
 }

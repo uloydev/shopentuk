@@ -34,4 +34,9 @@ class GameBid extends Model
     {
         return $this->belongsTo('App\Models\GameOption');
     }
+
+    public function setCalculatedPoint($value) 
+    {
+        $this->attributes['calculated_point'] = (int) $value;
+    }
 }
