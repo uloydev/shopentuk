@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use App\Models\GameBid;
 
 class Game extends Model
 {
@@ -26,7 +27,8 @@ class Game extends Model
 
     protected $appends = [
         'formatted_start_time',
-        'game_period'
+        'game_period',
+        'bid_count',
     ];
 
     public function bids()
@@ -49,5 +51,10 @@ class Game extends Model
     {
         $startedAt = Carbon::parse($this->attributes['started_at']);
         return $startedAt->format('dmy') . '-' . $this->attributes['id'];
+    }
+
+    public function getBidCountAttribute()
+    {
+        return GameBid::where('game_id', $this->attributes['id'])->count();
     }
 }

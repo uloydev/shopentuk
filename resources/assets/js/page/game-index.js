@@ -48,6 +48,26 @@ if (HelperModule.pageUrl === '/game') {
         }
     }
 
+    // update game table
+    function updateGameTable(games) {
+        console.log(games)
+        var html = '';
+        games.forEach(game => {
+            html += '<tr>';
+            html += '<td class="px-4 py-3 whitespace-nowrap">'+ game.game_period +'</td>';
+            html += '<td class="px-4 py-3 whitespace-nowrap">'+ game.bid_count +'</td>';
+            if (game.winner_option.type == 'color') {
+                html += '<td class="px-4 py-3 whitespace-nowrap">'+ game.winner_option.color +'</td>';
+            } else {                
+                html += '<td class="px-4 py-3 whitespace-nowrap">'+ game.winner_option.number +'</td>';
+            }
+            html += '<td class="px-4 py-3 whitespace-nowrap">'+ game.point_in +'</td>';
+            html += '<td class="px-4 py-3 whitespace-nowrap">'+ game.point_out +'</td>';
+            html += '</tr>';
+        });
+        document.querySelector('#gameTable tbody').innerHTML = html
+    }
+
     // update bid table
     function updateBidTable(bids) {
         console.log(bids)
@@ -70,7 +90,7 @@ if (HelperModule.pageUrl === '/game') {
             html += '<td class="px-4 py-3 whitespace-nowrap">'+ bid.reward +'</td>';
             html += '</tr>';
         });
-        document.querySelector('#gameTable tbody').innerHTML = html
+        document.querySelector('#bidTable tbody').innerHTML = html
     }
 
     // fetch game data from api
@@ -96,7 +116,9 @@ if (HelperModule.pageUrl === '/game') {
             console.log(gameEndTime, currentTime, gameEndTime-currentTime, response.currentTime)
             // update user point on sidebar
             point.textContent = response.userPoint;
-            updateBidTable(response.lastTenBids);
+            console.log('response.lastGames')
+            updateGameTable(response.lastGames)
+            updateBidTable(response.lastBids);
             // update game period
             gamePeriod.textContent = game.game_period;
             // submit btn onclick
@@ -198,7 +220,8 @@ if (HelperModule.pageUrl === '/game') {
                 .then(response => response.json())
                 .then(data => {
                     alert(data.message)
-                    updateBidTable(data.lastTenBids)
+                    updateGameTable(data.lastGames)
+                    updateBidTable(data.lastBids)
                     if (data.status == 'success') {
                         openThankYouMessage()
                         const point = document.querySelector('.sidebar-game__total-point')

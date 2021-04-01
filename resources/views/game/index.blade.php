@@ -35,21 +35,9 @@
                     @endforeach
                 </div>
             </div>
-            {{-- <div id="finishedContent" class="text-center" hidden>
-                <h1 class="text-xl font-bold mb-5">Game Telah Selesai</h1>
-                <h3>Pemenang Game Adalah </h3>
-                <ul id="winnerOptions">
-                    <li>Merah</li>
-                    <li>Angka 9</li>
-                </ul>
-                <h3 class="mt-10 font-bold">Bid Anda</h3>
-                <ul id="userBids">
-                    <li>No 9 (10 point) => 20 point (menang)</li>
-                </ul>
-            </div> --}}
-            <!-- This example requires Tailwind CSS v2.0+ -->
+            {{-- last 5 games table --}}
             <div class="py-10 px-4">
-                <p class="text-xl my-5">Last 10 Bids</p>
+                <p class="text-xl my-5">Last 5 Games</p>
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -57,31 +45,71 @@
                                 <thead class="bg-blue-100">
                                     <tr>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Period
                                         </th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            bid count
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            winner option
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            point total
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            reward total
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200 text-center">
+                                    <!-- More items... -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- last 5 bids table --}}
+            <div class="py-10 px-4">
+                <p class="text-xl my-5">Last 5 Bids</p>
+                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200" id="bidTable">
+                                <thead class="bg-blue-100">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Period
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Type
                                         </th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Number
                                         </th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Color
                                         </th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             point
                                         </th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             status
                                         </th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             reward
                                         </th>
                                     </tr>

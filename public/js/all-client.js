@@ -13848,7 +13848,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
-  // update bid table
+  // update game table
+  var updateGameTable = function updateGameTable(games) {
+    console.log(games);
+    var html = '';
+    games.forEach(function (game) {
+      html += '<tr>';
+      html += '<td class="px-4 py-3 whitespace-nowrap">' + game.game_period + '</td>';
+      html += '<td class="px-4 py-3 whitespace-nowrap">' + game.bid_count + '</td>';
+
+      if (game.winner_option.type == 'color') {
+        html += '<td class="px-4 py-3 whitespace-nowrap">' + game.winner_option.color + '</td>';
+      } else {
+        html += '<td class="px-4 py-3 whitespace-nowrap">' + game.winner_option.number + '</td>';
+      }
+
+      html += '<td class="px-4 py-3 whitespace-nowrap">' + game.point_in + '</td>';
+      html += '<td class="px-4 py-3 whitespace-nowrap">' + game.point_out + '</td>';
+      html += '</tr>';
+    });
+    document.querySelector('#gameTable tbody').innerHTML = html;
+  }; // update bid table
+
+
   var updateBidTable = function updateBidTable(bids) {
     console.log(bids);
     var html = '';
@@ -13871,7 +13893,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
       html += '<td class="px-4 py-3 whitespace-nowrap">' + bid.reward + '</td>';
       html += '</tr>';
     });
-    document.querySelector('#gameTable tbody').innerHTML = html;
+    document.querySelector('#bidTable tbody').innerHTML = html;
   }; // fetch game data from api
 
 
@@ -13897,7 +13919,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
       console.log(gameEndTime, currentTime, gameEndTime - currentTime, response.currentTime); // update user point on sidebar
 
       point.textContent = response.userPoint;
-      updateBidTable(response.lastTenBids); // update game period
+      console.log('response.lastGames');
+      updateGameTable(response.lastGames);
+      updateBidTable(response.lastBids); // update game period
 
       gamePeriod.textContent = game.game_period; // submit btn onclick
 
@@ -14037,7 +14061,8 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
           return response.json();
         }).then(function (data) {
           alert(data.message);
-          updateBidTable(data.lastTenBids);
+          updateGameTable(data.lastGames);
+          updateBidTable(data.lastBids);
 
           if (data.status == 'success') {
             openThankYouMessage();
