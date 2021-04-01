@@ -78,6 +78,7 @@ Route::namespace('Customer')->middleware(['auth', 'customer'])->group(function (
         Route::post('bid/cancel', 'GameController@cancelBid')->name('bid.cancel');
         Route::post('current', 'GameController@currentGame')->name('current');
         Route::get('test', 'GameController@test');
+        Route::get('game-history', 'GameController@gameHistory')->name('game-history');
     });
 });
 
