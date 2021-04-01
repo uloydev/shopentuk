@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Models\GameOptionReward;
 use App\Models\PointHistory;
 use App\Models\Rules;
+use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
 {
@@ -133,6 +134,16 @@ class GameController extends Controller
     {
         return view('game.game-history')->with([
             'games' => Game::with('winnerOption')->latest()->where('status', 'finished')->limit(50)->paginate(),
+            'rule' => Rules::first(),
+            'currentTime' => Carbon::now(),
+        ]);
+    }
+
+    public function bidHistory()
+    {
+        $gameIds = Game::latest()->where('status', '!=', 'queued')->limit(30)->pluck('id');
+        return view('game.bid-history')->with([
+            'bids' => GameBid::latest()->where('user_id', Auth::id())->whereIn('game_id', $gameIds)->paginate(15),
             'rule' => Rules::first(),
             'currentTime' => Carbon::now(),
         ]);

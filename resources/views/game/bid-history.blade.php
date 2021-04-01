@@ -12,8 +12,8 @@
             {{-- last 5 games table --}}
             <div class="py-4 px-4">
                 <div class="flex justify-between my-5">
-                    <span class="text-xl">Last 50 Games</span>
-                    <a href="{{ route('game.game-history') }}" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-full">
+                    <span class="text-xl">Your bids for last 30 Games</span>
+                    <a href="{{ route('game.bid-history') }}" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-full">
                         Refresh
                     </a>
                 </div>
@@ -29,34 +29,41 @@
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            bid count
+                                            option value
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            winner option
+                                            point
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            point total
+                                            status
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            reward total
+                                            reward
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 text-center">
-                                    @forelse ($games as $game)
+                                    @forelse ($bids as $bid)
                                         <tr>
-                                            <td class="px-4 py-3 whitespace-nowrap">{{ $game->game_period }}</td>
-                                            <td class="px-4 py-3 whitespace-nowrap">{{ $game->bid_count }}</td>
-                                            @if ($game->winnerOption->type == 'color')
-                                                <td class="px-4 py-3 whitespace-nowrap">{{ $game->winnerOption->color }}</td>
+                                            <td class="px-4 py-3 whitespace-nowrap">{{ $bid->game->game_period }}</td>
+                                            @if ($bid->gameOption->type == 'color')
+                                                <td class="px-4 py-3 whitespace-nowrap">{{ $bid->gameOption->color }}</td>
                                             @else
-                                                <td class="px-4 py-3 whitespace-nowrap">{{ $game->winnerOption->number }}</td>
+                                                <td class="px-4 py-3 whitespace-nowrap">{{ $bid->gameOption->number }}</td>
                                             @endif
-                                            <td class="px-4 py-3 whitespace-nowrap">{{ $game->point_in }}</td>
-                                            <td class="px-4 py-3 whitespace-nowrap">{{ $game->point_out }}</td>
+                                            <td class="px-4 py-3 whitespace-nowrap">{{ $bid->point }}</td>
+                                            @if ($bid->status == 'win')
+                                                <td class="px-4 py-3 whitespace-nowrap text-green-500">{{ $bid->status }}</td>
+                                            @elseif($bid->status == 'lose')
+                                                <td class="px-4 py-3 whitespace-nowrap text-red-500">{{ $bid->status }}</td>
+                                            @else
+                                                <td class="px-4 py-3 whitespace-nowrap text-blue-500">{{ $bid->status }}</td>
+                                                
+                                            @endif
+                                            <td class="px-4 py-3 whitespace-nowrap">{{ $bid->reward }}</td>
                                         </tr>
                                     @empty
                                         <p class="text-center">No data.</p>
@@ -68,7 +75,7 @@
                 </div>
             </div>
             <div class="px-4">
-                {{ $games->links() }}
+                {{ $bids->links() }}
             </div>
         </div>
     </section>

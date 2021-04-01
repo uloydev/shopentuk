@@ -79,6 +79,7 @@ Route::namespace('Customer')->middleware(['auth', 'customer'])->group(function (
         Route::post('current', 'GameController@currentGame')->name('current');
         Route::get('test', 'GameController@test');
         Route::get('game-history', 'GameController@gameHistory')->name('game-history');
+        Route::get('bid-history', 'GameController@bidHistory')->name('bid-history');
     });
 });
 

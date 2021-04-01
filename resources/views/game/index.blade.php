@@ -82,7 +82,12 @@
 
             {{-- last 5 bids table --}}
             <div class="py-10 px-4">
-                <p class="text-xl my-5">Last 5 Bids</p>
+                <div class="flex justify-between my-5">
+                    <span class="text-xl">Your Last 5 Bids</span>
+                    <a href="{{ route('game.bid-history') }}" class="bg-transparent hover:bg-blue-500 text-blue-600 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full ml-4">
+                        Show More
+                    </a>
+                </div>
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
