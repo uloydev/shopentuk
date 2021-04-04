@@ -123,6 +123,11 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
             'products' => 'ProductController',
             'rules' => 'RulesController'
         ]);
+        
+        // game management routes
+        Route::name('game.')->prefix('game')->group(function () {
+            Route::get('history', 'GameController@history')->name('history');
+        });
     }
 );
 

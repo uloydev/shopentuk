@@ -39,7 +39,7 @@
                             text="Custom game" to="{{ url('/') }}" />
                             @endif
                             <x-menu-admin icon="history" 
-                            text="Game history" to="{{ url('/') }}" />
+                            text="Game history" to="{{ route('admin.game.history') }}" />
                         </ul>
                     </x-menu-admin>
                 @endif
