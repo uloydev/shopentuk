@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RequestRefund;
 use App\Models\Order;
 use App\Models\Refund;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class RefundController extends Controller
 {
@@ -22,7 +24,7 @@ class RefundController extends Controller
         $userId = $orderToRefund->user->id;
         $paymentDate = Carbon::now()->toDateTimeString();
 
-        $refund = Refund::create([
+        $requestRefund = Refund::create([
             'user_id' => $userId,
             'order_id' => $orderId,
             'payment_date' => $paymentDate,
@@ -30,7 +32,12 @@ class RefundController extends Controller
             'payment_method' => request('payment_method')
         ]);
 
-        dd($refund);
+        Mail::to('bariq.2nd.rodriguez@gmail.com')->send(new RequestRefund($requestRefund));
+
+        return redirect()->back()->with(
+            'success', 
+            'Berhasil request refund. Mohon tunggu, permintaan mu akan dibalas melalui email'
+        );
     }
 
     public function manage()
