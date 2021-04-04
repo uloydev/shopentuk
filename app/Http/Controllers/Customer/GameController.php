@@ -148,4 +148,13 @@ class GameController extends Controller
             'currentTime' => Carbon::now(),
         ]);
     }
+
+    public function optionReward()
+    {
+        return view('game.option-reward')->with([
+            'rewards' => GameOptionReward::with(['gameOption', 'winnerOption'])->get(),
+            'rule' => Rules::first(),
+            'currentTime' => Carbon::now(),
+        ]);
+    }
 }
