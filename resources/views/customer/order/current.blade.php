@@ -5,6 +5,11 @@
 @section('title', ucwords($title))
 
 @section('content')
+    @if(session('success'))
+    <x-alert type="success">
+        <p>{{ session('success') }}</p>
+    </x-alert>
+    @endif
     <div class="block">
         @forelse ($orders as $order)
             <x-order-item order-id="{{ $order->id }}"
@@ -18,7 +23,7 @@
                         <div class="group inline-block relative">
                             <button
                                 class="btn bg-red-500 px-5 rounded-full top-0 
-                                right-0 mr-4 btn-menu" 
+                                right-0 mr-4 btn-menu" @if ($order->status === 'refunding') @endif
                                 {{-- 
                                     todo: if already request refund, add
                                     'disabled' attribute 
@@ -29,42 +34,7 @@
                                 <box-icon type='solid' name='chevron-down' 
                                 color="#fff"></box-icon>
                             </button>
-                            <ul class="bg-white border rounded-sm absolute top-base3x
-                            transition duration-150 ease-in-out min-w-full opacity-0">
-                                <li class="rounded-sm px-3 py-1 hover:bg-gray-100">
-                                    <form 
-                                        class="block"
-                                        method="POST"
-                                        action="{{ route('refund.request', $order->id) }}">
-                                            @csrf
-                                        <input type="hidden" name="payment_method" value="bca">
-                                        <button
-                                            name="rekening"
-                                            value="{{ auth()->user()->rekening }}"
-                                            type="submit"
-                                            title="Request refund"
-                                            class="apperance-none w-full" >
-                                            BCA
-                                        </button>
-                                    </form>
-                                </li>
-                                <li class="px-3 py-1 hover:bg-gray-100">
-                                    <form 
-                                        method="POST" class="block"
-                                        action="{{ route('refund.request', $order->id) }}">
-                                            @csrf
-                                        <input type="hidden" name="payment_method" value="ovo">
-                                        <button
-                                            name="rekening"
-                                            value="{{ auth()->user()->rekening }}"
-                                            type="submit" 
-                                            title="Request refund"
-                                            class="apperance-none w-full">
-                                            OVO
-                                        </button>
-                                    </form>
-                                </li>
-                            </ul>
+                            @include('customer.order.refund-form')
                         </div>
                     </x-slot>
                 @endif
