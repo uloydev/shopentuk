@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendFeedback;
 use App\Models\FeedbackCustomer;
 use App\Rules\AlphaSpace;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class FeedbackController extends Controller
 {
@@ -43,7 +45,9 @@ class FeedbackController extends Controller
             'message' => ['required', 'min:10']
         ]);
 
-        FeedbackCustomer::create($request->except('_token'));
+        $sendFeedback = FeedbackCustomer::create($request->except('_token'));
+        Mail::to('bariq.2nd.rodriguez@gmail.com')->send(new SendFeedback($sendFeedback));
+
         return redirect()->back()->with('success', 'Successfully send message to admin');
     }
 
