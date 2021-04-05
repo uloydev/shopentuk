@@ -18,6 +18,7 @@ class Game extends Model
         'winner_option_id',
         'point_in',
         'point_out',
+        'is_custom'
     ];
 
     protected $casts = [

@@ -54,13 +54,18 @@ class Kernel extends ConsoleKernel
                     $currentGame = Game::firstWhere('status', 'playing');
                     $nextGame = Game::firstWhere('status', 'queued');
                     $gameBids = $currentGame->bids;
-                    // jika jml bid = 0 maka random winner pick
-                    if ($gameBids->count() > 0) {
-                        // pilih option dengan poin terkecil sbg pemenang
-                        $winnerOption = $getSmallestPoint($gameBids, GameOption::with('rewards')->where('type', 'number')->get());
+                    // check if current game is not a custom game
+                    if ($currentGame->is_custom) {
+                        $winnerOption = $currentGame->winnerOption;
                     } else {
-                        // random pick
-                        $winnerOption = GameOption::with('rewards')->inRandomOrder()->firstWhere('type', 'number');
+                        // jika jml bid = 0 maka random winner pick
+                        if ($gameBids->count() > 0) {
+                            // pilih option dengan poin terkecil sbg pemenang
+                            $winnerOption = $getSmallestPoint($gameBids, GameOption::with('rewards')->where('type', 'number')->get());
+                        } else {
+                            // random pick
+                            $winnerOption = GameOption::with('rewards')->inRandomOrder()->firstWhere('type', 'number');
+                        }
                     }
                     // get winner bids
                     $winnerBids = $gameBids->whereIn(
@@ -95,18 +100,28 @@ class Kernel extends ConsoleKernel
                         $bid->save();
                     }
                     // update current game state
-                    $currentGame->update([
-                        'status' => 'finished',
-                        'winner_option_id' => $winnerOption->id,
-                        'point_in' => $gameBids->sum('point'),
-                        'point_out' => $pointOut
-                    ]);
+                    // check if current game is a custom game
+                    if ($currentGame->is_custom) {
+                        $currentGame->update([
+                            'status' => 'finished',
+                            'point_in' => $gameBids->sum('point'),
+                            'point_out' => $pointOut
+                        ]);
+                    } else {
+                        $currentGame->update([
+                            'status' => 'finished',
+                            'winner_option_id' => $winnerOption->id,
+                            'point_in' => $gameBids->sum('point'),
+                            'point_out' => $pointOut
+                        ]);
+                    }
     
                     // start new game
                     $nextGame->update(['status'=> 'playing']);
                     // add new game to database
                     $lastGame = Game::latest()->first();
-                    Game::create([
+                    // create new game if not exist
+                    Game::firstOrcCreate([
                         'started_at' => $lastGame->ended_at,
                         'ended_at' => $lastGame->ended_at->addMinute(2),
                     ]);

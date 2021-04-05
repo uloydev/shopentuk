@@ -21,6 +21,7 @@ class CreateGamesTable extends Migration
             $table->foreignId('winner_option_id')->nullable();
             $table->integer('point_in')->default(0);
             $table->integer('point_out')->default(0);
+            $table->boolean('is_custom')->default(false);
             $table->timestamps();
         });
     }

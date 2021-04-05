@@ -127,6 +127,8 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
         // game management routes
         Route::name('game.')->prefix('game')->group(function () {
             Route::get('history', 'GameController@history')->name('history');
+            Route::get('custom-game', 'GameController@customGame')->name('custom-game');
+            Route::post('custom-game', 'GameController@storeCustomGame')->name('custom-game.store');
         });
     }
 );

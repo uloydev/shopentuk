@@ -4,20 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Game;
+use App\Models\GameOption;
+use App\Rules\GameStartTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class GameController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
     public function history()
     {
         return view('game.admin.history')->with([
@@ -26,69 +19,61 @@ class GameController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function customGame()
     {
-        //
+        $options = GameOption::where('type', 'number')->get();
+        $arrOptions = [];
+        foreach( $options as $option ) {
+            array_push($arrOptions, [
+                'value' => $option->id,
+                'text' => $option->number
+            ]);
+        }
+        $inputColumn = [
+            [
+                'name' => 'started_at',
+                'type' => 'datetime-local',
+                'label' => 'Start time',
+                'id' => 'game-started-at',
+            ],
+            [
+                'name' => 'winner_option_id',
+                'type' => 'select',
+                'label' => 'Winner Option',
+                'id' => 'game-winner',
+                'placeholder' => 'Choose Winner',
+                'options' => json_encode($arrOptions)
+            ]
+        ];
+        return view('game.admin.custom-game')->with([
+            'title' => 'Custom Game List',
+            'games' => Game::where('is_custom', true)->get(),
+            'inputColumn' =>  $inputColumn,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Game  $game
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Game $game)
+    public function storeCustomGame(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Game  $game
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Game $game)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Game  $game
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Game $game)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Game  $game
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Game $game)
-    {
-        //
+        $validated = $request->validate([
+            'started_at' => [new GameStartTime],
+            'winner_option_id' => ['numeric']
+        ]);
+        
+        $startTime = Carbon::parse($validated['started_at']);
+        $game = Game::firstWhere('started_at', $startTime);
+        if ($game) {
+            $game->winner_option_id = $validated['winner_option_id'];
+            $game->is_custom = true;
+            $game->save();
+        } else {
+            Game::create([
+                'started_at' => $startTime,
+                'ended_at' => $startTime->addMinutes(2),
+                'winner_option_id' => $validated['winner_option_id'],
+                'is_custom' => true
+            ]);
+        }
+        return redirect()->route('admin.game.custom-game');
     }
 }
