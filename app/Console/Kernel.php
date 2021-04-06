@@ -52,7 +52,7 @@ class Kernel extends ConsoleKernel
                 if (Game::count()) {
                     // creating variables data
                     $currentGame = Game::firstWhere('status', 'playing');
-                    $nextGame = Game::firstWhere('status', 'queued');
+                    $nextGame = Game::orderBy('started_at')->firstWhere('status', 'queued');
                     $gameBids = $currentGame->bids;
                     // check if current game is not a custom game
                     if ($currentGame->is_custom) {
@@ -115,7 +115,6 @@ class Kernel extends ConsoleKernel
                             'point_out' => $pointOut
                         ]);
                     }
-    
                     // start new game
                     $nextGame->update(['status'=> 'playing']);
                     // add new game to database
