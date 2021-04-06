@@ -61,19 +61,19 @@ class GameController extends Controller
         ]);
         
         $startTime = Carbon::parse($validated['started_at']);
-        $game = Game::firstWhere('started_at', $startTime);
-        if ($game) {
-            $game->winner_option_id = $validated['winner_option_id'];
-            $game->is_custom = true;
-            $game->save();
-        } else {
-            Game::create([
+        $endTime = clone $startTime;
+        $endTime->addMinutes(2);
+        Game::updateOrCreate(
+            [
                 'started_at' => $startTime,
-                'ended_at' => $startTime->addMinutes(2),
+                'status' => 'queued'
+            ],
+            [
+                'ended_at' => $endTime,
                 'winner_option_id' => $validated['winner_option_id'],
                 'is_custom' => true
-            ]);
-        }
+            ]
+        );
         return redirect()->route('admin.game.custom-game');
     }
 }

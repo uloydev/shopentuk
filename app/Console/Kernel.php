@@ -119,12 +119,23 @@ class Kernel extends ConsoleKernel
                     // start new game
                     $nextGame->update(['status'=> 'playing']);
                     // add new game to database
-                    $lastGame = Game::latest()->first();
+                    $lastGame = Game::where('is_custom', false)->latest()->first();
                     // create new game if not exist
-                    Game::firstOrcCreate([
-                        'started_at' => $lastGame->ended_at,
-                        'ended_at' => $lastGame->ended_at->addMinute(2),
+                    $newStartTime = $lastGame->ended_at;
+                    $newEndTime = clone $newStartTime;
+                    $newEndTime->addMinutes(2);
+                    $newGame = Game::firstOrCreate([
+                        'started_at' => $newStartTime,
+                        'ended_at' => $newEndTime,
                     ]);
+                    while ($newGame->is_custom) {
+                        $newStartTime->addMinutes(2);
+                        $newEndTime->addMinutes(2);
+                        $newGame = Game::firstOrCreate([
+                            'started_at' => $newStartTime,
+                            'ended_at' => $newEndTime,
+                        ]);
+                    }
                 } else {
                     $now = Carbon::now();
                     $now->second = 0;
