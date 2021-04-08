@@ -42,6 +42,11 @@ class Game extends Model
         return $this->belongsTo('App\Models\GameOption', 'winner_option_id');
     }
 
+    public function winners()
+    {
+        return $this->hasMany('App\Models\GameOptionReward', 'winner_option_id', 'winner_option_id');
+    }
+
     public function getFormattedStartTimeAttribute()
     {
         $startedAt = Carbon::parse($this->attributes['started_at']);

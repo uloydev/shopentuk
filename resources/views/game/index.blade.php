@@ -59,15 +59,7 @@
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            winner option
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            point total
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            reward total
+                                            winners
                                         </th>
                                     </tr>
                                 </thead>

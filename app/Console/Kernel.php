@@ -154,7 +154,7 @@ class Kernel extends ConsoleKernel
                     $nextGame->update(['status' => 'playing']);
                 }
                 // seed bid to next game
-                GameBid::factory()->count(50)->state(['game_id' => $nextGame->id])->create();
+                // GameBid::factory()->count(50)->state(['game_id' => $nextGame->id])->create();
             } catch (\Throwable $th) {
                 var_dump($th);
             }

@@ -13856,16 +13856,19 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
       html += '<tr>';
       html += '<td class="px-4 py-3 whitespace-nowrap">' + game.game_period + '</td>';
       html += '<td class="px-4 py-3 whitespace-nowrap">' + game.bid_count + '</td>';
+      html += '<td class="px-4 py-3 whitespace-nowrap">';
+      game.winners.forEach(function (item) {
+        if (item.game_option.type == 'color') {
+          html += item.game_option.color;
+        } else {
+          html += item.game_option.number;
+        }
 
-      if (game.winner_option.type == 'color') {
-        html += '<td class="px-4 py-3 whitespace-nowrap">' + game.winner_option.color + '</td>';
-      } else {
-        html += '<td class="px-4 py-3 whitespace-nowrap">' + game.winner_option.number + '</td>';
-      }
-
-      html += '<td class="px-4 py-3 whitespace-nowrap">' + game.point_in + '</td>';
-      html += '<td class="px-4 py-3 whitespace-nowrap">' + game.point_out + '</td>';
-      html += '</tr>';
+        if (game.winners[game.winners.length - 1] != item) {
+          html += ', ';
+        }
+      });
+      html += '</td></tr>';
     });
     document.querySelector('#gameTable tbody').innerHTML = html;
   }; // update bid table

@@ -77,7 +77,7 @@ class GameController extends Controller
                 'message' => 'gagal !',
                 'bid' => $bid,
                 'lastTenBids' => GameBid::where('user_id', $user->id)->latest()->limit(10)->get(),
-                'lastGames' => Game::with('winnerOption')->latest()->where('status', 'finished')->limit(5)->get(),
+                'lastGames' => Game::with('winners')->latest()->where('status', 'finished')->limit(5)->get(),
             ]);
         }
         return response()->json([
@@ -85,7 +85,7 @@ class GameController extends Controller
             'message' => 'berhasil !',
             'bid' => $bid,
             'lastBids' => GameBid::where('user_id', $user->id)->latest()->limit(5)->get(),
-            'lastGames' => Game::with('winnerOption')->latest()->where('status', 'finished')->limit(5)->get(),
+            'lastGames' => Game::with('winners')->latest()->where('status', 'finished')->limit(5)->get(),
         ]);
     }
 
@@ -126,14 +126,14 @@ class GameController extends Controller
             'userPoint' => User::findOrFail($request->userId)->point,
             'userBids' => GameBid::where('user_id', $request->userId)->where('game_id', $game->id)->get(),
             'lastBids' => GameBid::where('user_id', $request->userId)->latest()->limit(5)->get(),
-            'lastGames' => Game::with('winnerOption')->latest()->where('status', 'finished')->limit(5)->get(),
+            'lastGames' => Game::with('winners')->latest()->where('status', 'finished')->limit(5)->get(),
         ]);
     }
 
     public function gameHistory()
     {
         return view('game.game-history')->with([
-            'games' => Game::with('winnerOption')->latest()->where('status', 'finished')->limit(50)->paginate(),
+            'games' => Game::with('winners')->latest()->where('status', 'finished')->limit(50)->paginate(),
             'rule' => Rules::first(),
             'currentTime' => Carbon::now(),
         ]);

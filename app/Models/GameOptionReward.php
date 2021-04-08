@@ -16,6 +16,8 @@ class GameOptionReward extends Model
         'winner_option_id',
     ];
 
+    protected $with = ['gameOption'];
+
     public function gameOption()
     {
         return $this->belongsTo('App\Models\GameOption');

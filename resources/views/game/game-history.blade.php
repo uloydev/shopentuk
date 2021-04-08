@@ -6,14 +6,16 @@
     @include('game.sidebar')
     <section class="section-game py-10 w-full lg:w-9/12">
         <div class="container h-full">
-            <a href="{{ route('game.index') }}" class="bg-transparent hover:bg-blue-500 text-blue-600 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full ml-4">
+            <a href="{{ route('game.index') }}"
+                class="bg-transparent hover:bg-blue-500 text-blue-600 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-full ml-4">
                 Back to Game
             </a>
             {{-- last 5 games table --}}
             <div class="py-4 px-4">
                 <div class="flex justify-between my-5">
                     <span class="text-xl">Last 50 Games</span>
-                    <a href="{{ route('game.game-history') }}" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-full">
+                    <a href="{{ route('game.game-history') }}"
+                        class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-full">
                         Refresh
                     </a>
                 </div>
@@ -33,15 +35,7 @@
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            winner option
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            point total
-                                        </th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            reward total
+                                            winners
                                         </th>
                                     </tr>
                                 </thead>
@@ -50,13 +44,16 @@
                                         <tr>
                                             <td class="px-4 py-3 whitespace-nowrap">{{ $game->game_period }}</td>
                                             <td class="px-4 py-3 whitespace-nowrap">{{ $game->bid_count }}</td>
-                                            @if ($game->winnerOption->type == 'color')
-                                                <td class="px-4 py-3 whitespace-nowrap">{{ $game->winnerOption->color }}</td>
-                                            @else
-                                                <td class="px-4 py-3 whitespace-nowrap">{{ $game->winnerOption->number }}</td>
-                                            @endif
-                                            <td class="px-4 py-3 whitespace-nowrap">{{ $game->point_in }}</td>
-                                            <td class="px-4 py-3 whitespace-nowrap">{{ $game->point_out }}</td>
+                                            <td class="px-4 py-3 whitespace-nowrap">
+                                                @foreach ($game->winners as $item)
+                                                    @if ($item->gameOption->type == 'color')
+                                                        {{ $item->gameOption->color }}
+                                                    @else
+                                                        {{ $item->gameOption->number }}
+                                                    @endif
+                                                    @if (!$loop->last), @endif
+                                                @endforeach
+                                            </td>
                                         </tr>
                                     @empty
                                         <p class="text-center">No data.</p>
