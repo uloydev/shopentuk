@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Rules extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+
+    ];
 }

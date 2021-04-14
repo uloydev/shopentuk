@@ -21,7 +21,7 @@ class GameController extends Controller
         return view('game.index', [
             'options' => GameOption::all(),
             // 'nextGame' => Game::where('status', 'queued')->limit(3)->get(),
-            'rule' => Rules::first(),
+            'rules' => Rules::get(),
             'currentTime' => Carbon::now(),
         ]);
     }
@@ -144,7 +144,7 @@ class GameController extends Controller
         $gameIds = Game::latest()->where('status', '!=', 'queued')->limit(30)->pluck('id');
         return view('game.bid-history')->with([
             'bids' => GameBid::latest()->where('user_id', Auth::id())->whereIn('game_id', $gameIds)->paginate(15),
-            'rule' => Rules::first(),
+            'rules' => Rules::get(),
             'currentTime' => Carbon::now(),
         ]);
     }
@@ -153,7 +153,7 @@ class GameController extends Controller
     {
         return view('game.option-reward')->with([
             'rewards' => GameOptionReward::with(['gameOption', 'winnerOption'])->get(),
-            'rule' => Rules::first(),
+            'rules' => Rules::get(),
             'currentTime' => Carbon::now(),
         ]);
     }

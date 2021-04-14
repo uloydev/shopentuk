@@ -9,7 +9,11 @@
                 data-micromodal-close></button>
             </header>
             <main class="modal__content game-rule" id="modal-1-content">
-                {!! $rule->content !!}
+                <ol>
+                    @foreach ($rules as $rule)
+                        <li>{{ $rule->content }}</li>
+                    @endforeach
+                </ol>
             </main>
             <footer class="modal__footer">
                 <button class="capitalize btn btn--primary" data-micromodal-close aria-label="Close this dialog window">
