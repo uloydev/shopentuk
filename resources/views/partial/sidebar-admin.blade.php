@@ -40,6 +40,8 @@
                             @endif
                             <x-menu-admin icon="history" 
                             text="Game history" to="{{ route('admin.game.history') }}" />
+                            <x-menu-admin icon="list-ol" 
+                            text="Game Rules" to="{{ route('admin.rules.index') }}" />
                         </ul>
                     </x-menu-admin>
                 @endif

@@ -1,5 +1,6 @@
 import 'boxicons'
 import './admin/manage-product'
+import './admin/manage-rules'
 import './admin/manage-admin'
 import './admin/manage-order'
 import './admin/category-sub'

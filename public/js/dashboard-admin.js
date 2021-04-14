@@ -587,6 +587,33 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products'
 
 /***/ }),
 
+/***/ "./resources/assets/js/page/admin/manage-rules.js":
+/*!********************************************************!*\
+  !*** ./resources/assets/js/page/admin/manage-rules.js ***!
+  \********************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper-module */ "./resources/assets/js/helper-module.js");
+
+
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/rules') {
+  var btnOpenEditModal = document.querySelectorAll('.btn[data-target="#modal-edit-rule"]');
+  btnOpenEditModal.forEach(function (btn, index) {
+    var rule = btn.parentNode.parentNode;
+    var categoryVal, subCategoryVal, parentCategoryValOnChange;
+    btn.addEventListener('click', function () {
+      document.querySelector('#modal-edit-rule .modal-title').innerHTML = "edit rule <b>".concat(rule.querySelector('.rule-item__number').dataset.original, "</b>");
+      document.querySelector('#modal-edit-rule form').action = btn.dataset.updateUrl;
+      document.querySelector('textarea[name="content"]').value = btn.dataset.ruleContent;
+    });
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/assets/js/page/dashboard-admin.js":
 /*!*****************************************************!*\
   !*** ./resources/assets/js/page/dashboard-admin.js ***!
@@ -599,14 +626,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _admin_manage_product__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin/manage-product */ "./resources/assets/js/page/admin/manage-product.js");
-/* harmony import */ var _admin_manage_admin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin/manage-admin */ "./resources/assets/js/page/admin/manage-admin.js");
-/* harmony import */ var _admin_manage_order__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./admin/manage-order */ "./resources/assets/js/page/admin/manage-order.js");
-/* harmony import */ var _admin_category_sub__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./admin/category-sub */ "./resources/assets/js/page/admin/category-sub.js");
-/* harmony import */ var _admin_category_parent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./admin/category-parent */ "./resources/assets/js/page/admin/category-parent.js");
-/* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./admin/general */ "./resources/assets/js/page/admin/general.js");
-/* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_admin_general__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _component_modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./../component/modal */ "./resources/assets/js/component/modal.js");
-/* harmony import */ var _component_modal__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_component_modal__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _admin_manage_rules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin/manage-rules */ "./resources/assets/js/page/admin/manage-rules.js");
+/* harmony import */ var _admin_manage_admin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./admin/manage-admin */ "./resources/assets/js/page/admin/manage-admin.js");
+/* harmony import */ var _admin_manage_order__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./admin/manage-order */ "./resources/assets/js/page/admin/manage-order.js");
+/* harmony import */ var _admin_category_sub__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./admin/category-sub */ "./resources/assets/js/page/admin/category-sub.js");
+/* harmony import */ var _admin_category_parent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./admin/category-parent */ "./resources/assets/js/page/admin/category-parent.js");
+/* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./admin/general */ "./resources/assets/js/page/admin/general.js");
+/* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_admin_general__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _component_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./../component/modal */ "./resources/assets/js/component/modal.js");
+/* harmony import */ var _component_modal__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_component_modal__WEBPACK_IMPORTED_MODULE_8__);
+
 
 
 

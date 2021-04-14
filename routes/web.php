@@ -119,10 +119,8 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
         Route::delete('all-category/{id}', 'AllCategoryController@parentCategoryDestroy')->name(
             'all-category.destroy'
         );
-        Route::resources([
-            'products' => 'ProductController',
-            'rules' => 'RulesController'
-        ]);
+        Route::resource('products' , 'ProductController');
+        Route::resource('rules' , 'RulesController')->only(['store', 'index', 'destroy']);
         
         // game management routes
         Route::name('game.')->prefix('game')->group(function () {

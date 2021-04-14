@@ -10,13 +10,16 @@ class RulesController extends Controller
 {
 
     /**
-     * Display a rule
+     * Display rules
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return view('game.rule.manage')->with([
+            'title' => 'Management Game Rules',
+            'rules' => Rules::all()
+        ]);
     }
 
     /**
@@ -37,12 +40,13 @@ class RulesController extends Controller
     /**
      * Remove the rule
      *
-     * @param  \App\Models\Rules  $rules
+     * @param  \App\Models\Rules  $rule
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rules $rules)
+    public function destroy(Rules $rule)
     {
-        $rules->delete();
+        // dd($rule);
+        $rule->delete();
         return redirect()->back()->with('berhasil menghapus rule');
     }
 }
