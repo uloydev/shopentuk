@@ -13859,13 +13859,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
       html += '<td class="px-4 py-3 whitespace-nowrap">';
       game.winners.forEach(function (item) {
         if (item.game_option.type == 'color') {
-          html += item.game_option.color;
+          html += '<span class="h-5 w-5 mr-2 inline-block rounded-full ' + item.game_option.html_class + '"></span>';
         } else {
           html += item.game_option.number;
-        }
-
-        if (game.winners[game.winners.length - 1] != item) {
-          html += ', ';
         }
       });
       html += '</td></tr>';

@@ -47,11 +47,10 @@
                                             <td class="px-4 py-3 whitespace-nowrap">
                                                 @foreach ($game->winners as $item)
                                                     @if ($item->gameOption->type == 'color')
-                                                        {{ $item->gameOption->color }}
+                                                        <span class="h-5 w-5 mr-2 inline-block rounded-full {{ $item->gameOption->html_class }}"></span>
                                                     @else
                                                         {{ $item->gameOption->number }}
                                                     @endif
-                                                    @if (!$loop->last), @endif
                                                 @endforeach
                                             </td>
                                         </tr>
