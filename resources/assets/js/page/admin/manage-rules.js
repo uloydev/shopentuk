@@ -3,9 +3,8 @@ import * as HelperModule from "../../helper-module"
 if (HelperModule.pageUrl === '/admin/rules') {
     const btnOpenEditModal = document.querySelectorAll('.btn[data-target="#modal-edit-rule"]')
 
-    btnOpenEditModal.forEach((btn, index) => {
+    btnOpenEditModal.forEach((btn) => {
         const rule = btn.parentNode.parentNode
-        let categoryVal, subCategoryVal, parentCategoryValOnChange
 
         btn.addEventListener('click', () => {
 

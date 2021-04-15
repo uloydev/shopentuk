@@ -121,6 +121,7 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
         );
         Route::resource('products' , 'ProductController');
         Route::resource('rules' , 'RulesController')->only(['store', 'index', 'destroy']);
+        Route::resource('vouchers' , 'VoucherController')->only(['store', 'index', 'destroy', 'update']);
         
         // game management routes
         Route::name('game.')->prefix('game')->group(function () {

@@ -45,6 +45,8 @@
                         </ul>
                     </x-menu-admin>
                 @endif
+                <x-menu-admin icon="purchase-tag" 
+                text="Discount Voucher" to="{{ route('admin.vouchers.index') }}" />
                 <x-menu-admin icon="shield-quarter" text="list admin" 
                 to="{{ route('superadmin.admins.index') }}"/>
                 <x-menu-admin icon="shield-quarter" text="Feedback Customer" 
