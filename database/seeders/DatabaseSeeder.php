@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             NewOrderSeeder::class,
             // ProductDiscountSeeder::class,
             RulesSeeder::class,
+            NewsSeeder::class
         ]);
     }
 }

@@ -25,9 +25,9 @@ class BoxPromo extends Component
         $heading, 
         $subheading, 
         $subheadClass, 
-        $primaryBtnText, 
-        $primaryBtnLink, 
-        $primaryBtnType, 
+        $primaryBtnText = null, 
+        $primaryBtnLink = null, 
+        $primaryBtnType = null, 
         $addedClass = null,
         $headingHelp = null
     ) {

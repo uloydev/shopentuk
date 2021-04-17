@@ -11,8 +11,10 @@
         {{ $subheading }}
     </h2>
     <div class="flex flex-col md:flex-row items-center flex-wrap mt-8 justify-center lg:justify-start">
+        @isset($primaryBtnLink)
         <a href="{{ $primaryBtnLink }}" 
         class="{{ $primaryBtnType }} p-3 rounded">{{ $primaryBtnText }}</a>
+        @endisset
         {{ $slot }}
     </div>
 </div>
