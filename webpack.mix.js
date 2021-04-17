@@ -17,7 +17,6 @@ mix.js('resources/assets/js/native.js', 'public/js/all-client.js')
         'resources/assets/template/assets/libs/chartist/chartist.min.css',
         'resources/assets/template/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css',
         'resources/assets/plugin/datatables.net/css/datatables.min.css',
-        'resources/assets/plugin/summernote/summernote-bs4.min.css',
         'resources/assets/template/dist/css/style.css',
     ], 'public/css/dashboard.css')
     .scripts([
@@ -36,8 +35,6 @@ mix.js('resources/assets/js/native.js', 'public/js/all-client.js')
         'resources/assets/template/assets/extra-libs/c3/c3.min.js',
         'resources/assets/template/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js',
         'resources/assets/template/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js',
-        'resources/assets/plugin/summernote/summernote.js',
-        'resources/assets/plugin/summernote/summernote-bs4.min.js',
         'public/js/dashboard-admin.js'
     ], 'public/js/all-admin.js')
     .setPublicPath('public');
