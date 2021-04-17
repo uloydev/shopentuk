@@ -3,7 +3,7 @@
     <h3 class="text-sm text-white">{{ $headingHelp }}</h3>
     @endisset
     <h1 class="text-white max-w-full overflow-hidden text-elipsis font-amita 
-    box-promo__heading font-bold text-5xl mb-5">
+    box-promo__heading font-bold text-5xl mb-5 mt-2">
         {{ $heading }}
     </h1>
     <h2 class="text-white max-w-full overflow-hidden text-elipsis 
