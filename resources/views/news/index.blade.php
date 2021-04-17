@@ -30,7 +30,7 @@
             @endforeach
         </div>
         <div class="mt-5">
-            {{ $allNews->links() }}
+            {{ $allNews->links('vendor.pagination.tailwind-white') }}
         </div>
     </div>
 @endsection
