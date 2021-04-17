@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Produk - ' . env('APP_NAME') . ' Shop')
+@section('title', 'Kumpulan berita')
 @section('body-id', 'store')
 @section('content')
     <header>
@@ -21,7 +21,12 @@
             @foreach ($allNews as $news)
             <article class="rounded overflow-hidden shadow-lg mb-20 bg-white">
                 <div class="px-6 py-4">
-                    <p class="font-bold text-2xl mb-2">{{ $news->title }}</p>
+                    <div class="flex justify-between mb-5">
+                        <p class="font-bold text-2xl">{{ $news->title }}</p>
+                        <time class="text-gray-700">
+                            {{ $news->created_at->format('d M Y H:i') }}
+                        </time>
+                    </div>
                     <div class="text-gray-700 text-base">
                         {!! $news->desc !!}
                     </div>
