@@ -17,15 +17,19 @@
             </div>
         </div>
     </header>
-    <div class="container py-10 px-5 lg:px-0 mx-auto">
-        @foreach ($allNews as $news)
-        <article class="mb-5">
-            <h1 class="text-3xl text-center">{{ $news->title }}</h1>
-            <div>
-                {!! $news->desc !!}
-            </div>
-        </article>
-        @endforeach
+    <div class="container py-10 px-5 lg:px-0">
+        <div class="w-10/12 mx-auto">
+            @foreach ($allNews as $news)
+            <article class="rounded overflow-hidden shadow-lg mb-20">
+                <div class="px-6 py-4">
+                    <p class="font-bold text-2xl mb-2">{{ $news->title }}</p>
+                    <div class="text-gray-700 text-base">
+                        {!! $news->desc !!}
+                    </div>
+                </div>
+            </article>
+            @endforeach
+        </div>
         <div class="mt-5">
             {{ $allNews->links() }}
         </div>
