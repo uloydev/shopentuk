@@ -128,6 +128,8 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
             Route::get('history', 'GameController@history')->name('history');
             Route::get('custom-game', 'GameController@customGame')->name('custom-game');
             Route::post('custom-game', 'GameController@storeCustomGame')->name('custom-game.store');
+            Route::get('current', 'GameController@currentGame')->name('current');
+            Route::post('current', 'GameController@setGameWinner')->name('current.set-winner');
         });
     }
 );

@@ -52,6 +52,50 @@ class GameController extends Controller
         ]);
     }
 
+    public function currentGame(Request $request)
+    {
+        $game = Game::with(['winners'])->firstWhere('status', 'playing');
+        $gameBids = $game->bids;
+        $options = GameOption::where('type', 'number')->with(['rewards'])->get();
+        foreach ($options as $option) {
+            $calculatedPoint = 0;
+            $bids = $gameBids->whereIn('game_option_id', $option->rewards->pluck('game_option_id'));
+            foreach ($bids as $bid) {
+                $reward = $option->rewards->firstWhere('game_option_id', $bid->game_option_id);
+                if ($reward) {
+                    $calculatedPoint += $bid->point * $reward->value;
+                }
+            }
+            $option->setCalculatedPoint($calculatedPoint);
+            $option->setGamePoint($bids->sum('point'));
+        }
+        if ($request->ajax()) {
+            return response()->json([
+                'game' => $game,
+                'options' => $options,
+                'current_time' => Carbon::now()
+            ]);
+        }
+        return view('game.admin.current-game')->with([
+            'title' => 'Current Game'
+        ]);
+    }
+
+    public function setGameWinner(Request $request)
+    {
+        $request->validate([
+            'winner_option_id' => ['required', 'exists:game_options,id', 'numeric'],
+            'game_id' => ['required', 'exists:games,id', 'numeric'],
+        ]);
+        $game = Game::findOrFail($request->game_id);
+        $game->update([
+            'is_custom' => true,
+            'winner_option_id' => $request->winner_option_id
+        ]);
+        return redirect()->route('admin.game.current')->with([
+            'success' => 'sukses menentukan pemenang game'
+        ]);
+    }
 
     public function storeCustomGame(Request $request)
     {

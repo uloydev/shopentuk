@@ -38,7 +38,9 @@ class Kernel extends ConsoleKernel
                 $bids = $gameBids->whereIn('game_option_id', $option->rewards->pluck('game_option_id'));
                 foreach ($bids as $bid) {
                     $reward = $option->rewards->firstWhere('game_option_id', $bid->game_option_id);
-                    $point += $bid->point * $reward->value;
+                    if ($reward) {
+                        $point += $bid->point * $reward->value;
+                    }
                 }
                 $option->setGamePoint($point);
             }
@@ -154,7 +156,7 @@ class Kernel extends ConsoleKernel
                     $nextGame->update(['status' => 'playing']);
                 }
                 // seed bid to next game
-                // GameBid::factory()->count(50)->state(['game_id' => $nextGame->id])->create();
+                GameBid::factory()->count(50)->state(['game_id' => $nextGame->id])->create();
             } catch (\Throwable $th) {
                 var_dump($th);
             }

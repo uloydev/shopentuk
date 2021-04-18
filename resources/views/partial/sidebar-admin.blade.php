@@ -36,6 +36,8 @@
                         <ul aria-expanded="false" class="collapse first-level base-level-line">
                             @if (auth()->user()->role == 'superadmin')
                             <x-menu-admin icon="customize" type="solid" 
+                            text="Current Game" to="{{ route('admin.game.current') }}" />
+                            <x-menu-admin icon="customize" type="solid" 
                             text="Custom game" to="{{ route('admin.game.custom-game') }}" />
                             @endif
                             <x-menu-admin icon="history" 

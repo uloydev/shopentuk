@@ -31,4 +31,8 @@ class GameOption extends Model
     {
         return $this->hasMany('App\Models\GameOptionReward', 'winner_option_id');
     }
+
+    public function setCalculatedPoint($point) {
+        $this->attributes['calculated_point'] = $point;
+    }
 }

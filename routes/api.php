@@ -11,4 +11,5 @@ Route::name('api.')->group(function () {
             'products' => 'ProductController'
         ]);
     });
+    Route::get('game/current', 'Admin\GameController@currentGame')->name('game.current');
 });

@@ -14387,3 +14387,26 @@ div.dt-buttons button.btn.processing:after,div.dt-buttons div.btn.processing:aft
   width: 2rem !important;
   height: 2rem !important;
 }
+
+.bg-red {
+  background-color: red;
+}
+
+.bg-green {
+  background-color: green;
+}
+
+.bg-purple {
+  background-color: purple;
+}
+
+.color-circle {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  line-height: 100%;
+}
+
+.option-item {
+  cursor: pointer;
+}

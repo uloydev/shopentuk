@@ -422,6 +422,124 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].includes('/sub')) {
 
 /***/ }),
 
+/***/ "./resources/assets/js/page/admin/game.js":
+/*!************************************************!*\
+  !*** ./resources/assets/js/page/admin/game.js ***!
+  \************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper-module */ "./resources/assets/js/helper-module.js");
+
+
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/game/current') {
+  var isGameDisabled = false;
+
+  var updateGameDetail = function updateGameDetail(game) {
+    var winnersHtml = '';
+    $('#gameDetail #period').text(game.game_period);
+    $('#gameDetail #start').text(game.formatted_start_time);
+    $('#gameDetail #finish').text(game.formatted_finish_time);
+    $('#gameDetail #status').text(game.status);
+    $('#gameDetail #isCustom').text(game.is_custom ? 'YES' : 'NO');
+    $('#gameDetail #bidTotal').text(game.bid_count);
+    game.winners.forEach(function (winner) {
+      if (winner.game_option.type == 'number') {
+        winnersHtml += winner.game_option.number + ' ';
+      } else {
+        winnersHtml += '<span class="color-circle bg-' + winner.game_option.color + ' rounded-circle mx-2"></span>';
+      }
+    });
+    $('#gameDetail #winners').html(winnersHtml);
+    $('#setWinnerForm input[name="game_id"]').val(game.id);
+  };
+
+  var updateOptions = function updateOptions(options) {
+    var optionsHtml = '';
+    options.forEach(function (option) {
+      var winnerHtml = '';
+      var rewardsHtml = '';
+      winnerHtml += '<div class="col-md-4 col-lg-3"><div class="option-item bg-dark m-2 p-2 text-white text-center" data-option-id="' + option.id + '"><p>Angka ' + option.number + '</p><p>' + option.calculated_point + ' point</p><p>Winners ';
+      option.rewards.forEach(function (reward) {
+        if (reward.game_option.type == 'number') {
+          rewardsHtml += reward.game_option.number + ' ';
+        } else {
+          rewardsHtml += '<span class="color-circle bg-' + reward.game_option.color + ' rounded-circle mx-2"></span>';
+        }
+      });
+      winnerHtml += rewardsHtml + '</p></div></div>';
+      optionsHtml += winnerHtml;
+    });
+    $('#gameOptions').html(optionsHtml);
+    $('.option-item').click(function () {
+      if (!isGameDisabled) {
+        $('#setWinnerForm input[name="winner_option_id"]').val($(this).data('optionId'));
+        $('#confirmModal').modal('show');
+      } else {
+        $('#alertModal').modal('show');
+      }
+    });
+  };
+
+  var startTimer = function startTimer(duration) {
+    var timer = duration;
+    var minutes, seconds;
+
+    if (timer > 0) {
+      // start interval countdown
+      var gameInterval = setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        $('#gameTimer').text(minutes + ":" + seconds);
+
+        if (--timer < 0 || (timer + 1) % 5 == 0) {
+          getGame();
+          clearInterval(gameInterval);
+        } // lock bid if time left is 30s
+
+
+        if (timer <= 10) {
+          if ($('#confirmModal').is(':visible')) {
+            $('#confirmModal').modal('hide');
+            $('#alertModal').modal('show');
+          }
+
+          isGameDisabled = true;
+        }
+      }, 1000);
+    } else {
+      getGame();
+    }
+  };
+
+  var getGame = function getGame() {
+    $.get('/api/game/current', function (data) {
+      // console.log(data)
+      var game = data.game;
+      var options = data.options;
+      var gameEndTime = Math.ceil(Date.parse(game.ended_at) / 1000);
+      var currentTime = Math.ceil(Date.parse(data.current_time) / 1000);
+      isGameDisabled = false;
+      startTimer(gameEndTime - currentTime);
+      updateGameDetail(game);
+      updateOptions(options);
+    });
+  };
+
+  $(document).ready(function () {
+    getGame();
+    $('#confirmBtn').click(function () {
+      $('#setWinnerForm').submit();
+    });
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/assets/js/page/admin/general.js":
 /*!***************************************************!*\
   !*** ./resources/assets/js/page/admin/general.js ***!
@@ -662,8 +780,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin_category_parent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./admin/category-parent */ "./resources/assets/js/page/admin/category-parent.js");
 /* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./admin/general */ "./resources/assets/js/page/admin/general.js");
 /* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_admin_general__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _component_modal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./../component/modal */ "./resources/assets/js/component/modal.js");
-/* harmony import */ var _component_modal__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_component_modal__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _admin_game__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./admin/game */ "./resources/assets/js/page/admin/game.js");
+/* harmony import */ var _component_modal__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./../component/modal */ "./resources/assets/js/component/modal.js");
+/* harmony import */ var _component_modal__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_component_modal__WEBPACK_IMPORTED_MODULE_10__);
+
 
 
 
