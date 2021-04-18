@@ -43,7 +43,7 @@
             <div class="px-5 md:px-10 lg:px-24">
                 <x-box-promo heading="Edisi Spesial"
                 subheading="Beli Baju,Celana,Sepatu,Dan Akseksoris Di Shopentuk Akan Mendapatkan Point Yang Nantinya Akan Menjadi Potongan Untuk Pembelian Berikutnya"
-                primary-btn-text="Beli sekarang" primary-btn-link="{{ route('store.product.index', ['sort'=>'promo']) }}" subheadClass="text-base"
+                primary-btn-text="Lihat promo" primary-btn-link="{{ route('news.index') }}" subheadClass="text-base"
                 primary-btn-type="bg-white hover:bg-gray-100 text-gray-800 border border-gray-400 shadow order-1">
                     <x-slot name="headingHelp">Promo Shopentuk Shop</x-slot>
                     <div class="w-full text-white mb-10">Apalagi Yang Kamu Tunggu Order Sekarang !!!</div>
