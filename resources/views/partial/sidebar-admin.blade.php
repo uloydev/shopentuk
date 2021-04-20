@@ -51,11 +51,11 @@
                 text="Discount Voucher" to="{{ route('admin.vouchers.index') }}" />
                 <x-menu-admin icon="shield-quarter" text="list admin" 
                 to="{{ route('superadmin.admins.index') }}"/>
-                <x-menu-admin icon="shield-quarter" text="Feedback Customer" 
+                <x-menu-admin icon="help-circle" text="Feedback Customer" 
                 to="{{ route('admin.contact-us.manage') }}"/>
                 <x-menu-admin icon="user-detail" type="solid" 
                 to="{{ route('admin.manage-customer') }}" text="List customer" />
-                <x-menu-admin icon="user-detail" type="solid" 
+                <x-menu-admin icon="news" 
                 to="{{ route('admin.news.manage') }}" text="News" />
             </ul>
         </nav>

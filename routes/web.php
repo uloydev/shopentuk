@@ -12,11 +12,11 @@ Route::prefix('admin')->name('admin.')->middleware(['admin', 'auth'])->group(fun
     Route::post('news/store', 'NewsController@store')->name('news.store');
     Route::delete('news/delete/{news}', 'NewsController@destroy')->name('news.destroy');
     Route::put('news/update/{news}', 'NewsController@update')->name('news.update');
+    Route::get('feedback-customer', 'FeedbackController@manage')->name(
+        'contact-us.manage'
+    );
 });
 
-Route::get('admin/feedback-customer', 'FeedbackController@manage')->name(
-    'admin.contact-us.manage'
-);
 
 Route::prefix('voucher')->name('voucher.')->group(function () {
     Route::post('validate', 'VoucherController@check')->name('validate');
