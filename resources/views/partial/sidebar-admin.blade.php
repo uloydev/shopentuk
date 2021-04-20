@@ -56,7 +56,7 @@
                 <x-menu-admin icon="user-detail" type="solid" 
                 to="{{ route('admin.manage-customer') }}" text="List customer" />
                 <x-menu-admin icon="user-detail" type="solid" 
-                to="{{ route('news.manage') }}" text="News" />
+                to="{{ route('admin.news.manage') }}" text="News" />
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

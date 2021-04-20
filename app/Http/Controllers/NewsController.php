@@ -35,44 +35,13 @@ class NewsController extends Controller
         return view($view, get_defined_vars());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     public function store()
     {
         News::create([
             'title' => request('title'),
             'desc' => request('desc')
         ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return redirect()->back()->with('success', 'Successfully create article');
     }
 
     /**
@@ -82,9 +51,9 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, News $news)
     {
-        News::where('id', $id)->update([
+        $news->update([
             'title' => request('title'),
             'desc' => request('desc')
         ]);
@@ -97,8 +66,10 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(News $news)
     {
-        //
+        // dd($news);
+        $news->delete();
+        return redirect()->back()->with('success', 'Successfully delete article');
     }
 }

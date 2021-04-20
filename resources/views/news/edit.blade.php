@@ -7,7 +7,7 @@
                 data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('news.update', $news->id) }}" method="post">
+                <form action="{{ route('admin.news.update', $news->id) }}" method="post">
                     @csrf @method('PUT')
                     <x-input-template id="news-title-{{ $news->id }}"
                     label="Title news"

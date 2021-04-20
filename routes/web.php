@@ -5,11 +5,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@landingPage')->name('landing-page');
 Route::resource('contact-us', 'FeedbackController')->only('index', 'store', 'destroy');
-Route::get('admin/news/manage', 'NewsController@index')->name('news.manage');
-Route::get('admin/news/edit', 'NewsController@edit')->name('news.edit');
 Route::get('news/archive', 'NewsController@index')->name('news.index');
-Route::get('news/index', 'NewsController@index')->name('news.destroy');
-Route::put('news/update/{id}', 'NewsController@update')->name('news.update');
+
+Route::prefix('admin')->name('admin.')->middleware(['admin', 'auth'])->group(function () {
+    Route::get('news/manage', 'NewsController@index')->name('news.manage');
+    Route::post('news/store', 'NewsController@store')->name('news.store');
+    Route::delete('news/delete/{news}', 'NewsController@destroy')->name('news.destroy');
+    Route::put('news/update/{news}', 'NewsController@update')->name('news.update');
+});
+
 Route::get('admin/feedback-customer', 'FeedbackController@manage')->name(
     'admin.contact-us.manage'
 );

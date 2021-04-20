@@ -6,7 +6,7 @@
                 <i class="ti-menu ti-close"></i>
             </a>
             <div class="navbar-brand">
-                <a href="index.html">
+                <a href="{{ route('landing-page') }}">
                     <span class="logo-text">Shopentuk</span>
                 </a>
             </div>

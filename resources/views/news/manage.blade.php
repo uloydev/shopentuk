@@ -9,7 +9,9 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="h3">Manage News</h1>
+                    <span class="h3">Manage News</span>
+                    <button class="btn btn-primary rounded-pill float-right" data-toggle="modal"
+                        data-target="#modal-add-news"><box-icon name='plus-square' type='solid' animation='tada' color='#ffffff' ></box-icon> Add News</button>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -31,14 +33,14 @@
                                             {!! Str::words($news->desc, 5) !!}
                                         </td>
                                         <td>
-                                            <a href="{{ route('news.edit', $news->id) }}" 
+                                            <a href="#" 
                                                 class="btn btn-sm btn-warning btn-rounded mr-2"
                                                 data-toggle="modal"
                                                 data-target="#edit-news-{{ $news->id }}">
                                                     Edit
                                                 </a>
                                                 <form method="POST" class="d-inline-block"
-                                                action="{{ route('news.destroy', $news->id) }}">
+                                                action="{{ route('admin.news.destroy', $news->id) }}">
                                                     @csrf @method('DELETE')
                                                     <button type="submit" 
                                                     class="btn btn-sm btn-danger btn-rounded">
@@ -63,6 +65,7 @@
             'id' => 'edit-news-' . $news->id
         ])
     @endforeach
+    @include('news.create')
 @endsection
 
 @push('scripts')
