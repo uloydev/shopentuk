@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Kumpulan berita')
 @section('body-id', 'store')
+@section('main-class') bg-fixed @endsection
 @section('content')
     <header>
         <div class="pt-20 bg-fixed w-full relative" id="section-catalog__promo">
