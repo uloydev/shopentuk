@@ -10,11 +10,11 @@
                     label="{{ $inputColumn[$i]['label'] }}" id="{{ $inputColumn[$i]['id'] }}"
                     placeholder="{{ $inputColumn[$i]['placeholder'] ?? '' }}" autocomplete="off"
                     value="{{ $inputColumn[$i]['value'] ?? old($inputColumn[$i]['name']) }}" required>
-                    @if ($inputColumn[$i]['name'] == 'password')
+                    {{-- @if ($inputColumn[$i]['name'] == 'password')
                     <small id="name" class="form-text text-muted px-1">
                         If empty, it'll using the default password : <b>gakadapassword</b>
                     </small>
-                    @endif
+                    @endif --}}
                 </x-input-template>
             </div>
             @if ($i % 2 == 1)

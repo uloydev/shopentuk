@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ ucfirst(Auth::user()->name) }} - @yield('title')</title>
     <link rel="stylesheet" href="{{ asset('css/admin-dashboard.css') }}">
-    <link rel="stylesheet" type="text/css" 
-    href="https://cdn.datatables.net/v/bs4/dt-1.10.24/b-1.7.0/b-html5-1.7.0/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/v/bs4/dt-1.10.24/b-1.7.0/b-html5-1.7.0/datatables.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -16,6 +16,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body id="@yield('body-id')Page">
     @include('partial.preloader')
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -24,6 +25,14 @@
         @include('partial.sidebar-admin')
         <div class="page-wrapper">
             <div class="container-fluid">
+                @foreach ($errors->all() as $message)
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Error</strong> {{ $message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endforeach
                 @yield('content')
             </div>
             <footer class="footer text-center text-muted">

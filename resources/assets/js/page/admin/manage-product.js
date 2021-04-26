@@ -3,6 +3,18 @@ import * as HelperModule from "./../../helper-module"
 if (HelperModule.pageUrl === '/admin/products') {
     const btnOpenEditModal = document.querySelectorAll('.btn[data-target="#modal-edit-product"]')
 
+    $('.btn-delete-product').click(function () {
+        var productId = $(this).data('productId');
+        $('#modalConfirmDelete').data('productId', productId);
+        $('#modalConfirmDelete').modal('show');
+    });
+
+    $('#confirmDeleteBtn').click(function () {
+        var productId = $('#modalConfirmDelete').data('productId');
+        console.log('ok')
+        $('#formDelete' + productId).submit();
+    });
+
     btnOpenEditModal.forEach((btn, index) => {
         const productItem = btn.parentNode.parentNode
         let categoryVal, subCategoryVal, parentCategoryValOnChange

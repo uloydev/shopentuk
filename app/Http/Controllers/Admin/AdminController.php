@@ -22,7 +22,7 @@ class AdminController extends Controller
     {
         $admin->name = $request->name;
         $admin->email = $request->email;
-        $admin->phone = '+62' . $request->phone;
+        $admin->phone = $request->phone;
         $admin->role = 'admin';
         $admin->password = Hash::make($request->input('password', 'gakadapassword'));
 
@@ -59,13 +59,6 @@ class AdminController extends Controller
                 'label' => 'Admin phone number',
                 'id' => 'admin-phone',
                 'placeholder' => 'Ex: 87771406656'
-            ],
-            [
-                'name' => 'joined_at',
-                'type' => 'date',
-                'label' => 'Admin Joining date',
-                'id' => 'admin-joined-at',
-                'value' => date('m/d/Y')
             ],
             [
                 'name' => 'password',
@@ -126,7 +119,7 @@ class AdminController extends Controller
     public function destroy($id)
     {
         $deleteAdmin = $this->adminAcc->where('id', $id);
-        $deleteAdmin->destroy($id);
+        $deleteAdmin->delete();
         return redirect()->back()->with('msg', 'Successfully delete admin ' . $deleteAdmin->name);
     }
 

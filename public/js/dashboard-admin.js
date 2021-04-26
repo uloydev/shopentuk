@@ -584,6 +584,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/superadmin/admins') {
+  $('.btn-delete-admin').click(function () {
+    var adminId = $(this).data('adminId');
+    $('#modalConfirmDelete').data('adminId', adminId);
+    $('#modalConfirmDelete').modal('show');
+  });
+  $('#confirmDeleteBtn').click(function () {
+    var adminId = $('#modalConfirmDelete').data('adminId');
+    console.log('ok');
+    $('#formDelete' + adminId).submit();
+  });
   var manageAdminPage = document.querySelector("#manageAdminPage");
   var totalError = manageAdminPage.querySelectorAll('.invalid-feedback').length;
 
@@ -595,17 +605,20 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/superadmin/admi
   var urlFormAdmin = 'superadmin/admins';
   var btnEditAdmin = manageAdminPage.querySelectorAll('.btn-edit-admin');
   var adminId, adminName, adminEmail, adminPhone, adminJoinedAt;
+  var formEdit = document.querySelector('#form-edit-admin');
   btnEditAdmin.forEach(function (btn) {
     btn.addEventListener('click', function () {
       adminId = btn.dataset.adminId;
       adminName = btn.closest('.admin').querySelector('.admin__name').dataset.adminName.trim();
       adminEmail = btn.closest('.admin').querySelector('.admin__email').textContent.trim();
       adminPhone = btn.closest('.admin').querySelector('.admin__phone').textContent.trim();
-      adminJoinedAt = btn.closest('.admin').querySelector('.admin__joined-at').textContent.trim();
-      _helper_module__WEBPACK_IMPORTED_MODULE_0__["setFormAction"]('#form-edit-admin', "".concat(appUrl, "/").concat(urlFormAdmin, "/").concat(adminId));
+      _helper_module__WEBPACK_IMPORTED_MODULE_0__["setFormAction"]('#form-edit-admin', "".concat(location.host, "/").concat(urlFormAdmin, "/").concat(adminId));
+      formEdit.querySelector('#admin-name').value = adminName;
+      formEdit.querySelector('#admin-email').value = adminEmail;
+      formEdit.querySelector('#admin-phone').value = adminPhone;
     });
   });
-  _helper_module__WEBPACK_IMPORTED_MODULE_0__["setFormAction"]('#form-add-admin', "".concat(appUrl, "/").concat(urlFormAdmin));
+  _helper_module__WEBPACK_IMPORTED_MODULE_0__["setFormAction"]('#form-add-admin', "".concat(location.host, "/").concat(urlFormAdmin));
 }
 
 /***/ }),
@@ -656,6 +669,16 @@ __webpack_require__.r(__webpack_exports__);
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products') {
   var btnOpenEditModal = document.querySelectorAll('.btn[data-target="#modal-edit-product"]');
+  $('.btn-delete-product').click(function () {
+    var productId = $(this).data('productId');
+    $('#modalConfirmDelete').data('productId', productId);
+    $('#modalConfirmDelete').modal('show');
+  });
+  $('#confirmDeleteBtn').click(function () {
+    var productId = $('#modalConfirmDelete').data('productId');
+    console.log('ok');
+    $('#formDelete' + productId).submit();
+  });
   btnOpenEditModal.forEach(function (btn, index) {
     var productItem = btn.parentNode.parentNode;
     var categoryVal, subCategoryVal, parentCategoryValOnChange;
