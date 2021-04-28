@@ -35,11 +35,6 @@ class ProductController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        return view('admin.product.create');
-    }
-
     public function store(ProductValidation $request)
     {
         $product = new Product;

@@ -1,8 +1,8 @@
-<div class="modal fade" id="modal-edit-product" tabindex="-1" role="dialog" aria-labelledby="modal-edit-product-label" aria-hidden="true">
+<div class="modal fade" id="modal-add-product" tabindex="-1" role="dialog" aria-labelledby="modal-add-product-label" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-capitalize" id="modal-edit-product-label"></h4>
+                <h4 class="modal-title text-capitalize" id="modal-add-product-label">Add New Product</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -24,6 +24,22 @@
                                 'id' => 'point',
                                 'name' => 'point_price',
                                 'type' => 'number',
+                            ],
+                            [
+                                'id' => 'category-id',
+                                'name' => 'category_id',
+                                'type' => 'select'
+                            ]
+                        ];
+
+                        $selects = [
+                            [
+                                'id' => 'category-id',
+                                'label' => 'category'
+                            ],
+                            [
+                                'id' => 'sub-category-id',
+                                'label' => 'sub category'
                             ]
                         ];
                     @endphp
@@ -35,21 +51,17 @@
                         name="{{ $input['name'] }}" type="{{ $input['type'] }}"
                         add-class="text-capitalize" required />
                     @endforeach
-                    <x-select-template label="category" 
-                    id="category-id" name="category_id">
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->title }}</option>
-                        @endforeach
-                    </x-select-template>
-                    <x-select-template label="sub category" 
-                    id="sub-category-id" name="sub_category_id">
-                        @foreach ($subCategories as $sub)
-                            <option value="{{ $sub->id }}" data-parent-category-id="{{ $sub->category_id }}">{{ $sub->title }}</option>
-                        @endforeach
-                    </x-select-template>
+                    @foreach ($selects as $select)
+                        <x-select-template label="{{ $select['label'] }}" 
+                        id="{{ $select['id'] }}" name="{{ str_replace('-', '_', $select['id']) }}">
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                            @endforeach
+                        </x-select-template>
+                    @endforeach
                     <div class="form-group">
-                        <label for="edit-desc">Description</label>
-                        <textarea class="form-control" id="edit-desc" rows="5" name="description"
+                        <label for="add-desc">Description</label>
+                        <textarea class="form-control" id="add-desc" rows="5" name="description"
                         placeholder="Deskripsi produk usahakan tidak lebih dari 100 karakter" 
                         maxlength="100" required></textarea>
                     </div>

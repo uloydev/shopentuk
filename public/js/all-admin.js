@@ -5954,6 +5954,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products'
     var categoryVal, subCategoryVal, parentCategoryValOnChange;
     btn.addEventListener('click', function () {
       var categorySelect = document.querySelector('#category-id');
+      var subCategorySelect = document.querySelector('#sub-category-id');
       var subCatOption = document.querySelectorAll('#sub-category-id option');
       document.querySelector('#modal-edit-product .modal-title').innerHTML = "edit product <b>".concat(productItem.querySelector('.product-item__title').dataset.original, "</b>");
       document.querySelector('#modal-edit-product form').action = btn.dataset.updateUrl; //title
@@ -5965,30 +5966,22 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products'
       var point = productItem.querySelector('.product-item__point').dataset.original;
       document.querySelector('input[name="point_price"]').value = point;
       document.querySelector('textarea[name="description"]').value = btn.dataset.productDesc;
-      categoryVal = document.querySelectorAll('.product-item__category')[index].dataset.original;
-      document.querySelector('select[name="category_id"]').value = categoryVal;
-      subCategoryVal = document.querySelectorAll('.product-item__sub-category')[index].dataset.original;
-      document.querySelector('select[name="sub_category_id"]').value = subCategoryVal;
-      var subCategoryOption;
+      document.querySelector('select[name="category_id"]').value = btn.dataset.categoryId;
+      document.querySelector('select[name="sub_category_id"]').value = btn.dataset.subCategoryId;
       subCatOption.forEach(function (subCat) {
-        subCategoryOption = subCat.dataset.parentCategory;
+        subCat.hidden = false;
 
-        if (subCategoryOption !== categoryVal) {
+        if (subCat.dataset.parentCategoryId !== document.querySelector('select[name="category_id"]').value) {
           subCat.hidden = true;
-        } else {
-          subCat.hidden = false;
         }
       });
-      categorySelect.addEventListener('change', function () {
-        parentCategoryValOnChange = categorySelect.options[categorySelect.selectedIndex].value;
+      categorySelect.addEventListener('input', function () {
+        subCategorySelect.value = "";
         subCatOption.forEach(function (subCat) {
           subCat.hidden = false;
 
-          if (subCat.dataset.parentCategory != parentCategoryValOnChange) {
+          if (subCat.dataset.parentCategoryId !== document.querySelector('select[name="category_id"]').value) {
             subCat.hidden = true;
-          } else {
-            subCat.selected = true;
-            subCat.hidden = false;
           }
         });
       });

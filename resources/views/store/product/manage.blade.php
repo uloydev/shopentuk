@@ -21,10 +21,12 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <div class="mb-3">
-                        <h1 class="h3">All products</h1>
-                    </div>
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h1 class="h3 text-capitalize">All Products</h1>
+                    <button type="button" data-toggle="modal" data-target="#modal-add-product"
+                        class="btn btn-sm btn-primary btn-rounded mr-2">
+                        Add new product
+                    </button>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -43,7 +45,7 @@
                                 @foreach ($products as $product)
                                     <tr class="product-item">
                                         <td class="product-item__title" data-original="{{ $product->title }}">
-                                            {{ Str::limit($product->title, 10) }}
+                                            {{ $product->title }}
                                         </td>
                                         <td class="product-item__price" data-original="{{ $product->price }}">
                                             @currency($product->price)
@@ -56,7 +58,7 @@
                                             {{ Str::words($product->productCategory->title, 1) }}
                                         </td>
                                         <td class="product-item__sub-category"
-                                            data-original="{{ $product->productSubCategory->id }}">
+                                            data-original="{{ $product->sub_category_id }}">
                                             {{ Str::words($product->productSubCategory->title, 2) }}
                                         </td>
                                         <td>
@@ -69,7 +71,8 @@
                                                 data-target="#modal-edit-product"
                                                 data-product-title="{{ $product->title }}"
                                                 data-product-id="{{ $product->id }}"
-                                                data-category="{{ $product->category_id }}"
+                                                data-category-id="{{ $product->category_id }}"
+                                                data-sub-category-id="{{ $product->sub_category_id }}"
                                                 data-product-desc="{{ $product->description }}"
                                                 data-update-url="{{ route('admin.products.update', $product->id) }}">
                                                 Edit
@@ -95,6 +98,7 @@
 
 @section('components')
     @include('store.product.edit')
+    @include('store.product.create')
     <div class="modal" tabindex="-1" role="dialog" id="modalConfirmDelete" data-product-id="">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

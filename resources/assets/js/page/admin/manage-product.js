@@ -21,6 +21,7 @@ if (HelperModule.pageUrl === '/admin/products') {
 
         btn.addEventListener('click', () => {
             const categorySelect = document.querySelector('#category-id')
+            const subCategorySelect = document.querySelector('#sub-category-id')
             const subCatOption = document.querySelectorAll('#sub-category-id option')
 
             document.querySelector('#modal-edit-product .modal-title').innerHTML =
@@ -42,37 +43,24 @@ if (HelperModule.pageUrl === '/admin/products') {
 
             document.querySelector('textarea[name="description"]').value = btn.dataset.productDesc
 
-            categoryVal = document.querySelectorAll('.product-item__category')[index].dataset.original
-            document.querySelector('select[name="category_id"]').value = categoryVal
+            document.querySelector('select[name="category_id"]').value = btn.dataset.categoryId;
+            document.querySelector('select[name="sub_category_id"]').value = btn.dataset.subCategoryId;
             
-            subCategoryVal = document.querySelectorAll('.product-item__sub-category')[index].dataset.original
-            document.querySelector('select[name="sub_category_id"]').value = subCategoryVal
-            
-            let subCategoryOption
             subCatOption.forEach(subCat => {
-                subCategoryOption = subCat.dataset.parentCategory
-                if (subCategoryOption !== categoryVal) {
+                subCat.hidden = false
+                if (subCat.dataset.parentCategoryId !== document.querySelector('select[name="category_id"]').value) {
                     subCat.hidden = true
-                }
-                else {
-                    subCat.hidden = false
                 }
             })
 
-            categorySelect.addEventListener('change', function () {
-                parentCategoryValOnChange = categorySelect.options[categorySelect.selectedIndex].value
-
+            categorySelect.addEventListener('input', function () {
+                subCategorySelect.value = ""
                 subCatOption.forEach(subCat => {
                     subCat.hidden = false
-                    if (subCat.dataset.parentCategory != parentCategoryValOnChange) {
+                    if (subCat.dataset.parentCategoryId !== document.querySelector('select[name="category_id"]').value) {
                         subCat.hidden = true
                     }
-                    else {
-                        subCat.selected = true
-                        subCat.hidden = false
-                    }
                 })
-                
             })
 
         })
