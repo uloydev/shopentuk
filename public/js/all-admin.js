@@ -5939,16 +5939,19 @@ __webpack_require__.r(__webpack_exports__);
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products') {
   var btnOpenEditModal = document.querySelectorAll('.btn[data-target="#modal-edit-product"]');
-  var btnOpenAddModal = document.querySelector('.btn[data-target="#modal-add-product"]');
-  $('.btn-delete-product').click(function () {
-    var productId = $(this).data('productId');
-    $('#modalConfirmDelete').data('productId', productId);
-    $('#modalConfirmDelete').modal('show');
+  var btnOpenAddModal = document.querySelector('.btn[data-target="#modal-add-product"]'); // console.log(modalConfirmDelete)
+
+  document.querySelectorAll('.btn-delete-product').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      console.log('ok');
+      e.preventDefault();
+      document.getElementById('modalConfirmDelete').dataset.productId = btn.dataset.productId;
+      $('#modalConfirmDelete').modal('show');
+    });
   });
-  $('#confirmDeleteBtn').click(function () {
-    var productId = $('#modalConfirmDelete').data('productId');
-    console.log('ok');
-    $('#formDelete' + productId).submit();
+  document.getElementById('confirmDeleteBtn').addEventListener('click', function (e) {
+    e.preventDefault();
+    document.getElementById('formDelete' + document.getElementById('modalConfirmDelete').dataset.productId).submit();
   });
   btnOpenAddModal.addEventListener('click', function () {
     var modalAdd = document.getElementById('modal-add-product');

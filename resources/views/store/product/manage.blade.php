@@ -111,7 +111,7 @@
 @section('components')
     @include('store.product.edit')
     @include('store.product.create')
-    <div class="modal" tabindex="-1" role="dialog" id="modalConfirmDelete" data-product-id="">
+    <div class="modal" tabindex="-1" role="dialog" id="modalConfirmDelete">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
