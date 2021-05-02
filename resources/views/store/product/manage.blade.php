@@ -30,12 +30,14 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered no-wrap" id="zero_config">
+                        <table class="table table-striped table-bordered no-wrap text-center" id="zero_config">
                             @include('partial.thead', [
                             'thead' => [
+                            'id',
                             'title',
                             'price',
                             'point price',
+                            'point bonus',
                             'category',
                             'sub category',
                             'action'
@@ -44,6 +46,9 @@
                             <tbody>
                                 @foreach ($products as $product)
                                     <tr class="product-item">
+                                        <td class="product-item__id" data-original="{{ $product->id }}">
+                                            {{ $product->id }}
+                                        </td>
                                         <td class="product-item__title" data-original="{{ $product->title }}">
                                             {{ $product->title }}
                                         </td>
@@ -53,6 +58,9 @@
                                         <td class="product-item__point" data-original="{{ $product->point_price }}">
                                             {{ $product->point_price }}
                                         </td>
+                                        <td class="product-item__point_bonus" data-original="{{ $product->point_bonus }}">
+                                            {{ $product->point_bonus }}
+                                        </td>
                                         <td class="product-item__category"
                                             data-original="{{ $product->productCategory->id }}">
                                             {{ Str::words($product->productCategory->title, 1) }}
@@ -61,8 +69,8 @@
                                             data-original="{{ $product->sub_category_id }}">
                                             {{ Str::words($product->productSubCategory->title, 2) }}
                                         </td>
-                                        <td>
-                                            <a href="{{ route('admin.products.show', $product->id) }}"
+                                        <td class="d-flex justify-content-center">
+                                            <a href="{{ route('store.product.show', $product->slug) }}"
                                                 class="btn btn-sm btn-primary btn-rounded mr-2">
                                                 View
                                             </a>
@@ -74,7 +82,11 @@
                                                 data-category-id="{{ $product->category_id }}"
                                                 data-sub-category-id="{{ $product->sub_category_id }}"
                                                 data-product-desc="{{ $product->description }}"
-                                                data-update-url="{{ route('admin.products.update', $product->id) }}">
+                                                data-update-url="{{ route('admin.products.update', $product->id) }}"
+                                                data-is-redeem="{{ $product->is_redeem }}"
+                                                data-weight="{{ $product->weight }}"
+                                                data-point-bonus="{{ $product->point_bonus }}"
+                                                data-image-url="{{ $product->mainImage ? Storage::url($product->mainImage->url) : 'https://via.placeholder.com/200' }}">
                                                 Edit
                                             </a>
                                             <form id="formDelete{{ $product->id }}" method="POST" class="d-inline-block"

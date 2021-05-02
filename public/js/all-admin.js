@@ -5987,6 +5987,10 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products'
       modalEdit.querySelector('textarea[name="description"]').value = btn.dataset.productDesc;
       modalEdit.querySelector('select[name="category_id"]').value = btn.dataset.categoryId;
       modalEdit.querySelector('select[name="sub_category_id"]').value = btn.dataset.subCategoryId;
+      modalEdit.querySelector('input[name="is_redeem"][value="' + btn.dataset.isRedeem + '"]').checked = true;
+      modalEdit.querySelector('input[name="weight"]').value = btn.dataset.weight;
+      modalEdit.querySelector('input[name="point_bonus"]').value = btn.dataset.pointBonus;
+      modalEdit.querySelector('img#productImage').src = btn.dataset.imageUrl;
       subCatOption.forEach(function (subCat) {
         subCat.hidden = false;
 

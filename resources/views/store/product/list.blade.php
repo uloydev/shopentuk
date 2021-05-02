@@ -2,7 +2,7 @@
     @forelse ($products as $product)
         @if ($product->discount)
         <x-card-product
-            product-img="{{ $product->mainImage ? asset('storage/' . $product->mainImage->url) : asset('img/static/example.jpg') }}" 
+            product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : 'https://via.placeholder.com/200' }}" 
             product-name="{{ $product->title }}"
             product-category="{{ $product->productCategory->title }}" 
             product-category-id="{{ $product->productCategory->id }}" 
@@ -13,7 +13,7 @@
             product-is-obral="true" />
         @else
             <x-card-product 
-                product-img="{{ $product->mainImage ? asset('storage/' . $product->mainImage->url) : asset('img/static/example.jpg') }}" 
+                product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : 'https://via.placeholder.com/200' }}" 
                 product-name="{{ $product->title }}"
                 product-category="{{ $product->productCategory->title }}" 
                 product-category-id="{{ $product->productCategory->id }}" 

@@ -21,6 +21,7 @@ class Product extends Model
         'sub_category_id',
         'is_redeem',
         'weight',
+        'point_bonus'
     ];
 
     /**

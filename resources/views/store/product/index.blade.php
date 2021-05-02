@@ -19,7 +19,7 @@
                             @if ($product->discount)
                                 <x-card-product
                                 data-product-id="{{ $product->id }}"
-                                product-img="{{ $product->mainImage ? asset('storage/' . $product->mainImage->url) : asset('img/static/example.jpg') }}"
+                                product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : 'https://via.placeholder.com/200' }}"
                                 product-name="{{ Str::words($product->title, 2) }}"
                                 product-category="{{ $product->productCategory->title }}" 
                                 product-category-id="{{ $product->productCategory->id }}" 
@@ -30,7 +30,7 @@
                                 is-horizontal="true" />
                             @else
                                 <x-card-product 
-                                product-img="{{ $product->mainImage ? asset('storage/' . $product->mainImage->url) : asset('img/static/example.jpg') }}" 
+                                product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : 'https://via.placeholder.com/200' }}" 
                                 product-name="{{ Str::words($product->title, 2) }}"
                                 product-category="{{ $product->productCategory->title }}" 
                                 product-category-id="{{ $product->productCategory->id }}" 
@@ -109,7 +109,7 @@
                     @if ($product->discount)
                         <x-card-product
                             data-product-id="{{ $product->id }}"
-                            product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : asset('img/static/example.jpg') }}" 
+                            product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : 'https://via.placeholder.com/200' }}" 
                             product-name="{{ $product->title }}"
                             product-category="{{ $product->productCategory->title }}" 
                             product-category-id="{{ $product->productCategory->id }}" 
@@ -123,7 +123,7 @@
                     @else
                         <x-card-product 
                             data-product-id="{{ $product->id }}"
-                            product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : asset('img/static/example.jpg') }}" 
+                            product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : 'https://via.placeholder.com/200' }}" 
                             product-name="{{ $product->title }}"
                             product-category="{{ $product->productCategory->title }}" 
                             product-category-id="{{ $product->productCategory->id }}" 

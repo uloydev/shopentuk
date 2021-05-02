@@ -24,6 +24,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('sub_category_id')->nullable();
             $table->boolean('is_redeem')->default(false);
             $table->integer('weight')->default(0);
+            $table->unsignedInteger('point_bonus')->default(0);
             $table->timestamps();
         });
     }

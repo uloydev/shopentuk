@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Product;
-use App\Models\ProductImage;
-use Illuminate\Http\Request;
-use App\Models\ProductCategory;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ProductValidation;
+use App\Models\Product;
+use App\Models\ProductCategory;
+use App\Models\ProductImage;
 use App\Models\ProductSubCategory;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -22,7 +22,25 @@ class ProductController extends Controller
         $product->point_price = $request->point_price;
         $product->category_id = $request->category_id;
         $product->sub_category_id = $request->sub_category_id;
+        $product->weight = $request->weight;
+        $product->point_bonus = $request->point_bonus;
+        $product->is_redeem = (int) $request->is_redeem;
         $product->save();
+        // dd($request);
+        if ($request->hasFile('image')) {
+            if ($product->mainImage) {
+                // dd($product);
+                $image = $product->mainImage;
+                Storage::delete($image->url);
+                $image->delete();
+            }
+            $imgPath = $request->file('image')->store('public/img');
+            ProductImage::create([
+                'product_id' => $product->id,
+                'url' => $imgPath,
+                'is_main_image' => true
+            ]);
+        }
     }
 
     public function index()
@@ -31,7 +49,7 @@ class ProductController extends Controller
             'categories' => ProductCategory::all(),
             'subCategories' => ProductSubCategory::all(),
             'products' => Product::all(),
-            'title' => 'manage product'
+            'title' => 'manage product',
         ]);
     }
 
