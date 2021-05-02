@@ -669,6 +669,7 @@ __webpack_require__.r(__webpack_exports__);
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products') {
   var btnOpenEditModal = document.querySelectorAll('.btn[data-target="#modal-edit-product"]');
+  var btnOpenAddModal = document.querySelector('.btn[data-target="#modal-add-product"]');
   $('.btn-delete-product').click(function () {
     var productId = $(this).data('productId');
     $('#modalConfirmDelete').data('productId', productId);
@@ -679,29 +680,47 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products'
     console.log('ok');
     $('#formDelete' + productId).submit();
   });
-  btnOpenEditModal.forEach(function (btn, index) {
-    var productItem = btn.parentNode.parentNode;
-    var categoryVal, subCategoryVal, parentCategoryValOnChange;
-    btn.addEventListener('click', function () {
-      var categorySelect = document.querySelector('#category-id');
-      var subCategorySelect = document.querySelector('#sub-category-id');
-      var subCatOption = document.querySelectorAll('#sub-category-id option');
-      document.querySelector('#modal-edit-product .modal-title').innerHTML = "edit product <b>".concat(productItem.querySelector('.product-item__title').dataset.original, "</b>");
-      document.querySelector('#modal-edit-product form').action = btn.dataset.updateUrl; //title
-
-      document.querySelector('input[name="title"]').value = productItem.querySelector('.product-item__title').dataset.original; //price
-
-      document.querySelector('input[name="price"]').value = productItem.querySelector('.product-item__price').dataset.original; //point
-
-      var point = productItem.querySelector('.product-item__point').dataset.original;
-      document.querySelector('input[name="point_price"]').value = point;
-      document.querySelector('textarea[name="description"]').value = btn.dataset.productDesc;
-      document.querySelector('select[name="category_id"]').value = btn.dataset.categoryId;
-      document.querySelector('select[name="sub_category_id"]').value = btn.dataset.subCategoryId;
+  btnOpenAddModal.addEventListener('click', function () {
+    var modalAdd = document.getElementById('modal-add-product');
+    var categorySelect = modalAdd.querySelector('#category-id');
+    var subCategorySelect = modalAdd.querySelector('#sub-category-id');
+    var subCatOption = modalAdd.querySelectorAll('#sub-category-id option');
+    categorySelect.value = "";
+    subCategorySelect.value = "";
+    categorySelect.addEventListener('input', function () {
+      subCategorySelect.value = "";
       subCatOption.forEach(function (subCat) {
         subCat.hidden = false;
 
-        if (subCat.dataset.parentCategoryId !== document.querySelector('select[name="category_id"]').value) {
+        if (subCat.dataset.parentCategoryId !== categorySelect.value) {
+          subCat.hidden = true;
+        }
+      });
+    });
+  });
+  btnOpenEditModal.forEach(function (btn, index) {
+    var productItem = btn.parentNode.parentNode;
+    btn.addEventListener('click', function () {
+      var modalEdit = document.getElementById('modal-edit-product');
+      var categorySelect = modalEdit.querySelector('#category-id');
+      var subCategorySelect = modalEdit.querySelector('#sub-category-id');
+      var subCatOption = modalEdit.querySelectorAll('#sub-category-id option');
+      modalEdit.querySelector('.modal-title').innerHTML = "edit product <b>".concat(productItem.querySelector('.product-item__title').dataset.original, "</b>");
+      modalEdit.querySelector('form').action = btn.dataset.updateUrl; //title
+
+      modalEdit.querySelector('input[name="title"]').value = productItem.querySelector('.product-item__title').dataset.original; //price
+
+      modalEdit.querySelector('input[name="price"]').value = productItem.querySelector('.product-item__price').dataset.original; //point
+
+      var point = productItem.querySelector('.product-item__point').dataset.original;
+      modalEdit.querySelector('input[name="point_price"]').value = point;
+      modalEdit.querySelector('textarea[name="description"]').value = btn.dataset.productDesc;
+      modalEdit.querySelector('select[name="category_id"]').value = btn.dataset.categoryId;
+      modalEdit.querySelector('select[name="sub_category_id"]').value = btn.dataset.subCategoryId;
+      subCatOption.forEach(function (subCat) {
+        subCat.hidden = false;
+
+        if (subCat.dataset.parentCategoryId !== modalEdit.querySelector('select[name="category_id"]').value) {
           subCat.hidden = true;
         }
       });
@@ -710,7 +729,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/products'
         subCatOption.forEach(function (subCat) {
           subCat.hidden = false;
 
-          if (subCat.dataset.parentCategoryId !== document.querySelector('select[name="category_id"]').value) {
+          if (subCat.dataset.parentCategoryId !== categorySelect.value) {
             subCat.hidden = true;
           }
         });

@@ -134,7 +134,7 @@ class GameController extends Controller
     {
         return view('game.game-history')->with([
             'games' => Game::with('winners')->latest()->where('status', 'finished')->limit(50)->paginate(),
-            'rule' => Rules::first(),
+            'rules' => Rules::all(),
             'currentTime' => Carbon::now(),
         ]);
     }

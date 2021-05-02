@@ -24,22 +24,6 @@
                                 'id' => 'point',
                                 'name' => 'point_price',
                                 'type' => 'number',
-                            ],
-                            [
-                                'id' => 'category-id',
-                                'name' => 'category_id',
-                                'type' => 'select'
-                            ]
-                        ];
-
-                        $selects = [
-                            [
-                                'id' => 'category-id',
-                                'label' => 'category'
-                            ],
-                            [
-                                'id' => 'sub-category-id',
-                                'label' => 'sub category'
                             ]
                         ];
                     @endphp
@@ -51,14 +35,18 @@
                         name="{{ $input['name'] }}" type="{{ $input['type'] }}"
                         add-class="text-capitalize" required />
                     @endforeach
-                    @foreach ($selects as $select)
-                        <x-select-template label="{{ $select['label'] }}" 
-                        id="{{ $select['id'] }}" name="{{ str_replace('-', '_', $select['id']) }}">
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->title }}</option>
-                            @endforeach
-                        </x-select-template>
-                    @endforeach
+                    <x-select-template label="category" 
+                    id="category-id" name="category_id">
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->title }}</option>
+                        @endforeach
+                    </x-select-template>
+                    <x-select-template label="sub category" 
+                    id="sub-category-id" name="sub_category_id">
+                        @foreach ($subCategories as $sub)
+                            <option value="{{ $sub->id }}" data-parent-category-id="{{ $sub->category_id }}">{{ $sub->title }}</option>
+                        @endforeach
+                    </x-select-template>
                     <div class="form-group">
                         <label for="add-desc">Description</label>
                         <textarea class="form-control" id="add-desc" rows="5" name="description"

@@ -2,7 +2,7 @@ import * as HelperModule from "./../../helper-module"
 
 if (HelperModule.pageUrl === '/admin/products') {
     const btnOpenEditModal = document.querySelectorAll('.btn[data-target="#modal-edit-product"]')
-
+    const btnOpenAddModal = document.querySelector('.btn[data-target="#modal-add-product"]')
     $('.btn-delete-product').click(function () {
         var productId = $(this).data('productId');
         $('#modalConfirmDelete').data('productId', productId);
@@ -15,40 +15,58 @@ if (HelperModule.pageUrl === '/admin/products') {
         $('#formDelete' + productId).submit();
     });
 
-    btnOpenEditModal.forEach((btn, index) => {
+    btnOpenAddModal.addEventListener('click', function () {
+        const modalAdd = document.getElementById('modal-add-product')
+        const categorySelect = modalAdd.querySelector('#category-id')
+        const subCategorySelect = modalAdd.querySelector('#sub-category-id')
+        const subCatOption = modalAdd.querySelectorAll('#sub-category-id option')
+        categorySelect.value = ""
+        subCategorySelect.value = ""
+        categorySelect.addEventListener('input', function () {
+            subCategorySelect.value = ""
+            subCatOption.forEach(subCat => {
+                subCat.hidden = false
+                if (subCat.dataset.parentCategoryId !== categorySelect.value) {
+                    subCat.hidden = true
+                }
+            })
+        })
+    });
+
+    btnOpenEditModal.forEach(function (btn, index) {
         const productItem = btn.parentNode.parentNode
-        let categoryVal, subCategoryVal, parentCategoryValOnChange
 
-        btn.addEventListener('click', () => {
-            const categorySelect = document.querySelector('#category-id')
-            const subCategorySelect = document.querySelector('#sub-category-id')
-            const subCatOption = document.querySelectorAll('#sub-category-id option')
+        btn.addEventListener('click', function () {
+            const modalEdit = document.getElementById('modal-edit-product')
+            const categorySelect = modalEdit.querySelector('#category-id')
+            const subCategorySelect = modalEdit.querySelector('#sub-category-id')
+            const subCatOption = modalEdit.querySelectorAll('#sub-category-id option')
 
-            document.querySelector('#modal-edit-product .modal-title').innerHTML =
-            `edit product <b>${productItem.querySelector('.product-item__title').dataset.original}</b>`
-            
-            document.querySelector('#modal-edit-product form').action = btn.dataset.updateUrl
+            modalEdit.querySelector('.modal-title').innerHTML =
+                `edit product <b>${productItem.querySelector('.product-item__title').dataset.original}</b>`
+
+            modalEdit.querySelector('form').action = btn.dataset.updateUrl
 
             //title
-            document.querySelector('input[name="title"]').value =
-            productItem.querySelector('.product-item__title').dataset.original
+            modalEdit.querySelector('input[name="title"]').value =
+                productItem.querySelector('.product-item__title').dataset.original
 
             //price
-            document.querySelector('input[name="price"]').value =
-            productItem.querySelector('.product-item__price').dataset.original
+            modalEdit.querySelector('input[name="price"]').value =
+                productItem.querySelector('.product-item__price').dataset.original
 
             //point
             const point = productItem.querySelector('.product-item__point').dataset.original
-            document.querySelector('input[name="point_price"]').value = point
+            modalEdit.querySelector('input[name="point_price"]').value = point
 
-            document.querySelector('textarea[name="description"]').value = btn.dataset.productDesc
+            modalEdit.querySelector('textarea[name="description"]').value = btn.dataset.productDesc
 
-            document.querySelector('select[name="category_id"]').value = btn.dataset.categoryId;
-            document.querySelector('select[name="sub_category_id"]').value = btn.dataset.subCategoryId;
-            
+            modalEdit.querySelector('select[name="category_id"]').value = btn.dataset.categoryId;
+            modalEdit.querySelector('select[name="sub_category_id"]').value = btn.dataset.subCategoryId;
+
             subCatOption.forEach(subCat => {
                 subCat.hidden = false
-                if (subCat.dataset.parentCategoryId !== document.querySelector('select[name="category_id"]').value) {
+                if (subCat.dataset.parentCategoryId !== modalEdit.querySelector('select[name="category_id"]').value) {
                     subCat.hidden = true
                 }
             })
@@ -57,7 +75,7 @@ if (HelperModule.pageUrl === '/admin/products') {
                 subCategorySelect.value = ""
                 subCatOption.forEach(subCat => {
                     subCat.hidden = false
-                    if (subCat.dataset.parentCategoryId !== document.querySelector('select[name="category_id"]').value) {
+                    if (subCat.dataset.parentCategoryId !== categorySelect.value) {
                         subCat.hidden = true
                     }
                 })
