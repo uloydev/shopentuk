@@ -1,5 +1,5 @@
-<div class="alert alert-{{ $type }} fade show 
-{{ $isDismissable == 'true' ? 'alert-dismissible' : '' }} mb-0" role="alert">
+<div class="alert alert-{{ $type }} fade show
+{{ $isDismissable == 'true' ? 'alert-dismissible' : '' }} mb-0 {{ $addClass }}" role="alert">
     @if ($isDismissable == 'true')
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">×</span>

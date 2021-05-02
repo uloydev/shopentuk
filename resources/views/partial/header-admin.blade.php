@@ -20,7 +20,7 @@
         <div class="navbar-collapse collapse" id="navbarSupportedContent">
             <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('admin.setting.index') }}">
                         <i data-feather="settings" class="svg-icon"></i>
                     </a>
                 </li>
