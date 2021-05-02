@@ -9,42 +9,32 @@
             <div class="modal-body">
                 <form enctype="multipart/form-data" action="{{ route('admin.products.store') }}" method="post">
                     @csrf
-                    @php
-                        $inputs = [
-                            [
-                                'id' => 'title',
-                                'name' => 'title',
-                                'type' => 'text',
-                            ],
-                            [
-                                'id' => 'price',
-                                'name' => 'price',
-                                'type' => 'number',
-                            ],
-                            [
-                                'id' => 'point-price',
-                                'name' => 'point_price',
-                                'type' => 'number',
-                            ],
-                            [
-                                'id' => 'point-bonus',
-                                'name' => 'point_bonus',
-                                'type' => 'number',
-                            ],
-                            [
-                                'id' => 'weight',
-                                'name' => 'weight',
-                                'type' => 'number',
-                            ],
-                        ];
-                    @endphp
 
-                    @foreach ($inputs as $input)
-                        <x-input-template id="{{ 'product-' . $input['id'] }}"
-                            label="{{ str_replace('-', ' ', 'product-' . $input['id']) }}"
-                            placeholder="Input the {{ $input['name'] }} of the product" name="{{ $input['name'] }}"
-                            type="{{ $input['type'] }}" add-class="text-capitalize" required />
-                    @endforeach
+                    <x-input-template id="title"
+                        label="title"
+                        placeholder="Input the title of the product" name="title"
+                        type="text" add-class="text-capitalize" required />
+                            
+                    <x-input-template id="price"
+                        label="price"
+                        placeholder="Input the price of the product" name="price"
+                            type="number" add-class="text-capitalize" required />
+                            
+                    <x-input-template id="point-price"
+                        label="Point Price"
+                        placeholder="Input the point price of the product" name="point_price"
+                        type="number" add-class="text-capitalize" required />
+                        
+                    <x-input-template id="point-bonus"
+                        label="Point Bonus"
+                        placeholder="Input the point bonus of the product" name="point_bonus"
+                        type="number" add-class="text-capitalize" required />
+                        
+                    <x-input-template id="weight"
+                        label="Weight"
+                        placeholder="Input the weight of the product" name="weight"
+                        type="number" add-class="text-capitalize" required />
+
                     <x-select-template label="category" id="category-id" name="category_id">
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->title }}</option>
