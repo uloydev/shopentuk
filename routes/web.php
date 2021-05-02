@@ -129,6 +129,7 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
             'all-category.destroy'
         );
         Route::resource('products' , 'ProductController');
+        Route::resource('product-discounts' , 'ProductDiscountController');
         Route::resource('rules' , 'RulesController')->only(['store', 'index', 'destroy']);
         Route::resource('vouchers' , 'VoucherController')->only([
             'store', 'index', 'destroy', 'update'
