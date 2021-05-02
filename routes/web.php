@@ -131,7 +131,11 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
         Route::resource('products' , 'ProductController');
         Route::resource('product-discounts' , 'ProductDiscountController');
         Route::resource('rules' , 'RulesController')->only(['store', 'index', 'destroy']);
-        Route::resource('vouchers' , 'VoucherController')->only(['store', 'index', 'destroy', 'update']);
+        Route::resource('vouchers' , 'VoucherController')->only([
+            'store', 'index', 'destroy', 'update'
+        ]);
+        Route::resource('setting' , 'SettingController')->only(['index', 'update']);
+
         
         // game management routes
         Route::name('game.')->prefix('game')->group(function () {

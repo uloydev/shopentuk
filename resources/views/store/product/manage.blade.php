@@ -32,22 +32,22 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered no-wrap text-center" id="zero_config">
                             @include('partial.thead', [
-                            'thead' => [
-                            'id',
-                            'title',
-                            'price',
-                            'point price',
-                            'point bonus',
-                            'category',
-                            'sub category',
-                            'action'
-                            ]
+                                'thead' => [
+                                    'no',
+                                    'title',
+                                    'price',
+                                    'point price',
+                                    'point bonus',
+                                    'category',
+                                    'sub category',
+                                    'action'
+                                ]
                             ])
                             <tbody>
                                 @foreach ($products as $product)
                                     <tr class="product-item">
-                                        <td class="product-item__id" data-original="{{ $product->id }}">
-                                            {{ $product->id }}
+                                        <td class="product-item__id">
+                                            {{ $loop->iteration }}
                                         </td>
                                         <td class="product-item__title" data-original="{{ $product->title }}">
                                             {{ $product->title }}
@@ -71,7 +71,8 @@
                                         </td>
                                         <td class="d-flex justify-content-center">
                                             <a href="{{ route('store.product.show', $product->slug) }}"
-                                                class="btn btn-sm btn-primary btn-rounded mr-2">
+                                                class="btn btn-sm btn-primary btn-rounded mr-2"
+                                                target="_blank">
                                                 View
                                             </a>
                                             <a href="{{ route('admin.products.edit', $product->id) }}"
