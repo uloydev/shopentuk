@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\PaymentConfirmation;
 use App\Models\PaymentConfirmationImage;
@@ -10,12 +11,25 @@ use Illuminate\Validation\Rule;
 
 class PaymentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->only('manage');
+    }
+
     public function showConfirm(Request $request)
     {
         return view('payment.confirm', [
             'title' => 'Konfirmasi pembayaran',
             'order_id' => $request->order_id
         ]);
+    }
+
+    public function manage()
+    {
+        $title = 'Manage payment confirmation';
+        $allOrder = Order::where('status', 'unpaid')->has('paymentConfirmation', '>=', 1)->get();
+
+        return view('payment.manage-confirm', get_defined_vars());
     }
 
     public function showReturning()

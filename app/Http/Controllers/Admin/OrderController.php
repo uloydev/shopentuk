@@ -22,7 +22,6 @@ class OrderController extends Controller
 
     public function index()
     {
-        // dd(;
         return view('order.manage', ['orders' => Order::all(), 'title' => 'manage order']);
     }
 
@@ -92,6 +91,17 @@ class OrderController extends Controller
         return redirect()->route('admin.order.refund.index')->with(
             'success',
             'sukses refund order!'
+        );
+    }
+
+    public function changeStatus(Order $order)
+    {
+        $order->update([
+            'status' => 'paid'
+        ]);
+        return redirect()->back()->with(
+            'success',
+            'Successfully change status for order with ID' . $order->id
         );
     }
 }

@@ -43,6 +43,7 @@ Route::prefix('store')->name('store.')->group(function () {
 
 Route::prefix('payment')->name('payment.')->group(function () {
     Route::get('confirmation', 'PaymentController@showConfirm')->name('show-confirm');
+    Route::get('manage', 'PaymentController@manage')->name('manage-confirm');
     Route::post('confirmation', 'PaymentController@store')->name('store');
     Route::get('returning', 'PaymentController@showReturning')->name('returning');
 });
@@ -102,6 +103,9 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
         Route::prefix('order')->name('order.')->group(function () {
             Route::get('/', 'OrderController@index')->name('index');
             Route::get('new', 'OrderController@newOrder')->name('new');
+            Route::put('change-status/{order}', 'OrderController@changeStatus')->name(
+                'change-status'
+            );
         });
 
         Route::get('all-category/{cat}/sub', 'AllCategoryController@subCategoryIndex')->name(

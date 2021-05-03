@@ -20,6 +20,7 @@
                             <table class="table table-striped table-bordered no-wrap" id="zero_config">
                                 @include('partial.thead', [
                                     'thead' => [
+                                        'order id',
                                         'title product',
                                         'product price',
                                         'product point ',
@@ -41,12 +42,13 @@
                                         <tr class="product-item">
                                             @include('partial.tbody', [
                                                 'td' => [
+                                                    $order->id,
                                                     '',
                                                     // Str::limit(
                                                     //     $order->orderProducts->product->title, 10
                                                     // ) ?? '-',
-                                                    $order->product_price,
-                                                    $order->point_price,
+                                                    'Rp ' . number_format($order->product_price),
+                                                    $order->point_price ?? '-',
                                                     $order->price_total,
                                                     $order->point_total,
                                                     $order->weight_total,
