@@ -19,7 +19,8 @@
                                         'price total',
                                         'point total',
                                         'status',
-                                        'shipping price'
+                                        'shipping price',
+                                        'order date'
                                     ]
                                 ])
                                 <tbody>
@@ -47,7 +48,11 @@
                                             <td class="order-item__sub-cat" 
                                             data-original="{{ $order->shipping_price }}">
                                                 @currency($order->shipping_price)
-                                            </td>  
+                                            </td>
+                                            <td class="order-item__sub-cat" 
+                                            data-original="{{ $order->created_at }}">
+                                                {{ $order->created_at->format('d M Y') }}
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
