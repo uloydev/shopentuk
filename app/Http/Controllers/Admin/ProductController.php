@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductValidation;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
@@ -129,4 +130,5 @@ class ProductController extends Controller
 
         return redirect()->back()->with(['msg' => 'set main product image successfuly']);
     }
+
 }

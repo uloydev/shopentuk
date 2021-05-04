@@ -10,6 +10,10 @@
     <x-alert type="error">
         {{ session('error') }}
     </x-alert>
+    @elseif(session('success'))
+    <x-alert type="success">
+        {{ session('success') }}
+    </x-alert>
     @endif
     @if (isset($cart) && $cart->cartItems->count() > 0)
         <input type="hidden" id="cartId" value="{{ $cart->id }}">
@@ -21,6 +25,17 @@
             @foreach ($cart->cartItems as $item)
                 <div class="py-10 cart-item">
                     <figure class="flex flex-wrap items-center">
+                        @if (!$yourFavorite->contains($item->product_id))
+                        <form action="{{ route('my-account.favorite.store') }}" 
+                        method="POST" class="mr-3">
+                            @csrf
+                            <input type="hidden" name="product_id" 
+                            value="{{ $item->product_id }} " required>
+                            <button type="submit">
+                                <box-icon name='heart' color="red"></box-icon>
+                            </button>
+                        </form>
+                        @endif
                         <img src="{{ asset('storage/' . $item->product->mainImage->url) }}" 
                         alt="Product on cart" class="h-24 mx-auto">
                         <figcaption class="p-3 flex-grow flex flex-col lg:flex-row lg:justify-between">
@@ -35,7 +50,8 @@
                                     <var class="cart-item__price not-italic ml-3"
                                     data-price="{{ $item->product->point_price }}" 
                                     data-init-price="{{ $item->product->point_price }}" 
-                                    data-is-point="true" data-weight="{{ $item->product->weight }}">
+                                    data-is-point="true" 
+                                    data-weight="{{ $item->product->weight }}">
                                         {{ $item->product->point_price * $item->quantity }} point
                                     </var>
                                 @else
@@ -112,13 +128,14 @@
         <div class="flex justify-between items-center flex-col lg:flex-row space-y-5 lg:space-y-0">
             <a href="{{ url()->previous() }}" id="btn-back"
             class="btn-outline hpver:bg-blue-600 border-blue-500 text-blue-500 
-            hover:bg-blue-500 hover:text-white w-full lg:w-auto">
+            hover:bg-blue-500 hover:text-white w-full lg:w-auto change-icon-color-on-hover" data-to-color="#fff">
                 <box-icon name='left-arrow-alt'
                 class="text-blue-500"></box-icon>
                 <span>Kembali</span>
             </a>
             <x-btn action="submit" type="primary" text="Lanjutkan checkout" 
-            id="btnShowCheckoutStep" add-class="w-full lg:w-auto" />
+            data-checkbox-name="choose_checkout"
+            id="btnShowCheckoutStep" add-class="w-full lg:w-auto need-checked" />
         </div>
 
         @include('payment.step-checkout')

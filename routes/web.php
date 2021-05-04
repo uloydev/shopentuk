@@ -43,8 +43,8 @@ Route::prefix('store')->name('store.')->group(function () {
 
 Route::prefix('payment')->name('payment.')->group(function () {
     Route::get('confirmation', 'PaymentController@showConfirm')->name('show-confirm');
+    Route::get('manage', 'PaymentController@manage')->name('manage-confirm');
     Route::post('confirmation', 'PaymentController@store')->name('store');
-    Route::get('returning', 'PaymentController@showReturning')->name('returning');
 });
 
 Auth::routes();
@@ -65,6 +65,11 @@ Route::prefix('refund')->name('refund.')->group(function (){
 Route::namespace('Customer')->middleware(['auth', 'customer'])->group(function () {
     // my account routes
     Route::prefix('my-account')->name('my-account.')->group(function () {
+        Route::get('wishlist', 'DashboardController@wishlistProduct')->name('product.favorite');
+        Route::post('wishlist', 'DashboardController@storeWishlist')->name('favorite.store');
+        Route::delete('wishlist/{favoriteProduct}', 'DashboardController@removeWishlist')->name(
+            'favorite.remove'
+        );
         Route::post('update', 'DashboardController@updateAccount')->name('update');
         Route::get('order/history', 'DashboardController@orderHistory')->name('history.order');
         Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');
@@ -102,6 +107,9 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
         Route::prefix('order')->name('order.')->group(function () {
             Route::get('/', 'OrderController@index')->name('index');
             Route::get('new', 'OrderController@newOrder')->name('new');
+            Route::put('change-status/{order}', 'OrderController@changeStatus')->name(
+                'change-status'
+            );
         });
 
         Route::get('all-category/{cat}/sub', 'AllCategoryController@subCategoryIndex')->name(

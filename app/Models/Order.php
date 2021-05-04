@@ -42,7 +42,7 @@ class Order extends Model
 
     public function paymentConfirmation()
     {
-        return $this->hasOne('App\Models\Refund')->where('is_confirmed', true);
+        return $this->hasOne('App\Models\PaymentConfirmation');
     }
 
     public function userAddress()

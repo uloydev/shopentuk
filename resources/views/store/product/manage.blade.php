@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-12">
             @if ($errors->any())
-                <div class="alert alert--danger" role="alert">
+            <div class="alert alert--danger" role="alert">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -49,16 +49,20 @@
                                         <td class="product-item__id">
                                             {{ $loop->iteration }}
                                         </td>
-                                        <td class="product-item__title" data-original="{{ $product->title }}">
+                                        <td class="product-item__title" 
+                                        data-original="{{ $product->title }}">
                                             {{ $product->title }}
                                         </td>
-                                        <td class="product-item__price" data-original="{{ $product->price }}">
+                                        <td class="product-item__price" 
+                                        data-original="{{ $product->price }}">
                                             @currency($product->price)
                                         </td>
-                                        <td class="product-item__point" data-original="{{ $product->point_price }}">
+                                        <td class="product-item__point" 
+                                        data-original="{{ $product->point_price }}">
                                             {{ $product->point_price }}
                                         </td>
-                                        <td class="product-item__point_bonus" data-original="{{ $product->point_bonus }}">
+                                        <td class="product-item__point_bonus" 
+                                        data-original="{{ $product->point_bonus }}">
                                             {{ $product->point_bonus }}
                                         </td>
                                         <td class="product-item__category"
@@ -112,23 +116,5 @@
 @section('components')
     @include('store.product.edit')
     @include('store.product.create')
-    <div class="modal" tabindex="-1" role="dialog" id="modalConfirmDelete">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Apa Anda yakin ingin menghapus Product ini ?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Semua order yang terkait dengan Product ini akan ikut terhapus.</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-danger" id="confirmDeleteBtn">DELETE</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">CANCEL</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('store.product.delete')
 @endsection

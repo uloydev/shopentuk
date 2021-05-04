@@ -46,7 +46,7 @@ class FeedbackController extends Controller
         ]);
 
         $sendFeedback = FeedbackCustomer::create($request->except('_token'));
-        Mail::to('bariq.2nd.rodriguez@gmail.com')->send(new SendFeedback($sendFeedback));
+        Mail::to(config('app.email_admin'))->send(new SendFeedback($sendFeedback));
 
         return redirect()->back()->with('success', 'Successfully send message to admin');
     }

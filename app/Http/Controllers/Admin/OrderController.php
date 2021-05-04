@@ -19,11 +19,12 @@ class OrderController extends Controller
 {
     private $completedOrderStatus = ['finished', 'canceled', 'refunded'];
 
-
     public function index()
     {
-        // dd(;
-        return view('order.manage', ['orders' => Order::all(), 'title' => 'manage order']);
+        return view('order.manage', [
+            'orders' => Order::whereIn('status', $this->completedOrderStatus)->get(), 
+            'title' => 'manage order'
+        ]);
     }
 
     public function newOrder()
@@ -92,6 +93,17 @@ class OrderController extends Controller
         return redirect()->route('admin.order.refund.index')->with(
             'success',
             'sukses refund order!'
+        );
+    }
+
+    public function changeStatus(Order $order)
+    {
+        $order->update([
+            'status' => 'paid'
+        ]);
+        return redirect()->back()->with(
+            'success',
+            'Successfully change status for order with ID' . $order->id
         );
     }
 }

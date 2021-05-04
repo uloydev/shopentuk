@@ -40,6 +40,18 @@
         }
     }
 
+    &--danger {
+        @apply bg-red-500 border-red-600 text-white;
+
+        &:not(.btn--without-hover):hover {
+            @apply bg-red-600 border-red-700;
+        }
+
+        &:active {
+            @apply bg-red-800;
+        }
+    }
+
     &--third {
         @apply bg-white text-gray-700 border-gray-200;
 

@@ -12964,6 +12964,30 @@ document.addEventListener('click', function (e) {
 
 /***/ }),
 
+/***/ "./resources/assets/js/component/btn.js":
+/*!**********************************************!*\
+  !*** ./resources/assets/js/component/btn.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+    * set icon color when btn #btn-back hovered
+*/
+var btnChangeIconOnHover = document.querySelectorAll('.change-icon-color-on-hover');
+btnChangeIconOnHover.forEach(function (btn) {
+  var icon = btn.querySelector('box-icon');
+  var iconOriginalColor = icon.getAttribute('color');
+  btn.addEventListener('mouseover', function () {
+    icon.setAttribute('color', btn.dataset.toColor);
+  });
+  btn.addEventListener('mouseleave', function () {
+    icon.setAttribute('color', iconOriginalColor);
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/component/dropdown-menu.js":
 /*!********************************************************!*\
   !*** ./resources/assets/js/component/dropdown-menu.js ***!
@@ -12991,6 +13015,52 @@ if (dropdownToggler) {
       dropdownBox.classList.add('dropdown-box--active');
     }
   });
+}
+
+/***/ }),
+
+/***/ "./resources/assets/js/component/form.js":
+/*!***********************************************!*\
+  !*** ./resources/assets/js/component/form.js ***!
+  \***********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helper-module */ "./resources/assets/js/helper-module.js");
+
+
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/login') {
+  var removeValidationOnFalseForm = function removeValidationOnFalseForm(falseForm) {
+    var falseErrorMessage = falseForm.querySelectorAll('.error-message');
+    var falseErrorInput = falseForm.querySelectorAll('.border-red-400');
+    Array.from(falseErrorMessage).map(function (error) {
+      error.remove();
+    });
+    Array.from(falseErrorInput).map(function (input) {
+      input.value = null;
+      input.classList.remove('border-red-400');
+    });
+  };
+
+  var authPage = document.querySelector('#authPage');
+  var formRegister = authPage.querySelector('#form-daftar');
+  var formLogin = authPage.querySelector('#form-masuk');
+  formRegister.addEventListener('submit', function () {
+    localStorage.clear();
+    localStorage.setItem('sessionFailed', 'regist');
+  });
+  formLogin.addEventListener('submit', function () {
+    localStorage.clear();
+    localStorage.setItem('sessionFailed', 'login');
+  });
+
+  if (localStorage.getItem('sessionFailed') === 'regist') {
+    removeValidationOnFalseForm(formLogin);
+  } else if (localStorage.getItem('sessionFailed') === 'login') {
+    removeValidationOnFalseForm(formRegister);
+  }
 }
 
 /***/ }),
@@ -13371,8 +13441,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_dropdown_menu__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_component_dropdown_menu__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _component_btn_menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./component/btn-menu */ "./resources/assets/js/component/btn-menu.js");
 /* harmony import */ var _component_btn_menu__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_component_btn_menu__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _page_homepage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./page/homepage */ "./resources/assets/js/page/homepage.js");
-/* harmony import */ var _page_auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./page/auth */ "./resources/assets/js/page/auth.js");
+/* harmony import */ var _component_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./component/form */ "./resources/assets/js/component/form.js");
+/* harmony import */ var _component_btn__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./component/btn */ "./resources/assets/js/component/btn.js");
+/* harmony import */ var _component_btn__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_component_btn__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _page_cart_page__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./page/cart-page */ "./resources/assets/js/page/cart-page.js");
 /* harmony import */ var _page_dashboard_customer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./page/dashboard-customer */ "./resources/assets/js/page/dashboard-customer.js");
 /* harmony import */ var _page_game_index__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./page/game-index */ "./resources/assets/js/page/game-index.js");
@@ -13389,52 +13460,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-/***/ }),
-
-/***/ "./resources/assets/js/page/auth.js":
-/*!******************************************!*\
-  !*** ./resources/assets/js/page/auth.js ***!
-  \******************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helper-module */ "./resources/assets/js/helper-module.js");
-
-
-if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/login') {
-  var removeValidationOnFalseForm = function removeValidationOnFalseForm(falseForm) {
-    var falseErrorMessage = falseForm.querySelectorAll('.error-message');
-    var falseErrorInput = falseForm.querySelectorAll('.border-red-400');
-    Array.from(falseErrorMessage).map(function (error) {
-      error.remove();
-    });
-    Array.from(falseErrorInput).map(function (input) {
-      input.value = null;
-      input.classList.remove('border-red-400');
-    });
-  };
-
-  var authPage = document.querySelector('#authPage');
-  var formRegister = authPage.querySelector('#form-daftar');
-  var formLogin = authPage.querySelector('#form-masuk');
-  formRegister.addEventListener('submit', function () {
-    localStorage.clear();
-    localStorage.setItem('sessionFailed', 'regist');
-  });
-  formLogin.addEventListener('submit', function () {
-    localStorage.clear();
-    localStorage.setItem('sessionFailed', 'login');
-  });
-
-  if (localStorage.getItem('sessionFailed') === 'regist') {
-    removeValidationOnFalseForm(formLogin);
-  } else if (localStorage.getItem('sessionFailed') === 'login') {
-    removeValidationOnFalseForm(formRegister);
-  }
-}
 
 /***/ }),
 
@@ -13526,19 +13551,6 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
 
 
   var cartPage = document.querySelector('#cartPage');
-  /**
-   * set icon color when btn #btn-back hovered
-   */
-
-  var backToPrevBtn = document.querySelector('#btn-back');
-  var icon = backToPrevBtn.querySelector('box-icon');
-  var iconOriginalColor = icon.getAttribute('color');
-  backToPrevBtn.addEventListener('mouseover', function () {
-    icon.setAttribute('color', '#fff');
-  });
-  backToPrevBtn.addEventListener('mouseleave', function () {
-    icon.setAttribute('color', iconOriginalColor);
-  });
   var currencyFormatter = new Intl.NumberFormat('id-ID', {
     style: 'currency',
     currency: 'IDR',
@@ -13597,8 +13609,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/cart') {
       btnOnModalAddNewAddress.addEventListener('click', function () {
         Object(_helper_module__WEBPACK_IMPORTED_MODULE_0__["openCloseModal"])('#modalAddAddress');
       });
-    }); // Modal.openCloseModalAddress()
-
+    });
     /*
      * when user go to next step on checkout
      */
@@ -14104,30 +14115,6 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/game') {
 
 /***/ }),
 
-/***/ "./resources/assets/js/page/homepage.js":
-/*!**********************************************!*\
-  !*** ./resources/assets/js/page/homepage.js ***!
-  \**********************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../helper-module */ "./resources/assets/js/helper-module.js");
-
-
-if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/') {
-  document.querySelector('header, main').classList.remove('bg-gray-100'); //jika lg di landing page dan di mode tablet keatas, icon menu ganti warna jd putih
-
-  if (window.screen.width > 768) {
-    document.querySelectorAll('.nav .container > .nav__ul > .nav__item > .nav__link > .child-dropdown-icon').forEach(function (dropdownIcon) {
-      dropdownIcon.setAttribute('color', '#fff');
-    });
-  }
-}
-
-/***/ }),
-
 /***/ "./resources/assets/js/page/product.js":
 /*!*********************************************!*\
   !*** ./resources/assets/js/page/product.js ***!
@@ -14159,7 +14146,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/product') > -1 || _helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/toko-point') > -1 || _helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/voucher') > -1) {
-  // let httpQuery = {!! json_encode($httpQuery) !!}
   var urlQueriesAsArray = window.location.search.slice(1).split('&');
   var httpQueries = urlQueriesAsArray.map(function (p) {
     return p.split('=');
@@ -14171,8 +14157,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/produ
     var encodingQuery = _objectSpread(_objectSpread({}, obj), {}, _defineProperty({}, key, value));
 
     return encodingQuery;
-  }, []); // let currentPage = {{ $products->currentPage() }};
-
+  }, []);
   var currentUrl = window.location.href.split('?')[0];
   var newUrl;
   document.querySelector('#form-search').addEventListener('submit', function () {

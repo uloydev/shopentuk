@@ -22,7 +22,7 @@
                 <x-menu-admin icon="shopping-bag" class="has-arrow"
                 text="order management" to="javascript:void(0);">
                     <ul aria-expanded="false" class="collapse first-level base-level-line">
-                        <x-menu-admin icon="shopping-bag" type="solid" text="all order" 
+                        <x-menu-admin icon="shopping-bag" type="solid" text="history order" 
                         to="{{ route('admin.order.index') }}"/>
                         <x-menu-admin icon="shopping-bag" type="solid" text="new order" 
                         to="{{ route('admin.order.new') }}"/>
@@ -59,6 +59,9 @@
                 to="{{ route('admin.manage-customer') }}" text="List customer" />
                 <x-menu-admin icon="news" 
                 to="{{ route('admin.news.manage') }}" text="News" />
+                <x-menu-admin icon="news" 
+                to="{{ route('payment.manage-confirm') }}" type="logo" icon="paypal"
+                text="Payment Confirmation Request" />
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

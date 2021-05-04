@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\CartItem;
+use App\Models\FavoriteProduct;
 use App\Models\SiteSetting;
 use App\Models\UserAddress;
 use App\Models\Province;
@@ -59,6 +60,8 @@ class CartController extends Controller
             }
         }
 
+        $yourFavorite = FavoriteProduct::where('user_id', auth()->id())->pluck('id');
+
         return view('payment.cart', [
             'title' => 'cart',
             'cart' => $cart,
@@ -71,6 +74,7 @@ class CartController extends Controller
             'inputIds' => $inputIds,
             'inputText' => $inputText,
             'provinces' => Province::all(),
+            'yourFavorite' => $yourFavorite
         ]);
     }
 

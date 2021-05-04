@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\FavoriteProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Province;
@@ -10,7 +11,13 @@ use App\Models\Province;
 class DashboardController extends Controller
 {
 
-    protected $tabMenus = ['history order', 'current order', 'account detail', 'point history'];
+    protected $tabMenus = [
+        'history order',
+        'current order',
+        'account detail',
+        'point history',
+        'product favorite'
+    ];
 
     public function currentOrder()
     {
@@ -66,5 +73,32 @@ class DashboardController extends Controller
     {
         Auth::user()->update($request->all());
         return redirect()->back()->with(['success' => 'data user berhasil diupdate!']);
+    }
+
+    public function wishlistProduct()
+    {
+        $favoriteProduct = FavoriteProduct::all();
+        $title = 'My wishlist';
+        $tabMenus = $this->tabMenus;
+        return view('customer.account.wishlist', get_defined_vars());
+    }
+
+    public function storeWishlist(FavoriteProduct $favoriteProduct)
+    {
+        $favoriteProduct->create([
+            'product_id' => request('product_id'),
+            'user_id' => auth()->id()
+        ]);
+
+        return redirect()->back()->with('success', 'Successfully add product to your favorite');
+    }
+
+    public function removeWishlist(FavoriteProduct $favoriteProduct)
+    {
+        $favoriteProduct->delete();
+        return redirect()->back()->with(
+            'success',
+            'Successfully remove product from your favorite'
+        );
     }
 }

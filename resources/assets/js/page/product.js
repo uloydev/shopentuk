@@ -4,7 +4,6 @@ if (pageUrl.indexOf('/store/product') > -1 ||
     pageUrl.indexOf('/store/toko-point') > -1 || 
     pageUrl.indexOf('/store/voucher') > -1
 ) {
-    // let httpQuery = {!! json_encode($httpQuery) !!}
 
     let urlQueriesAsArray = window.location.search.slice(1).split('&')
     let httpQueries = urlQueriesAsArray
@@ -14,7 +13,6 @@ if (pageUrl.indexOf('/store/product') > -1 ||
                         return encodingQuery
                     }, [])
 
-    // let currentPage = {{ $products->currentPage() }};
     let currentUrl = window.location.href.split('?')[0]
     let newUrl;
 
