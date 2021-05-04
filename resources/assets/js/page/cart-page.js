@@ -5,25 +5,12 @@ const metaToken = document.querySelector('meta[name="csrf-token"]').content
 if (pageUrl === '/cart') {
     const cartPage = document.querySelector('#cartPage')
 
-    /**
-     * set icon color when btn #btn-back hovered
-     */
-    const backToPrevBtn = document.querySelector('#btn-back')
-    const icon = backToPrevBtn.querySelector('box-icon')
-    const iconOriginalColor = icon.getAttribute('color')
-    backToPrevBtn.addEventListener('mouseover', () => {
-        icon.setAttribute('color', '#fff')
-    })
-    backToPrevBtn.addEventListener('mouseleave', () => {
-        icon.setAttribute('color', iconOriginalColor)
-    })
-
     var currencyFormatter = new Intl.NumberFormat('id-ID', {
         style: 'currency',
         currency: 'IDR',
         maximumFractionDigits: 0, 
         minimumFractionDigits: 0, 
-      });
+    });
 
     // modal checkout and it's child
     if (cartPage.querySelector('#modalCheckout')) {
@@ -78,8 +65,6 @@ if (pageUrl === '/cart') {
                 openCloseModal('#modalAddAddress')
             })
         })
-
-        // Modal.openCloseModalAddress()
     
         /*
          * when user go to next step on checkout

@@ -1,6 +1,6 @@
 <header class="header relative z-10 @yield('header-class')" 
 style="background-image: url(@yield('header-bg'))">
-    <nav class="nav lg:py-4 lg:shadow-none">
+    <nav class="nav lg:py-4 lg:shadow-none z-10">
         <div class="container">
             <div class="nav__item nav__item--first lg:border-b-0 lg:pb-0 lg:px-0">
                 <a href="{{ route('landing-page') }}" class="nav__logo">
@@ -125,8 +125,13 @@ style="background-image: url(@yield('header-bg'))">
                             @if (Auth::user()->role == 'customer')
                                 <x-menu-standar id="menu-my-akun-akun-saya" text="Akun saya" 
                                 to="{{ route('my-account.history.order') }}" have-icon="false" />
-                                <x-menu-standar id="menu-cancel-pembatalan" text="Pembatalan order"
+                                <x-menu-standar id="menu-cancel-pembatalan" 
+                                text="Pembatalan order"
                                 to="" have-icon="false" />
+                                <x-menu-standar id="menu-favorite-product" 
+                                text="Favorite Product"
+                                to="{{ route('my-account.product.favorite') }}" 
+                                have-icon="false" />
                             @else
                                 <x-menu-standar id="menu-my-akun-akun-saya" text="Dashboard"
                                 to="{{ route('admin.dashboard') }}" have-icon="false" />

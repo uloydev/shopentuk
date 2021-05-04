@@ -36,14 +36,14 @@
         </div>
         <div class="flex flex-col lg:flex-row items-start relative">
             <ul class="mb-5 dashboard-customer__menu-box bg-white shadow-md rounded w-full flex flex-wrap flex-col border border-gray-400 md:w-1/4 md:sticky top-base">
-                @for ($i = 0; $i < 4; $i++)
+                @foreach ($tabMenus as $tabMenu)
                     <li class="dashboard-customer__menu-item flex-grow capitalize">
-                        <a href="{{ route('my-account.' . Str::slug($tabMenus[$i], '.')) }}"
+                        <a href="{{ route('my-account.' . Str::slug($tabMenu, '.')) }}"
                         class="dashboard-customer__menu-link text-center block p-4 text-gray-600">
-                            {{ $tabMenus[$i] }}
+                            {{ $tabMenu }}
                         </a>
                     </li>
-                @endfor
+                @endforeach
             </ul>
             <div class="mb-6 lg:ml-10 w-full">
                 @yield('content')

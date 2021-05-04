@@ -65,6 +65,11 @@ Route::prefix('refund')->name('refund.')->group(function (){
 Route::namespace('Customer')->middleware(['auth', 'customer'])->group(function () {
     // my account routes
     Route::prefix('my-account')->name('my-account.')->group(function () {
+        Route::get('wishlist', 'DashboardController@wishlistProduct')->name('product.favorite');
+        Route::post('wishlist', 'DashboardController@storeWishlist')->name('favorite.store');
+        Route::delete('wishlist/{favoriteProduct}', 'DashboardController@removeWishlist')->name(
+            'favorite.remove'
+        );
         Route::post('update', 'DashboardController@updateAccount')->name('update');
         Route::get('order/history', 'DashboardController@orderHistory')->name('history.order');
         Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');

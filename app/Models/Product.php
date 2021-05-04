@@ -92,4 +92,9 @@ class Product extends Model
     {
         return $this->hasOne('App\Models\ProductImage')->where('is_main_image', true);
     }
+
+    public function favoriteProduct()
+    {
+        return $this->hasMany('App\Models\FavoriteProduct');
+    }
 }

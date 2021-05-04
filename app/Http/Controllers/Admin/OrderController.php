@@ -19,10 +19,12 @@ class OrderController extends Controller
 {
     private $completedOrderStatus = ['finished', 'canceled', 'refunded'];
 
-
     public function index()
     {
-        return view('order.manage', ['orders' => Order::all(), 'title' => 'manage order']);
+        return view('order.manage', [
+            'orders' => Order::whereIn('status', $this->completedOrderStatus)->get(), 
+            'title' => 'manage order'
+        ]);
     }
 
     public function newOrder()
