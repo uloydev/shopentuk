@@ -26,8 +26,8 @@ class PaymentConfirmation extends Model
         return $this->belongsTo('App\Models\Order')->withDefault();
     }
 
-    public function images()
+    public function image()
     {
-        return $this->hasMany('App\Model\PaymentConfirmationImage');
+        return $this->hasOne('App\Models\PaymentConfirmationImage');
     }
 }
