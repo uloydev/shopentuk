@@ -1,5 +1,6 @@
 import 'boxicons'
 import './admin/manage-product'
+import './admin/manage-payment'
 import './admin/manage-voucher'
 import './admin/manage-rules'
 import './admin/manage-admin'

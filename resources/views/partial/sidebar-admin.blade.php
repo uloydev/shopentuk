@@ -28,6 +28,8 @@
                         to="{{ route('admin.order.new') }}"/>
                         <x-menu-admin icon="shopping-bag" type="solid" text="order to refund" 
                         to="{{ route('refund.manage') }}"/>
+                        <x-menu-admin icon="money" text="Payment Confirmation" 
+                        to="{{ route('admin.payment.index') }}"/>
                     </ul>
                 </x-menu-admin>
                 @if (Auth::user()->role == 'superadmin')
