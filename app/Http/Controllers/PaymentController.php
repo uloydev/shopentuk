@@ -32,11 +32,6 @@ class PaymentController extends Controller
         return view('payment.manage-confirm', get_defined_vars());
     }
 
-    public function showReturning()
-    {
-        return view('payment.returning', ['title' => 'Pengembalian uang']);
-    }
-
     public function store(Request $request)
     {
         $request->validate([
