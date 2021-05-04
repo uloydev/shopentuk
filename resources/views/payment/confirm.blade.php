@@ -12,7 +12,7 @@
         Konfirmasi Pembayaran
     </h1>
     <div class="flex justify-center">
-        <form action="{{ route('payment.store') }}" method="post" enctype="multipart/form-data"
+        <form action="{{ route('payment.store', request()->query('order_id')) }}" method="post" enctype="multipart/form-data"
         class="w-full max-w-screen-md shadow-md rounded px-8 py-5 bg-white">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 mb-5">
@@ -22,9 +22,9 @@
                 <x-input-basic name="phone" type="text" 
                 value="{{ old('phone') ?? $auth->phone ?? '' }}" label="No Telepon / Wa" 
                 min="999999" max="9999999999999" placeholder="Contoh: 087771xxx" required />
-                <x-input-basic name="order_id" type="number" box-width="col-span-full"
+                {{-- <x-input-basic name="order_id" type="number" box-width="col-span-full"
                 label="Nomor Order" value="{{ old('order_id') }}" autocomplete="off" min="1"
-                placeholder="Nomor order harus berupa angka" required />
+                placeholder="Nomor order harus berupa angka" required /> --}}
                 <x-input-basic name="payment_date" type="date" value="{{ old('payment_date') }}"
                 box-width="col-span-full" label="Tanggal bayar" max="{{ date('Y-m-d') }}" required />
                 <div class="mb-5 col-span-full">
@@ -38,10 +38,10 @@
                     <div class="box-upload__input">
                         <input class="box-upload__file opacity-0 overflow-hidden absolute"
                         type="file" name="files[]" id="file"
-                        data-multiple-caption="{count} files selected" multiple />
+                        data-multiple-caption="{count} files selected" required />
                         <label for="file" class="box-upload__text 
                         absolute flex items-center justify-center h-full w-full">
-                            <strong>klik untuk pilih bukti pembayaran</strong>
+                            <strong class="file-name">klik untuk pilih bukti pembayaran</strong>
                         </label>
                     </div>
                 </div>
