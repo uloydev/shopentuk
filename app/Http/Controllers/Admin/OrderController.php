@@ -29,9 +29,12 @@ class OrderController extends Controller
 
     public function newOrder()
     {
-        $orders = Order::where('status', 'paid')->orWhere('status', 'unpaid')->get();
+        $orderPaid = Order::where('status', 'paid')->get();
+        $orderUnpaid = Order::where('status', 'unpaid')->get();
+        
         return view('order.new', [
-            'orders' => $orders,
+            'orderPaid' => $orderPaid,
+            'orderUnpaid' => $orderUnpaid,
             'title' => 'latest order'
         ]);
     }
@@ -105,5 +108,21 @@ class OrderController extends Controller
             'success',
             'Successfully change status for order with ID' . $order->id
         );
+    }
+
+    public function cancel(Order $order)
+    {
+        $order->user->email = 'bariq.2nd.rodriguez@gmail.com';
+
+        // dd($order->user->email, env('MAIL_USERNAME'));
+
+        $order->update([
+            'status' => 'refunding'
+        ]);
+
+        // $user = $order->user;
+        Mail::to($order->user->email)->send(new OrderRefunded($order));
+
+        return redirect()->route('admin.order.new')->with('success', 'Successfully cancel order');
     }
 }

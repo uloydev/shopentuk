@@ -59,6 +59,7 @@ Route::get('register', function () {
 Route::prefix('refund')->name('refund.')->group(function (){
     Route::post('request/{orderId}', 'RefundController@request')->name('request');
     Route::get('manage', 'RefundController@manage')->name('manage');
+    Route::post('kirim', 'RefundController@kirimBukti')->name('kirim-bukti');
 });
 
 
@@ -109,6 +110,7 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
         Route::prefix('order')->name('order.')->group(function () {
             Route::get('/', 'OrderController@index')->name('index');
             Route::get('new', 'OrderController@newOrder')->name('new');
+            Route::put('cancel/{order}', 'OrderController@cancel')->name('cancel');
             Route::put('change-status/{order}', 'OrderController@changeStatus')->name(
                 'change-status'
             );
