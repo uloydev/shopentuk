@@ -99,7 +99,9 @@ class CartController extends Controller
     public function update(Cart $cart, Request $request)
     {
         foreach ($request->all() as $data) {
-            CartItem::find($data['item_id'])->update(['quantity' => $data['quantity']]);
+            if ($data['quantity'] != 0) {
+                CartItem::find($data['item_id'])->update(['quantity' => $data['quantity']]);
+            }
         }
         return 'ok';
     }

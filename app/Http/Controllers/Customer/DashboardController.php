@@ -47,12 +47,13 @@ class DashboardController extends Controller
         return view('customer.account.detail', [
             'title' => 'my dashboard',
             'tabMenus' => $this->tabMenus,
-            'labelInput' => ['name', 'email', 'phone', 'bank', 'rekening'],
+            'labelInput' => ['name', 'email', 'phone', 'bank', 'pemilik rekening', 'rekening'],
             'userData' => [
                 $user->name,
                 $user->email,
                 $user->phone,
                 $user->bank,
+                $user->pemilik_rekening,
                 $user->rekening
             ],
             'userAddresses' => $userAddresses,

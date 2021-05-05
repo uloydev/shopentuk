@@ -45,7 +45,7 @@ class PaymentController extends Controller
             
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $item) {
-                $paymentImage = $item->store('payment-confirmation');
+                $paymentImage = $item->store('public/payment-confirmation');
                 PaymentConfirmationImage::create([
                     'file' => $paymentImage,
                     'payment_confirmation_id' => $paymentConfirmation->id

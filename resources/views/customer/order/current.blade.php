@@ -5,11 +5,6 @@
 @section('title', ucwords($title))
 
 @section('content')
-    @if(session('success'))
-    <x-alert type="success">
-        <p>{{ session('success') }}</p>
-    </x-alert>
-    @endif
     <div class="block">
         @forelse ($orders as $order)
             <x-order-item order-id="{{ $order->id }}"

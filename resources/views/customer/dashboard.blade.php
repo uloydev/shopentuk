@@ -2,19 +2,17 @@
 @include('layouts.header')
 <main class="bg-gray-100 dashboard-customer">
     <div class="container py-10">
-        @if(session('success'))
-            <x-alert type="success">
-                <p>
-                    {{ session('success') }}
-                </p>
-            </x-alert>
-        @endif
         @if(session('error'))
             <x-alert type="error">
                 <p>
                     {{ session('error') }}
                 </p>
             </x-alert>
+        @endif
+        @if(session('success'))
+        <x-alert type="success">
+            <p>{{ session('success') }}</p>
+        </x-alert>
         @endif
         <div class="mb-5">
             <div class="col-12">

@@ -27,7 +27,7 @@ class AdminController extends Controller
         $admin->password = Hash::make($request->input('password', 'gakadapassword'));
 
         $admin->save();
-        return redirect()->back()->with('msg', 'Successfully ' . $msg . ' admin');
+        return redirect()->back()->with('success', 'Successfully ' . $msg . ' admin');
     }
 
     /**
@@ -120,7 +120,7 @@ class AdminController extends Controller
     {
         $deleteAdmin = $this->adminAcc->where('id', $id);
         $deleteAdmin->delete();
-        return redirect()->back()->with('msg', 'Successfully delete admin ' . $deleteAdmin->name);
+        return redirect()->back()->with('success', 'Successfully delete admin ' . $deleteAdmin->name);
     }
 
     public function dashboard()
@@ -144,5 +144,12 @@ class AdminController extends Controller
         return view('customer.manage', [
             'customers' => User::where('role', 'customer')->get()
         ]);
+    }
+
+    public function updateCustomer(Request $request, User $user)
+    {
+        // dd($user);
+        $user->update($request->only(['phone', 'pemilik_rekening', 'bank', 'rekening']));
+        return redirect()->back()->with('success', 'Successfully Update User ' . $user->email);
     }
 }
