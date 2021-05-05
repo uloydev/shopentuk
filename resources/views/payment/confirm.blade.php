@@ -22,9 +22,6 @@
                 <x-input-basic name="phone" type="text" 
                 value="{{ old('phone') ?? $auth->phone ?? '' }}" label="No Telepon / Wa" 
                 min="999999" max="9999999999999" placeholder="Contoh: 087771xxx" required />
-                {{-- <x-input-basic name="order_id" type="number" box-width="col-span-full"
-                label="Nomor Order" value="{{ old('order_id') }}" autocomplete="off" min="1"
-                placeholder="Nomor order harus berupa angka" required /> --}}
                 <x-input-basic name="payment_date" type="date" value="{{ old('payment_date') }}"
                 box-width="col-span-full" label="Tanggal bayar" max="{{ date('Y-m-d') }}" required />
                 <div class="mb-5 col-span-full">

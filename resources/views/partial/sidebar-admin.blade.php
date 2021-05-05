@@ -59,9 +59,6 @@
                 to="{{ route('admin.manage-customer') }}" text="List customer" />
                 <x-menu-admin icon="news" 
                 to="{{ route('admin.news.manage') }}" text="News" />
-                <x-menu-admin icon="news" 
-                to="{{ route('payment.manage-confirm') }}" type="logo" icon="paypal"
-                text="Payment Confirmation Request" />
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

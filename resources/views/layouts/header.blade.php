@@ -108,9 +108,6 @@ style="background-image: url(@yield('header-bg'))">
                     <a href="{{ route('store.toko-point.index') }}" class="nav__link">Point</a>
                 </li>
                 <li class="nav__item nav__item--menu lg:mr-6 lg:flex-grow lg:justify-center">
-                    <a href="{{ route('payment.show-confirm') }}" class="nav__link">Pembayaran</a>
-                </li>
-                <li class="nav__item nav__item--menu lg:mr-6 lg:flex-grow lg:justify-center">
                     <a href="{{ route('contact-us.index') }}" class="nav__link">Contact us</a>
                 </li>
                 <li class="nav__item nav__item--menu lg:mr-6 lg:flex-grow lg:justify-center">

@@ -24,14 +24,6 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function manage()
-    {
-        $title = 'Manage payment confirmation';
-        $allOrder = Order::where('status', 'unpaid')->has('paymentConfirmation', '>=', 1)->get();
-
-        return view('payment.manage-confirm', get_defined_vars());
-    }
-
     public function store(Request $request, $id)
     {
         $request->validate([
