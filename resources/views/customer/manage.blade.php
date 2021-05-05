@@ -17,7 +17,8 @@
                                     'name',
                                     'email',
                                     'telephone',
-                                    'join at'
+                                    'join at',
+                                    'action'
                                 ]
                             ])
                             <tbody>
@@ -27,6 +28,17 @@
                                         <td>{{ $customer->email }}</td>
                                         <td>{{ $customer->phone }}</td>
                                         <td>{{ $customer->created_at }}</td>
+                                        <td>
+                                            <button class="btn btn-warning btn-edit-user"
+                                            data-toggle="modal" data-target="#modalEditUser"
+                                            data-user-email="{{ $customer->email }}"
+                                            data-user-phone="{{ $customer->phone }}"
+                                            data-user-pemilik-rekening="{{ $customer->pemilik_rekening }}"
+                                            data-user-bank="{{ $customer->bank }}"
+                                            data-user-rekening="{{ $customer->rekening }}"
+                                            data-update-url="{{ route('admin.manage-customer.update', $customer->id) }}"
+                                            >edit</button>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -36,4 +48,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('components')
+    @include('customer.edit')
 @endsection

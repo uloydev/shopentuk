@@ -5,11 +5,6 @@
 @section('title', ucfirst($title))
 
 @section('content')
-@if (session('msg'))
-<div class="mb-5">
-    <x-adminmart-alert is-dismissable="true" type="success" message="{{ session('msg') }}" />
-</div>
-@endif
 <div class="row">
     <div class="col-12">
         <div class="card">

@@ -23,7 +23,7 @@ class AllCategoryController extends Controller
         $productCategory->is_digital_product = $request->boolean('is_digital_product');
         $productCategory->save();
 
-        return redirect()->back()->with('msg', "Succesfully $action category called $title");
+        return redirect()->back()->with('success', "Succesfully $action category called $title");
     }
 
     /**
@@ -74,7 +74,7 @@ class AllCategoryController extends Controller
             'category_id' => $cat->id,
             'title' => $request->subcategory
         ]);
-        return redirect()->back()->with('msg', "Successfully add sub category to $cat->title category");
+        return redirect()->back()->with('success', "Successfully add sub category to $cat->title category");
     }
 
     public function subCategoryUpdate($cat, ProductSubCategory $sub, Request $request)
@@ -82,7 +82,7 @@ class AllCategoryController extends Controller
         $sub->update([
             'title' => $request->subcategory,
         ]);
-        return redirect()->back()->with('msg', "Successfully update sub category");
+        return redirect()->back()->with('success', "Successfully update sub category");
     }
 
     /**
@@ -133,7 +133,7 @@ class AllCategoryController extends Controller
         $productCategory->productSubCategory()->delete();
         $productCategory->delete();
 
-        return redirect()->back()->with('msg', 'Successfully delete this sub category');
+        return redirect()->back()->with('success', 'Successfully delete this sub category');
     }
 
     /**
@@ -147,7 +147,7 @@ class AllCategoryController extends Controller
         $sub->products()->delete();
         $sub->delete();
 
-        return redirect()->back()->with('msg', 'Successfully delete this sub category');
+        return redirect()->back()->with('success', 'Successfully delete this sub category');
     }
 
     public function subCategoryIndex(ProductCategory $cat)

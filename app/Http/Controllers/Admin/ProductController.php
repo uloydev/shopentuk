@@ -59,7 +59,7 @@ class ProductController extends Controller
         $product = new Product;
         $this->saveProduct($product, $request);
 
-        return redirect()->back()->with(['msg' => 'product added successfuly']);
+        return redirect()->back()->with(['success' => 'product added successfuly']);
     }
 
     public function show($id)
@@ -76,7 +76,7 @@ class ProductController extends Controller
         $updateProduct = Product::findOrFail($id);
         $this->saveProduct($updateProduct, $request);
 
-        return redirect()->back()->with(['msg' => 'product edited successfuly']);
+        return redirect()->back()->with(['success' => 'product edited successfuly']);
     }
 
     public function destroy($id)
@@ -92,7 +92,7 @@ class ProductController extends Controller
         }
         $product->delete();
 
-        return redirect()->back()->with(['msg' => 'product deleted successfuly']);
+        return redirect()->back()->with(['success' => 'product deleted successfuly']);
     }
 
     public function editImages(Product $product)
@@ -105,7 +105,7 @@ class ProductController extends Controller
         Storage::delete($image->url);
         $image->delete();
 
-        return redirect()->back()->with(['msg' => 'product image deleted successfuly']);
+        return redirect()->back()->with(['success' => 'product image deleted successfuly']);
     }
 
     public function storeImage(Product $product, Request $request)
@@ -117,7 +117,7 @@ class ProductController extends Controller
             'product_id' => $product->id,
         ]);
 
-        return redirect()->back()->with(['msg' => 'product image added successfuly']);
+        return redirect()->back()->with(['success' => 'product image added successfuly']);
     }
 
     public function setMainImage(Product $product, ProductImage $image)
@@ -128,7 +128,7 @@ class ProductController extends Controller
 
         $image->update(['is_main_image' => true]);
 
-        return redirect()->back()->with(['msg' => 'set main product image successfuly']);
+        return redirect()->back()->with(['success' => 'set main product image successfuly']);
     }
 
 }

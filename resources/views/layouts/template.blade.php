@@ -33,6 +33,11 @@
                         </button>
                     </div>
                 @endforeach
+                @if (session('success'))
+                    <div class="mb-5">
+                        <x-adminmart-alert is-dismissable="true" type="success" message="{{ session('success') }}" />
+                    </div>
+                @endif
                 @yield('content')
             </div>
             <footer class="footer text-center text-muted">

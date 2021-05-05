@@ -623,6 +623,41 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/superadmin/admi
 
 /***/ }),
 
+/***/ "./resources/assets/js/page/admin/manage-customer.js":
+/*!***********************************************************!*\
+  !*** ./resources/assets/js/page/admin/manage-customer.js ***!
+  \***********************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper-module */ "./resources/assets/js/helper-module.js");
+
+
+if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/manage-customer') {
+  var modalEditUser = document.querySelector('#modalEditUser');
+  var formEditUser = modalEditUser.querySelector('form');
+  var modalEditUserlabel = document.querySelector('#modalEditUserLabel');
+  var inputPhone = modalEditUser.querySelector('#inputPhone');
+  var inputPemilikRekening = modalEditUser.querySelector('#inputPemilikRekening');
+  var inputBank = modalEditUser.querySelector('#inputBank');
+  var inputRekening = modalEditUser.querySelector('#inputRekening');
+  var editUserButtons = document.querySelectorAll('.btn-edit-user');
+  editUserButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      modalEditUserlabel.textContent = 'Edit Data User ' + this.dataset.userEmail;
+      inputPhone.value = this.dataset.userPhone;
+      inputPemilikRekening.value = this.dataset.userPemilikRekening;
+      inputBank.value = this.dataset.userBank;
+      inputRekening.value = this.dataset.userRekening;
+      formEditUser.action = this.dataset.updateUrl;
+    });
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/assets/js/page/admin/manage-order.js":
 /*!********************************************************!*\
   !*** ./resources/assets/js/page/admin/manage-order.js ***!
@@ -869,18 +904,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! boxicons */ "./node_modules/boxicons/dist/boxicons.js");
 /* harmony import */ var boxicons__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(boxicons__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _admin_manage_product__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin/manage-product */ "./resources/assets/js/page/admin/manage-product.js");
-/* harmony import */ var _admin_manage_payment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin/manage-payment */ "./resources/assets/js/page/admin/manage-payment.js");
-/* harmony import */ var _admin_manage_voucher__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./admin/manage-voucher */ "./resources/assets/js/page/admin/manage-voucher.js");
-/* harmony import */ var _admin_manage_rules__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./admin/manage-rules */ "./resources/assets/js/page/admin/manage-rules.js");
-/* harmony import */ var _admin_manage_admin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./admin/manage-admin */ "./resources/assets/js/page/admin/manage-admin.js");
-/* harmony import */ var _admin_manage_order__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./admin/manage-order */ "./resources/assets/js/page/admin/manage-order.js");
-/* harmony import */ var _admin_category_sub__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./admin/category-sub */ "./resources/assets/js/page/admin/category-sub.js");
-/* harmony import */ var _admin_category_parent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./admin/category-parent */ "./resources/assets/js/page/admin/category-parent.js");
-/* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./admin/general */ "./resources/assets/js/page/admin/general.js");
-/* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_admin_general__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _admin_game__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./admin/game */ "./resources/assets/js/page/admin/game.js");
-/* harmony import */ var _component_modal__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./../component/modal */ "./resources/assets/js/component/modal.js");
-/* harmony import */ var _component_modal__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_component_modal__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _admin_manage_customer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin/manage-customer */ "./resources/assets/js/page/admin/manage-customer.js");
+/* harmony import */ var _admin_manage_payment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./admin/manage-payment */ "./resources/assets/js/page/admin/manage-payment.js");
+/* harmony import */ var _admin_manage_voucher__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./admin/manage-voucher */ "./resources/assets/js/page/admin/manage-voucher.js");
+/* harmony import */ var _admin_manage_rules__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./admin/manage-rules */ "./resources/assets/js/page/admin/manage-rules.js");
+/* harmony import */ var _admin_manage_admin__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./admin/manage-admin */ "./resources/assets/js/page/admin/manage-admin.js");
+/* harmony import */ var _admin_manage_order__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./admin/manage-order */ "./resources/assets/js/page/admin/manage-order.js");
+/* harmony import */ var _admin_category_sub__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./admin/category-sub */ "./resources/assets/js/page/admin/category-sub.js");
+/* harmony import */ var _admin_category_parent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./admin/category-parent */ "./resources/assets/js/page/admin/category-parent.js");
+/* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./admin/general */ "./resources/assets/js/page/admin/general.js");
+/* harmony import */ var _admin_general__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_admin_general__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _admin_game__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./admin/game */ "./resources/assets/js/page/admin/game.js");
+/* harmony import */ var _component_modal__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./../component/modal */ "./resources/assets/js/component/modal.js");
+/* harmony import */ var _component_modal__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_component_modal__WEBPACK_IMPORTED_MODULE_12__);
+
 
 
 

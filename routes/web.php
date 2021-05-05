@@ -103,6 +103,7 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
 ->group(
     function () {
         Route::get('manage-customer', 'AdminController@manageCustomer')->name('manage-customer');
+        Route::put('manage-customer/{user}', 'AdminController@updateCustomer')->name('manage-customer.update');
         Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
         Route::prefix('order')->name('order.')->group(function () {
             Route::get('/', 'OrderController@index')->name('index');

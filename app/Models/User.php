@@ -25,6 +25,7 @@ class User extends Authenticatable
         'role',
         'point',
         'bank',
+        'pemilik_rekening',
         'rekening',
     ];
 
