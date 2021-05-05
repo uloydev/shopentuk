@@ -49,6 +49,7 @@
                 placeholder="Sama dengan password anda" min="8" required />
                 <x-input-basic name="bank" minlength="3" label="Nama Bank" value="{{ old('bank') }}"
                 placeholder="Contoh: BCA" required />
+                <x-input-basic name="pemilik_rekening" label="Nama Pemilik Rekening" value="{{ old('pemilik_rekening') }}" required />
                 <x-input-basic name="rekening" label="Nomor Rekening" value="{{ old('rekening') }}"
                 placeholder="Contoh: 1003243823" type="number" max="99999999" required />
                 <small class="text-green-600">data bank dan nomor rekening hanya bisa di isi sekali, mohon di cek kembali.</small>
