@@ -13063,6 +13063,18 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/login') {
   }
 }
 
+var inputFile = document.querySelectorAll('input[type="file"]');
+inputFile.forEach(function (input) {
+  var initLabelText = input.parentElement.querySelector('.file-name').textContent;
+  input.addEventListener('change', function () {
+    if (this.value !== '') {
+      this.parentElement.querySelector('.file-name').textContent = this.files[0].name;
+    } else {
+      this.parentElement.querySelector('.file-name').textContent = initLabelText;
+    }
+  });
+});
+
 /***/ }),
 
 /***/ "./resources/assets/js/component/nav.js":
@@ -14227,9 +14239,9 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"].indexOf('/store/produ
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
-__webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
-module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/native.js */"./resources/assets/js/native.js");
+__webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/native.scss */"./resources/assets/sass/native.scss");
+module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/sass/admin-dashboard.scss */"./resources/assets/sass/admin-dashboard.scss");
 
 
 /***/ })

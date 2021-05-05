@@ -27,7 +27,6 @@ class NewOrderSeeder extends Seeder
             'point_total' => rand(3, 123), //done
             'weight_total' => rand(3, 13), //done
             'voucher_discount' => rand(3, 13), //done
-            'no_resi' => Str::random(10)
         ]);
     }
 }

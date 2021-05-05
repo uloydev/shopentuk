@@ -6,7 +6,7 @@
     </button>
     @endif
     <div class="d-flex justify-content-center">
-        <p class="text-center text-capitalize mb-0">{{ $message }}</p>
+        <p class="text-center text-capitalize mb-0">{!! $message !!}</p>
         {{ $slot }}
     </div>
 </div>

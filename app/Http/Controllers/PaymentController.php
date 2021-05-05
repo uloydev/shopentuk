@@ -62,4 +62,17 @@ class PaymentController extends Controller
         }
         return redirect()->back()->with(['success' => 'sukses membuat konfirmasi pembayaran']);
     }
+
+    public function inputResi()
+    {
+        Order::where('id', request('order_id'))->update([
+            'no_resi' => request('no_resi'),
+            'status' => 'shipping'
+        ]);
+
+        return redirect()->back()->with(
+            'success',
+            'Successfully insert resi number for order <b>' . request('order_id') . '</b>'
+        );
+    }
 }
