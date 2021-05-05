@@ -57,7 +57,7 @@
                                             data-order-status="{{ $payment->order->status }}"
                                             data-order-date="{{ $payment->order->created_at }}"
                                             data-order-total="@currency($payment->order->price_total)"
-                                            data-payment-image="{{ Storage::url($payment->image->file) }}"
+                                            data-payment-image="{{ $payment->image ? Storage::url($payment->image->file) : ''  }}"
                                             data-payment-phone="{{ $payment->phone }}"
                                             data-payment-date="{{ $payment->payment_date }}"
                                             data-payment-method="{{ $payment->payment_method }}"

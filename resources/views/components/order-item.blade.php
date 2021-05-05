@@ -8,10 +8,8 @@
     <p>Total Point  : {{$totalPoint}}</p>
     <p>Order Status : {{$orderStatus}}</p>
     <div class="w-full text-right flex justify-between mt-5">
-        {{-- todo: add logic show this text only when order have refund request  --}}
-        <p class="text-blue-500 font-bold">
-            Refund requested, please wait until admin contact you
-        </p>
+        {{-- todo: add logic show this text only when order have refund request --}}
+        {{ $slot }}
 
         <time datetime="10-07-2020 15:30">{{ $orderDate }}</time>
     </div>

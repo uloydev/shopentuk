@@ -34,3 +34,16 @@ if (pageUrl === '/login') {
         removeValidationOnFalseForm(formRegister)
     }
 }
+
+const inputFile = document.querySelectorAll('input[type="file"]')
+inputFile.forEach(input => {
+    const initLabelText = input.parentElement.querySelector('.file-name').textContent
+    input.addEventListener('change', function () {
+        if (this.value !== '') {
+            this.parentElement.querySelector('.file-name').textContent = this.files[0].name
+            
+        } else {
+            this.parentElement.querySelector('.file-name').textContent = initLabelText
+        }
+    })
+})

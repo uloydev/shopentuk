@@ -148,11 +148,20 @@ module.exports = function numWords (input) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+//show feedback popup
 $('button[data-target="#modal-feedback"]').on('click', function (event) {
   var message = $(this).data('message');
   var email = $(this).data('email');
   $('#modal-feedback .modal-title').text('Feedback from ' + email);
   $('#modal-feedback .modal-body').html(message);
+}); //input resi popup
+
+$('#inputResiModal').on('show.bs.modal', function (event) {
+  var modal = $(this);
+  var btnTriggered = $(event.relatedTarget);
+  var orderId = btnTriggered.data('order-id');
+  modal.find('#order-id').text(orderId);
+  modal.find('input[name="order_id"]').val(orderId);
 });
 
 /***/ }),

@@ -13063,6 +13063,18 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/login') {
   }
 }
 
+var inputFile = document.querySelectorAll('input[type="file"]');
+inputFile.forEach(function (input) {
+  var initLabelText = input.parentElement.querySelector('.file-name').textContent;
+  input.addEventListener('change', function () {
+    if (this.value !== '') {
+      this.parentElement.querySelector('.file-name').textContent = this.files[0].name;
+    } else {
+      this.parentElement.querySelector('.file-name').textContent = initLabelText;
+    }
+  });
+});
+
 /***/ }),
 
 /***/ "./resources/assets/js/component/nav.js":
