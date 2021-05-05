@@ -25,6 +25,8 @@ class Order extends Model
         'no_resi', //done
     ];
 
+    protected $with = ['user'];
+
     public function orderProducts()
     {
         return $this->hasMany('App\Models\OrderProduct');
@@ -32,7 +34,7 @@ class Order extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User')->withDefault();
     }
 
     public function refund()

@@ -12,10 +12,10 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="h4">{{ ucwords($title) }}</h1>
+                    <h1 class="h4">Paid Order</h1>
                 </div>
                 <div class="card-body">
-                    @if (count($orders) > 0)
+                    @if (count($orderPaid) > 0)
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered no-wrap" id="zero_config">
                                 @include('partial.thead', [
@@ -28,11 +28,12 @@
                                         'status',
                                         'shipping price',
                                         'no resi',
+                                        'cancel order',
                                         'order date'
                                     ]
                                 ])
                                 <tbody>
-                                    @foreach ($orders as $order)
+                                    @foreach ($orderPaid as $order)
                                         <tr class="order-item">
                                             <td>
                                                 {{ $order->id }}
@@ -72,6 +73,18 @@
                                                     {{ $order->no_resi }}
                                                 @endif
                                             </td>
+                                            <td class="order-item__sub-cat">
+                                                <form action="{{ route(
+                                                    'admin.order.cancel', $order->id
+                                                ) }}"
+                                                method="post">
+                                                    @csrf @method('PUT')
+                                                    <button type="submit" class="btn btn-danger"
+                                                    data-order-id="{{ $order->id }}">
+                                                        Cancel order
+                                                    </button>
+                                                </form>
+                                            </td>
                                             <td class="order-item__sub-cat" 
                                             data-original="{{ $order->created_at }}">
                                                 {{ $order->created_at->format('d M Y') }}
@@ -83,7 +96,82 @@
                         </div>
                     @else
                         <x-adminmart-alert is-dismissable="false" type="light"
-                        message="sedang tidak ada orderan saat ini.">
+                        message="sedang tidak ada orderan yang belum dibayar">
+                            @include('partial.btn-refresh')
+                        </x-adminmart-alert>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="h4">Unpaid Order</h1>
+                </div>
+                <div class="card-body">
+                    @if (count($orderUnpaid) > 0)
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered no-wrap" id="zero_config">
+                                @include('partial.thead', [
+                                    'thead' => [
+                                        'order id',
+                                        'customer name',
+                                        'customer email',
+                                        'product price',
+                                        'price total',
+                                        'point total',
+                                        'status',
+                                        'shipping price',
+                                        'order date'
+                                    ]
+                                ])
+                                <tbody>
+                                    @foreach ($orderUnpaid as $order)
+                                        <tr class="order-item">
+                                            <td>
+                                                {{ $order->id }}
+                                            </td>
+                                            <td class="order-item__customer-name">
+                                                {{ Str::limit($order->user->name, 10) }}
+                                            </td>
+                                            <td class="order-item__customer-name">
+                                                {{ Str::limit($order->user->email) }}
+                                            </td>
+                                            <td class="order-item__price"
+                                            data-original="{{ $order->product_price }}">
+                                                @currency($order->product_price)
+                                            </td>
+                                            <td class="order-item__point" 
+                                            data-original="{{ $order->price_total }}">
+                                                @currency($order->price_total)
+                                            </td>
+                                            <td class="order-item__cat" 
+                                            data-original="{{ $order->point_total }}">
+                                                {{ $order->point_total }}
+                                            </td>
+                                            <td class="order-item__sub-cat" 
+                                            data-original="{{ $order->status }}">
+                                                {{ $order->status }}
+                                            </td> 
+                                            <td class="order-item__sub-cat" 
+                                            data-original="{{ $order->shipping_price }}">
+                                                @currency($order->shipping_price)
+                                            </td>
+                                            <td class="order-item__sub-cat" 
+                                            data-original="{{ $order->created_at }}">
+                                                {{ $order->created_at->format('d M Y') }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @else
+                        <x-adminmart-alert is-dismissable="false" type="light"
+                        message="sedang tidak ada orderan yang belum dibayar.">
                             @include('partial.btn-refresh')
                         </x-adminmart-alert>
                     @endif

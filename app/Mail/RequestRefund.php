@@ -31,9 +31,7 @@ class RequestRefund extends Mailable
      */
     public function build()
     {
-        $requestRefund = $this->requestRefund;
-        return $this->from('sanchez77rodriguez@gmail.com')
-                    ->replyTo($requestRefund->order->user->email)
-                    ->markdown('emails.request-refund');
+        return $this->from(config('app.email_admin'))
+                    ->markdown('emails.refund');
     }
 }

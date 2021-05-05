@@ -13,8 +13,6 @@ class Refund extends Model
         'user_id',
         'order_id',
         'payment_date',
-        'rekening',
-        'is_paid',
         'payment_method',
         'struk'
     ];

@@ -26,6 +26,7 @@ class CreateOrdersTable extends Migration
             $table->integer('weight_total')->default(0);
             $table->integer('voucher_discount')->nullable();
             $table->string('no_resi')->nullable();
+            $table->enum('refund_method', ['bca', 'ovo'])->nullable();
             $table->enum('status', [
                 'unpaid', 'paid', 'shipping', 'canceled', 'refunding', 'refunded', 'finished'
             ])->default('unpaid');
