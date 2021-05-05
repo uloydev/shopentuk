@@ -3,11 +3,6 @@
 @section('body-id', Str::camel($title))
 @section('content')
 <div class="container py-10 px-5">
-    @if (session('success'))
-    <x-alert type="success">
-        {{ session('success') }}
-    </x-alert>
-    @endif
     <h1 class="mb-10 text-2xl md:text-4xl text-center input-lowercase">
         Konfirmasi Pembayaran
     </h1>
