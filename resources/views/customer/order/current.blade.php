@@ -14,7 +14,8 @@
         @forelse ($orders as $order)
             <x-order-item order-id="{{ $order->id }}"
             total-price="{{ $order->price_total }}" total-point="{{ $order->point_total }}" 
-            order-date="{{ $order->created_at }}" order-status="{{ $order->status }}" >
+            order-date="{{ $order->created_at->format('d M Y G:i') }}" 
+            order-status="{{ $order->status }}" >
                 @if ($order->status == 'unpaid')
                     <x-slot name="addonBtn">
                         <a href="{{ route('payment.show-confirm', ['order_id'=> $order->id]) }}" class="btn bg-teal-500 px-5 rounded-full top-0 right-0 mr-4">
@@ -60,6 +61,11 @@
                         </div>
                     @endforeach
                 </x-slot>
+                @if ($order->status === 'refunding')
+                <p class="text-blue-500 font-bold">
+                    Refund requested, please wait until admin contact you
+                </p>
+                @endif
             </x-order-item>
         @empty
             <p>tidak ada data untuk ditampilkan</p>
