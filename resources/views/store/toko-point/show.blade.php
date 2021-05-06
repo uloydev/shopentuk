@@ -4,7 +4,7 @@
 @section('content')
 <div class="container py-10 px-5 lg:px-0 mx-auto">
     <figure class="grid grid-cols-1 md:grid-cols-2 flex-col md:flex-row mb-8">
-        <img src="{{ asset('storage/'.($product->mainImage ? $product->mainImage->url : 'img/telkomsel.jpg')) }}" class="w-full mb-5 md:mb-0">
+        <img src="{{ $product->mainImage ? Storage::url($product->mainImage->url) : 'https://via.placeholder.com/200' }}" class="w-full mb-5 md:mb-0">
         <figcaption class="md:ml-10">
             @include('partial.breadcumb')
             <p class="text-2xl mb-5">{{ $product->title }}</p>
@@ -31,44 +31,11 @@
     <section id="deskripsi-ulasan">
         <ul data-tabs>
             <li>
-                <a href="#deskripsi-detail">Deskripsi</a>
-            </li>
-            <li>
-                <a href="#ulasan-detail" data-tabby-default>Ulasan</a>
+                <a href="#deskripsi-detail" data-tabby-default>Deskripsi</a>
             </li>
         </ul>
         <div id="deskripsi-detail" class="py-3">
             {!! $product->description !!}
-        </div>
-        <div id="ulasan-detail" class="py-5">
-            {{-- contoh --}}
-            @php
-                $ulasanTotal = 3;
-            @endphp
-            @if ($ulasanTotal > 0)
-                @for ($i = 0; $i < $ulasanTotal; $i++)
-                    <div class="flex flex-col mb-8">
-                        <figure class="flex border-b-2 border-gray-300 pb-5 items-center">
-                            <img src="{{ asset('img/static/people.png') }}" class="mr-2 h-8 w-8 rounded-full"
-                            alt="People avatar {{ env('APP_NAME') }}">
-                            <figcaption>
-                                <p>People name</p>
-                            </figcaption>
-                        </figure>
-                        <div class="py-3">
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus labore 
-                                incidunt totam maxime eligendi reprehenderit alias libero nam. 
-                                Possimus architecto corrupti exercitationem cum ipsum cumque, 
-                                non quis impedit error reiciendis?
-                            </p>
-                        </div>
-                    </div>
-                @endfor
-            @else
-            <h1 class="text-xl mb-5 mt-2 px-1">Belum ada ulasan</h1>
-            @endif
-            {{-- end of contoh --}}
         </div>
     </section>
     <section id="related-product" class="mt-5">

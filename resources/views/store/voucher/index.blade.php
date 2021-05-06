@@ -133,10 +133,15 @@
                             is-digital-product="true" />
                     @endif
                 @empty
-                    @include('store.product.empty', [
-                        'message' => "Oops, there's no voucher called " . 
-                                     "<q>" . $httpQuery['search'] . "</q>" . " on this categories"
-                    ])
+                    @isset($httpQuery['search'])
+                        @include('store.product.empty', [
+                            'message' => "Oops, there's no point called <q>" . $httpQuery['search'] . "</q> on this categories"
+                        ])
+                    @else
+                        @include('store.product.empty', [
+                            'message' => "Oops, there's no products at the moment on this categories"
+                        ])
+                    @endisset
                 @endforelse
             </div>
             <div class="mt-8">
