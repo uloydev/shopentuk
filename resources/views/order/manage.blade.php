@@ -21,7 +21,8 @@
                                 @include('partial.thead', [
                                     'thead' => [
                                         'order id',
-                                        'title product',
+                                        'customer email',
+                                        'order date',
                                         'product price',
                                         'product point ',
                                         'price total',
@@ -32,7 +33,6 @@
                                         'no resi',
                                         'shipping price',
                                         'shipping point',
-                                        'customer email',
                                         'customer address',
                                         'customer province',
                                     ]
@@ -40,28 +40,23 @@
                                 <tbody>
                                     @foreach ($orders as $order)
                                         <tr class="product-item">
-                                            @include('partial.tbody', [
-                                                'td' => [
-                                                    $order->id,
-                                                    '',
-                                                    // Str::limit(
-                                                    //     $order->orderProducts->product->title, 10
-                                                    // ) ?? '-',
-                                                    'Rp ' . number_format($order->product_price),
-                                                    $order->point_price ?? '-',
-                                                    $order->price_total,
-                                                    $order->point_total,
-                                                    $order->weight_total,
-                                                    $order->voucher_discount,
-                                                    $order->status,
-                                                    $order->no_resi,
-                                                    $order->shipping_price,
-                                                    $order->shipping_point,
-                                                    $order->user->email,
-                                                    $order->userAddress->title,
-                                                    $order->userAddress->getProvinceAttribute(),
-                                                ]
-                                            ])
+                                            <td>{{ $order->id }}</td>
+                                            <td>{{ $order->created_at->format('d M Y H:i') }}</td>
+                                            <td>{{ $order->user->email }}</td>
+                                            <td>@currency($order->product_price)</td>
+                                            <td>{{ $order->point_price ?? '-' }}</td>
+                                            <td>{{ $order->price_total }}</td>
+                                            <td>{{ $order->point_total }}</td>
+                                            <td>{{ $order->weight_total }}</td>
+                                            <td>{{ $order->voucher_discount }}</td>
+                                            <td>{{ $order->status }}</td>
+                                            <td>{{ $order->no_resi }}</td>
+                                            <td>{{ $order->shipping_price }}</td>
+                                            <td>{{ $order->shipping_point }}</td>
+                                            <td>{{ $order->userAddress->title }}</td>
+                                            <td>
+                                                {{ $order->userAddress->getProvinceAttribute() }}
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

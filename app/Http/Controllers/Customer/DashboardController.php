@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\FavoriteProduct;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Province;
@@ -101,5 +102,15 @@ class DashboardController extends Controller
             'success',
             'Successfully remove product from your favorite'
         );
+    }
+
+    public function cancelBeforePaid(Order $order)
+    {
+        $order->update([
+            'status' => 'canceled'
+        ]);
+
+        return redirect()->back()->with('success', 'Successfully cancel order');
+
     }
 }

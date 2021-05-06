@@ -16,6 +16,13 @@
                         <a href="{{ route('payment.show-confirm', ['order_id'=> $order->id]) }}" class="btn bg-teal-500 px-5 rounded-full top-0 right-0 mr-4">
                             Pay this order
                         </a>
+                        <form action="{{ route('my-account.cancel.order', $order->id) }}" method="post">
+                            @csrf @method('PUT')
+                            <button type="submit"
+                            class="btn bg-red-500 px-5 rounded-full top-0 right-0 mr-4">
+                                Cancel
+                            </button>
+                        </form>
                     </x-slot>
                 @elseif($order->status === 'refunding' and $order->refund_method === null)
                 <x-slot name="addonBtn">
