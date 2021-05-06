@@ -10,14 +10,14 @@
             <x-order-item order-id="{{ $order->id }}"
             total-price="{{ $order->price_total }}" total-point="{{ $order->point_total }}" 
             order-date="{{ $order->created_at->format('d M Y G:i') }}" 
-            order-status="{{ $order->status }}" >
+            order-status="{{ $order->status }}">
                 @if ($order->status == 'unpaid')
                     <x-slot name="addonBtn">
                         <a href="{{ route('payment.show-confirm', ['order_id'=> $order->id]) }}" class="btn bg-teal-500 px-5 rounded-full top-0 right-0 mr-4">
                             Pay this order
                         </a>
                     </x-slot>
-                @elseif($order->status === 'refunding')
+                @elseif($order->status === 'refunding' and $order->refund_method === null)
                 <x-slot name="addonBtn">
                     <div class="group inline-block relative">
                         <button
@@ -59,7 +59,7 @@
                         </div>
                     @endforeach
                 </x-slot>
-                @if ($order->status === 'refunding')
+                @if ($order->status === 'refunding' and $order->refund_method)
                 <p class="text-blue-500 font-bold">
                     Refund requested, please wait until admin contact you
                 </p>
