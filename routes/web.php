@@ -73,7 +73,13 @@ Route::namespace('Customer')->middleware(['auth', 'customer'])->group(function (
         );
         Route::post('update', 'DashboardController@updateAccount')->name('update');
         Route::get('order/history', 'DashboardController@orderHistory')->name('history.order');
+        Route::put('order/finish/{order}', 'DashboardController@finishOrder')->name(
+            'finish.order'
+        );
         Route::get('order/current', 'DashboardController@currentOrder')->name('current.order');
+        Route::put('order/cancel/{order}', 'DashboardController@cancelBeforePaid')->name(
+            'cancel.order'
+        );
         Route::get('detail', 'DashboardController@accountDetail')->name('account.detail');
         Route::get('point', 'DashboardController@pointHistory')->name('point.history');
         // address routes

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\FavoriteProduct;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Province;
@@ -73,7 +74,7 @@ class DashboardController extends Controller
     public function updateAccount(Request $request)
     {
         Auth::user()->update($request->all());
-        return redirect()->back()->with(['success' => 'data user berhasil diupdate!']);
+        return redirect()->back()->with(['success' => 'Successfully update user data']);
     }
 
     public function wishlistProduct()
@@ -100,6 +101,26 @@ class DashboardController extends Controller
         return redirect()->back()->with(
             'success',
             'Successfully remove product from your favorite'
+        );
+    }
+
+    public function cancelBeforePaid(Order $order)
+    {
+        $order->update([
+            'status' => 'canceled'
+        ]);
+
+        return redirect()->back()->with('success', 'Successfully cancel order');
+    }
+
+    public function finishOrder(Order $order)
+    {
+        $order->update([
+            'status' => 'finished'
+        ]);
+
+        return redirect()->back()->with(
+            'success', 'Thank you for ordering, your order is now finished'
         );
     }
 }
