@@ -564,8 +564,9 @@ logoutBtn.addEventListener('click', function (e) {
 $("#zero_config").DataTable({
   dom: 'Bfrtip',
   buttons: [{
-    extend: 'pdf',
-    text: 'Download as PDF'
+    extend: 'collection',
+    text: 'Download Data',
+    buttons: ['pdf', 'excel']
   }]
 });
 document.querySelectorAll('box-icon').forEach(function (icon) {
