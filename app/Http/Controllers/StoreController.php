@@ -47,8 +47,6 @@ class StoreController extends Controller
                 }
                 if ($productType == 'redeem') {
                     $query->where('is_redeem', true);
-                } else {
-                    $query->where('is_redeem', false);
                 }
             });
         }

@@ -20,7 +20,7 @@
                 @foreach ($history as $item)
                     <tr class="hover:bg-gray-100 point-item">
                         <td class="border border-gray-400 py-3 px-4">
-                            <time datetime="{{ $item->created_at }}">{{ $item->created_at->format('d M Y h:i') }}</time>
+                            <time datetime="{{ $item->created_at }}">{{ $item->created_at}}</time>
                         </td>
                         <td class="border border-gray-400 py-3 px-4">
                             {{ $item->description }}
@@ -38,7 +38,11 @@
 @push('script')
     <script>
         $(document).ready(function() {
-            $('#pointHistoryTable').DataTable();
+            $('#pointHistoryTable').DataTable({
+                "order": [
+                    [0, "desc"]
+                ]
+            });
         });
 
     </script>

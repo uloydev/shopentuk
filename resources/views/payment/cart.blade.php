@@ -7,7 +7,7 @@
 @section('content')
 <div class="container h-full pt-10 pb-20 px-5 mx-auto">
     @if(session('error'))
-    <x-alert type="error">
+    <x-alert type="danger">
         {{ session('error') }}
     </x-alert>
     @endif

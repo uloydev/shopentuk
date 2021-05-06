@@ -2,12 +2,6 @@
 @section('body-id', Str::camel($title))
 @section('title', ucwords($title))
 @section('content')
-
-    @if (session('success'))
-    <x-adminmart-alert is-dismissable="false" 
-    message="{!! session('success') !!}"
-    type="success"/>
-    @endif
     <div class="row @if (session('success')) mt-5 @endif">
         <div class="col">
             <div class="card">

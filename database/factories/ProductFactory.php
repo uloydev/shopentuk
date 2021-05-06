@@ -72,7 +72,7 @@ class ProductFactory extends Factory
             'point_price' => $this->faker->numberBetween(10, 150),
             'category_id' => $category->id,
             'sub_category_id' => isset($subCategory) ? $subCategory->id : NULL,
-            'is_redeem' => false,
+            'is_redeem' => rand(0,1),
             'weight' => $category->is_digital_product ? 0 : $this->faker->randomElement($weights),
         ];
     }

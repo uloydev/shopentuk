@@ -7,14 +7,14 @@
 @section('content')
     <div class="block">
         @forelse ($orders as $order)
-            <x-order-item order-id="{{ $order->id }}"
-            total-price="{{ $order->price_total }}" total-point="{{ $order->point_total }}" 
-            order-date="{{ $order->created_at }}" order-status="{{ $order->status }}" >
+            <x-order-item order-id="{{ $order->id }}" total-price="{{ $order->price_total }}"
+                total-point="{{ $order->point_total }}" order-date="{{ $order->created_at }}"
+                order-status="{{ $order->status }}">
                 <x-slot name="products">
                     @foreach ($order->orderProducts as $orderProduct)
                         <div class="w-full mb-3">
                             <p class="font-bold text-xl">
-                                {{ $orderProduct->product->title }} 
+                                {{ $orderProduct->product->title }}
                                 <span> &times; {{ $orderProduct->quantity }}</span>
                             </p>
                             @if ($orderProduct->is_toko_point)
@@ -26,18 +26,19 @@
                                     <var class="rupiah-currency text-lg">{{ $orderProduct->original_price }}</var>
                                 @endif
                             @endif
-                            
+
                         </div>
                     @endforeach
                 </x-slot>
-                @if($order->refund)
-                <p class="font-bold">
-                    Refund berhasil. 
-                    <a class="text-blue-500" 
-                    href="{{ Storage::url($order->refund->struk) }}" download>
-                        Download bukti refund
-                    </a>
-                </p>
+                @if ($order->status == 'refunded')
+                    <p class="font-bold">
+                        Refund berhasil sebesar @currency($order->price_total) dan {{ $order->point_total }} point.
+                    </p>
+                    @if ($order->refund_method != 'point')
+                        <a class="text-blue-500" href="{{ Storage::url($order->refund->struk) }}" download>
+                            Download bukti refund
+                        </a>
+                    @endif
                 @endif
             </x-order-item>
         @empty

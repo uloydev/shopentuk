@@ -11,8 +11,10 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Order;
 use App\Models\Refund;
 use App\Models\SiteSetting;
+use App\Models\PointHistory;
 
 use App\Mail\OrderRejected;
+use App\Mail\RefundReceipt;
 use App\Mail\OrderRefunded;
 
 class OrderController extends Controller
@@ -66,39 +68,6 @@ class OrderController extends Controller
         ]);
     }
 
-    public function makeRefund(Order $order, Request $request)
-    {
-        // payment_method = ['bca', 'ovo', 'point']
-
-        $siteSetting = SiteSetting::first();
-        $user = $order->user;
-        $refund = new Refund;
-
-        $refund->full_name = $user->name;
-        $refund->phone = $user->phone;
-        $refund->order_id = $order->id;
-        $refund->payment_method = $request->payment_method;
-        if ($request->hasFile('image')) {
-            $refund->image = $request->file('image')->store('refund_images');
-        }
-
-        if ($request->paymentMethod == 'point') {
-            $refund->payment_date = Carbon::now();
-            $user->point += round($order->price_total / $siteSetting->point_value);
-            $user->point += $order->point_total;
-        } else {
-            $refund->payment_date = Carbon::parse($request->payment_date);
-        }
-        $refund->save();
-        $user->save();
-        Mail::to($user->email)->send(new OrderRefunded($user, $order));
-
-        return redirect()->route('admin.order.refund.index')->with(
-            'success',
-            'sukses refund order!'
-        );
-    }
-
     public function changeStatus(Order $order)
     {
         $order->update([
@@ -112,10 +81,27 @@ class OrderController extends Controller
 
     public function cancel(Order $order)
     {
-        $order->update([
-            'status' => 'refunding'
-        ]);
-        Mail::to($order->user->email)->send(new OrderRefunded($order));
+        $user = $order->user;
+        // dd($user->email);
+        if ($order->price_total == 0) {
+            $order->update([
+                'status' => 'refunded',
+                'refund_method' => 'point'
+            ]);
+            $user->point += $order->point_total;
+            $user->save();
+            PointHistory::create([
+                'value' => $order->point_total,
+                'description' => PointHistory::ORDER_POINT_REFUND_MESSAGE,
+                'user_id' => $user->id
+            ]);
+            Mail::to($user->email)->send(new RefundReceipt($order));
+        } else {
+            $order->update([
+                'status' => 'refunding'
+            ]);
+            Mail::to($user->email)->send(new OrderRefunded($order));
+        }
 
         return redirect()->route('admin.order.new')->with('success', 'Successfully cancel order');
     }
