@@ -28,7 +28,7 @@ if (HelperModule.pageUrl === '/admin/game/current') {
         options.forEach((option) => {
             var winnerHtml = '';
             var rewardsHtml = '';
-            winnerHtml += '<div class="col-md-4 col-lg-3"><div class="option-item bg-dark m-2 p-2 text-white text-center" data-option-id="' + option.id + '"><p>Angka ' + option.number + '</p><p>' + option.calculated_point + ' point</p><p>Winners ';
+            winnerHtml += '<div class="col-md-4 col-lg-3"><div class="option-item bg-dark m-2 p-2 text-white text-center" data-option-id="' + option.id + '"><p>Angka ' + option.number + '</p><p>' + option.calculated_point + ' point</p><p>' + option.bid_count + ' bids</p><p>Winners ';
             option.rewards.forEach((reward) => {
                 if (reward.game_option.type == 'number') {
                     rewardsHtml += reward.game_option.number + ' ';

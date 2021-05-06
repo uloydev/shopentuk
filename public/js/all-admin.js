@@ -5740,7 +5740,7 @@ if (_helper_module__WEBPACK_IMPORTED_MODULE_0__["pageUrl"] === '/admin/game/curr
     options.forEach(function (option) {
       var winnerHtml = '';
       var rewardsHtml = '';
-      winnerHtml += '<div class="col-md-4 col-lg-3"><div class="option-item bg-dark m-2 p-2 text-white text-center" data-option-id="' + option.id + '"><p>Angka ' + option.number + '</p><p>' + option.calculated_point + ' point</p><p>Winners ';
+      winnerHtml += '<div class="col-md-4 col-lg-3"><div class="option-item bg-dark m-2 p-2 text-white text-center" data-option-id="' + option.id + '"><p>Angka ' + option.number + '</p><p>' + option.calculated_point + ' point</p><p>' + option.bid_count + ' bids</p><p>Winners ';
       option.rewards.forEach(function (reward) {
         if (reward.game_option.type == 'number') {
           rewardsHtml += reward.game_option.number + ' ';
@@ -6219,7 +6219,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/shopentuk/resources/assets/js/page/dashboard-admin.js */"./resources/assets/js/page/dashboard-admin.js");
+module.exports = __webpack_require__(/*! /home/uloydev/project/web/laravel/shopentuk/resources/assets/js/page/dashboard-admin.js */"./resources/assets/js/page/dashboard-admin.js");
 
 
 /***/ })

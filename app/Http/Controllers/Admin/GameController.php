@@ -56,7 +56,10 @@ class GameController extends Controller
     {
         $game = Game::with(['winners'])->firstWhere('status', 'playing');
         $gameBids = $game->bids;
-        $options = GameOption::where('type', 'number')->with(['rewards'])->get();
+        $options = GameOption::where('type', 'number')
+            ->with(['rewards'])
+            ->get();
+        // dd($options->sum('bids_count'));
         foreach ($options as $option) {
             $calculatedPoint = 0;
             $bids = $gameBids->whereIn('game_option_id', $option->rewards->pluck('game_option_id'));
@@ -66,6 +69,7 @@ class GameController extends Controller
                     $calculatedPoint += $bid->point * $reward->value;
                 }
             }
+            $option->setBidCount($bids->count());
             $option->setCalculatedPoint($calculatedPoint);
             $option->setGamePoint($bids->sum('point'));
         }
