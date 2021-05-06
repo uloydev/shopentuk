@@ -74,7 +74,7 @@ class DashboardController extends Controller
     public function updateAccount(Request $request)
     {
         Auth::user()->update($request->all());
-        return redirect()->back()->with(['success' => 'data user berhasil diupdate!']);
+        return redirect()->back()->with(['success' => 'Successfully update user data']);
     }
 
     public function wishlistProduct()
@@ -111,6 +111,16 @@ class DashboardController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Successfully cancel order');
+    }
 
+    public function finishOrder(Order $order)
+    {
+        $order->update([
+            'status' => 'finished'
+        ]);
+
+        return redirect()->back()->with(
+            'success', 'Thank you for ordering, your order is now finished'
+        );
     }
 }

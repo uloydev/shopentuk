@@ -28,7 +28,7 @@
                                         'status',
                                         'shipping price',
                                         'no resi',
-                                        'cancel order',
+                                        'action',
                                         'order date'
                                     ]
                                 ])
@@ -56,7 +56,7 @@
                                             <td class="order-item__sub-cat" 
                                             data-original="{{ $order->status }}">
                                                 {{ $order->status }}
-                                            </td> 
+                                            </td>
                                             <td class="order-item__sub-cat" 
                                             data-original="{{ $order->shipping_price }}">
                                                 @currency($order->shipping_price)
@@ -74,6 +74,7 @@
                                                 @endif
                                             </td>
                                             <td class="order-item__sub-cat">
+                                                @if ($order->status === 'paid')
                                                 <form action="{{ route(
                                                     'admin.order.cancel', $order->id
                                                 ) }}"
@@ -84,6 +85,9 @@
                                                         Cancel order
                                                     </button>
                                                 </form>
+                                                @else
+                                                Orderan sudah dikirim
+                                                @endif
                                             </td>
                                             <td class="order-item__sub-cat" 
                                             data-original="{{ $order->created_at }}">

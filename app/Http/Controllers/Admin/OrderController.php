@@ -21,7 +21,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        return view('order.manage', [
+        return view('order.history', [
             'orders' => Order::whereIn('status', $this->completedOrderStatus)->get(), 
             'title' => 'manage order'
         ]);
@@ -29,7 +29,7 @@ class OrderController extends Controller
 
     public function newOrder()
     {
-        $orderPaid = Order::where('status', 'paid')->get();
+        $orderPaid = Order::whereIn('status', ['paid', 'shipping'])->get();
         $orderUnpaid = Order::where('status', 'unpaid')->get();
         
         return view('order.new', [

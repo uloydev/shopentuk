@@ -21,6 +21,7 @@
                                 @include('partial.thead', [
                                     'thead' => [
                                         'order id',
+                                        'customer name',
                                         'customer email',
                                         'order date',
                                         'product price',
@@ -41,8 +42,9 @@
                                     @foreach ($orders as $order)
                                         <tr class="product-item">
                                             <td>{{ $order->id }}</td>
-                                            <td>{{ $order->created_at->format('d M Y H:i') }}</td>
+                                            <td>{{ $order->user->name }}</td>
                                             <td>{{ $order->user->email }}</td>
+                                            <td>{{ $order->created_at->format('d M Y H:i') }}</td>
                                             <td>@currency($order->product_price)</td>
                                             <td>{{ $order->point_price ?? '-' }}</td>
                                             <td>{{ $order->price_total }}</td>
