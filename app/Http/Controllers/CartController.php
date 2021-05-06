@@ -33,6 +33,7 @@ class CartController extends Controller
 
         $user = Auth::user();
         $cart = $user->cart;
+        // dd($cart->cartItems->first()->product);
         $addresses = $user->userAddresses->sortByDesc('is_main_address');
 
         $userAddress = new UserAddress();

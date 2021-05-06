@@ -4,8 +4,7 @@
 @section('content')
 <div class="container py-10 px-5 lg:px-0 mx-auto">
     <figure class="grid grid-cols-1 md:grid-cols-2 flex-col md:flex-row mb-8">
-        <img src="{{ $product->mainImage ? Storage::url($product->mainImage->url) : 'https://via.placeholder.com/200' }}"
-        class="w-full mb-5 md:mb-0">
+        <img src="{{ $product->mainImage ? Storage::url($product->mainImage->url) : 'https://via.placeholder.com/200' }}" class="w-full mb-5 md:mb-0">
         <figcaption class="md:ml-10">
             @include('partial.breadcumb')
             <p class="text-2xl mb-5">{{ $product->title }}</p>

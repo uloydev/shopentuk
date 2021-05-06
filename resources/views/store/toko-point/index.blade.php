@@ -18,7 +18,7 @@
                     @foreach ($bestProducts as $product)
                         <li class="pb-3">
                             <x-card-product 
-                            product-img="{{ $product->mainImage ? asset('storage/' . $product->mainImage->url) : asset('storage/img/telkomsel.jpg') }}" 
+                            product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : 'https://via.placeholder.com/200' }}" 
                             product-name="{{ Str::words($product->title, 2) }}"
                             product-category="{{ $product->productCategory->title }}" 
                             product-category-id="{{ $product->productCategory->id }}" 
@@ -99,8 +99,7 @@
             <div class="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-10 mt-10">
                 @forelse ($products as $product)
                     <x-card-product
-                    product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : 
-                    asset('img/static/example.jpg') }}"
+                    product-img="{{ $product->mainImage ? Storage::url($product->mainImage->url) : 'https://via.placeholder.com/200' }}"
                     product-name="{{ $product->title }}"
                     product-category="{{ $product->productCategory->title }}"
                     product-category-id="{{ $product->productCategory->id }}"
@@ -110,10 +109,15 @@
                     is-horizontal="false"
                     is-toko-point="true"/>
                 @empty
-                    @include('store.product.empty', [
-                        'message' => "Oops, there's no point called " . 
-                                     "<q>" . $httpQuery['search'] . "</q>" . " on this categories"
-                    ])
+                    @isset($httpQuery['search'])
+                        @include('store.product.empty', [
+                            'message' => "Oops, there's no point called <q>" . $httpQuery['search'] . "</q> on this categories"
+                        ])
+                    @else
+                        @include('store.product.empty', [
+                            'message' => "Oops, there's no products at the moment on this categories"
+                        ])
+                    @endisset
                 @endforelse
             </div>
             <div class="mt-8">

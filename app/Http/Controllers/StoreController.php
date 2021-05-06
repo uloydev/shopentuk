@@ -124,16 +124,11 @@ class StoreController extends Controller
 
     public function tokoPoint(Request $request)
     {
-        return view('store.toko-point.index', $this->getFilteredProducts($request, 'all'));
+        return view('store.toko-point.index', $this->getFilteredProducts($request, 'redeem'));
     }
 
     public function showTokoPoint($slug)
     {
         return view('store.toko-point.show', $this->getProductFromSlug($slug));
-    }
-
-    public function redeem(Request $request)
-    {
-        return view('store.toko-point.index', $this->getFilteredProducts($request, 'redeem'));
     }
 }
