@@ -15,12 +15,12 @@ if (HelperModule.pageUrl.indexOf('/my-account') > -1) {
     // script on '/my-account/point' page
     if (HelperModule.pageUrl === '/my-account/point') {
         //collecting each point and sum-ing it
-        const pointQty = Array.from(document.querySelectorAll('.point-item__qty')).map(point => {
-            return Number(point.textContent)
-        })
+        // const pointQty = Array.from(document.querySelectorAll('.point-item__qty')).map(point => {
+        //     return Number(point.textContent)
+        // })
         
-        const pointTotal = pointQty.reduce((acc, val) => acc + val)
-        document.querySelector('.point-item__total').textContent = pointTotal
+        // const pointTotal = pointQty.reduce((acc, val) => acc + val)
+        // document.querySelector('.point-item__total').textContent = pointTotal
     }
 
     if (HelperModule.pageUrl === '/my-account/detail') {

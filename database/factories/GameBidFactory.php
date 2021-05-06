@@ -35,8 +35,8 @@ class GameBidFactory extends Factory
     {
         return $this->afterCreating(function (GameBid $bid) {
             PointHistory::create([
-                'value' => $bid->point,
-                'description' => 'GameBid',
+                'value' => -$bid->point,
+                'description' => PointHistory::GAME_BID_MESSAGE,
                 'user_id' => $bid->user_id,
             ]);
         });

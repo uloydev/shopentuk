@@ -10,6 +10,7 @@ use App\Models\OrderProduct;
 use App\Models\SiteSetting;
 use App\Models\Voucher;
 use App\Models\UserAddress;
+use App\Models\PointHistory;
 
 class CheckoutController extends Controller
 {
@@ -74,6 +75,16 @@ class CheckoutController extends Controller
             }
         }
         $order->save();
+
+        $user->point -= $order->point_total;
+        $user->save();
+
+        PointHistory::create([
+            'value' => -$order->point_total,
+            'description' => PointHistory::PLACE_ORDER_MESSAGE,
+            'user_id' => $user->id
+        ]);
+
         return redirect()->route('my-account.current.order')->with([
             'success' => 'sukses membuat order' . (!$isAllPoint ? ", silahkan bayar pesanan anda !" : ""),
         ]);

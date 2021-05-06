@@ -22,11 +22,9 @@
                                     'thead' => [
                                         'order id',
                                         'customer name',
-                                        'product price',
                                         'price total',
                                         'point total',
                                         'status',
-                                        'shipping price',
                                         'no resi',
                                         'action',
                                         'order date'
@@ -41,10 +39,6 @@
                                             <td class="order-item__customer-name">
                                                 {{ Str::limit($order->user->name, 10) }}
                                             </td>
-                                            <td class="order-item__price"
-                                            data-original="{{ $order->product_price }}">
-                                                @currency($order->product_price)
-                                            </td>
                                             <td class="order-item__point" 
                                             data-original="{{ $order->price_total }}">
                                                 @currency($order->price_total)
@@ -56,10 +50,6 @@
                                             <td class="order-item__sub-cat" 
                                             data-original="{{ $order->status }}">
                                                 {{ $order->status }}
-                                            </td>
-                                            <td class="order-item__sub-cat" 
-                                            data-original="{{ $order->shipping_price }}">
-                                                @currency($order->shipping_price)
                                             </td>
                                             <td class="order-item__sub-cat" 
                                             data-original="{{ $order->no_resi ? 
