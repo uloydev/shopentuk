@@ -35,4 +35,8 @@ class GameOption extends Model
     public function setCalculatedPoint($point) {
         $this->attributes['calculated_point'] = $point;
     }
+
+    public function setBidCount($count) {
+        $this->attributes['bid_count'] = $count;
+    }
 }
