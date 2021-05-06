@@ -20,31 +20,27 @@
                                     'status',
                                     'no resi',
                                     'refund type',
+                                    'bank',
+                                    'pemilik rekening',
+                                    'nomor rekening',
+                                    'nomor telepon',
                                     'order date',
                                 ]
                             ])
                             <tbody>
                                 @foreach ($orderToRefund as $order)
                                     <tr class="order-item">
-                                        <td>
-                                            {{ $order->id }}
-                                        </td>
-                                        <td class="order-item__customer-name">
-                                            {{ Str::limit($order->user->name, 10) }}
-                                        </td>
+                                        <td>{{ $order->id }}</td>
+                                        <td>{{ Str::limit($order->user->name, 10) }}</td>
                                         <td class="order-item__point" 
                                         data-original="{{ $order->price_total }}">
                                             @currency($order->price_total)
-                                        </td>
-                                        <td class="order-item__cat" 
-                                        data-original="{{ $order->point_total }}">
-                                            {{ $order->point_total }}
                                         </td>
                                         <td class="order-item__sub-cat" 
                                         data-original="{{ $order->status }}">
                                             {{ $order->status }}
                                         </td>
-                                        <td class="order-item__sub-cat" 
+                                        <td class="order-item__sub-cat"
                                         data-original="{{ $order->no_resi ? 
                                         $order->no_resi : '' }}">
                                             @if (empty($order->no_resi))
@@ -59,12 +55,17 @@
                                         <td>
                                             {{-- @if ($order->refund_type)
                                             {{ $order->refund_type }} --}}
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" 
+                                            <button type="button" 
+                                            class="btn btn-primary" data-toggle="modal"
                                             data-target="#buktiRefund{{ $order->id }}">
                                                 Kirim bukti refund ke customer
                                             </button>
                                             {{-- @endif --}}
                                         </td>
+                                        <td>{{ $order->user->bank }}</td>
+                                        <td>{{ $order->user->pemilik_rekening }}</td>
+                                        <td>{{ $order->user->rekening }}</td>
+                                        <td>{{ $order->user->phone }}</td>
                                         <td class="order-item__sub-cat" 
                                         data-original="{{ $order->created_at }}">
                                             {{ $order->created_at->format('d M Y') }}

@@ -18,7 +18,6 @@ class CreateRefundsTable extends Migration
             $table->foreignId('user_id');
             $table->foreignId('order_id');
             $table->date('payment_date')->nullable();
-            $table->enum('payment_method', ['bca', 'ovo'])->nullable();
             $table->string('struk')->nullable();
             $table->timestamps();
         });

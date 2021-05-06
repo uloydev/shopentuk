@@ -58,7 +58,7 @@ Route::get('register', function () {
 
 Route::prefix('refund')->name('refund.')->group(function (){
     Route::post('request/{orderId}', 'RefundController@request')->name('request');
-    Route::get('manage', 'RefundController@manage')->name('manage');
+    Route::get('manage', 'RefundController@manage')->name('manage')->middleware('admin', 'auth');
     Route::post('kirim', 'RefundController@kirimBukti')->name('kirim-bukti');
 });
 
