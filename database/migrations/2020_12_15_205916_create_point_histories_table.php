@@ -18,7 +18,6 @@ class CreatePointHistoriesTable extends Migration
             $table->integer('value');
             $table->string('description');
             $table->foreignId('user_id');
-            $table->foreignId('order_id')->nullable();
             $table->timestamps();
         });
     }

@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             FeedbackCustomerSeeder::class,
             VoucherSeeder::class,
             ProvinceSeeder::class,
-            PointHistorySeeder::class,
+            // PointHistorySeeder::class,
             GameOptionSeeder::class,
             GameOptionRewardSeeder::class,
             // GameSeeder::class,

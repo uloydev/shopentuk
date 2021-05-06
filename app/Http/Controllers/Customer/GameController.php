@@ -67,7 +67,7 @@ class GameController extends Controller
                 PointHistory::create([
                     'value' => $request->point,
                     'user_id' => $user->id,
-                    'description' => 'GameBid'
+                    'description' => PointHistory::GAME_BID_MESSAGE
                 ]);
             }
             $user->save();

@@ -95,7 +95,7 @@ class Kernel extends ConsoleKernel
                         $pointOut += $pointReward;
                         PointHistory::create([
                             'value' => $pointReward,
-                            'description' => 'game winner reward',
+                            'description' => PointHistory::GAME_WINNER_MESSAGE,
                             'user_id' => $user->id
                         ]);
                         $bid->reward = $pointReward;
