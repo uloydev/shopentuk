@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RefundReceipt;
 use App\Mail\RequestRefund;
 use App\Models\Order;
 use App\Models\Refund;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -18,21 +20,11 @@ class RefundController extends Controller
         $this->middleware('admin')->only('manage');
     }
 
-    public function request($orderId)
+    public function request(Order $order)
     {
-        $orderToRefund = Order::where('id', $orderId)->firstOrFail();
-        $userId = $orderToRefund->user->id;
-        $paymentDate = Carbon::now()->toDateTimeString();
-
-        $requestRefund = Refund::create([
-            'user_id' => $userId,
-            'order_id' => $orderId,
-            'payment_date' => $paymentDate,
-            'rekening' => (int)request('rekening'),
-            'payment_method' => request('payment_method')
+        $order->update([
+            'refund_method' => request('refund_method')
         ]);
-
-        Mail::to('bariq.2nd.rodriguez@gmail.com')->send(new RequestRefund($requestRefund));
 
         return redirect()->back()->with(
             'success', 
@@ -49,13 +41,21 @@ class RefundController extends Controller
 
     public function kirimBukti()
     {
-        Refund::create([
+        $refundReceipt = Refund::create([
             'user_id' => request('user_id'),
             'order_id' => request('order_id'),
             'payment_date' => request('payment_date'),
-            'is_paid' => request('is_paid'),
-            'payment_method' => request('payment_method'),
-            'struk' => request('struk')->store('refund')
+            'struk' => request('struk')->store('public/refund')
+        ]);
+
+        $emailCustomer = User::findOrFail(request('user_id'))->email;
+
+        Mail::to($emailCustomer)->send(
+            new RefundReceipt($refundReceipt)
+        );
+
+        Order::where('id', $refundReceipt->order_id)->update([
+            'status' => 'refunded'
         ]);
 
         return redirect()->back()->with('success', 'Successfully refund order to custoemr');

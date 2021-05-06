@@ -18,56 +18,56 @@
                                     'customer name',
                                     'price total',
                                     'status',
-                                    'no resi',
                                     'refund type',
+                                    'bank',
+                                    'pemilik rekening',
+                                    'nomor rekening',
+                                    'nomor telepon',
                                     'order date',
+                                    'action'
                                 ]
                             ])
                             <tbody>
                                 @foreach ($orderToRefund as $order)
                                     <tr class="order-item">
-                                        <td>
-                                            {{ $order->id }}
-                                        </td>
-                                        <td class="order-item__customer-name">
-                                            {{ Str::limit($order->user->name, 10) }}
-                                        </td>
+                                        <td>{{ $order->id }}</td>
+                                        <td>{{ Str::limit($order->user->name, 10) }}</td>
                                         <td class="order-item__point" 
                                         data-original="{{ $order->price_total }}">
                                             @currency($order->price_total)
-                                        </td>
-                                        <td class="order-item__cat" 
-                                        data-original="{{ $order->point_total }}">
-                                            {{ $order->point_total }}
                                         </td>
                                         <td class="order-item__sub-cat" 
                                         data-original="{{ $order->status }}">
                                             {{ $order->status }}
                                         </td>
-                                        <td class="order-item__sub-cat" 
-                                        data-original="{{ $order->no_resi ? 
-                                        $order->no_resi : '' }}">
-                                            @if (empty($order->no_resi))
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inputResiModal"
-                                            data-order-id="{{ $order->id }}">
-                                                Input resi
-                                            </button>
+                                        <td>
+                                            @if ($order->refund_method)
+                                            {{ $order->refund_method }}
                                             @else
-                                                {{ $order->no_resi }}
+                                            User belum memilih metode refund
                                             @endif
                                         </td>
-                                        <td>
-                                            {{-- @if ($order->refund_type)
-                                            {{ $order->refund_type }} --}}
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" 
-                                            data-target="#buktiRefund{{ $order->id }}">
-                                                Kirim bukti refund ke customer
-                                            </button>
-                                            {{-- @endif --}}
-                                        </td>
+                                        <td>{{ $order->user->bank }}</td>
+                                        <td>{{ $order->user->pemilik_rekening }}</td>
+                                        <td>{{ $order->user->rekening }}</td>
+                                        <td>{{ $order->user->phone }}</td>
                                         <td class="order-item__sub-cat" 
                                         data-original="{{ $order->created_at }}">
                                             {{ $order->created_at->format('d M Y') }}
+                                        </td>
+                                        <td>
+                                            @if ($order->refund_method and !$order->refund)
+                                            <button type="button" 
+                                            class="btn btn-primary" data-toggle="modal"
+                                            data-target="#buktiRefund{{ $order->id }}">
+                                                Kirim bukti refund ke customer
+                                            </button>
+                                            @else
+                                            <span>
+                                                Belum bisa mengirim bukti refund, 
+                                                tunggu user memilih metode refund
+                                            </span>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -101,7 +101,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('refund.kirim-bukti') }}" method="POST">
+                    <form action="{{ route('refund.kirim-bukti') }}" method="POST"
+                    id="formRefund{{ $order->id }}" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="order_id" value="{{ $order->id }}">
                         <input type="hidden" name="user_id" value="{{ $order->user_id }}">
@@ -112,7 +113,7 @@
                         <div class="form-group">
                             <p>Bukti telah refund</p>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile">
+                                <input type="file" class="custom-file-input" name="struk" id="customFile">
                                 <label class="custom-file-label" for="customFile">
                                     Choose file
                                 </label>
@@ -124,7 +125,10 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
                         Close
                     </button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary" 
+                    form="formRefund{{ $order->id }}">
+                        Upload bukti refund
+                    </button>
                 </div>
             </div>
         </div>

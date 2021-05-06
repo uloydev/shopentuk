@@ -22,7 +22,8 @@ class Order extends Model
         'weight_total', //done
         'voucher_discount', //done
         'status', //done
-        'no_resi', //done
+        'no_resi', //done,
+        'refund_method' //done
     ];
 
     protected $with = ['user'];

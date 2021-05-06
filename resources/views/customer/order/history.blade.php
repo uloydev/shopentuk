@@ -30,6 +30,15 @@
                         </div>
                     @endforeach
                 </x-slot>
+                @if($order->refund)
+                <p class="font-bold">
+                    Refund berhasil. 
+                    <a class="text-blue-500" 
+                    href="{{ Storage::url($order->refund->struk) }}" download>
+                        Download bukti refund
+                    </a>
+                </p>
+                @endif
             </x-order-item>
         @empty
             <p>tidak ada data untuk ditampilkan</p>
