@@ -12,18 +12,7 @@ style="background-image: url(@yield('header-bg'))">
                         <img src="{{ asset('img/logo/shopentuk.png') }}">
                     </picture>
                 </a>
-                <a href="" class="nav__icon nav__icon--bag lg:hidden">
-                    <div class="nav__icon-cart">
-                        <var class="not-italic" id="total-shopping">
-                            @if (Auth::check() && Auth::user()->cart)
-                                {{ Auth::user()->cart->cartItems->pluck('quantity')->sum() ?? 0 }}
-                            @else
-                                0
-                            @endif
-                        </var>
-                        <box-icon name='shopping-bag'></box-icon>
-                    </div>
-                </a>
+                @include('partial.link-to-cart', ['class' => 'lg:hidden'])
                 <a href="javascript:void(0);" class="nav__icon nav__toggle-menu ml-3">
                     <box-icon name='menu-alt-right' id="open-icon"></box-icon>
                     <box-icon name='x' id="close-icon"></box-icon>
@@ -144,18 +133,7 @@ style="background-image: url(@yield('header-bg'))">
                     </ul>
                 </li>
                 <li class="nav__item nav__item--menu hidden lg:inline-flex lg:flex-grow lg:justify-center">
-                    <a href="{{ route('cart.index') }}" class="nav__icon nav__icon--bag">
-                        <div class="nav__icon-cart">
-                            <var class="not-italic" id="total-shopping">
-                                @if (Auth::check() && Auth::user()->cart)
-                                    {{ Auth::user()->cart->cartItems->pluck('quantity')->sum() ?? 0 }}
-                                @else
-                                    0
-                                @endif
-                            </var>
-                            <box-icon name='shopping-bag'></box-icon>
-                        </div>
-                    </a>
+                    @include('partial.link-to-cart')
                 </li>
             </ul>
         </div>
