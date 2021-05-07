@@ -26,7 +26,10 @@
                                     <var class="rupiah-currency text-lg">{{ $orderProduct->original_price }}</var>
                                 @endif
                             @endif
-
+                            @if ($order->status == 'finished' and $orderProduct->is_digital)
+                                <p class="font-bold">Voucher Code : {{ $orderProduct->voucher_code }}</p>
+                                <small class="text-red-500">jika quantity lebih dari 1, kode dipisahkan dengan koma (,)</small>
+                            @endif
                         </div>
                     @endforeach
                 </x-slot>

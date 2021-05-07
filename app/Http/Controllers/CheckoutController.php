@@ -51,6 +51,7 @@ class CheckoutController extends Controller
             }
             $orderProduct->quantity = $item->quantity;
             $orderProduct->is_toko_point = $item->is_toko_point;
+            $orderProduct->is_digital = $item->is_digital;
             $orderProduct->save();
             $item->delete();
         }
@@ -79,11 +80,13 @@ class CheckoutController extends Controller
         $user->point -= $order->point_total;
         $user->save();
 
-        PointHistory::create([
-            'value' => -$order->point_total,
-            'description' => PointHistory::PLACE_ORDER_MESSAGE,
-            'user_id' => $user->id
-        ]);
+        if ($order->point_total > 0) {
+            PointHistory::create([
+                'value' => -$order->point_total,
+                'description' => PointHistory::PLACE_ORDER_MESSAGE,
+                'user_id' => $user->id
+            ]);
+        }
 
         return redirect()->route('my-account.current.order')->with([
             'success' => 'sukses membuat order' . (!$isAllPoint ? ", silahkan bayar pesanan anda !" : ""),

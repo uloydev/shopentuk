@@ -8,20 +8,21 @@ class OrderItem extends Component
 {
 
     public $orderId, $totalPoint, $totalPrice, $orderDate;
-    public $orderStatus;
+    public $orderStatus, $orderResi;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($orderId, $totalPoint, $totalPrice, $orderDate, $orderStatus)
+    public function __construct($orderId, $totalPoint, $totalPrice, $orderDate, $orderStatus, $orderResi = '')
     {
         $this->orderId = $orderId;
         $this->totalPoint = $totalPoint;
         $this->totalPrice = $totalPrice;
         $this->orderDate = $orderDate;
         $this->orderStatus = $orderStatus;
+        $this->orderResi = $orderResi;
     }
 
     /**

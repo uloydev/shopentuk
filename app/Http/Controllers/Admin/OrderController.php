@@ -102,7 +102,26 @@ class OrderController extends Controller
             ]);
             Mail::to($user->email)->send(new OrderRefunded($order));
         }
-
         return redirect()->route('admin.order.new')->with('success', 'Successfully cancel order');
     }
+
+    public function submitVoucherCode(Request $request, Order $order) {
+        foreach ($request->order_product_id as $index => $id) {
+            $orderItem = $order->orderProducts->firstWhere('id', $id);
+            $orderItem->voucher_code = $request->voucher_code[$index];
+            $orderItem->save();
+        }
+        if ($order->orderProducts->where('is_digital', false)->count()) {
+            if ( ! empty($order->no_resi) ) {
+                $order->update([
+                    'status' => 'shipping'
+                ]);
+            }
+        } else {
+            $order->update([
+                'status' => 'finished'
+            ]);
+        }
+        return redirect()->route('admin.order.new')->with('success', 'Successfully submit  voucher code');
+    } 
 }

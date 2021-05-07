@@ -52,16 +52,24 @@ class PaymentController extends Controller
                 ]);
             }
         }
-        return redirect()->back()->with(['success' => 'sukses membuat konfirmasi pembayaran']);
+        return redirect()->route('my-account.current.order')->with(['success' => 'sukses membuat konfirmasi pembayaran']);
     }
 
     public function inputResi()
     {
-        Order::where('id', request('order_id'))->update([
-            'no_resi' => request('no_resi'),
-            'status' => 'shipping'
-        ]);
-
+        $isNeedMoreAction = false;
+        $order = Order::findOrFail(request('order_id'));
+        $order->no_resi = request('no_resi');
+        foreach ($order->orderProducts->where('is_digital', true) as $orderItem) {
+            if (empty($orderItem->voucher_code)) {
+                $isNeedMoreAction = true;
+                break;
+            }
+        }
+        if (! $isNeedMoreAction) {
+            $order->status = 'shipping';
+        }
+        $order->save();
         return redirect()->back()->with(
             'success',
             'Successfully insert resi number for order <b>' . request('order_id') . '</b>'

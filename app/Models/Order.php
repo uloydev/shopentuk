@@ -26,7 +26,7 @@ class Order extends Model
         'refund_method' //done
     ];
 
-    protected $with = ['user'];
+    protected $with = ['user', 'orderProducts'];
 
     public function orderProducts()
     {

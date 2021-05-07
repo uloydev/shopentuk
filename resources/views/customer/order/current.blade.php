@@ -10,7 +10,7 @@
             <x-order-item order-id="{{ $order->id }}"
             total-price="{{ $order->price_total }}" total-point="{{ $order->point_total }}" 
             order-date="{{ $order->created_at->format('d M Y G:i') }}" 
-            order-status="{{ $order->status }}">
+            order-status="{{ $order->status }}" order-resi="{{ $order->no_resi }}">
                 <x-slot name="addonBtn">
                     @if ($order->status == 'unpaid')
                         <a href="{{ route('payment.show-confirm', ['order_id'=> $order->id]) }}" class="btn bg-teal-500 px-5 rounded-full top-0 right-0 mr-4">
@@ -64,7 +64,10 @@
                                     <var class="rupiah-currency text-lg">{{ $orderProduct->original_price }}</var>
                                 @endif
                             @endif
-                            
+                            @if (in_array($order->status, ['shipping', 'finished']) and $orderProduct->is_digital)
+                                <p class="font-bold">Voucher Code : {{ $orderProduct->voucher_code }}</p>
+                                <small class="text-red-500">jika quantity lebih dari 1, kode dipisahkan dengan koma (,)</small>
+                            @endif
                         </div>
                     @endforeach
                 </x-slot>

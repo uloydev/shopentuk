@@ -19,6 +19,7 @@ class CreateCartItemsTable extends Migration
             $table->foreignId('product_id');
             $table->integer('quantity');
             $table->boolean('is_toko_point')->default(false);
+            $table->boolean('is_digital')->default(false);
             $table->timestamps();
         });
     }

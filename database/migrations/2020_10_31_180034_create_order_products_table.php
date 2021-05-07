@@ -22,6 +22,8 @@ class CreateOrderProductsTable extends Migration
             $table->integer('discounted_price')->default(0);
             $table->integer('quantity');
             $table->boolean('is_toko_point')->default(false);
+            $table->boolean('is_digital')->default(false);
+            $table->string('voucher_code')->nullable();
             $table->timestamps();
         });
     }

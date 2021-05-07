@@ -37,9 +37,6 @@
                         </label>
                     </div>
                 </div>
-                <small class="text-green-500 font-bold">
-                    * tidak wajib untuk upload bukti pembayaran
-                </small>
             </div>
             <x-btn action="submit" text="Kirim" type="primary" add-class="w-full lg:w-auto" />
         </form>

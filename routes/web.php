@@ -116,6 +116,7 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
             Route::get('/', 'OrderController@index')->name('index');
             Route::get('new', 'OrderController@newOrder')->name('new');
             Route::put('cancel/{order}', 'OrderController@cancel')->name('cancel');
+            Route::put('submit-voucher-code/{order}', 'OrderController@submitVoucherCode')->name('submit-voucher-code');
             Route::put('change-status/{order}', 'OrderController@changeStatus')->name(
                 'change-status'
             );

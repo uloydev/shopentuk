@@ -15,6 +15,7 @@ class CartItem extends Model
         'product_id',
         'quantity',
         'is_toko_point',
+        'is_digital'
     ];
 
     public function cart()

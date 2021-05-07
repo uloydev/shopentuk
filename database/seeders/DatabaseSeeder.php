@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             ProductImageSeeder::class,
             UserSeeder::class,
             CartSeeder::class,
-            CartItemSeeder::class,
+            // CartItemSeeder::class,
             FeedbackCustomerSeeder::class,
             VoucherSeeder::class,
             ProvinceSeeder::class,
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             GameOptionRewardSeeder::class,
             // GameSeeder::class,
             // OrderSeeder::class,
-            NewOrderSeeder::class,
+            // NewOrderSeeder::class,
             // ProductDiscountSeeder::class,
             RulesSeeder::class,
             NewsSeeder::class

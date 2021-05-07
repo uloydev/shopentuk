@@ -17,6 +17,8 @@ class OrderProduct extends Model
         'discounted_price',
         'quantity',
         'is_toko_point',
+        'is_digital',
+        'voucher_code',
     ];
 
     public function order()

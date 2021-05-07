@@ -90,6 +90,7 @@ class CartController extends Controller
                 'cart_id' => $cart->id,
                 'product_id' => $product->id,
                 'is_toko_point' => (bool) $request->is_toko_point,
+                'is_digital' =>  $product->productCategory->is_digital_product
             ]);
             $cartItem->quantity += $request->quantity;
             $cartItem->save();

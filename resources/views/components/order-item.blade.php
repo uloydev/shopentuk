@@ -7,6 +7,9 @@
     <p>Total Price  : {{$totalPrice}}</p>
     <p>Total Point  : {{$totalPoint}}</p>
     <p>Order Status : {{$orderStatus}}</p>
+    @if ($orderStatus == 'shipping')
+        <p>Order Resi : {{$orderResi}}</p>
+    @endif
     <div class="w-full text-right flex justify-between mt-5">
         {{-- todo: add logic show this text only when order have refund request --}}
         {{ $slot }}
