@@ -17,6 +17,7 @@
             <h1>Order</h1>
             <p>Price</p>
         </div>
+        <p class="text-center">untuk checkout hanya untuk barang tertentu, silahkan masukkan ke dalam favorite product dengan cara klik icon hati, lalu hapus product dari cart.</p>
         <div class="grid grid-cols-1">
             @foreach ($cart->cartItems as $item)
                 <div class="py-10 cart-item">

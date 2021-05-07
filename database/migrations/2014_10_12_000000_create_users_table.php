@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->integer('point')->default(0);
             $table->string('bank')->nullable();
             $table->string('pemilik_rekening')->nullable();
-            $table->integer('rekening')->nullable();
+            $table->string('rekening')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

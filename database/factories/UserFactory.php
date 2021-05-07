@@ -30,9 +30,10 @@ class UserFactory extends Factory
             'email_verified_at' => now()->translatedFormat('Y-m-d H:i:s'),
             'password' => Hash::make('password'), // password
             'role' => 'customer',
-            'point' => 0,
+            'point' => 100,
             'remember_token' => Str::random(10),
             'bank' => 'bca',
+            'pemilik_rekening' => $this->faker->name,
             'rekening' => 123456789,
         ];
     }

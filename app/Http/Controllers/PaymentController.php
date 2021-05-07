@@ -72,7 +72,7 @@ class PaymentController extends Controller
         $order->save();
         return redirect()->back()->with(
             'success',
-            'Successfully insert resi number for order <b>' . request('order_id') . '</b>'
+            'Successfully insert resi number for order ' . request('order_id')
         );
     }
 }
