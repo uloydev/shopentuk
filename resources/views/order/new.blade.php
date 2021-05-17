@@ -136,10 +136,26 @@
                                                                 </div>
                                                             </div>
                                                         @endif
+
+                                                        <hr>
+                                                        @if ($order->orderProducts->where('is_digital', false)->count())
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <h4 class="mt-2 mb-0">Product</h4>
+                                                                </div>
+                                                            </div>
+                                                            @foreach ($order->orderProducts->where('is_digital', false) as $item)
+                                                                <div class="row">
+                                                                    <div class="col">{{ $item->product->title }} @
+                                                                        {{ $item->quantity }} qty</div>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+
                                                         @if ($order->orderProducts->where('is_digital', true)->count())
                                                             <div class="row">
                                                                 <div class="col">
-                                                                    <h4 class="mt-5 mb-0">Voucher</h4>
+                                                                    <h4 class="mt-2 mb-0">Voucher</h4>
                                                                 </div>
                                                             </div>
                                                             @foreach ($order->orderProducts->where('is_digital', true) as $item)
