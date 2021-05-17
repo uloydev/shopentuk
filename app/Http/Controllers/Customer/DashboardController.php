@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Customer;
 use App\Http\Controllers\Controller;
 use App\Models\FavoriteProduct;
 use App\Models\Order;
+use App\Models\PointHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Province;
@@ -118,7 +119,17 @@ class DashboardController extends Controller
         $order->update([
             'status' => 'finished'
         ]);
-
+        $bonusPoint = $order->orderProducts->sum(function($orderItem) {
+            return $orderItem->product->point_bonus;
+        });
+        $user = $order->user;
+        $user->point += $bonusPoint;
+        $user->save();
+        PointHistory::create([
+            'value' => $bonusPoint,
+            'description' => PointHistory::ORDER_REWARD_MESSAGE,
+            'user_id' => $user->id,
+        ]);
         return redirect()->back()->with(
             'success', 'Thank you for ordering, your order is now finished'
         );

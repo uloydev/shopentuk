@@ -118,6 +118,14 @@ class OrderController extends Controller
                 ]);
             }
         } else {
+            $bonusPoint = $order->orderProducts->sum(function($orderItem) {
+                return $orderItem->product->point_bonus;
+            });
+            PointHistory::create([
+                'value' => $bonusPoint,
+                'description' => PointHistory::ORDER_REWARD_MESSAGE,
+                'user_id' => $order->user_id,
+            ]);
             $order->update([
                 'status' => 'finished'
             ]);
