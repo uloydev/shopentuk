@@ -9,11 +9,5 @@ class SiteSetting extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'title',
-        'description',
-        'shipping_price',
-        'non_java_shipping_price',
-        'point_value',
-    ];
+    protected $guarded = [];
 }

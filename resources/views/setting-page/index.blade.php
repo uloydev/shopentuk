@@ -6,11 +6,6 @@
 
 @section('content')
 
-@if (session('success'))
-<x-adminmart-alert is-dismissable="false" add-class="mb-5"
-message="{{ session('success') }}" type="success"/>
-    
-@endif
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -21,6 +16,13 @@ message="{{ session('success') }}" type="success"/>
                 <form action="{{ route('admin.setting.update', 1) }}" method="POST">
                     @csrf @method('PUT')
                     <x-input-template name="title" id="title" label="Site Title" placeholder="Title Web" :is-required="true" value="{{ $setting->title }}" />
+                        
+                    <x-input-template name="norek_bca" id="norek_bca" label="Account number BCA" placeholder="Ex: 0931838AJ29" :is-required="true" 
+                    value="{{ $setting->norek_bca }}" />
+
+                    <x-input-template name="norek_ovo" id="norek_ovo" label="OVO Number"
+                    placeholder="Ex: 018273638" :is-required="true" 
+                    value="{{ $setting->norek_ovo }}" />
 
                     <x-input-template name="shipping_price" id="shipping_price" label="Shipping Price" placeholder="Shipping Price" :is-required="true" 
                     value="{{ $setting->shipping_price }}" />

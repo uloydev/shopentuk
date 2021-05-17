@@ -6,9 +6,19 @@
     <h1 class="mb-10 text-2xl md:text-4xl text-center input-lowercase">
         Konfirmasi Pembayaran
     </h1>
-    <div class="flex justify-center">
-        <form action="{{ route('payment.store', request()->query('order_id')) }}" method="post" enctype="multipart/form-data"
-        class="w-full max-w-screen-md shadow-md rounded px-8 py-5 bg-white">
+    <div class="flex justify-center flex-col max-w-screen-md mx-auto w-full">
+        <div class="bg-white w-full shadow-md rounded px-8 py-5 mb-10">
+            <p class="mb-5 text-lg font-bold">Transfer ke nomor berikut</p>
+            <x-input-basic add-class="input-lowercase" 
+                value="{{ $auth->name ?? '' }}" value="08787867613" 
+                label="BCA" readonly />
+            <x-input-basic add-class="input-lowercase" 
+                value="{{ $auth->name ?? '' }}" value="08787867613" 
+                label="OVO" readonly />
+        </div>
+        <form action="{{ route('payment.store', request()->query('order_id')) }}" 
+        method="post" enctype="multipart/form-data"
+        class="w-full shadow-md rounded px-8 py-5 bg-white">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 mb-5">
                 <x-input-basic name="full_name" add-class="input-lowercase" 

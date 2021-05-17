@@ -14,7 +14,7 @@ class InputBasic extends Component
      *
      * @return void
      */
-    public function __construct($name, $label = '', $type = 'text', $boxWidth = '', $addClass = '')
+    public function __construct($name = '', $label = '', $type = 'text', $boxWidth = '', $addClass = '')
     {
         $this->name = $name;
         $this->label = $label;

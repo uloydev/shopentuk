@@ -20,6 +20,8 @@ class CreateSiteSettingsTable extends Migration
             $table->integer('shipping_price');
             $table->integer('non_java_shipping_price');
             $table->integer('point_value');
+            $table->string('norek_ovo');
+            $table->string('norek_bca');
             $table->timestamps();
         });
     }

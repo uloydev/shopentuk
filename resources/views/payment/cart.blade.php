@@ -11,13 +11,15 @@
         {{ session('error') }}
     </x-alert>
     @endif
+    <x-alert type="info" class="not-dismissable">
+        Untuk checkout hanya untuk barang tertentu, silahkan masukkan ke dalam favorite product dengan cara klik icon hati, lalu hapus product dari cart.
+    </x-alert>
     @if (isset($cart) && $cart->cartItems->count() > 0)
         <input type="hidden" id="cartId" value="{{ $cart->id }}">
         <div class="border-b border-gray-400 flex justify-between pb-5 font-bold">
             <h1>Order</h1>
             <p>Price</p>
         </div>
-        <p class="text-center">untuk checkout hanya untuk barang tertentu, silahkan masukkan ke dalam favorite product dengan cara klik icon hati, lalu hapus product dari cart.</p>
         <div class="grid grid-cols-1">
             @foreach ($cart->cartItems as $item)
                 <div class="py-10 cart-item">
