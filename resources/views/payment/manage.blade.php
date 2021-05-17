@@ -28,13 +28,13 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered no-wrap text-center" id="zero_config">
                             @include('partial.thead', [
-                                'thead' => [
-                                    'order id',
-                                    'order date',
-                                    'payment method',
-                                    'payer name',
-                                    'action'
-                                ]
+                            'thead' => [
+                            'order id',
+                            'order date',
+                            'payment method',
+                            'payer name',
+                            'action'
+                            ]
                             ])
                             <tbody>
                                 @foreach ($payments as $payment)
@@ -52,17 +52,17 @@
                                             {{ $payment->full_name }}
                                         </td>
                                         <td class="d-flex justify-content-center">
-                                            <button class="btn btn-primary" data-toggle="modal" data-target="#modalShowDetail"
-                                            data-order-id="{{ $payment->order->id }}"
-                                            data-order-status="{{ $payment->order->status }}"
-                                            data-order-date="{{ $payment->order->created_at }}"
-                                            data-order-total="@currency($payment->order->price_total)"
-                                            data-payment-image="{{ $payment->image ? Storage::url($payment->image->file) : ''  }}"
-                                            data-payment-phone="{{ $payment->phone }}"
-                                            data-payment-date="{{ $payment->payment_date }}"
-                                            data-payment-method="{{ $payment->payment_method }}"
-                                            data-payment-name="{{ $payment->full_name }}"
-                                            data-update-url="{{ route('admin.payment.update', $payment->id) }}">
+                                            <button class="btn btn-primary" data-toggle="modal"
+                                                data-target="#modalShowDetail" data-order-id="{{ $payment->order->id }}"
+                                                data-order-status="{{ $payment->order->status }}"
+                                                data-order-date="{{ $payment->order->created_at }}"
+                                                data-order-total="@currency($payment->order->price_total)"
+                                                data-payment-image="{{ $payment->image ? Storage::url($payment->image->file) : '' }}"
+                                                data-payment-phone="{{ $payment->phone }}"
+                                                data-payment-date="{{ $payment->payment_date }}"
+                                                data-payment-method="{{ $payment->payment_method }}"
+                                                data-payment-name="{{ $payment->full_name }}"
+                                                data-update-url="{{ route('admin.payment.update', $payment->id) }}">
                                                 Detail
                                             </button>
                                         </td>
@@ -82,7 +82,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Order Details</h5>
+                    <h3 class="modal-title">Order Details</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -123,15 +123,29 @@
                     <div class="row">
                         <div class="col-md-6">payment image</div>
                         <div class="col-md-6">
-                            <img src="" class="d-block" id="paymentImage" width="100%">
-                            <a href="" class="btn btn-primary btn-sm" id="paymentImageDownload" download>Download image</a>
+                            <img src="" class="d-block my-3" id="paymentImage" width="100%">
+                            <a href="" class="btn btn-primary btn-sm d-block" id="paymentImageDownload" download>Download
+                                image</a>
                         </div>
                     </div>
                     <form action="" method="post" id="updatePaymentForm">
-                    @csrf
-                    @method('PUT')
-                    <input type="hidden" name="is_accepted">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="is_accepted">
                     </form>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="my-2 fw-bold">Order items</h4>
+                        </div>
+                    </div>
+                    @foreach ($payment->order->orderProducts as $item)
+                        <div class="row">
+                            <div class="col">{{ $item->product->title }} @
+                                {{ $item->quantity }} qty</div>
+                        </div>
+                    @endforeach
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success" id="acceptOrderBtn">Accept Order</button>
