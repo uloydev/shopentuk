@@ -11,10 +11,10 @@
         {{ session('error') }}
     </x-alert>
     @endif
+    @if (isset($cart) && $cart->cartItems->count() > 0)
     <x-alert type="info" class="not-dismissable">
         Untuk checkout hanya untuk barang tertentu, silahkan masukkan ke dalam favorite product dengan cara klik icon hati, lalu hapus product dari cart.
     </x-alert>
-    @if (isset($cart) && $cart->cartItems->count() > 0)
         <input type="hidden" id="cartId" value="{{ $cart->id }}">
         <div class="border-b border-gray-400 flex justify-between pb-5 font-bold">
             <h1>Order</h1>

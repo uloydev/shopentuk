@@ -11,7 +11,7 @@
         @endif
         @if(session('success'))
         <x-alert type="success">
-            <p>{{ session('success') }}</p>
+            {{ session('success') }}
         </x-alert>
         @endif
         <div class="mb-5">

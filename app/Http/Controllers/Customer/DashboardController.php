@@ -80,7 +80,7 @@ class DashboardController extends Controller
 
     public function wishlistProduct()
     {
-        $favoriteProduct = FavoriteProduct::all();
+        $favoriteProduct = FavoriteProduct::where('user_id', auth()->id())->get();
         $title = 'My wishlist';
         $tabMenus = $this->tabMenus;
         return view('customer.account.wishlist', get_defined_vars());

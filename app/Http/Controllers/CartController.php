@@ -61,7 +61,7 @@ class CartController extends Controller
             }
         }
 
-        $yourFavorite = FavoriteProduct::where('user_id', auth()->id())->pluck('id');
+        $yourFavorite = FavoriteProduct::where('user_id', auth()->id())->pluck('product_id');
 
         return view('payment.cart', [
             'title' => 'cart',

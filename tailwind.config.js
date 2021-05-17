@@ -3,7 +3,22 @@ module.exports = {
     future: {
         removeDeprecatedGapUtilities: true,
     },
-    purge: [],
+    purge: {
+        enabled: true,
+        content: [
+			'./resources/views/**/*.blade.php',
+		],
+        options: {
+            whitelistPatterns: [
+                /^bg-.*/,
+            ],
+            whitelist: [
+                'transform',
+                '-translate-x-1/2',
+                '-translate-y-1/2'
+            ]
+        },
+    },
     theme: {
         extend: {
             width: {

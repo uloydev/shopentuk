@@ -28,10 +28,11 @@
                             type="number" required
                             class="appearance-none bg-white border border-gray-400 p-1 
                             text-center w-12 mr-2">
-                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="product_id" 
+                            value="{{ $favorite->product_id }}">
                             <x-btn type="primary" text="Tambah ke keranjang" action="submit"/>
                         </form>
-                        <form action="{{ route('my-account.favorite.remove') }}" method="POST">
+                        <form action="{{ route('my-account.favorite.remove', $favorite->id) }}" method="POST">
                             @csrf @method('DELETE')
                             <x-btn type="primary" text="" action="submit">
                                 <box-icon type='solid' name='trash-alt'></box-icon>
@@ -57,7 +58,7 @@
                             value="{{ $favorite->product_id }}">
                             <x-btn type="primary" text="Tambah ke keranjang" action="submit"/>
                         </form>
-                        <form action="{{ route('my-account.favorite.remove', $favorite->product_id) }}" 
+                        <form action="{{ route('my-account.favorite.remove', $favorite->id) }}" 
                         method="POST" class="ml-3">
                             @csrf @method('DELETE')
                             <x-btn type="danger" text="" action="submit">
