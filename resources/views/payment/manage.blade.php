@@ -78,80 +78,83 @@
 @endsection
 
 @section('components')
-    <div class="modal" tabindex="-1" role="dialog" id="modalShowDetail">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Order Details</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">order ID</div>
-                        <div class="col-md-6" id="orderId"></div>
+    {{-- @foreach ($payments as $payment) --}}
+        <div class="modal" tabindex="-1" role="dialog" id="modalShowDetail">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Order Details</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">order date</div>
-                        <div class="col-md-6" id="orderDate"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">order status</div>
-                        <div class="col-md-6" id="orderStatus"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">order price total</div>
-                        <div class="col-md-6" id="orderTotal"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">payment name</div>
-                        <div class="col-md-6" id="paymentName"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">payment phone</div>
-                        <div class="col-md-6" id="paymentPhone"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">payment date</div>
-                        <div class="col-md-6" id="paymentDate"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">payment method</div>
-                        <div class="col-md-6" id="paymentMethod"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">payment image</div>
-                        <div class="col-md-6">
-                            <img src="" class="d-block my-3" id="paymentImage" width="100%">
-                            <a href="" class="btn btn-primary btn-sm d-block" id="paymentImageDownload" download>Download
-                                image</a>
-                        </div>
-                    </div>
-                    <form action="" method="post" id="updatePaymentForm">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="is_accepted">
-                    </form>
-                    <hr>
-
-                    <div class="row">
-                        <div class="col">
-                            <h4 class="my-2 fw-bold">Order items</h4>
-                        </div>
-                    </div>
-                    @foreach ($payment->order->orderProducts as $item)
+                    <div class="modal-body">
                         <div class="row">
-                            <div class="col">{{ $item->product->title }} @
-                                {{ $item->quantity }} qty</div>
+                            <div class="col-md-6">order ID</div>
+                            <div class="col-md-6" id="orderId"></div>
                         </div>
-                    @endforeach
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-success" id="acceptOrderBtn">Accept Order</button>
-                    <button type="button" class="btn btn-danger" id="rejectPaymentBtn">Reject Payment</button>
+                        <div class="row">
+                            <div class="col-md-6">order date</div>
+                            <div class="col-md-6" id="orderDate"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">order status</div>
+                            <div class="col-md-6" id="orderStatus"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">order price total</div>
+                            <div class="col-md-6" id="orderTotal"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">payment name</div>
+                            <div class="col-md-6" id="paymentName"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">payment phone</div>
+                            <div class="col-md-6" id="paymentPhone"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">payment date</div>
+                            <div class="col-md-6" id="paymentDate"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">payment method</div>
+                            <div class="col-md-6" id="paymentMethod"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">payment image</div>
+                            <div class="col-md-6">
+                                <img src="" class="d-block my-3" id="paymentImage" width="100%">
+                                <a href="" class="btn btn-primary btn-sm d-block" id="paymentImageDownload"
+                                    download>Download
+                                    image</a>
+                            </div>
+                        </div>
+                        <form action="" method="post" id="updatePaymentForm">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="is_accepted">
+                        </form>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="my-2 fw-bold">Order items</h4>
+                            </div>
+                        </div>
+                        {{-- @foreach ($payment->order->orderProducts as $item)
+                            <div class="row">
+                                <div class="col">{{ $item->product->title }} @
+                                    {{ $item->quantity }} qty</div>
+                            </div>
+                        @endforeach --}}
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" id="acceptOrderBtn">Accept Order</button>
+                        <button type="button" class="btn btn-danger" id="rejectPaymentBtn">Reject Payment</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    {{-- @endforeach --}}
 @endsection

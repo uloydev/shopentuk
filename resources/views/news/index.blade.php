@@ -3,7 +3,7 @@
 @section('body-id', 'store')
 @section('main-class') bg-fixed @endsection
 @section('content')
-    <header>
+    <header class="h-auto">
         <div class="pt-20 bg-fixed w-full relative" id="section-catalog__promo">
             {{-- <div class="bg-overlay bg-overlay--blue-gradient 
             absolute top-0 left-0 h-full w-full opacity-50"></div> --}}

@@ -11,6 +11,9 @@ module.exports = {
         options: {
             whitelistPatterns: [
                 /^bg-.*/,
+                /^h-.*/,
+                /^w-.*/,
+                /^z-.*/,
             ],
             whitelist: [
                 'transform',

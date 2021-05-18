@@ -4,19 +4,19 @@
 
 @section('title', 'Login atau register untuk menikmati semua fitur kami')
 
-@section('header-class', 'flex flex-col flex-grow bg-fixed bg-cover')
+@section('header-class', 'flex flex-col flex-grow bg-fixed bg-cover h-auto')
 
 @section('header-bg', asset('img/static/auth-bg.jpg'))
 
 @section('header')
-    <div class="flex py-32 items-center relative flex-grow justify-center">
-        <div class="bg-overlay bg-overlay--black-gradient"></div>
-        <div class="z-10 text-white font-shadows-light font-bold">
-            <h1 class="text-6xl">Akun Saya</h1>
-            <hr class="bg-white border-white my-8">
-            <h2 class="text-4xl">Selamat Datang</h2>
-        </div>
+<div class="flex py-32 items-center relative justify-center">
+    <div class="bg-overlay bg-overlay--black-gradient"></div>
+    <div class="z-10 text-white font-shadows-light font-bold">
+        <h1 class="text-6xl">Akun Saya</h1>
+        <hr class="bg-white border-white my-8">
+        <h2 class="text-4xl">Selamat Datang</h2>
     </div>
+</div>
 @endsection
 
 @section('content')
