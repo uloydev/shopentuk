@@ -131,7 +131,7 @@ class OrderController extends Controller
                 'status' => 'finished'
             ]);
             $user->point += $bonusPoint;
-            $user->save()
+            $user->save();
         }
         return redirect()->route('admin.order.new')->with('success', 'Successfully submit  voucher code');
     } 
