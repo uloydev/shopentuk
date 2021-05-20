@@ -17,8 +17,14 @@
                     @csrf @method('PUT')
                     <x-input-template name="title" id="title" label="Site Title" placeholder="Title Web" :is-required="true" value="{{ $setting->title }}" />
                         
+                    <x-input-template name="pemilik_bca" id="pemilik_bca" label="Owner Name BCA" placeholder="Ex: Cristiano ronaldo" :is-required="true" 
+                    value="{{ $setting->pemilik_bca }}" />
+
                     <x-input-template name="norek_bca" id="norek_bca" label="Account number BCA" placeholder="Ex: 0931838AJ29" :is-required="true" 
                     value="{{ $setting->norek_bca }}" />
+
+                    <x-input-template name="pemilik_ovo" id="pemilik_ovo" label="Owner Name OVO" placeholder="Ex: Cristiano ronaldo" :is-required="true" 
+                    value="{{ $setting->pemilik_ovo }}" />
 
                     <x-input-template name="norek_ovo" id="norek_ovo" label="OVO Number"
                     placeholder="Ex: 018273638" :is-required="true" 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\PaymentConfirmation;
+use App\Models\SiteSetting;
 use App\Models\PaymentConfirmationImage;
 use App\Rules\AlphaSpace;
 use Illuminate\Validation\Rule;
@@ -20,7 +21,8 @@ class PaymentController extends Controller
     {
         return view('payment.confirm', [
             'title' => 'Konfirmasi pembayaran',
-            'order_id' => $request->order_id
+            'order_id' => $request->order_id,
+            'setting' => SiteSetting::first(),
         ]);
     }
 

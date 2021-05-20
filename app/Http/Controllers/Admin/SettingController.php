@@ -23,27 +23,21 @@ class SettingController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'title' => ['required'],
             'description' => ['nullable', 'string'],
             'shipping_price' => ['required', 'numeric'],
             'non_java_shipping_price' => ['required', 'numeric'],
             'point_value' => ['required', 'numeric'],
             'norek_bca' => ['required', 'numeric', 'digits_between:3,100'],
-            'norek_ovo' => ['required', 'starts_with:0', 'numeric']
+            'norek_ovo' => ['required', 'starts_with:0', 'numeric'],
+            'pemilik_bca' => ['required'],
+            'pemilik_ovo' => ['required']
         ]);
 
-        SiteSetting::first()->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'shipping_price' => $request->shipping_price,
-            'non_java_shipping_price' => $request->non_java_shipping_price,
-            'point_value' => $request->point_value,
-            'norek_bca' => $request->norek_bca,
-            'norek_ovo' => $request->norek_ovo
-        ]);
+        SiteSetting::first()->update($validated);
 
-        return redirect()->back()->with('success', 'Successfull Update Site');
+        return redirect()->route('admin.setting.index')->with('success', 'Successfull Update Site');
     }
 
 }
