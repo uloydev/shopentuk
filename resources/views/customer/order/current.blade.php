@@ -13,6 +13,7 @@
             order-status="{{ $order->status }}" order-resi="{{ $order->no_resi }}">
                 <x-slot name="addonBtn">
                     @if ($order->status == 'unpaid')
+                        @if (!$order->paymentConfirmation)
                         <a href="{{ route('payment.show-confirm', ['order_id'=> $order->id]) }}" class="btn bg-teal-500 px-5 rounded-full top-0 right-0 mr-4">
                             Pay this order
                         </a>
@@ -23,6 +24,11 @@
                                 Cancel
                             </button>
                         </form>
+                        @else
+                        <a href="{{ route('payment.show-confirm', ['order_id'=> $order->id]) }}" class="btn bg-teal-500 opacity-50 px-5 rounded-full top-0 right-0 mr-4 pointer-events-none">
+                            Your payment is on process
+                        </a>
+                        @endif
                     @elseif($order->status === 'refunding' and $order->refund_method === null)
                         <div class="group inline-block relative">
                             <button
