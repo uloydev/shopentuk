@@ -21,26 +21,30 @@
                     <table class="table table-striped table-bordered no-wrap" id="zero_config">
                         @include('partial.thead', [
                         'thead' => [
-                        'name',
-                        'email',
-                        'phone',
-                        'joined at',
-                        'action'
+                            'No',
+                            'name',
+                            'email',
+                            'phone',
+                            'joined at',
+                            'action'
                         ]
                         ])
                         <tbody>
                             @foreach ($admins as $account)
                                 <tr class="admin">
-                                    <td class="admin__name" data-admin-name="{{ $account->name }}">
+                                    <td>
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <td>
                                         {{ $account->name }}
                                     </td>
-                                    <td class="admin__email">
+                                    <td>
                                         {{ $account->email }}
                                     </td>
-                                    <td class="admin__phone">
+                                    <td>
                                         {{ $account->phone }}
                                     </td>
-                                    <td class="admin__joined-at">
+                                    <td>
                                         {{ $account->created_at }}
                                     </td>
                                     <td>
