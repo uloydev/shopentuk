@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
 
+    protected $adminAcc;
+
     public function __construct()
     {
         $this->adminAcc = User::where('role', 'admin');
@@ -37,50 +39,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        
-        $inputColumn = [
-            [
-                'name' => 'name',
-                'type' => 'type',
-                'label' => 'Admin Fullname',
-                'id' => 'admin-name',
-                'placeholder' => 'Ex: bariq dharmawan'
-            ],
-            [
-                'name' => 'email',
-                'type' => 'email',
-                'label' => 'Email admin',
-                'id' => 'admin-email',
-                'placeholder' => 'Ex: dharmawan@bariq.me'
-            ],
-            [
-                'name' => 'phone',
-                'type' => 'tel',
-                'label' => 'Admin phone number',
-                'id' => 'admin-phone',
-                'placeholder' => 'Ex: 87771406656'
-            ],
-            [
-                'name' => 'password',
-                'type' => 'password',
-                'label' => 'Admin default password',
-                'id' => 'admin-password',
-                'placeholder' => 'Ex: gakadapassword'
-            ],
-            [
-                'name' => 'password_confirmation',
-                'type' => 'password',
-                'label' => 'Confirm password',
-                'id' => 'admin-confirm-pw',
-                'placeholder' => 'Please confirm the password'
-            ],
-        ];
-        
         // dd(User::all());
         // dd(collect($inputColumn));
         return view('admin.manage', [
             'title' => 'manage admin',
-            'inputColumn' => $inputColumn,
             'admins' => $this->adminAcc->get()
         ]);
     }
@@ -106,7 +68,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $updateAdmin = $this->adminAcc->where('id', $id);
+        $updateAdmin = $this->adminAcc->find($id);
         return $this->saveAdmin($updateAdmin, $request, 'update');
     }
 
@@ -120,7 +82,7 @@ class AdminController extends Controller
     {
         $deleteAdmin = $this->adminAcc->where('id', $id);
         $deleteAdmin->delete();
-        return redirect()->back()->with('success', 'Successfully delete admin ' . $deleteAdmin->name);
+        return redirect()->back()->with('success', 'Successfully delete admin');
     }
 
     public function dashboard()

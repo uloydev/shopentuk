@@ -10,8 +10,10 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h1 class="h3 text-capitalize">{{ $title }}</h1>
-                    <button type="button" data-toggle="modal" data-target="#addNewAdmin"
-                        class="btn btn-sm btn-primary btn-rounded mr-2">
+                    <button type="button" data-toggle="modal" 
+                    data-target="#addNewAdmin" 
+                    data-form-url="{{ route('superadmin.admin.store') }}"
+                    class="btn btn-sm btn-primary btn-rounded mr-2">
                         Add new admin
                     </button>
                 </div>
@@ -44,13 +46,24 @@
                                     <td>
                                         <button type="button" data-toggle="modal" data-target="#editAdmin"
                                             class="btn btn-sm btn-warning btn-rounded mr-2 btn-edit-admin"
-                                            data-admin-id="{{ $account->id }}">
+                                            data-admin-id="{{ $account->id }}"
+                                            data-admin-name="{{ $account->name }}"
+                                            data-admin-email="{{ $account->email }}"
+                                            data-admin-phone="{{ $account->phone }}"
+                                            data-form-url="{{ route(
+                                                'superadmin.admin.update', $account->id
+                                            ) }}">
                                             Edit
                                         </button>
-                                        <form id="formDelete{{ $account->id }}" action="{{ route('superadmin.admins.destroy', $account->id) }}" method="POST" class="d-inline-block">
+                                        <form id="formDelete{{ $account->id }}" action="{{ route('superadmin.admin.destroy', $account->id) }}" method="POST" class="d-inline-block">
                                             @csrf @method('DELETE')
                                         </form>
-                                        <button class="btn btn-sm btn-danger btn-rounded btn-delete-admin" data-admin-id='{{ $account->id }}'>
+                                        <button type="button" data-toggle="modal" data-target="#modalConfirmDelete"
+                                        class="btn btn-sm btn-danger btn-rounded mr-2"
+                                        data-admin-id="{{ $account->id }}"
+                                        data-delete-url="{{ route(
+                                            'superadmin.admin.destroy', $account->id
+                                        ) }}">
                                             Delete
                                         </button>
                                     </td>
@@ -63,8 +76,22 @@
         </div>
     </div>
 
-    @include('admin.add-edit')
-    <div class="modal" tabindex="-1" role="dialog" id="modalConfirmDelete" data-admin-id="">
+    <x-modal-template id="addNewAdmin" form-target="form-add-admin" title-modal="Add new admin">
+        @include('admin.form', [
+            'idForm' => 'form-add-admin',
+            'action' => 'add'
+        ])
+    </x-modal-template>
+
+    <x-modal-template id="editAdmin" form-target="form-edit-admin" 
+    title-modal="Edit admin detail">
+        @include('admin.form', [
+            'idForm' => 'form-edit-admin', 
+            'action' => 'edit'
+        ])
+    </x-modal-template>
+
+    <div class="modal" tabindex="-1" role="dialog" id="modalConfirmDelete">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -75,12 +102,26 @@
                 </div>
                 <div class="modal-body">
                     <p>Apa Anda yakin ingin menghapus akun admin ini ?</p>
+                    <form action="" method="POST" id="form-delete-admin">
+                        @csrf @method('DELETE')
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-danger" id="confirmDeleteBtn">DELETE</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">CANCEL</button>
+                    <button class="btn btn-danger" id="confirmDeleteBtn"
+                    form="form-delete-admin">DELETE</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        CANCEL
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        if ($("#addNewAdmin form").hasClass("having-error")) {
+            $("#addNewAdmin").modal({show: true})
+        }
+    </script>
+@endpush

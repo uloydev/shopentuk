@@ -1,26 +1,85 @@
-<form action="{{-- routing di custom-dashboard.js --}}" method="POST" id="{{ $idForm }}" autocomplete="off">
+<form action="" method="POST" id="{{ $idForm }}" autocomplete="off"
+@if ($errors->any()) class="having-error" @endif>
     @csrf
     @if ($idForm == 'form-edit-admin')
         @method('PUT')
     @endif
     <div class="row">
-        @for ($i = 0; $i < count($inputColumn); $i++) 
-            <div class="col-lg-6">
-                <x-input-template name="{{ $inputColumn[$i]['name'] }}" type="{{ $inputColumn[$i]['type'] }}"
-                    label="{{ $inputColumn[$i]['label'] }}" id="{{ $inputColumn[$i]['id'] }}"
-                    placeholder="{{ $inputColumn[$i]['placeholder'] ?? '' }}" autocomplete="off"
-                    value="{{ $inputColumn[$i]['value'] ?? old($inputColumn[$i]['name']) }}" required>
-                    {{-- @if ($inputColumn[$i]['name'] == 'password')
-                    <small id="name" class="form-text text-muted px-1">
-                        If empty, it'll using the default password : <b>gakadapassword</b>
-                    </small>
-                    @endif --}}
-                </x-input-template>
-            </div>
-            @if ($i % 2 == 1)
-                </div>
-                <div class="row">
-            @endif
-        @endfor
+        <div class="col-lg-6">
+            <x-input-template 
+                name="name" 
+                type="text"
+                label="Admin Fullname" 
+                id="admin-name-{{ $action }}"
+                placeholder="Ex: bariq dharmawan" autocomplete="off"
+                value="{{ old('name') }}" required>
+            </x-input-template>
+        </div>
+        <div class="col-lg-6">
+            <x-input-template 
+                name="email" 
+                type="email"
+                label="Email admin" 
+                id="admin-email-{{ $action }}"
+                placeholder="Ex: dharmawan@bariq.me" autocomplete="off"
+                value="{{ old('email') }}" required>
+            </x-input-template>
+        </div>
+        <div class="col-lg-6">
+            <x-input-template 
+                name="phone" 
+                type="tel"
+                label="Admin phone number" 
+                id="admin-phone-{{ $action }}"
+                placeholder="Ex: 87771406656" autocomplete="off"
+                value="{{ old('phone') }}" required>
+            </x-input-template>
+        </div>
+        @if ($action === 'add')
+        <div class="col-lg-6">
+            <x-input-template 
+                name="password" 
+                type="password"
+                label="Admin default password" 
+                id="admin-password-{{ $action }}"
+                placeholder="Ex: gakadapassword" autocomplete="off"
+                value="{{ old('password') }}"
+                required>
+            </x-input-template>
+        </div>
+        <div class="col-lg-6">
+            <x-input-template 
+                name="password_confirmation" 
+                type="password"
+                label="Confirm password" 
+                id="admin-confirm-pw-{{ $action }}"
+                placeholder="Please confirm the password" autocomplete="off"
+                value="{{ old('password_confirmation') }}"
+                required>
+            </x-input-template>
+        </div>
+        @else
+        <div class="col-lg-6">
+            <x-input-template 
+                name="password" 
+                type="password"
+                label="Admin default password" 
+                id="admin-password-{{ $action }}"
+                placeholder="Ex: gakadapassword" autocomplete="off"
+                value="{{ old('password') }}">
+            </x-input-template>
+        </div>
+        <div class="col-lg-6">
+            <x-input-template 
+                name="password_confirmation" 
+                type="password"
+                label="Confirm password" 
+                id="admin-confirm-pw-{{ $action }}"
+                placeholder="Please confirm the password" autocomplete="off"
+                value="{{ old('password_confirmation') }}">
+            </x-input-template>
+        </div>
+        @endif
+
     </div>
 </form>

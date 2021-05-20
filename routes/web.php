@@ -168,7 +168,7 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
 );
 
 Route::prefix('superadmin')->middleware('superadmin')->name('superadmin.')->group(function () {
-    Route::resource('admins', 'Admin\AdminController')->only(
+    Route::resource('admin', 'Admin\AdminController')->only(
         'index', 'store', 'update', 'destroy'
     );
 });
