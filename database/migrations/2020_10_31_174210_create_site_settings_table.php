@@ -22,6 +22,8 @@ class CreateSiteSettingsTable extends Migration
             $table->integer('point_value');
             $table->string('norek_ovo');
             $table->string('norek_bca');
+            $table->string('pemilik_ovo');
+            $table->string('pemilik_bca');
             $table->timestamps();
         });
     }

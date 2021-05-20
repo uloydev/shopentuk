@@ -36,6 +36,7 @@
                                         'shipping point',
                                         'customer address',
                                         'customer province',
+                                        'detail',
                                     ]
                                 ])
                                 <tbody>
@@ -59,7 +60,74 @@
                                             <td>
                                                 {{ $order->userAddress->getProvinceAttribute() }}
                                             </td>
+                                            <td><button type="button" class="my-2 btn btn-primary" data-toggle="modal"
+                                                data-target="#orderDetailModal{{ $order->id }}">
+                                                Order Detail
+                                            </button></td>
                                         </tr>
+
+                                        <div class="modal fade" id="orderDetailModal{{ $order->id }}" tabindex="-1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                            Order Detail
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body p-4 bg-light">
+                                                        <div class="row">
+                                                            <div class="col-md-6">Order Id</div>
+                                                            <div class="col-md-6">{{ $order->id }}</div>
+                                                        </div>
+                                                        @if ($order->orderProducts->where('is_digital', false)->count())
+                                                            <div class="row">
+                                                                <div class="col-md-6">Resi</div>
+                                                                <div class="col-md-6">
+                                                                    {{ $order->no_resi ? $order->no_resi : 'resi belum di input' }}
+                                                                </div>
+                                                            </div>
+                                                        @endif
+
+                                                        <hr>
+                                                        @if ($order->orderProducts->where('is_digital', false)->count())
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <h4 class="mt-2 mb-0">Product</h4>
+                                                                </div>
+                                                            </div>
+                                                            @foreach ($order->orderProducts->where('is_digital', false) as $item)
+                                                                <div class="row">
+                                                                    <div class="col">{{ $item->product->title }} @
+                                                                        {{ $item->quantity }} qty</div>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+
+                                                        @if ($order->orderProducts->where('is_digital', true)->count())
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <h4 class="mt-2 mb-0">Voucher</h4>
+                                                                </div>
+                                                            </div>
+                                                            @foreach ($order->orderProducts->where('is_digital', true) as $item)
+                                                                <div class="row">
+                                                                    <div class="col-md-6">{{ $item->product->title }} @
+                                                                        {{ $item->quantity }} qty</div>
+                                                                    <div class="col-md-6">
+                                                                        {{ $item->voucher_code ? $item->voucher_code : 'kode belum di input' }}
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endforeach
                                 </tbody>
                             </table>

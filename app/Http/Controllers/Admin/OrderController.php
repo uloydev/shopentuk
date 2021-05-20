@@ -118,6 +118,7 @@ class OrderController extends Controller
                 ]);
             }
         } else {
+            $user = $order->user;
             $bonusPoint = $order->orderProducts->sum(function($orderItem) {
                 return $orderItem->product->point_bonus;
             });
@@ -129,6 +130,8 @@ class OrderController extends Controller
             $order->update([
                 'status' => 'finished'
             ]);
+            $user->point += $bonusPoint;
+            $user->save();
         }
         return redirect()->route('admin.order.new')->with('success', 'Successfully submit  voucher code');
     } 

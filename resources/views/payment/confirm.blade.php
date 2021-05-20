@@ -10,11 +10,11 @@
         <div class="bg-white w-full shadow-md rounded px-8 py-5 mb-10">
             <p class="mb-5 text-lg font-bold">Transfer ke nomor berikut</p>
             <x-input-basic add-class="input-lowercase" 
-                value="{{ $auth->name ?? '' }}" value="08787867613" 
-                label="BCA" readonly />
+                value="{{ $setting->norek_bca }}" 
+                label="BCA atas nama {{ $setting->pemilik_bca }}" readonly />
             <x-input-basic add-class="input-lowercase" 
-                value="{{ $auth->name ?? '' }}" value="08787867613" 
-                label="OVO" readonly />
+                value="{{ $setting->norek_ovo }}" 
+                label="OVO atas nama {{ $setting->pemilik_ovo }}" readonly />
         </div>
         <form action="{{ route('payment.store', request()->query('order_id')) }}" 
         method="post" enctype="multipart/form-data"
