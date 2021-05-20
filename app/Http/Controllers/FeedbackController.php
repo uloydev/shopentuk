@@ -40,13 +40,11 @@ class FeedbackController extends Controller
     {
         $request->validate([
             'name' => ['required', 'max:100', 'min:3', new AlphaSpace],
-            'telephone' => ['required', 'digits:12'],
+            'telephone' => ['required'],
             'email' => ['required', 'email', 'max:255'],
             'message' => ['required', 'min:10']
         ]);
-
         $sendFeedback = FeedbackCustomer::create($request->except('_token'));
-        Mail::to(config('app.email_admin'))->send(new SendFeedback($sendFeedback));
 
         return redirect()->back()->with('success', 'Successfully send message to admin');
     }

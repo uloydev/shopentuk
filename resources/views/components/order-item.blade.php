@@ -4,7 +4,7 @@
         {{ $addonBtn ?? '' }}
     </div>
     {{ $products ?? ''}}
-    <p>Total Price  : {{$totalPrice}}</p>
+    <p>Total Price  : @currency($totalPrice)</p>
     <p>Total Point  : {{$totalPoint}}</p>
     <p>Order Status : {{$orderStatus}}</p>
     @if ($orderStatus == 'shipping')

@@ -18,6 +18,7 @@
                         <table class="table table-striped table-bordered no-wrap" id="zero_config">
                             @include('partial.thead', [
                                 'thead' => [
+                                    'id',
                                     'title',
                                     'desc',
                                     'manage'
@@ -26,6 +27,7 @@
                             <tbody>
                                 @foreach ($allNews as $news)
                                     <tr>
+                                        <td>{{ $news->id }}</td>
                                         <td data-original="{{ $news->title }}">
                                             {{ $news->title }}
                                         </td>

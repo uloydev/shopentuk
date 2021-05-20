@@ -1,3 +1,4 @@
+
 @extends('layouts.template')
 
 @section('title', ucwords($title))
@@ -18,6 +19,7 @@
                         <table class="table table-striped table-bordered no-wrap" id="zero_config">
                             @include('partial.thead', [
                                 'thead' => [
+                                    'id',
                                     'name',
                                     'telephone',
                                     'email',
@@ -27,6 +29,7 @@
                             <tbody>
                                 @foreach ($feedbackCustomer as $feedback)
                                     <tr>
+                                        <td>{{ $feedback->id }}</td>
                                         <td>{{ $feedback->name }}</td>
                                         <td>{{ $feedback->telephone }}</td>
                                         <td>{{ $feedback->email }}</td>

@@ -14,6 +14,7 @@
                         <table class="table table-striped table-bordered no-wrap" id="zero_config">
                             @include('partial.thead', [
                                 'thead' => [
+                                    'id',
                                     'name',
                                     'email',
                                     'telephone',
@@ -24,6 +25,7 @@
                             <tbody>
                                 @foreach ($customers as $customer)
                                     <tr>
+                                        <td>{{ $customer->id }}</td>
                                         <td>{{ $customer->name }}</td>
                                         <td>{{ $customer->email }}</td>
                                         <td>{{ $customer->phone }}</td>
