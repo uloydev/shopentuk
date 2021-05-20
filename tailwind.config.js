@@ -14,6 +14,7 @@ module.exports = {
                 /^h-.*/,
                 /^w-.*/,
                 /^z-.*/,
+                /^opacity-.*/
             ],
             whitelist: [
                 'transform',
