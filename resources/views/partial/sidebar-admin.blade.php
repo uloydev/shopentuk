@@ -52,7 +52,7 @@
                 <x-menu-admin icon="purchase-tag" 
                 text="Discount Voucher" to="{{ route('admin.vouchers.index') }}" />
                 <x-menu-admin icon="shield-quarter" text="list admin" 
-                to="{{ route('superadmin.admins.index') }}"/>
+                to="{{ route('superadmin.admin.index') }}"/>
                 <x-menu-admin icon="help-circle" text="Feedback Customer" 
                 to="{{ route('admin.contact-us.manage') }}"/>
                 <x-menu-admin icon="user-detail" type="solid" 

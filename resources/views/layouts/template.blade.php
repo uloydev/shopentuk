@@ -25,6 +25,7 @@
         @include('partial.sidebar-admin')
         <div class="page-wrapper">
             <div class="container-fluid">
+                @if (Route::currentRouteName() !== 'superadmin.admin.index')
                 @foreach ($errors->all() as $message)
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         <strong>Error</strong> {{ $message }}
@@ -33,6 +34,7 @@
                         </button>
                     </div>
                 @endforeach
+                @endif
                 @if (session('success'))
                     <div class="mb-5">
                         <x-adminmart-alert is-dismissable="true" type="success" message="{{ session('success') }}" />
