@@ -16,7 +16,6 @@ if (HelperModule.pageUrl === '/admin/vouchers') {
             document.querySelector('input[name="name"]').value = btn.dataset.voucherName
             document.querySelector('input[name="code"]').value = btn.dataset.voucherCode
             document.querySelector('input[name="discount_value"]').value = btn.dataset.voucherDiscountValue
-            document.querySelector('input[name="expired_at"]').value = btn.dataset.voucherExpiredAt
 
         })
     })

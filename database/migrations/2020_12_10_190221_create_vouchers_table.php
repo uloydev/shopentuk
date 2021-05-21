@@ -18,7 +18,7 @@ class CreateVouchersTable extends Migration
             $table->string('name');
             $table->string('code')->unique();
             $table->integer('discount_value');
-            $table->datetime('expired_at');
+            $table->boolean('is_used')->default(false);
             $table->timestamps();
         });
     }

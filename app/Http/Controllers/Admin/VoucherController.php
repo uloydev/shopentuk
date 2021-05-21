@@ -33,7 +33,7 @@ class VoucherController extends Controller
             'name' => ['required', 'string'],
             'code' => ['required', 'string', 'unique:vouchers'],
             'discount_value' => ['required', 'numeric'],
-            'expired_at' => ['required', 'date'],
+            'is_used' => ['required'],
         ]);
         Voucher::create($validated);
         return redirect()->back()->with(['success' => 'Berhasil Menambahkan Discount Voucher']);
@@ -45,7 +45,7 @@ class VoucherController extends Controller
             'name' => ['required', 'string'],
             'code' => ['required', 'string', 'unique:vouchers,id,'.$voucher->id],
             'discount_value' => ['required', 'numeric'],
-            'expired_at' => ['required', 'date'],
+            'is_used' => ['required'],
         ]);
         $voucher->update($validated);
         return redirect()->back()->with(['success' => 'Berhasil Mengubah Discount Voucher']);

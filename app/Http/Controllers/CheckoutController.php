@@ -26,11 +26,18 @@ class CheckoutController extends Controller
 
         if ($request->voucher != '') {
             $voucher = Voucher::where('code', $request->voucher)->first();
+            
+            if ($voucher->is_used) {
+                return redirect()->back()->with(['error' => 'voucher diskon tidak bisa digunakan!']);
+            }
+
+            $voucher->update(['is_used' => true]);
         }
 
         if ($cart->total_point > $user->point) {
             return redirect()->back()->with(['error' => 'point kamu gak cukup buat order!']);
         }
+
         $order = new Order();
         $order->user_id = $user->id;
         $order->user_address_id = $request->address_id;
@@ -46,16 +53,20 @@ class CheckoutController extends Controller
             $orderProduct->product_id = $item->product_id;
             $orderProduct->point_price = $itemProduct->point_price;
             $orderProduct->original_price = $item->product->price;
+
             if (!empty($itemProduct->discount)) {
                 $orderProduct->discounted_price = $itemProduct->discount->discounted_price;
             }
+
             $orderProduct->quantity = $item->quantity;
             $orderProduct->is_toko_point = $item->is_toko_point;
             $orderProduct->is_digital = $item->is_digital;
             $orderProduct->save();
             $item->delete();
         }
+
         $shipping_value = $address->is_java ? $siteSetting->shipping_price : $siteSetting->non_java_shipping_price;
+
         if ($isAllPoint) {
             $order->shipping_point = $shipping_value * ceil($order->weight_total / 1000) / $siteSetting->point_value;
             $order->shipping_price = 0;
@@ -65,16 +76,20 @@ class CheckoutController extends Controller
             $order->shipping_point = 0;
             $order->status ='unpaid';
         }
+
         $order->price_total = $order->product_price + $order->shipping_price;
         $order->point_total = $order->product_point + $order->shipping_point;
+
         if ($voucher) {
             $order->price_total = $order->price_total - $voucher->discount_value;
             $order->voucher_discount = $voucher->discount_value;
+
             if ($order->price_total < 0) {
                 $order->price_total = 0;
                 $order->status ='paid';
             }
         }
+
         $order->save();
 
         $user->point -= $order->point_total;
