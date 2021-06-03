@@ -13,9 +13,11 @@ class GameController extends Controller
 {
     public function history()
     {
+        $time = Carbon::now();
+        $time->subDays(1);
         return view('game.admin.history')->with([
-            'title' => 'Game History',
-            'games' => Game::with('winnerOption')->where('status', 'finished')->get()
+            'title' => 'Game History Last 24 hours',
+            'games' => Game::with('winnerOption')->where('status', 'finished')->where('ended_at' , '>', $time)->get()
         ]);
     }
 
@@ -59,7 +61,6 @@ class GameController extends Controller
         $options = GameOption::where('type', 'number')
             ->with(['rewards'])
             ->get();
-        // dd($options->sum('bids_count'));
         foreach ($options as $option) {
             $calculatedPoint = 0;
             $bids = $gameBids->whereIn('game_option_id', $option->rewards->pluck('game_option_id'));
