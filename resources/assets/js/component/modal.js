@@ -1,5 +1,5 @@
 //show feedback popup
-$('button[data-target="#modal-feedback"]').on('click', function (event) {
+$('.table-manage-feedback').on('click', 'button[data-target="#modal-feedback"]', function (event) {
     const message = $(this).data('message')
     const email = $(this).data('email')
     $('#modal-feedback .modal-title').text('Feedback from ' + email)
@@ -7,9 +7,9 @@ $('button[data-target="#modal-feedback"]').on('click', function (event) {
 })
 
 //input resi popup
-$('#inputResiModal').on('show.bs.modal', function (event) {
-    const modal = $(this)
-    const btnTriggered = $(event.relatedTarget)
+$('.table-manage-new-order').on('click', 'button[data-target="#inputResiModal"]', function (event) {
+    const modal = $("#inputResiModal")
+    const btnTriggered = $(this)
     let orderId = btnTriggered.data('order-id')
 
     modal.find('#order-id').text(orderId)
@@ -17,12 +17,12 @@ $('#inputResiModal').on('show.bs.modal', function (event) {
 })
 
 //delete admin confirmation
-$("#modalConfirmDelete").on('show.bs.modal', function (event) {
-    const btnTriggered = $(event.relatedTarget)
-    const adminId = btnTriggered.data('admin-id')
+$(".table-manage-admin").on('click', 'button[data-target="#modalConfirmDeleteAdmin"]', function (event) {
+    console.log('ok');
+    const btnTriggered = $(this)
     const deleteUrl = btnTriggered.data('delete-url')
 
-    $(this).find("form").attr('action', deleteUrl)
+    $("#modalConfirmDeleteAdmin form").attr('action', deleteUrl)
 })
 
 //add admin modal
@@ -34,15 +34,15 @@ $("#addNewAdmin").on('show.bs.modal', function (event) {
 })
 
 //edit admin modal
-$("#editAdmin").on('show.bs.modal', function (event) {
-    const btnTriggered = $(event.relatedTarget)
+$(".table-manage-admin").on('click', 'button[data-target="#editAdmin"]', function (event) {
+    const btnTriggered = $(this)
     const formUrl = btnTriggered.data('form-url')
     const adminName = btnTriggered.data('admin-name')
     const adminEmail = btnTriggered.data('admin-email')
     const adminPhone = btnTriggered.data('admin-phone')
 
-    $(this).find("#admin-name-edit").val(adminName)
-    $(this).find("#admin-email-edit").val(adminEmail)
-    $(this).find("#admin-phone-edit").val(adminPhone)
-    $(this).find('form').attr('action', formUrl)
+    $('#editAdmin').find("#admin-name-edit").val(adminName)
+    $('#editAdmin').find("#admin-email-edit").val(adminEmail)
+    $('#editAdmin').find("#admin-phone-edit").val(adminPhone)
+    $('#editAdmin').find('form').attr('action', formUrl)
 })

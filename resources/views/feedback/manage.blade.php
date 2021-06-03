@@ -16,7 +16,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered no-wrap" id="zero_config">
+                        <table class="table table-striped table-bordered no-wrap table-manage-feedback" id="zero_config">
                             @include('partial.thead', [
                                 'thead' => [
                                     'id',

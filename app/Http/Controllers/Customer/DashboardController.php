@@ -26,9 +26,9 @@ class DashboardController extends Controller
         return view('customer.order.current', [
             'title' => 'current order',
             'tabMenus' => $this->tabMenus,
-            'orders' => Auth::user()->orders->whereNotIn('status', [
+            'orders' => Auth::user()->orders()->whereNotIn('status', [
                 'canceled', 'refunded', 'finished'
-            ])
+            ])->paginate(5)
         ]);
     }
 
@@ -37,7 +37,7 @@ class DashboardController extends Controller
         return view('customer.order.history', [
             'title' => 'order history',
             'tabMenus' => $this->tabMenus,
-            'orders' => Auth::user()->orders->whereIn('status', ['canceled', 'refunded', 'finished'])
+            'orders' => Auth::user()->orders()->whereIn('status', ['canceled', 'refunded', 'finished'])->paginate(5)
         ]);
     }
 
@@ -80,7 +80,7 @@ class DashboardController extends Controller
 
     public function wishlistProduct()
     {
-        $favoriteProduct = FavoriteProduct::where('user_id', auth()->id())->get();
+        $favoriteProduct = FavoriteProduct::where('user_id', auth()->id())->paginate(5);
         $title = 'My wishlist';
         $tabMenus = $this->tabMenus;
         return view('customer.account.wishlist', get_defined_vars());

@@ -11,7 +11,7 @@
                 <div class="card-body">
                     @if (count($orderPaid) > 0)
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered no-wrap" id="zero_config">
+                            <table class="table table-striped table-bordered no-wrap table-manage-new-order" id="zero_config">
                                 @include('partial.thead', [
                                 'thead' => [
                                 'order id',

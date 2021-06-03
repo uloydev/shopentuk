@@ -35,7 +35,7 @@
                         placeholder="Input the weight of the product" name="weight"
                         type="number" add-class="text-capitalize" required />
 
-                    <x-select-template label="category" id="category-id" name="category_id">
+                    <x-select-template label="category" id="category-id" name="category_id" required>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->title }}</option>
                         @endforeach
