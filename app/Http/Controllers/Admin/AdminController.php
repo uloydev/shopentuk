@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserValidaion;
 use App\Models\Product;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -96,7 +97,7 @@ class AdminController extends Controller
 
         return view('admin.dashboard', [
             'menus' => ['Total products', 'Total order', 'Total customer'],
-            'valueMenus' => [Product::count(), 20, $totalUser],
+            'valueMenus' => [Product::count(), Order::count(), $totalUser],
             'links' => $links
         ]);
     }
