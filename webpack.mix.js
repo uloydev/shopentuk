@@ -40,6 +40,6 @@ mix.js('resources/assets/js/native.js', 'public/js/all-client.js')
     .setPublicPath('public');
 
 mix.browserSync({
-    proxy: 'http://localhost:9000'
+    proxy: 'http://localhost:8000'
 });
 mix.serve();
