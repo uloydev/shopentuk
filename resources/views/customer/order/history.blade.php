@@ -47,5 +47,6 @@
         @empty
             <p>tidak ada data untuk ditampilkan</p>
         @endforelse
+        {{ $orders->links() }}
     </div>
 @endsection

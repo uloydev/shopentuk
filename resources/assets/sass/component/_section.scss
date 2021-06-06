@@ -6,9 +6,11 @@
 
             &::after {
                 content: '';
-                bottom: -30px;
+                position: absolute;
+                bottom: -10%;
                 height: 2px;
-                @include centerPosition;
+                left: 50%;
+                transform: translateX(-50%);
                 @apply bg-black w-3/5;
             }
         }

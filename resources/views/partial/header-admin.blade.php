@@ -19,22 +19,14 @@
         </div>
         <div class="navbar-collapse collapse" id="navbarSupportedContent">
             <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.setting.index') }}">
-                        <i data-feather="settings" class="svg-icon"></i>
-                    </a>
-                </li>
-                <li class="nav-item d-none d-md-block">
-                    <a class="nav-link" href="javascript:void(0)">
-                        <form>
-                            <div class="customize-input">
-                                <input type="search" placeholder="Search" aria-label="Search"
-                                class="form-control custom-shadow custom-radius border-0 bg-white">
-                                <i class="form-control-icon" data-feather="search"></i>
-                            </div>
-                        </form>
-                    </a>
-                </li>
+                @if (Auth::user()->role === 'superadmin')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.setting.index') }}">
+                            <i data-feather="settings" class="svg-icon"></i>
+                            Site Setting
+                        </a>
+                    </li>
+                @endif
             </ul>
             <ul class="navbar-nav float-right">
                 <li class="nav-item dropdown">
@@ -47,8 +39,6 @@
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                        <x-menu-header-admin :to="url('/')" icon="user" text="My Profile"/>
-                        <x-menu-header-admin :to="url('/')" icon="credit-card" text="My Balance"/>
                         <x-menu-header-admin :to="route('logout')" icon="power" 
                         text="Logout" id="logoutBtn" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();" />

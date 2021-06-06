@@ -74,5 +74,6 @@
         </div>
         @endforelse
     </ul>
+    {{ $favoriteProduct->links() }}
 </div>
 @endsection

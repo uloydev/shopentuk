@@ -45,7 +45,7 @@
                             placeholder="Input the {{ $input['name'] }} of the product" name="{{ $input['name'] }}"
                             type="{{ $input['type'] }}" add-class="text-capitalize" required />
                     @endforeach
-                    <x-select-template label="category" id="category-id" name="category_id">
+                    <x-select-template label="category" id="category-id" name="category_id" required>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->title }}</option>
                         @endforeach

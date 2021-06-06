@@ -17,22 +17,35 @@ class DatabaseSeeder extends Seeder
             ProductCategorySeeder::class,
             ProductSubCategorySeeder::class,
             SiteSettingSeeder::class,
-            ProductImageSeeder::class,
             UserSeeder::class,
-            CartSeeder::class,
-            // CartItemSeeder::class,
-            FeedbackCustomerSeeder::class,
-            VoucherSeeder::class,
             ProvinceSeeder::class,
-            // PointHistorySeeder::class,
             GameOptionSeeder::class,
             GameOptionRewardSeeder::class,
-            // GameSeeder::class,
-            // OrderSeeder::class,
-            // NewOrderSeeder::class,
-            // ProductDiscountSeeder::class,
-            RulesSeeder::class,
-            NewsSeeder::class
         ]);
+        if (env('APP_ENV') == 'production') {
+            
+        } else {
+            $this->call([
+                ProductCategorySeeder::class,
+                ProductSubCategorySeeder::class,
+                SiteSettingSeeder::class,
+                ProductImageSeeder::class,
+                UserSeeder::class,
+                CartSeeder::class,
+                // CartItemSeeder::class,
+                FeedbackCustomerSeeder::class,
+                VoucherSeeder::class,
+                ProvinceSeeder::class,
+                // PointHistorySeeder::class,
+                GameOptionSeeder::class,
+                GameOptionRewardSeeder::class,
+                // GameSeeder::class,
+                // OrderSeeder::class,
+                // NewOrderSeeder::class,
+                // ProductDiscountSeeder::class,
+                RulesSeeder::class,
+                NewsSeeder::class
+                ]);
+        }
     }
 }

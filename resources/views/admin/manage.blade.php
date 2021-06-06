@@ -18,7 +18,7 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-bordered no-wrap" id="zero_config">
+                    <table class="table table-striped table-bordered no-wrap table-manage-admin" id="zero_config">
                         @include('partial.thead', [
                         'thead' => [
                             'No',
@@ -59,10 +59,7 @@
                                             ) }}">
                                             Edit
                                         </button>
-                                        <form id="formDelete{{ $account->id }}" action="{{ route('superadmin.admin.destroy', $account->id) }}" method="POST" class="d-inline-block">
-                                            @csrf @method('DELETE')
-                                        </form>
-                                        <button type="button" data-toggle="modal" data-target="#modalConfirmDelete"
+                                        <button type="button" data-toggle="modal" data-target="#modalConfirmDeleteAdmin"
                                         class="btn btn-sm btn-danger btn-rounded mr-2"
                                         data-admin-id="{{ $account->id }}"
                                         data-delete-url="{{ route(
@@ -95,7 +92,7 @@
         ])
     </x-modal-template>
 
-    <div class="modal" tabindex="-1" role="dialog" id="modalConfirmDelete">
+    <div class="modal" tabindex="-1" role="dialog" id="modalConfirmDeleteAdmin">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <form action="{{ route('admin.product-discounts.store') }}" method="post">
                     @csrf
-                    <x-select-template label="pilih product" id="product" name="product_id">
+                    <x-select-template label="pilih product" id="product" name="product_id" required>
                         @foreach ($products as $product)
                             <option value="{{ $product->id }}">
                                 {{ $product->title }}</option>

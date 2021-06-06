@@ -14,16 +14,6 @@ class Voucher extends Model
         'name',
         'code', 
         'discount_value',
-        'expired_at'
+        'is_used'
     ];
-
-    protected $casts = [
-        'expired_at' => 'datetime'
-    ];
-
-    public function getFormattedExpiredTimeAttribute()
-    {
-        $expired = Carbon::parse($this->attributes['expired_at']);
-        return $expired->format('Y-m-d'). 'T' .$expired->format('h:i');
-    }
 }

@@ -21,13 +21,10 @@ class VoucherFactory extends Factory
      */
     public function definition()
     {
-        $expired = now();
-        $expired->addDays(7);
         return [
             'name' => 'voucher ' . $this->faker->sentence($nmWords=2),
             'code' => $this->faker->regexify('[A-Za-z0-9]{6}'),
             'discount_value' => $this->faker->numberBetween(1000, 10000),
-            'expired_at' => $expired
         ];
     }
 }
