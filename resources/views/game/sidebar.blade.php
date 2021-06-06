@@ -14,23 +14,5 @@
                 rules
             </a>
         </li>
-        {{-- <li>
-            <a class="flex items-center lg:w-auto px-4 w-1/3 py-4 capitalize cursor-pointer justify-between dropdown-toggler w-full">
-                <span>next 3 game schedule</span>
-                <box-icon name='chevron-right' type='solid'></box-icon>
-            </a>
-            <ul id="nextGameList" class="dropdown-box pl-5 overflow-hidden transition duration-200 ease-in">
-                @foreach ($nextGame as $game)
-                <li class="sidebar-game__dropdown-item">
-                    <span class="flex items-center lg:w-auto px-4 w-1/3 py-4 capitalize cursor-pointer w-full">
-                        <span class="mr-2">Jam:</span>
-                        <time>
-                            {{ $game->formatted_start_time }}
-                        </time>
-                    </span>
-                </li>
-                @endforeach
-            </ul>
-        </li> --}}
     </ul>
 </aside>

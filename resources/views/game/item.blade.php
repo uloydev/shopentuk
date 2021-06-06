@@ -9,15 +9,16 @@
         </p>
         <input type="checkbox" name="choose_option" id="option-{{ $option->id }}">
         <div class="section-game__item--checked">
-            <form action="" method="POST" class="w-full flex items-center justify-center">
-                <label for="input-point{{ $option->id }}" class="capitalize">
+            <form action="" method="POST" 
+            class="w-full flex items-center justify-center flex-wrap">
+                <label for="input-point{{ $option->id }}" class="capitalize w-full block mb-2 text-center">
                     input point
                 </label>
                 <div class="flex">
                     <input type="number" name="point" id="input-point{{ $option->id }}"
                         class="section-game__input bg-white border-transparent text-center p-2 rounded text-gray-900"
                         max="100" min="1" data-game-option-id="{{ $option->id }}" required>
-                    <x-btn action="submit" type="transparent" add-class="btn--without-hover section-game__btn-submit">
+                    <x-btn action="submit" type="transparent" add-class="btn--without-hover game-submit px-0">
                         <box-icon type='solid' name='send' class="text-white"></box-icon>
                     </x-btn>
                 </div>

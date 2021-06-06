@@ -124,7 +124,7 @@ if (HelperModule.pageUrl === '/game') {
                 // update game period
                 gamePeriod.textContent = game.game_period;
                 // submit btn onclick
-                document.querySelectorAll('.section-game__btn-submit').forEach(btn => {
+                document.querySelectorAll('.game-submit').forEach(btn => {
                     const pointInput = btn.parentElement.querySelector('input[name="point"]');
                     const gameItem = pointInput.parentElement.parentElement.parentElement.parentElement.parentElement;
                     gameItem.querySelector('input[name="choose_option"]').checked = false
@@ -182,7 +182,7 @@ if (HelperModule.pageUrl === '/game') {
     /**
      * submit bid
      */
-    const btnSubmitPoint = document.querySelectorAll('.section-game__btn-submit')
+    const btnSubmitPoint = document.querySelectorAll('.game-submit')
     btnSubmitPoint.forEach(btn => {
         const iconBtn = btn.querySelector('box-icon')
         HelperModule.boxiconHoverChangeColor(iconBtn, '#ededed')
