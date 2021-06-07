@@ -127,7 +127,7 @@ if (HelperModule.pageUrl === '/game') {
                 document.querySelectorAll('.game-submit').forEach(btn => {
                     const pointInput = btn.parentElement.querySelector('input[name="point"]');
                     const gameItem = pointInput.parentElement.parentElement.parentElement.parentElement.parentElement;
-                    gameItem.querySelector('input[name="choose_option"]').checked = false
+                    gameItem.querySelector('.toggle-box').checked = false
                     pointInput.disabled = false
                     btn.disabled = false
                     pointInput.value = null
@@ -149,7 +149,7 @@ if (HelperModule.pageUrl === '/game') {
                     const pointInput = document.querySelector('input#input-point' + bid.game_option_id)
                     const gameItem = pointInput.parentElement.parentElement.parentElement.parentElement.parentElement;
                     pointInput.value = bid.point
-                    gameItem.querySelector('input[name="choose_option"]').checked = false
+                    gameItem.querySelector('.toggle-box').checked = false
                     pointInput.disabled = true
                     gameItem.querySelector('.point-submitted').textContent = pointInput.value
                     gameItem.querySelector('.thanks-box')
@@ -175,7 +175,7 @@ if (HelperModule.pageUrl === '/game') {
     btnUncheckGame.forEach(btn => {
         btn.addEventListener('click', () => {
             btn.classList.add('hidden')
-            btn.parentNode.querySelector('input[name="choose_option"]').checked = false
+            btn.parentNode.querySelector('.toggle-box').checked = false
         })
     })
 
@@ -194,7 +194,7 @@ if (HelperModule.pageUrl === '/game') {
          * defined "thank you" message overlay after submit point
          */
         const openThankYouMessage = () => {
-            gameItem.querySelector('input[name="choose_option"]').checked = false
+            gameItem.querySelector('.toggle-box').checked = false
             pointInput.disabled = true
             gameItem.querySelector('.point-submitted').textContent = pointInput.value
 
@@ -234,14 +234,14 @@ if (HelperModule.pageUrl === '/game') {
                         }
                     })
             } else {
-                gameItem.querySelector('input[name="choose_option"]').checked = false
+                gameItem.querySelector('.toggle-box').checked = false
             }
         })
     })
 
     // option label onclick 
     checkboxLabels.forEach(label => {
-        var inputCheckbox = label.querySelector('input[name="choose_option"]');
+        var inputCheckbox = label.querySelector('.toggle-box');
         var thanksBox = label.parentElement.querySelector('.thanks-box');
         var uncheckBtn = label.parentElement.querySelector('.section-game__uncheck');
         label.addEventListener('click', (e) => {

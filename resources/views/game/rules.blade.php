@@ -8,7 +8,7 @@
                 <button class="modal__close" aria-label="Close modal" 
                 data-micromodal-close></button>
             </header>
-            <main class="modal__content game-rule" id="modal-1-content">
+            <main class="modal__content list-order" id="modal-1-content">
                 <ol>
                     @foreach ($rules as $rule)
                         <li>{{ $rule->content }}</li>

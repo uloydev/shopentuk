@@ -1,40 +1,23 @@
 @import 'general';
 
-@import './component/section', './component/btn', './component/alert', './component/input', './component/modal', './component/dropdown-menu', './component/thanks-box', './component/card', './component/card', './component/nav.scss', './component/overlay', './component/step';
+@import './component/section',
+        './component/btn',
+        './component/alert',
+        './component/input',
+        './component/modal',
+        './component/dropdown-menu',
+        './component/thanks-box',
+        './component/card',
+        './component/card',
+        './component/nav.scss',
+        './component/overlay',
+        './component/step',
+        './component/list',
+        './component/toggle-box';
 
-@import './helper/font', './helper/visibility', "./helper/text";
-
-.section-game {
-
-    &__item {
-
-        &--checked {
-            @apply invisible mt-5 absolute bg-parent;
-        }
-    }
-
-    input[name=choose_option] {
-        @apply absolute inset-0 z-10 h-0 w-0 overflow-hidden;
-    }
-
-    input[name=choose_option]:checked+.section-game__item--checked {
-        @apply opacity-100 visible h-full w-full static;
-    }
-
-}
-
-.game-rule {
-
-    ol {
-        @apply pl-4;
-    }
-
-    li {
-        @apply mb-4 list-decimal;
-    }
-
-}
-
+@import './helper/font',
+        './helper/visibility',
+        './helper/text';
 
 
 @tailwind utilities;

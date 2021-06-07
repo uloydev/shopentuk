@@ -1,5 +1,5 @@
 @foreach ($options->where('type', 'color') as $color)
-    <div class="section-game__item flex items-center justify-center transition-all duration-200 ease-in flex-col relative text-white p-4 {{ $color->html_class }}">
+    <div class="box-item flex items-center justify-center transition-all duration-200 ease-in flex-col relative text-white p-4 {{ $color->html_class }}">
         <label class="game-checkbox-label section-game__slide-number cursor-pointer w-full h-full" for="input-color-{{ $color->id }}">
             <div class="text-center text-3xl capitalize">
                 {{ $color->color }}
@@ -7,8 +7,8 @@
             <p class="section-game__paragraph text-center capitalize">
                 pilih warna ini
             </p>
-            <input type="checkbox" name="choose_option" id="input-color-{{ $color->id }}">
-            <div class="section-game__item--checked">
+            <input type="checkbox" name="choose_option" id="input-color-{{ $color->id }}" class="toggle-box">
+            <div class="box-item--checked">
                 <form action="" class="w-full flex items-center justify-center" method="POST">
                     <label for="input-point{{ $color->id }}" class="capitalize mr-2">
                         input point

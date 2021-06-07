@@ -23,8 +23,9 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row lg:justify-end lg:space-x-5">
                 <x-btn text="cancel" type="third" 
-                add-class="w-full lg:w-auto btn-open-close-modal-address"
-                id="btn-close-modalAddAddress" />
+                add-class="w-full lg:w-auto toggle-popup"
+                id="btn-close-modalAddAddress"
+                data-modal-id="#modalAddAddress" />
                 <x-btn action="submit" type="primary" text="Submit" id="newAddressSubmit" 
                 add-class="w-full lg:w-auto" form="newAddressForm" />
             </div>

@@ -12,9 +12,9 @@ if (pageUrl === '/game') {
     //     initialSlide: 2,
     //     loop: true,
     //     grabCursor: true,
-    //     slideActiveClass: 'section-game__item--active',
-    //     slideNextClass: 'section-game__item--next',
-    //     slidePrevClass: 'section-game__item--prev',
+    //     slideActiveClass: 'box-item--active',
+    //     slideNextClass: 'box-item--next',
+    //     slidePrevClass: 'box-item--prev',
     //     navigation: {
     //         nextEl: '.section-game__btn-slide--next',
     //         prevEl: '.section-game__btn-slide--prev',
@@ -25,10 +25,10 @@ if (pageUrl === '/game') {
     // document.querySelectorAll('.section-game__list .swiper-slide').forEach(eachSlide => {
 
     //     eachSlide.addEventListener('click', () => {
-    //         if (eachSlide.classList.contains('section-game__item--next')) {
+    //         if (eachSlide.classList.contains('box-item--next')) {
     //             listGameSwiper.slideNext()
     //         }
-    //         else if(eachSlide.classList.contains('section-game__item--prev')) {
+    //         else if(eachSlide.classList.contains('box-item--prev')) {
     //             listGameSwiper.slidePrev()
     //         }
     //     })

@@ -51,8 +51,10 @@
                 @endif
                 <x-menu-admin icon="purchase-tag" 
                 text="Discount Voucher" to="{{ route('admin.vouchers.index') }}" />
+                @if (auth()->user()->role === 'superadmin')
                 <x-menu-admin icon="shield-quarter" text="list admin" 
-                to="{{ route('superadmin.admin.index') }}"/>
+                to="{{ route('superadmin.admin.index') }}"/>                    
+                @endif
                 <x-menu-admin icon="help-circle" text="Feedback Customer" 
                 to="{{ route('admin.contact-us.manage') }}"/>
                 <x-menu-admin icon="user-detail" type="solid" 

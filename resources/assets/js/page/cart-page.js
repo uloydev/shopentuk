@@ -56,7 +56,7 @@ if (pageUrl === '/cart') {
         /*
           * open #modalAddAddress if it closed. Otherwise close it
           */
-        const btnOpenModalAddress = document.querySelector('.btn-open-close-modal-address')
+        const btnOpenModalAddress = document.querySelector('.toggle-popup')
         const btnCloseModalAddress = document.querySelector('#btn-close-modalAddAddress')
         const btnsManageModalAddress = [btnOpenModalAddress, btnCloseModalAddress]
         

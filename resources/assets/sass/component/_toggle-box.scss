@@ -1,0 +1,13 @@
+.box-item {
+
+    &--checked {
+        @apply invisible mt-5 absolute bg-parent;
+    }
+}
+
+.toggle-box {
+    @apply absolute inset-0 z-10 h-0 w-0 overflow-hidden;
+    &:checked + .box-item--checked {
+        @apply opacity-100 visible h-full w-full static;
+    }
+}

@@ -35,7 +35,8 @@ class="fixed z-10 inset-0 overflow-y-auto transition duration-200 invisible h-0 
                                     @endforelse
                                 </select>
                                 <a href="javascript:void(0)"
-                                class="btn-open-close-modal-address text-blue-400 underline">
+                                class="toggle-popup text-blue-400 underline"
+                                data-modal-id="#modalAddAddress">
                                     Tambah alamat
                                 </a>
                             </div>
