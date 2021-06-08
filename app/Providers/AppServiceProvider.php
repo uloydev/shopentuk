@@ -36,6 +36,12 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
+        if (env('APP_ENV') == 'production') {
+            $this->app->bind('path.public', function() {
+                return base_path().'/../';
+            });
+        }
+
         View::share('categories', ProductCategory::all());
 
         View::composer('*', function ($view) {
