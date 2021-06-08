@@ -21,8 +21,9 @@
         @endif
         <div class="bg-white shadow-md p-5 my-10 lg:my-0">
             <x-btn type="secondary"
-            add-class="btn-open-close-modal-address justify-center"
-            data-url="{{ route('my-account.address.store') }} " text="tambah alamat" />
+            add-class="toggle-popup justify-center"
+            data-url="{{ route('my-account.address.store') }} " text="tambah alamat"
+            data-modal-id="#modalAddAddress" />
 
             {{-- <div id="userAddresses" data-address="{!! $userAddresses->toJson() !!}" hidden></div> --}}
 

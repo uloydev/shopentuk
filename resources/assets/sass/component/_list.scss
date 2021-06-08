@@ -1,0 +1,9 @@
+.list-order {
+    ol {
+        @apply pl-4;
+    }
+
+    li {
+        @apply mb-4 list-decimal;
+    }
+}

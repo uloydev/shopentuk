@@ -2,6 +2,8 @@
 
 @section('body-id', 'dashboard')
 
+@section('title', 'Dashboard')
+
 @section('content')
     <div class="card-group">
         @for ($i = 0; $i < 3; $i++)

@@ -37,7 +37,7 @@
                 @foreach ($tabMenus as $tabMenu)
                     <li class="dashboard-customer__menu-item flex-grow capitalize">
                         <a href="{{ route('my-account.' . Str::slug($tabMenu, '.')) }}"
-                        class="dashboard-customer__menu-link text-center block p-4 text-gray-600">
+                        class="tab-link text-center block p-4 text-gray-600">
                             {{ $tabMenu }}
                         </a>
                     </li>

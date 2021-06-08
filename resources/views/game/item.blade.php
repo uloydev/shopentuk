@@ -1,5 +1,5 @@
 <div
-    class="section-game__item flex items-center justify-center transition-all duration-200 ease-in flex-col relative text-gray-800 p-4 bg-gray-300">
+    class="box-item flex items-center justify-center transition-all duration-200 ease-in flex-col relative text-gray-800 p-4 bg-gray-300">
     <label class="game-checkbox-label section-game__slide-number cursor-pointer w-full h-full" for="option-{{ $option->id }}">
         <div class="text-center text-3xl">
             {{ $option->number }}
@@ -7,8 +7,8 @@
         <p class="section-game__paragraph capitalize text-center">
             pilih nomor ini
         </p>
-        <input type="checkbox" name="choose_option" id="option-{{ $option->id }}">
-        <div class="section-game__item--checked">
+        <input type="checkbox" name="choose_option" id="option-{{ $option->id }}" class="toggle-box">
+        <div class="box-item--checked">
             <form action="" method="POST" 
             class="w-full flex items-center justify-center flex-wrap">
                 <label for="input-point{{ $option->id }}" class="capitalize w-full block mb-2 text-center">

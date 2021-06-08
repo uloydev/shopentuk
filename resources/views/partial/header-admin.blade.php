@@ -26,6 +26,13 @@
                             Site Setting
                         </a>
                     </li>
+                @else
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.setting.index') }}">
+                        <i data-feather="settings" class="svg-icon"></i>
+                        Site Setting
+                    </a>
+                </li>
                 @endif
             </ul>
             <ul class="navbar-nav float-right">
@@ -52,3 +59,5 @@
         </div>
     </nav>
 </header>
+
+{{-- @include('partial.sidebar-admin') --}}

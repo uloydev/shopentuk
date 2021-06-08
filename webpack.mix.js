@@ -1,6 +1,7 @@
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
-require('laravel-mix-artisan-serve');
+
+require('laravel-mix-serve');
 
 mix.js('resources/assets/js/native.js', 'public/js/all-client.js')
     .js('resources/assets/js/page/dashboard-admin.js', 'public/js')
@@ -39,7 +40,8 @@ mix.js('resources/assets/js/native.js', 'public/js/all-client.js')
     ], 'public/js/all-admin.js')
     .setPublicPath('public');
 
+mix.serve();
+
 mix.browserSync({
     proxy: 'http://localhost:8000'
 });
-mix.serve();

@@ -34,6 +34,29 @@ class HomeController extends Controller
     public function landingPage()
     {
         $products = Product::where('is_redeem', false)->limit(10)->latest()->get();
-        return view('landing', ['products' => $products]);
+        $catalogs = [
+            (object) [
+                'heading' => 'Store',
+                'subheading' => 'clothing and fashion',
+                'route' => route('store.product.index')
+            ],
+            (object) [
+                'heading' => 'Voucher',
+                'subheading' => 'Voucher and Digital stuff',
+                'route' => route('store.voucher.index')
+            ],
+            (object) [
+                'heading' => 'Game',
+                'subheading' => 'Play Game and get Point',
+                'route' => route('game.index')
+            ],
+            (object) [
+                'heading' => 'Toko Point',
+                'subheading' => 'Redeem your point with product, voucher or cash',
+                'route' => route('store.toko-point.index')
+            ],
+        ];
+
+        return view('landing', get_defined_vars());
     }
 }
