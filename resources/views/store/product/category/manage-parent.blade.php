@@ -20,11 +20,11 @@
             <div class="card-body">
                 <ul class="list-group">
                     @forelse ($categories as $category)
-                    <li class="list-group-item d-flex align-items-center">
-                        <span class="mr-auto primary-category__title">
+                    <li class="list-group-item d-flex align-items-center flex-wrap">
+                        <span class="mr-auto primary-category__title d-block d-lg-inline w-100">
                             {{ Str::words($category->title, 1) }}
                         </span>
-                        <a href="{{ route('admin.all-category.sub.index', $category->id) }}" class="badge badge-primary badge-pill ml-auto">view sub categories</a>
+                        <a href="{{ route('admin.all-category.sub.index', $category->id) }}" class="badge badge-primary badge-pill ml-lg-auto">view sub categories</a>
                         <a href="javascript:void(0);"
                         data-routing="{{ route('admin.all-category.update', $category->id) }}"
                         data-is-digital="{{ $category->is_digital_product }}"
