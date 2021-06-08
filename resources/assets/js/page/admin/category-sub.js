@@ -41,6 +41,10 @@ if (HelperModule.pageUrl.includes('/sub')) {
         parentCategoryOptionEl[0].selected = true
         modalManipulateCategory.querySelector('#sub-category').value = null
     })
+
+    $("#btn-add-sub-category").click(function () {
+        $('.modal-manipulate-category #sub-category').val(null)
+    });
     // end of edit sub category
 
     // add new sub category

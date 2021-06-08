@@ -5,7 +5,7 @@
         <span aria-hidden="true">×</span>
     </button>
     @endif
-    <div class="d-flex justify-content-center">
+    <div class="d-flex flex-column flex-lg-row justify-content-center">
         <p class="text-center text-capitalize mb-0">{!! $message !!}</p>
         {{ $slot }}
     </div>
