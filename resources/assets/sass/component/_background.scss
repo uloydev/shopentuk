@@ -1,11 +1,9 @@
-.bg {
-    &-red {
-        background-color: red;
-    }
-    &-green {
-        background-color: green;
-    }
-    &-purple {
-        background-color: purple;
+$colors: red, green, purple;
+
+@each $color in $colors {
+    .bg {
+        &-#{$color} {
+            background-color: $color;
+        }
     }
 }
