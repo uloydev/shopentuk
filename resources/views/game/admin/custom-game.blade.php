@@ -7,7 +7,7 @@
             <div class="card-header">
                 <h1 class="h3 font-weight-bold">{{ ucwords($title) }}</h1>
             </div>
-            <div class="card-body">
+            <div class="card-body text-center text-lg-left">
                 <button type="button" data-toggle="modal" data-target="#addCustomGame" class="btn btn-success mb-3">
                     Create New Custom Game
                 </button>

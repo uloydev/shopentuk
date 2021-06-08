@@ -1,0 +1,8 @@
+$dimensions: w, h;
+@each $dimension in $dimensions {
+    .#{$dimension} {
+        &-full {
+            height: 100%;
+        }
+    }
+}

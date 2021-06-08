@@ -2,26 +2,21 @@
 @import './../template/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css';
 @import './../template/dist/css/style.css';
 @import './../plugin/datatables.net/css/datatables.min.css';
+@import './component/background';
 
-#dashboardPage #add-product-btn {
-    display: flex;
-}
-#dashboardPage #add-product-btn span {
-    height: 100%;
-    width: 100%;
-}
-#dashboardPage #add-product-btn svg {
-    width: 2rem !important;
-    height: 2rem !important;
-}
-.bg-red {
-    background-color: red;
-}
-.bg-green {
-    background-color: green;
-}
-.bg-purple {
-    background-color: purple;
+#dashboardPage {
+    #add-product-btn {
+
+        span {
+            height: 100%;
+            width: 100%;
+        }
+
+        svg {
+            width: 2rem !important;
+            height: 2rem !important;
+        }
+    }  
 }
 .color-circle {
     width: 15px;

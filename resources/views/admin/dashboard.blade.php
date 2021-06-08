@@ -21,8 +21,8 @@
                             </h6>
                         </div>
                         <div class="ml-auto mt-lg-0">
-                            <a href="{{ $links[$i] }}" id="add-product-btn">
-                                <span class="opacity-7 text-muted">
+                            <a href="{{ $links[$i] }}" id="add-product-btn" class="d-flex">
+                                <span class="opacity-7 text-muted w-100 h-100">
                                     <i data-feather="plus-circle"></i>
                                 </span>
                             </a>

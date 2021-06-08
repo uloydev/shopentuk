@@ -21,12 +21,11 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <div class="mb-3">
-                        <span class="h3">All Game Rules</span>
-                        <button class="btn btn-primary rounded-pill float-right" data-toggle="modal"
-                        data-target="#modal-add-rule"><box-icon name='plus-square' type='solid' animation='tada' color='#ffffff' ></box-icon> Add Rule</button>
-                    </div>
+                <div class="card-header mb-3 d-flex flex-column 
+                flex-lg-row justify-content-between">
+                    <span class="h3 mb-3 mb-lg-0 d-block d-lg-inline">All Game Rules</span>
+                    <button class="btn btn-primary rounded-pill d-flex d-lg-inline-flex align-items-center justify-content-center col-12 col-md-auto" data-toggle="modal"
+                    data-target="#modal-add-rule"><box-icon name='plus-square' type='solid' animation='tada' color='#ffffff' ></box-icon> Add Rule</button>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
