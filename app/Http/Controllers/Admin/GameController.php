@@ -56,7 +56,7 @@ class GameController extends Controller
 
     public function currentGame(Request $request)
     {
-        $game = Game::with(['winners'])->firstWhere('status', 'playing');
+        $game = Game::with(['winners'])->where('status', 'playing')->firstOrFail();
         $gameBids = $game->bids;
         $options = GameOption::where('type', 'number')
             ->with(['rewards'])
