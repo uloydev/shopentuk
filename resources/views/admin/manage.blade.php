@@ -8,70 +8,73 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header d-flex align-items-center justify-content-between">
-                    <h1 class="h3 text-capitalize">{{ $title }}</h1>
+                <div class="card-header mb-3 d-flex flex-column 
+                flex-lg-row justify-content-between">
+                    <span class="h3 mb-3 mb-lg-0 d-block d-lg-inline">{{ $title }}</span>
                     <button type="button" data-toggle="modal" 
                     data-target="#addNewAdmin" 
                     data-form-url="{{ route('superadmin.admin.store') }}"
-                    class="btn btn-sm btn-primary btn-rounded mr-2">
+                    class="btn btn-primary rounded-pill d-flex d-lg-inline-flex align-items-center justify-content-center col-12 col-md-auto">
                         Add new admin
                     </button>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-bordered no-wrap table-manage-admin" id="zero_config">
-                        @include('partial.thead', [
-                        'thead' => [
-                            'No',
-                            'name',
-                            'email',
-                            'phone',
-                            'joined at',
-                            'action'
-                        ]
-                        ])
-                        <tbody>
-                            @foreach ($admins as $account)
-                                <tr class="admin">
-                                    <td>
-                                        {{ $loop->iteration }}
-                                    </td>
-                                    <td>
-                                        {{ $account->name }}
-                                    </td>
-                                    <td>
-                                        {{ $account->email }}
-                                    </td>
-                                    <td>
-                                        {{ $account->phone }}
-                                    </td>
-                                    <td>
-                                        {{ $account->created_at }}
-                                    </td>
-                                    <td>
-                                        <button type="button" data-toggle="modal" data-target="#editAdmin"
-                                            class="btn btn-sm btn-warning btn-rounded mr-2 btn-edit-admin"
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered no-wrap table-manage-admin" id="zero_config">
+                            @include('partial.thead', [
+                            'thead' => [
+                                'No',
+                                'name',
+                                'email',
+                                'phone',
+                                'joined at',
+                                'action'
+                            ]
+                            ])
+                            <tbody>
+                                @foreach ($admins as $account)
+                                    <tr class="admin">
+                                        <td>
+                                            {{ $loop->iteration }}
+                                        </td>
+                                        <td>
+                                            {{ $account->name }}
+                                        </td>
+                                        <td>
+                                            {{ $account->email }}
+                                        </td>
+                                        <td>
+                                            {{ $account->phone }}
+                                        </td>
+                                        <td>
+                                            {{ $account->created_at }}
+                                        </td>
+                                        <td>
+                                            <button type="button" data-toggle="modal" data-target="#editAdmin"
+                                                class="btn btn-sm btn-warning btn-rounded mr-2 btn-edit-admin"
+                                                data-admin-id="{{ $account->id }}"
+                                                data-admin-name="{{ $account->name }}"
+                                                data-admin-email="{{ $account->email }}"
+                                                data-admin-phone="{{ $account->phone }}"
+                                                data-form-url="{{ route(
+                                                    'superadmin.admin.update', $account->id
+                                                ) }}">
+                                                Edit
+                                            </button>
+                                            <button type="button" data-toggle="modal" data-target="#modalConfirmDeleteAdmin"
+                                            class="btn btn-sm btn-danger btn-rounded mr-2"
                                             data-admin-id="{{ $account->id }}"
-                                            data-admin-name="{{ $account->name }}"
-                                            data-admin-email="{{ $account->email }}"
-                                            data-admin-phone="{{ $account->phone }}"
-                                            data-form-url="{{ route(
-                                                'superadmin.admin.update', $account->id
+                                            data-delete-url="{{ route(
+                                                'superadmin.admin.destroy', $account->id
                                             ) }}">
-                                            Edit
-                                        </button>
-                                        <button type="button" data-toggle="modal" data-target="#modalConfirmDeleteAdmin"
-                                        class="btn btn-sm btn-danger btn-rounded mr-2"
-                                        data-admin-id="{{ $account->id }}"
-                                        data-delete-url="{{ route(
-                                            'superadmin.admin.destroy', $account->id
-                                        ) }}">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

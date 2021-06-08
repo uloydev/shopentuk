@@ -18622,6 +18622,18 @@ div.dt-buttons button.btn.processing:after,div.dt-buttons div.btn.processing:aft
 }
 
 
+.bg-red {
+  background-color: red;
+}
+
+.bg-green {
+  background-color: green;
+}
+
+.bg-purple {
+  background-color: purple;
+}
+
 #dashboardPage #add-product-btn span {
   height: 100%;
   width: 100%;
