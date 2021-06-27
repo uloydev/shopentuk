@@ -35,7 +35,7 @@
                             </button>
                         </form>
                         @endif
-                        <img src="{{ $item->product->mainImage ? asset('storage/' . $item->product->mainImage->url) : 'https://via.placeholder.com/200' }}" 
+                        <img src="{{ $item->product->mainImage ? Storage::url($item->product->mainImage->url) : 'https://via.placeholder.com/200' }}" 
                         alt="Product on cart" class="h-24 mx-auto">
                         <figcaption class="p-3 flex-grow flex flex-col lg:flex-row lg:justify-between">
                             <div class="mb-5 lg:mb-0">

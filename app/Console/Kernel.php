@@ -49,10 +49,11 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () use ($getSmallestPoint) {
             try {
                 $now = Carbon::now();
-                if (Game::count()) {
+                $gameCount = Game::count();
+                if ($gameCount) {
                     // creating variables data
                     $currentGame = Game::firstWhere('status', 'playing');
-                    $nextGame = Game::orderBy('started_at')->firstWhere('status', 'queued');
+                    $nextGame = Game::orderBy('started_at')->where('ended_at', '>', $now)->where('started_at', '<', $now)->firstWhere('status', 'queued');
                     $gameBids = $currentGame->bids;
                     $pointOut = 0;
                     // check if current game is not a custom game
@@ -154,6 +155,8 @@ class Kernel extends ConsoleKernel
                     $nextGame = Game::first();
                     $nextGame->update(['status' => 'playing']);
                 }
+                // delete game if more than 24 hours
+                Game::where('ended_at', '<=', $now->subDays(1))->delete();
                 // seed bid to next game
                 // GameBid::factory()->count(50)->state(['game_id' => $nextGame->id])->create();
             } catch (\Throwable$th) {

@@ -38,7 +38,7 @@ class UserValidaion extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'min:3', 'max:100', 'unique:users'],
+            'name' => ['required', 'min:3', 'max:100'],
             'email' => ['required', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'unique:users', new PhoneValidation],
             'password' => ['required', 'min:8', 'confirmed']

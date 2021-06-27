@@ -52,20 +52,7 @@ if (pageUrl === '/cart') {
                 checkoutBtn.classList.add('hidden')
             }
         });
-    
-        /*
-          * open #modalAddAddress if it closed. Otherwise close it
-          */
-        const btnOpenModalAddress = document.querySelector('.toggle-popup')
-        const btnCloseModalAddress = document.querySelector('#btn-close-modalAddAddress')
-        const btnsManageModalAddress = [btnOpenModalAddress, btnCloseModalAddress]
-        
-        btnsManageModalAddress.forEach(btnOnModalAddNewAddress => {
-            btnOnModalAddNewAddress.addEventListener('click', () => {
-                openCloseModal('#modalAddAddress')
-            })
-        })
-    
+
         /*
          * when user go to next step on checkout
          */
