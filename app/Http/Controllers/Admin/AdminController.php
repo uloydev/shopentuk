@@ -115,4 +115,27 @@ class AdminController extends Controller
         $user->update($request->only(['phone', 'pemilik_rekening', 'bank', 'rekening']));
         return redirect()->back()->with('success', 'Successfully Update User ' . $user->email);
     }
+
+    public function changePasswordForm(Request $request)
+    {
+        return view('admin.change-password', ['title' => 'change password']);
+    }
+
+    public function updatePasswordAdmin(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'confirmed', 'min:8'],
+        ]);
+        Auth::user()->update(['password' => Hash::make($request->password)]);
+        return redirect()->back()->with('success', 'password changed');
+    }
+
+    public function updatePasswordCustomer(Request $request, User $user)
+    {
+        $request->validate([
+            'password' => ['required', 'confirmed', 'min:8'],
+        ]);
+        $user->update(['password' => Hash::make($request->password)]);
+        return redirect()->back()->with('success', 'Successfully Update Password User ' . $user->email);
+    }
 }

@@ -53,6 +53,8 @@
                         method="POST" class="d-none">
                             @csrf
                         </form>
+                        <x-menu-header-admin :to="route('admin.change-password')" icon="key" 
+                        text="Change Password"/>
                     </div>
                 </li>
             </ul>

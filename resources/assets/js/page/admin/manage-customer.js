@@ -22,6 +22,17 @@ if (HelperModule.pageUrl === '/admin/manage-customer') {
         });
     });
 
+    // modal change password
+    const modalUpdatePasswordUser = document.querySelector("#modalChangePasswordUser");
+    console.log(modalUpdatePasswordUser);
+    const formUpdatePasswordUser = modalUpdatePasswordUser.querySelector("form");
 
+    document.querySelectorAll('.btn-change-password').forEach(function (btn)  {
+        btn.addEventListener('click', function () {
+            modalUpdatePasswordUser.querySelector('#modalChangePasswordUserLabel').textContent = "Change Password User " + this.dataset.userEmail;
+            formUpdatePasswordUser.action = this.dataset.updateUrl;
+        });
+    });
 
 }
+

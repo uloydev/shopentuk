@@ -18,7 +18,7 @@ class GameBid extends Model
         'reward'
     ];
 
-    protected $with = ['gameOption', 'game'];
+    protected $with = ['gameOption', 'game', 'user'];
 
     public function game()
     {

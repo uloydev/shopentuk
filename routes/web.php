@@ -111,6 +111,7 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
     function () {
         Route::get('manage-customer', 'AdminController@manageCustomer')->name('manage-customer');
         Route::put('manage-customer/{user}', 'AdminController@updateCustomer')->name('manage-customer.update');
+        Route::put('manage-customer/{user}/change-password', 'AdminController@updatePasswordCustomer')->name('manage-customer.update-password');
         Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
         Route::prefix('order')->name('order.')->group(function () {
             Route::get('/', 'OrderController@index')->name('index');
@@ -164,6 +165,10 @@ Route::namespace('Admin')->prefix('admin')->middleware(['admin', 'auth'])->name(
             Route::get('current', 'GameController@currentGame')->name('current');
             Route::post('current', 'GameController@setGameWinner')->name('current.set-winner');
         });
+
+        // change password admin
+        Route::get('change-password', 'AdminController@changePasswordForm')->name('change-password');
+        Route::post('change-password', 'AdminController@updatePasswordAdmin');
     }
 );
 

@@ -40,6 +40,12 @@
                                             data-user-rekening="{{ $customer->rekening }}"
                                             data-update-url="{{ route('admin.manage-customer.update', $customer->id) }}"
                                             >edit</button>
+
+                                            <button class="btn btn-danger btn-change-password"
+                                            data-toggle="modal" data-target="#modalChangePasswordUser"
+                                            data-update-url="{{ route('admin.manage-customer.update-password', $customer->id) }}"
+                                            data-user-email="{{ $customer->email }}"
+                                            >change password</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -54,4 +60,5 @@
 
 @section('components')
     @include('customer.edit')
+    @include('customer.change-password')
 @endsection

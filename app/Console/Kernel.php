@@ -52,10 +52,30 @@ class Kernel extends ConsoleKernel
                 $gameCount = Game::count();
                 if ($gameCount) {
                     // creating variables data
-                    $currentGame = Game::firstWhere('status', 'playing');
-                    $nextGame = Game::orderBy('started_at')->where('ended_at', '>', $now)->where('started_at', '<', $now)->firstWhere('status', 'queued');
+                    $currentGame = Game::with('bids')->firstWhere('status', 'playing');
+                    $nextGame = Game::orderBy('started_at')->where('ended_at', '>', $now)->firstWhere('status', 'queued');
                     $gameBids = $currentGame->bids;
                     $pointOut = 0;
+
+                    if ( ! $nextGame) {
+                        $now->second = 0;
+                        while ($now->minute % 2 != 0) {
+                            $now->minute++;
+                        }
+                        // create new game
+                        for ($i = 0; $i < 3; $i++) {
+                            $game = new Game();
+                            $game->started_at = $now;
+                            $now->addMinute(2);
+                            $game->ended_at = $now;
+                            $game->status = 'queued';
+                            $game->save();
+                            if ($i == 0) {
+                                $nextGame = $game;
+                            }
+                        }
+                    }
+
                     // check if current game is not a custom game
                     if ($currentGame->is_custom) {
                         $winnerOption = $currentGame->winnerOption;
@@ -81,14 +101,16 @@ class Kernel extends ConsoleKernel
                                 'status' => 'win',
                             ]);
                             // send reward to winners
+                            $optionRewards = GameOptionReward::whereIn('game_option_id', $winnerBids->pluck('game_option_id'))->get();
+                            $pointHistoryArray = [];
                             foreach ($winnerBids as $bid) {
                                 $user = $bid->user;
-                                $optionReward = GameOptionReward::where('winner_option_id', $winnerOption->id)->where('game_option_id', $bid->game_option_id)->first();
+                                $optionReward = $optionRewards->firstWhere('game_option_id', $bid->game_option_id);
                                 $pointReward = $bid->point * $optionReward->value;
                                 $user->point += $pointReward;
                                 $user->save();
                                 $pointOut += $pointReward;
-                                PointHistory::create([
+                                array_push($pointHistoryArray, [
                                     'value' => $pointReward,
                                     'description' => PointHistory::GAME_WINNER_MESSAGE,
                                     'user_id' => $user->id,
@@ -96,6 +118,7 @@ class Kernel extends ConsoleKernel
                                 $bid->reward = $pointReward;
                                 $bid->save();
                             }
+                            PointHistory::insert($pointHistoryArray);
                         } else {
                             // random pick
                             $winnerOption = GameOption::with('rewards')->inRandomOrder()->firstWhere('type', 'number');
