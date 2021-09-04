@@ -60,6 +60,7 @@
                 placeholder="Input Your {{ ucwords($labelInput[$i]) }}" 
                 value="{{ $userData[$i] ?? '' }}" disabled/>
             @endfor
+            <a href="{{ route('password.request') }}" class="btn bg-red-700">Reset Password</a>
             <p class="text-center">
                 untuk mengubah data akun silahkan gunakan form
                 <a class="text-blue-500" href="{{ route('contact-us.index') }}">contact us</a>

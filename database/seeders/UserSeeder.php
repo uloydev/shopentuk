@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
         if (env('APP_ENV') == 'production') {
             User::create([
                 'name' => 'superadmin',
-                'email' => 'superadmin@mail.com',
+                'email' => 'shopentukshop@gmail.com',
                 'phone' => '1234567890',
                 'role' => 'superadmin',
                 'password' => Hash::make('@shopentuk2021@'),
